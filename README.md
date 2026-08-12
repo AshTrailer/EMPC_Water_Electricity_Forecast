@@ -15,8 +15,8 @@ Economic model predictive control for pumping scheduling in water distribution s
 
 ## 仓库结构（计划）
 - `/data`           原始电价数据与处理脚本
-- `/models`         预测模型（AR/ARMA）相关代码
-- `/empc`           经济 MPC 控制器实现
+- `/models`         预测模型（AR/ARMA/ARMAX）相关代码
+- `/empc`           EMPC 控制器实现
 - `/simulation`     仿真案例与结果分析
 - `/docs`           笔记、公式推导、参考文献
 
@@ -30,3 +30,8 @@ Economic model predictive control for pumping scheduling in water distribution s
 - [ ] 搭建水管网仿真模型
 - [ ] 实现 EMPC 控制器
 - [ ] 对比不同策略的经济性
+
+
+
+
+
