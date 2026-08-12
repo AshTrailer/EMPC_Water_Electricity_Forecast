@@ -1,0 +1,9 @@
+cd /c/Users/AshTrailer/Documents/MATLAB/Capstone_Project
+
+git status
+
+git add .
+
+git commit -m "在这里写清楚这次改了什么"
+
+git push
