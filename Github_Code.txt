@@ -4,6 +4,9 @@ git status
 
 git add .
 
-git commit -m "在这里写清楚这次改了什么"
+!git commit -m "在这里写清楚这次改了什么"
 
-git push
+!git push
+
+
+!git commit -m "Upload AR Predictor and RLS First Testing Result and Figure"
