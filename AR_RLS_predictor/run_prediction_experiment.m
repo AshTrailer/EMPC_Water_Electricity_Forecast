@@ -1,7 +1,7 @@
 %% ============================================================
 %  RUN_PREDICTION_EXPERIMENT  电价日模板 + AR 递归预测实验
 %
-%  预测协议 (与教授会议纪要一致):
+%  预测协议:
 %     - 每天 00:00 (即前一天最后一个采样点 24:00) 生成未来
 %       24 小时 (288 步) 的预测
 %     - 预测时冻结 RLS 的 AR 系数, 递归递推 288 步
@@ -21,13 +21,33 @@
 %
 %  训练期: 2026-01 (31 天)   测试期: 2026-02-01 ~ 02-07 (7 天)
 % ============================================================
-
+%  RUN_PREDICTION_EXPERIMENT  Electricity price daily template + AR recursive forecasting experiment
+%
+%  Forecasting protocol:
+%     - At 00:00 each day (i.e., the last sample point of the previous day at 24:00),
+%       generate a forecast for the next 24 hours (288 steps)
+%     - During forecasting, freeze the RLS AR coefficients and recursively propagate 288 steps
+%     - After forecasting, the actual data of the day "arrives" step by step, and the RLS
+%       coefficients continue to be updated online
+%     - Templates are updated daily according to the scheme (rolling-window rebuild within
+%       class / truncated EWMA)
+%
+%  Fig. 1: Comparison of three models (answering "why pure AR cannot forecast 6 hours")
+%       Row 1: Pure AR(4) recursive forecast (no template)
+%       Row 2: AR(4) + all-day template (average over entire January, no classification)
+%       Row 3: AR(4) + weekday/weekend daily template
+%
+%  Fig. 2: Comparison of template window strategies (answering "how long should the mean be taken")
+%       Row 1: AR(4) + class-specific template, rolling window within class (7 weekdays,
+%              7 weekend days) -- class separation, eliminating weekend sample shortage
+%       Row 2: AR(4) + class-specific template, rolling window within class (28 days per class)
+%       Row 3: AR(4) + class-specific template, truncated EWMA (alpha=0.15, epsilon=0.01, K=28)
 clear; close all; clc;
 
 % ---- 路径设置 ----
 project_root = "C:\Users\AshTrailer\Documents\MATLAB\Capstone_Project";
 addpath(fullfile(project_root, "filter"));
-addpath(fullfile(project_root, "predictor"));
+addpath(fullfile(project_root, "AR_RLS_predictor"));
 
 % ---- 数据加载 ----
 cfg = system_config();
@@ -36,12 +56,13 @@ aemo_data = load_aemo_data(fullfile(project_root, "data"));
 t_all = aemo_data.time;
 y_all = aemo_data.price;
 
-n_slots_day = 288;   % 每天槽位数 (5 分钟 × 24 小时)
-n_test_days = 7;     % 测试期天数
+n_slots_day = 288;   % Number of slots per day (5 minutes × 24 hours)
+n_test_days = 7;     % Number of test days
 
-% ---- 训练/测试期划分 ----
-% 训练: 2026-01-01 00:05 ~ 2026-02-01 00:00 (1月31天, 8928点)
-% 测试: 2026-02-01 00:05 ~ 2026-02-08 00:00 (7天, 2016点)
+% ---- Train/test split ----
+% Train: 2026-01-01 00:05 ~ 2026-02-01 00:00 (31 days in January, 8928 points)
+% Test: 2026-02-01 00:05 ~ 2026-02-08 00:00 (7 days, 2016 points)
+
 train_start = datetime(2026,1,1,0,5,0);
 train_end   = datetime(2026,2,1,0,0,0);
 test_start  = datetime(2026,2,1,0,5,0);
@@ -58,40 +79,40 @@ y_test  = y_all(test_mask);
 n_train = length(y_train);
 n_test  = length(y_test);
 
-assert(n_train == 31 * n_slots_day, '训练期应恰为 8928 点');
-assert(n_test  == 7  * n_slots_day, '测试期应恰为 2016 点');
+assert(n_train == 31 * n_slots_day, 'Training period should be exactly 8928 points');
+assert(n_test  == 7  * n_slots_day, 'Test period should be exactly 2016 points');
 
-% ---- RLS 参数 (与 filter/apply_rls_filter 一致) ----
+% ---- RLS parameters (consistent with filter/apply_rls_filter) ----
 rls_params.lambda = cfg.filter.rls_lambda;   % 0.98
 rls_params.delta  = cfg.filter.rls_delta;    % 100
 rls_params.p      = cfg.filter.rls_order;    % 4
 
-% ---- 截断 EWMA 参数 ----
-ewma_alpha      = 0.15;  % 遗忘因子: 类内有效记忆 ≈ 1/α ≈ 7 个类内天
-ewma_min_weight = 0.01;  % 截断阈值: 权重 < ε 的天被彻底丢弃
+% ---- Truncated EWMA parameters ----
+ewma_alpha      = 0.15;  % Forgetting factor: effective in-class memory ≈ 1/alpha ≈ 7 in-class days
+ewma_min_weight = 0.01;  % Truncation threshold: days with weight < epsilon are discarded completely
 ewma_K = max(1, floor(log(ewma_min_weight) / log(1 - ewma_alpha)));
 
-fprintf("\n========== 预测实验 ==========\n");
-fprintf("训练期: %s ~ %s (%d 点)\n", char(train_start), char(train_end), n_train);
-fprintf("测试期: %s ~ %s (%d 点)\n", char(test_start), char(test_end), n_test);
-fprintf("截断 EWMA: α=%.2f, ε=%.2f → K=%d 个类内天\n", ...
+fprintf("\n========== Prediction Experiment ==========\n");
+fprintf("Training period: %s ~ %s (%d 点)\n", char(train_start), char(train_end), n_train);
+fprintf("Test period: %s ~ %s (%d 点)\n", char(test_start), char(test_end), n_test);
+fprintf("Truncated EWMA: α=%.2f, ε=%.2f → K=%d in-class days\n", ...
    ewma_alpha, ewma_min_weight, ewma_K);
-fprintf("  (工作日模板覆盖最近 %d 个工作日, 周末模板覆盖最近 %d 个周末日)\n", ...
+fprintf("  (Weekday template covers last %d weekdays, weekend template covers last %d weekend day)\n", ...
    ewma_K, ewma_K);
 
-%% ---------- 构建模板 ----------
-% 图1模型2: 全体模板 (1月全部, 不分类, 测试期固定)
+%% ---------- Build templates ----------
+% Fig.1 Model 2: all-day template (entire January, no classification, fixed during test)
 tpl_all = build_daily_template(y_train, t_train, "none", Inf);
-% 图1模型3: 区分模板 (1月全部, 工作日/周末, 测试期固定)
+% Fig.1 Model 3: class-specific template (entire January, weekday/weekend, fixed during test)
 tpl_ws  = build_daily_template(y_train, t_train, "weekday_weekend", Inf);
-% 图2方案A/B: 类别内滚动窗口的初始模板 (预热用)
+% Fig.2 Scheme A/B: initial templates for in-class rolling windows (for warm-up)
 tplA0 = build_daily_template(y_train, t_train, "weekday_weekend", [7, 7]);
 tplB0 = build_daily_template(y_train, t_train, "weekday_weekend", [28, 28]);
-% 图2方案C: 截断 EWMA 初始状态 (1月全部按指数权重)
+% Fig.2 Scheme C: initial state for truncated EWMA (entire January with exponential weights)
 [tplC0, day_bufC] = init_ewma_state(y_train, t_train, ewma_alpha, ewma_min_weight);
 
-%% ---------- RLS 预热 (在线训练, 1月数据逐点更新) ----------
-% 模型1 (纯AR) 对中心化序列建模: 否则 AR 无截距项, 递归预测会衰减到 0
+%% ---------- RLS warm-up (online training, point-by-point update on January data) ----------
+% Model 1 (pure AR) models the centered series: otherwise AR has no intercept term and recursive forecasts decay to 0
 center1 = mean(y_train);
 rls1 = struct();  rls2 = struct();  rls3 = struct();
 rlsA = struct();  rlsB = struct();  rlsC = struct();
@@ -110,13 +131,13 @@ for i = 1:n_train
    [~, rlsC] = apply_rls_filter(y_i - tplC0.values(cls, slot),   rlsC, rls_params);
 end
 
-fprintf("RLS 预热完成 (%d 点 × 6 模型)。\n", n_train);
+fprintf("RLS warm-up completed (%d points x 6 models).\n", n_train);
 
-%% ---------- 测试期主循环 ----------
+%% ---------- Test period main loop ----------
 pred1 = zeros(n_test,1);  pred2 = zeros(n_test,1);  pred3 = zeros(n_test,1);
 predA = zeros(n_test,1);  predB = zeros(n_test,1);  predC = zeros(n_test,1);
 
-% 历史池: 截至当前预测时刻的所有可用数据
+% Historical pool: all available data up to the current forecast time
 t_hist = t_train;
 y_hist = y_train;
 
@@ -126,15 +147,15 @@ for d = 1:n_test_days
    idx = (d-1)*n_slots_day + (1:n_slots_day);
    t_target = t_test(idx);
 
-   % ---- 每日 00:00: 重建/更新模板 (仅图2方案) ----
-   % 方案A/B: 类别内滚动窗口 (工作日与周末各自独立计数)
+   % ---- At 00:00 each day: rebuild/update templates (only for Fig.2 schemes) ----
+   % Scheme A/B: in-class rolling windows (weekdays and weekends counted separately)
    tplA = build_daily_template(y_hist, t_hist, "weekday_weekend", [7, 7]);
    tplB = build_daily_template(y_hist, t_hist, "weekday_weekend", [28, 28]);
-   % 方案C: 截断 EWMA (推入前一天, 丢弃权重<ε的旧数据, 重算加权模板)
+   % Scheme C: truncated EWMA (push in the previous day, discard old data with weight<epsilon, recompute weighted template)
    [tplC, day_bufC] = update_template_ewma(tplC, day_bufC, ...
       y_hist(end-287:end), t_hist(end-287:end), ewma_alpha, ewma_min_weight);
 
-   % ---- 冻结 AR 系数, 递归预测 288 步 ----
+   % ---- Freeze AR coefficients, recursively forecast 288 steps ----
    pred1(idx) = predict_ar_recursive(rls1.theta, rls1.history, n_slots_day) + center1;
 
    tpl2_seq = get_template_sequence(tpl_all, t_target);
@@ -152,7 +173,7 @@ for d = 1:n_test_days
    tplC_seq = get_template_sequence(tplC, t_target);
    predC(idx) = tplC_seq + predict_ar_recursive(rlsC.theta, rlsC.history, n_slots_day);
 
-   % ---- 回放当天真实数据, 在线更新 RLS ----
+   % ---- Replay actual data of the day, update RLS online ----
    for s = 1:n_slots_day
       y_true = y_test(idx(s));
       t_true = t_target(s);
@@ -167,45 +188,45 @@ for d = 1:n_test_days
       [~, rlsC] = apply_rls_filter(y_true - tplC.values(cls, slot),    rlsC, rls_params);
    end
 
-   % 更新历史池
+   % Update historical pool
    t_hist = [t_hist; t_test(idx)];
    y_hist = [y_hist; y_test(idx)];
 end
 
-fprintf("测试期预测完成 (%d 天 × 288 步)。\n", n_test_days);
+fprintf("Test period prediction completed (%d days x 288 steps).\n", n_test_days);
 
-%% ---------- 指标汇总 ----------
+%% ---------- Metric summary ----------
 err1 = y_test - pred1;  err2 = y_test - pred2;  err3 = y_test - pred3;
 errA = y_test - predA;  errB = y_test - predB;  errC = y_test - predC;
 
-model_names = {'纯 AR(4)', ...
-               'AR(4)+全体模板', ...
-               'AR(4)+区分模板(固定1月)', ...
-               'AR(4)+区分模板(类内7天窗口)', ...
-               'AR(4)+区分模板(类内28天窗口)', ...
-               sprintf('AR(4)+区分模板(截断EWMA α=%.2f)', ewma_alpha)};
+model_names = {'Pure AR(4)                                                ', ...
+               'AR(4)+All-day template                                    ', ...
+               'AR(4)+Weekday/weekend template (fixed Jan)                ', ...
+               'AR(4)+Weekday/weekend template (7-day in-class window)    ', ...
+               'AR(4)+Weekday/weekend template (28-day in-class window)   ', ...
+               sprintf('AR(4)+Weekday/weekend template (truncated EWMA alpha=%.2f)', ewma_alpha)};
 err_cells = {err1, err2, err3, errA, errB, errC};
 
-fprintf("\n========== 测试期整体指标 (2026-02-01 ~ 02-07) ==========\n");
-fprintf('%-42s %10s %10s\n', '模型', 'RMSE', 'MAE');
+fprintf("\n========== Overall Test Metrics (2026-02-01 ~ 02-07) ==========\n");
+fprintf('%-58s %10s %10s\n', 'Model', 'RMSE', 'MAE');
 for i = 1:6
    e = err_cells{i};
    fprintf('%-42s %10.1f %10.1f\n', model_names{i}, rms(e), mean(abs(e)));
 end
-fprintf('信号标准差: %.1f $/MWh (RMSE 接近此值 = 预测无信息)\n', std(y_test));
+fprintf('Signal std dev: %.1f $/MWh (RMSE close to this value = uninformative forecast)\n', std(y_test));
 
-% 按预测时域聚合的 RMSE (288 行=horizon, 7 列=天)
-fprintf("\n按预测时域的 RMSE ($/MWh):\n");
+% RMSE aggregated by forecast horizon (288 rows = horizon, 7 columns = days)
+fprintf("\nRMSE by forecast horizon ($/MWh):\n");
 h_targets = [12, 36, 72, 144, 288];
-fprintf('%-42s %8s %8s %8s %8s %8s\n', '模型', '1h', '3h', '6h', '12h', '24h');
+fprintf('%0s %60s %8s %8s %8s %8s\n', 'Model', '1h', '3h', '6h', '12h', '24h');
 for i = 1:6
    e_mat = reshape(err_cells{i}, n_slots_day, n_test_days);
    vals = arrayfun(@(h) rms(e_mat(h, :)), h_targets);
    fprintf('%-42s %8.1f %8.1f %8.1f %8.1f %8.1f\n', model_names{i}, vals);
 end
 
-%% ---------- 图1: 三种模型对比 (3×2) ----------
-figure('Name', '图1: 三种预测模型对比', 'Position', [40, 40, 1250, 950]);
+%% ---------- Fig. 1: Comparison of three models (3x2) ----------
+figure('Name', 'Fig. 1: Comparison of three forecasting models', 'Position', [40, 40, 1250, 950]);
 tl1 = tiledlayout(3, 2, 'TileSpacing', 'compact', 'Padding', 'compact');
 
 y_lim   = [min(y_test) - 0.1*range(y_test), max(y_test) + 0.1*range(y_test)];
@@ -213,64 +234,62 @@ err_lim = [min([err1;err2;err3]) - 0.1*range([err1;err2;err3]), ...
            max([err1;err2;err3]) + 0.1*range([err1;err2;err3])];
 day_edges = t_test((1:n_test_days-1) * n_slots_day + 1);
 
-plot_model_row(tl1, 1, t_test, y_test, pred1, '模型 1: 纯 AR(4) 递归预测', 'r', y_lim, err_lim, day_edges);
-plot_model_row(tl1, 2, t_test, y_test, pred2, '模型 2: AR(4) + 全体日模板 (不分类)', 'b', y_lim, err_lim, day_edges);
-plot_model_row(tl1, 3, t_test, y_test, pred3, '模型 3: AR(4) + 工作日/周末日模板', 'g', y_lim, err_lim, day_edges);
+plot_model_row(tl1, 1, t_test, y_test, pred1, 'Model 1: Pure AR(4) recursive forecast', 'r', y_lim, err_lim, day_edges);
+plot_model_row(tl1, 2, t_test, y_test, pred2, 'Model 2: AR(4) + all-day template (no classification)', 'b', y_lim, err_lim, day_edges);
+plot_model_row(tl1, 3, t_test, y_test, pred3, 'Model 3: AR(4) + weekday/weekend daily template', 'g', y_lim, err_lim, day_edges);
 
-xlabel(tl1, '时间');
-tl1.Title.String = '图1: 三种预测模型对比 (2026-02-01 ~ 02-07, 每天00:00生成未来24h预测)';
+xlabel(tl1, 'Time');
+tl1.Title.String = 'Fig. 1: Comparison of three forecasting models (2026-02-01 ~ 02-07, 24h forecast generated daily at 00:00)';
 
-%% ---------- 图2: 模板窗口策略对比 (3×2) ----------
-figure('Name', '图2: 模板窗口策略对比', 'Position', [60, 60, 1250, 950]);
+%% ---------- Fig. 2: Comparison of template window strategies (3x2) ----------
+figure('Name', 'Fig. 2: Comparison of template window strategies', 'Position', [60, 60, 1250, 950]);
 tl2 = tiledlayout(3, 2, 'TileSpacing', 'compact', 'Padding', 'compact');
 
 err_lim2 = [min([errA;errB;errC]) - 0.1*range([errA;errB;errC]), ...
             max([errA;errB;errC]) + 0.1*range([errA;errB;errC])];
 
 plot_model_row(tl2, 1, t_test, y_test, predA, ...
-   'AR(4) + 区分模板 (类内7天窗口: 工作日7个/周末7个)', 'r', y_lim, err_lim2, day_edges);
+   'AR(4) + weekday/weekend template (7-day in-class window: 7 weekdays / 7 weekend days)', 'r', y_lim, err_lim2, day_edges);
 plot_model_row(tl2, 2, t_test, y_test, predB, ...
-   'AR(4) + 区分模板 (类内28天窗口)', 'b', y_lim, err_lim2, day_edges);
+   'AR(4) + weekday/weekend template (28-day in-class window)', 'b', y_lim, err_lim2, day_edges);
 plot_model_row(tl2, 3, t_test, y_test, predC, ...
-   sprintf('AR(4) + 区分模板 (截断EWMA: α=%.2f, ε=%.2f, K=%d)', ewma_alpha, ewma_min_weight, ewma_K), ...
+   sprintf('AR(4) + weekday/weekend template (truncated EWMA: alpha=%.2f, epsilon=%.2f, K=%d)', ewma_alpha, ewma_min_weight, ewma_K), ...
    'g', y_lim, err_lim2, day_edges);
 
-xlabel(tl2, '时间');
-tl2.Title.String = '图2: 模板窗口策略对比 (均使用 AR(4)+工作日/周末模板, 类别内窗口)';
+xlabel(tl2, 'Time');
+tl2.Title.String = 'Fig. 2: Comparison of template window strategies (all use AR(4)+weekday/weekend template, in-class windows)';
 
 %% ============================================================
-%  局部函数: 绘制一行 (左: 真实vs预测, 右: 误差)
+%  Local function: plot one row (left: actual vs forecast, right: error)
 % ============================================================
 function plot_model_row(tl, row, t_test, y_test, y_pred, model_name, col, y_lim, err_lim, day_edges)
-   % 左列: 真实 vs 预测
-   % tiledlayout 默认 TileIndexing='columnmajor':
-   %   线性索引 1,2,3 → 第1列(左), 4,5,6 → 第2列(右)
+   % Left column: actual vs forecast
    nexttile(tl, (row-1)*2 + 1);
-   plot(t_test, y_test, 'k-', 'LineWidth', 1, 'DisplayName', '真实电价');
+   plot(t_test, y_test, 'k-', 'LineWidth', 1, 'DisplayName', 'Actual price');
    hold on;
    rmse_val = sqrt(mean((y_test - y_pred).^2));
    plot(t_test, y_pred, 'Color', col, 'LineWidth', 1, ...
-      'DisplayName', sprintf('预测 (RMSE=%.1f)', rmse_val));
-   ylabel('电价 ($/MWh)');
+      'DisplayName', sprintf('Forecast (RMSE=%.1f)', rmse_val));
+   ylabel('Price ($/MWh)');
    ylim(y_lim);
    title(model_name);
    legend('Location', 'best');
    grid on;
 
-   % 右列: 误差 (真实 - 预测)
+   % Right column: error (actual - forecast)
    nexttile(tl, (row-1)*2 + 2);
    err = y_test - y_pred;
    plot(t_test, err, 'Color', col, 'LineWidth', 1, ...
-      'DisplayName', '误差 (真实-预测)');
+      'DisplayName', 'Error (actual - forecast)');
    hold on;
    yline(0, 'k-', 'HandleVisibility', 'off');
-   % 竖虚线标记每天 00:00 边界 → 可见每块预测内误差随 horizon 增长
+   % Vertical dashed lines mark daily 00:00 boundaries -> visible error growth within each forecast block as horizon increases
    for k = 1:length(day_edges)
       xline(day_edges(k), 'k--', 'HandleVisibility', 'off');
    end
-   ylabel('误差 ($/MWh)');
+   ylabel('Error ($/MWh)');
    ylim(err_lim);
-   title([model_name, ' : 预测误差']);
+   title([model_name, ' : Forecast Error']);
    legend('Location', 'best');
    grid on;
 end
