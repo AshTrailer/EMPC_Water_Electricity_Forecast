@@ -1,4 +1,5 @@
 %% Economic MPC for Tank Pump Decision Module
+% 可直接独立运行版本
 clear; clc;
 % ---------------------- 1. 系统参数 ----------------------
 N = 12;                 % 预测时域 12步，每步5min
@@ -36,7 +37,6 @@ f = zeros(n_var,1);
 for k = 1:N
     f(k) = price(k)*Qmax;
     f(n_u + k) = lam * weight(k) * (-2*x_ref);
-    f(n_u + N+1) = 0;
 end
 
 % 等式约束：状态递推 x_{k+1} = x_k + C*u_k - d_k
