@@ -17,8 +17,7 @@
 %      test period: 2026-02-01 ~ 02-07 (7 days)
 %
 %  Outputs:
-%      Fig: per-horizon RMSE curves (x = horizon in hours) + heatmap
-%           of RMSE aggregated per hour block (y = AR order)
+%      Fig: per-horizon RMSE curves (x = horizon in hours)
 %      Console: overall RMSE/MAE and RMSE at 1h/3h/6h/12h/24h per order
 % ============================================================
 clear; close all; clc;
@@ -88,7 +87,6 @@ mae_overall  = mean(abs(err_all), 1);
 h_targets = [12 36 72 144 288];
 rmse_h_target = zeros(n_orders, numel(h_targets));
 rmse_h    = zeros(n_orders, n_slots_day);
-rmse_hour = zeros(n_orders, 24);
 
 for m = 1:n_orders
    e_mat = reshape(err_all(:, m), n_slots_day, n_test_days);
@@ -104,10 +102,7 @@ end
 
 fprintf("\n========== Pure AR order sweep (2026-02-01 ~ 02-07) ==========\n");
 fprintf('%-8s %10s %10s %8s %8s %8s %8s %8s\n', 'Order', 'RMSE', 'MAE', '1h', '3h', '6h', '12h', '24h');
-for m = 1:n_orders
-   fprintf('AR(%-2d)  %10.1f %10.1f %8.1f %8.1f %8.1f %8.1f %8.1f\n', ...
-      p_list(m), rmse_overall(m), mae_overall(m), rmse_h_target(m, :));
-end
+
 fprintf('Signal std dev: %.1f $/MWh (RMSE near this = uninformative)\n', std(y_test));
 
 [~, i_overall] = min(rmse_overall);
@@ -117,28 +112,23 @@ fprintf('Best overall: AR(%d)   best 1h: AR(%d)   best 24h: AR(%d)\n', ...
    p_list(i_overall), p_list(i_1h), p_list(i_24h));
 
 %% ---------- figure ----------
-figure('Name', 'AR order sweep: per-horizon RMSE', 'Position', [40 40 1300 560]);
-tl = tiledlayout(1, 2, 'TileSpacing', 'compact', 'Padding', 'compact');
-
-nexttile(tl, 1);
+% Single-panel per-horizon RMSE; the 6h mark highlights where higher
+% orders start to diverge (recursion ringing outweighs extra memory).
+figure('Name', 'AR order sweep: per-horizon RMSE', 'Position', [40 40 1100 520]);
 hold on;
 cols = parula(n_orders);
 for m = 1:n_orders
    plot((1:n_slots_day)/12, rmse_h(m, :), '-', 'Color', cols(m, :), 'LineWidth', 1);
 end
 yline(std(y_test), 'k--', 'LineWidth', 1);
+xline(6, 'k:', 'LineWidth', 1);
 hold off;
 xlabel('Forecast horizon (h)');
 ylabel('RMSE ($/MWh)');
-title('Per-horizon RMSE vs AR order');
+title('Pure AR(p): per-horizon RMSE, p = 1..10 (2026-02-01 ~ 02-07)');
 legend(arrayfun(@(p) sprintf('AR(%d)', p), p_list, 'UniformOutput', false), ...
    'Location', 'eastoutside');
 grid on;
-
-nexttile(tl, 2);
-imagesc(1:24, p_list, rmse_hour);
-set(gca, 'YDir', 'normal');
-colormap(turbo);
 cb = colorbar;
 cb.Label.String = 'RMSE ($/MWh)';
 xlabel('Hour of day (h)');

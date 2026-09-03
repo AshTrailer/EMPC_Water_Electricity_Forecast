@@ -127,6 +127,30 @@ for i = 1:numel(h_comp)
    fprintf('%-6d steps  %10.1f %10.1f %10.1f %10.1f %10.1f\n', h, row);
 end
 
+%% ---------- RMSE by forecast-origin block ----------
+% Explains why the 24h cadence (single origin at 00:00, calm overnight)
+% can beat the 6h cadence (origins at 00/06/12/18, including volatile
+% midday/evening starts): overall RMSE mixes the origin time of day with
+% the lead time, and the 00:00 origin is by far the easiest.
+fprintf("\nRMSE by forecast-origin block of day ($/MWh):\n");
+fprintf('%-8s %10s %10s %10s %10s\n', 'Cadence', '00-06h', '06-12h', '12-18h', '18-24h');
+for m = 1:n_cad
+   K = K_list(m);
+   n_upd = size(err_h{m}, 2);
+   sq = zeros(1, 4);
+   cnt = zeros(1, 4);
+   for u = 1:n_upd
+      origin_slot = mod((u - 1) * K, n_slots_day) + 1;
+      blk = floor((origin_slot - 1) / 72) + 1;
+      e = err_h{m}(:, u);
+      e = e(~isnan(e));
+      sq(blk)  = sq(blk) + sum(e .^ 2);
+      cnt(blk) = cnt(blk) + numel(e);
+   end
+   row = sqrt(sq ./ cnt);
+   fprintf('%-8s %10.1f %10.1f %10.1f %10.1f\n', K_label{m}, row);
+end
+
 %% ---------- figure ----------
 figure('Name', 'Update cadence sweep', 'Position', [40 40 1300 950]);
 tl = tiledlayout(2, 2, 'TileSpacing', 'compact', 'Padding', 'compact');

@@ -51,7 +51,7 @@ mpc_cfg.rho_slack = 1e3;          % soft-constraint penalty
 
 % ---- simulation ----
 x_hist = zeros(n_steps + 1, 1);
-x_hist(1) = tank.x;
+x_hist(1) = tank.x; 
 u_hist = zeros(n_steps, 1);
 d_hist = zeros(n_steps, 1);
 t_hours = (0:n_steps-1)' * dt / 3600;
