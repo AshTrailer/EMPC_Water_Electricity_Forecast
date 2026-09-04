@@ -119,7 +119,8 @@ def parse_dispatch(csv_text, source_file, regions):
    if (settlement_str == "").any():
       LOG.warning("%s: %d/%d SETTLEMENTDATE values failed to parse; sample=%r",
                   source_file, (settlement_str == "").sum(), len(settlement_str),
-                  price["SETTLEMENTDATE"].iloc[0])   demand_map = {}
+                  price["SETTLEMENTDATE"].iloc[0])
+      demand_map = {}
    region_sum_table = _find_table(tables, {"SETTLEMENTDATE", "REGIONID", "TOTALDEMAND"})
    if region_sum_table is not None:
       region_sum = _to_frame(region_sum_table, source_file)
