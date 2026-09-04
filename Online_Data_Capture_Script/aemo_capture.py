@@ -48,6 +48,10 @@ def collect_listing(report_key):
 def needs_fetch(info, report_key, existing, state):
    """True if this zip is missing from the store or carries a newer revision."""
    last_gen = store_mod.last_generation(state, report_key, info["effective_str"])
+   if report_key == "DISPATCHIS":
+      if last_gen and info["generation_str"] <= last_gen:
+         return False
+      return True
    if info["effective_str"] in existing and last_gen and info["generation_str"] <= last_gen:
       return False
    return True

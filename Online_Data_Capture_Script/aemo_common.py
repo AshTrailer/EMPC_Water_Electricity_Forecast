@@ -78,16 +78,25 @@ def parse_report_filename(filename, report_key):
    return effective_dt, generation_str
 
 
-_HREF_RE = re.compile(r'href\s*=\s*"([^"]+?\.zip)"', re.IGNORECASE)
+# 原来的精确 href 匹配在 IIS 目录列表上匹配不到任何链接，
+# 改为直接提取所有形如 PUBLIC_*.zip 的纯文本 token（IIS 列表里文件名唯一）。
+_ZIP_TOKEN_RE = re.compile(r'PUBLIC_[A-Z0-9]+_\d{12}_\d+(?:\.zip)?', re.IGNORECASE)
 
 
 def list_remote_zips(listing_url):
-   """Return all zip filenames visible on a NEMWEB current listing page."""
+   """Return all zip filenames visible on a NEMWEB current listing page.
+
+   NEMWEB uses an IIS directory listing whose links are not reliably
+   matched by an href= regex, so we scan the raw HTML for the literal
+   'PUBLIC_*.zip' filename tokens instead.
+   """
    for attempt in range(cfg.HTTP_RETRIES):
       try:
          response = requests.get(listing_url, headers=_HEADERS, timeout=cfg.HTTP_TIMEOUT_SECONDS)
          response.raise_for_status()
-         names = sorted(set(_HREF_RE.findall(response.text)))
+         raw_tokens = _ZIP_TOKEN_RE.findall(response.text)
+         names = sorted({t if t.lower().endswith(".zip") else t + ".zip"
+                         for t in raw_tokens})
          LOG.debug("listing %s -> %d zips", listing_url, len(names))
          return names
       except requests.RequestException as exc:
