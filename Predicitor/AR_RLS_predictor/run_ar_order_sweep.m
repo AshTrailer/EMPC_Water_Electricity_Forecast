@@ -23,11 +23,13 @@
 clear; close all; clc;
 
 project_root = "C:\Users\AshTrailer\Documents\MATLAB\Capstone_Project";
-addpath(fullfile(project_root, "filter"));
-addpath(fullfile(project_root, "AR_RLS_predictor"));
+predictor_root = fullfile(project_root, "Predicitor");
+
+addpath(fullfile(predictor_root, "Testing_Filter"));
+addpath(fullfile(predictor_root, "AR_RLS_predictor"));
+aemo_data = load_aemo_data(fullfile(project_root, "AEMO_Data"));
 
 cfg = system_config();
-aemo_data = load_aemo_data(fullfile(project_root, "data"));
 t_all = aemo_data.time;
 y_all = aemo_data.price;
 
@@ -87,6 +89,7 @@ mae_overall  = mean(abs(err_all), 1);
 h_targets = [12 36 72 144 288];
 rmse_h_target = zeros(n_orders, numel(h_targets));
 rmse_h    = zeros(n_orders, n_slots_day);
+rmse_hour = zeros(n_orders, 24);        % <-- 预分配，避免警告
 
 for m = 1:n_orders
    e_mat = reshape(err_all(:, m), n_slots_day, n_test_days);
@@ -100,37 +103,50 @@ for m = 1:n_orders
    end
 end
 
+%% ---------- print table ----------
 fprintf("\n========== Pure AR order sweep (2026-02-01 ~ 02-07) ==========\n");
-fprintf('%-8s %10s %10s %8s %8s %8s %8s %8s\n', 'Order', 'RMSE', 'MAE', '1h', '3h', '6h', '12h', '24h');
+fprintf('%-8s %10s %10s %8s %8s %8s %8s %8s\n', ...
+        'Order', 'RMSE', 'MAE', '1h', '3h', '6h', '12h', '24h');
+
+for m = 1:n_orders
+    fprintf('AR(%-5d) %10.2f %10.2f %8.2f %8.2f %8.2f %8.2f %8.2f\n', ...
+        p_list(m), ...
+        rmse_overall(m), mae_overall(m), ...
+        rmse_h_target(m,1), rmse_h_target(m,2), rmse_h_target(m,3), ...
+        rmse_h_target(m,4), rmse_h_target(m,5));
+end
 
 fprintf('Signal std dev: %.1f $/MWh (RMSE near this = uninformative)\n', std(y_test));
 
 [~, i_overall] = min(rmse_overall);
-[~, i_1h]  = min(rmse_h_target(:, 1));
-[~, i_24h] = min(rmse_h_target(:, 5));
+[~, i_1h]      = min(rmse_h_target(:, 1));
+[~, i_24h]     = min(rmse_h_target(:, 5));
 fprintf('Best overall: AR(%d)   best 1h: AR(%d)   best 24h: AR(%d)\n', ...
    p_list(i_overall), p_list(i_1h), p_list(i_24h));
 
 %% ---------- figure ----------
-% Single-panel per-horizon RMSE; the 6h mark highlights where higher
-% orders start to diverge (recursion ringing outweighs extra memory).
 figure('Name', 'AR order sweep: per-horizon RMSE', 'Position', [40 40 1100 520]);
 hold on;
 cols = parula(n_orders);
+h_lines = gobjects(n_orders, 1);
 for m = 1:n_orders
-   plot((1:n_slots_day)/12, rmse_h(m, :), '-', 'Color', cols(m, :), 'LineWidth', 1);
+   h_lines(m) = plot((1:n_slots_day)/12, rmse_h(m, :), '-', ...
+                     'Color', cols(m, :), 'LineWidth', 1.2);
 end
-yline(std(y_test), 'k--', 'LineWidth', 1);
-xline(6, 'k:', 'LineWidth', 1);
+yline(std(y_test), 'k--', 'LineWidth', 1, 'DisplayName', 'Signal std');
+xline(6, 'k:', 'LineWidth', 1, 'HandleVisibility', 'off');
 hold off;
+
 xlabel('Forecast horizon (h)');
 ylabel('RMSE ($/MWh)');
 title('Pure AR(p): per-horizon RMSE, p = 1..10 (2026-02-01 ~ 02-07)');
-legend(arrayfun(@(p) sprintf('AR(%d)', p), p_list, 'UniformOutput', false), ...
-   'Location', 'eastoutside');
+legend(h_lines, arrayfun(@(p) sprintf('AR(%d)', p), p_list, 'UniformOutput', false), ...
+       'Location', 'eastoutside');
 grid on;
+
+colormap(cols);
 cb = colorbar;
-cb.Label.String = 'RMSE ($/MWh)';
-xlabel('Hour of day (h)');
-ylabel('AR order p');
-title('RMSE per hour block');
+cb.Ticks = linspace(1, n_orders, n_orders);
+cb.TickLabels = arrayfun(@(p) sprintf('%d', p), p_list, 'UniformOutput', false);
+cb.Label.String = 'AR order p';
+clim([1 n_orders]);

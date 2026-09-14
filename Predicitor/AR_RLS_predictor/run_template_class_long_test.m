@@ -36,11 +36,12 @@
 clear; close all; clc;
 
 project_root = "C:\Users\AshTrailer\Documents\MATLAB\Capstone_Project";
-addpath(fullfile(project_root, "filter"));
-addpath(fullfile(project_root, "AR_RLS_predictor"));
+predictor_root = fullfile(project_root, "Predicitor");
 
+addpath(fullfile(predictor_root, "Testing_Filter"));
+addpath(fullfile(predictor_root, "AR_RLS_predictor"));
+aemo_data = load_aemo_data(fullfile(project_root, "AEMO_Data"));
 cfg = system_config();
-aemo_data = load_aemo_data(fullfile(project_root, "data"));
 t_all = aemo_data.time;
 y_all = aemo_data.price;
 

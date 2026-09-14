@@ -1,0 +1,23 @@
+========== Update cadence sweep, pure AR(4) ==========
+Cadence    EffHorizon       RMSE        MAE
+5 min          1..1           26.8        8.9
+30 min         1..6           29.2       11.9
+1 h            1..12          34.1       14.5
+6 h            1..72          57.2       37.3
+24 h           1..288         51.8       39.5
+
+RMSE at the same horizon across cadences ($/MWh):
+Horizon           5 min     30 min        1 h        6 h       24 h
+1      steps        26.8       15.5       17.3       15.5       11.3
+6      steps         NaN       28.0       28.2       31.7       15.5
+12     steps         NaN        NaN       38.3       53.1       16.3
+72     steps         NaN        NaN        NaN       70.9       53.3
+288    steps         NaN        NaN        NaN        NaN       36.2
+
+RMSE by forecast-origin block of day ($/MWh):
+Cadence      00-06h     06-12h     12-18h     18-24h
+5 min          12.7       12.8       49.0       12.5
+30 min         12.7       17.9       51.8       15.4
+1 h            14.6       20.8       60.6       17.8
+6 h            35.2       86.7       58.1       30.7
+24 h           51.8        NaN        NaN        NaN
