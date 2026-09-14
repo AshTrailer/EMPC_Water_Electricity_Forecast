@@ -1,0 +1,156 @@
+function test_results = test_basic_mpc()
+%TEST_BASIC_MPC Deterministic Basic 1.2 rolling-horizon checks.
+
+test_root = fileparts(mfilename('fullpath'));
+basic_root = fileparts(test_root);
+addpath(basic_root);
+addpath(fullfile(basic_root, 'controller'));
+addpath(fullfile(basic_root, 'interfaces'));
+addpath(fullfile(basic_root, 'scenarios'));
+addpath(fullfile(basic_root, 'simulation'));
+
+config = basic_mpc_config();
+tolerance = 1e-7;
+expected_hourly = [ ...
+    0.71, 0.48, 0.46, 0.40, 0.39, 0.41, ...
+    0.52, 1.10, 1.61, 1.53, 1.40, 1.15, ...
+    1.06, 1.04, 1.00, 0.92, 0.95, 1.16, ...
+    1.34, 1.45, 1.32, 1.33, 1.11, 1.07];
+
+% Provenance-sensitive demand checks: no normalization and no shift.
+assert(numel(config.demand_multiplier_hourly) == 24);
+assert(isequal(config.demand_multiplier_hourly, expected_hourly));
+assert(numel(config.demand_multiplier_5min) == 288);
+hour_blocks = reshape(config.demand_multiplier_5min, 12, 24);
+assert(all(all(hour_blocks == repmat(expected_hourly, 12, 1))));
+assert(abs(mean(config.demand_multiplier_hourly)-0.99625) <= 1e-12);
+assert(min(config.demand_multiplier_hourly) == 0.39);
+assert(max(config.demand_multiplier_hourly) == 1.61);
+assert(max(abs(config.water_demand_m3s ...
+    - 0.025.*config.demand_multiplier_5min)) <= 1e-12);
+assert(~isfield(config, 'terminal_min_m'), ...
+    'Basic 1.2 must not restore a 2.30 m terminal constraint.');
+
+demand_575 = make_richmond_demand_series(config, 575);
+assert(numel(demand_575) == 575);
+assert(isequal(demand_575(1:288), config.water_demand_m3s(:)));
+assert(isequal(demand_575(289:575), ...
+    config.water_demand_m3s(1:287)'));
+assert(all(demand_575(1:12) == 0.025*0.71));
+assert(demand_575(13) == 0.025*0.48);
+assert(demand_575(288) == 0.025*1.07);
+assert(demand_575(289) == 0.025*0.71);
+assert(demand_575(300) == 0.025*0.71);
+assert(demand_575(301) == 0.025*0.48);
+
+% A controlled price step confirms the inherited exact binary optimizer.
+unit_config = config;
+unit_config.horizon_steps = 24;
+unit_window.demand = unit_config.base_water_demand_m3s*ones(24,1);
+unit_window.price = [10*ones(12,1); 200*ones(12,1)];
+unit_window.time = datetime(2026,2,1)+minutes(5)*(1:24)';
+unit_window.source = 'synthetic_price_step';
+unit_initial_level = 1.49;
+unit_solution = constrained_tank_mpc( ...
+    unit_initial_level, unit_window, unit_config, 0);
+assert(all(unit_solution.u_plan == 0 | unit_solution.u_plan == 1));
+assert(sum(unit_solution.u_plan(1:12)) == 6 ...
+    && sum(unit_solution.u_plan(13:24)) == 0);
+unit_energy_mwh = unit_config.pump_power_kw ...
+    * (unit_config.dt_seconds/3600)/1000;
+unit_expected_objective = 6*10*unit_energy_mwh ...
+    + 2*unit_config.switch_cost_aud;
+assert(abs(unit_solution.objective-unit_expected_objective) <= tolerance);
+assert(all(unit_solution.x_prediction >= config.level_min_m-tolerance));
+assert(all(unit_solution.x_prediction <= config.level_max_m+tolerance));
+
+% AEMO history is continuous and selected by interval-ending timestamps.
+history = load_historical_price_data(config.historical_price_file, ...
+    config.historical_region);
+selected = select_interval_ending_history(history, ...
+    config.historical_start_day, 575, config.dt_seconds);
+expected_time = config.historical_start_day ...
+    + seconds(config.dt_seconds)*(1:575)';
+assert(isequal(selected.time, expected_time));
+assert(selected.time(1) ...
+    == config.historical_start_day+minutes(5));
+assert(selected.time(288) ...
+    == config.historical_start_day+days(1));
+assert(selected.time(575) ...
+    == config.historical_start_day+days(1)+hours(23)+minutes(55));
+assert(nnz(selected.price(1:288) < 0) == 0, ...
+    'Default example is not a minimum-negative-price day.');
+assert(nnz(selected.price < 0) == 1, ...
+    'Default 575-point input is not the minimum-negative-price window.');
+assert(any(selected.price(1:287) ~= selected.price(289:575)), ...
+    'Second-day prices appear to be a repeated copy of the first day.');
+
+% Full 24-hour closed-loop run: 288 separate optimizations, not one plan.
+historical_results = simulate_basic_mpc(config, 'historical', ...
+    288, false, config.historical_start_day);
+assert(historical_results.input_count == 575);
+assert(historical_results.optimization_count == 288);
+assert(all(historical_results.optimization.horizon_steps == 288));
+assert(isequal(historical_results.optimization.window_start_index, ...
+    (1:288)'));
+assert(isequal(historical_results.optimization.window_end_index, ...
+    (288:575)'));
+assert(isequal(historical_results.optimization.last_window_indices, ...
+    288:575));
+assert(historical_results.optimization.window_start_time(end) ...
+    == historical_results.input_time(288));
+assert(historical_results.optimization.window_end_time(end) ...
+    == historical_results.input_time(575));
+
+start_index = historical_results.optimization.window_start_index;
+assert(isequal( ...
+    historical_results.optimization.first_price_aud_per_mwh, ...
+    historical_results.input_price_aud_per_mwh(start_index)));
+assert(isequal(historical_results.optimization.first_demand_m3s, ...
+    historical_results.input_demand_m3s(start_index)));
+assert(isequal(historical_results.optimization.window_start_time, ...
+    historical_results.input_time(start_index)));
+assert(isequal(historical_results.optimization.first_action, ...
+    historical_results.u_request));
+assert(isequal(historical_results.price_aud_per_mwh, ...
+    historical_results.input_price_aud_per_mwh(1:288)));
+assert(isequal(historical_results.demand, ...
+    historical_results.input_demand_m3s(1:288)));
+
+assert(all(historical_results.u_actual == 0 ...
+    | historical_results.u_actual == 1));
+assert(all(historical_results.level >= config.level_min_m-tolerance));
+assert(all(historical_results.level <= config.level_max_m+tolerance));
+assert(historical_results.constraint_violations == 0);
+assert(all(historical_results.exitflag > 0));
+assert(max(abs(historical_results.decision_tracking_error_m3s)) ...
+    <= tolerance);
+assert(max(abs(historical_results.predicted_next_level_error_m)) ...
+    <= tolerance, 'Predicted and actual x(k+1) are misaligned.');
+
+recomputed_next_level = historical_results.level(1:end-1) ...
+    + config.dt_seconds/config.tank_area_m2 ...
+    .* (historical_results.actual_flow_m3s-historical_results.demand);
+assert(max(abs(recomputed_next_level ...
+    - historical_results.level(2:end))) <= tolerance);
+assert(all(historical_results.level_time(2:end) ...
+    == historical_results.time));
+expected_energy_cost = sum(historical_results.price_aud_per_mwh/1000 ...
+    * config.pump_power_kw*(config.dt_seconds/3600) ...
+    .* historical_results.u_actual);
+assert(abs(expected_energy_cost ...
+    - historical_results.total_energy_cost_aud) <= tolerance);
+
+comparison_source = fileread(fullfile(basic_root, ...
+    'run_two_day_comparison.m'));
+assert(~contains(comparison_source, 'optimize_one_day'), ...
+    'Basic 1.2 still contains a one-shot daily optimizer.');
+
+test_results.synthetic = unit_solution;
+test_results.history = history;
+test_results.selected_575 = selected;
+test_results.historical = historical_results;
+fprintf(['Basic 1.2 tests passed: Richmond demand provenance, 575-point ', ...
+    'cross-day inputs, 288 rolling optimizations, 288-step horizons, ', ...
+    'aligned price/demand/action/state, and hard level bounds.\n']);
+end
