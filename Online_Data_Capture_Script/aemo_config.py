@@ -71,6 +71,13 @@ PROCESSED_KEEP_DAYS = 4         # prune processed-file bookkeeping older than th
 # time handling
 # ---------------------------------------------------------------------------
 # NEMWEB timestamps are NEM standard time (AEST, UTC+10, no DST shift).
-# If True they are converted to Australia/Sydney local time (DST aware) for
-# all *_csv outputs; set False to keep the published NEM time unchanged.
-USE_AUS_LOCAL_TIME = True
+#
+# Keep False. Converting to Australia/Sydney local time adds +1 h during AEDT and
+# +0 h during AEST, so the same store silently changes timebase twice a year:
+# measured against the AEMO monthly dashboard files and the NEMWEB archive (both
+# on NEM time), January/February/March/April-4 needed a +60 min shift to line up
+# while April-6 onward needed 0. With this flag False all months align at 0
+# (mean |dRRP| 0.0005..0.0019 $/MWh = the published 2-decimal rounding).
+# The predictor trains on NEM-time monthly files, so local time here would cost
+# 12 five-minute slots during daylight saving.
+USE_AUS_LOCAL_TIME = False
