@@ -33,6 +33,12 @@ _DT_FORMATS = (
    "%Y%m%d%H%M",
 )
 
+# The two compact numeric formats have fixed widths, and strptime's field regexes
+# accept 1-digit month/day/hour. Without a width guard "2026091515" (a
+# PREDISPATCHSEQNO yyyymmddhh code) matches "%Y%m%d%H%M%S" as 4+2+1+1+1+1 and is
+# silently accepted as 2026-09-01 05:01:05.
+_COMPACT_WIDTHS = {"%Y%m%d%H%M%S": 14, "%Y%m%d%H%M": 12}
+
 
 def parse_nem_datetime(value):
    """Parse a NEMWEB timestamp (string or Excel serial) into a naive datetime."""
@@ -49,6 +55,9 @@ def parse_nem_datetime(value):
    if not text or text.lower() in {"nan", "none", "null", "nat"}:
       return None
    for fmt in _DT_FORMATS:
+      width = _COMPACT_WIDTHS.get(fmt)
+      if width is not None and len(text) != width:
+         continue
       try:
          return datetime.strptime(text, fmt)
       except ValueError:

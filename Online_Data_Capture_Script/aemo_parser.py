@@ -9,6 +9,7 @@ The csv files use a record-type line layout:
 Only the few tables needed for region price/demand are extracted here.
 """
 
+import csv
 import logging
 
 import numpy as np
@@ -20,7 +21,18 @@ LOG = logging.getLogger("aemo")
 
 
 def _split_record(line):
-   return [field.strip() for field in line.split(",")]
+   """Split one record line, honouring CSV quoting.
+
+   NEMWEB wraps every datetime payload field in double quotes, e.g.
+      D,DISPATCH,PRICE,5,"2026/09/04 03:55:00",1,NSW1 ...
+   A bare str.split(",") leaves those quote characters attached, so
+   parse_nem_datetime returns None for every timestamp and the store ends up
+   with empty settlement_date / interval_datetime / period_id columns.
+   """
+   try:
+      return [field.strip() for field in next(csv.reader([line]))]
+   except (csv.Error, StopIteration):
+      return [field.strip() for field in line.split(",")]
 
 
 def parse_nemweb_tables(csv_text):
@@ -93,6 +105,15 @@ def _format_column(series):
    return series.apply(parse_nem_datetime).apply(format_output_time)
 
 
+def _period_column(series):
+   """PERIODID is a datetime in the legacy layout but a period index ("01",
+   "02", ...) in the current one. Format it when it is a timestamp, otherwise
+   keep the raw index instead of dropping the value."""
+   formatted = series.apply(parse_nem_datetime).apply(format_output_time)
+   raw = series.astype(str).str.strip()
+   return formatted.mask(formatted == "", raw)
+
+
 def _optional_column(frame, name):
    if name in frame.columns:
       return frame[name]
@@ -147,31 +168,59 @@ def parse_dispatch(csv_text, source_file, regions):
 
 
 def parse_predispatch(csv_text, source_file, regions, effective_time):
-   """Extract the predispatch region table (30-min forecast horizons)."""
+   """Extract the predispatch region forecast (30-min horizons).
+
+   Two report layouts exist:
+      legacy   one PDREGION table carrying RRP *and* TOTALDEMAND;
+      current  REGION_PRICES carries RRP/EEP, REGION_SOLUTION carries
+               TOTALDEMAND, and the two are keyed by
+               (PREDISPATCHSEQNO, REGIONID, PERIODID).
+   Prefer the single-table layout and merge the split pair otherwise, so
+   total_demand is populated either way.
+
+   PREDISPATCHSEQNO is a yyyymmddhh sequence code, not a timestamp; it is
+   stored verbatim (round-tripping it through a datetime is lossy and used to
+   produce a bogus 2026-09-01 05:01:05 for the 2026091515 batch).
+   """
    tables = parse_nemweb_tables(csv_text)
-   table = _find_table(tables, {"REGIONID", "PERIODID", "RRP"},
-                       optional_columns={"TOTALDEMAND"})
-   if table is None:
+   price_table = _find_table(tables, {"REGIONID", "PERIODID", "RRP", "TOTALDEMAND"})
+   demand_table = None
+   if price_table is None:
+      price_table = _find_table(tables, {"REGIONID", "PERIODID", "RRP"})
+      demand_table = _find_table(tables, {"REGIONID", "PERIODID", "TOTALDEMAND"})
+   if price_table is None:
       LOG.warning("%s: no predispatch region table found", source_file)
       return pd.DataFrame()
-   frame = _to_frame(table, source_file)
+   frame = _to_frame(price_table, source_file)
    frame = frame[frame["REGIONID"].isin(regions)]
    if frame.empty:
       return frame
-   frame = _keep_max_runno(frame, ["PERIODID", "REGIONID"])
-   seqno = _optional_column(frame, "PREDISPATCHSEQNO")
-   if (seqno == "").all():
-      seqno = pd.Series(effective_time, index=frame.index, dtype=object)
+   frame = _keep_max_runno(frame, ["PREDISPATCHSEQNO", "REGIONID", "PERIODID"])
+
+   demand_col = _optional_column(frame, "TOTALDEMAND")
+   if demand_table is not None:
+      demand = _to_frame(demand_table, source_file)
+      demand = demand[demand["REGIONID"].isin(regions)]
+      if not demand.empty:
+         demand = _keep_max_runno(demand, ["PREDISPATCHSEQNO", "REGIONID", "PERIODID"])
+         keys = list(zip(demand["PREDISPATCHSEQNO"], demand["REGIONID"], demand["PERIODID"]))
+         demand_map = dict(zip(keys, pd.to_numeric(demand["TOTALDEMAND"], errors="coerce")))
+         demand_col = pd.Series(
+            [demand_map.get((q, r, p), np.nan) for q, r, p in
+             zip(frame["PREDISPATCHSEQNO"], frame["REGIONID"], frame["PERIODID"])],
+            index=frame.index)
+
+   seqno = _optional_column(frame, "PREDISPATCHSEQNO").astype(str).str.strip()
+   seqno = seqno.mask(seqno == "", effective_time)
    out = pd.DataFrame({
       "effective_time": effective_time,
-      "predispatch_seqno": seqno.apply(parse_nem_datetime).apply(format_output_time).values,
+      "predispatch_seqno": seqno.values,
       "run_no": _to_int64(_optional_column(frame, "RUNNO")).values,
       "region_id": frame["REGIONID"].values,
-      "period_id": _format_column(frame["PERIODID"]).values,
+      "period_id": _period_column(frame["PERIODID"]).values,
       "rrp": pd.to_numeric(frame["RRP"], errors="coerce").values,
       "eep": pd.to_numeric(_optional_column(frame, "EEP"), errors="coerce").values,
-      "total_demand": pd.to_numeric(_optional_column(frame, "TOTALDEMAND"),
-                                    errors="coerce").values,
+      "total_demand": pd.to_numeric(demand_col, errors="coerce").values,
       "intervention": _optional_column(frame, "INTERVENTION").values,
       "source_file": source_file,
    })

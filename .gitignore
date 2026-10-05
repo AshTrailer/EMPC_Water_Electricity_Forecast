@@ -24,3 +24,16 @@ sccprj/
 # 操作系统生成文件
 .DS_Store
 Thumbs.db
+
+# 在线抓取下载的 NEMWEB 报表缓存（纯下载缓存，可随时重新抓取；历史值在 store 里）
+AEMO_Data/zip_cache/
+
+# AEMO NEMWEB 归档缓存（每日 zip，可按需重新下载；约 5.7 MB/天 DispatchIS、57 MB/天 P5MIN）
+AEMO_Data/archive_cache/
+
+# 由归档回填出的「实际价 + 官方预测」配对数据（体积大、可由 backfill_archive.py 重建）
+AEMO_Data/forecast_actual/
+
+# 本周工作区的临时件：matplotlib 字体缓存、上一版 PPT 的渲染图归档
+Weekly/**/_mplcache/
+Weekly/**/_prev_qa/
