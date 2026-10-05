@@ -1,0 +1,699 @@
+\documentclass[UTF8,a4paper,11pt]{ctexart}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,longtable,array,tabularx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+
+\definecolor{codebg}{RGB}{247,248,250}
+\definecolor{codeframe}{RGB}{215,220,226}
+\definecolor{keywordblue}{RGB}{20,70,150}
+\definecolor{commentgreen}{RGB}{35,120,75}
+\definecolor{stringred}{RGB}{160,55,55}
+\definecolor{changedblue}{RGB}{232,241,252}
+\definecolor{warningyellow}{RGB}{255,247,214}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=keywordblue,
+  urlcolor=keywordblue,
+  pdftitle={Basic 1.3 Three-Pump MILP: Framework and Code Changes},
+  pdfauthor={Capstone Project}
+}
+
+\lstdefinestyle{matlabstyle}{
+  language=Matlab,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{keywordblue}\bfseries,
+  commentstyle=\color{commentgreen},
+  stringstyle=\color{stringred},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  breaklines=true,
+  breakatwhitespace=false,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  tabsize=4,
+  captionpos=b
+}
+\lstset{style=matlabstyle}
+
+\setlist[itemize]{leftmargin=2em,itemsep=0.25em,topsep=0.35em}
+\setlist[enumerate]{leftmargin=2.2em,itemsep=0.3em,topsep=0.35em}
+\renewcommand{\arraystretch}{1.18}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Basic 1.3 Framework and Code Explanation}
+\rhead{Three-Pump Rolling MILP}
+\cfoot{\thepage}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\changed}{\cellcolor{changedblue}}
+\newcommand{\important}[1]{%
+  \begin{center}
+  \colorbox{warningyellow}{\parbox{0.94\linewidth}{#1}}
+  \end{center}}
+
+\title{\textbf{Basic 1.3 三泵滚动 MILP：框架与代码改动详解}\\
+\large 从 Basic 1.2 单泵控制器到 Basic 1.3 三泵控制器}
+\author{Capstone Project Technical Note}
+\date{基于当前本地 MATLAB 实现}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+本文面向已经理解 Basic 1.2、但尚未阅读 Basic 1.3 的读者。Basic 1.3 保留了 Basic 1.2 的五分钟滚动 MPC 外层结构、24 小时预测时域、Richmond 用水倍率、水箱参数和 AEMO VIC1 interval-ending 时间对齐；核心变化是把单泵二进制动态规划升级为三台固定流量、固定功率水泵的混合整数线性规划（MILP）。本文先解释整体框架和数学模型，再按实际 MATLAB 文件说明从 Basic 1.2 到 Basic 1.3 的每一类关键改动。
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{先给 Basic 1.2 读者的结论}
+
+如果已经理解 Basic 1.2，可以先记住下面五点：
+
+\begin{enumerate}
+  \item \textbf{外层滚动逻辑没有改变：}每五分钟重新优化一次，每次预测未来 288 步，只执行最优计划的第一步。
+  \item \textbf{控制变量变了：}Basic 1.2 每步只有一个标量 $u(k)\in\{0,1\}$；Basic 1.3 每步有三个二进制变量 $u_1(k),u_2(k),u_3(k)$。
+  \item \textbf{求解器变了：}Basic 1.2 利用单泵结构进行精确动态规划；Basic 1.3 使用 MATLAB Optimization Toolbox 的 \code{intlinprog} 求解 MILP。
+  \item \textbf{接口变了：}请求值、实际状态和启停事件都从标量扩展为 $1\times3$ 或 $N\times3$ 矩阵，并增加总功率和模式编号。
+  \item \textbf{水位仍然不是控制输入：}水位由当前水位、需求和三泵总流量通过质量平衡唯一决定。
+\end{enumerate}
+
+\important{Basic 1.3 的三泵参数是合成测试参数，不是 Richmond 真实设备参数，也不是论文实测参数。历史电价被当作 perfect forecast，只验证控制器，不验证预测器。}
+
+\section{Basic 1.2 保留了什么，Basic 1.3 改了什么}
+
+\subsection{保持不变的外层设置}
+
+\begin{table}[htbp]
+\centering
+\caption{Basic 1.2 与 Basic 1.3 共用的设置}
+\begin{tabularx}{\linewidth}{>{\bfseries}l X}
+\toprule
+项目 & 保留内容 \\
+\midrule
+控制间隔 & $\Delta t=300$ s，即五分钟 \\
+预测时域 & 24 小时，即 $N=288$ 步 \\
+滚动方式 & 每五分钟重新求解，只执行第一步 \\
+水箱面积 & $A=1000\ \mathrm{m^2}$ \\
+水位约束 & $1.40\le x\le3.37$ m \\
+初始水位 & $x_0=2.30$ m \\
+需求 & 25 L/s 基础需求乘以 Richmond 24 小时倍率 \\
+价格数据 & 五分钟 AEMO VIC1 历史 RRP \\
+时间定义 & AEMO interval-ending；一天从 00:05 结束的区间开始 \\
+终点条件 & 不增加 terminal-level equality constraint \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{核心升级}
+
+\begin{table}[htbp]
+\centering
+\caption{从 Basic 1.2 到 Basic 1.3 的核心差异}
+\begin{tabularx}{\linewidth}{>{\bfseries}p{3.2cm} X X}
+\toprule
+项目 & Basic 1.2 & Basic 1.3 \\
+\midrule
+水泵数量 & 1 台 & 3 台 \\
+每步控制量 & 标量 $u(k)$ & 行向量 $[u_1(k),u_2(k),u_3(k)]$ \\
+计划维度 & $N\times1$ & $N\times3$ \\
+流量参数 & 0.050 m$^3$/s & $[0.050,0.030,0.020]$ m$^3$/s \\
+功率参数 & 46 kW & $[43,27,19]$ kW \\
+求解方法 & 单泵精确动态规划 & \code{intlinprog} MILP \\
+启停计算 & $|u(k)-u(k-1)|$ & 每台泵分别计算 $|u_j(k)-u_j(k-1)|$ \\
+执行器输出 & 单个开关、流量、功率 & 三泵状态、模式、总流量、总功率、跟踪误差 \\
+历史闭环基准 & 原有单泵设置 & 新 P1-only：50 L/s、43 kW \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Basic 1.3 整体框架}
+
+\subsection{一次五分钟闭环发生什么}
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=7mm and 8mm,
+  box/.style={draw,rounded corners,align=center,minimum height=10mm,text width=4.4cm,fill=blue!4},
+  arrow/.style={-{Latex[length=2.5mm]},thick}
+]
+\node[box] (data) {取得未来 288 步输入\\价格 $price(k)$、需求 $d(k)$};
+\node[box,below=of data] (milp) {三泵 MILP\\求解 $u_{j,k}$ 和 $s_{j,k}$};
+\node[box,below=of milp] (first) {只取第一步\\\code{pump\_request\_now}};
+\node[box,below=of first] (exec) {Decision/执行器\\返回实际三泵状态、流量、功率};
+\node[box,below=of exec] (update) {用 \code{actual\_flow\_m3s}\\更新真实水位并计算真实电费};
+\node[box,below=of update] (roll) {时间前移五分钟\\实际泵状态成为下一轮 previous state};
+\draw[arrow] (data)--(milp);
+\draw[arrow] (milp)--(first);
+\draw[arrow] (first)--(exec);
+\draw[arrow] (exec)--(update);
+\draw[arrow] (update)--(roll);
+\draw[arrow] (roll.east) -- ++(1.0,0) |- (data.east);
+\end{tikzpicture}
+\end{center}
+
+\subsection{文件调用关系}
+
+\begin{enumerate}
+  \item \code{run\_basic\_mpc.m}：建立配置并启动一次历史闭环仿真。
+  \item \code{basic\_mpc\_config.m}：提供水箱、三泵、需求、价格文件和求解器参数。
+  \item \code{simulate\_basic\_mpc.m}：负责滚动窗口、执行第一步、状态更新和结果记录。
+  \item \code{constrained\_tank\_mpc.m}：把一个预测窗口转换成 MILP 并调用 \code{intlinprog}。
+  \item \code{mpc\_to\_decision\_request.m}：把 MPC 第一动作整理成执行器请求。
+  \item \code{mock\_decision\_optimizer.m}：理想执行请求，并返回实际三泵状态、流量和功率。
+  \item \code{pump\_state\_to\_mode.m}：把三个二进制状态转换为模式编号 0--7。
+\end{enumerate}
+
+\section{三泵参数和八种模式}
+
+\subsection{单泵参数}
+
+\begin{table}[htbp]
+\centering
+\caption{Basic 1.3 合成三泵参数}
+\begin{tabular}{lrrrr}
+\toprule
+泵 & 固定流量 (m$^3$/s) & 固定流量 (L/s) & 固定功率 (kW) & PE100 \\
+\midrule
+P1 & 0.050 & 50 & 43 & 86 \\
+P2 & 0.030 & 30 & 27 & 90 \\
+P3 & 0.020 & 20 & 19 & 95 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+PE100 只用于结果展示和效率比较。实际电费直接使用 43、27 和 19 kW：
+
+\begin{equation}
+C_{\mathrm{energy},k}=price_k\,P_k\,\frac{300/3600}{1000}.
+\end{equation}
+
+其中 $price_k$ 的单位为 AUD/MWh，$P_k$ 的单位为 kW；除以 1000 是从 kWh 转换为 MWh，不能删除。
+
+\subsection{模式定义}
+
+\begin{table}[htbp]
+\centering
+\caption{三台二进制泵形成的全部八种模式}
+\begin{tabular}{clrrrr}
+\toprule
+模式 & 泵组合 & 状态 $[P1,P2,P3]$ & 流量 (L/s) & 功率 (kW) & kWh/5 min \\
+\midrule
+0 & 全关 & 000 & 0 & 0 & 0 \\
+1 & P1 & 100 & 50 & 43 & 3.583333 \\
+2 & P2 & 010 & 30 & 27 & 2.250000 \\
+3 & P3 & 001 & 20 & 19 & 1.583333 \\
+4 & P1+P2 & 110 & 80 & 70 & 5.833333 \\
+5 & P1+P3 & 101 & 70 & 62 & 5.166667 \\
+6 & P2+P3 & 011 & 50 & 46 & 3.833333 \\
+7 & P1+P2+P3 & 111 & 100 & 89 & 7.416667 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+模式编号只负责显示和记录。MILP 的决策变量仍是三台泵各自的二进制状态，不是一个整数模式变量，也没有按需求区间手工指定模式。
+
+\section{MILP 数学模型}
+
+\subsection{变量}
+
+对泵 $j\in\{1,2,3\}$ 和预测步 $k\in\{1,\dots,N\}$：
+
+\begin{itemize}
+  \item $u_{j,k}\in\{0,1\}$：泵 $j$ 在时段 $k$ 是否开启；
+  \item $s_{j,k}\in[0,1]$：泵 $j$ 在时段 $k$ 是否发生状态变化；
+  \item $x_k$：水箱水位。代码中水位由质量平衡消元计算，不作为独立优化变量。
+\end{itemize}
+
+当 $N=288$ 时，MILP 有 $3N=864$ 个二进制变量和 $3N=864$ 个连续辅助变量，共 1728 个变量。
+
+\subsection{流量、功率和水位}
+
+\begin{align}
+q_k &= 0.050u_{1,k}+0.030u_{2,k}+0.020u_{3,k},\\
+P_k &= 43u_{1,k}+27u_{2,k}+19u_{3,k},\\
+x_{k+1} &= x_k+\frac{300}{1000}(q_k-d_k).
+\end{align}
+
+水位满足：
+
+\begin{equation}
+1.40\le x_{k+1}\le3.37,
+\qquad
+u_{1,k}+u_{2,k}+u_{3,k}\le3.
+\end{equation}
+
+\subsection{逐泵启停线性化}
+
+第一步与上一个\textbf{实际执行状态}比较：
+
+\begin{align}
+s_{j,1}&\ge u_{j,1}-u^{\mathrm{actual}}_{j,\mathrm{previous}},\\
+s_{j,1}&\ge u^{\mathrm{actual}}_{j,\mathrm{previous}}-u_{j,1}.
+\end{align}
+
+后续预测步与前一计划步比较：
+
+\begin{align}
+s_{j,k}&\ge u_{j,k}-u_{j,k-1},\\
+s_{j,k}&\ge u_{j,k-1}-u_{j,k}.
+\end{align}
+
+例如从 P1+P2 的 $[1,1,0]$ 切换到 P1+P3 的 $[1,0,1]$，P2 关闭一次、P3 开启一次，因此 transition 数量是 2，而不是“模式编号变化一次”。
+
+\subsection{目标函数}
+
+\begin{equation}
+\min\;\sum_{k=1}^{N} price_kP_k\frac{300/3600}{1000}
++0.20\sum_{j=1}^{3}\sum_{k=1}^{N}s_{j,k}.
+\end{equation}
+
+模型没有增加终点水位等式、流量跟踪惩罚或人为模式偏好。负电价时，高功率模式可能被选择，这是目标函数的合理结果，不是单位错误。
+
+\section{代码改动一：配置文件从标量变成三泵向量}
+
+Basic 1.2 的泵参数是标量：
+
+\begin{lstlisting}[caption={Basic 1.2：单泵配置}]
+config.pump_flow_m3s = 0.050;
+config.pump_power_kw = 46.0;
+config.max_pumps = 1;
+\end{lstlisting}
+
+Basic 1.3 改为三个元素的行向量，并加入泵名、PE100、启用掩码和求解器设置：
+
+\begin{lstlisting}[caption={Basic 1.3：三泵配置}]
+config.pump_names = ["P1", "P2", "P3"];
+config.pump_flow_m3s = [0.050, 0.030, 0.020];
+config.pump_power_kw = [43, 27, 19];
+config.pump_pe100_kw_per_100ls = [86, 90, 95];
+config.max_pumps = 3;
+config.pump_enabled = [true, true, true];
+
+config.switch_cost_aud = 0.20;
+config.intlinprog_options = optimoptions('intlinprog', ...
+    'Display', 'off', 'RelativeGapTolerance', 1e-9);
+\end{lstlisting}
+
+\paragraph{为什么需要 \code{pump\_enabled}?}
+公平的 P1-only 基准仍复用同一个 MILP，只把 P2、P3 的变量上界设为零：
+
+\begin{lstlisting}
+p1_config = config;
+p1_config.pump_enabled = [true false false];
+\end{lstlisting}
+
+这样两种控制器使用相同的价格、需求、预测时域、水位约束和求解流程，避免把 Basic 1.2 的 46 kW 旧参数混入对照。
+
+\section{代码改动二：从单泵动态规划到三泵 MILP}
+
+\subsection{函数输入的变化}
+
+Basic 1.2 的第四个输入 \code{u\_previous} 是一个标量。Basic 1.3 改为三泵实际状态：
+
+\begin{lstlisting}
+function result = constrained_tank_mpc( ...
+    x_current, decision_output, config, pump_previous)
+
+if nargin < 4 || isempty(pump_previous)
+    pump_previous = zeros(1,3);
+end
+pump_previous = double(pump_previous(:)');
+\end{lstlisting}
+
+这里强制把状态整理为 $1\times3$ 行向量。后续每台泵的第一步启停成本都与该向量对应元素比较。
+
+\subsection{决策向量排列}
+
+代码将变量排成：
+
+\begin{equation}
+z=[u(:,1);u(:,2);u(:,3);s(:,1);s(:,2);s(:,3)].
+\end{equation}
+
+即先放 P1 的 $N$ 个状态，再放 P2、P3，之后用相同顺序放三个 switch plan。这个顺序决定了 \code{kron}、\code{reshape} 和变量上下界的写法。
+
+\subsection{用累计矩阵表示水位}
+
+\begin{lstlisting}[caption={构造累计质量平衡矩阵}]
+I = speye(N);
+L = sparse(tril(ones(N)));
+flow_map = kron(q, I);
+level_map = alpha*L*flow_map;
+x_base = x_current*ones(N,1)-alpha*L*demand;
+\end{lstlisting}
+
+各变量的意义如下：
+
+\begin{itemize}
+  \item \code{I}：$N\times N$ 单位矩阵；
+  \item \code{L}：下三角全 1 矩阵，用于对第 1 步到当前步的流量和需求累加；
+  \item \code{flow\_map}：把 $3N\times1$ 的泵状态向量映射为 $N\times1$ 总流量；
+  \item \code{x\_base}：假设所有泵都关闭时，由需求造成的水位轨迹；
+  \item \code{level\_map*pump\_plan(:)}：泵送流量对水位的累计贡献。
+\end{itemize}
+
+最终预测水位是：
+
+\begin{lstlisting}
+x_prediction = x_base + level_map*pump_plan(:);
+\end{lstlisting}
+
+这说明水位由决策和需求唯一计算，不是可以任意选择的变量。
+
+\subsection{水位和最多三泵约束}
+
+\begin{lstlisting}[caption={硬水位约束与同时运行数量约束}]
+A_level = [level_map, sparse(N,3*N); ...
+    -level_map, sparse(N,3*N)];
+b_level = [config.level_max_m-x_base; ...
+    x_base-config.level_min_m];
+
+A_count = [kron(ones(1,3), I), sparse(N,3*N)];
+b_count = config.max_pumps*ones(N,1);
+\end{lstlisting}
+
+上半部分实现 $x\le x_{\max}$，下半部分通过乘以 $-1$ 实现 $x\ge x_{\min}$。\code{A\_count} 对每个时段的三个泵状态求和。
+
+\subsection{启停变量的稀疏差分矩阵}
+
+\begin{lstlisting}[caption={逐泵 switch 线性化}]
+D = spdiags([-ones(N,1), ones(N,1)], [-1,0], N, N);
+D(1,1) = 1;
+D3 = kron(speye(3), D);
+
+previous_offset = zeros(3*N,1);
+for j = 1:3
+    previous_offset((j-1)*N+1) = pump_previous(j);
+end
+
+A_switch = [D3, -speye(3*N); -D3, -speye(3*N)];
+b_switch = [previous_offset; -previous_offset];
+\end{lstlisting}
+
+矩阵 \code{D} 产生 $[u_1,\,u_2-u_1,\dots,u_N-u_{N-1}]^\mathsf{T}$。\code{previous\_offset} 再把每台泵的第一项修正为 $u_{j,1}-u^{\mathrm{actual}}_{j,\mathrm{previous}}$。两组不等式共同保证 $s\ge|\Delta u|$。
+
+\subsection{目标系数、变量类型和求解}
+
+\begin{lstlisting}[caption={MILP 目标与 intlinprog 调用}]
+energy_coefficient = kron(power(:), ...
+    price*(config.dt_seconds/3600)/1000);
+f = [energy_coefficient; ...
+    config.switch_cost_aud*ones(3*N,1)];
+
+lb = zeros(6*N,1);
+ub = ones(6*N,1);
+for j = 1:3
+    if ~enabled(j)
+        ub((j-1)*N+(1:N)) = 0;
+    end
+end
+intcon = 1:3*N;
+
+[z, objective, exitflag, output] = intlinprog( ...
+    f, intcon, A, b, [], [], lb, ub, config.intlinprog_options);
+\end{lstlisting}
+
+\code{intcon=1:3*N} 表示只有 $u$ 是整数变量；$s$ 是 $[0,1]$ 内连续变量。由于每个 $s$ 的目标系数为正，最优解会把它压到满足线性化约束的最小值，即实际绝对变化量。
+
+\subsection{解向量还原为工程量}
+
+\begin{lstlisting}[caption={把求解器向量恢复为泵计划、流量、功率和水位}]
+pump_plan = round(reshape(z(1:3*N), N, 3));
+switch_plan = round(reshape(z(3*N+1:end), N, 3));
+requested_flow_plan_m3s = pump_plan*q(:);
+requested_power_plan_kw = pump_plan*power(:);
+x_prediction = x_base+level_map*pump_plan(:);
+mode_plan = pump_state_to_mode(pump_plan);
+\end{lstlisting}
+
+Basic 1.3 的主要控制器输出为：
+
+\begin{itemize}
+  \item \code{pump\_request\_plan}：$N\times3$ 二进制计划；
+  \item \code{pump\_request\_now}：第一步 $1\times3$ 状态；
+  \item \code{mode\_plan}、\code{mode\_now}：显示用模式编号；
+  \item \code{requested\_flow\_plan\_m3s}、\code{requested\_power\_plan\_kw}；
+  \item \code{switch\_plan}：$N\times3$ 逐泵启停计划；
+  \item \code{x\_prediction}：质量平衡决定的预测水位；
+  \item 电费、启停成本、总目标、\code{exitflag} 和求解时间。
+\end{itemize}
+
+\section{代码改动三：新增八模式映射}
+
+\code{pump\_state\_to\_mode.m} 明确存储表格中的模式顺序：
+
+\begin{lstlisting}
+mode_states = [0 0 0; 1 0 0; 0 1 0; 0 0 1; ...
+    1 1 0; 1 0 1; 0 1 1; 1 1 1];
+[found, location] = ismember(pump_state, mode_states, 'rows');
+mode = location-1;
+\end{lstlisting}
+
+不能直接使用普通二进制权重 $1,2,4$ 生成编号，因为本项目规定 P3 单独运行是模式 3，而不是模式 4。显式查表避免了编号歧义。
+
+\section{代码改动四：MPC--Decision 接口从标量扩展为三泵状态}
+
+\subsection{请求接口}
+
+Basic 1.2 主要传递标量 \code{u\_request} 和请求流量。Basic 1.3 请求包含：
+
+\begin{lstlisting}
+request.pump_request_now = mpc_result.pump_request_now;
+request.pump_request_plan = mpc_result.pump_request_plan;
+request.mode_now = mpc_result.mode_now;
+request.requested_flow_m3s = mpc_result.requested_flow_m3s;
+request.requested_flow_plan_m3s = mpc_result.requested_flow_plan_m3s;
+request.requested_power_kw = mpc_result.requested_power_kw;
+request.requested_power_plan_kw = mpc_result.requested_power_plan_kw;
+request.switch_plan = mpc_result.switch_plan;
+request.interface_revision = 3;
+\end{lstlisting}
+
+\subsection{理想执行器}
+
+第一版执行器假设完全执行请求，但仍然重新从实际三泵状态计算流量和功率：
+
+\begin{lstlisting}
+pump_actual_state = round(request.pump_request_now(:)');
+actual_flow_m3s = pump_actual_state*config.pump_flow_m3s(:);
+actual_power_kw = pump_actual_state*config.pump_power_kw(:);
+
+decision_result.pump_actual_state = pump_actual_state;
+decision_result.actual_flow_m3s = actual_flow_m3s;
+decision_result.actual_power_kw = actual_power_kw;
+decision_result.actual_mode = pump_state_to_mode(pump_actual_state);
+decision_result.tracking_error_m3s = ...
+    actual_flow_m3s-request.requested_flow_m3s;
+\end{lstlisting}
+
+即使理想执行器的误差为零，也必须保留 request/actual 区分。未来替换成真实 Decision 模块或故障执行器时，水位和电费仍应由 actual 字段驱动。
+
+\section{代码改动五：滚动仿真从单泵标量扩展为三列矩阵}
+
+\subsection{状态数组的维度变化}
+
+\begin{lstlisting}
+pump_request = zeros(n_steps,3);
+pump_actual = zeros(n_steps,3);
+mode_request = zeros(n_steps,1);
+mode_actual = zeros(n_steps,1);
+requested_power_kw = zeros(n_steps,1);
+actual_power_kw = zeros(n_steps,1);
+switch_event = zeros(n_steps,3);
+pump_actual_previous = zeros(1,3);
+\end{lstlisting}
+
+Basic 1.2 的 \code{u\_actual\_previous} 是一个标量；Basic 1.3 的 \code{pump\_actual\_previous} 是 $1\times3$ 向量。
+
+\subsection{每轮求解、执行和更新}
+
+\begin{lstlisting}[caption={Basic 1.3 闭环中最关键的执行顺序}]
+solution = constrained_tank_mpc(level(k), window, ...
+    config, pump_actual_previous);
+request = mpc_to_decision_request(solution, all_data.time(k));
+execution = mock_decision_optimizer(request, config);
+
+level(k+1) = level(k)+config.dt_seconds/config.tank_area_m2 ...
+    *(execution.actual_flow_m3s-all_data.demand(k));
+
+energy_cost_aud(k) = all_data.price(k)*execution.actual_power_kw ...
+    *(config.dt_seconds/3600)/1000;
+
+switch_event(k,:) = abs( ...
+    execution.pump_actual_state-pump_actual_previous);
+pump_actual_previous = execution.pump_actual_state;
+\end{lstlisting}
+
+顺序不能交换：
+
+\begin{enumerate}
+  \item 优化器根据上一时刻\textbf{实际状态}求计划；
+  \item 执行器决定实际状态；
+  \item 水位使用实际总流量更新；
+  \item 电费使用实际总功率计算；
+  \item 下一轮 previous state 使用本轮实际三泵状态。
+\end{enumerate}
+
+如果误用上一轮计划值，就会在执行器无法完全跟踪时错误计算下一轮启停成本。
+
+\subsection{结果记录的扩展}
+
+除水位、价格和需求外，Basic 1.3 还记录：
+
+\begin{itemize}
+  \item 请求与实际三泵矩阵；
+  \item 请求与实际模式、总流量和总功率；
+  \item 逐泵 transition 数量和逐泵运行小时；
+  \item 每次 MILP 的 \code{exitflag}、消息和求解时间；
+  \item 每次计划的水位违规数和质量平衡残差；
+  \item 终点水位和总泵水体积。
+\end{itemize}
+
+\section{测试如何覆盖这些更新}
+
+\subsection{短时域与单次 MILP 测试}
+
+\code{test\_basic\_1\_3\_unit.m} 验证：
+
+\begin{enumerate}
+  \item 三台泵的流量和功率参数；
+  \item 八种二进制组合及模式编号；
+  \item 每种模式的总流量、总功率、五分钟耗电和 PE100；
+  \item P1+P2 到 P1+P3 为两个 transitions；
+  \item 正电价、相同 50 L/s 时 P1 电费低于 P2+P3；
+  \item 前低价、后高价场景把所需抽水移动到低价段；
+  \item 负电价场景可以选择三泵全开；
+  \item 预测水位满足质量平衡和边界；
+  \item 实际第一步水位与 MILP 第一预测水位一致；
+  \item 一次完整 288 步 MILP 可以成功求解。
+\end{enumerate}
+
+\subsection{完整历史闭环}
+
+\code{test\_basic\_1\_3\_full.m} 对 Multi-pump 和 P1-only 分别运行 288 次滚动优化。两者使用相同价格、需求、初始水位、预测时域、仿真长度和水位边界。
+
+\begin{table}[htbp]
+\centering
+\caption{实际运行的 24 小时历史闭环结果}
+\begin{tabular}{lrr}
+\toprule
+指标 & Multi-pump MILP & P1-only MILP \\
+\midrule
+滚动优化次数 & 288 & 288 \\
+每次预测时域 & 288 & 288 \\
+\code{exitflag} & 全部 1 & 全部 1 \\
+实际水位违规数 & 0 & 0 \\
+水位范围 (m) & 1.445975--2.742200 & 1.520600--2.300000 \\
+终点水位 (m) & 1.978100 & 1.738100 \\
+总泵水量 (m$^3$) & 1830 & 1590 \\
+能源成本 (AUD) & 28.529631 & 27.145183 \\
+启停成本 (AUD) & 1.200000 & 0.600000 \\
+总成本 (AUD) & 29.729631 & 27.745183 \\
+总求解时间 (s) & 1382.121 & 691.890 \\
+平均单次求解时间 (s) & 4.799 & 2.402 \\
+最大单次求解时间 (s) & 31.276 & 12.139 \\
+逐泵 transitions & $[2,2,2]$ & $[3,0,0]$ \\
+逐泵运行小时 & $[5.833,5.833,2.083]$ & $[8.833,0,0]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\important{Multi-pump 的总成本较高，但它的终点水位和总泵水量也更高。由于模型按要求没有终点水位等式，不能只比较总成本就断言哪个控制器经济性更好。报告终点库存和总泵水量正是为了避免这种错误结论。}
+
+\section{如何运行和阅读结果}
+
+\subsection{运行短测试和单次完整 MILP}
+
+\begin{lstlisting}
+cd('D:/.../EMPC_Water_Electricity_Forecast/MPC/Basic 1.3')
+run('run_basic_mpc_tests.m')
+\end{lstlisting}
+
+\subsection{运行完整历史对照}
+
+\begin{lstlisting}
+run('run_full_closed_loop_tests.m')
+% 或：
+run('run_controller_comparison.m')
+\end{lstlisting}
+
+\subsection{只运行 Multi-pump 历史闭环}
+
+\begin{lstlisting}
+run('run_basic_mpc.m')
+\end{lstlisting}
+
+完整对照需要 576 次 MILP 求解，在已测试机器上总求解时间约 34.6 分钟。正式设置没有为了加速而缩短 288 步预测时域。
+
+\section{从 Basic 1.2 迁移时最容易犯的错误}
+
+\begin{enumerate}
+  \item \textbf{继续把 \code{pump\_flow\_m3s} 当标量。}Basic 1.3 中它是 $1\times3$ 向量，必须与三泵状态做矩阵乘法。
+  \item \textbf{继续读取标量 \code{u\_request}。}兼容别名现在也是三元素状态；新代码应优先使用 \code{pump\_request\_now} 和 \code{pump\_request\_plan}。
+  \item \textbf{按模式编号是否变化计算启停。}必须逐泵计算状态差的绝对值。
+  \item \textbf{使用 PE100 计算电费。}电费必须使用实际固定功率 43、27、19 kW；PE100 只用于展示。
+  \item \textbf{用请求流量更新水位。}闭环必须使用执行器返回的 \code{actual\_flow\_m3s}。
+  \item \textbf{用计划状态作为下一轮 previous state。}必须使用上一轮的 \code{pump\_actual\_state}。
+  \item \textbf{把历史价格运行称为预测器验证。}当前运行只验证已知价格输入下的控制器。
+  \item \textbf{忽略终点库存差异。}没有终点水位等式时，成本比较必须同时报告终点水位和总泵水量。
+\end{enumerate}
+
+\section{变量和字段速查}
+
+\begin{longtable}{p{4.7cm}p{2.2cm}p{7.1cm}}
+\caption{Basic 1.3 主要变量与接口字段}\label{tab:variables}\\
+\toprule
+名称 & 维度 & 含义 \\
+\midrule
+\endfirsthead
+\toprule
+名称 & 维度 & 含义 \\
+\midrule
+\endhead
+\code{pump\_previous} & $1\times3$ & 上一步实际执行的三泵状态 \\
+\code{pump\_request\_plan} & $N\times3$ & MILP 预测时域内的泵状态计划 \\
+\code{pump\_request\_now} & $1\times3$ & 当前只执行的第一步请求 \\
+\code{switch\_plan} & $N\times3$ & 每台泵逐步 transition 计划 \\
+\code{requested\_flow\_plan\_m3s} & $N\times1$ & 计划总流量 \\
+\code{requested\_power\_plan\_kw} & $N\times1$ & 计划总功率 \\
+\code{x\_prediction} & $N\times1$ & 由质量平衡得到的预测水位 \\
+\code{pump\_actual\_state} & $1\times3$ & 执行器返回的实际泵状态 \\
+\code{actual\_flow\_m3s} & 标量 & 实际三泵总流量 \\
+\code{actual\_power\_kw} & 标量 & 实际三泵总功率 \\
+\code{actual\_mode} & 标量 & 实际模式编号 0--7 \\
+\code{tracking\_error\_m3s} & 标量 & 实际流量减请求流量 \\
+\code{exitflag} & 标量/向量 & \code{intlinprog} 求解状态 \\
+\code{solve\_time\_seconds} & 标量/向量 & 单次或全部 MILP 求解时间 \\
+\bottomrule
+\end{longtable}
+
+\section{适用范围和未验证内容}
+
+\begin{itemize}
+  \item 三泵参数是合成控制测试参数，尚未由 Richmond 真实泵曲线、效率曲线或设备铭牌验证。
+  \item 水泵采用固定流量、固定功率、每五分钟切换一次的第一版离散模型；没有连续转速或部分时段运行变量。
+  \item 理想执行器当前完全执行请求；真实设备延迟、故障和流量偏差尚未加入。
+  \item 历史电价作为 perfect forecast；价格预测误差尚未进入 Basic 1.3 验证。
+  \item 模型没有 terminal-level equality，因此不同控制器的终点库存可能不同。
+\end{itemize}
+
+\section{总结}
+
+Basic 1.3 不是简单地把 Basic 1.2 的单泵开关复制三次。真正的升级包括：把控制变量扩展为三泵二进制矩阵；用 MILP 同时处理水位、价格、逐泵启停和八种组合；把系统接口改造成请求状态与实际状态分离的三泵接口；并让闭环始终由实际流量、实际功率和实际泵状态驱动。Basic 1.2 的滚动 MPC 时间结构仍然保留，因此理解 Basic 1.2 的读者只需重点掌握上述控制器内部、接口和结果维度的变化，即可完整理解 Basic 1.3。
+
+\end{document}
