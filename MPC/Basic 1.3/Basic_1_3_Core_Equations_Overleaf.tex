@@ -1,0 +1,426 @@
+\documentclass[t,12pt]{beamer}
+
+% A4 portrait pages.  The global `t` option top-aligns every frame so the
+% lower part of each page remains intentionally open instead of overflowing.
+\geometry{paperwidth=21cm,paperheight=29.7cm}
+
+% Compile directly in Overleaf with pdfLaTeX.
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\DeclareSIUnit{\AUD}{AUD}
+
+\definecolor{bodygreen}{HTML}{405344}
+\definecolor{softgreen}{HTML}{EAF0EA}
+\definecolor{accentblue}{HTML}{0072BD}
+\definecolor{accentorange}{HTML}{D95319}
+\definecolor{warningred}{HTML}{B22222}
+
+\setbeamercolor{normal text}{fg=bodygreen,bg=white}
+\setbeamercolor{frametitle}{fg=black,bg=white}
+\setbeamercolor{structure}{fg=bodygreen}
+\setbeamercolor{alerted text}{fg=warningred}
+\setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=1.2cm,text margin right=1.2cm}
+\setbeamertemplate{itemize item}{\raise0.15ex\hbox{\scriptsize$\bullet$}}
+\setbeamertemplate{itemize subitem}{\raise0.10ex\hbox{\tiny$\circ$}}
+\setbeamertemplate{footline}{%
+  \hfill\color{gray}\scriptsize Basic 1.3 three-pump MILP\hspace{0.7em}
+  \insertframenumber/\inserttotalframenumber\hspace{1.0em}\vspace{0.5em}}
+
+% Normal readable spacing is retained because portrait pages provide enough
+% vertical room; content starts at the top and does not fill the lower page.
+\setlength{\parskip}{0.35em}
+\sisetup{per-mode=symbol,detect-all}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\unitcost}{\mathrm{AUD/m^3}}
+
+\title{Basic 1.3 Core Equations}
+\subtitle{Three-pump rolling MILP and economic interpretation}
+\author{}
+\date{}
+
+\begin{document}
+
+% ----------------------------------------------------------------------
+\begin{frame}
+  \titlepage
+  \vspace{-1.4em}
+  \begin{center}
+    \small
+    Fixed-flow synthetic pumps, five-minute control intervals, and a
+    24-hour prediction horizon.
+  \end{center}
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Key updates from Basic 1.2 to Basic 1.3}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.25\textwidth}
+                >{\raggedright\arraybackslash}p{0.31\textwidth}
+                >{\raggedright\arraybackslash}p{0.34\textwidth}}
+\toprule
+Component & Basic 1.2 & Basic 1.3 \\
+\midrule
+Pump model & One fixed-flow pump & Three independent fixed-flow pumps \\
+Decision variable & Scalar binary $u(k)$ & Binary vector
+  $\bm u(k)=[u_1,u_2,u_3]$ \\
+Optimization & Single-pump binary dynamic programming &
+  Three-pump MILP solved by \code{intlinprog} \\
+Available modes & Off or P1 & All eight three-pump combinations \\
+Switching & Change in one pump state & Separate transition variable for
+  every pump \\
+Controller output & One immediate request & Full $N\times3$ plan plus
+  first-step request \\
+Execution feedback & One actual state and flow & Three actual states,
+  mode, total flow, total power, and tracking error \\
+Closed-loop memory & Previous scalar action & Previous
+  \emph{actually executed} $1\times3$ pump state \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.4em}
+\small
+The outer rolling structure is unchanged: five-minute sampling, a
+288-step horizon, re-optimization at every interval, and execution of only
+the first optimized action.
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Water-demand calculation}
+The hourly Richmond demand multipliers are converted into five-minute
+values using
+\[
+  d_{m,\,5\mathrm{min}}=\operatorname{repelem}
+  \!\left(d_{m,\,\mathrm{hourly}},12\right).
+\]
+The water demand during interval $k$ is
+\[
+  d(k)=d_{\mathrm{base}}d_m(k)=0.025d_m(k).
+\]
+
+\textbf{Where:}
+\begin{itemize}
+  \item $d(k)$: water demand during interval $k$, in \si{\metre\cubed\per\second};
+  \item $d_{\mathrm{base}}=0.025\ \si{\metre\cubed\per\second}$:
+        base demand, equivalent to \SI{25}{\litre\per\second};
+  \item $d_m(k)$: dimensionless Richmond demand multiplier.
+\end{itemize}
+
+For example, if $d_m(k)=1.61$, then
+$d(k)=0.025\times1.61=0.04025\ \si{\metre\cubed\per\second}
+=\SI{40.25}{\litre\per\second}$.
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Three-pump binary decisions}
+For pump $j\in\{1,2,3\}$ and prediction step $k$,
+\[
+  u_j(k)\in\{0,1\},
+  \qquad 0=\text{off},\quad 1=\text{on}.
+\]
+The synthetic pump parameters used by Basic 1.3 are
+\[
+  \bm q=\begin{bmatrix}0.050&0.030&0.020\end{bmatrix}
+  \ \si{\metre\cubed\per\second},
+  \qquad
+  \bm P=\begin{bmatrix}43&27&19\end{bmatrix}\ \si{\kilo\watt}.
+\]
+Therefore, the total requested flow and power are
+\[
+  q(k)=\sum_{j=1}^{3}q_j u_j(k),
+  \qquad
+  P(k)=\sum_{j=1}^{3}P_j u_j(k).
+\]
+
+\begin{itemize}
+  \item The pumps have fixed flow and fixed power; there is no continuous
+        pump-speed variable.
+  \item All $2^3=8$ on/off combinations are available because
+        $\sum_j u_j(k)\leq3$.
+  \item These values are synthetic test parameters, not measured Richmond
+        pump data.
+\end{itemize}
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{All eight operating modes}
+\small
+\begin{center}
+\begin{tabular}{c l c r r r r}
+\toprule
+Mode & Pump combination & $[u_1\ u_2\ u_3]$ &
+Flow (L/s) & Power (kW) & Energy/5 min (kWh) & PE100 \\
+\midrule
+0 & All off       & $[0\ 0\ 0]$ &   0 &  0 & 0.000000 & -- \\
+1 & P1            & $[1\ 0\ 0]$ &  50 & 43 & 3.583333 & 86.0000 \\
+2 & P2            & $[0\ 1\ 0]$ &  30 & 27 & 2.250000 & 90.0000 \\
+3 & P3            & $[0\ 0\ 1]$ &  20 & 19 & 1.583333 & 95.0000 \\
+4 & P1+P2         & $[1\ 1\ 0]$ &  80 & 70 & 5.833333 & 87.5000 \\
+5 & P1+P3         & $[1\ 0\ 1]$ &  70 & 62 & 5.166667 & 88.5714 \\
+6 & P2+P3         & $[0\ 1\ 1]$ &  50 & 46 & 3.833333 & 92.0000 \\
+7 & P1+P2+P3      & $[1\ 1\ 1]$ & 100 & 89 & 7.416667 & 89.0000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\small
+The five-minute electrical energy is
+\[
+  E_{\mathrm{step}}=P\frac{300}{3600}=\frac{P}{12}
+  \quad\text{in kWh}.
+\]
+PE100 is an efficiency-display metric,
+$\mathrm{PE100}=100P/q_{\mathrm{L/s}}$ in
+$\mathrm{kW/(100\,L/s)}$.  It is \alert{not} used to calculate the
+electricity bill.
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Tank-level dynamics}
+The tank level is updated using the actual net inflow:
+\[
+  x(k+1)=x(k)+\frac{\Delta t}{A}\left[q(k)-d(k)\right].
+\]
+Substituting $\Delta t=\SI{300}{\second}$, $A=\SI{1000}{\metre\squared}$,
+and the three-pump flow equation gives
+\[
+  x(k+1)=x(k)+0.3\left[
+  0.050u_1(k)+0.030u_2(k)+0.020u_3(k)-d(k)\right].
+\]
+
+\textbf{Where:}
+\begin{itemize}
+  \item $x(k)$: tank level at the beginning of interval $k$, in \si{\metre};
+  \item $x(k+1)$: level after one five-minute interval, in \si{\metre};
+  \item $A=\SI{1000}{\metre\squared}$: tank cross-sectional area;
+  \item $q(k)$: combined pump inflow, in \si{\metre\cubed\per\second};
+  \item $d(k)$: water demand, in \si{\metre\cubed\per\second}.
+\end{itemize}
+
+The level is a state determined by mass balance; it is not an independent
+control input.
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{MILP constraints}
+At every step of the prediction horizon, the controller enforces
+\[
+  u_j(k)\in\{0,1\},\qquad
+  1.40\leq x(k)\leq3.37,\qquad
+  \sum_{j=1}^{3}u_j(k)\leq3.
+\]
+The tank dynamics must also hold exactly:
+\[
+  x(k+1)-x(k)=\frac{300}{1000}\left[
+  \sum_{j=1}^{3}q_j u_j(k)-d(k)\right].
+\]
+
+\begin{itemize}
+  \item Initial level: $x(0)=\SI{2.30}{\metre}$.
+  \item Prediction horizon: $N=288$ five-minute intervals, or 24 hours.
+  \item No terminal-level equality is imposed.
+  \item No flow-tracking penalty is added.
+  \item Historical prices are used as perfect-forecast inputs to test the
+        controller, not to validate a price predictor.
+\end{itemize}
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Per-pump switching transitions}
+Each pump has a non-negative switching variable $s_j(k)$.  For the first
+predicted interval,
+\[
+  s_j(1)\geq u_j(1)-u_{j,\mathrm{previous}},\qquad
+  s_j(1)\geq u_{j,\mathrm{previous}}-u_j(1).
+\]
+For later intervals,
+\[
+  s_j(k)\geq u_j(k)-u_j(k-1),\qquad
+  s_j(k)\geq u_j(k-1)-u_j(k).
+\]
+Because $s_j(k)$ is minimized with a positive coefficient,
+\[
+  s_j(k)=\left|u_j(k)-u_j(k-1)\right|
+\]
+at the optimum.
+
+\begin{itemize}
+  \item Switching cost: $c_s=\SI{0.20}{\AUD}$ per transition per pump.
+  \item An on transition and an off transition are counted separately.
+  \item Changing from P1+P2 to P1+P3 produces two transitions:
+        P2 turns off and P3 turns on.
+  \item The previous state comes from the pumps actually executed in the
+        preceding closed-loop interval.
+\end{itemize}
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Electricity-cost conversion}
+The electricity price $p(k)$ is in \si{\AUD\per\mega\watt\hour}, whereas
+pump power $P(k)$ is in \si{\kilo\watt}.  The five-minute energy cost is
+\[
+  C_{\mathrm{energy}}(k)
+  =p(k)P(k)\frac{300}{3600}\frac{1}{1000}.
+\]
+
+\textbf{Unit check:}
+\[
+  \frac{\mathrm{AUD}}{\mathrm{MWh}}
+  \times\mathrm{kW}
+  \times\mathrm{h}
+  \times\frac{\mathrm{MW}}{1000\,\mathrm{kW}}
+  =\mathrm{AUD}.
+\]
+
+For example, one five-minute P1 interval uses
+\[
+  E_{1,\mathrm{step}}=43\times\frac{300}{3600}
+  =\SI{3.583333}{\kilo\watt\hour}
+  =\SI{0.003583333}{\mega\watt\hour}.
+\]
+
+The factor $1/1000$ must be retained.  PE100 is used only for efficiency
+display; the electricity bill uses the actual powers 43, 27, and
+\SI{19}{\kilo\watt}.
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Three-pump MPC objective function}
+At every sampling instant, the MILP minimizes predicted electricity and
+per-pump switching costs over $N=288$ future intervals:
+\[
+  \min_{u,s}\ J=
+  \sum_{k=1}^{N}\left[
+    p(k)\left(\sum_{j=1}^{3}P_j u_j(k)\right)
+    \frac{300}{3600}\frac{1}{1000}
+    +c_s\sum_{j=1}^{3}s_j(k)
+  \right].
+\]
+
+\textbf{Where:}
+\begin{itemize}
+  \item $J$: predicted operating cost over the 24-hour horizon, in AUD;
+  \item $p(k)$: predicted electricity price, in \si{\AUD\per\mega\watt\hour};
+  \item $P_j$: fixed power of pump $j$, in \si{\kilo\watt};
+  \item $u_j(k)$: planned binary state of pump $j$;
+  \item $s_j(k)$: switching transition of pump $j$;
+  \item $c_s=\SI{0.20}{\AUD}$ per transition per pump.
+\end{itemize}
+
+There is no separate penalty on pumped volume or final tank level.
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Rolling closed-loop MPC operation}
+At closed-loop interval $t$, Basic 1.3 performs the following sequence:
+\begin{enumerate}
+  \item read the current measured tank level $x(t)$ and the previously
+        executed pump state $\bm u_{\mathrm{actual}}(t-1)$;
+  \item build a 288-step price and demand prediction window;
+  \item solve the three-pump MILP using \code{intlinprog};
+  \item obtain the planned matrix
+        $\bm U^\star\in\{0,1\}^{288\times3}$;
+  \item execute only the first row,
+        $\bm u_{\mathrm{request}}(t)=\bm U^\star(1,:)$;
+  \item obtain actual pump states, total flow, and total power from the
+        execution interface;
+  \item update the tank with actual flow and calculate cost using actual
+        power;
+  \item advance five minutes and solve a new 288-step MILP.
+\end{enumerate}
+
+Thus a 24-hour closed-loop test solves 288 separate MILPs; it is not one
+open-loop 24-hour schedule.
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Absolute cost versus cost per cubic metre}
+The historical comparison produced the following realised results:
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+Metric & Multi-pump & P1-only \\
+\midrule
+Pumped volume & \SI{1830}{\metre\cubed} & \SI{1590}{\metre\cubed} \\
+Final tank level & \SI{1.9781}{\metre} & \SI{1.7381}{\metre} \\
+Absolute total cost & \SI{29.7296}{\AUD} & \SI{27.7452}{\AUD} \\
+Cost per pumped volume & \SI{0.01625}{\AUD\per\metre\cubed}
+                       & \SI{0.01745}{\AUD\per\metre\cubed} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item \textbf{Absolute cost:} P1-only is cheaper because it pumps
+        \SI{240}{\metre\cubed} less water during the displayed day.
+  \item \textbf{Cost per cubic metre:} P1-only is more expensive per unit
+        of pumped water.  Multi-pump is approximately $6.9\%$ cheaper on
+        this metric.
+  \item The final inventories are different, so absolute cost alone is not
+        an equal-service economic comparison.
+\end{itemize}
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Why the two conclusions are both possible}
+The volume difference is exactly explained by final tank inventory:
+\[
+  \Delta V=A\Delta x
+  =1000(1.9781-1.7381)=\SI{240}{\metre\cubed}.
+\]
+This equals the pumping difference $1830-1590=\SI{240}{\metre\cubed}$:
+the extra water remained in the tank and was not extra demand.
+
+\begin{itemize}
+  \item P1-only has the lower \emph{total daily bill}.
+  \item Multi-pump has the lower \emph{cost per pumped cubic metre}, because
+        more pumping is shifted into cheaper price intervals.
+  \item The lower relative quantity is \textbf{AUD/m$^3$}, not
+        \textbf{kWh/m$^3$}; therefore ``relative consumption'' is ambiguous.
+\end{itemize}
+
+The electrical intensities are
+\[
+  \text{Multi}=0.2448\ \mathrm{kWh/m^3},\qquad
+  \text{P1-only}=0.2389\ \mathrm{kWh/m^3}.
+\]
+\textbf{Conclusion:} the economic advantage per cubic metre comes from
+electricity-price timing, not from lower physical energy use.
+\end{frame}
+
+% ----------------------------------------------------------------------
+\begin{frame}{Interpretation and fair comparison}
+The multi-pump feasible set contains the P1-only actions, but this does not
+guarantee a lower truncated 24-hour realised bill when the two trajectories
+finish with different stored water.
+
+\begin{itemize}
+  \item Every rolling optimization looks 24 hours ahead, including times
+        beyond the end of the displayed day.
+  \item With no terminal-level equality, the controller may use a cheap
+        period today to store water for future demand.
+  \item The reported comparison is fair in price, demand, initial level,
+        constraints, horizon, and simulation duration, but not in final
+        inventory.
+\end{itemize}
+
+For a strict economic comparison, report all three quantities together:
+\[
+  \boxed{\text{total cost}},\qquad
+  \boxed{\text{cost per pumped }\mathrm{m^3}},\qquad
+  \boxed{\text{final stored volume}}.
+\]
+Alternatively, run a separate analysis in which both controllers are
+required to finish at the same tank level.  This is an evaluation choice;
+it is not part of the current Basic 1.3 controller specification.
+\end{frame}
+
+\end{document}
