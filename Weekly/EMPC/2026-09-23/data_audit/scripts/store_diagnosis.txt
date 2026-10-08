@@ -1,0 +1,177 @@
+==============================================================================
+1. dispatch_actual.csv
+==============================================================================
+dispatch_actual.csv: 5 rows, 9 cols
+  columns: ['settlement_date', 'region_id', 'rrp', 'eep', 'total_demand', 'run_no', 'dispatch_interval', 'intervention', 'source_file']
+  settlement_date    distinct=1     ['']
+  region_id          distinct=5     ['NSW1', 'QLD1', 'SA1', 'TAS1', 'VIC1']
+  rrp                distinct=5     ['-9.07137', '-8.07', '-7.86171', '-8.03596', '-7.81259']
+  eep                distinct=1     ['0']
+  total_demand       distinct=5     ['4441.33', '3402.65', '594.7', '842.4', '3734.23']
+  run_no             distinct=1     ['1']
+  dispatch_interval  distinct=1     ['20260915090']
+  intervention       distinct=1     ['0']
+  source_file        distinct=1     ['PUBLIC_DISPATCHIS_202609151130_0000000537980194.zip']
+
+==============================================================================
+2. p5min_forecast.csv
+==============================================================================
+p5min_forecast.csv: 3600 rows, 7 cols
+  columns: ['effective_time', 'region_id', 'interval_datetime', 'rrp', 'total_demand', 'intervention', 'source_file']
+  effective_time     distinct=60     ['2026-09-15 06:35:00', '2026-09-15 06:40:00', '2026-09-15 06:45:00', '2026-09-15 06:50:00', '2026-09-15 06:55:00']
+  region_id          distinct=5      ['NSW1', 'QLD1', 'SA1', 'TAS1', 'VIC1']
+  interval_datetime  distinct=1      ['']
+  rrp                distinct=1932   ['81.96984', '84.48714', '87.74101', '83.99', '89.68671']
+  total_demand       distinct=3529   ['7355.07', '7375.07', '7389.07', '7396.07', '7391.07']
+  intervention       distinct=1      ['0']
+  source_file        distinct=60     ['PUBLIC_P5MIN_202609150635_20260915063034.zip', 'PUBLIC_P5MIN_202609150640_20260915063535.zip', 'PUBLIC_P5MIN_202609150645_20260915064036.zip', 'PUBLIC_P5MIN_202609150650_20260915064534.zip', 'PUBLIC_P5MIN_202609150655_20260915065035.zip']
+  empty-field counts: {'effective_time': 0, 'region_id': 0, 'interval_datetime': 3600, 'rrp': 0, 'total_demand': 0, 'intervention': 0, 'source_file': 0}
+  rows per (effective_time, region): {12: 300}
+
+==============================================================================
+3. predispatch_forecast.csv
+==============================================================================
+predispatch_forecast.csv: 1925 rows, 10 cols
+  columns: ['effective_time', 'predispatch_seqno', 'run_no', 'region_id', 'period_id', 'rrp', 'eep', 'total_demand', 'intervention', 'source_file']
+  effective_time       distinct=10     ['2026-09-15 07:00:00', '2026-09-15 07:30:00', '2026-09-15 08:00:00', '2026-09-15 08:30:00', '2026-09-15 09:00:00']
+  predispatch_seqno    distinct=10     ['2026-09-01 05:00:06', '2026-09-01 05:00:07', '2026-09-01 05:00:08', '2026-09-01 05:00:09', '2026-09-01 05:01:00']
+  run_no               distinct=1      ['1']
+  region_id            distinct=5      ['NSW1', 'QLD1', 'SA1', 'TAS1', 'VIC1']
+  period_id            distinct=1      ['']
+  rrp                  distinct=1292   ['65.51', '36.21808', '0.01044', '-3.72177', '-6.72845']
+  eep                  distinct=1      ['0']
+  total_demand         distinct=1      ['']
+  intervention         distinct=1      ['0']
+  source_file          distinct=10     ['PUBLIC_PREDISPATCHIS_202609150700_20260915063154.zip', 'PUBLIC_PREDISPATCHIS_202609150730_20260915070157.zip', 'PUBLIC_PREDISPATCHIS_202609150800_20260915073157.zip', 'PUBLIC_PREDISPATCHIS_202609150830_20260915080158.zip', 'PUBLIC_PREDISPATCHIS_202609150900_20260915083158.zip']
+  empty-field counts: {'effective_time': 0, 'predispatch_seqno': 0, 'run_no': 0, 'region_id': 0, 'period_id': 1925, 'rrp': 0, 'eep': 0, 'total_demand': 1925, 'intervention': 0, 'source_file': 0}
+  predispatch_seqno x effective_time (head 12):
+     effective_time   predispatch_seqno  rows
+2026-09-15 07:00:00 2026-09-01 05:00:06   215
+2026-09-15 07:30:00 2026-09-01 05:00:07   210
+2026-09-15 08:00:00 2026-09-01 05:00:08   205
+2026-09-15 08:30:00 2026-09-01 05:00:09   200
+2026-09-15 09:00:00 2026-09-01 05:01:00   195
+2026-09-15 09:30:00 2026-09-01 05:01:01   190
+2026-09-15 10:00:00 2026-09-01 05:01:02   185
+2026-09-15 10:30:00 2026-09-01 05:01:03   180
+2026-09-15 11:00:00 2026-09-01 05:01:04   175
+2026-09-15 11:30:00 2026-09-01 05:01:05   170
+
+==============================================================================
+4. 原始 PREDISPATCHIS 表结构与字段（最新一个 zip）
+==============================================================================
+zip = PUBLIC_PREDISPATCHIS_202609151130_20260915110132.zip
+
+  [PREDISPATCH / CASE_SOLUTION]  D-rows=1  cols=20
+    has RRP=False  has TOTALDEMAND=False  has REGIONID=False  has PERIODID=False
+    sample (first 14 fields):
+        PREDISPATCHSEQNO           = '2026091515'
+        RUNNO                      = '1'
+        SOLUTIONSTATUS             = '1'
+        SPDVERSION                 = ''
+        NONPHYSICALLOSSES          = '0'
+        TOTALOBJECTIVE             = '945510730.66'
+        TOTALAREAGENVIOLATION      = '0'
+        TOTALINTERCONNECTORVIOLATION = '0'
+        TOTALGENERICVIOLATION      = '0'
+        TOTALRAMPRATEVIOLATION     = '0'
+        TOTALUNITMWCAPACITYVIOLATION = '0'
+        TOTAL5MINVIOLATION         = ''
+        TOTALREGVIOLATION          = ''
+        TOTAL6SECVIOLATION         = ''
+
+  [PREDISPATCH / LOCAL_PRICE]  D-rows=2335  cols=7
+    has RRP=False  has TOTALDEMAND=False  has REGIONID=False  has PERIODID=True
+    sample (first 14 fields):
+        PREDISPATCHSEQNO           = '2026091515'
+        DATETIME                   = '"2026/09/15 19:30:00"'
+        DUID                       = 'ALDGASF1'
+        PERIODID                   = '17'
+        LOCAL_PRICE_ADJUSTMENT     = '-1.76'
+        LOCALLY_CONSTRAINED        = '1'
+        LASTCHANGED                = '"2026/09/15 11:01:25"'
+
+  [PREDISPATCH / REGION_PRICES]  D-rows=170  cols=35
+    has RRP=True  has TOTALDEMAND=False  has REGIONID=True  has PERIODID=True
+    sample (first 14 fields):
+        PREDISPATCHSEQNO           = '2026091515'
+        RUNNO                      = '1'
+        REGIONID                   = 'QLD1'
+        PERIODID                   = '01'
+        INTERVENTION               = '0'
+        RRP                        = '-8.07'
+        EEP                        = '0'
+        RRP1                       = ''
+        EEP1                       = ''
+        RRP2                       = ''
+        EEP2                       = ''
+        RRP3                       = ''
+        EEP3                       = ''
+        RRP4                       = ''
+
+  [PREDISPATCH / REGION_SOLUTION]  D-rows=170  cols=127
+    has RRP=False  has TOTALDEMAND=True  has REGIONID=True  has PERIODID=True
+    sample (first 14 fields):
+        PREDISPATCHSEQNO           = '2026091515'
+        RUNNO                      = '1'
+        REGIONID                   = 'QLD1'
+        PERIODID                   = '01'
+        INTERVENTION               = '0'
+        TOTALDEMAND                = '3415.85'
+        AVAILABLEGENERATION        = '12030.632'
+        AVAILABLELOAD              = '2406'
+        DEMANDFORECAST             = '0'
+        DISPATCHABLEGENERATION     = '5059.18'
+        DISPATCHABLELOAD           = '1321'
+        NETINTERCHANGE             = '322.34'
+        EXCESSGENERATION           = '0'
+        LOWER5MINDISPATCH          = ''
+
+  [PREDISPATCH / INTERCONNECTOR_SOLN]  D-rows=204  cols=23
+    has RRP=False  has TOTALDEMAND=False  has REGIONID=False  has PERIODID=True
+    sample (first 14 fields):
+        PREDISPATCHSEQNO           = '2026091515'
+        RUNNO                      = '1'
+        INTERCONNECTORID           = 'V-SA'
+        PERIODID                   = '01'
+        INTERVENTION               = '0'
+        METEREDMWFLOW              = '284.65039'
+        MWFLOW                     = '308.14485'
+        MWLOSSES                   = '2.60717'
+        MARGINALVALUE              = '0'
+        VIOLATIONDEGREE            = '0'
+        LASTCHANGED                = '"2026/09/15 11:01:25"'
+        DATETIME                   = '"2026/09/15 11:30:00"'
+        EXPORTLIMIT                = '308.14485'
+        IMPORTLIMIT                = '-538.80209'
+
+  [PREDISPATCH / CONSTRAINT_SOLUTION]  D-rows=31350  cols=14
+    has RRP=False  has TOTALDEMAND=False  has REGIONID=False  has PERIODID=True
+    sample (first 14 fields):
+        PREDISPATCHSEQNO           = '2026091515'
+        RUNNO                      = '1'
+        CONSTRAINTID               = 'Q>NIL_CLBTX_CLBTX'
+        PERIODID                   = '2026091515'
+        INTERVENTION               = '0'
+        RHS                        = '666.49412'
+        MARGINALVALUE              = '0'
+        VIOLATIONDEGREE            = '0'
+        LASTCHANGED                = '"2026/09/15 11:01:25"'
+        DATETIME                   = '"2026/09/15 11:30:00"'
+        DUID                       = ''
+        GENCONID_EFFECTIVEDATE     = '"2026/06/05 00:00:00"'
+        GENCONID_VERSIONNO         = '1'
+        LHS                        = '263.61642'
+
+  _find_table simulation:
+    no STRICT match; LOOSE match -> PREDISPATCH / REGION_PRICES  (TOTALDEMAND absent!)
+
+==============================================================================
+5. 原始 P5MIN REGIONSOLUTION 关键字段
+==============================================================================
+  zip = PUBLIC_P5MIN_202609151130_20260915112644.zip
+  REGIONSOLUTION cols (first 8): ['RUN_DATETIME', 'INTERVENTION', 'INTERVAL_DATETIME', 'REGIONID', 'RRP', 'ROP', 'EXCESSGENERATION', 'RAISE6SECRRP']
+  D> D,P5MIN,REGIONSOLUTION,10,"2026/09/15 11:30:00",0,"2026/09/15 11:30:00",NSW1,-8.94266,-8.94266,0,0.02,0.02,0.01,0.01,0.01,0.01,1.47,1.47,0.01,0.01,0.01,0.01,0.01,0.01,1,1,4441.33,15877.091,2916,-14,5537.82,2033,-936.51,,
+  D> D,P5MIN,REGIONSOLUTION,10,"2026/09/15 11:30:00",0,"2026/09/15 11:35:00",NSW1,-9.16984,-9.16984,0,0.02,0.02,0.01,0.01,0.01,0.01,2.4,2.4,0.01,0.01,0.01,0.01,0.01,0.01,1,1,4430.33,15912.106,2916,-11,5561.68,2034,-902.65,,,3
+  D> D,P5MIN,REGIONSOLUTION,10,"2026/09/15 11:30:00",0,"2026/09/15 11:40:00",NSW1,-9.16984,-9.16984,0,0.02,0.02,0.01,0.01,0.01,0.01,2.58,2.58,0.01,0.01,0.01,0.01,0.01,0.01,1,1,4423.33,15915.709,2916,-7,5570.92,2034,-886.4,,,3
+  (note: datetime fields above are double-quoted in the raw file)

@@ -1,0 +1,48 @@
+Fix five data-capture defects; rebuild the dispatch / P5 / pre-dispatch stores
+
+The online capture tool had been writing silently broken stores. None of these
+raised an error -- they wrote empty strings, which is why they survived.
+
+  D1  _split_record used str.split(','), which leaves the quote characters on
+      NEMWEB's double-quoted datetime fields ("2026/09/04 03:55:00"). Every
+      timestamp parse therefore returned None and settlement_date /
+      interval_datetime / period_id were written empty. dispatch_actual.csv
+      dedups on (settlement_date, region_id), so with an empty key every new
+      5-minute interval overwrote the previous one: the file had been stuck at
+      5 rows (one per region) since the day it was first written.
+  D2  parse_nem_datetime's "%Y%m%d%H%M%S" fallback has no width guard. strptime
+      accepts one-digit fields, so the 10-digit PREDISPATCHSEQNO code
+      2026091515 matched as 4+2+1+1+1+1 and was stored as 2026-09-01 05:01:05,
+      incrementing by exactly one second per half-hour batch.
+  D3  parse_predispatch selected REGION_PRICES, which carries RRP but not
+      TOTALDEMAND -- the current layout puts demand in REGION_SOLUTION -- so
+      total_demand was empty in all 1,925 rows.
+  D4  PERIODID is a period index ("01", "02", ...) in the current layout, not a
+      timestamp, so formatting it as a datetime dropped it.
+  D5  USE_AUS_LOCAL_TIME defaulted to True, rewriting NEM time (AEST/UTC+10, no
+      DST shift) into Australia/Sydney local time. That conversion adds one hour
+      during AEDT and zero during AEST, so the same store changed timebase twice
+      a year while the training data never did.
+
+D5 evidence, measured against the NEMWEB archive (which is on NEM time -- its
+daily zips keep a clean 5-minute ladder across the 2026-04-05 DST boundary):
+with the flag on, 2026-01-15 / 02-15 / 03-15 / 04-04 needed a +60 min shift to
+line up with the monthly dashboard files while 04-06 onward needed zero; with the
+flag off all eight sampled months align at zero shift, mean |dRRP| 0.0007 to
+0.0019 $/MWh, which is exactly the monthly file's 2-decimal rounding. One hour is
+12 five-minute slots, enough to put the daily template on the wrong slots.
+
+Same comparison also settles the open question about the monthly files: they are
+NOT in disagreement with real-time AEMO prices. Across 8 sampled days the
+max |difference| is 0.005 $/MWh and demand matches to 0.0000 MW.
+
+Stores rebuilt from a fresh capture pass: dispatch_actual.csv 2,880 rows with no
+empty time fields (was 5 rows / 5 empty), p5min_forecast.csv 3,600 rows,
+predispatch_forecast.csv 2,975 rows. predispatch_seqno now stores the raw
+yyyymmddhh code instead of a fabricated timestamp.
+
+Also drop Predicitor/Outputs/benchmark_summary.csv: run_predictor_benchmark.m no
+longer writes it.
+
+.gitignore gains the NEMWEB archive cache and the backfilled forecast/actual
+pairing data -- both large and reproducible from the archive.

@@ -11,7 +11,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 # output location
 # ---------------------------------------------------------------------------
-OUTPUT_DIR = Path(r"C:\Users\AshTrailer\Documents\MATLAB\Capstone_Project\AEMO_Data")
+OUTPUT_DIR = Path(r"C:\Ash\Projects\EMPC_Water_Electricity_Forecast\AEMO_Data")
 ZIP_CACHE_DIR = OUTPUT_DIR / "zip_cache"
 
 DISPATCH_CSV_PATH = OUTPUT_DIR / "dispatch_actual.csv"

@@ -1,0 +1,43 @@
+python: 3.12.13 (main, Jun 23 2026, 15:23:43) [MSC v.1944 64 bit (AMD64)]
+requests: 2.34.2
+
+==========================================================================
+CURRENT listing
+  https://www.nemweb.com.au/Reports/CURRENT/DispatchIS_Reports/
+==========================================================================
+  HTTP 200  125064 bytes  content-type=text/html; charset=utf-8
+  PUBLIC_*.zip tokens: 576 distinct
+      PUBLIC_DISPATCHIS_202609220010_0000000539130811.zip
+      PUBLIC_DISPATCHIS_202609220015_0000000539131290.zip
+      PUBLIC_DISPATCHIS_202609220020_0000000539131844.zip
+      PUBLIC_DISPATCHIS_202609220025_0000000539132532.zip
+      PUBLIC_DISPATCHIS_202609220030_0000000539133113.zip
+      PUBLIC_DISPATCHIS_202609220035_0000000539133628.zip
+      ...
+      PUBLIC_DISPATCHIS_202609232355_0000000539474224.zip
+      PUBLIC_DISPATCHIS_202609240000_0000000539474687.zip
+      PUBLIC_DISPATCHIS_202609240005_0000000539475328.zip
+
+==========================================================================
+ARCHIVE listing (root)
+  https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/
+==========================================================================
+  HTTP 200  67174 bytes  content-type=text/html; charset=utf-8
+  PUBLIC_*.zip tokens: 375 distinct
+      PUBLIC_DISPATCHIS_20250912.zip
+      PUBLIC_DISPATCHIS_20250913.zip
+      PUBLIC_DISPATCHIS_20250914.zip
+      PUBLIC_DISPATCHIS_20250915.zip
+      PUBLIC_DISPATCHIS_20250916.zip
+      PUBLIC_DISPATCHIS_20250917.zip
+      ...
+      PUBLIC_DISPATCHIS_20260919.zip
+      PUBLIC_DISPATCHIS_20260920.zip
+      PUBLIC_DISPATCHIS_20260921.zip
+  daily DispatchIS zips: 375 days, 20250912 .. 20260921
+
+==========================================================================
+ARCHIVE 单个日包体积（只发 HEAD，不下载正文）
+==========================================================================
+  20260701 -> HTTP 200  content-length=5662305
+  20260715 -> HTTP 200  content-length=5732004

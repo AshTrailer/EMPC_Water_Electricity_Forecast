@@ -1,0 +1,84 @@
+==============================================================================
+DispatchIS_Reports
+  https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/
+  HTTP 200  67174 bytes
+  PUBLIC_*.zip tokens: 375
+      PUBLIC_DISPATCHIS_20250912.zip
+      PUBLIC_DISPATCHIS_20250913.zip
+      PUBLIC_DISPATCHIS_20250914.zip
+      PUBLIC_DISPATCHIS_20250915.zip
+      ...
+      PUBLIC_DISPATCHIS_20260920.zip
+      PUBLIC_DISPATCHIS_20260921.zip
+  daily-style names : 375  20250912 .. 20260921
+  months covered    : ['202509', '202510', '202511', '202512', '202601', '202602', '202603', '202604', '202605', '202606', '202607', '202608', '202609']
+  subdirs           : -
+==============================================================================
+P5_Reports
+  https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/
+  HTTP 200  60408 bytes
+  PUBLIC_*.zip tokens: 375
+      PUBLIC_P5MIN_20250912.zip
+      PUBLIC_P5MIN_20250913.zip
+      PUBLIC_P5MIN_20250914.zip
+      PUBLIC_P5MIN_20250915.zip
+      ...
+      PUBLIC_P5MIN_20260920.zip
+      PUBLIC_P5MIN_20260921.zip
+  daily-style names : 375  20250912 .. 20260921
+  months covered    : ['202509', '202510', '202511', '202512', '202601', '202602', '202603', '202604', '202605', '202606', '202607', '202608', '202609']
+  subdirs           : -
+==============================================================================
+PredispatchIS_Reports
+  https://www.nemweb.com.au/Reports/ARCHIVE/PredispatchIS_Reports/
+  HTTP 200  15031 bytes
+  PUBLIC_*.zip tokens: 54
+      PUBLIC_PREDISPATCHIS_20250831_20250906.zip
+      PUBLIC_PREDISPATCHIS_20250907_20250913.zip
+      PUBLIC_PREDISPATCHIS_20250914_20250920.zip
+      PUBLIC_PREDISPATCHIS_20250921_20250927.zip
+      ...
+      PUBLIC_PREDISPATCHIS_20260830_20260905.zip
+      PUBLIC_PREDISPATCHIS_20260906_20260912.zip
+  daily-style names : 0  - .. -
+  months covered    : -
+  subdirs           : -
+==============================================================================
+Predispatch_Reports
+  https://www.nemweb.com.au/Reports/ARCHIVE/Predispatch_Reports/
+  HTTP 200  14703 bytes
+  PUBLIC_*.zip tokens: 54
+      PUBLIC_PREDISPATCH_20250831_20250906.zip
+      PUBLIC_PREDISPATCH_20250907_20250913.zip
+      PUBLIC_PREDISPATCH_20250914_20250920.zip
+      PUBLIC_PREDISPATCH_20250921_20250927.zip
+      ...
+      PUBLIC_PREDISPATCH_20260830_20260905.zip
+      PUBLIC_PREDISPATCH_20260906_20260912.zip
+  daily-style names : 0  - .. -
+  months covered    : -
+  subdirs           : -
+==============================================================================
+DispatchIS_Reports (nested)
+  https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/2026/
+  HTTP 404  0 bytes
+  PUBLIC_*.zip tokens: 0
+  daily-style names : 0  - .. -
+  months covered    : -
+  subdirs           : -
+==============================================================================
+P5_Reports (nested)
+  https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/2026/
+  HTTP 404  0 bytes
+  PUBLIC_*.zip tokens: 0
+  daily-style names : 0  - .. -
+  months covered    : -
+  subdirs           : -
+
+==============================================================================
+单个日包体积（HEAD，不下载正文）
+==============================================================================
+  DispatchIS     HTTP 200  bytes=5732004  (5.7 MB)
+  P5MIN          HTTP 200  bytes=57126550  (57.1 MB)
+  PREDISPATCHIS  HTTP 404  bytes=None  (0.0 MB)
+  PREDISPATCH    HTTP 404  bytes=None  (0.0 MB)

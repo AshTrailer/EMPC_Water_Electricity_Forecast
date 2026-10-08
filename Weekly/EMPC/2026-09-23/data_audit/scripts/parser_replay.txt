@@ -1,0 +1,69 @@
+==============================================================================
+0. parse_nem_datetime 对照：带引号 vs 不带引号
+==============================================================================
+  '"2026/09/04 03:55:00"'    -> None
+  '2026/09/04 03:55:00'      -> datetime.datetime(2026, 9, 4, 3, 55)
+  '2026091515'               -> None
+  '2026091506'               -> None
+  '01'                       -> None
+  '20260901050006'           -> datetime.datetime(2026, 9, 1, 5, 0, 6)
+
+==============================================================================
+1. parse_dispatch  on PUBLIC_DISPATCHIS_202609151130_0000000537980194.zip
+==============================================================================
+  rows=5
+  empty per column: {'settlement_date': 0, 'region_id': 0, 'rrp': 0, 'eep': 0, 'total_demand': 0, 'run_no': 0, 'dispatch_interval': 0, 'intervention': 0, 'source_file': 0}
+    settlement_date region_id      rrp  eep  total_demand  run_no dispatch_interval intervention source_file
+2026-09-15 11:30:00      NSW1 -9.07137    0       4441.33       1       20260915090            0   probe.zip
+2026-09-15 11:30:00      QLD1 -8.07000    0       3402.65       1       20260915090            0   probe.zip
+2026-09-15 11:30:00       SA1 -7.86171    0        594.70       1       20260915090            0   probe.zip
+2026-09-15 11:30:00      TAS1 -8.03596    0        842.40       1       20260915090            0   probe.zip
+2026-09-15 11:30:00      VIC1 -7.81259    0       3734.23       1       20260915090            0   probe.zip
+
+==============================================================================
+2. parse_p5min  on PUBLIC_P5MIN_202609151130_20260915112644.zip
+==============================================================================
+  rows=60
+  empty per column: {'effective_time': 0, 'region_id': 0, 'interval_datetime': 0, 'rrp': 0, 'total_demand': 0, 'intervention': 0, 'source_file': 0}
+     effective_time region_id   interval_datetime      rrp  total_demand intervention source_file
+2026-09-15 11:30:00      NSW1 2026-09-15 11:30:00 -8.94266       4441.33            0   probe.zip
+2026-09-15 11:30:00      NSW1 2026-09-15 11:35:00 -9.16984       4430.33            0   probe.zip
+2026-09-15 11:30:00      NSW1 2026-09-15 11:40:00 -9.16984       4423.33            0   probe.zip
+2026-09-15 11:30:00      NSW1 2026-09-15 11:45:00 -9.36571       4419.33            0   probe.zip
+2026-09-15 11:30:00      NSW1 2026-09-15 11:50:00 -9.81386       4415.33            0   probe.zip
+2026-09-15 11:30:00      NSW1 2026-09-15 11:55:00 -9.20998       4413.33            0   probe.zip
+
+==============================================================================
+3. parse_predispatch  on PUBLIC_PREDISPATCHIS_202609151130_20260915110132.zip
+==============================================================================
+  rows=170
+  empty per column: {'effective_time': 0, 'predispatch_seqno': 0, 'run_no': 0, 'region_id': 0, 'period_id': 170, 'rrp': 0, 'eep': 0, 'total_demand': 0, 'intervention': 0, 'source_file': 0}
+     effective_time predispatch_seqno  run_no region_id period_id       rrp  eep  total_demand intervention source_file
+2026-09-15 11:30:00        2026091515       1      QLD1            -8.07000    0       3415.85            0   probe.zip
+2026-09-15 11:30:00        2026091515       1       SA1            -7.15000    0        726.07            0   probe.zip
+2026-09-15 11:30:00        2026091515       1      TAS1           -20.51277    0        819.00            0   probe.zip
+2026-09-15 11:30:00        2026091515       1      VIC1           -20.00000    0       3549.30            0   probe.zip
+2026-09-15 11:30:00        2026091515       1      NSW1            -8.86921    0       4635.51            0   probe.zip
+2026-09-15 11:30:00        2026091515       1      NSW1           -12.90095    0       4561.08            0   probe.zip
+2026-09-15 11:30:00        2026091515       1      QLD1           -12.60000    0       3453.05            0   probe.zip
+2026-09-15 11:30:00        2026091515       1      VIC1           -19.99000    0       3486.87            0   probe.zip
+
+==============================================================================
+4. 原始 REGION_PRICES 的 PREDISPATCHSEQNO / PERIODID 原样值
+==============================================================================
+  raw head: D,PREDISPATCH,REGION_PRICES,2,2026091515,1,QLD1
+
+  CASE_SOLUTION 行:
+  raw head: D,PREDISPATCH,CASE_SOLUTION,1
+
+==============================================================================
+5. 结论
+==============================================================================
+  - aemo_parser._split_record 用 line.split(',')，D 记录里的时间字段带双引号
+    （"2026/09/04 03:55:00"），引号未剥离 -> parse_nem_datetime 返回 None
+    -> format_output_time(None) = ''，于是 settlement_date / interval_datetime
+    / period_id 全空。
+  - dispatch 的 dedup 键是 (settlement_date, region_id)；settlement_date 全空后，
+    每次 5 分钟观测都把上一分钟挤掉，dispatch_actual.csv 永远只剩 5 行。
+  - _find_table 在 PREDISPATCHIS 上选 REGION_PRICES（有 RRP、无 TOTALDEMAND），
+    该表没有 TOTALDEMAND -> total_demand 全空。

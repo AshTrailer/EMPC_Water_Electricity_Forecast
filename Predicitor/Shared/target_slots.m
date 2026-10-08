@@ -12,5 +12,5 @@ function u = target_slots(origin_slot, horizon, n_slots)
       n_slots (1,1) double = 288
    end
 
-   u = mod(origin_slot - 1 + (1:horizon)' - 1, n_slots) + 1;
+   u = mod(origin_slot - 1 + (1:horizon)', n_slots) + 1;
 end

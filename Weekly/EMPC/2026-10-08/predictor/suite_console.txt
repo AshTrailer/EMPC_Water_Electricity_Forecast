@@ -1,0 +1,6 @@
+feature('HotLinks',0);cd('C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\EMPC\2026-10-08\predictor')
+feature('HotLinks',0);cd('C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\EMPC\2026-10-08\predictor')
+feature('HotLinks',0);cd('C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\EMPC\2026-10-08\predictor')
+feature('HotLinks',0);cd('C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\EMPC\2026-10-08\predictor')
+feature('HotLinks',0);cd('C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\EMPC\2026-10-08\predictor')
+feature('HotLinks',0);cd('C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\EMPC\2026-10-08\predictor')

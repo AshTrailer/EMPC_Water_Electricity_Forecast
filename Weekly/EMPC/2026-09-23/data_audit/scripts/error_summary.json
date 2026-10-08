@@ -1,0 +1,31 @@
+{
+ "generated_from": {
+  "actuals": "C:\\Users\\AshTrailer\\Documents\\MATLAB\\Capstone_Project\\AEMO_Data\\forecast_actual\\dispatch_5min.csv",
+  "forecasts": "C:\\Users\\AshTrailer\\Documents\\MATLAB\\Capstone_Project\\AEMO_Data\\forecast_actual\\p5min.csv"
+ },
+ "period": [
+  "2026-08-25 00:05:00",
+  "2026-09-22 00:00:00"
+ ],
+ "regions": [
+  {
+   "region": "VIC1",
+   "n": 96702,
+   "n_test": 2419,
+   "rmse_h1": 14.973103211060446,
+   "rmse_h11": 42.18618634303393,
+   "sd": 50.1039602139085,
+   "acf1": 0.6818392178697228,
+   "acf2": 0.6054291952878093,
+   "run_mean": 6.152284263959391,
+   "run_max": 122,
+   "gain1": 13.0433233746726,
+   "gain6": 1.513198364072399,
+   "gain11": -1.4297452488256868,
+   "p5p1": -35.155420280673624,
+   "p5p6": 0.6691207435203128,
+   "p5p11": -32.68293586883062
+  }
+ ],
+ "profiles": {}
+}

@@ -1,0 +1,50 @@
+==============================================================================
+ARCHIVE 20260404   (Sydney still AEDT all day)
+==============================================================================
+  members = 288, labelled intervals = 288
+  first=202604040005  last=202604050000
+  duplicated HHMM labels: none
+  calendar dates present: ['20260404', '20260405']
+  non-5-minute steps: 1
+      step=-1435 min   202604042355 -> 202604050000
+      member PUBLIC_DISPATCHIS_202604040005_0000000511187697.zip
+        C> C,NEMP.WORLD,DISPATCHIS,AEMO,PUBLIC,2026/04/04,00:00:15,0000000511187697,DISPATCHIS,0000000511187696
+      member PUBLIC_DISPATCHIS_202604050000_0000000511346433.zip
+        C> C,NEMP.WORLD,DISPATCHIS,AEMO,PUBLIC,2026/04/04,23:55:20,0000000511346433,DISPATCHIS,0000000511346432
+==============================================================================
+ARCHIVE 20260405   (Sydney DST ends 03:00 (03:00 AEDT -> 02:00 AEST))
+==============================================================================
+  members = 288, labelled intervals = 288
+  first=202604050005  last=202604060000
+  duplicated HHMM labels: none
+  calendar dates present: ['20260405', '20260406']
+  non-5-minute steps: 1
+      step=-1435 min   202604052355 -> 202604060000
+      member PUBLIC_DISPATCHIS_202604050005_0000000511346936.zip
+        C> C,NEMP.WORLD,DISPATCHIS,AEMO,PUBLIC,2026/04/05,00:00:12,0000000511346936,DISPATCHIS,0000000511346935
+      member PUBLIC_DISPATCHIS_202604060000_0000000511506387.zip
+        C> C,NEMP.WORLD,DISPATCHIS,AEMO,PUBLIC,2026/04/05,23:55:09,0000000511506387,DISPATCHIS,0000000511506386
+==============================================================================
+ARCHIVE 20260406   (Sydney on AEST all day)
+==============================================================================
+  members = 288, labelled intervals = 288
+  first=202604060005  last=202604070000
+  duplicated HHMM labels: none
+  calendar dates present: ['20260406', '20260407']
+  non-5-minute steps: 1
+      step=-1435 min   202604062355 -> 202604070000
+      member PUBLIC_DISPATCHIS_202604060005_0000000511506886.zip
+        C> C,NEMP.WORLD,DISPATCHIS,AEMO,PUBLIC,2026/04/06,00:00:11,0000000511506886,DISPATCHIS,0000000511506885
+      member PUBLIC_DISPATCHIS_202604070000_0000000511662763.zip
+        C> C,NEMP.WORLD,DISPATCHIS,AEMO,PUBLIC,2026/04/06,23:55:09,0000000511662763,DISPATCHIS,0000000511662762
+==============================================================================
+ARCHIVE 20261004   (Sydney DST starts 02:00 (02:00 AEST -> 03:00 AEDT))
+==============================================================================
+  download failed: HTTPError('404 Client Error: The requested content does not exist. for url: https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20261004.zip')
+
+==============================================================================
+判读
+==============================================================================
+  固定偏移时基（NEM time, AEST/UTC+10）在夏令时切换日仍是干净的 5 分钟阶梯；
+  悉尼本地时基会在切换日出现重复的一小时（4 月）或缺失的一小时（10 月）。
+  看上面 'non-5-minute steps' 与 'duplicated HHMM labels' 两行即可判定。

@@ -1,0 +1,114 @@
+[
+ {
+  "tex": "\\hat{r}(t+s|t)=\\phi^{T}[\\hat{r}(t+s-1|t),\\ldots,\\hat{r}(t+s-4|t)]^{T}",
+  "path": "sample_00.png",
+  "w": 2544,
+  "h": 160,
+  "aspect": 15.9,
+  "alpha_min": 0,
+  "alpha_max": 255,
+  "corner_rgba": [
+   255,
+   255,
+   255,
+   0
+  ],
+  "transparent": true
+ },
+ {
+  "tex": "\\hat{y}(t+s|t)=\\mu+\\hat{r}(t+s|t)",
+  "path": "sample_01.png",
+  "w": 1354,
+  "h": 160,
+  "aspect": 8.4625,
+  "alpha_min": 0,
+  "alpha_max": 255,
+  "corner_rgba": [
+   255,
+   255,
+   255,
+   0
+  ],
+  "transparent": true
+ },
+ {
+  "tex": "e(k,k_i)=y(k)-\\hat{y}_{\\mathrm{AEMO}}(k\\,|\\,k_i)",
+  "path": "sample_02.png",
+  "w": 1567,
+  "h": 161,
+  "aspect": 9.732919,
+  "alpha_min": 0,
+  "alpha_max": 255,
+  "corner_rgba": [
+   255,
+   255,
+   255,
+   0
+  ],
+  "transparent": true
+ },
+ {
+  "tex": "\\hat{y}_{\\mathrm{corr}}(k|k_0)=\\hat{y}_{\\mathrm{AEMO}}(k|k_0)+\\hat{e}(k|k_0)",
+  "path": "sample_03.png",
+  "w": 1894,
+  "h": 162,
+  "aspect": 11.691358,
+  "alpha_min": 0,
+  "alpha_max": 255,
+  "corner_rgba": [
+   255,
+   255,
+   255,
+   0
+  ],
+  "transparent": true
+ },
+ {
+  "tex": "K=\\frac{P\\varphi}{\\lambda+\\varphi^{T}P\\varphi}\\in\\mathbb{R}^{p}",
+  "path": "sample_04.png",
+  "w": 894,
+  "h": 216,
+  "aspect": 4.138889,
+  "alpha_min": 0,
+  "alpha_max": 255,
+  "corner_rgba": [
+   255,
+   255,
+   255,
+   0
+  ],
+  "transparent": true
+ },
+ {
+  "tex": "T_{c}(s)=\\frac{1}{N}\\sum_{d\\in W_{c}}y_{d}(s),\\qquad s=1\\ldots288",
+  "path": "sample_05.png",
+  "w": 1964,
+  "h": 272,
+  "aspect": 7.220588,
+  "alpha_min": 0,
+  "alpha_max": 255,
+  "corner_rgba": [
+   255,
+   255,
+   255,
+   0
+  ],
+  "transparent": true
+ },
+ {
+  "tex": "\\hat{e}(k|k_0)=\\beta_{h}\\;\\varepsilon(k_0),\\qquad \\varepsilon(k)=y(k)-\\hat{y}_{\\mathrm{AEMO}}(k|k)",
+  "path": "sample_06.png",
+  "w": 2602,
+  "h": 162,
+  "aspect": 16.061728,
+  "alpha_min": 0,
+  "alpha_max": 255,
+  "corner_rgba": [
+   255,
+   255,
+   255,
+   0
+  ],
+  "transparent": true
+ }
+]
