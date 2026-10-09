@@ -43,7 +43,7 @@
 | TAS1 | 159,840 | 20.25 MB |
 | VIC1 | 159,840 | 20.39 MB |
 
-**合计 5 份 CSV,799,200 行,101.69 MB(101,692,789 字节)。**
+**合计 5 份 CSV,799,200 行,101.69 MB(101,692,749 字节)。**
 
 列结构与时间语义与那套 120 天**完全一致**:
 
@@ -53,7 +53,7 @@ effective_time, region_id, target_datetime, period_id, rrp, eep, total_demand, r
 
 配对规则:**`target_datetime = effective_time + 30 分钟 × (period_id − 1)`**。
 注意是 `period_id − 1`:第 1 个周期恰好等于 `effective_time`。构建时对每一行都做了这条
-恒等式校验,违例 565 行。
+恒等式校验,违例 0 行。
 
 ## 五、horizon
 
