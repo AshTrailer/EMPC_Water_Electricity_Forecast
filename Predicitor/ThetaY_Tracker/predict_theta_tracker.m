@@ -18,7 +18,7 @@ function y_hat = predict_theta_tracker(tracker, origin_slot, horizon)
    arguments
       tracker struct
       origin_slot (1,1) double
-      horizon (1,1) double
+      horizon (:,1) double
    end
 
    u = target_slots(origin_slot, horizon, tracker.n_slots);

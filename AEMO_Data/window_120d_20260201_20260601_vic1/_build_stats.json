@@ -1,0 +1,151 @@
+{
+ "window_start": "2026-02-01 00:00:00",
+ "window_end": "2026-06-01 00:00:00",
+ "window_days": 120,
+ "files": [
+  {
+   "file": "dispatch_5min_NSW1.csv",
+   "product": "DISPATCHIS",
+   "region": "NSW1",
+   "rows": 34538,
+   "bytes": 3820876,
+   "days": 120
+  },
+  {
+   "file": "dispatch_5min_QLD1.csv",
+   "product": "DISPATCHIS",
+   "region": "QLD1",
+   "rows": 34538,
+   "bytes": 3809883,
+   "days": 120
+  },
+  {
+   "file": "dispatch_5min_SA1.csv",
+   "product": "DISPATCHIS",
+   "region": "SA1",
+   "rows": 34538,
+   "bytes": 3789075,
+   "days": 120
+  },
+  {
+   "file": "dispatch_5min_TAS1.csv",
+   "product": "DISPATCHIS",
+   "region": "TAS1",
+   "rows": 34538,
+   "bytes": 3784767,
+   "days": 120
+  },
+  {
+   "file": "dispatch_5min_VIC1.csv",
+   "product": "DISPATCHIS",
+   "region": "VIC1",
+   "rows": 34538,
+   "bytes": 3811364,
+   "days": 120
+  },
+  {
+   "file": "p5min_5min_NSW1.csv",
+   "product": "P5MIN",
+   "region": "NSW1",
+   "rows": 414432,
+   "bytes": 44600501,
+   "days": 120
+  },
+  {
+   "file": "p5min_5min_QLD1.csv",
+   "product": "P5MIN",
+   "region": "QLD1",
+   "rows": 414432,
+   "bytes": 44494404,
+   "days": 120
+  },
+  {
+   "file": "p5min_5min_SA1.csv",
+   "product": "P5MIN",
+   "region": "SA1",
+   "rows": 414432,
+   "bytes": 44278680,
+   "days": 120
+  },
+  {
+   "file": "p5min_5min_TAS1.csv",
+   "product": "P5MIN",
+   "region": "TAS1",
+   "rows": 414432,
+   "bytes": 44143779,
+   "days": 120
+  },
+  {
+   "file": "p5min_5min_VIC1.csv",
+   "product": "P5MIN",
+   "region": "VIC1",
+   "rows": 414432,
+   "bytes": 44537027,
+   "days": 120
+  },
+  {
+   "file": "predispatch_30min_NSW1.csv",
+   "product": "PREDISPATCH",
+   "region": "NSW1",
+   "rows": 319680,
+   "bytes": 40778188,
+   "days": 120
+  },
+  {
+   "file": "predispatch_30min_QLD1.csv",
+   "product": "PREDISPATCH",
+   "region": "QLD1",
+   "rows": 319680,
+   "bytes": 40762967,
+   "days": 120
+  },
+  {
+   "file": "predispatch_30min_SA1.csv",
+   "product": "PREDISPATCH",
+   "region": "SA1",
+   "rows": 319680,
+   "bytes": 40594403,
+   "days": 120
+  },
+  {
+   "file": "predispatch_30min_TAS1.csv",
+   "product": "PREDISPATCH",
+   "region": "TAS1",
+   "rows": 319680,
+   "bytes": 40293755,
+   "days": 120
+  },
+  {
+   "file": "predispatch_30min_VIC1.csv",
+   "product": "PREDISPATCH",
+   "region": "VIC1",
+   "rows": 319680,
+   "bytes": 40781960,
+   "days": 120
+  }
+ ],
+ "checks": {
+  "p5min_targets_per_issue": [
+   12,
+   12
+  ],
+  "predispatch_identity_violations": 0,
+  "predispatch_periods_per_issue": [
+   32,
+   79
+  ],
+  "predispatch_lead_minutes": [
+   0.0,
+   2340.0
+  ],
+  "predispatch_last_target_times": [
+   "00:00",
+   "00:30",
+   "01:00",
+   "01:30",
+   "02:00",
+   "02:30"
+  ]
+ },
+ "total_bytes": 444281629
+}

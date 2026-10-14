@@ -19,19 +19,27 @@ function [y_hat, r_hat, t_vec] = predict_template_ar(st, origin_slot, horizon)
    arguments
       st struct
       origin_slot (1,1) double
-      horizon (1,1) double
+      horizon (:,1) double
    end
 
-   u = target_slots(origin_slot, horizon, st.n_slots);
+   if isscalar(horizon)
+      steps = (1:horizon)';
+   else
+      steps = horizon(:);
+   end
+
+   u = target_slots(origin_slot, steps, st.n_slots);
    t_vec = st.sum(u) ./ max(st.cnt(u), 1);
 
-   r_hat = zeros(horizon, 1);
+   r_hat = zeros(numel(steps), 1);
    if st.n_hist >= st.p
       buf = st.hist;                 % newest first
-      for s = 1:horizon
-         r_hat(s) = st.phi' * buf;
-         buf = [r_hat(s); buf(1:end-1)];
+      full = zeros(max(steps), 1);
+      for k = 1:max(steps)
+         full(k) = st.phi' * buf;
+         buf = [full(k); buf(1:end-1)];
       end
+      r_hat = full(steps);
    end
    y_hat = t_vec + r_hat;
 end

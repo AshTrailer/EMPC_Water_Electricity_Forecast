@@ -1,31 +1,41 @@
-function [theta_new, P_new, y_hat] = rls_scalar_step(y_new, x, theta, P, lambda)
+function [theta_new, P_rls_new, z_hat] = rls_scalar_step(z, u, theta, P_rls, lambda)
    % RLS_SCALAR_STEP  One scalar RLS update with exponential forgetting
    %
-   %    Model: y = theta*x + e, state (theta, P), forgetting factor lambda.
-   %    Returns the updated pair and the one-step-ahead prediction y_hat.
-   %    Shared by the per-slot gains (theta tracker, blend weights).
+   %    Notation follows section 2.4 of
+   %    Weekly/2026-10-13/HANDOVER_预测器整理与全跨度比较_20261013.md.
+   %       z      the explained quantity
+   %       u      the scalar regressor
+   %       theta  the estimated coefficient
+   %       P_rls  its covariance, a scalar here
+   %       z_hat  the one-step-ahead prediction, u*theta before the update
+   %
+   %    G_rls = P_rls u / ( lambda + P_rls u^2 )
+   %    theta = theta + G_rls ( z - u theta )
+   %    P_rls = ( 1 - G_rls u ) P_rls / lambda
+   %
+   %    Shared by the per-slot gains of the theta tracker and the blend weights.
 
    arguments
-      y_new (1,1) double
-      x (1,1) double
+      z (1,1) double
+      u (1,1) double
       theta (1,1) double
-      P (1,1) double
+      P_rls (1,1) double
       lambda (1,1) double = 0.98
    end
 
-   denom = lambda + P * x * x;
+   denom = lambda + P_rls * u * u;
    if denom < 1e-10
-      y_hat = theta * x;
+      z_hat = theta * u;
       theta_new = theta;
-      P_new = P;
+      P_rls_new = P_rls;
       return;
    end
 
-   K = P * x / denom;
-   y_hat = theta * x;
-   theta_new = theta + K * (y_new - y_hat);
-   P_new = (1 - K * x) * P / lambda;
-   if P_new > 1e8
-      P_new = 1e8;   % covariance cap: avoid unbounded growth
+   G_rls = P_rls * u / denom;
+   z_hat = theta * u;
+   theta_new = theta + G_rls * (z - z_hat);
+   P_rls_new = (1 - G_rls * u) * P_rls / lambda;
+   if P_rls_new > 1e8
+      P_rls_new = 1e8;   % covariance cap: avoid unbounded growth
    end
 end

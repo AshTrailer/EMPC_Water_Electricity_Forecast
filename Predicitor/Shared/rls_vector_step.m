@@ -1,40 +1,51 @@
-function [theta_new, P_new, y_hat] = rls_vector_step(y_new, phi, theta, P, lambda)
+function [theta_new, P_rls_new, z_hat] = rls_vector_step(z, u, theta, P_rls, lambda)
    % RLS_VECTOR_STEP  One vector RLS update with exponential forgetting
    %
-   %    Model: y = phi'*theta + e, state (theta, P), forgetting lambda.
-   %    Numerical guards: denominator floor, P symmetrization, trace cap.
+   %    Notation follows section 2.4 of
+   %    Weekly/2026-10-13/HANDOVER_预测器整理与全跨度比较_20261013.md.
+   %       z      the explained quantity
+   %       u      the regressor vector
+   %       theta  the estimated coefficient vector
+   %       P_rls  its covariance matrix
+   %       z_hat  the one-step-ahead prediction, u'*theta before the update
    %
-   %    Used by the per-slot cross-day AR(p): phi holds the same slot's
-   %    residuals on the previous p days.
+   %    G_rls = P_rls u / ( lambda + u' P_rls u )
+   %    theta = theta + G_rls ( z - u' theta )
+   %    P_rls = ( P_rls - G_rls u' P_rls ) / lambda
+   %
+   %    Numerical guards: denominator floor, symmetrization, trace cap.
+   %
+   %    Used by the per-slot cross-day AR(p), where u holds the same slot's
+   %    residuals on the previous p days and theta is phi.
 
    arguments
-      y_new (1,1) double
-      phi (:,1) double
+      z (1,1) double
+      u (:,1) double
       theta (:,1) double
-      P (:,:) double
+      P_rls (:,:) double
       lambda (1,1) double = 0.98
    end
 
-   n = numel(phi);
-   assert(numel(theta) == n && all(size(P) == n), 'Dimension mismatch in RLS state');
+   n = numel(u);
+   assert(numel(theta) == n && all(size(P_rls) == n), 'Dimension mismatch in RLS state');
 
-   P_phi = P * phi;
-   denom = lambda + phi' * P_phi;
+   P_u = P_rls * u;
+   denom = lambda + u' * P_u;
 
    if abs(denom) < 1e-10
-      y_hat = phi' * theta;
+      z_hat = u' * theta;
       theta_new = theta;
-      P_new = P;
+      P_rls_new = P_rls;
       return;
    end
 
-   K = P_phi / denom;
-   y_hat = phi' * theta;
-   theta_new = theta + K * (y_new - y_hat);
-   P_new = (P - K * phi' * P) / lambda;
-   P_new = (P_new + P_new') / 2;
+   G_rls = P_u / denom;
+   z_hat = u' * theta;
+   theta_new = theta + G_rls * (z - z_hat);
+   P_rls_new = (P_rls - G_rls * u' * P_rls) / lambda;
+   P_rls_new = (P_rls_new + P_rls_new') / 2;
 
-   if trace(P_new) > 1e8
-      P_new = P_new * (1e8 / trace(P_new));
+   if trace(P_rls_new) > 1e8
+      P_rls_new = P_rls_new * (1e8 / trace(P_rls_new));
    end
 end
