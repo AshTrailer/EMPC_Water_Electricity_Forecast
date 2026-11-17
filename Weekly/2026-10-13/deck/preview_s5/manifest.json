@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "backend": "native",
+  "rasterEngine": "libreoffice",
+  "source": "saved",
+  "inputPath": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Weekly\\2026-10-13\\deck\\_preview_tmp\\scaled.pptx",
+  "sourceSha256": "0681b851354db7a15deb6d750715a562be7d26f7c45c84cf16e5f3da276a30ee",
+  "dpi": 100,
+  "pageCount": 50,
+  "images": [
+    {
+      "index": 1,
+      "page": 47,
+      "path": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Weekly\\2026-10-13\\deck\\preview_s5\\page-0001.png",
+      "width": 1334,
+      "height": 751,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280.0666666666666,
+        "height": 720.0666666666667
+      },
+      "byteLength": 30741
+    },
+    {
+      "index": 2,
+      "page": 48,
+      "path": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Weekly\\2026-10-13\\deck\\preview_s5\\page-0002.png",
+      "width": 1334,
+      "height": 751,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280.0666666666666,
+        "height": 720.0666666666667
+      },
+      "byteLength": 84711
+    },
+    {
+      "index": 3,
+      "page": 49,
+      "path": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Weekly\\2026-10-13\\deck\\preview_s5\\page-0003.png",
+      "width": 1334,
+      "height": 751,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280.0666666666666,
+        "height": 720.0666666666667
+      },
+      "byteLength": 82018
+    },
+    {
+      "index": 4,
+      "page": 50,
+      "path": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Weekly\\2026-10-13\\deck\\preview_s5\\page-0004.png",
+      "width": 1334,
+      "height": 751,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280.0666666666666,
+        "height": 720.0666666666667
+      },
+      "byteLength": 67193
+    }
+  ],
+  "missingFonts": []
+}

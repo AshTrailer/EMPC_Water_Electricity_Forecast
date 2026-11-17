@@ -1,0 +1,23 @@
+ENGR90037 Capstone — Assignment 2 Part 2
+Speaker notes for Assignment2_PM_Slides_v3_revised.pptx
+Estimated delivery: 4–4.5 minutes at a clear speaking pace.
+
+SLIDE 1 — From price forecasts to pumping decisions (about 2 minutes)
+
+The project turns electricity-price forecasts into pumping decisions for a water utility. Wholesale prices change every five minutes, so the utility may reduce cost by moving pumping to cheaper periods. It cannot simply pump whenever prices are low: tank levels still have to stay within safe operating limits.
+
+We are building three connected parts: the actual price series used as the benchmark, a forecaster that predicts prices ahead, and an economic model predictive controller—EMPC—that uses those predictions to schedule the pumps. Forecast accuracy is scored against prices that actually occurred. For the cost comparison, the official AEMO forecast is the comparator; perfect foresight is an ideal benchmark using the realised future prices, not a forecast that could be used in operation.
+
+As of the 16 October report snapshot, all four milestones due by that date were recorded as met. The baseline controller was operational on 14 August, and the forecaster and controller were integrated on 24 September, within the planned week. However, this does not mean every task was on schedule: the data pipeline slipped about a month, predictor testing about five weeks, and controller development about four weeks.
+
+The early 60-day comparison from 17 August to 15 October showed about six per cent lower pumping cost than the case driven by the official forecast, but about six per cent higher cost than perfect foresight. Daily rankings varied, so we should describe this as early evidence, not a proven or robust saving. The next step is to check the cost result and its limitations before the 13 November review.
+
+SLIDE 2 — Why the plan slipped—and what changed (about 2–2.5 minutes)
+
+There were three reasons the plan slipped, and they are not all the same kind of problem. First, we under-estimated the work needed to compare AEMO forecast products. They update at different intervals, cover different forecast horizons and are not presented in the same format. We chose one realised five-minute price series on 4 September to provide a fair common target, but reconciling the products delayed system integration until 24 September. The data products themselves were not faulty; the extra integration effort was not sufficiently budgeted in our original schedule.
+
+Second, forecast validation needed more iteration than we planned. A model that performed well at one horizon did not stay best across all horizons, and accuracy also changed with time of day. We therefore moved from looking at one horizon at one time, or one time of day at one horizon, to a two-dimensional heatmap. Combining forecasts was a change in implementation, not a change to the objective or deliverables. I continued developing the forecaster, while the MPC lead used my outputs in EMPC testing.
+
+Third, a known data-integrity risk materialised through an internal failure mechanism. Capture code assigned incorrect timestamps and a parsing defect dropped most records. Our module ownership and weekly adviser meetings helped expose stalled tasks, but they did not check whether the data itself was complete and correctly timed. Fixing the code and rebuilding the data took a week. We now require cross-source timestamp and completeness checks before reporting a result.
+
+We have also changed the way the team works: decisions and blockers are written down at each weekly review, every member owns an end-to-end test, and I rebuilt the shared schedule and check it weekly. The remaining critical path is economic validation. We need to test whether the early cost advantage holds across days and explain the limitations at the 13 November review. The two lessons are simple: validate our data before trusting results, and define the comparison before selecting models.

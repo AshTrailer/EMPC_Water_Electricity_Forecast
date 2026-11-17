@@ -1,0 +1,1053 @@
+# source: https://r.jina.ai/https://www.monash.edu/business/ebs/research/publications/ebs/2023/wp08-2023.pdf
+
+Title: wp08-2023.pdf
+
+URL Source: https://www.monash.edu/business/ebs/research/publications/ebs/2023/wp08-2023.pdf
+
+Number of Pages: 58
+
+Markdown Content:
+# DEPARTMENT OF ECONOMETRCS 
+
+# AND BUSINESS STATISTICS 
+
+> ISSN 1440-771X
+
+# WORKING PAPER SERIES 
+
+# Forecast reconciliation: A review 
+
+# George Athanasopoulos, Rob J Hyndman, Nikolaos Kouretzes and Anastasios Panagiotelis 
+
+# Working Paper No. 08/23 
+
+# April 2023 Forecast reconciliation: A review 
+
+George Athanasopoulos 
+
+Monash University, VIC 3145, Australia Email: george.athanasopoulos@monash.edu Corresponding author 
+
+Rob J Hyndman 
+
+Monash University, VIC 3800, Australia Email: rob.hyndman@monash.edu 
+
+Nikolaos Kourentzes 
+
+University of Skövde, 541 28 Skövde, Sweden Email: nikolaos@kourentzes.com 
+
+Anastasios Panagiotelis 
+
+The University of Sydney, NSW 2006, Australia Email: anastasios.panagiotelis@sydney.edu.au 27 April 2023 
+
+JEL classification: C10,C14,C53 Forecast reconciliation: A review 
+
+Abstract 
+
+Collections of time series that are formed via aggregation are prevalent in many fields. These are commonly referred to as hierarchical time series and may be constructed cross-sectionally across different variables, temporally by aggregating a single series at different frequencies, or may even be generalised beyond aggregation as time series that respect linear constraints. When forecasting such time series, a desirable condition is for forecasts to be coherent, that is to respect the constraints. The past decades have seen substantial growth in this field with the development of reconciliation methods that not only ensure coherent forecasts but can also improve forecast accuracy. This paper serves as both an encyclopaedic review of forecast reconciliation and an entry point for researchers and practitioners dealing with hierarchical time series. The scope of the article includes perspectives on forecast reconciliation from machine learning, Bayesian statistics and probabilistic forecasting as well as applications in economics, energy, tourism, retail demand and demography. 
+
+Keywords: Aggregation, Coherence, Cross-temporal, Hierarchical time series, Grouped time series, Temporal aggregation 
+
+# 1 Introduction 
+
+In time series forecasting, aggregation occurs in a variety of settings. For example, regional level tourism demand aggregates to national tourism demand; total revenue from the sale of individual stock keeping units aggregates to total revenue from all stock keeping units; the Gross Domestic Product of an economy is an aggregate of individual components; time series data measured at a quarterly frequency can be aggregated to data at annual frequency. While hierarchical time series will be defined more formally in Section 2, the notion of hierarchical forecasting can be understood via the simple example where there is a time series X, a time series Y and a time series Z = X + Y, and we are interested in forecasts of X, Y and Z.In practice, it is important to acknowledge that our variables X, Y and Z may be forecast in isolation from one another. This may occur when each forecast is obtained using a different time series model, or when forecasts are produced by separate organisational silos (see Chase 2013). In such cases, it will typically be the case that adding the forecast of X to the forecast of Y will 
+
+2Forecast reconciliation: A review 
+
+not be equal to the forecast of Z. Indeed, even where forecasts for X, Y and Z are produced jointly, it is not typically the case that forecasts aggregate in the correct fashion 1. This leads to two fundamental questions facing the forecaster of hierarchical time series: 
+
+Question 1: How best to adjust forecasts so that they agree with the known aggregation structure? 
+
+and 
+
+Question 2: Does adjusting forecasts in this manner lead to improvements in forecast accuracy? 
+
+These questions have motivated a growing and fruitful area of research, particularly over the past decade. The top panel of Figure 1 shows the growth in Google Scholar items by the search terms “Hierarchical forecasting” and “Forecast Reconciliation” (the latter to be defined in Section 3). The bottom panel tracks the occurrence of the terms “hierarch*“ 2 and”reconcil” in the book of abstracts of the International Symposium of Forecasters, the leading conference on forecasting. Both measures, while crude, pick up on the growing interest in the topic, especially in academic circles. Further, the reference list of this paper will attest to the multidisciplinary nature of the field with breakthroughs in hierarchical forecasting being published in top-tier journals in statistics, econometrics, operations research and machine learning. The impact of methods for forecasting hierarchical time series has not been limited to academia, with industry also showing a strong interest. We are aware of many organizations using modern hierarchical forecast methods in practice, including Amazon, the International Monetary Fund, the Bank of New York Mellon, IBM, Huawei, H&M, and Volkswagen. Methods have been imple-mented in leading analytics software platforms such as SAP, SAS, ForecastPro and Fiddlehead technologies, not to mention numerous open source packages in R and Python (see Section 7). Among the broader forecasting community including academics and practitioners, hierarchical data have featured as part of the M5 competition (Makridakis, Spiliotis & Assimakopoulos 2022; Seaman & Bowman 2022) and the Global Energy Forecasting competition (Hong, Xie & Black 2019). The growth and impact of hierarchical forecasting make a review paper timely. Throughout our focus will be on forecasting, although where there are similarities between hierarchical forecast-ing methods and other literature, we will discuss seminal papers (for example in Section 3.1). Methods for dealing with hierarchical time series often involve first generating forecasts of all series in the hierarchy. Throughout this review we will not focus on the models and methods  
+
+> 1Some rare, and necessarily restrictive exceptions are discussed in Section 3.9.
+> 2We acknowledge that this search term may pick up instances of the word hierarchical related to hierarchical models rather than hierarchical time series, although the use of hierarchical models in a conference primarily on time series is rare.
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 3Forecast reconciliation: A review 050 100 150 1990 2000 2010 2020 Year Count  Search term Hierarchical forecasting Forecast reconciliation Google Scholar items by year 030 60 90 1990 2000 2010 2020 Year Count  Search term hierarch reconcil Occurrence of term in ISF program 
+
+Figure 1: Search term results in Google Scholar and the book of abstracts for the International Symposium on Forecasting during ISFs (1990-2022) 
+
+used to obtain these original forecasts. Also, while we will focus in Section 6 on some specific application areas where hierarchical forecasting methods have been used extensively, the meth-ods have been applied so widely that not every applied paper can lie within the scope of this review and instead our focus is on papers that make important methodological contributions. The remainder of the paper is organised as follows. Section 2 provides the basic setting for hierarchical forecasting introducing notation and terminology and covering important historical background. Section 3 covers forecast reconciliation which has been the hierarchical forecasting method to garner by far the most attention over the past decade. Section 4 covers the special case of temporal aggregation of a single time series, which (despite a separate historical devel-opment) has since adopted methods from (and now merged with) cross-sectional aggregation. Section 5 covers approaches to probabilistic forecasting, an area that, while previously ignored, has in recent years seen some important breakthroughs. Significant applications in tourism, macroeconomics, energy, demography, retail and healthcare are covered in Section 6. Finally, in Section 8, we look to the future of the field and point to some open questions in hierarchical forecasting. 
+
+Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023 4Forecast reconciliation: A review 
+
+Total AAA AB BBA BB CCA CB Total X YA AX AY B BX BY C CX CY 
+
+Figure 2: Left diagram shows a 2-level hierarchical tree structure while the diagram on the right shows a 2-level grouped structure. 
+
+# 2 The setting 
+
+2.1 Hierarchical and grouped time series 
+
+We define a hierarchical time series as a multivariate time series, y1, . . . , yT, that adheres to some known linear constraints. For example, Figure 2 (left) shows a 2-level hierarchical structure. Let yTot, t be the total (level 0) of all series at time t; and let yi,t be the value of the time series at node i and time t. Let yt ∈ Rn be a vector comprising observations at time t of all time series in the hierarchy, and bt ∈ Rnb (nb < n) be a vector comprising the observations at time t of only the most disaggregated bottom-level series. The remaining na = n − nb aggregated series can be written as 
+
+at = Ab t,for an appropriate na × nb aggregation matrix A, and the full set of time series can be written for all t as 
+
+yt = Sb t,where yt =
+
+at
+
+bt
+
+ and S =
+
+ AInb
+
+ is the n × nb summing or structural matrix. For example, for the hierarchical structure of Figure 2, n = 10, nb = 6, na = 4, bt =[yAA ,t, yAB ,t, yBA ,t, yBB ,t, yCA ,t, yCB ,t]′, a = [ yTot ,t, yA,t, yB,t, yC,t]′ and 
+
+A =
+
+
+
+1 1 1 1 1 11 1 0 0 0 00 0 1 1 0 00 0 0 0 1 1
+
+
+
+.The aggregation matrix, A, describes how the bottom-level series aggregate to the series above. Hence, the columns of S span the linear subspace of Rn for which the linear constraints hold.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 5Forecast reconciliation: A review 
+
+We refer to this as the coherent subspace and denote it by s. We refer to the property that data adhere to these linear constraints as coherence .Figure 2 (right) shows a grouped structure in which the bottom-level series are aggregated by attributes of interest that are crossed, in contrast to the hierarchical (nested) structure shown on the left. For this grouped example, the bottom-level series bt = ( yAX, t, yAY, t, yBX, t, yBY, t, yCX, t, yCY, t)′,aggregate into yA, t, yB, t and yC, t, and also into yX, t and yY, t. Hence, in contrast to hierarchical time series, grouped time series do not naturally aggregate (or disaggregate) in a unique manner. However, for simplicity, when we refer to hierarchical time series we mean both hierarchical and grouped structures. We will highlight the difference when it is important to do so. 
+
+2.2 Other representations 
+
+The structural representation , based on the summing matrix S in the form shown above, is not the only way to write the constraints for the time series yt.First, the ordering of the series within yt is arbitrary, and there is no requirement for the bottom-level series to appear below the aggregated series. An alternative order is sometimes more convenient, and then the rows of S can be permuted to match the order of yt.The coherent structure can also be expressed via a constraint matrix such that 
+
+Cy t = 0.If we start with the structural representation shown above, then we can write C = [ Ina −A].It is often more convenient to work with this zero-constrained representation, rather than the structural representation. In fact, we can simply start with a general constraint matrix C, that may not be of full rank, without defining an aggregation or summing matrix (Di Fonzo & Girolimetto 2023a). There is no requirement for the S, A or C matrices to contain only 0s and 1s. They can include any real values, specifying linear constraints that apply to the available time series (Athanasopoulos et al. 2020). Each of these representations has been used in the forecast reconciliation literature, and we will return to them in subsequent sections. 
+
+2.3 Coherent forecasts 
+
+When forecasting hierarchical time series, we require the forecasts to adhere to the same linear constraints as the data; i.e., to aggregate in the same manner, or to follow the same linear  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 6Forecast reconciliation: A review      
+
+> 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.5  1.0  1.5  2.0 0.0 0.2 0.4 0.6 0.8 1.0
+
+# yA
+
+> yB
+> yTot
+
+# s1
+
+# s2
+
+# s
+
+Figure 3: Depiction of a three dimensional hierarchy with y Tot = yA + yB. The gray coloured two dimensional plane depicts the coherent subspace s where ⃗ s1 = ( 1, 1, 0 )′ and ⃗ s2 = ( 1, 0, 1 )′ are basis vectors that span s. The red points in s represent realisations or coherent forecasts. 
+
+constraints. We define a set of h-step-ahead point forecasts ˜ yt+h|t ∈ Rn as coherent if ˜ yt+h|t ∈ s.Figure 3 presents an example of the simplest possible hierarchy for which yt ∈ R3, bt ∈ R2
+
+and yTot ,t = yA,t + yB,t. The coherent subspace is shown as a grey 2-dimensional plane within a 3-dimensional space. Note that the columns of S,⃗ s1 = ( 1, 1, 0 )′ and ⃗ s2 = ( 1, 0, 1 )′, span the coherent subspace; i.e., s = span (S). The red points in s represent realisations or coherent forecasts. Pritularga, Svetunkov & Kourentzes (2021) note that this definition of coherence implicitly assumes that the measurement of the data occurs at a given level, typically the lowest. In practice, this may not be the case and due to measurement errors, different data collection methodologies, or otherwise, there may be discrepancies in the coherence. Therefore, they propose to add to the aggregation a statistical discrepancy term δt:
+
+yt = Sb t + δt.Equivalently, this can be expressed as a slack term in the coherence constraints. When the data collection is done perfectly, naturally this term is zero. Athanasopoulos et al. (2020) and 
+
+Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023 7Forecast reconciliation: A review 
+
+Kourentzes et al. (2021) provide examples where a time series is included in the hierarchy to deal with this discrepancy. 
+
+2.4 Single-level approaches 
+
+Traditionally, forecasts of hierarchical time series have involved selecting one level of aggre-gation, generating forecasts for that level, and then linearly combining these to obtain a set of coherent forecasts for the rest of the structure. These methods are usually classified as bottom-up, top-down or middle-out. Bottom-up approaches require generating forecasts at the bottom-level and then aggregating these up. Generating forecasts at the most disaggregate level implies that no information is lost due to aggregation. On the other hand, bottom-level data can be very noisy, or even intermittent, and hence more challenging to forecast. Top-down approaches require forecasts for only one time series at the most aggregate level and then disaggregating these down. Forecasting at the most aggregate level implies a large loss of information, and it can also be challenging to disaggregate these forecasts down. The disaggregation becomes even more challenging when the structure is grouped, as then the disaggregation paths are not unique. Further, Hyndman et al. (2011) and Panagiotelis et al. (2021) show that top-down approaches can introduce bias, even if the forecasts for the top level are unbiased. Middle-out approaches require forecasts at some intermediate-level and then aggregating these up and also disaggregating them down. In general, single-level approaches are limited to using information from a single-level and potentially ignoring valuable information from all other levels. Another consideration comes from the number of forecasting models used in the hierarchy. In the top-down case, all predictions in the hierarchy are anchored to a single forecasting model at the top level (although forecasts at other levels may be used to compute the proportions for disaggregation). Similarly, in bottom-up, all forecasts are anchored to the bottom level. This introduces modelling and estimation risks, where the few forecasts that are used to populate the rest of the hierarchy may be of poor quality. For example, Kourentzes, Rostami-Tabar & Barrow (2017) show that even with full knowledge of the data generating process, estimation errors can substantially reduce the quality of the resulting forecasts on other levels of the hierarchy. In this section we concentrate on the implementation of single-level approaches for generating point forecasts. Related approaches for generating coherent probabilistic forecasts are discussed in Section 5. Methods in the purely temporal setting are reviewed in Section 4.1. The vast majority of the literature, prior to the introduction of the concept of forecast reconcil-iation, almost exclusively focused on comparing bottom-up and top-down methods. Orcutt, Watts & Edwards (1968) and Edwards & Orcutt (1969) are from the early works arguing that  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 8Forecast reconciliation: A review 
+
+information loss is substantial and therefore it is important to work with the most disaggregate data available. Kinney Jr. (1971) found that disaggregated earnings’ data by market segments resulted in more accurate forecasts than when firm-level data were used. Building on this result, Collins (1976) compared segmented econometric models with aggregate models for a group of 96 firms, and found that the segmented models produced more accurate forecasts for both sales and profit. Dunn, Williams & Dechaine (1976) show that forecasts aggregated from a lower level for modeling telephone demand are more accurate than the top-down method, although the comparison was based on only nine series. Shlifer & Wolff (1979) concluded that the bottom-up method is preferable under some conditions on the structure of the hierarchy and the forecast horizon. Schwarzkopf, Tersine & Morris (1988) looked at the bias and robustness of the two methods and concluded that the bottom-up method is better except when there are missing or unreliable data at the lowest levels. Dangerfield & Morris (1992) construct 15,000 artificial 2-level hierarchies using the M-competition data with two series at the bottom level. They found that bottom-up forecasts were more accurate, especially when the two bottom-level series were highly correlated. Zellner & Tobias (2000) used annual GDP growth rates from 18 countries and found that disaggregation provided better forecasts, results in line with earlier perspectives expressed by Espasa (1994). Another comparison is that of Wanke & Saliby (2007) who compare the two approaches for safety inventory levels. Wan, Wang & Woo (2013) analyse aggregate versus disaggregate forecasts for international arrivals into Hong Kong considering alternative bottom-up approaches, arguing that these take advantage of the heterogeneity across the disaggregate series, and show that the traditional bottom-up approach is more accurate compared to directly forecasting at the aggregate level. There are fewer studies that find clear evidence and argue for a top-down approach, in contrast to a bottom-up approach. Grunfeld & Griliches (1960) argue that disaggregated data are error prone and that top-down forecasts may therefore be more accurate. Strijbosch, Heuts & Moors (2008) in an estimation setting show superiority of a top-down estimator. Athanasopoulos, Ahmed & Hyndman (2009) propose two new top-down approaches based on forecast proportions rather than historical proportions which show promising performance. These approaches can lead to negative weights, which perhaps stretches the definition of disaggregation. Gross & Sohl (1990) and Athanasopoulos, Ahmed & Hyndman (2009) provide a summary of top-down approaches. Fliedner & Mabert (1992) experiment with how different groupings (based on clustering) of time series, affect the forecast accuracy of traditional approaches. Fliedner (1999) argues that  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 9Forecast reconciliation: A review 
+
+strong positive or negative correlation of sub-aggregate series, enhances forecast accuracy of the aggregate series whether a bottom-up or a direct approach is used for forecasting the aggregate and vice versa (low correlation in the bottom-level series diminishes forecast accuracy of the aggregate series). He further concludes that direct forecasts of an aggregate variable are more accurate than using a bottom-up approach. Lütkepohl (1984a) and Ilmakunnas (1990) show that it might be preferable to forecast the aggregate variable directly rather then using a bottom-up approach. Hubrich (2005) also concludes that using a bottom-up approach to forecast inflation for the Euro area. He attributes this to shocks affecting components of inflation in a similar way over the evaluation period and therefore forecast bias is increased when aggregating subcomponent forecasts. Kremer, Siemsen & Thomas (2016) examine bottom-up versus direct forecasts for the aggregate through a behavioural lens and argue for advantages and disadvantages for a bottom-up judgemental approach which depend to a large degree on the underlying correlation structure at the bottom level. Zotteri, Kalchschmidt & Caniato (2005) and Zotteri & Kalchschmidt (2007) argue that forecast accuracy is highly correlated to the choice of aggregation level which depends on the underlying data generation process. Widiarta, Viswanathan & Piplani (2008) compare top-down to bottom-up, in a restricted simulation setting, and find that the difference in forecast accuracy between these is insignificant when the correlation between the sub-aggregate components is small or moderate. Sbrana & Silvestrini (2013) extend these results and conclude that neither top-down nor the bottom-up approach should be preferred a priori in any empirical analysis. Williams & Waller (2011) compare top-down to bottom-up demand forecasts. They conclude that the superiority of the methods depends on whether shared weekly point-of-sale data are used. Fliedner (2001) also reviewed these approaches, and discuss their advantages and disadvantages. He notes that different forecasting methods may be better suited to different aggregation levels, and this may affect the choice of which level to use for forecasting. Kahn (1998) highlighted the need for a method that would enjoy and combine the good features of single-level approaches. This call was taken up by Hyndman et al. (2011) and Athanasopoulos, Ahmed & Hyndman (2009), who introduced the concept of forecast reconciliation.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 10 Forecast reconciliation: A review 
+
+# 3 Forecast reconciliation 
+
+3.1 Least squares reconciliation outside of forecasting 
+
+The concept of least squares reconciliation has appeared in several contexts outside of the forecasting domain. As far back as the 1940s, reconciliation procedures were being used for national economic accounts. The national economic account is disaggregated into production, income and outlay, and capital transactions, which are further disaggregated by various factors. The aim is to coherently estimate the national account for all disaggregated and aggregated levels. Stone, Champernowne & Meade (1942) formulated the problem using simultaneous linear equations (similar to the zero-constrained form). Stone (1961) proposed a constrained estimation approach to balancing national accounts, where the constrained estimates are a weighted linear combination of initial estimates. This underpinned the work for which Richard Stone later won the 1984 Nobel Prize in Economics. Byron (1978) formalized and extended Stone’s work using more computationally efficient procedures. Suppose the national accounts are expressed as a vector y which need to satisfy the constraint Cy = 0, and let the original (incoherent) account estimates be denoted by ˆ y. Then the reconciled estimates ˜ y are found by solving the constrained generalized least squares (GLS) problem ˜y = arg min y(y − ˆy)′W (y − ˆy), s.t. Cy = 0.Assuming C is full rank, Byron (1978) and Byron (1979) provide the solution ˜ y = M ˆy, where 
+
+M = I − W C ′(CW C ′)−1C
+
+is a projection matrix, and W is a positive definite matrix. See also Bikker, Daalmans & Mushku-diani (2013) for a more modern treatment of this approach. Later, the same idea was applied to reconciling other time series produced by national statistics offices. A review of some of this work is provided by Dagum & Cholette (2006, chapter 11). To take just one example, seasonally adjusted time series require reconciliation. While the original time series data are coherent (e.g., national and state employment numbers), after each series is seasonally adjusted, they become incoherent. The same least squares solution is used for this problem (Di Fonzo & Marini 2011; Corona, Guerrero & López-Peréz 2021; Quenneville & Fortier 2012). Temporal reconciliation is also of interest to national statistics offices, ensuring monthly or quarterly estimates sum to the annual estimates (Chow & Lin 1971). Simultaneous least squares  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 11 Forecast reconciliation: A review 
+
+reconciliation of time series estimates in both cross-sectional and temporal dimensions was introduced by Di Fonzo (1990), building on Rossi (1982). Least squares reconciliation has also found its way into chemical process measurement. Chemical process data are inherently noisy, and data reconciliation methods allow adjustment of measured values to satisfy specific material and energy constraints (Romagnoli & Sanchez 2000). In the engineering literature, a related problem involves optimal vehicle tracking where roads provide locally linear constraints on the position of a vehicle (Simon & Chia 2002). This line of research is summarised in Simon (2006) and Simon (2010). 
+
+3.2 First attempts at reconciliation in forecasting 
+
+To our knowledge, the earliest published work that applied least squares reconciliation in a forecasting context was the PhD thesis of Roman Ahmed (2009), working under the supervision of Rob Hyndman and George Athanasopoulos. The main methodological contributions from this thesis eventually appeared as Hyndman et al. (2011). First, they showed that all of the existing bottom-up, middle-out and top-down methods could be expressed as ˜yh = SG h ˆyh (1) for a suitably chosen nb × n matrix Gh. (We will drop the subscript h when G does not depend on the forecast horizon, h.) Here, Gh maps the base forecasts ˆ yh into the bottom level, and so can be thought of as a forecast combination that combines all base forecasts to form bottom-level reconciled forecasts. In the special case of bottom-up forecasting, G = [ Onb ×na Inb ], while for top-down forecasts, the first column of G contains the proportions for each of the bottom-level series, while the remaining columns are all zero. Hyndman et al. (2011) showed that if the base forecasts ˆ yh are unbiased with covariance Wh, and 
+
+SG hS = S, then the reconciled forecasts ˜ yh are also unbiased and have covariance SG hWh G′
+
+> h
+
+S′.Notably, the condition SG hS = S is generally not satisfied for top-down methods, with the exception of those discussed in Section 3.6. To find the optimal matrix Gh, Hyndman et al. (2011) formulated the problem as a regression of the form ˆyh = Sβh + εh
+
+where εh is the reconciliation error with covariance Vh. This led to the GLS solution 
+
+Gh = ( S′V −1 
+
+> h
+
+S)−1S′V −1 
+
+> h
+
+. (2)  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 12 Forecast reconciliation: A review 
+
+The covariance Vh is unknown (and later shown to be unidentifiable by Wickramasuriya, Athana-sopoulos & Hyndman 2019), but under some conditions, Hyndman et al. (2011) showed that (2) collapses to an OLS solution where Vh is replaced by an identity matrix, giving G = ( S′S)−1S′.Another key contribution of Hyndman et al. (2011) was to propose using sparse matrix algebra to greatly speed up the computations for large systems of time series. Simultaneously and independently, Di Fonzo & Marini (2011) also proposed sparse matrix algebra for reconciling historical time series. The first application of these new ideas was Athanasopoulos, Ahmed & Hyndman (2009), which appeared two years earlier due to delays in publishing Hyndman et al. (2011). There, the OLS reconciliation was compared to various top-down and bottom-up methods, using some quarterly Australian tourism data disaggregated by a geographic hierarchy and purpose of travel. Variations of these Australian tourism data have since become ubiquitous for benchmarking forecast reconciliation methods. The hts R package (Hyndman, Ahmed & Shang 2010) implementing the OLS reconciliation method appeared on CRAN in 2010, and led to the method quickly becoming popular in business and industry, long before the methodological paper actually appeared. An early explanation of the method intended for practitioners appeared as Hyndman & Athana-sopoulos (2014), while the ideas made their way into an undergraduate textbook in Hyndman & Athanasopoulos (2018) and Hyndman & Athanasopoulos (2021). 
+
+3.3 Scaled reconcilation methods 
+
+One obvious drawback of the OLS approach is that it weights all series equally, whether they are aggregates or disaggregates, and whether their base forecasts are good or bad. An early recognition of this issue is in Kourentzes, Petropoulos & Trapero (2014) who treat the aggregate time series to bring all series on the same scale. The same issue prompted Hyndman, Lee & Wang (2016) to propose a weighted least squares (WLS) solution, where the series are weighted by the inverse variances of the base forecasts, later referred to as “variance scaling”. If Wh is the covariance matrix Var (yT+h|h − ˆyh), then the WLS solution is Gh = ( S′Λ−1 
+
+> h
+
+S)−1S′Λ−1 
+
+> h
+
+and 
+
+Λ = diag (Wh). Hyndman, Lee & Wang (2016) was also the first forecasting paper to note that the methods applied to grouped time series as well as to strictly hierarchical structures. 
+
+3.4 Minimum trace reconciliation 
+
+Wickramasuriya, Athanasopoulos & Hyndman (2019) provided theoretical insights into the problem by taking an optimization approach rather than a regression approach. They formulated  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 13 Forecast reconciliation: A review 
+
+the problem as minimizing the trace (MinT) of the covariance matrix Var (yT+h|h − ˜yh), equal to the sum of the variances of all the reconciled forecasts, and showed that the solution is given by 
+
+Gh = ( S′W −1 
+
+> h
+
+S)−1S′W −1 
+
+> h
+
+,where Wh is the covariance matrix Var (yT+h|h − ˆyh). Equivalently, ˜ yh = Mh ˆyh, where 
+
+Mh = S(S′W −1 
+
+> h
+
+S)−1S′W −1 
+
+> h
+
+.This MinT solution is equivalent to GLS, and has the WLS and OLS solutions as special cases. Wickramasuriya, Athanasopoulos & Hyndman (2019) also showed that there is an equivalent and more computationally efficient solution given by 
+
+Mh = In − WhC′(CW hC′)−1C
+
+where C = [ Ina − A], which matches the earlier work of Byron (1978) for reconciling national accounts (although derived from a different perspective). A difficulty with the MinT solution is in estimating the covariance matrix, Wh, especially for 
+
+h > 1. The sample covariance matrix of the base models’ residuals provides an estimate of W1,but it is often a very poor estimate, and may be singular, especially when n > T (which is true for many real hierarchical time series). Wickramasuriya, Athanasopoulos & Hyndman (2019) proposed a shrinkage estimator of W1, where the off-diagonal elements are shrunk towards zero, and suggested approximating Wh as a scalar multiple of W1. The scalar multiple cancels when computing Gh, and so it does not need to be estimated when computing point forecasts. Wickramasuriya, Athanasopoulos & Hyndman (2019) also discuss a simple alternative approach to finding Wh, first proposed by Athanasopoulos et al. (2017), based only on the structure of the hierarchy, and not on a statistical estimate. In this “structural scaling” approximation, 
+
+Wh = Λ ∝ diag (S1nb ), where 1nb is an nb-vector of 1s. That is, Wh is a diagonal matrix with entries proportional to the row sums of S. This is the covariance matrix that would arise if all the most disaggregated series were uncorrelated with each other and they had the same forecast variance. Observe that (1) implies a combination of forecasts in Gh ˆyh. Motivated by this, Pritularga, Svetunkov & Kourentzes (2021) investigated the implications of estimation uncertainty in forecast reconciliation. They showed that uncertainties in both the forecasting models generating ˆyh and in Gh will influence the quality of the reconciled forecasts. As S is fixed, the approximation  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 14 Forecast reconciliation: A review 
+
+of Wh carries the reconciliation uncertainty in Gh, where each element that needs to be estimated can potentially increase the forecast error of the reconciled forecasts. This can help explain the surprising performance of “structural scaling” (Athanasopoulos et al. 2017), where all elements of G are fixed, and the volatile performance of MinT, especially for short time series, where estimation errors in W1 can dominate. By introducing various approximations of increasing complexity of W1, Pritularga, Svetunkov & Kourentzes (2021) demonstrate that this choice can have significant effect on the quality of the reconciled forecasts, especially when it comes to having consistent performance over different forecast origins, a key element of trustworthiness in forecasting (Spavound & Kourentzes 2022). From the investigated approximations, retaining only the block-diagonal structure of the shrinkage estimator of W1 was found to perform well in a variety of situations. 
+
+3.5 Other optimization approaches 
+
+van Erven & Cugliari (2015) took a game-theoretic approach to forecast reconciliation, and chose to find the solution to the minimax problem 
+
+V = min  
+
+> ˜y∈s
+
+max  
+
+> y∈s
+
+{ℓ(y, ˜ y) − ℓ(y, ˆ y)} ,where ℓ is a loss function, and s is the coherent subspace. They demonstrate that V ≤ 0, so that the reconciled forecasts are guaranteed to have smaller loss than the base forecasts. They further show that, when ℓ is L2 loss, the minimax solution is equivalent to solving the constrained least squares problem, where the reconciled and base forecasts are as close as possible subject to the reconciled forecasts being coherent, leading to the closed form solution of (2) for Gh .Panagiotelis et al. (2021) unify, and in certain cases generalise, the results of van Erven & Cugliari (2015) and Wickramasuriya, Athanasopoulos & Hyndman (2019), providing a geometric intuition. In particular, they consider a loss function of the form (y − ˜y)′Ψ(y − ˜y), where Ψ can be any symmetric positive definite matrix, and derive two main results. The first is that the reconciled forecast ˜ y = S(S′ΨS)−1S′Ψ ˆy will always improve upon the base forecast (generalising the result of van Erven & Cugliari 2015, to non-diagonal Ψ). The second is that the MinT solution ˜y = S(S′W −1 
+
+> h
+
+S)−1S′W −1 
+
+> h
+
+ˆy will optimise loss in expectation for any choice of Ψ (generalising the result of Wickramasuriya, Athanasopoulos & Hyndman 2019). Note that the second result does not consider the estimation uncertainty in Gh (Pritularga, Svetunkov & Kourentzes 2021), which can be especially prominent for short time series, explaining cases in the literature where this result seems to be violated.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 15 Forecast reconciliation: A review 
+
+If we are willing to drop the unbiased condition, and allow both base and reconciled forecasts to be biased, a different least squares solution emerges, as shown by Ben Taieb & Koo (2019). They use an expanding window approach, applying the base forecasting method iteratively to the training data, computing ˆ yt+h|t, the h-step-ahead base forecast of yt+h based on training data y1, . . . , yt, for t = T1, . . . , T − h. They consider the regularized empirical risk minimization problem min  
+
+> G
+
+LT (G),where 
+
+LT (G) = 1
+
+Nn ∥Y − ˆY G ′S′∥F + λ∥vec G∥1,
+
+N = T − T1 − h + 1, ∥ · ∥ F is the Frobenius norm, Y = [ yT1+h, . . . , yT ]′, ˆ Y = [ ˆyT1+h|T1 , . . . , ˆ yT|T−h]′,and λ is a regularization parameter. The first term contains the errors of the reconciled forecasts, while the second shrinks the elements of G to zero, providing some regularization of the amount of reconciliation involved. When λ = 0, they show that its solution is ˆG = B′ ˆY( ˆY′ ˆY)−1.where B = [ bT1+h, . . . , bT ]′. When ˆY′ ˆY is non-invertible, the solution is not unique, and a generalized inverse can be used. Inspired by this development, Wickramasuriya (2021b) proposed minimizing the trace of the forecast error covariance matrix without an unbiased constraint, to create an unconstrained version of MinT which she called “MinT-U”. She also derived an estimate of the resulting G
+
+matrix in the case where the series are jointly weakly stationary, dubbing the resulting method “EMinT-U” (empirical MinT unconstrained). 
+
+3.6 Adding optimization constraints 
+
+Any approach to reconciliation based on optimisation uses a form of constrained optimisation since reconciled forecasts must lie on the coherent subspace. However, at times additional constraints may be implemented. The first is the case where reconciled forecasts must be non-negative. In general, even if base forecasts are constrained to be positive (which can be achieved by modelling on the log scale and back-transforming), there is no guarantee that the usual reconciliation approaches such as OLS and MinT will maintain the non-negativity of forecasts. To address this issue, the usual optimisation problem can be augmented with non-negativity constraints on the reconciled forecasts. Such optimisation problems can be solved using quadratic programming, with Wickramasuriya, Turlach & Hyndman (2020) providing  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 16 Forecast reconciliation: A review 
+
+an early example for forecast reconciliation, and Di Fonzo & Girolimetto (2023b) a more recent example. Kourentzes & Athanasopoulos (2021) also consider the case of non-negative reconciled forecasts. However, instead of using a constrained optimisation approach, they propose a heuristic to iteratively adjust the reconciled predictions to be non-negative. Although this does not guar-antee optimal solutions, their proposed algorithm has the interesting feature that it distributes adjustments of forecasts across the hierarchy, which can be useful in a variety of situations, such as the application of judgemental adjustments on specific nodes of the hierarchy. Di Fonzo & Girolimetto (2023b) also discuss an effective nonnegative heuristic called “set-negative-to-zero”, whereby the negative reconciled forecasts at the bottom level are set to zero, and the remaining forecasts computed via aggregation. Another constraint of interest is where some particular base forecasts remain unchanged. For instance, Hollyman, Petropoulos & Tipping (2021) consider the case of reconciliation where the top-level base forecast is retained. This differs from truly top-down approaches in that it can be done while also preserving the unbiasedness of base forecasts. To briefly illustrate the main idea, for a three variable hierarchy where yTot ,t = yA,t + yB,t, either setting 
+
+
+
+˜yTot ,t
+
+˜yA,t
+
+˜yB,t
+
+ =
+
+
+
+ˆyTot ,t
+
+ˆyA,t
+
+ˆyTot ,t − ˆyA,t
+
+ or 
+
+
+
+˜yTot ,t
+
+˜yA,t
+
+˜yB,t
+
+ =
+
+
+
+ˆyTot ,t
+
+ˆyTot ,t − ˆyB,t
+
+ˆyB,t
+
+
+
+will lead to coherent forecasts that preserve unbiasedness. Any average between these two solutions will have the same properties. Hollyman, Petropoulos & Tipping (2021) generalise this idea to more complex hierarchies, and the properties of their methods are investigated by Di Fonzo & Girolimetto (2022b). Zhang et al. (2022) further generalise this idea to a setting where reconciliation can be carried out while keeping a subset of base forecasts unchanged and not just the top level. Conditions on how a set of such “immutable” series can be selected are also provided by Zhang et al. (2022). 
+
+3.7 Machine learning and regularization 
+
+Machine Learning (ML), including Artificial Intelligence (AI), methods have been used to provide various modifications of the optimal combination approach of Hyndman et al. (2011). Most of the contributions, attempt to replace the linear regression formulation with a less restrictive method to obtain combinations of forecasts from the various hierarchical levels. Coherence is achieved via a bottom-up approach, or by embedding coherence in the ML training.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 17 Forecast reconciliation: A review 
+
+A minority of contributions focus on other aspects of hierarchical forecasting, such as selecting the best reconciliation method. Qiao & Huang (2018) focus on earnings forecasting, and rely on the problem structure of hier-archical forecasting to address this, recognising the forecast combination at its core. However, instead of combining forecasts across hierarchical levels, they combine forecasts across alterna-tive hierarchical mappings, and then proceed to achieve coherence using a bottom-up approach. The different mappings are the product of the different ways one can do the accounting of the different components that contribute to the net earnings. This raises the question of which hierarchy is best to use, but also how to efficiently search across the different hierarchies. They resolve the construction of the hierarchy using a genetic algorithm, to avoid the computationally infeasible greedy search across mappings of the hierarchy. Although they do not discuss this in their work, this approach could be used to relax the conventionally rigid hierarchies, and identifying re-mappings that can potentially improve the final result. Forecasts are generated by LSTM networks, for each time series and each different mappings of the hierarchy. The forecasts are then combined across these mappings to give final prediction, with encompassed forecasts being rejected from the combination. Spiliotis et al. (2021) rely on random forests and gradient boosting machines, specifically XG-Boost, to facilitate the combination of forecasts implied by hierarchical forecasting. They show superior performance to the linear approach, however it is unclear whether the gains are due to the nonlinear capabilities of the ML methods, or due to the differential combination over various forecasts horizons that are considered and are typically omitted by the linear counterparts. Furthermore, it should be noted that the objective of the training of the ML methods is obtaining the minimum forecast combination errors, rather than minimum reconciliation errors. Coherent forecasts across the complete hierarchy are obtained via bottom-up aggregation. Burba & Chen (2021) propose an alternative use of ML to achieve coherent forecasts. They recast the recon-ciliation step as an encoder-decoder setup, where base forecasts are processed by a trainable encoder to produce the reconciled bottom-level forecasts. These are then decoded using the summing matrix, as with a standard bottom-up setup. The encoder is implemented using a shallow feed-forward neural network. They find that this approach demonstrates increasing gains for deeper hierarchies. Gleason (2020) attempts to overcome the lack of focus on coherence by adjusting the objective function. Using neural network forecasts the includes a regularisation term that penalises incoherences in the generated forecasts. This follows from Mishchenko, Montgomery & Vaggi  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 18 Forecast reconciliation: A review 
+
+(2019) who proposed a similar regularisation term to obtain reconciled forecasts directly from the base forecasts. The disadvantage of these regularisation approaches is that they result in soft constrains that do not guarantee coherence. Gleason (2020) provides two alternatives for the regularisation term and shows that the resulting forecasts can outperform standard MinT reconciliation. However, when the regulisation is used in conjunction with MinT this results in both coherent and the most accurate forecasts. Han, Dasgupta & Ghosh (2021) propose a similar approach, where a regularisation term is added in the loss function, again based on coherence constraints. They also consider a regularised loss for producing coherent quantile forecasts. The authors demonstrate the use of the proposed regularised loss on a variety of linear and ML models, and also empirically show the negative effect of regularisation on coherence. Shiratori, Kobayashi & Takano (2020) introduces a regularisation term, based on the coherence constraints, in the objective function to push bottom-level forecasts to fit both on their target series and their aggregate counterparts. They forecast the bottom-level series but as the regu-larisation cannot ensure coherence, these are used in a bottom-up setting to produce coherent forecasts for the rest of the hierarchy. The authors demonstrate the efficacy of this in the context of neural networks. They find that these outperform conventionally trained networks whose forecasts are then reconciled, either with bottom-up or MinT. Paria et al. (2021) propose a regularised neural network with sequence-to-sequence architecture. Focusing on the hierarchical part of the contribution, a regularisation term is added to incorpo-rate the coherence constraints. As with the previous work, this does not guarantee coherence, yet forces the final forecasts to be approximately coherent. The regularisation is embedded in the loss function of the network, achieving an integrated approach. In contrast to the previous work, the network outputs forecasts for all the levels. The contribution by Anderer & Li (2022) can be seen to belong loosely in the regularisation approaches. Focusing on the M5 competition dataset, the authors produce separate forecasts for the top- and the bottom-levels of the hierarchy, using different methods (NBEATS and LightGBM respectively). To achieve coherent forecasts they modify the loss function of the bottom-level method, where positive errors can are multiplied by a factor. This factor is identified by minimising the incoherence error between the summed bottom-level forecasts and the top-level forecast. Note that this factor is calibrated by keeping the top-level forecasts fixed, and therefore any coherence is obtained by modifying the bottom-level forecasts. Rangapuram et al. (2021) propose another way to achieve an integrated forecast-reconciliation mechanism. First, a global neural network is used to forecast the time series in the hierarchy,  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 19 Forecast reconciliation: A review 
+
+which with the assumption of a forecast distribution can produce sample forecasts. The sample forecasts are subsequently reconciled, obtaining distributions of coherent probabilistic forecasts. The calculation of the loss for the training of the model makes use of the reconciled forecasts, allowing an end-to-end approach that parametrises the model to achieve both accurate and coherent forecasts. Note that the methodology allows for various assumptions on the forecast distribution, and the relaxing of these. The resulting forecasts guarantee coherence, in contrast to the previous integrated approaches. The substantive difference with conventional hierarchical approaches, that post-processes base forecasts, is that the global network can model richer interconnections between the time series in the hierarchy for the generation of the forecasts. Furthermore, the authors compare the results of the proposed hierarchical model against a global learner without coherent forecasts and demonstrate on average better performance, suggesting that the integrated methodology offers gains beyond any achieved by the global learning. Wang et al. (2022) contribute with a similar formulation. The important differences are in that they use an autoregressive transformer to produce the base forecasts and that their approach does not require assuming particular predictive distributions. Instead, they rely on empirical estimation (conditional normalising flow) for the distributions. Furthermore, their approach focuses on obtaining bottom-level forecasts which are internally aggregated in a bottom-up fashion to the complete hierarchy. Similar to the Rangapuram et al. (2021), the errors of the final forecasts are used during training, realising an end-to-end hierarchical forecasting method. The authors demonstrate gains in performance over a non-hierarchical version of the their method, as well as over various benchmarks. Focusing on temporal hierarchies, Theodosiou & Kourentzes (2021) provide an end-to-end neural network based method. Similarly to Burba & Chen (2021) they explore a series of encoder-decoders to achieve reconciliation, considering fixed and trained decoder weights, using the complete or only the bottom-level of the hierarchy. These can be used instead of conventional hierarchical methods, demonstrating good performance in a global learning setting. To achieve an end-to-end integration, they pass the temporal hierarchy data through a convolutional layer and subsequently to an LSTM. The convolutional layer compresses the abstracts the hierarchical time series, and the LSTM models the dynamics over time. By appending an encoder-decoder to the outputs of the LSTM an end-to-end methodology is obtained. The authors demonstrate the gains due to the various components, but also investigate the amount of time series that are needed to achieve good performance in a global training setting. By modifying the training loss function, Theodosiou & Kourentzes (2020) extend the method to provide quantile forecasts.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 20 Forecast reconciliation: A review 
+
+Abolghasemi, Tarr & Bergmeir (2022) use ML to address the challenge of selecting the best method to perform the hierarchical reconciliation. To achieve this they rely on a meta-learning classifier, which is trained to identify given the time series features of a dataset what is the best reconciliation method to employ. The approach is quite flexible in terms of features and classifiers, as well as the forecasting models and reconciliation methods. Abolghasemi et al. (2019) use ML to improve the performance of non-combination hierarchical approaches. They consider various ML methods to obtain better prorations to decompose upper-level forecasts to lower-levels. Feng & Zhang (2020) provide a standard implementation of hierarchical methods using base forecasts from ML models, and find the hierarchically reconciled forecasts to be the most accurate. Punia, Singh & Madaan (2020) leverage on LSTM networks to produce forecasts for the cross-temporal case. Forecasts are generated for the various temporal aggregation levels, which are reconciled first by using temporal hierarchies and then cross-sectional. Sprangers, Schelter & Rijke (2021) propose a method for probabilistic gradient boosting machines, and benchmark its performance on the hierarchical M5 dataset, demonstrating good performance against other non-hierarchical ML methods. Although the proposed method can provide probabilistic predictions for all time series of the hierarchy, coherence is not established. ManEtAl2021 use a deep neural network to directly produce reconciled forecasts. The neural network captures the structure of the hierarchy, as well links the relationship between time series features extracted at any level of the hierarchy and explanatory variables into an end-to-end neural network. 
+
+3.8 Bayesian versions 
+
+Papers tackling hierarchical forecasting from a Bayesian angle focus on different aspects of the problem, but have much in common due to certain advantages of Bayesian inference. These are: the suitability of Bayesian inference for models with latent states such as state space models; the natural way uncertainty is propagated via Bayes’ rule leading to probabilistic forecasts; and the use of priors to incorporate judgement into forecasts. Park & Nassar (2014) propose a top-down approach, similar to Athanasopoulos, Ahmed & Hyndman (2009), that forecasts the bottom-level series as proportions of the top-level forecast, rather than forecasting them directly. To this end, a state space model is proposed where latent states are mapped to proportions via the softmax function. A variational approximation factorised into states and remaining parameters is employed with Evidence Lower Bound (ELBO) optimised via the EM algorithm. For the data considered, the method improves upon the top-down method of Athanasopoulos, Ahmed & Hyndman (2009), and gives more accurate  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 21 Forecast reconciliation: A review 
+
+bottom-level forecasts than bottom-up and OLS. However, as a top-down method, there is no scope for top-level forecasts to be improved using bottom-level series, and for the data considered in the paper, both bottom-up and OLS generate more accurate forecasts for the top-level series. Roque, Torgo & Soares (2021) also employ Bayesian modelling for forecasting hierarchical data in a way that differs from the two-step reconciliation approach. In particular, they decompose time series into a trend, modelled by a piecewise linear component, and a stationary component modelled as a sum of Gaussian Processes (GPs). Rather than modelling individual GPs for each series in the hierarchy, these are fit group-wise, with groups determined according to the hierarchical structure. The method outperforms MinT in an empirical study for the Australian prison population data, but not for the Australian tourism data. Another strain of the literature brings a Bayesian approach to the regression model interpretation of forecast reconciliation. Novak, McGarvie & Garcia (2017) recognise that the posterior of βh
+
+can act as a probabilistic forecast for the bottom-level series. Using Markov chain Monte Carlo to obtain a sample from this posterior, and then aggregating, gives a probabilistic forecast for the entire hierarchy. Eckert, Hyndman & Panagiotelis (2021) also obtain a posterior on βh, but their focus is on augmenting the reconciliation regression equation with a vector of intercepts that allow for base forecasts to be biased and evolve according to a state space representation. Both Novak, McGarvie & Garcia (2017) and Eckert, Hyndman & Panagiotelis (2021) suggest that in a Bayesian setting, judgement can be incorporated via the prior, in the latter case via an explicit empirical example where prior information about a structural break in data classification can be exploited. Also, while both papers recognise the potential of Bayesian inference to obtain probabilistic forecasts, neither paper makes this the focus of empirical evaluation. Novak, McGarvie & Garcia (2017) minimise loss functions over the posterior sample and then use this as a point forecast, while Eckert, Hyndman & Panagiotelis (2021) use maximum a posteriori (MAP) estimates as point forecasts. Probabilistic forecast reconciliation is the motivation and focus of the Bayesian algorithm proposed by Corani et al. (2021). In particular, a prior is placed on the bottom-level series with the mean set to point forecasts obtained in the first step of forecast reconciliation and a variance given by the variance-covariance matrix of one-step ahead errors. This prior is updated using the top-level forecasts obtained in the first stage of forecast reconciliation via Bayes’ rule. The method generalises MinT in the sense that the posterior mean is equivalent to the usual MinT approach. The necessary updates via Bayes’ rule have parallels with the Kalman filter  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 22 Forecast reconciliation: A review 
+
+since the reconciliation problem is recast as a linear Gaussian model. The empirical results are evaluated using scoring rules for probabilistic forecasts including the CRPS and energy score. This approach has also recently been extending to the challenging case of forecast reconciliation for discrete data by Corani et al. (2022) and Zambon, Azzimonti & Corani (2022). Bayesian methods are likely to continue to play an important role in the development of the forecast reconciliation literature. Some promising avenues will be incorporating information from the hierarchical structure via the prior and to use Bayesian methods to obtain non-Gaussian probabilistic forecasts. The challenges are likely to be computational in nature, as scalability of MCMC methods to large hierarchies may be difficult. The development of fast alternatives such as variational inference represent a promising a way forward. 
+
+3.9 In-built coherence 
+
+So far, all the approaches discussed have involved two steps — first compute the base forecasts ˆyh, and then reconcile them to produce ˜ yh. The computationally slow part is producing the base forecasts, because they usually involve fitting models to each series individually, with the estimation requiring non-linear optimization. However, as shown by Ashouri, Hyndman & Shmueli (2022), if the base forecasts ˆ y are produced using a linear regression model, the base forecasts and reconciliation can be combined, giving coherent forecasts directly in a single closed form equation. Further, the computation is extremely fast provided sparse matrix algebra is used. Another approach which aims to produce coherent forecasts directly is due to Pennings & Dalen (2017), who propose the state space model 
+
+yt = Sμt + εt, εt ∼ N(0, Σε), (3) 
+
+μt = μt−1 + ηt, ηt ∼ N(0, Ση).Variations are also considered, including covariates in the measurement equation (3). Coherent forecasts arise naturally using the Kalman filter, as discussed by Simon (2010). However, the covariance matrices are difficult to estimate with anything other than small hierarchies. A related state space approach was proposed by Villegas & Pedregal (2018), who show that their formulation subsumes bottom-up, top-down, and some forms of forecast reconciliation and combination forecasting.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 23 Forecast reconciliation: A review 
+
+Inbuilt constraints to form coherent forecasts have also been considered in an ARIMA mod-elling context (Guerrero 1989; De Alba 1993) and for exponential smoothing forecasts (Rosas & Guerrero 1994). 
+
+# 4 Temporal and cross temporal reconciliation 
+
+4.1 Early temporal aggregation papers 
+
+Studying the effects of temporal aggregation on forecasts goes back to the seminal works of Amemiya & Wu (1972), Tiao (1972), and Brewer (1973). Wei (1979), Lütkepohl (1984b), Lütkepohl (1986), Stram & Wei (1986), Hotta & Cardoso Neto (1993) and Rossana & Seater (1995) study the effect of temporal aggregation on seasonal and non-seasonal ARIMA processes respectively, with aligned theoretical results. In general, these show that aggregation to the annual frequency simplifies dynamics of ARIMA processes generated at monthly or quarterly frequencies. They state that “quarterly data may be the best compromise among frequency of observation, measurement error, and temporal aggregation distortion”. Such observations are not unusual. A similar conclusion is reached by Nijman & Palm (1990). Silvestrini & Veredas (2008) provide a detailed review of the literature to that point, with a focus on the implications on the model structure and identifiability for univariate ARIMA and multivariate GARCH processes. In parallel to the investigations in the econometric literature up to the early 2000s, temporal aggregation was becoming popular in high-frequency time series forecasting, albeit implicitly. The relatively limited computational resources of that period had forced researchers to develop clever ways to handle the long time series appearing in applications such as daily electricity load forecasting. The dominant approach had become to split the daily time series into seven weekly series, each corresponding to a stock measurement at a specific week of the day (Hippert, Pedreira & Souza 2001). From an accuracy standpoint, in the last decade there has been a revival of temporal aggregation in the forecasting literature. Luna & Ballini (2011) study 111 weekly time series related to cash withdrawals. They examine forecasts generated by two top-down approaches and find considerable improvements compared to forecasts generated by the daily models directly. Motivated by intermittent demand forecasting, Nikolopoulos et al. (2011) proposed the ADIDA method, where a time series is temporally aggregated to a less intermittent level, forecasted, and subsequently disaggregated. The authors find promising accuracy gains, although there is only heuristic guidance for the level of temporal aggregation. Spithourakis et al. (2011) demonstrate  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 24 Forecast reconciliation: A review 
+
+the benefits of using ADIDA in fast moving consumer goods, while Spithourakis et al. (2014) attempt to develop the theoretical background for the method, investigating the aggregation and disaggregation mechanism, and trying to identify how to select well-performing temporal aggregation levels. Rostami-Tabar et al. (2013) and Rostami-Tabar et al. (2014) derive the optimal temporal aggregation level for AR(1), MA(1), and ARMA(1,1), when simple exponential smoothing is used to produce the forecasts. Notably the discussion so far has been on non-overlapping temporal aggregation. This form of aggregation acts as a moving average filter (Kourentzes, Petropoulos & Trapero 2014), while substantially reducing the available sample size. Boylan & Babai (2016) investigate the effect of overlapping temporal aggregation, where a moving window is used to aggregate the time series, which is moved iteratively over the original series, including and dropping one observation at the time. They provide the conditions for which overlapping temporal aggregation outperforms its non-overlapping counterpart for independently and identically distributed demand processes. Earlier work on overlapping aggregation by Hotta, Morettin & Pereira (1992) explore the effects on ARIMA, and by Mohammadipour & Boylan (2012) on INARMA models. Similarly, Petropoulos, Kourentzes & Nikolopoulos (2016) motivated by intermittent demand problems, investigate empirically the usefulness of aggregating over unequal time periods, finding cases that can be beneficial. Babai, Boylan & Rostami-Tabar (2022) provide an extensive review of the aggregation literature. The use of temporal aggregation in demand forecasting is natural, as we are typically interested in the demand of the lead time period, which lends itself to temporal aggregation, and remains an active research area (for example, Rostami-Tabar et al. 2019; Saoud, Kourentzes & Boylan 2022). 
+
+4.2 Temporal reconciliation 
+
+Motivated by the resurgence in the interest in temporal aggregation, following the work by Nikolopoulos et al. (2011), Kourentzes, Petropoulos & Trapero (2014) propose the Multiple Aggregation Prediction Algorithm (MAPA), where a time series is modelled independently at multiple temporal aggregation levels with a state-space model, such as exponential smoothing, and then these models are combined by state. Temporal aggregation filters high frequency components in the time series, making low frequency ones more prominent. MAPA takes advantage of this to provide forecasts that perform well both in the short- and long-term forecast horizons. A by-product of the algorithm is that the resulting forecasts are coherent at the various temporal aggregation levels, which is a benefit the authors stress from a decision-making  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 25 Forecast reconciliation: A review 
+
+perspective. In follow up work Kourentzes & Petropoulos (2016) investigate the impact of temporal aggregation on promotional indicator variables. They demonstrate the usefulness of the method in the presence of promotional information. Similar benefits are seen in the case of intermittent demand when relying on multiple temporal aggregation levels instead of a single level (Petropoulos & Kourentzes 2015), as well as in inventory management (Barrow & Kourentzes 2016; Petropoulos, Wang & Disney 2019), again alluding to the connection between temporal aggregation and supply chain management. Kourentzes & Petropoulos (2016) compare directly the use of optimally identified single temporal aggregation levels to using multiple levels. They find that the latter is preferable, even when the underlying data generating process is known. Using multiple aggregation levels results in combinations of forecasts, therefore reducing the modelling risk. Athanasopoulos et al. (2017) combine the idea of using the multiple temporal aggregation levels of MAPA with hierarchical reconciliation, introducing the notion of temporal hierarchies. With temporal hierarchies, multiple levels of temporal aggregation of a time series (typically up to the annual level) are constructed from the original series and modelled independently. Subsequently, the forecasts are reconciled using the approaches outlined previously. Let the original time series yt, with t = 1, . . . , T, be observed at a sampling frequency 1/ m (e.g., 
+
+m = 12 for monthly data). The aggregation levels {k1, . . . , kp} are the p factors of m in ascending order, where k1 = 1 and kp = m. For each factor k of m, the non-overlapping temporally aggregated time series is constructed as: 
+
+x[k] 
+
+> j
+
+= 
+
+> t∗+jk −1
+
+# ∑ 
+
+> t=t∗+( j−1)k
+
+yt,where j = 1, . . . , ⌊T/k⌋ and t∗ = T − ⌊ T/m⌋m + 1, ensuring that all aggregation levels have complete aggregation windows. Note that x[1] 
+
+> j
+
+= yt. The complete hierarchy progresses at the observation index of the most aggregate level, which we define as τ (this corresponds to j at that level). For each aggregation level, we stack the observations in column vectors 
+
+x[k] 
+
+> τ
+
+=
+
+
+
+x[k] 
+
+> mk(τ−1)+ 1
+
+x[k] 
+
+> mk(τ−1)+ 2
+
+...
+
+x[k] 
+
+> mkτ
+
+
+
+, 
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 26 Forecast reconciliation: A review 
+
+where mk = m/k, τ = 1, . . . , N, and N = T/m. Collecting these in one column vector, we obtain 
+
+xτ =
+
+
+
+x[m]
+
+> τ
+
+x[m−1]
+
+> τ
+
+...
+
+x[1]
+
+> τ
+
+
+
+.The structural representation becomes xτ = Sx [1] 
+
+> τ
+
+with S =
+
+AI
+
+ and 
+
+A =
+
+
+
+1′
+
+> m
+
+Im/kp−1 ⊗ 1′
+
+> kp−1
+
+...
+
+Im/k2 ⊗ 1′
+
+> k2
+
+
+
+.We have used xτ in the notation to clearly distinguish a temporal hierarchy from a cross-sectional one that uses yt. An example for a quarterly time series ( m = 4) is provided in Figure 4. If there are multiple seasonalities that are not integer multiples of each other, the resulting additional temporal aggregations can simply be stacked in xτ, and A can be extended accordingly. Annual τ
+
+Semi Annual 2(τ−1)+ 1
+
+Quarter 4(τ−1)+ 1 Quarter 4(τ−1)+ 2
+
+Semi Annual 2(τ−1)+ 2
+
+Quarter 4(τ−1)+ 3 Quarter 4(τ−1)+ 4
+
+Figure 4: A temporal hierarchy for a quarterly time series at year τ, with m = 4.
+
+An important difference between a temporal hierarchy and the data structure in its predecessor MAPA, is that the use of the p factors of m simplifies the hierarchical structure and allows the direct implementation of hierarchical reconciliation, with the major advantage being that now there are no model restrictions, and at each level different forecasting models/methods can be used. Further, there is added flexibility in the combination of the forecasts between levels, through G. In contrast to cross-sectional hierarchies, temporal hierarchies can be constructed for any time series, requiring no additional data. However, this comes at the cost of estimation inefficiencies. Since there are only N = T/m observations of the complete hierarchy, this significantly affects any estimation required in the approximation of Wh, which motivated  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 27 Forecast reconciliation: A review 
+
+Athanasopoulos et al. (2017) to propose the aforementioned structural scaling that requires no estimation. Nystrup et al. (2020) propose and demonstrate the benefits of more advanced approximations that take advantage of the autocorrelation in the forecast errors, when there is sufficient data, and demonstrate their merits in a short-term electricity load forecasting application. Nystrup et al. (2021) go one step further and propose an estimator based on an eigendecomposition of the temporal correlation matrix, which is able to perform well even with relatively limited data compared with the dimension of the temporal hierarchy. Athanasopoulos et al. (2017) provide simulation and empirical evidence of the accuracy ben-efits of forecasting with temporal hierarchies. These benefits increase with added modelling uncertainty and at more temporally aggregate levels, echoing the arguments and evidence in Kourentzes, Petropoulos & Trapero (2014) and Kourentzes & Petropoulos (2016). The good per-formance of temporal hierarchies has been evidenced in various follow-up studies (for example, Yang et al. 2017b; Jeon, Panagiotelis & Petropoulos 2019; Nystrup et al. 2020, 2021; Kourentzes et al. 2021). 
+
+4.3 Cross-temporal reconciliation 
+
+Observe that cross-sectional hierarchies are described at time t for time series yt, while temporal hierarchies at time τ for xτ contain temporally aggregate views of yt. Given that hierarchical methods are motivated to support forecasting at various levels of a hierarchy, cross-sectional and temporal hierarchies on their own may have limitations. For example, consider the case of forecasting for a grocery retailer. Let yt ∈ yt describe the sales of a particular ice cream product. Cross-sectionally this may be grouped with other similar products, or with product sales within a geographic demarcation, and so on. The further we aggregate, the less relevant a forecast becomes for the specific period t and at the granularity of yt. Although we may be interested in the daily sales of a specific ice cream product, it is unlikely that we are interested in the daily sales at the top-level of the hierarchy describing the total company sales. Similarly, from the temporal point of view, it is unlikely that we are interested in the sales of yt in time increments τ, for example the sales of a particular ice cream product in several years. A more aggregate view across products and time units is typically more relevant for decision makers, with many nodes in a hierarchy having the role of statistical devices that improve the quality of the overall coherent forecast, rather than being directly connected with some supported decision (Athanasopoulos & Kourentzes 2022). Motivated by this, Kourentzes & Athanasopoulos (2019) proposed the notion of cross-temporal hierarchies, where the hierarchy spans across both cross-sections and time, more accurately  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 28 Forecast reconciliation: A review 
+
+mapping the various forecasts required by decision-makers and stakeholders. They show that sequential reconciliation across the cross-sectional and temporal dimensions, irrespective of order, does not always result in coherent forecasts, and address this by estimating all cross-sectional Gk, across the k temporal aggregation levels, which are then averaged in a common cross-temporal ¯ G. They obtain holistically coherent forecasts, which are also the most accurate. In their experiments the temporal reconcilation provided the biggest accuracy gain. Motivated by the sequential algorithm of Kourentzes & Athanasopoulos (2019), Di Fonzo & Girolimetto (2023a) propose an iterative version whereby the forecasts are alternately reconciled in temporal and cross-sectional dimensions in a cyclic fashion, and find that it produces more accurate forecasts. A number of contributions recognise that there are potential accuracy benefits in reconciling across both cross-sectional and temporal dimensions. Spiliotis et al. (2020), Yagli, Yang & Srinivasan (2019), and Punia, Singh & Madaan (2020), apply sequentially temporal and cross-sectional approaches, with Yagli, Yang & Srinivasan (2019) experimenting with the order of reconciliation as well. They all identify accuracy benefits, but do not establish holistic coherence. This sequential approach is discussed and improved by Di Fonzo & Girolimetto (2023b). Rather than separately reconciling the cross-sectional and temporal dimensions, Di Fonzo & Girolimetto (2023a) proposed a single reconciliation step, using the full cross-temporal hierarchy. Following our notation, from the cross-sectional yt at the most temporally disaggregate level, let 
+
+yi,t denote its ith element, i = 1, . . . , n. For each i, we construct all the temporally aggregated variants, giving a vector of length p:
+
+xi,τ =
+
+
+
+x[m]
+
+> i,τ
+
+...
+
+x[1]
+
+> i,τ
+
+ .These can then be stacked into a long vector: 
+
+xτ =
+
+
+
+x1, τ
+
+...
+
+xn,τ
+
+ . 
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 29 Forecast reconciliation: A review 
+
+With Scs and Ste denoting the structural matrices for the cross-sectional and temporal reconcilia-tions respectively, the cross-temporal structural matrix is Sct = Scs ⊗ Ste , so that 
+
+xτ = Sct bτ,where the bottom-level series 
+
+bτ =
+
+
+
+x[1]
+
+> 1, τ
+
+...
+
+x[1]
+
+> nb,τ
+
+ .Di Fonzo & Girolimetto (2023a) develop optimal cross-temporal reconciliation and evaluate it against the heuristic approach of Kourentzes & Athanasopoulos (2019) and variants. They report a relatively larger contribution to accuracy from the temporal side, and find that the optimal approaches tend to be outperformed by the heuristic approaches. We note that in their experi-ments all the approximations used for the cross-temporal Wh required some estimation, which given the size of the cross-temporal matrices may explain the findings (Pritularga, Svetunkov & Kourentzes 2021). Cross-temporally reconciled forecasts offer relatively limited accuracy gains compared to one-way reconciled forecasts (primarily temporally reconciled), with their major benefit being the qualitative difference of being coherent across both dimensions. This is impactful within a decision-making context and can be seen as a tool to sidestep organisational information silos, and achieve aligned plans across different functions in organisations (Kourentzes & Athana-sopoulos 2019). Kourentzes (2022) argues that cross-temporally coherent forecasts offer a pathway towards so-called “one-number” forecasts, enabling the integration of independent forecasts built for different functions and decisions that are typically based on different infor-mation, with different horizons, and purposes. If these forecasts remain disconnected, they can lead to misaligned decisions and organisational friction. In the cross-temporal case, some nodes of the hierarchy are by-products of the structure, rather than directly connected with some decision (Athanasopoulos & Kourentzes 2022). This raises questions how to best evaluate the quality of these forecasts, given that the relevant metrics for different decisions may vary in an organisational context.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 30 Forecast reconciliation: A review 
+
+# 5 Probabilistic hierarchical forecasting and reconciliation 
+
+The period that saw growth in the development of methods for hierarchical forecasting and reconciliation coincided with an increasing awareness of the importance of probabilistic fore-casting. Therefore it is unsurprising that in recent years, a number of papers have attempted to tackle the problem of probabilistic hierarchical forecasting. As in the case for point forecasting, methods for obtaining probabilistic hierarchical forecasts can be split into bottom-up, top-down and reconciliation approaches, although some algorithms combine elements of more than one approach. Note that Bayesian approaches to probabilistic forecast reconciliation are discussed in Section 3.8. Bottom-up methods of probabilistic hierarchical forecasting were introduced by Ben Taieb, Taylor & Hyndman (2017) and subsequently expanded on in Ben Taieb, Taylor & Hyndman (2021). The algorithm is initialised by generating a Monte Carlo sample from the predictive distribution of each bottom-level variable, which by construction are independent. To induce dependence, these samples are first ranked, and then permuted series-wise. The permutations are designed to ensure that the samples from bottom-level predictive distributions have the same empirical copula as ‘in-sample’ forecast errors (residuals), taking care to exploit the hierarchical structure to avoid dealing with very high-dimensional copulas. These are then aggregated to yield a sample from the predictive distribution of all top-level series. This is summarised with a simple example in Figure 5. 
+
+A ↓
+
+1.4 2.3 1.7 2.1 
+
+
+
+B ↓
+
+3.6 5.3 2.2 6.4 
+
+
+
+> rank
+
+⇒
+
+A ⟳
+
+1.4 1.7 2.1 2.3 
+
+
+
+B ⟳
+
+2.2 3.6 5.3 6.4 
+
+
+
+> permute
+
+⇒
+
+A
+
+1.4 1.7 2.1 2.3 
+
+
+
++
+
+B
+
+3.6 2.2 6.4 5.3 
+
+
+
+> aggregate
+
+⇒
+
+T
+
+5.0 3.9 8.5 7.6 
+
+
+
+Figure 5: A toy example describing bottom-up approaches for probabilistic forecasting for a simple 3-variable hierarchy with T = A + B. A sample of size K = 4 has been drawn for two bottom-level series A and B. These are then ranked from smallest to largest, then permuted so that their empirical copula matches that of the residuals. The residuals are not shown here, but in this example, the smallest residual in A coincides with the second smallest residual in B, the second smallest residual in A coincides with the smallest residual in B and so on. Finally A and B are aggregated to give a sample from the predicted distribution of the total series, T. 
+
+While the bottom-up algorithm does not use a top-level forecast at all, both Ben Taieb, Taylor & Hyndman (2017) and Ben Taieb, Taylor & Hyndman (2021) propose an extension that incorpo-rates top-level information, by adjusting the mean of each series to be equal to a reconciled point forecast; for example, in Ben Taieb, Taylor & Hyndman (2021), MinT is used. A shortcoming of  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 31 Forecast reconciliation: A review 
+
+the bottom-up approach and its extension is that the sample drawn from the predictive distri-bution and the sample of training data must be of equal size, making it ill-suited to problems with a small amount of training data. This is overcome by Panamtash & Zhou (2018) and Zhao, Wang & Zhang (2019) who rather than using Monte Carlo, estimate predictive quantiles directly via quantile regression. Panamtash & Zhou (2018) also propose a top-down method for producing probabilistically coherent forecasts whereby quantile forecasts are first produced for all series. Proportions for top-down disaggregation are then found by taking the ratio of a forecast of a child node to the ratio of the forecast of the parent node. These are then applied to the original top-level forecasts. To the best of our knowledge the only other top-down method for coherent forecasting has been proposed by Das et al. (2022) who model future proportions based on past proportions using a combination of an LSTM and multi-head self attention architecture. A sample from the predictive distribution of the top level is generated and each observation from this sample is disaggregated according to the forecast proportions. Similar to the point forecasting case, progress has been made in extending the two-step reconcili-ation approach whereby probabilistic forecasts are produced from all series, and then reconciled to be coherent in a second step. Jeon, Panagiotelis & Petropoulos (2019) propose drawing a sample from the predictive distribution of each series (both top- and bottom-level) and then stacking these into a matrix. The matrix can then be pre-multiplied by a projection matrix SG to obtain a sample from the coherent multivariate predictive distribution. One algorithm proposed by Jeon, Panagiotelis & Petropoulos (2019), which they refer to as the ‘ranked sample’, orders the observations drawn from each predictive distribution before pre-multiplying by SG . This approach is described in Figure 6 and corresponds to reconciling quantiles; an idea that has antecedents in Shang & Hyndman (2017) who reconcile prediction intervals. Quantiles are only preserved under linear combinations when the data are perfectly dependent, however in cases where dependence between series is high, the method of Jeon, Panagiotelis & Petropoulos (2019) is shown to perform well. Panagiotelis et al. (2023) make a number of contributions to probabilistic forecast reconciliation by providing formal definitions for coherence and reconciliation that justify Monte Carlo ap-proaches as well as finding reconciled probabilistic forecasts for elliptical distributions (including the Gaussian). The Panagiotelis et al. (2023) framework allows any set of base forecasts, either univariate, or multivariate (the latter until then had not been considered in the hierarchical forecasting literature) to be reconciled using any reconciliation method. Reconciliation weights  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 32 Forecast reconciliation: A review 
+
+T ↓
+
+6.2 8.3 3.6 3.4 
+
+
+
+A ↓
+
+1.4 2.3 1.7 2.1 
+
+
+
+B ↓
+
+3.6 5.3 2.2 6.4 
+
+
+
+> rank
+
+⇒
+
+T
+
+3.4 3.6 6.2 8.3 
+
+
+
+A
+
+1.4 1.7 2.1 2.3 
+
+
+
+B
+
+2.2 3.6 5.3 6.4 
+
+
+
+> stack
+
+⇓
+
+T 3.4 3.6 6.2 8.3 
+
+A 1.4 1.7 2.1 2.3 
+
+B 2.2 3.6 5.3 6.4 
+
+> reconcile
+
+⇒ SG 
+
+
+
+3.4 3.6 6.2 8.3 1.4 1.7 2.1 2.3 2.2 3.6 5.3 6.4 
+
+
+
+Figure 6: A toy example describing the ranked sample approach to probabilistic forecast reconciliation for a three variable hierarchy where T = A + B. A sample of size K = 4 has been drawn for the top-level series T and two bottom-level series A and B. These are then ranked from smallest to largest, then stacked, and reconciliation is applied (final reconciled forecasts depend on the choice of G, and are not shown here). 
+
+are trained by optimising with respect to a multivariate scoring rule. Rangapuram et al. (2021) also optimise with respect to scoring rules for probabilistic forecasts, but rather than train reconciliation weights, they assume least squares reconciliation, with the novelty coming from training forecasting models and reconciling in an end-to-end fashion rather than via the usual two-step approach. Despite very recent progress in forecast reconciliation, a number of open research questions remain. In the case of point forecasting, the optimality of certain reconciliation techniques such as MinT are now well understood. Similar results have not been derived for reconciliation methods in the probabilistic setting with the exception of Wickramasuriya (2021a) who derive the optimality of MinT in the Gaussian case. We expect a better understanding of the theoretical and empirical properties of different probabilistic forecast reconciliation techniques in coming years, including which methods produce forecasts that are well calibrated and whether their prediction intervals achieve correct coverage rates. 
+
+# 6 Significant applications 
+
+6.1 Tourism 
+
+The new concept of forecast reconciliation was first implemented on tourism data in Athana-sopoulos, Ahmed & Hyndman (2009). Tourism flows comprise aggregation structures across various dimensions. The most obvious of these are geographic hierarchies. At an international level, we have inbound travel from multiple countries or from regions within source countries, to multiple destination countries, airports or regions within the destination countries. The same  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 33 Forecast reconciliation: A review 
+
+applies for outbound travel while similar geographic divisions are natural for domestic travel. Further, policy makers and business planners are also interested in various characteristics of tourists. For example, the expenditure patterns of holiday makers are very different to those of business travelers or those visiting friends and relatives. Hence, grouped structures where geographic hierarchies are crossed with various attributes of interest also naturally arise. An attribute commonly observed for tourism flows is purpose of travel, which typically comprises holidays, visiting friends and relatives, business, and other. Athanasopoulos, Ahmed & Hyndman (2009) focus on two aggregation structures based on quarterly tourism flows. A grouped structure where geographic divisions (Australia, States, Capital city versus other) are crossed with purpose of travel (also considered in Hyndman et al. 2011); and a pure geographic hierarchy where Australian domestic tourism flows are disaggregated by States, Zones and Regions. Coherent forecasts were generated from traditional bottom-up and top-down approaches based on historical proportions, as well a new top-down approach based on forecast proportions and forecast reconciliation. The paper found that the proposed top-down and reconciliation approaches improve forecast accuracy compared to the traditional approaches, and provides detailed forecasts for Australian domestic tourism flows, identifying some key features at both the aggregate and disaggregate levels that are crucial for informing policy makers. Variations of these Australian tourism data have since become ubiquitous for benchmarking forecast reconciliation methods. For example, Abolghasemi, Tarr & Bergmeir (2022) propose what they refer to as conditional hierarchical forecasting, an approach based on machine learning classification methods that use time series features to select the reconciliation method for a hierarchy and evaluate the performance of the method based on the pure geographic hierarchy. Gleason (2020) introduces an embedding reconciliation term that penalizes deviation from an aggregation structure, and uses the grouped structure to evaluate the forecasting performance of the proposed method, claiming improvements over MinT. An updated and richer monthly Australian tourism data set was introduced in Wickramasuriya, Athanasopoulos & Hyndman (2019). The geographic hierarchy comprises 111 series. In particu-lar the total tourism flow is disaggregated to 7 states, 27 zones and 76 regions. The hierarchical structure is crossed with the 4 purposes of travel, resulting in a total of 555 time series, of which 525 are unique (Di Fonzo & Girolimetto 2022b, online appendix). This data set or close variations of it, is considered in several studies, including Kourentzes & Athanasopoulos (2019), Hollyman, Petropoulos & Tipping (2021), Spiliotis et al. (2021) and Di Fonzo & Girolimetto (2022b).  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 34 Forecast reconciliation: A review 
+
+Karmy & Maldonado (2019) study ten different data sets, including three related to tourism. The first one is a variation of the quarterly data set introduced in Athanasopoulos, Ahmed & Hyndman (2009), using only the hierarchical structure based on the geographic divisions (also used in Karmy, López & Maldonado 2023). They also consider a weekly dataset of flight passengers between Melbourne and Sydney for an airline, disaggregated by flight ticket class type (first class, business, and economy), and monthly departures from Australia disaggregated into permanent, long-term, and short-term departures, and then between residents and visitors for the cases of long- term and short-term departures. The paper presents forecasting methods for hierarchical time series based on Support Vector Machines. These are compared to traditional single-level approaches with the conclusion that a major limitation of the proposed methods is the lack of data in a time series context. Athanasopoulos et al. (2023) and Kourentzes et al. (2021) focus on tourism flows amid the COVID-19 pandemic. Athanasopoulos et al. (2023) model both international inbound and domestic flows for the case of Australia, while Kourentzes et al. (2021) analyse international arrivals for the case of South Africa. The papers argue for the use of forecast reconciliation in order to generate robust forecasts for tourism flows during the pre-COVID period. 
+
+6.2 Macroeconomics 
+
+Since macroeconomics is the study of aggregate economic phenomena, it is not surprising that this field has provided fertile ground for hierarchical data. For example, Gross Domestic Product (GDP) is constructed as an aggregate of individual components. The expenditure method constructs GDP as an aggregate of expenditure characterized by consumption, investment, imports and exports, while the income approach aggregates variables such as the gross operating surplus of firms with employee compensation. Thus there are two hierarchies involved with the same aggregated series. The structural formulation of the reconciliation problem does not allow for this scenario, but the more general constraint formulation (Section 2.2) does. As noted in Section 3.1, reconciliation of estimates (as distinct from forecast reconciliation) has a long history in macroeconomics. For forecasting problems, forecasts of the disaggregate series may be of direct interest, otherwise the objective may be to improve accuracy by leveraging forecasts of the disaggregate series via reconciliation. Athanasopoulos et al. (2020), Bisaglia, Di Fonzo & Girolimetto (2020) and Di Fonzo & Girolimetto (2022c) find evidence in favour of forecast reconciliation in both of these settings for Australian GDP. In particular for both point and probabilistic forecasts, improvements in forecast accuracy over base and bottom-up methods can be achieved using forecast reconciliation. The MinT method is found to work best  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 35 Forecast reconciliation: A review 
+
+overall, while when attention is restricted to only the top-level series, weighted least squares is found to be more accurate. Di Fonzo & Girolimetto (2023a) use the constraint representation with a cross-temporal framework, and show that it leads to better forecasts on this data set. Another important macroeconomic variable that admits a hierarchical structure is the consumer price index (CPI). The CPI is constructed as a weighted price index of a basket of goods. As such the novel aspect to reconciliation in this setting is that rather than a summing matrix consisting only of ones and zeros, the S matrix includes weights that can change over time. In an early application of reconciliation methodology, Capistrán, Constandse & Ramos-Francia (2010) find that OLS reconciliation can improve upon a bottom-up approach for some but not all components of Mexican CPI. For overall CPI, OLS improves upon a bottom-up approach, however the difference between the forecast accuracy of these methods is not found to be statistically significant. Weiss (2018) considers UK CPI and finds that reconciliation using OLS performs better than traditional approaches for 1-month-ahead forecasts, but that middle out approaches work better for longer horizons. Weiss (2018) also considers inflation volatility; in this case, reconciliation methods do not outperform bottom-up. While hierarchical structures are common in macroeconomics, certain details concerning the construction of these datasets suggest new directions in reconciliation methodology. One example, Koop et al. (2022) consider a geographic hierarchy of productivity, with a model that includes growth rates in national and regional output. However, since chain volume measures are used to construct output, with different price deflators for each region, regional growth rates only add up to the national growth rate as an approximation. Since the usual aggregation constraint only holds approximately, Koop et al. (2022) recommend shrinking towards the aggregation constraint via a Bayesian approach rather than imposing a hard constraint. Considering unemployment data from multiple labour force surveys in Brazil, Lila, Meira & Cyrino Oliveira (2022) introduce robust estimation in the reconciliation stage with primary aim to address measurement issues occurring in the original time series. These methods are likely to generalise to other hierarchical forecasting problems in macroeconomics and other disciplines. 
+
+6.3 Energy 
+
+Energy applications are widespread in the forecast reconciliation literature due to the natural geographic hierarchies that arise in energy distribution. For example, both the GEFCom2012 (Hong, Pinson & Fan 2014) and GEFcom2017 (Hong, Xie & Black 2019) energy forecasting  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 36 Forecast reconciliation: A review 
+
+competitions included hierarchical electricity load data, although none of the participants took advantage of the hierarchical structure to improve their forecasts. One of the earliest uses of forecast reconciliation applied to energy data was van Erven & Cugliari (2015), discussed earlier, who applied their methods to electricity demand data from Électricité de France, disaggregated into 17 tariff groups. Three interesting examples of forecast reconciliation of electricity load are due to Ben Taieb and his coauthors. Ben Taieb et al. (2017) propose a regularized version of MinT reconciliation with penalties analogous to those used in LASSO and elastic-net regressions, giving sparse adjustments to the base forecasts. They apply the method to electricity consumption measured by 5701 smart meters with a rich geographic hierarchy. Ben Taieb, Taylor & Hyndman (2017) and Ben Taieb, Taylor & Hyndman (2021) each developed new probabilistic reconciliation methods (discussed in Section 5), and applied them to the same dataset. Zhao, Wang & Zhang (2019) proposed a computationally simpler variation of the method of Ben Taieb, Taylor & Hyndman (2017), and applied it to two public data sets: the ISO New England data from Hong, Xie & Black (2019), and some Irish smart meter data aggregated to groups of 100 customers. Roach (2019) also studies the ISO New England data from the Hong, Xie & Black (2019) and proposes a method based on generating reconciled quantile forecasts using a gradient boosted model which is shown to outperform the benchmark. Brégère & Huard (2022) also tackle load forecasting, but introduce an innovation by including an “aggregation algorithm” before reconciling the forecasts. This aggregation algorithm involves computing revised base forecasts that are linear combinations of the base forecasts of all series. The revised base forecasts are then reconciled using OLS reconcilation. This approach means that any cross-sectional relationships between series are modelled in the aggregation step rather than the reconciliation step. The authors applied this approach to the same dataset used by Ben Taieb, Taylor & Hyndman (2017). Forecast reconciliation has also been used in solar generation forecasts. Here, power generated by distributed photovoltaics (PV) are naturally disaggregated in a geographic hierarchy such as transmission zones, distribution nodes, PV plants, subsystems and inverters. Yang et al. (2017a) explored the application of MinT reconciliation and some of its special cases to hourly generation data from 318 power plants in California, USA, while Yagli, Yang & Srinivasan (2020) applies probabilistic (Gaussian) MinT reconciliation to the same data set. The data set is used again in Yang et al. (2017b), applying temporal reconciliation methods, and in Yagli, Yang & Srinivasan (2019), where both cross-sectional and temporal reconciliation are considered. They apply the  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 37 Forecast reconciliation: A review 
+
+cross-sectional and temporal reconciliations sequentially, rather than simultaneously. Di Fonzo & Girolimetto (2022a) and Di Fonzo & Girolimetto (2023a) critique this two-step approach and argue for simultaneous cross-temporal reconciliation, but show that the two approaches can be equivalent if the covariance matrices used in both steps are constant across levels and time granularities. They further show how the forecasts can be constrained to be non-negative using the simple approach of setting any negative bottom-level reconciled forecasts to zero, and then aggregating the results. Another application to solar power is Panamtash & Zhou (2018), who applied the probabilistic reconciliation methods they developed (discussed in Section 5) to 5-minute solar power data for about 6000 simulated PV plants in Florida, USA. A further application to energy data is Gilbert, Browell & McMillan (2018) who produce probabilistic forecasts of wind power for individual turbines, and for the entire wind farm. An innovative feature is the use of a weighted aggregation based on an elastic net penalized regression. Bergsteinsson et al. (2021) propose an adaptive reconciliation method for temporal hierarchies by allowing for time-varying weights. They use this approach to improve the accuracy of heat load forecasts. 
+
+6.4 Mortality rates 
+
+Applications of forecast reconciliation in mortality started with Shang & Hyndman (2017), who forecast Japanese mortality rates disaggregated by age, sex, and by a geographic hierarchy of 47 prefectures within 8 regions. The base forecasts were obtained using a functional data method. Because mortality rates do not sum directly, they proposed an aggregation matrix A comprising population ratios. For example, for the mortality rate of 50-year-old females within a region, the non-zero values of the corresponding row of the A matrix contains the 50-year-old female population of each prefecture divided by the total 50-year-old female population of the region. Thus, the aggregation matrix A is time-varying, and the values for the future time periods were forecast using univariate time series models. WLS reconciliation was used. Shang & Haberman (2017) provide an application to annuity pricing using an identical approach to the same data set. Li & Hyndman (2021) used a similar formulation, but applied MinT reconciliation to US age-sex-specific mortality rates, and explored future mortality inequality. Li et al. (2019) consider forecasting mortality due to different causes of death and show that forecast accuracy is improved by reconciliation. Although the data form a simple two-level hierarchy with bottom-level series and their aggregate, the authors combine individual causes of death into middle level series. This is done via hierarchical clustering on the data. Augmenting  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 38 Forecast reconciliation: A review 
+
+the hierarchy with middle level series in this fashion, leads to further improvement in forecast accuracy. Li & Tang (2019) use a forecast reconciliation approach to forecast a longevity divergence index (LDI), used to compute the Swiss Re Kortis bond. The most disaggregated series in the hierarchy are age-specific mortality improvement rates in the US and UK, while the most aggregated series are LDI values, expressed as linear combinations of these disaggregated series. They use a MinT approach to generate probabilistic forecasts, following Jeon, Panagiotelis & Petropoulos (2019). 
+
+6.5 Retail demand & supply chain 
+
+Forecasting for demand planning has been an attractive application for hierarchical forecasting and therefore it has attracted attention in the literature. Rostami-Tabar et al. (2015) look at the conditions where top-down or bottom-up is favourable assuming that the disaggregate series are ARIMA(0,1,1) processes, using the reconciliation approach as a benchmark. The latter is found to be more accurate overall, with the bottom-up method outperforming it in some cases, particularly for the bottom-level time series. Yang et al. (2016) using the publicly available Dominick’s Finer Food dataset find that the shrinkage estimator for W1 performed better than classic hierarchical methods (bottom-up and top-down). Oliveira & Ramos (2019) find the same conclusion on data from a Portuguese supermarket. Mircetic et al. (2022) look at sales of a major European brewery and find that hierarchical reconciliation performs better than base forecasts. They also propose combining the bottom-level forecasts of different hierarchical forecasting methods and then construct the forecasts for the rest of the hierarchy using a bottom-up approach. They argue that this method has the advantage that it eliminates the need to select a hierarchical approach and find small gains over the reconciliation method. Karmy & Maldonado (2019) explore the performance of hierarchical forecasting on sales in the travel retail industry. They do not consider the reconciliation approach and find bottom-up to be best. Villegas & Pedregal (2018) propose encapsulating cross-sectional hierarchical reconciliation in a state-space formulation, together with the forecasting model. Using simulations and an empirical investigation on a Spanish grocery retailer, they find that the standard reconciliation performs well for short horizons (1–3 days), while for longer horizons (4–7 days) the state-space based reconciliation is best and is also the overall most accurate method. Other applications include the contributions of abolghasemi2022machine , Abolghasemi, Tarr & Bergmeir (2022), and Spiliotis et al. (2021) who investigate the application of hierarchical fore-casting on data from a food manufacturer in Australia. Finally, the M5 forecasting competition used data from Walmart, a major US retailer, with a grouped time series structure, providing a  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 39 Forecast reconciliation: A review 
+
+test bed for reconciliation methods (Makridakis, Spiliotis & Assimakopoulos 2022). We provide further details of these works in Section 3.7. 
+
+6.6 Intermittent demand 
+
+Hierarchical forecasting has seen some application in intermittent demand modelling. However, in reviewing these papers it is useful to consider that the literature has progressed substantially over the last years in terms of how to evaluate forecasts of intermittent demand time series (Kourentzes 2014; Kolassa 2016; Athanasopoulos & Kourentzes 2022), recognising that classic er-ror metrics, especially those based on absolute errors, are often inappropriate. Direct evaluation on decision metrics, such as inventory metrics, or the predictive distribution are preferable. One of the earliest works using hierarchical forecasting for intermittent demand is by Moon, Hicks & Simpson (2012) who looked at top-down hierarchical forecasts, against combination and base forecasts for predicting spare parts for the South Korean navy. In the reported inventory cost, the top-down approach offers benefits in some settings, but overall is outperformed by combination methods. It should be noted that the hierarchy that was used in this work was constructed by the researchers and its eventual structure may have been significant for the findings. Petropoulos & Kourentzes (2015) provide a translation of the temporal MAPA algorithm (Kourentzes, Petropoulos & Trapero 2014) for intermittent demand. It is used to forecast spare parts for the UK Royal Air Force. They find it outperforms various benchmarks, including ADIDA that relies on a single temporal aggregation level (Nikolopoulos et al. 2011), and vari-ous combinations of forecasts. However, the empirical evaluation lacks decision or predictive distribution related metrics. Li & Lim (2018) provide a top-down-like hierarchical forecasting method for predicting in-termittent demand in fashion retailing. Their approach produces separately daily forecasts of the aggregate demand across multiple items, and a forecast of the inter-demand interval and demand size for each individual item. The latter forecasts are used to prorate the total forecast into the individual items. Although the proposed algorithm performs well against benchmarks, the empirical evaluation lacks other cross-sectional reconciliation benchmarks and strong performance metrics. Kourentzes & Athanasopoulos (2021) investigate the use of temporal hierarchies for intermittent demand forecasting for aerospace spare parts. Their motivation is that a method that predicts well the intermittent pattern should be able to demonstrate the various patterns (such as  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 40 Forecast reconciliation: A review 
+
+seasonality and trend) that may appear when the data are explored at lower sampling frequency. They demonstrate that the use of temporal hierarchies allows the capture of these patterns at higher temporal aggregation levels and combining this information with intermittent demand forecasts of the original time series, results in reconciled forecasts that dominate the base forecasts on a variety of metrics and horizons. They obtain prediction intervals using the empirical distribution of the reconciled forecasts and provide a heuristic to ensure non-negative forecasts. 
+
+6.7 Healthcare, accidents & emergencies 
+
+Athanasopoulos et al. (2017) applied temporal hierarchies to predict weekly admissions for Accidents & Emergency wards in UK hospitals. The volume of patients relates to different decisions in the operations of the wards, from staff scheduling, to procuring consumables, training and hiring of staff, etc. They showed that temporally coherent forecasts dominated base forecasts in all cases. Pritularga, Svetunkov & Kourentzes (2021) looked at weekly Accidents & Emergency cases for a specific hospital, and were interesting in producing cross-sectionally coherent forecasts across various patient demarcations. They compared a variety of approximations for Wh, controlling for the sample size, and found that hierarchical forecasts were universally better than the base forecasts. They also showed that the complexity of the approximation is important, with simpler ones performing best at smaller sample sizes, and more complex ones gaining a substantial advantage when there were sufficiently long time series. Weiss (2018) investigated improving the staffing for a large UK teaching hospital. Hierarchical forecasts were found to provide more accurate forecasts than the benchmark used by the hospital. Further, when the forecasts were used in a staffing model, they resulted in cheaper operations and less under-staffing. 
+
+# 7 Open-source software implementations 
+
+The first available open-source implementation of forecast reconciliation methods was the hts 
+
+package for R (Hyndman, Ahmed & Shang 2010), which helped popularise cross-sectional point forecast reconciliation methods in business and industry. The hts package has continued to be developed, and its latest version (Hyndman et al. 2021) includes implementations of Wickramasuriya, Athanasopoulos & Hyndman (2019) and Wickramasuriya, Turlach & Hyn-dman (2020). The game-theoretic approach of van Erven & Cugliari (2015) is implemented  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 41 Forecast reconciliation: A review 
+
+in the gtop package for R (Cugliari & Erven 2015). Temporal point forecast reconciliation is provided in the thief package for R (Hyndman & Kourentzes 2018). Cross-sectional, temporal, and cross-temporal point forecast reconciliation with optional non-negativity constraints is provided by the FoReco package for R (Girolimetto & Di Fonzo 2022). The score optimization approach of Panagiotelis et al. (2023) is implemented in the ProbReco package (Panagiotelis 2020). Probabilistic cross-sectional forecast reconciliation is also included in the fabletools 
+
+package for R (O’Hara-Wild, Hyndman & Wang 2023), with a very simple user interface for specifying complicated hierarchical and grouping structures. There are also several Python implementations of the methods, including the pyhts package of Zhang, Kang & Li (2022), which is a python translation of Hyndman et al. (2021), and Darts (Herzen et al. 2023, 2022) which provides similar functionality. The hierarchicalforecast 
+
+package (Olivares et al. 2022b, 2023) provides a more comprehensive suite of functions covering both point and probabilistic forecast reconciliation including the methods of Ben Taieb, Taylor & Hyndman (2017), Ben Taieb & Koo (2019), Wickramasuriya, Athanasopoulos & Hyndman (2019), and Panagiotelis et al. (2023). The method of Rangapuram et al. (2021) is implemented in  
+
+> GluonTS
+
+(Alexandrov et al. 2023). 
+
+# 8 Conclusion 
+
+Research into hierarchical time series and forecast reconciliation has seen great success and impact, particularly over the last decade. At this juncture we wish to speculate on what the next decade holds in store by identifying some key open questions. We anticipate growth in the following areas. The breadth of data to which reconciliation methods need to be applied necessitates the extension of methods to non-standard domains. This includes non-negative data (for which there is existing work by Wickramasuriya, Turlach & Hyndman 2020, amongst others), discrete data (for which Corani et al. (2021), Olivares et al. (2022a) and Zambon, Azzimonti & Corani (2022) give early attempts to address the issues), and finally mixtures of discrete and continuous data. The latter could be potentially useful for zero inflated data (which arise in intermittent sales data) or where there are hierarchies where some bottom-level series are best modelled as discrete, while the top -level series are best modelled as continuous. The development of algorithms to handle these cases, as well as understanding the theoretical properties of reconciliation in such settings, represents a bold research agenda.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 42 Forecast reconciliation: A review 
+
+While recent progress has been made in probabilistic forecasting, as discussed in Section 5, there are a number of open questions on the properties of probabilistic forecast reconciliation. For example, what are the coverage properties of prediction intervals derived from reconciled forecasts, how do these depend on the coverage properties of the base forecasts themselves and does reconciliation even improve coverage relative to base forecasts? These questions are particularly vexed since reconciled probabilistic forecasts are defined on a domain that is a linear subspace. As such, it may be more fruitful to think of coverage in terms of highest density regions (Hyndman 1995) rather than prediction intervals. An often stated advantage of coherent forecasts is that they have the potential to lead to aligned decisions. However the attempts to quantify this effect have been limited. Where gains in forecast accuracy due to forecast reconciliation have been established, forecast evaluation is often based on general purpose metrics such as RMSE and MAE as well as scaled versions thereof. These metrics do not explicitly penalise incoherence in forecasts particularly when, as is often the case, the forecasts of different variables are evaluated individually. The disconnect between metrics of forecast evaluation and the operational considerations of hierarchical forecasting may explain why hierarchical methods have not been popular in forecasting competitions such as the M5, even where the data follow a hierarchical structure. Therefore we anticipate the development of new forecast evaluation metrics that account for the multivariate and hierarchical nature of the data. Further, we concur with the view of Athanasopoulos & Kourentzes (2022) that forecast evaluation must be integrated with the decisions made by agents at different levels of the hierarchies. This issue opens up additional questions related to the game theoretic aspects of hierarchical forecasting. Most empirical work to date shows that even where reconciliation improves forecast accuracy, these improvements do not occur across all levels of the hierarchy. In some applications, improvements may be seen in forecasts of bottom-level series after reconciliation, while base forecasts at the top level still outperform the top-level reconciled forecast. In other applications, the reverse may be true. This has a number of interesting implications in an organisational setting where those making forecasts at different levels can be treated as separate agents. Can reconciliation methods be found that lead to Pareto improvements across the hierarchy meaning all agents gain from reconciliation? If not, in a cooperative setting, can forecast reconciliation, and the decisions agents make based on these forecasts be aligned to improve overall welfare of the organisation? Also, in a competitive setting, can compensation mechanisms be developed to encourage agents at different levels of the hierarchy, each making forecasts based on their  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 43 Forecast reconciliation: A review 
+
+own information sets to share base forecasts for reconciliation? These open questions should stimulate research for years to come. 
+
+# Acknowledgements 
+
+We thank Xiaoqian Wang, Daniele Girolimetto and Tommaso Di Fonzo for providing helpful comments on an earlier draft of this paper. Rob J Hyndman was funded by the Australian Government through the Australian Research Council Industrial Transformation Training Centre in Optimisation Technologies, Integrated Methodologies, and Applications (OPTIMA), Project ID IC200100009. 
+
+# References 
+
+Abolghasemi, M, RJ Hyndman, G Tarr & C Bergmeir (2019). “Machine learning applications in time series hierarchical forecasting”. https://arxiv.org/abs/1912.00370 .Abolghasemi, M, G Tarr & C Bergmeir (2022). Machine learning applications in hierarchical time series forecasting: Investigating the impact of promotions. International Journal of Forecasting 
+
+forthcoming .Ahmed, RA (2009). “Forecasting hierarchical time series”. PhD thesis. Monash University. Alexandrov, A, K Benidis, M Bohlke-Schneider, V Flunkert, J Gasthaus, T Januschowski, DC Maddix, S Rangapuram, D Salinas, J Schulz, L Stella, AC Türkmen & Y Wang (2023). “Glu-onTS: Probabilistic Time Series Modeling in Python”. Python package v0.11.8. https : //ts.gluon.ai/ .Amemiya, T & RY Wu (1972). The Effect of Aggregation on Prediction in the Autoregressive model. Journal of the American Statistical Association 67 (339), 628–632. Anderer, M & F Li (2022). Hierarchical forecasting with a top-down alignment of independent level forecasts. International Journal of Forecasting 38 (4), 1405–1414. Ashouri, M, RJ Hyndman & G Shmueli (2022). Fast forecast reconciliation using linear models. 
+
+Journal of Computational & Graphical Statistics 31 (1), 263–282. Athanasopoulos, G, RJ Hyndman, N Kourentzes & M O’Hara-Wild (2023). Probabilistic forecasts using expert judgement: the road to recovery from COVID-19. Journal of Travel Research 62 (1), 233–258. Athanasopoulos, G & N Kourentzes (2022). On the evaluation of hierarchical forecasts. Interna-tional Journal of Forecasting forthcoming . 
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 44 Forecast reconciliation: A review 
+
+Athanasopoulos, G, RA Ahmed & RJ Hyndman (2009). Hierarchical forecasts for Australian domestic tourism. International Journal of Forecasting 25 (1), 146–166. Athanasopoulos, G, P Gamakumara, A Panagiotelis, RJ Hyndman & M Affan (2020). “Hierarchi-cal forecasting”. In: Macroeconomic Forecasting in the Era of Big Data . Ed. by P Fuleky. Springer. Chap. 21, pp. 689–719. Athanasopoulos, G, RJ Hyndman, N Kourentzes & F Petropoulos (2017). Forecasting with temporal hierarchies. European Journal of Operational Research 262 (1), 60–74. Babai, MZ, JE Boylan & B Rostami-Tabar (2022). Demand forecasting in supply chains: a review of aggregation and hierarchical approaches. International Journal of Production Research 60 (1), 324–348. Barrow, DK & N Kourentzes (2016). Distributions of forecasting errors of forecast combinations: implications for inventory management. International Journal of Production Economics 177 ,24–33. Ben Taieb, S & B Koo (2019). Regularized regression for hierarchical forecasting without un-biasedness conditions. In: Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining . KDD ’19. Anchorage, AK, USA: Association for Comput-ing Machinery, pp.1337–1347. Ben Taieb, S, JW Taylor & RJ Hyndman (2017). Coherent probabilistic forecasts for hierarchical time series. In: Proceedings of the 34th International Conference on Machine Learning . Ed. by D Precup & YW Teh. Vol. 70. Proceedings of Machine Learning Research. PMLR, pp.3348–3357. Ben Taieb, S, JW Taylor & RJ Hyndman (2021). Hierarchical probabilistic forecasting of electricity demand with smart meter data. Journal of the American Statistical Association 116 (533), 27–43. Ben Taieb, S, J Yu, MN Barreto & R Rajagopal (2017). Regularization in hierarchical time series forecasting with application to electricity smart meter data. 31st AAAI Conference on Artificial Intelligence, AAAI 2017 31 (1), 4474–4480. Bergsteinsson, HG, JK Møller, P Nystrup, ÓP Pálsson, D Guericke & H Madsen (2021). Heat load forecasting using adaptive temporal hierarchies. Applied Energy 292 , 116872. Bikker, R, J Daalmans & N Mushkudiani (2013). Benchmarking large accounting frameworks: a generalized multivariate model. Economic Systems Research 25 (4), 390–408. Bisaglia, L, T Di Fonzo & D Girolimetto (2020). Fully reconciled GDP forecasts from income and expenditure sides. In: Book of Short Papers SIS 2020 . Ed. by A Pollice, N Salvati & F Schirripa Spagnolo. Pearson, pp.951–956. Boylan, JE & MZ Babai (2016). On the performance of overlapping and non-overlapping temporal demand aggregation approaches. International Journal of Production Economics 181 , 136–144.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 45 Forecast reconciliation: A review 
+
+Brégère, M & M Huard (2022). Online hierarchical forecasting for power consumption data. 
+
+International Journal of Forecasting 38 , 339–351. Brewer, K (1973). Some consequences of temporal aggregation and systematic sampling for ARMAand ARMAX models. Journal of Econometrics 1(2), 133–154. Burba, D & T Chen (2021). “A trainable reconciliation method for hierarchical time-series”. 
+
+> https://arxiv.org/abs/2101.01329
+
+.Byron, RP (1978). The estimation of large social account matrices. Journal of the Royal Statistical Society, Series A 141 (3), 359–367. Byron, RP (1979). Corrigenda: The estimation of large social account matrices. Journal of the Royal Statistical Society. Series A 142 (3), 405. Capistrán, C, C Constandse & M Ramos-Francia (2010). Multi-horizon inflation forecasts using disaggregated data. Economic Modelling 27 (3), 666–677. Chase, CW (2013). Using big data to enhance demand-driven forecasting and planning. Journal of Business Forecasting 32 (2), 27–32. Chow, GC & Al Lin (1971). Best linear unbiased interpolation, distribution, and extrapolation of time series by related series. The Review of Economics and Statistics 53 (4), 372–375. Collins, DW (1976). Predicting Earnings with Sub-Entity Data: Some Further Evidence. Journal of Accounting Research 14 (1), 163. Corani, G, D Azzimonti, JPSC Augusto & M Zaffalon (2021). Probabilistic reconciliation of hier-archical forecast via Bayes’ rule. In: Machine Learning and Knowledge Discovery in Databases .Ed. by F Hutter, K Kersting, J Lijffijt & I Valera. Cham: Springer International Publishing, pp.211–226. Corani, G, N Rubattu, D Azzimonti & A Antonucci (2022). “Probabilistic reconciliation of count time series”. https://arxiv.org/abs/2207.09322 .Corona, F, VM Guerrero & J López-Peréz (2021). Optimal Reconciliation of Seasonally Adjusted Disaggregates Taking Into Account the Difference Between Direct and Indirect Adjustment of the Aggregate. Journal of Official Statistics 37 (1), 31–51. Cugliari, J & T van Erven (2015). gtop: Game-Theoretically OPtimal (GTOP) Reconciliation Method .R package v0.2.0. https://CRAN.R-project.org/package=gtop .Dagum, EB & PA Cholette (2006). Benchmarking, Temporal Distribution, and Reconciliation Methods for Time Series . Vol. 186. Lecture Notes in Statistics. Springer New York. Dangerfield, BJ & JS Morris (1992). Top-down or bottom-up: aggregate versus disaggregate extrapolations. International Journal of Forecasting 8(2), 233–241.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 46 Forecast reconciliation: A review 
+
+Das, A, W Kong, B Paria & R Sen (2022). “A deep top-down approach to hierarchically coherent probabilistic forecasting”. https://arxiv.org/abs/2204.10414 .De Alba, E (1993). Constrained forecasting in autoregressive time series models: A Bayesian analysis. International Journal of Forecasting 9(1), 95–108. Di Fonzo, T (1990). The estimation of M disaggregate time series when contemporaneous and temporal aggregates are known. The Review of Economics and Statistics 72 (1), 178–182. Di Fonzo, T & D Girolimetto (2022a). “Enhancements in cross-temporal forecast reconciliation, with an application to solar irradiance forecasts”. https://arxiv.org/abs/2209.07146 .Di Fonzo, T & D Girolimetto (2022b). Forecast combination-based forecast reconciliation: Insights and extensions. International Journal of Forecasting forthcoming .Di Fonzo, T & D Girolimetto (2022c). Fully reconciled probabilistic GDP forecasts from income and expenditure sides. In: Book of Short Papers SIS 2022 . Ed. by A Balzanella, M Bini, C Cavicchia & R Verde. Pearson, pp.1376–1381. Di Fonzo, T & D Girolimetto (2023a). Cross-temporal forecast reconciliation: Optimal combina-tion method and heuristic alternatives. International Journal of Forecasting 39 (1), 39–57. Di Fonzo, T & D Girolimetto (2023b). Spatio-temporal reconciliation of solar forecasts. Solar Energy 251 , 13–29. Di Fonzo, T & M Marini (2011). Simultaneous and two-step reconciliation of systems of time series: methodological and practical issues. Journal of the Royal Statistical Society, Series C 60 (2), 143–164. Dunn, DM, WH Williams & TL Dechaine (1976). Aggregate versus subaggregate models in local area forecasting. Journal of the American Statistical Association 71 (353), 68–71. Eckert, F, RJ Hyndman & A Panagiotelis (2021). Forecasting Swiss exports using Bayesian forecast reconciliation. European Journal of Operational Research 291 (2), 693–710. Edwards, JB & GH Orcutt (1969). Should aggregation prior to estimation be the rule? The Review of Economics and Statistics 51 (4), 409–420. Espasa, A (1994). Comments on ’Time-series analysis, forecasting and econometric modelling: The structural econometric modelling, time-series analysis (SEMTSA) approach’ by A. Zell-ner. Journal of Forecasting 13 (2), 215–233. Feng, C & J Zhang (2020). Assessment of aggregation strategies for machine-learning based short-term load forecasting. Electric Power Systems Research 184 , 106304. Fliedner, EB & VA Mabert (1992). Constrained Forecasting: some implementation guidelines. 
+
+Decision Sciences 23 , 1143–1161.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 47 Forecast reconciliation: A review 
+
+Fliedner, G (1999). An investigation of aggregate variable time series forecast strategies with specific subaggregate time series statistical correlation. Computers and Operations Research 26 ,1133–1149. Fliedner, G (2001). Hierarchical forecasting: issues and use guidelines. Industrial Management & Data Systems 101 (1), 5–12. Gilbert, C, J Browell & D McMillan (2018). A hierarchical approach to probabilistic wind power forecasting. In: 2018 IEEE International Conference on Probabilistic Methods Applied to Power Systems (PMAPS) . ieeexplore.ieee.org, pp.1–6. Girolimetto, D & T Di Fonzo (2022). FoReco: Point Forecast Reconciliation . R package v0.2.5. 
+
+> https://CRAN.R-project.org/package=FoReco
+
+.Gleason, JL (2020). Forecasting hierarchical time series with a regularized embedding space. In: MileTS ’20: 6th KDD Workshop on Mining and Learning from Time Series 2020 . San Diego, California, USA, pp.883–894. Gross, CW & JE Sohl (1990). Disaggregation methods to expedite product line forecasting. Journal of Forecasting 9(3), 233–254. Grunfeld, Y & Z Griliches (1960). Is aggregation necessarily bad? The Review of Economics and Statistics 42 (1), 1–13. Guerrero, VM (1989). Optimal conditional ARIMA forecasts. Journal of forecasting 8(3), 215–229. Han, X, S Dasgupta & J Ghosh (2021). Simultaneously reconciled quantile forecasting of hier-archically related time series. In: Proceedings of the 24th International Conference on Artificial Intelligence and Statistics (AISTATS) . Vol. 130. San Diego, California, USA. Herzen, J, F Lässig, SG Piazzetta, T Neuer, L Tafti, G Raille, TV Pottelbergh, M Pasieka, A Skrodzki, N Huguenin, M Dumonal, J Ko´ scisz, D Bader, F Gusset, M Benheddi, C Williamson, M Kosinski, M Petrik & G Grosch (2022). Darts: User-Friendly Modern Machine Learning for Time Series. Journal of Machine Learning Research 23 (124), 1–6. Herzen, J, F Lässig, SG Piazzetta, T Neuer, L Tafti, G Raille, TV Pottelbergh, M Pasieka, A Skrodzki, N Huguenin, M Dumonal, J Ko´ scisz, D Bader, F Gusset, M Benheddi, C Williamson, M Kosinski, M Petrik & G Grosch (2023). Darts: Time Series Made Easy in Python . Python package v0.23.1. https://unit8co.github.io/darts/ .Hippert, HS, CE Pedreira & RC Souza (2001). Neural networks for short-term load forecasting: A review and evaluation. IEEE Transactions on Power Systems 16 (1), 44–55. Hollyman, R, F Petropoulos & ME Tipping (2021). Understanding forecast reconciliation. Euro-pean Journal of Operational Research 294 (1), 149–160.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 48 Forecast reconciliation: A review 
+
+Hong, T, P Pinson & S Fan (2014). Global energy forecasting competition 2012. International Journal of Forecasting 30 (2), 357–363. Hong, T, J Xie & J Black (2019). Global energy forecasting competition 2017: Hierarchical proba-bilistic load forecasting. International Journal of Forecasting 35 (4), 1389–1399. Hotta, LK & J Cardoso Neto (1993). The effect of aggregation on prediction in autoregressive integrated moving-average models. Journal of Time Series Analysis 14 (3), 261–269. Hotta, LK, PA Morettin & PLV Pereira (1992). The effect of overlapping aggregation on time series models: an application to the unemployment rate in Brazil. Brazilian Review of Econometrics 
+
+12 (2), 223–241. Hubrich, K (2005). Forecasting euro area inflation: Does aggregating forecasts by HICP compo-nent improve forecast accuracy? International Journal of Forecasting 21 (1), 119–136. Hyndman, RJ & G Athanasopoulos (2014). Optimally reconciling forecasts in a hierarchy. Fore-sight: International Journal of Applied Forecasting 35 , 42–48. Hyndman, RJ (1995). Highest-density forecast regions for nonlinear and non-normal time series models. J Forecasting 14 (5), 431–441. Hyndman, RJ, RA Ahmed & HL Shang (2010). hts: Hierarchical Time Series . R package v1.0. 
+
+> https://cran.r-project.org/src/contrib/Archive/hts/hts_1.0.tar.gz
+
+.Hyndman, RJ & G Athanasopoulos (2018). Forecasting: Principles and Practice . 2nd. Melbourne, Australia: OTexts. Hyndman, RJ & G Athanasopoulos (2021). Forecasting: Principles and Practice . 3rd. Melbourne, Australia: OTexts. Hyndman, RJ & N Kourentzes (2018). thief: Temporal HIErarchical Forecasting . R package v0.3. 
+
+> https://CRAN.R-project.org/package=thief
+
+.Hyndman, RJ, A Lee, E Wang & S Wickramasuriya (2021). hts: Hierarchical and Grouped Time Series . R package v6.0.2. https://CRAN.R-project.org/package=hts .Hyndman, RJ, RA Ahmed, G Athanasopoulos & HL Shang (2011). Optimal combination forecasts for hierarchical time series. Computational Statistics & Data Analysis 55 (9), 2579–2589. Hyndman, RJ, AJ Lee & E Wang (2016). Fast computation of reconciled forecasts for hierarchical and grouped time series. Computational Statistics & Data Analysis 97 , 16–32. Ilmakunnas, P (1990). “Aggregation vs disaggregation in forecasting construction activities”. In: 
+
+Disaggregation in econometric modelling . Ed. by T Barker & MH Pesaran. Routledge, pp.73–86. Jeon, J, A Panagiotelis & F Petropoulos (2019). Probabilistic forecast reconciliation with ap-plications to wind power and electric load. European Journal of Operational Research 279 (2), 364–379.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 49 Forecast reconciliation: A review 
+
+Kahn, KB (1998). Revisiting top-down versus bottom-up forecasting. The Journal of Business Forecasting Methods & Systems 17 (2), 14–19. Karmy, JP, J López & S Maldonado (2023). Pooling information across levels in hierarchical time series forecasting via kernel methods. Expert Systems with Applications 213 (PA), 118830. Karmy, JP & S Maldonado (2019). Hierarchical time series forecasting via support vector re-gression in the European travel retail industry. Expert Systems with Applications 137 , 59– 73. Kinney Jr., WR (1971). Predicting earnings: entity versus subentity data. Journal of Accounting Research 9(1), 127–136. Kolassa, S (2016). Evaluating predictive count data distributions in retail sales forecasting. 
+
+International Journal of Forecasting 32 (3), 788–803. Koop, G, S Mcintyre, J Mitchell & A Poon (2022). Using stochastic hierarchical aggregation constraints to nowcast regional economic aggregates. International Journal of Forecasting 
+
+forthcoming .Kourentzes, N (2014). On intermittent demand model optimisation and selection. International Journal of Production Economics 156 , 180–190. Kourentzes, N (2022). Toward a one-number forecast: cross-temporal hierarchies. Foresight: The International Journal of Applied Forecasting (67), 32–38. Kourentzes, N & G Athanasopoulos (2019). Cross-temporal coherent forecasts for Australian tourism. Annals of Tourism Research 75 , 393–409. Kourentzes, N & G Athanasopoulos (2021). Elucidate structure in intermittent demand series. 
+
+European Journal of Operational Research 288 (1), 141–152. Kourentzes, N & F Petropoulos (2016). Forecasting with multivariate temporal aggregation: The case of promotional modelling. International Journal of Production Economics 181 , 145–153. Kourentzes, N, F Petropoulos & JR Trapero (2014). Improving forecasting by estimating time series structural components across multiple frequencies. International Journal of Forecasting 
+
+30 (2), 291–302. Kourentzes, N, B Rostami-Tabar & DK Barrow (2017). Demand forecasting by temporal ag-gregation: Using optimal or multiple aggregation levels? Journal of Business Research 78 ,1–9. Kourentzes, N, A Saayman, P Jean-Pierre, D Provenzano, M Sahli, N Seetaram & S Volo (2021). Visitor arrivals forecasts amid COVID-19: A perspective from the Africa team. Annals of Tourism Research 88 , 103197.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 50 Forecast reconciliation: A review 
+
+Kremer, M, E Siemsen & DJ Thomas (2016). The sum and its parts: judgmental hierarchical forecasting. Management Science 62 (9), 2745–2764. Li, C & A Lim (2018). A greedy aggregation–decomposition method for intermittent demand forecasting in fashion retailing. European Journal of Operational Research 269 (3), 860–869. Li, H & RJ Hyndman (2021). Assessing mortality inequality in the U.S.: What can be said about the future? Insurance: Mathematics and Economics 99 , 152–162. Li, H, H Li, Y Lu & A Panagiotelis (2019). A forecast reconciliation approach to cause-of-death mortality modeling. Insurance: Mathematics and Economics 86 , 122–133. Li, H & Q Tang (2019). Analyzing mortality bond indexes via hierarchical forecast reconciliation. 
+
+ASTIN Bulletin 49 (3), 823–846. Lila, MF, E Meira & FL Cyrino Oliveira (2022). Forecasting unemployment in Brazil: A robust reconciliation approach using hierarchical data. Socio-Economic Planning Sciences 82 (PB), 101298. Luna, I & R Ballini (2011). Top-down strategies based on adaptive fuzzy rule-based systems for daily time series forecasting. International Journal of Forecasting 27 (3), 708–724. Lütkepohl, H (1984a). Forecasting contemporaneously aggregated vector. Journal of Business & Economic Statistics 2, 201–214. Lütkepohl, H (1984b). Linear transformations of vector ARMA processes. Journal of Econometrics 
+
+26 , 283–293. Lütkepohl, H (1986). Forecasting temporally aggregated vector ARMA processes. Journal of Forecasting 5, 85–95. Makridakis, S, E Spiliotis & V Assimakopoulos (2022). The M5 accuracy competition: Results, findings and conclusions. 38 (4), 1346–1364. Mircetic, D, B Rostami-Tabar, S Nikolicic & M Maslaric (2022). Forecasting hierarchical time series in supply chains: an empirical investigation. International Journal of Production Research 
+
+60 (8), 2514–2533. Mishchenko, K, M Montgomery & F Vaggi (2019). A self-supervised approach to hierarchical forecasting with applications to groupwise synthetic controls. arXiv preprint arXiv:1906.10586 .Mohammadipour, M & JE Boylan (2012). Forecast horizon aggregation in integer autoregressive moving average (INARMA) models. Omega 40 (6), 703–712. Moon, S, C Hicks & A Simpson (2012). The development of a hierarchical forecasting method for predicting spare parts demand in the South Korean Navy—A case study. International Journal of Production Economics 140 (2), 794–802.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 51 Forecast reconciliation: A review 
+
+Nijman, TE & FC Palm (1990). Predictive accuracy gain from disaggregate sampling in ARIMA models. Journal of Business & Economic Statistics 8(4), 405–415. Nikolopoulos, K, AA Syntetos, JE Boylan, F Petropoulos & V Assimakopoulos (2011). An aggregate–disaggregate intermittent demand approach (ADIDA) to forecasting: an empirical proposition and analysis. Journal of the Operational Research Society 62 (3), 544–554. Novak, J, S McGarvie & BE Garcia (2017). “A Bayesian model for forecasting hierarchically structured time series”. https://arxiv.org/abs/1711.04738 .Nystrup, P, E Lindström, JK Møller & H Madsen (2021). Dimensionality reduction in forecasting with temporal hierarchies. International Journal of Forecasting 37 (3), 1127–1146. Nystrup, P, E Lindström, P Pinson & H Madsen (2020). Temporal hierarchies with autocorrela-tion for load forecasting. European Journal of Operational Research 280 (3), 876–888. O’Hara-Wild, M, RJ Hyndman & E Wang (2023). fabletools: Core Tools for Packages in the ’fable’ Framework . R package v0.3.2. https://CRAN.R-project.org/package=fabletools .Olivares, KG, ON Meetei, R Ma, R Reddy, M Cao & L Dicker (2022a). “Probabilistic hierarchical forecasting with deep Poisson mixtures”. https://arxiv.org/abs/2110.13179v6 .Olivares, KG, F Garza, D Luo, C Challú, M Mergenthaler, SB Taieb, SL Wickramasuriya & A Dubrawski (2022b). HierarchicalForecast: Probabilistic hierarchical forecasting with statis-tical and econometric methods . Python package v0.2.1. https : / / nixtla . github . io / hierarchicalforecast .Olivares, KG, F Garza, D Luo, C Challú, M Mergenthaler, SB Taieb, SL Wickramasuriya & A Dubrawski (2023). “HierarchicalForecast: A Reference Framework for Hierarchical Forecast-ing in Python”. https://arxiv.org/abs/2207.03517 .Oliveira, JM & P Ramos (2019). Assessing the performance of hierarchical forecasting methods on the retail sector. Entropy 21 (4), 436. Orcutt, GH, HW Watts & JB Edwards (1968). Data aggregation and information loss. The American Economic Review 58 (4), 773–787. Panagiotelis, A (2020). ProbReco: Score Optimal Probabilistic Forecast Reconciliation . R package version 0.1.0.1. https://CRAN.R-project.org/package=ProbReco .Panagiotelis, A, G Athanasopoulos, P Gamakumara & RJ Hyndman (2021). Forecast reconcilia-tion: A geometric view with new insights on bias correction. International Journal of Forecasting 
+
+37 (1), 343–359. Panagiotelis, A, P Gamakumara, G Athanasopoulos & RJ Hyndman (2023). Probabilistic forecast reconciliation: properties, evaluation and score optimisation. European Journal of Operational Research 306 (2), 693–706.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 52 Forecast reconciliation: A review 
+
+Panamtash, H & Q Zhou (2018). Coherent probabilistic solar power forecasting. In: 2018 IEEE International Conference on Probabilistic Methods Applied to Power Systems (PMAPS) , pp.1–6. Paria, B, R Sen, A Ahmed & A Das (2021). “Hierarchically regularized deep forecasting”. https: //arxiv.org/abs/2106.07630 .Park, M & M Nassar (2014). Variational Bayesian inference for forecasting hierarchical time series. In: International Conference on Machine Learning, Workshop on divergence methods for probabilistic inference . Bejing, China. Pennings, CL & J van Dalen (2017). Integrated hierarchical forecasting. European Journal of Operational Research 263 (2), 412–418. Petropoulos, F & N Kourentzes (2015). Forecast combinations for intermittent demand. Journal of the Operational Research Society 66 (6), 914–924. Petropoulos, F, N Kourentzes & K Nikolopoulos (2016). Another look at estimators for intermit-tent demand. International Journal of Production Economics 181 , 154–161. Petropoulos, F, X Wang & SM Disney (2019). The inventory performance of forecasting methods: Evidence from the M3 competition data. International Journal of Forecasting 35 (1), 251–265. Pritularga, KF, I Svetunkov & N Kourentzes (2021). Stochastic coherency in forecast reconcilia-tion. International Journal of Production Economics 240 , 108221. Punia, S, SP Singh & JK Madaan (2020). A cross-temporal hierarchical framework and deep learning for supply chain forecasting. Computers & Industrial Engineering 149 , 106796. Qiao, M & KW Huang (2018). Hierarchical accounting variables forecasting by deep learning methods. In: ICIS 2018 Proceedings 7 . International Conference on Information Systems. Quenneville, B & S Fortier (2012). “Restoring accounting constraints in time series: methods and software for a statistical agency”. In: Economic Time Series: Modeling and Seasonality . Ed. by WR Bell, SH Holan & TS McElroy. Taylor & Francis, pp.231–253. Rangapuram, SS, LD Werner, K Benidis, P Mercado, J Gasthaus & T Januschowski (2021). End-to-end learning of coherent probabilistic forecasts for hierarchical time series. In: Proceedings of the 38th International Conference on Machine Learning, PMLR 139 , pp.8832–8843. Roach, C (2019). Reconciled boosted models for GEFCom2017 hierarchical probabilistic load forecasting. International Journal of Forecasting 35 (4), 1439–1450. Romagnoli, JA & MC Sanchez (2000). Data Processing and Reconciliation for Chemical Process Operations . Academic Press. Roque, L, L Torgo & C Soares (2021). Automatic hierarchical time-series forecasting using Gaussian processes. Engineering Proceedings 5(1), 49.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 53 Forecast reconciliation: A review 
+
+Rosas, AL & VM Guerrero (1994). Restricted forecasts using exponential smoothing techniques. 
+
+International Journal of Forecasting 10 (4), 515–527. Rossana, R & J Seater (1995). Temporal aggregation and economic times series. Journal of Business & Economic Statistics 13 (4), 441–451. Rossi, N (1982). A note on the estimation of disaggregate time series when the aggregate is known. The Review of Economics and Statistics 64 (4), 695–696. Rostami-Tabar, B, MZ Babai, M Ali & JE Boylan (2019). The impact of temporal aggregation on supply chains with ARMA (1, 1) demand processes. European Journal of Operational Research 
+
+273 (3), 920–932. Rostami-Tabar, B, MZ Babai, A Syntetos & Y Ducq (2013). Demand forecasting by temporal aggregation. Naval Research Logistics 60 (6), 479–498. Rostami-Tabar, B, MZ Babai, Y Ducq & A Syntetos (2015). Non-stationary demand forecasting by cross-sectional aggregation. International Journal of Production Economics 170 , 297–309. Rostami-Tabar, B, MZ Babai, A Syntetos & Y Ducq (2014). A note on the forecast performance of temporal aggregation. Naval Research Logistics 61 (7), 489–500. Saoud, P, N Kourentzes & JE Boylan (2022). Approximations for the lead time variance: A forecasting and inventory evaluation. Omega 110 , 102614. Sbrana, G & A Silvestrini (2013). Forecasting aggregate demand: Analytical comparison of top-down and bottom-up approaches in a multivariate exponential smoothing framework. 
+
+International Journal of Production Economics 146 (1), 185–198. Schwarzkopf, AB, RJ Tersine & JS Morris (1988). Top-down versus bottom-up forecasting strategies. International Journal of Production Research 26 (11), 1833–1843. Seaman, B & J Bowman (2022). Applicability of the M5 to forecasting at Walmart. International Journal of Forecasting 38 (4), 1468–1472. Shang, HL & S Haberman (2017). Grouped multivariate and functional time series forecasting: An application to annuity pricing. Insurance: Mathematics and Economics 75 , 166–179. Shang, HL & RJ Hyndman (2017). Grouped functional time series forecasting: an application to age-specific mortality rates. Journal of Computational and Graphical Statistics 26 (2), 330–343. Shiratori, T, K Kobayashi & Y Takano (2020). Prediction of hierarchical time series using struc-tured regularization and its application to artificial neural networks. PLOS ONE 15 (11), e0242099. Shlifer, E & RW Wolff (1979). Aggregation and proration in forecasting. Management Science 25 (6), 594–603.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 54 Forecast reconciliation: A review 
+
+Silvestrini, A & D Veredas (2008). Temporal aggregation of univariate and multivariate time series models: A survey. Journal of Economic Surveys 22 (3), 458–497. Simon, D (2006). Optimal state estimation: Kalman, H ∞, and nonlinear approaches . Hoboken, NJ: John Wiley and Sons. Simon, D (2010). Kalman filtering with state constraints: a survey of linear and nonlinear algorithms. IET Control Theory & Applications 4(8), 1303–1318. Simon, D & TL Chia (2002). Kalman filtering with state equality constraints. IEEE transactions on Aerospace and Electronic Systems 38 (1), 128–136. Spavound, S & N Kourentzes (2022). Making forecasts more trustworthy. Foresight: The Interna-tional Journal of Applied Forecasting (66), 21–25. Spiliotis, E, M Abolghasemi, RJ Hyndman, F Petropoulos & V Assimakopoulos (2021). Hierar-chical forecast reconciliation with machine learning. Applied Soft Computing 112 , 107756. Spiliotis, E, F Petropoulos, N Kourentzes & V Assimakopoulos (2020). Cross-temporal aggrega-tion: Improving the forecast accuracy of hierarchical electricity consumption. Applied Energy 
+
+261 , 114339. Spithourakis, GP, F Petropoulos, MZ Babai, K Nikolopoulos & V Assimakopoulos (2011). Im-proving the performance of popular supply chain forecasting techniques. Supply Chain Forum: An International Journal 12 (4), 16–25. Spithourakis, GP, F Petropoulos, K Nikolopoulos & V Assimakopoulos (2014). A systemic view of the ADIDA framework. IMA Journal of Management Mathematics 25 (2), 125–137. Sprangers, O, S Schelter & M de Rijke (2021). Probabilistic Gradient Boosting Machines for Large-Scale Probabilistic Regression. In: Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining . KDD ’21. Virtual Event, Singapore: Association for Computing Machinery, pp.1510–1520. Stone, R (1961). Input-Output and National Accounts . Paris: O.E.E.C. Stone, R, DG Champernowne & JE Meade (1942). The precision of national income estimates. 
+
+Review of Economic Studies 9(2), 111–125. Stram, DO & WWS Wei (1986). Temporal Aggregation in the Arima Process. Journal of Time Series Analysis 7(4), 279–292. Strijbosch, LWG, RMJ Heuts & JJA Moors (2008). Hierarchical estimation as a basis for hierarchi-cal forecasting. IMA Journal of Management Mathematics 19 (2), 193–205. Theodosiou, F & N Kourentzes (2020). Estimators of Prediction Intervals for Statistical and Machine Learning Forecasts. In: 2020 INFORMS ANNUAL MEETING, Location: Virtual . 
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 55 Forecast reconciliation: A review 
+
+Theodosiou, F & N Kourentzes (2021). Forecasting with deep temporal hierarchies. Available at SSRN 3918315 .Tiao, GC (1972). Asymptotic behaviour of temporal aggregates of time series. Biometrika 59 (3), 525–531. van Erven, T & J Cugliari (2015). “Game-theoretically optimal reconciliation of contemporaneous hierarchical time series forecasts”. In: Modeling and Stochastic Learning for Forecasting in High Dimension . Ed. by A Antoniadis, JM Poggi & X Brossat. Cham: Springer International Publishing, pp.297–317. Villegas, MA & DJ Pedregal (2018). Supply chain decision support systems based on a novel hierarchical forecasting approach. Decision Support Systems 114 , 29–36. Wan, SK, SH Wang & CK Woo (2013). Aggregate vs. disaggregate forecast: Case of Hong Kong. 
+
+Annals of Tourism Research 42 , 434–438. Wang, S, F Zhou, Y Sun, L Ma, J Zhang, Y Zheng, L Lei & Y Hu (2022). End-to-End Modeling Hierarchical Time Series Using Autoregressive Transformer and Conditional Normalizing Flow based Reconciliation. arXiv preprint arXiv:2212.13706 .Wanke, P & E Saliby (2007). Top-down or bottom-up forecasting? Pesquisa Operacional 27 , 591– 605. Wei, WWS (1979). “Some consequences of temporal aggregation in seasonal time series models”. In: Seasonal Analysis of Economic Time Series . Ed. by A Zellner. NBER, pp.433–448. Weiss, C (2018). “Essays in hierarchical time series forecasting and forecast combination”. PhD thesis. University of Cambridge. Wickramasuriya, SL (2021a). “Probabilistic forecast reconciliation under the Gaussian frame-work”. https://arxiv.org/abs/2103.11128 .Wickramasuriya, SL (2021b). “Properties of point forecast reconciliation approaches”. https: //arxiv.org/abs/2103.11129 .Wickramasuriya, SL, G Athanasopoulos & RJ Hyndman (2019). Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization. Journal of the American Statistical Association 114 (526), 804–819. Wickramasuriya, SL, BA Turlach & RJ Hyndman (2020). Optimal non-negative forecast reconcili-ation. Statistics and Computing 30 (5), 1167–1182. Widiarta, H, S Viswanathan & R Piplani (2008). Forecasting item-level demands: an analytical evaluation of top-down versus bottom-up forecasting in a production-planning framework. 
+
+IMA Journal of Management Mathematics 19 (2), 207–218.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 56 Forecast reconciliation: A review 
+
+Williams, BD & MA Waller (2011). Top-down versus bottom-up demand forecasts: The value of shared point-of-sale data in the retail supply chain. Journal of Business Logistics 32 (1), 17–26. Yagli, GM, D Yang & D Srinivasan (2019). Reconciling solar forecasts: Sequential reconciliation. 
+
+Solar Energy 179 , 391–397. Yagli, GM, D Yang & D Srinivasan (2020). Reconciling solar forecasts: Probabilistic forecasting with homoscedastic Gaussian errors on a geographical hierarchy. Solar Energy 210 , 59–67. Yang, D, GS Goh, S Jiang & AN Zhang (2016). Forecast UPC-level FMCG demand, Part III: Grouped reconciliation. In: Proceedings - 2016 IEEE International Conference on Big Data . Santa Clara, CA, USA: IEEE, pp.3813–3819. Yang, D, H Quan, VR Disfani & L Liu (2017a). Reconciling solar forecasts: Geographical hierarchy. 
+
+Solar Energy 146 , 276–286. Yang, D, H Quan, VR Disfani & CD Rodríguez-Gallegos (2017b). Reconciling solar forecasts: Temporal hierarchy. Solar Energy 158 , 332–346. Zambon, L, D Azzimonti & G Corani (2022). “Efficient probabilistic reconciliation of forecasts for real-valued and count time series”. https://arxiv.org/abs/2210.02286 .Zellner, A & J Tobias (2000). A note on aggregation, disaggregation and forecasting performance. 
+
+Journal of Forecasting 19 (5), 457–469. Zhang, B, Y Kang & F Li (2022). A python package for hierarchical forecasting . Python package v0.2.0. 
+
+> https://angelpone.github.io/pyhts/
+
+.Zhang, B, Y Kang, A Panagiotelis & F Li (2022). Optimal reconciliation with immutable forecasts. 
+
+European Journal of Operational Research forthcoming .Zhao, T, J Wang & Y Zhang (2019). Day-ahead hierarchical probabilistic load forecasting with linear quantile regression and empirical copulas. IEEE Access 7, 80969–80979. Zotteri, G & M Kalchschmidt (2007). A model for selecting the appropriate level of aggregation in forecasting processes. International Journal of Production Economics 108 (1-2), 74–83. Zotteri, G, M Kalchschmidt & F Caniato (2005). The impact of aggregation level on forecasting performance. International Journal of Production Economics 93-94 , 479–491.  
+
+> Athanasopoulos, Hyndman, Kourentzes, Panagiotelis: 27 April 2023
+
+# 57

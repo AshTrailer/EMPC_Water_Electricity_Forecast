@@ -1,0 +1,106 @@
+file            C:\Ash\Projects\EMPC_Water_Electricity_Forecast\AEMO_Data\predispatch_120d_20260201_20260601\predispatch_30min_120d_VIC1.csv
+header          effective_time,region_id,target_datetime,period_id,rrp,eep,total_demand,run_no,intervention,source_file
+data rows       319680
+distinct runs   5760
+run window      2026-02-01 00:00:00 .. 2026-05-31 23:30:00
+
+horizon hours   min 15.50  q05 16.50  q25 21.38  median 27.25  q75 33.13  q95 38.00  max 39.00
+periods/run     min 32  median 55.5  max 79
+regions/run     1
+
+history of horizon end clock time:
+   04:00:00  5760 runs
+
+history of pidMax:
+   pidMax=32  120 runs  (horizon 15.5 h)
+   pidMax=33  120 runs  (horizon 16.0 h)
+   pidMax=34  120 runs  (horizon 16.5 h)
+   pidMax=35  120 runs  (horizon 17.0 h)
+   pidMax=36  120 runs  (horizon 17.5 h)
+   pidMax=37  120 runs  (horizon 18.0 h)
+   pidMax=38  120 runs  (horizon 18.5 h)
+   pidMax=39  120 runs  (horizon 19.0 h)
+   pidMax=40  120 runs  (horizon 19.5 h)
+   pidMax=41  120 runs  (horizon 20.0 h)
+   pidMax=42  120 runs  (horizon 20.5 h)
+   pidMax=43  120 runs  (horizon 21.0 h)
+   pidMax=44  120 runs  (horizon 21.5 h)
+   pidMax=45  120 runs  (horizon 22.0 h)
+   pidMax=46  120 runs  (horizon 22.5 h)
+   pidMax=47  120 runs  (horizon 23.0 h)
+   pidMax=48  120 runs  (horizon 23.5 h)
+   pidMax=49  120 runs  (horizon 24.0 h)
+   pidMax=50  120 runs  (horizon 24.5 h)
+   pidMax=51  120 runs  (horizon 25.0 h)
+   pidMax=52  120 runs  (horizon 25.5 h)
+   pidMax=53  120 runs  (horizon 26.0 h)
+   pidMax=54  120 runs  (horizon 26.5 h)
+   pidMax=55  120 runs  (horizon 27.0 h)
+   pidMax=56  120 runs  (horizon 27.5 h)
+   pidMax=57  120 runs  (horizon 28.0 h)
+   pidMax=58  120 runs  (horizon 28.5 h)
+   pidMax=59  120 runs  (horizon 29.0 h)
+   pidMax=60  120 runs  (horizon 29.5 h)
+   pidMax=61  120 runs  (horizon 30.0 h)
+   pidMax=62  120 runs  (horizon 30.5 h)
+   pidMax=63  120 runs  (horizon 31.0 h)
+   pidMax=64  120 runs  (horizon 31.5 h)
+   pidMax=65  120 runs  (horizon 32.0 h)
+   pidMax=66  120 runs  (horizon 32.5 h)
+   pidMax=67  120 runs  (horizon 33.0 h)
+   pidMax=68  120 runs  (horizon 33.5 h)
+   pidMax=69  120 runs  (horizon 34.0 h)
+   pidMax=70  120 runs  (horizon 34.5 h)
+   pidMax=71  120 runs  (horizon 35.0 h)
+   pidMax=72  120 runs  (horizon 35.5 h)
+   pidMax=73  120 runs  (horizon 36.0 h)
+   pidMax=74  120 runs  (horizon 36.5 h)
+   pidMax=75  120 runs  (horizon 37.0 h)
+   pidMax=76  120 runs  (horizon 37.5 h)
+   pidMax=77  120 runs  (horizon 38.0 h)
+   pidMax=78  120 runs  (horizon 38.5 h)
+   pidMax=79  120 runs  (horizon 39.0 h)
+
+first 8 runs and last 8 runs:
+   2026-02-01 00:00:00  seqno=undefined runno=1  npid=57 pid 1..57  horizon 28.00h  end 2026-02-02 04:00:00
+   2026-02-01 00:30:00  seqno=undefined runno=1  npid=56 pid 1..56  horizon 27.50h  end 2026-02-02 04:00:00
+   2026-02-01 01:00:00  seqno=undefined runno=1  npid=55 pid 1..55  horizon 27.00h  end 2026-02-02 04:00:00
+   2026-02-01 01:30:00  seqno=undefined runno=1  npid=54 pid 1..54  horizon 26.50h  end 2026-02-02 04:00:00
+   2026-02-01 02:00:00  seqno=undefined runno=1  npid=53 pid 1..53  horizon 26.00h  end 2026-02-02 04:00:00
+   2026-02-01 02:30:00  seqno=undefined runno=1  npid=52 pid 1..52  horizon 25.50h  end 2026-02-02 04:00:00
+   2026-02-01 03:00:00  seqno=undefined runno=1  npid=51 pid 1..51  horizon 25.00h  end 2026-02-02 04:00:00
+   2026-02-01 03:30:00  seqno=undefined runno=1  npid=50 pid 1..50  horizon 24.50h  end 2026-02-02 04:00:00
+   2026-05-31 20:00:00  seqno=undefined runno=1  npid=65 pid 1..65  horizon 32.00h  end 2026-06-02 04:00:00
+   2026-05-31 20:30:00  seqno=undefined runno=1  npid=64 pid 1..64  horizon 31.50h  end 2026-06-02 04:00:00
+   2026-05-31 21:00:00  seqno=undefined runno=1  npid=63 pid 1..63  horizon 31.00h  end 2026-06-02 04:00:00
+   2026-05-31 21:30:00  seqno=undefined runno=1  npid=62 pid 1..62  horizon 30.50h  end 2026-06-02 04:00:00
+   2026-05-31 22:00:00  seqno=undefined runno=1  npid=61 pid 1..61  horizon 30.00h  end 2026-06-02 04:00:00
+   2026-05-31 22:30:00  seqno=undefined runno=1  npid=60 pid 1..60  horizon 29.50h  end 2026-06-02 04:00:00
+   2026-05-31 23:00:00  seqno=undefined runno=1  npid=59 pid 1..59  horizon 29.00h  end 2026-06-02 04:00:00
+   2026-05-31 23:30:00  seqno=undefined runno=1  npid=58 pid 1..58  horizon 28.50h  end 2026-06-02 04:00:00
+
+runs grouped by effective hour-of-day (NEM clock): mean horizon
+   00:00  n= 240  mean 27.75h  min 27.50  max 28.00
+   01:00  n= 240  mean 26.75h  min 26.50  max 27.00
+   02:00  n= 240  mean 25.75h  min 25.50  max 26.00
+   03:00  n= 240  mean 24.75h  min 24.50  max 25.00
+   04:00  n= 240  mean 23.75h  min 23.50  max 24.00
+   05:00  n= 240  mean 22.75h  min 22.50  max 23.00
+   06:00  n= 240  mean 21.75h  min 21.50  max 22.00
+   07:00  n= 240  mean 20.75h  min 20.50  max 21.00
+   08:00  n= 240  mean 19.75h  min 19.50  max 20.00
+   09:00  n= 240  mean 18.75h  min 18.50  max 19.00
+   10:00  n= 240  mean 17.75h  min 17.50  max 18.00
+   11:00  n= 240  mean 16.75h  min 16.50  max 17.00
+   12:00  n= 240  mean 15.75h  min 15.50  max 16.00
+   13:00  n= 240  mean 38.75h  min 38.50  max 39.00
+   14:00  n= 240  mean 37.75h  min 37.50  max 38.00
+   15:00  n= 240  mean 36.75h  min 36.50  max 37.00
+   16:00  n= 240  mean 35.75h  min 35.50  max 36.00
+   17:00  n= 240  mean 34.75h  min 34.50  max 35.00
+   18:00  n= 240  mean 33.75h  min 33.50  max 34.00
+   19:00  n= 240  mean 32.75h  min 32.50  max 33.00
+   20:00  n= 240  mean 31.75h  min 31.50  max 32.00
+   21:00  n= 240  mean 30.75h  min 30.50  max 31.00
+   22:00  n= 240  mean 29.75h  min 29.50  max 30.00
+   23:00  n= 240  mean 28.75h  min 28.50  max 29.00

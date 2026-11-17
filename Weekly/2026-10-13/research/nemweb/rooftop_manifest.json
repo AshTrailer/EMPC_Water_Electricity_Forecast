@@ -1,0 +1,62 @@
+[
+ {
+  "base": "CURRENT",
+  "sub": "ROOFTOP_PV/FORECAST",
+  "label": "rooftop_forecast_current",
+  "status": 200,
+  "zips": 672,
+  "newest": "PUBLIC_ROOFTOP_PV_FORECAST_20261013013000_0000000542575122.zip",
+  "bytes": 26424,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "sub": "ROOFTOP_PV/FORECAST_AREA",
+  "label": "rooftop_forecast_area_current",
+  "status": 200,
+  "zips": 672,
+  "newest": "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261013013000_0000000542575123.zip",
+  "bytes": 40276,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "sub": "ROOFTOP_PV/ACTUAL",
+  "label": "rooftop_actual_current",
+  "status": 200,
+  "zips": 1344,
+  "newest": "PUBLIC_ROOFTOP_PV_ACTUAL_SATELLITE_20261013013000_0000000542575126.zip",
+  "bytes": 447,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "sub": "ROOFTOP_PV/ACTUAL_AREA",
+  "label": "rooftop_actual_area_current",
+  "status": 200,
+  "zips": 1344,
+  "newest": "PUBLIC_ROOFTOP_PV_ACTUAL_SATELLITE_AREA_20261013013000_0000000542575127.zip",
+  "bytes": 482,
+  "state": "downloaded"
+ },
+ {
+  "base": "ARCHIVE",
+  "sub": "ROOFTOP_PV/FORECAST",
+  "label": "rooftop_forecast_archive",
+  "status": 200,
+  "zips": 53,
+  "newest": "PUBLIC_ROOFTOP_PV_FORECAST_20260924.zip",
+  "bytes": 7836694,
+  "state": "downloaded"
+ },
+ {
+  "base": "ARCHIVE",
+  "sub": "ROOFTOP_PV/FORECAST_AREA",
+  "label": "rooftop_forecast_area_archive",
+  "status": 200,
+  "zips": 54,
+  "newest": "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929.zip",
+  "bytes": 12233607,
+  "state": "downloaded"
+ }
+]

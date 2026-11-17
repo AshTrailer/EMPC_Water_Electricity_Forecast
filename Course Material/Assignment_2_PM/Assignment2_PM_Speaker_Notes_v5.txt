@@ -1,0 +1,33 @@
+ASSIGNMENT 2 PM RETROSPECTIVE — SPEAKER NOTES v5
+Approximate delivery time: about 4.0 minutes at 125 words per minute; allow for pauses.
+
+SLIDE 1
+
+Good morning, I’m Ash, project manager. We are testing whether a water utility can spend less on electricity by changing when it pumps—without risking water supply.
+
+Utilities must keep tanks within safe levels. Electricity prices change every five minutes. If we estimate cheaper periods, a controller can schedule pumping around them while respecting water-level limits.
+
+We built two tools: one forecasts upcoming prices; the other turns those forecasts into a pump schedule. Deliverables have not changed. The method did: no single forecast model performed consistently across all prediction lengths, so I continued developing forecasts while the controller lead combined model outputs and tested them in the pumping system.
+
+We score forecasts against actual prices. For pumping cost, we compare our schedule with one based on the official forecast published by Australia’s electricity market operator, AEMO. We also compare with an ideal case that knows future prices exactly; it is a reference point, not a real option.
+
+At the 16 October snapshot, all four milestones due had been met, and the forecast was linked to the controller on 24 September. But some work packages were late.
+
+In a 60-day simulation from 17 August to 15 October, pumping cost was about 6% lower than using the official forecast and 6% higher than the ideal case. Daily results vary, so this is early evidence—not a proven saving. The next checkpoint is 13 November.
+
+SLIDE 2
+
+Three causes explain the delays.
+
+First, we underestimated data-alignment work. The operator publishes three forecasts with different update intervals, look-ahead periods and formats. Aligning them to the same actual five-minute prices took about a month longer than planned. The products were available; we underestimated the work to make them comparable.
+
+Second, our test plan was too narrow. We first looked at either prediction distance or time of day, not both. Accuracy changed across both, so we added a two-dimensional error grid. Forecast testing ran about five weeks late; controller work fell about four weeks behind because it depended on those results. No single model worked consistently across all forecast distances, so I continued forecast development while the controller lead combined outputs and tested them. Deliverables stayed the same; implementation changed.
+
+Third, our own code assigned wrong timestamps, while a parsing fault dropped most records. We monitored blocked tasks but not data quality. Repair and rebuilding the data took one week.
+
+We now check timestamps and completeness before reporting results, test the full path from forecast to pump schedule, and record decisions and blockers at each weekly review while keeping the shared schedule current.
+
+All milestone deadlines due by 16 October were met, but the schedule buffer is mostly gone. Before the 13 November review, we need to establish whether the apparent cost advantage holds across days. Until then, we call the 6% result preliminary, not guaranteed.
+
+Our lessons: validate our own data before blaming the source, and agree how success will be measured before choosing a model. Both are now built into team checks.
+

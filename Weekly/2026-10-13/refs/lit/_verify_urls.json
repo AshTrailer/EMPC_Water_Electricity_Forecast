@@ -1,0 +1,572 @@
+[
+ {
+  "url": "https://www.nber.org/papers/w10483",
+  "status": 200,
+  "ok": true,
+  "final": "https://www.nber.org/papers/w10483",
+  "type": "text/html",
+  "bytes": 89176,
+  "ms": 651,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1093/rfs/hhm014",
+  "status": 403,
+  "ok": false,
+  "final": "https://academic.oup.com/rfs/article-lookup/doi/10.1093/rfs/hhm014",
+  "type": "text/html",
+  "bytes": 5860,
+  "ms": 517,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1093/rfs/hhae044",
+  "status": 403,
+  "ok": false,
+  "final": "https://academic.oup.com/rfs/article/37/11/3490/7749383",
+  "type": "text/html",
+  "bytes": 5805,
+  "ms": 283,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.3386/w27410",
+  "status": 200,
+  "ok": true,
+  "final": "https://www.nber.org/system/files/working_papers/w27410/w27410.pdf",
+  "type": "application/pdf",
+  "bytes": 878404,
+  "ms": 3143,
+  "looksHtml": false
+ },
+ {
+  "url": "https://doi.org/10.1016/j.jfineco.2021.09.013",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0304405X21004013",
+  "type": "text/html",
+  "bytes": 2661,
+  "ms": 1117,
+  "looksHtml": true
+ },
+ {
+  "url": "https://www.nber.org/papers/w2511",
+  "status": 200,
+  "ok": true,
+  "final": "https://www.nber.org/papers/w2511",
+  "type": "text/html",
+  "bytes": 88744,
+  "ms": 441,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.jeconom.2013.04.017",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0304407613000948",
+  "type": "text/html",
+  "bytes": 2643,
+  "ms": 492,
+  "looksHtml": true
+ },
+ {
+  "url": "https://escholarship.org/content/qt1st3n7z7/qt1st3n7z7.pdf",
+  "status": 200,
+  "ok": true,
+  "final": "https://escholarship.org/content/qt1st3n7z7/qt1st3n7z7.pdf",
+  "type": "application/pdf",
+  "bytes": 2029653,
+  "ms": 1538,
+  "looksHtml": false
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ijforecast.2015.12.005",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0169207016000327",
+  "type": "text/html",
+  "bytes": 2681,
+  "ms": 660,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ijforecast.2018.09.006",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0169207018301596",
+  "type": "text/html",
+  "bytes": 2725,
+  "ms": 492,
+  "looksHtml": true
+ },
+ {
+  "url": "https://economics.sas.upenn.edu/system/files/working-papers/18-014%20PIER%20Paper%20Submission.pdf",
+  "status": 200,
+  "ok": true,
+  "final": "https://economics.sas.upenn.edu/system/files/working-papers/18-014%20PIER%20Paper%20Submission.pdf",
+  "type": "application/pdf",
+  "bytes": 506844,
+  "ms": 694,
+  "looksHtml": false
+ },
+ {
+  "url": "https://pure.au.dk/ws/files/45366192/rp12_18.pdf",
+  "status": 200,
+  "ok": true,
+  "final": "https://pure.au.dk/ws/files/45366192/rp12_18.pdf",
+  "type": "application/pdf",
+  "bytes": 626401,
+  "ms": 1368,
+  "looksHtml": false
+ },
+ {
+  "url": "https://doi.org/10.1108/s0731-9053(2012)0000030011",
+  "status": 403,
+  "ok": false,
+  "final": "https://www.emerald.com/books/edited-volume/16004/chapter/87669855",
+  "type": "text/html",
+  "bytes": 5862,
+  "ms": 297,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.jeconom.2024.105722",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S030440762400068X",
+  "type": "text/html",
+  "bytes": 2674,
+  "ms": 484,
+  "looksHtml": true
+ },
+ {
+  "url": "https://arxiv.org/abs/2104.00655",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/abs/2104.00655",
+  "type": "text/html",
+  "bytes": 40340,
+  "ms": 64,
+  "looksHtml": true
+ },
+ {
+  "url": "https://www.nber.org/papers/w8160",
+  "status": 200,
+  "ok": true,
+  "final": "https://www.nber.org/papers/w8160",
+  "type": "text/html",
+  "bytes": 90077,
+  "ms": 726,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1093/jjfinec/nbp001",
+  "status": 403,
+  "ok": false,
+  "final": "https://academic.oup.com/jfec/article-lookup/doi/10.1093/jjfinec/nbp001",
+  "type": "text/html",
+  "bytes": 5896,
+  "ms": 282,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1080/07474930600972467",
+  "status": 403,
+  "ok": false,
+  "final": "https://www.tandfonline.com/doi/abs/10.1080/07474930600972467",
+  "type": "text/html",
+  "bytes": 5881,
+  "ms": 313,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ijforecast.2015.07.004",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0169207015001144",
+  "type": "text/html",
+  "bytes": 2658,
+  "ms": 490,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ijforecast.2013.01.010",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S016920701300040X",
+  "type": "text/html",
+  "bytes": 2708,
+  "ms": 494,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ejor.2017.02.046",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0377221717301911",
+  "type": "text/html",
+  "bytes": 2653,
+  "ms": 483,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1080/01621459.2018.1448825",
+  "status": 403,
+  "ok": false,
+  "final": "https://www.tandfonline.com/doi/full/10.1080/01621459.2018.1448825",
+  "type": "text/html",
+  "bytes": 5918,
+  "ms": 263,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ijforecast.2023.10.010",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0169207023001097",
+  "type": "text/html",
+  "bytes": 2649,
+  "ms": 485,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.csda.2011.03.006",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0167947311000971",
+  "type": "text/html",
+  "bytes": 2674,
+  "ms": 498,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/s0927-5398(03)00007-0",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0927539803000070",
+  "type": "text/html",
+  "bytes": 2720,
+  "ms": 665,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1111/j.1468-0084.2008.00541.x",
+  "status": 403,
+  "ok": false,
+  "final": "https://onlinelibrary.wiley.com/doi/10.1111/j.1468-0084.2008.00541.x",
+  "type": "text/html",
+  "bytes": 5916,
+  "ms": 700,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1111/j.1467-6419.2007.00518.x",
+  "status": 403,
+  "ok": false,
+  "final": "https://onlinelibrary.wiley.com/doi/10.1111/j.1467-6419.2007.00518.x",
+  "type": "text/html",
+  "bytes": 5916,
+  "ms": 259,
+  "looksHtml": true
+ },
+ {
+  "url": "https://repec.unibocconi.it/igier/igi/wp/2005/285.pdf",
+  "status": 200,
+  "ok": true,
+  "final": "https://repec.unibocconi.it/igier/igi/wp/2005/285.pdf",
+  "type": "application/pdf",
+  "bytes": 1434166,
+  "ms": 161,
+  "looksHtml": false
+ },
+ {
+  "url": "https://doi.org/10.1016/j.jeconom.2005.07.020",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S030440760500165X",
+  "type": "text/html",
+  "bytes": 2714,
+  "ms": 486,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0169207014001083",
+  "type": "text/html",
+  "bytes": 2707,
+  "ms": 486,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.apenergy.2021.116983",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0306261921004529",
+  "type": "text/html",
+  "bytes": 2742,
+  "ms": 702,
+  "looksHtml": true
+ },
+ {
+  "url": "https://arxiv.org/abs/2008.08004",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/abs/2008.08004",
+  "type": "text/html",
+  "bytes": 44001,
+  "ms": 44,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.eneco.2017.12.016",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S014098831730436X",
+  "type": "text/html",
+  "bytes": 2737,
+  "ms": 659,
+  "looksHtml": true
+ },
+ {
+  "url": "https://arxiv.org/pdf/1805.06649",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/pdf/1805.06649",
+  "type": "application/pdf",
+  "bytes": 1777923,
+  "ms": 180,
+  "looksHtml": false
+ },
+ {
+  "url": "https://doi.org/10.1016/j.eneco.2016.05.009",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S014098831630127X",
+  "type": "text/html",
+  "bytes": 2712,
+  "ms": 705,
+  "looksHtml": true
+ },
+ {
+  "url": "https://ideas.repec.org/p/wuu/wpaper/hsc1605.html",
+  "status": 200,
+  "ok": true,
+  "final": "https://ideas.repec.org/p/wuu/wpaper/hsc1605.html",
+  "type": "text/html",
+  "bytes": 67315,
+  "ms": 1143,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.eneco.2023.106843",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0140988323003419",
+  "type": "text/html",
+  "bytes": 2680,
+  "ms": 503,
+  "looksHtml": true
+ },
+ {
+  "url": "https://arxiv.org/abs/2207.02832",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/abs/2207.02832",
+  "type": "text/html",
+  "bytes": 42426,
+  "ms": 12,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1109/tpwrs.2016.2521545",
+  "status": 202,
+  "ok": true,
+  "final": "https://ieeexplore.ieee.org/document/7398175/",
+  "type": "text/html",
+  "bytes": 2060,
+  "ms": 470,
+  "looksHtml": true
+ },
+ {
+  "url": "https://arxiv.org/pdf/1509.01966",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/pdf/1509.01966",
+  "type": "application/pdf",
+  "bytes": 1040542,
+  "ms": 98,
+  "looksHtml": false
+ },
+ {
+  "url": "https://arxiv.org/abs/2508.11372",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/abs/2508.11372",
+  "type": "text/html",
+  "bytes": 41004,
+  "ms": 14,
+  "looksHtml": true
+ },
+ {
+  "url": "https://arxiv.org/abs/2503.02518",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/abs/2503.02518",
+  "type": "text/html",
+  "bytes": 43813,
+  "ms": 12,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.jcomm.2024.100449",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S2405851324000680",
+  "type": "text/html",
+  "bytes": 2724,
+  "ms": 505,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ijforecast.2022.11.004",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0169207022001479",
+  "type": "text/html",
+  "bytes": 2722,
+  "ms": 692,
+  "looksHtml": true
+ },
+ {
+  "url": "https://arxiv.org/abs/2305.16255",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/abs/2305.16255",
+  "type": "text/html",
+  "bytes": 43538,
+  "ms": 227,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.rser.2017.05.234",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S1364032117308808",
+  "type": "text/html",
+  "bytes": 2703,
+  "ms": 653,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.eneco.2014.07.014",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0140988314001716",
+  "type": "text/html",
+  "bytes": 2709,
+  "ms": 710,
+  "looksHtml": true
+ },
+ {
+  "url": "https://arxiv.org/abs/2204.11735",
+  "status": 200,
+  "ok": true,
+  "final": "https://arxiv.org/abs/2204.11735",
+  "type": "text/html",
+  "bytes": 44849,
+  "ms": 12,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.apenergy.2018.02.069",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S030626191830196X",
+  "type": "text/html",
+  "bytes": 2728,
+  "ms": 487,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.eneco.2021.105121",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0140988321000268",
+  "type": "text/html",
+  "bytes": 2705,
+  "ms": 496,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1109/tpwrs.2017.2734563",
+  "status": 202,
+  "ok": true,
+  "final": "https://ieeexplore.ieee.org/document/7997921/",
+  "type": "text/html",
+  "bytes": 2060,
+  "ms": 435,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.rser.2018.05.038",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S1364032118303885",
+  "type": "text/html",
+  "bytes": 2678,
+  "ms": 491,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.3390/en13071667",
+  "status": 200,
+  "ok": true,
+  "final": "https://www.mdpi.com/1996-1073/13/7/1667",
+  "type": "text/html",
+  "bytes": 2210,
+  "ms": 305,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.ijforecast.2017.11.009",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0169207017301401",
+  "type": "text/html",
+  "bytes": 2738,
+  "ms": 487,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.rser.2018.05.038",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S1364032118303885",
+  "type": "text/html",
+  "bytes": 2678,
+  "ms": 664,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.eneco.2018.11.007",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S014098831830447X",
+  "type": "text/html",
+  "bytes": 2662,
+  "ms": 488,
+  "looksHtml": true
+ },
+ {
+  "url": "https://doi.org/10.1016/j.apenergy.2017.11.098",
+  "status": 200,
+  "ok": true,
+  "final": "https://linkinghub.elsevier.com/retrieve/pii/S0306261917316999",
+  "type": "text/html",
+  "bytes": 2716,
+  "ms": 492,
+  "looksHtml": true
+ }
+]

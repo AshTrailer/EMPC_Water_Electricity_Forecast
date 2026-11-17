@@ -1,0 +1,1058 @@
+# source: https://ideas.repec.org/p/wuu/wpaper/hsc1605.html
+
+<!DOCTYPE html> 
+<HTML lang="en">
+<HEAD>
+<TITLE>On the importance of the long-term seasonal component in day-ahead electricity price forecasting</TITLE>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha256-pdY4ejLKO67E0CM2tbPtq1DJ3VGDVVdqAR6j3ZwdiE4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awes
+ome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css" />-->
+    <link href="/css/normalnew.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/pushy.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image.jpg" href="/favicon.ico">
+<!--[if lte IE 9]>
+  <script src="/css/html5shiv.min.js"></script>
+  <script src="/css/respond.min.js"></script>
+<![endif]-->
+  <script type='text/javascript'>
+    var captchaContainer = null;
+    var loadCaptcha = function() {
+      captchaContainer = grecaptcha.render('captcha_container', {
+        'sitekey' : '6LdQebIaAAAAACSKxvbloyrkQ_q-MqhOAGgD5PQV',
+        'callback' : function(response) {
+          console.log(response);
+        }
+      });
+    };
+  </script>
+
+<META NAME="handle" CONTENT="RePEc:wuu:wpaper:hsc1605"><META NAME="description" CONTENT="Downloadable! In day-ahead electricity price forecasting (EPF) the daily and weekly seasonalities are always taken into account, but the long-term seasonal component (LTSC) is believed to add unnecessary complexity to the already parameter-rich models and is generally ignored. Conducting an extensive empirical study involving state-of-the-art time series models we show that (i) decomposing a series of electricity prices into a LTSC and a stochastic component, (ii) modeling them independently and (iii) combining their forecasts can bring - contrary to a common belief - an accuracy gain compared to an approach in which a given time series model is calibrated to the prices themselves.">
+<META NAME="keywords" CONTENT="Electricity spot price; Forecasting; Day-ahead market; Long-term seasonal component">
+<META NAME="jel_code" CONTENT="C14; C22; C51; C53; Q47">
+<META NAME="author" CONTENT="Jakub Nowotarski & Rafal Weron">
+<META NAME="author_shortid" CONTENT="pno175; pwe42">
+<META NAME="title" CONTENT="On the importance of the long-term seasonal component in day-ahead electricity price forecasting">
+<META NAME="download" CONTENT="1">
+<META NAME="freedownload" CONTENT="1">
+<META NAME="date" CONTENT="2016-02-02">
+<META NAME="citation_publication_date" CONTENT="2016/03/15">
+<META NAME="citation_authors" content="Jakub Nowotarski; Rafal Weron">
+<META NAME="citation_title" content="On the importance of the long-term seasonal component in day-ahead electricity price forecasting">
+<META NAME="citation_abstract" content="In day-ahead electricity price forecasting (EPF) the daily and weekly seasonalities are always taken into account, but the long-term seasonal component (LTSC) is believed to add unnecessary complexity to the already parameter-rich models and is generally ignored. Conducting an extensive empirical study involving state-of-the-art time series models we show that (i) decomposing a series of electricity prices into a LTSC and a stochastic component, (ii) modeling them independently and (iii) combining their forecasts can bring - contrary to a common belief - an accuracy gain compared to an approach in which a given time series model is calibrated to the prices themselves.">
+<META NAME="citation_publisher" content="Hugo Steinhaus Center, Wroclaw University of Science and Technology">
+<META NAME="citation_journal_title" content="HSC Research Reports">
+<META NAME="citation_keywords" content="Electricity spot price; Forecasting; Day-ahead market; Long-term seasonal component">
+<META NAME="citation_abstract_html_url" content="https://ideas.repec.org/p/wuu/wpaper/hsc1605.html">
+<META NAME="citation_abstract_pdf_url" content="https://ideas.repec.org/p/wuu/wpaper/hsc1605.html">
+<META NAME="redif-type" content="paper">
+<META NAME="citation_type" content="redif-paper">
+<META NAME="citation_technical_report_number" content="HSC/16/05">
+<META NAME="citation_year" content="2016">
+<META NAME="citation_number_of_pages" content="15 pages">
+<META NAME="twitter:card" content="summary_large_image">
+<META NAME="twitter:site" content="@repec_org">
+<META NAME="twitter:title" content="On the importance of the long-term seasonal component in day-ahead ele">
+<META NAME="twitter:description" content="In day-ahead electricity price forecasting (EPF) the daily and weekly seasonalities are always taken into account, but the long-term seasonal component (LTSC) is believed to add unnecessary complexity">
+<META NAME="twitter:image" content="https://ideas.repec.org/cgi-bin/twimage.cgi?p&wuu:wpaper:hsc1605">
+<META PROPERTY="og:type" content="article">
+<META PROPERTY="og:title" content="On the importance of the long-term seasonal component in day">
+<META PROPERTY="og:description" content="In day-ahead electricity price forecasting (EPF) the daily and weekly seasonalities are always taken into account, but the long-term seasonal component (LTSC) is believed to add unnecessary complexity">
+<META PROPERTY="og:url" content="https://ideas.repec.org//p/wuu/wpaper/hsc1605.html">
+<META PROPERTY="og:image" content="https://ideas.repec.org/cgi-bin/twimage.cgi?p&wuu:wpaper:hsc1605">
+<script type="application/ld+json">
+    {
+	"@context": "http://schema.org",
+	"@graph": [
+	  {
+	    "@id": "#periodical",
+	    "@type": "Periodical",
+	    "name": "HSC Research Reports",
+	    "publisher": "Hugo Steinhaus Center, Wroclaw University of Science and Technology",
+	    "url": "https://ideas.repec.org/s/wuu/wpaper.html",
+	    "requiresSubscription": "false"
+          },
+	  {
+	    "@id": "#number",
+	    "@type": "PublicationIssue",
+	    "datePublished": "2016-03-15",
+	    "issueNumber": "HSC/16/05"
+          },
+	  {
+	    "@id": "#article",
+	    "@type": "ScholarlyArticle",
+ 	    "name": "On the importance of the long-term seasonal component in day-ahead electricity price forecasting",
+	    "url": "https://ideas.repec.org//p/wuu/wpaper/hsc1605.html",
+	    "description": "In day-ahead electricity price forecasting (EPF) the daily and weekly seasonalities are always taken into account, but the long-term seasonal component (LTSC) is believed to add unnecessary complexity to the already parameter-rich models and is generally ignored. Conducting an extensive empirical study involving state-of-the-art time series models we show that (i) decomposing a series of electricity prices into a LTSC and a stochastic component, (ii) modeling them independently and (iii) combining their forecasts can bring - contrary to a common belief - an accuracy gain compared to an approach in which a given time series model is calibrated to the prices themselves.",
+	    "keywords": "Electricity spot price; Forecasting; Day-ahead market; Long-term seasonal component",
+	    "author": "Jakub Nowotarski & Rafal Weron",
+	    "isPartOf": [
+	      {	
+	        "@id": "#periodical"
+	      },
+	      {
+	        "@id": "#number"
+	      }
+	    ]
+	 }
+      ]
+    }
+    </script>
+    </HEAD><BODY>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G63YGSJVZ7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G63YGSJVZ7');
+</script>
+
+<div class="container">
+    <div id="header" class="row">
+      <nav class="navbar navbar-collapse navbar-expand-md" role="navigation">
+          <a class="navbar-brand" href="/">
+            <img width="125" src="/ideas4.jpg" border="0" alt="IDEAS home">
+          </a>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-toggle="collapse" data-target="#mobilesearch" aria-controls="mobilesearch" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"><i class="bi-search"></i></span>
+	</button>
+	<div class="collapse" id="mobilesearch">
+	  <div class="form-inline">
+	  <form method="POST" action="/cgi-bin/htsearch2" id="mobilesearch" role="search" class="card card-body">
+            <div class="input-group">
+              <input class="form-control" type="text" name="q" value="" placeholder="Search econ literature">
+              <span class="input-group-btn">
+		<button type="submit" class="btn" style="background-color: #2d4e8b; color: white;" aria-label="Search">
+                <i class="bi-search"></i>
+              </button>
+		<!--<input class="btn btn-default btn-lg fa" type="submit" value="&#xf002;" style="color:white;background-color:#2d4e8b;">-->
+              </span>
+            </div>
+            <a href="/search.html" class="advanced-search">Advanced search</a>
+	  </form>
+	  </div>
+	  </div>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-toggle="collapse" data-target="#mobilemenu" aria-controls="mobilemenu" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>
+	</button>
+	<div class="collapse" id="mobilemenu">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+	      <a class="nav-link" href="/">Economic literature:</a> <a href="/i/p.html">papers</A>, <a href="/i/a.html">articles</A>, <a href="/i/c.html">software</A>, <a href="/i/h.html">chapters</A>, <a href="/i/b.html">books</A>.
+	    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/i/e.html">Authors</a>
+	    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://edirc.repec.org/">Institutions</a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/top/">Rankings</a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/help.html" target="_blank">Help/FAQ  <i class="bi bi-box-arrow-up-right"></i></a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/cgi-bin/myideas.cgi">MyIDEAS <I class="bi bi-lightbulb"></I></a>
+	    </li>
+	    <li class="nav-item">
+	      <span class="nav-text">More options at page bottom</span>
+	    </li>
+          </ul>
+	</div>
+	<div class="d-none d-md-inline">
+          <ul class="nav nav-fill" id="topnav">
+            <li class="nav-item">
+	      <a class="nav-link" href="/">Economic literature</a>
+	    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/i/e.html">Authors</a>
+	    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://edirc.repec.org/">Institutions</a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/top/">Rankings</a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/help.html" target="_blank">Help/FAQ  <i class="bi bi-box-arrow-up-right"></i></a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/cgi-bin/myideas.cgi" style="color:blue;">MyIDEAS <I class="bi bi-lightbulb"></I> <small>(now improved)</small></a>
+	    </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-12" style="margin-top: -10px;">
+	
+	
+	<div id="sidebar" class="sidebar-nav-fixed pull-right d-none d-print-none d-md-inline col-md-3">
+	  <div class="inline-form">
+	  <form method="POST" action="/cgi-bin/htsearch2" id="topsearch" role="search" class="navbar-form navbar-right">
+            <div class="input-group">
+              <input class="form-control" type="text" name="q" value="" placeholder="Search econ literature">
+              <button type="submit" class="btn" style="background-color: #2d4e8b; color: white;" aria-label="Search">
+                <i class="bi-search"></i>
+              </button>
+	      <!--<input class="btn fa" type="submit" value="&#xf002;" style="color:white;background-color:#2d4e8b;">-->
+            </div>
+            <a href="/search.html" class="advanced-search">Advanced search</a>
+	  </form>
+	  </div>
+	  <div id="menu">
+            <h3>Browse Econ Literature</h3>
+            <ul>
+              <li><a href="/i/p.html">Working papers</a></li>
+              <li><a href="/i/a.html">Journals</a></li>
+              <li><a href="/i/c.html">Software components</a></li>
+              <li><a href="/i/b.html">Books</a></li>
+              <li><a href="/i/h.html">Book chapters</a></li>
+              <li><a href="/j/">JEL classification</a></li>
+            </ul>
+	    
+            <h3>More features</h3>
+            <ul>
+	      <li><a href="http://nep.repec.org/">Subscribe to new research</a></li>
+	      <li><a href="https://biblio.repec.org/">RePEc Biblio</a></li>
+	      <li><a href="https://authors.repec.org/">Author registration</a></li>
+	      <li><a href="/v/">Economics Virtual Seminar Calendar</a></li>
+	      <li><a href="https://confwatcher.b2ideas.eu/"><font color="red">ConfWatcher</font></a> NEW!</li>
+            </ul>
+	  </div>
+	</div>
+	<div class="d-none d-print-block">
+	  <img width="145" src="/ideas4.jpg" border="0" alt="IDEAS home"> Printed from https://ideas.repec.org/p/wuu/wpaper/hsc1605.html 
+	</div>
+	
+	<div id="main" class="col-12 col-md-9">
+	  <div class="site-overlay"></div>
+	  <div class="d-print-none">
+	    
+<div id="messages" class="col-xs-12">
+<span class="share-block">
+            &nbsp;<a href="https://bsky.app/intent/compose?text=Found%20on%20RePEc/IDEAS:%20https://ideas.repec.org//p/wuu/wpaper/hsc1605.html%20&#128161;" target="_NEW"><i class="bi bi-bluesky"></i></a>&nbsp;
+            <share-to-mastodon message="Found on RePEc/IDEAS:" url='https://ideas.repec.org//p/wuu/wpaper/hsc1605.html'><font color="#2d4e8b"><i class="bi bi-mastodon"></i></font></share-to-mastodon>
+            <a class="share-twitter bi bi-twitter-x" href="#" title="Share on Twitter"></a>
+            <a class="share-facebook bi bi-facebook" href="#" title="Share on Facebook"></a>
+            <a class="share-reddit bi bi-reddit" href="#" title="Share on Reddit"></a>
+            <a class="share-linkedin bi bi-linkedin" href="#"  title="Share on LinkedIn"></a>
+            <a class="share-email bi bi-envelope" href="#"  title="Share by Email"></a>
+            <a class="share-print bi bi-printer" href="#" title="Print this page"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span id="myideas">
+
+<a href="/cgi-bin/myideas.cgi" data-bs-toggle="tooltip" data-toggle="tooltip" title="MyIDEAS: not logged in">
+<i class="bi bi-lightbulb"></i>
+<i class="bi bi-lock"></i>&nbsp;</a>
+
+
+ <A HREF="/cgi-bin/myideas.cgi#myibiblio1unassigned"><I class="bi bi-archive-fill"></I>&nbsp;My&nbsp;bibliography</A> 
+ <i class="bi bi-bookmark"></i>&nbsp;<span onclick="loadDoc('https://ideas.repec.org/cgi-bin/myiadd2.cgi',myFunction);return true;">Save this paper</span>
+
+
+
+
+</span>
+<script>
+function loadDoc(url,cfunc) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      cfunc(xhttp);
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+function myFunction(xhttp) {
+  document.getElementById("response").innerHTML = xhttp.responseText;
+}
+</script><span id="response"></span>
+</div>
+
+
+	  </div>
+	  <div id="content-block">
+	    
+	    
+
+<div id="title">
+<h1>On the importance of the long-term seasonal component in day-ahead electricity price forecasting</h1></div>
+<div>
+<ul class="nav nav-pills" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="author-abstract-tab" data-bs-toggle="tab" data-toggle="tab" href="#author-abstract" role="tab" aria-controls="author-abstract" aria-selected="true">Author & abstract</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link download-tab" id="download-tab" data-bs-toggle="tab" data-toggle="tab" href="#download" role="tab" aria-controls="download" aria-selected="false">Download &amp; other version</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="refs-tab" data-bs-toggle="tab" data-toggle="tab" href="#refs" role="tab" aria-controls="refs" aria-selected="false">31 References</a>
+  </li>
+      <li class="nav-item">
+    <a class="nav-link" id="cites-tab" href="/r/wuu/wpaper/hsc1605.html" role="tab" aria-controls="cites" aria-selected="false">56 Citations</a>
+  </li>
+          <li class="nav-item">
+    <a class="nav-link" id="mrel-tab" data-bs-toggle="tab" data-toggle="tab" href="#mrel" role="tab" aria-controls="mrel" aria-selected="false">Most related</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="more-tab" data-bs-toggle="tab" data-toggle="tab" href="#more" role="tab" aria-controls="more" aria-selected="false">Related works & more</a>
+  </li>
+  <!-- Placeholder usernotes pill-->
+  <li class="nav-item">
+    <a class="nav-link" id="correct-tab" data-bs-toggle="tab" data-toggle="tab" href="#correct" role="tab" aria-controls="correct" aria-selected="false">Corrections</a>
+  </li>
+</ul>
+    
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="author-abstract" role="tabpanel" aria-labelledby="author-abstract-tab">
+
+<h2>Author</h2>
+    <div id="author-body">
+      <div id="authortable">
+        <div id="listed-authors">Listed:
+          <ul id="authorlist"><li class="authorname">Jakub Nowotarski</li>
+<li class="authorname">Rafal Weron</li>
+</ul></div><div id="registered-authors"> <a href="https://authors.repec.org/">Registered:</a> <ul id="authorregistered"><li><a href="/e/pno175.html">Jakub  Nowotarski </A></li>
+<li><a href="/e/pwe42.html">Rafal  Weron </A></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<h2 style="clear:left">Abstract</h2><div id="abstract-body">In day-ahead electricity price forecasting (EPF) the daily and weekly seasonalities are always taken into account, but the long-term seasonal component (LTSC) is believed to add unnecessary complexity to the already parameter-rich models and is generally ignored. Conducting an extensive empirical study involving state-of-the-art time series models we show that (i) decomposing a series of electricity prices into a LTSC and a stochastic component, (ii) modeling them independently and (iii) combining their forecasts can bring - contrary to a common belief - an accuracy gain compared to an approach in which a given time series model is calibrated to the prices themselves.</div>
+<h2>Suggested Citation</h2>
+<div id="biblio-body">
+<LI class="list-group-item downfree"> Jakub Nowotarski & Rafal Weron, 2016.
+ "<B><A HREF="/p/wuu/wpaper/hsc1605.html">On the importance of the long-term seasonal component in day-ahead electricity price forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/16/05, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+</li>
+Handle: <i style="word-break:break-all">RePEc:wuu:wpaper:hsc1605</i>
+<form method="post" action="/cgi-bin/refs.cgi" target="refs" class="form-inline" role="form" style="margin-bottom: 10px;">
+<input type="hidden" name="handle" value="RePEc:wuu:wpaper:hsc1605">
+<div class="pull-left" style="padding-right: 2px;">
+<span class="input-group-btn">
+<input class="btn btn-default btn-lg fa" type="submit" value="Export reference" style="background-color:lightgrey;"><i class="bi bi-box-arrow-up-right"></i> as
+<select name="output" size="1">
+<option value="0">HTML</option>
+<option value="0.5">HTML with abstract</option>
+<option value="1">plain text</option>
+<option value="1.5">plain text with abstract</option>
+<option value="2">BibTeX</option>
+<option value="3">RIS (EndNote, RefMan, ProCite)</option>
+<option value="4">ReDIF</option>
+<option value="6">JSON</option>
+</select> 
+</span>
+</div>
+</form></div>
+   </div>
+  <div class="tab-pane fade" id="download" role="tabpanel" aria-labelledby="download-tab">
+    <h2>Download full text from publisher</h2><p></p>
+       <FORM METHOD=GET ACTION="/cgi-bin/get_doc.cgi" target="_blank">
+       <INPUT TYPE=HIDDEN NAME="urn" VALUE="RePEc:wuu:wpaper:hsc1605"><INPUT TYPE="radio" NAME="url" VALUE="http://www.im.pwr.wroc.pl/~hugo/RePEc/wuu/wpaper/HSC_16_05.pdf" checked><B>File URL:</B> <span style="word-break:break-all">http://www.im.pwr.wroc.pl/~hugo/RePEc/wuu/wpaper/HSC_16_05.pdf</span><BR><B>File Function:</B> Original version<BR><B>Download Restriction:</B> no<BR>
+<font size="+2" color="red">---><INPUT TYPE="SUBMIT" class="btn fa" VALUE="Download the selected file &#xf08e;" style="color:white;background-color:#2d4e8b;"><---</font></FORM><P><h2>Other versions of this item:</h2>
+<div class="publishedas"><UL><LI class="list-group-item downgate">  Nowotarski, Jakub & Weron, Rafał, 2016.
+"<B><A HREF="https://ideas.repec.org/a/eee/eneeco/v57y2016icp228-235.html">On the importance of the long-term seasonal component in day-ahead electricity price forecasting</A></B>,"
+<A HREF="https://ideas.repec.org/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 57(C), pages 228-235.
+</UL></div>
+</div>
+
+  <div class="tab-pane fade" id="refs" role="tabpanel" aria-labelledby="refs-tab"><h2>References listed on IDEAS</h2><form method="post" action="/cgi-bin/refs.cgi" target="refs" class="form-inline" role="form" style="margin-bottom: 10px;">
+<input type="hidden" name="handle" value="repec:wuu:wpaper:hsc1501#repec:wuu:wpaper:hsc1506#repec:eee:enepol:v:49:y:2012:i:c:p:328-332#repec:eee:appene:v:162:y:2016:i:c:p:218-230#repec:pra:mprapa:10428#repec:pra:mprapa:1363#repec:spr:mathme:v:79:y:2014:i:1:p:1-30#repec:eee:eneeco:v:39:y:2013:i:c:p:13-27#repec:wuu:wpaper:hsc1601#repec:wuu:hsbook:hsbook0601#repec:eee:intfor:v:21:y:2005:i:3:p:435-462#repec:eee:eneeco:v:33:y:2011:i:6:p:1216-1226#repec:mcb:jmoncb:v:29:y:1997:i:1:p:1-16#repec:wuu:wpaper:hsc1409#repec:eee:energy:v:98:y:2016:i:c:p:40-49#repec:eee:eneeco:v:35:y:2013:i:c:p:88-103#repec:wuu:wpaper:hsc0605#repec:arx:papers:1509.01966#repec:eee:eneeco:v:38:y:2013:i:c:p:96-110#repec:bes:jnlbes:v:13:y:1995:i:3:p:253-63#repec:eee:intfor:v:32:y:2016:i:3:p:957-965#repec:eee:eneeco:v:46:y:2014:i:c:p:395-412#repec:eee:intfor:v:30:y:2014:i:2:p:357-363#repec:eee:intfor:v:32:y:2016:i:3:p:896-913#repec:wuu:wpaper:hsc1405#repec:eee:intfor:v:32:y:2016:i:3:p:1051-1056#repec:eee:intfor:v:32:y:2016:i:3:p:585-597#repec:eee:eneeco:v:44:y:2014:i:c:p:178-190#repec:eee:intfor:v:30:y:2014:i:4:p:1030-1081#repec:wuu:wpaper:hsc1407#repec:eee:intfor:v:32:y:2016:i:3:p:1038-1050#repec:eee:eneeco:v:44:y:2014:i:c:p:143-159#repec:eee:eneeco:v:48:y:2015:i:c:p:1-6#repec:eee:intfor:v:24:y:2008:i:4:p:744-763#repec:pra:mprapa:42563#repec:bpj:sndecm:v:10:y:2006:i:3:n:2">
+<div class="pull-left" style="padding-right: 2px;">
+<span class="input-group-btn">
+<input class="btn btn-default btn-lg fa" type="submit" value="Export references" style="background-color:lightgrey;"><i class="bi bi-box-arrow-up-right"></i> as
+<select name="output" size="1">
+<option value="0">HTML</option>
+<option value="0.5">HTML with abstract</option>
+<option value="1">plain text</option>
+<option value="1.5">plain text with abstract</option>
+<option value="2">BibTeX</option>
+<option value="3">RIS (EndNote, RefMan, ProCite)</option>
+<option value="4">ReDIF</option>
+<option value="6">JSON</option>
+</select> 
+</span>
+</div>
+</form>
+<ol class="list-group"><LI class="list-group-item downgate">  Misiorek Adam & Trueck Stefan & Weron Rafal, 2006.
+"<B><A HREF="/a/bpj/sndecm/v10y2006i3n2.html">Point and Interval Forecasting of Spot Electricity Prices: Linear vs. Non-Linear Time Series Models</A></B>,"
+<A HREF="/s/bpj/sndecm.html">Studies in Nonlinear Dynamics & Econometrics</A>, De Gruyter, vol. 10(3), pages 1-36, September.
+<LI class="list-group-item downfree"> Bidong Liu & Jakub Nowotarski & Tao Hong & Rafal Weron, 2015.
+ "<B><A HREF="/p/wuu/wpaper/hsc1501.html">Probabilistic load forecasting via Quantile Regression Averaging on sister forecasts</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/15/01, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+<LI class="list-group-item downgate">  Nowotarski, Jakub & Raviv, Eran & Trück, Stefan & Weron, Rafał, 2014.
+"<B><A HREF="/a/eee/eneeco/v46y2014icp395-412.html">An empirical comparison of alternative schemes for combining electricity spot price forecasts</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 46(C), pages 395-412.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Jakub Nowotarski & Eran Raviv & Stefan Trueck & Rafal Weron, 2013.
+ "<B><A HREF="/p/wuu/wpaper/hsc1307.html">An empirical comparison of alternate schemes for combining electricity spot price forecasts</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/13/07, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Maciejowska, Katarzyna & Nowotarski, Jakub, 2016.
+"<B><A HREF="/a/eee/intfor/v32y2016i3p1051-1056.html">A hybrid model for GEFCom2014 probabilistic electricity price forecasting</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 32(3), pages 1051-1056.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Katarzyna Maciejowska & Jakub Nowotarski, 2015.
+ "<B><A HREF="/p/wuu/wpaper/hsc1506.html">A hybrid model for GEFCom2014 probabilistic electricity price forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/15/06, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Kristiansen, Tarjei, 2012.
+"<B><A HREF="/a/eee/enepol/v49y2012icp328-332.html">Forecasting Nord Pool day-ahead prices with an autoregressive model</A></B>,"
+<A HREF="/s/eee/enepol.html">Energy Policy</A>, Elsevier, vol. 49(C), pages 328-332.
+<LI class="list-group-item downgate">  Weron, Rafał & Zator, Michał, 2015.
+"<B><A HREF="/a/eee/eneeco/v48y2015icp1-6.html">A note on using the Hodrick–Prescott filter in electricity markets</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 48(C), pages 1-6.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Rafal Weron & Michal Zator, 2014.
+ "<B><A HREF="/p/wuu/wpaper/hsc1404.html">A note on using the Hodrick-Prescott filter in electricity markets</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/14/04, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Weron, Rafał, 2014.
+"<B><A HREF="/a/eee/intfor/v30y2014i4p1030-1081.html">Electricity price forecasting: A review of the state-of-the-art with a look into the future</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 30(4), pages 1030-1081.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Rafal Weron, 2014.
+ "<B><A HREF="/p/wuu/wpaper/hsc1407.html">Electricity price forecasting: A review of the state-of-the-art with a look into the future</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/14/07, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Nowotarski, Jakub & Tomczyk, Jakub & Weron, Rafał, 2013.
+"<B><A HREF="/a/eee/eneeco/v39y2013icp13-27.html">Robust estimation and forecasting of the long-term seasonal component of electricity spot prices</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 39(C), pages 13-27.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Jakub Nowotarski & Jakub Tomczyk & Rafal Weron, 2012.
+ "<B><A HREF="/p/wuu/wpaper/hsc1206.html">Robust estimation and forecasting of the long-term seasonal component of electricity spot prices</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/12/06, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+<LI class="list-group-item downfree"> Nowotarski, Jakub & Tomczyk, Jakub & Weron, Rafal, 2012.
+ "<B><A HREF="/p/pra/mprapa/42563.html">Robust estimation and forecasting of the long-term seasonal component of electricity spot prices</A></B>,"
+<A HREF="/s/pra/mprapa.html">MPRA Paper</A> 
+42563, University Library of Munich, Germany.
+
+
+</UL></div>
+<LI class="list-group-item downfree"> Jakub Nowotarski & Rafal Weron, 2016.
+ "<B><A HREF="/p/wuu/wpaper/hsc1601.html">To combine or not to combine? Recent trends in electricity price forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/16/01, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+<LI class="list-group-item downgate">  Hong, Tao & Pinson, Pierre & Fan, Shu, 2014.
+"<B><A HREF="/a/eee/intfor/v30y2014i2p357-363.html">Global Energy Forecasting Competition 2012</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 30(2), pages 357-363.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Tao Hong & Pierre Pinson & Shu Fan, 2013.
+ "<B><A HREF="/p/wuu/wpaper/hsc1316.html">Global Energy Forecasting Competition 2012</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/13/16, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Hong, Tao & Pinson, Pierre & Fan, Shu & Zareipour, Hamidreza & Troccoli, Alberto & Hyndman, Rob J., 2016.
+"<B><A HREF="/a/eee/intfor/v32y2016i3p896-913.html">Probabilistic energy forecasting: Global Energy Forecasting Competition 2014 and beyond</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 32(3), pages 896-913.
+<LI class="list-group-item downgate">  Bordignon, Silvano & Bunn, Derek W. & Lisi, Francesco & Nan, Fany, 2013.
+"<B><A HREF="/a/eee/eneeco/v35y2013icp88-103.html">Combining day-ahead forecasts for British electricity prices</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 35(C), pages 88-103.
+<LI class="list-group-item downgate">  Conejo, Antonio J. & Contreras, Javier & Espinola, Rosa & Plazas, Miguel A., 2005.
+"<B><A HREF="/a/eee/intfor/v21y2005i3p435-462.html">Forecasting electricity prices for a day-ahead pool-based electric energy market</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 21(3), pages 435-462.
+<LI class="list-group-item downgate">  Maciejowska, Katarzyna & Nowotarski, Jakub & Weron, Rafał, 2016.
+"<B><A HREF="/a/eee/intfor/v32y2016i3p957-965.html">Probabilistic forecasting of electricity spot prices using Factor Quantile Regression Averaging</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 32(3), pages 957-965.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Katarzyna Maciejowska & Jakub Nowotarski & Rafal Weron, 2014.
+ "<B><A HREF="/p/wuu/wpaper/hsc1409.html">Probabilistic forecasting of electricity spot prices using Factor Quantile Regression Averaging</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/14/09, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downnone">  Hodrick, Robert J & Prescott, Edward C, 1997.
+"<B><A HREF="/a/mcb/jmoncb/v29y1997i1p1-16.html">Postwar U.S. Business Cycles: An Empirical Investigation</A></B>,"
+<A HREF="/s/mcb/jmoncb.html">Journal of Money, Credit and Banking</A>, Blackwell Publishing, vol. 29(1), pages 1-16, February.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Robert J. Hodrick & Edward Prescott, 1981.
+ "<B><A HREF="/p/nwu/cmsems/451.html">Post-War U.S. Business Cycles: An Empirical Investigation</A></B>,"
+<A HREF="/s/nwu/cmsems.html">Discussion Papers</A> 
+451, Northwestern University, Center for Mathematical Studies in Economics and Management Science.
+
+
+<LI class="list-group-item downfree">  Kurt Annen, 2006.
+"<B><A HREF="/c/dge/qmrbcd/167.html">HP-Filter DLL executable</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+167, Quantitative Macroeconomics & Real Business Cycles.
+
+<LI class="list-group-item downfree">  Christian Zimmermann, 2005.
+"<B><A HREF="/c/dge/qmrbcd/98.html">HP-Filter code (Perl)</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+98, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Kurt Annen, 2004.
+"<B><A HREF="/c/dge/qmrbcd/168.html">HP-filter for Java</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+168, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Morten Ravn, "undated".
+"<B><A HREF="/c/dge/qmrbcd/101.html">GAUSS program for Hodrick-Prescott filter</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+101, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Edward C. Prescott, 1982.
+"<B><A HREF="/c/dge/qmrbcd/3.html">FORTRAN code for the Hodrick-Prescott filter</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+3, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Kurt Annen, 2006.
+"<B><A HREF="/c/dge/qmrbcd/165.html">HP-Filter Excel Add-In</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+165, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Morten Ravn, "undated".
+"<B><A HREF="/c/dge/qmrbcd/102.html">Alternate GAUSS program for the Hodrick-Prescott Filter</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+102, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Christian Zimmermann, 2005.
+"<B><A HREF="/c/dge/qmrbcd/97.html">HP-Filter (web interface)</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+97, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Kurt Annen, 2004.
+"<B><A HREF="/c/dge/qmrbcd/166.html">Matlab functions for HP-filter</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+166, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Ivailo Izvorski, "undated".
+"<B><A HREF="/c/dge/qmrbcd/1.html">MATLAB code for the Hodrick-Prescott filter</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+1, Quantitative Macroeconomics & Real Business Cycles.
+<LI class="list-group-item downfree">  Ken Matheny & Simon van Norden & Robert Vigfusson, 1989.
+"<B><A HREF="/c/dge/qmrbcd/2.html">GAUSS code for the Hodrick-Prescott filter</A></B>,"
+<A HREF="/s/dge/qmrbcd.html">QM&RBC Codes</A>
+2, Quantitative Macroeconomics & Real Business Cycles, revised Apr 1995.
+</UL></div>
+<LI class="list-group-item downgate">  Gaillard, Pierre & Goude, Yannig & Nedellec, Raphaël, 2016.
+"<B><A HREF="/a/eee/intfor/v32y2016i3p1038-1050.html">Additive models and robust aggregation for GEFCom2014 probabilistic electric load and electricity price forecasting</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 32(3), pages 1038-1050.
+<LI class="list-group-item downgate">  Keles, Dogan & Scelle, Jonathan & Paraschiv, Florentina & Fichtner, Wolf, 2016.
+"<B><A HREF="/a/eee/appene/v162y2016icp218-230.html">Extended forecast methods for day-ahead electricity spot prices applying artificial neural networks</A></B>,"
+<A HREF="/s/eee/appene.html">Applied Energy</A>, Elsevier, vol. 162(C), pages 218-230.
+<LI class="list-group-item downfree"> Weron, Rafal & Misiorek, Adam, 2006.
+ "<B><A HREF="/p/pra/mprapa/1363.html">Point and interval forecasting of wholesale electricity prices: Evidence from the Nord Pool market</A></B>,"
+<A HREF="/s/pra/mprapa.html">MPRA Paper</A> 
+1363, University Library of Munich, Germany.
+<LI class="list-group-item downgate">  Weron, Rafal & Misiorek, Adam, 2008.
+"<B><A HREF="/a/eee/intfor/v24y2008i4p744-763.html">Forecasting spot electricity prices: A comparison of parametric and semiparametric time series models</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 24(4), pages 744-763.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Weron, Rafal & Misiorek, Adam, 2008.
+ "<B><A HREF="/p/pra/mprapa/10428.html">Forecasting spot electricity prices: A comparison of parametric and semiparametric time series models</A></B>,"
+<A HREF="/s/pra/mprapa.html">MPRA Paper</A> 
+10428, University Library of Munich, Germany.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Janczura, Joanna & Trück, Stefan & Weron, Rafał & Wolff, Rodney C., 2013.
+"<B><A HREF="/a/eee/eneeco/v38y2013icp96-110.html">Identifying spikes and seasonal components in electricity spot price data: A guide to robust modeling</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 38(C), pages 96-110.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Janczura, Joanna & Trueck, Stefan & Weron, Rafal & Wolff, Rodney, 2012.
+ "<B><A HREF="/p/pra/mprapa/39277.html">Identifying spikes and seasonal components in electricity spot price data: A guide to robust modeling</A></B>,"
+<A HREF="/s/pra/mprapa.html">MPRA Paper</A> 
+39277, University Library of Munich, Germany.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Lisi, Francesco & Nan, Fany, 2014.
+"<B><A HREF="/a/eee/eneeco/v44y2014icp143-159.html">Component estimation for electricity prices: Procedures and comparisons</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 44(C), pages 143-159.
+<LI class="list-group-item downfree"> Florian Ziel, 2015.
+ "<B><A HREF="/p/arx/papers/1509.01966.html">Forecasting Electricity Spot Prices using Lasso: On Capturing the Autoregressive Intraday Structure</A></B>,"
+<A HREF="/s/arx/papers.html">Papers</A> 
+1509.01966, arXiv.org, revised Jan 2016.
+<LI class="list-group-item downnone">  Diebold, Francis X & Mariano, Roberto S, 2002.
+"<B><A HREF="/a/bes/jnlbes/v20y2002i1p134-44.html">Comparing Predictive Accuracy</A></B>,"
+<A HREF="/s/bes/jnlbes.html">Journal of Business & Economic Statistics</A>, American Statistical Association, vol. 20(1), pages 134-144, January.
+
+<div class="publishedas"><UL>
+<LI class="list-group-item downnone">  Diebold, Francis X & Mariano, Roberto S, 1995.
+"<B><A HREF="/a/bes/jnlbes/v13y1995i3p253-63.html">Comparing Predictive Accuracy</A></B>,"
+<A HREF="/s/bes/jnlbes.html">Journal of Business & Economic Statistics</A>, American Statistical Association, vol. 13(3), pages 253-263, July.
+</UL></div>
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Francis X. Diebold & Roberto S. Mariano, 1994.
+ "<B><A HREF="/p/nbr/nberte/0169.html">Comparing Predictive Accuracy</A></B>,"
+<A HREF="/s/nbr/nberte.html">NBER Technical Working Papers</A> 
+0169, National Bureau of Economic Research, Inc.
+
+
+<LI class="list-group-item downfree">  Tom Doan, 2025.
+"<B><A HREF="/c/boc/bocode/rts00055.html">DMARIANO: RATS procedure to compute Diebold-Mariano Forecast Comparison Test</A></B>,"
+<A HREF="/s/boc/bocode.html">Statistical Software Components</A>
+RTS00055, Boston College Department of Economics.
+
+</UL></div>
+<LI class="list-group-item downgate">  Serinaldi, Francesco, 2011.
+"<B><A HREF="/a/eee/eneeco/v33y2011i6p1216-1226.html">Distributional modeling and short-term forecasting of electricity prices by Generalized Additive Models for Location, Scale and Shape</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 33(6), pages 1216-1226.
+<LI class="list-group-item downfree"> Adam Misiorek & Rafal Weron, 2006.
+ "<B><A HREF="/p/wuu/wpaper/hsc0605.html">Interval forecasting of spot electricity prices</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/06/05, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+<LI class="list-group-item downgate">  Wang, Pu & Liu, Bidong & Hong, Tao, 2016.
+"<B><A HREF="/a/eee/intfor/v32y2016i3p585-597.html">Electric load forecasting with recency effect: A big data approach</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 32(3), pages 585-597.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Pu Wang & Bidong Liu & Tao Hong, 2015.
+ "<B><A HREF="/p/wuu/wpaper/hsc1508.html">Electric load forecasting with recency effect: A big data approach</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/15/08, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Weron, Rafał & Zator, Michał, 2014.
+"<B><A HREF="/a/eee/eneeco/v44y2014icp178-190.html">Revisiting the relationship between spot and futures prices in the Nord Pool electricity market</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 44(C), pages 178-190.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Rafal Weron & Michal Zator, 2013.
+ "<B><A HREF="/p/wuu/wpaper/hsc1308.html">Revisiting the relationship between spot and futures prices in the Nord Pool electricity market</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/13/08, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downfree"> Katarzyna Maciejowska, 2014.
+ "<B><A HREF="/p/wuu/wpaper/hsc1405.html">Fundamental and speculative shocks, what drives electricity prices?</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/14/05, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+<LI class="list-group-item downfree">  Rafal Weron, 2006.
+"<B><A HREF="/b/wuu/hsbook/hsbook0601.html">Modeling and Forecasting Electricity Loads and Prices: A Statistical Approach</A></B>,"
+<A HREF="/s/wuu/hsbook.html">HSC Books</A>,
+Hugo Steinhaus Center, Wroclaw University of Science and Technology, number hsbook0601.
+<LI class="list-group-item downgate">  Nowotarski, Jakub & Liu, Bidong & Weron, Rafał & Hong, Tao, 2016.
+"<B><A HREF="/a/eee/energy/v98y2016icp40-49.html">Improving short term load forecast accuracy via combining sister forecasts</A></B>,"
+<A HREF="/s/eee/energy.html">Energy</A>, Elsevier, vol. 98(C), pages 40-49.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Jakub Nowotarski & Bidong Liu & Rafal Weron & Tao Hong, 2015.
+ "<B><A HREF="/p/wuu/wpaper/hsc1505.html">Improving short term load forecast accuracy via combining sister forecasts</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/15/05, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Joanna Janczura, 2014.
+"<B><A HREF="/a/spr/mathme/v79y2014i1p1-30.html">Pricing electricity derivatives within a Markov regime-switching model: a risk premium approach</A></B>,"
+<A HREF="/s/spr/mathme.html">Mathematical Methods of Operations Research</A>, Springer;Gesellschaft für Operations Research (GOR);Nederlands Genootschap voor Besliskunde (NGB), vol. 79(1), pages 1-30, February.
+</ol>
+<A TARGET="_blank" HREF="http://citec.repec.org/cgi-bin/get_data.pl?h=RePEc:wuu:wpaper:hsc1605&o=all"><B>Full references</B> <i class="bi bi-box-arrow-up-right"></i></A> (including those not matched with items on IDEAS)<P>
+</div>
+
+ <div class="tab-pane fade" id="mrel" role="tabpanel" aria-labelledby="mrel-tab">
+    <h2>Most related items</H2>
+These are the items that most often cite the same works as this one and are cited by the same works as this one.
+<ol class="list-group"><LI class="list-group-item downgate">  Uniejewski, Bartosz & Marcjasz, Grzegorz & Weron, Rafał, 2019.
+"<B><A HREF="/a/eee/eneeco/v79y2019icp171-182.html">On the importance of the long-term seasonal component in day-ahead electricity price forecasting: Part II — Probabilistic forecasting</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 79(C), pages 171-182.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Bartosz Uniejewski & Grzegorz Marcjasz & Rafal Weron, 2017.
+ "<B><A HREF="/p/wuu/wpaper/hsc1702.html">On the importance of the long-term seasonal component in day-ahead electricity price forecasting. Part II – Probabilistic forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/17/02, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downfree"> Grzegorz Marcjasz & Bartosz Uniejewski & Rafal Weron, 2017.
+ "<B><A HREF="/p/wuu/wpaper/hsc1703.html">Importance of the long-term seasonal component in day-ahead electricity price forecasting revisited: Neural network models</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/17/03, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+<LI class="list-group-item downgate">  Marcjasz, Grzegorz & Uniejewski, Bartosz & Weron, Rafał, 2019.
+"<B><A HREF="/a/eee/intfor/v35y2019i4p1520-1532.html">On the importance of the long-term seasonal component in day-ahead electricity price forecasting with NARX neural networks</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 35(4), pages 1520-1532.
+<LI class="list-group-item downgate">  Nowotarski, Jakub & Weron, Rafał, 2018.
+"<B><A HREF="/a/eee/rensus/v81y2018ip1p1548-1568.html">Recent advances in electricity price forecasting: A review of probabilistic forecasting</A></B>,"
+<A HREF="/s/eee/rensus.html">Renewable and Sustainable Energy Reviews</A>, Elsevier, vol. 81(P1), pages 1548-1568.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Jakub Nowotarski & Rafal Weron, 2016.
+ "<B><A HREF="/p/wuu/wpaper/hsc1607.html">Recent advances in electricity price forecasting: A review of probabilistic forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/16/07, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Marcjasz, Grzegorz & Uniejewski, Bartosz & Weron, Rafał, 2020.
+"<B><A HREF="/a/eee/intfor/v36y2020i2p466-479.html">Probabilistic electricity price forecasting with NARX networks: Combine point or probabilistic forecasts?</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 36(2), pages 466-479.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Grzegorz Marcjasz & Bartosz Uniejewski & Rafal Weron, 2018.
+ "<B><A HREF="/p/wuu/wpaper/hsc1805.html">Probabilistic electricity price forecasting with NARX networks: Combine point or probabilistic forecasts?</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/18/05, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downfree">  Grzegorz Marcjasz & Tomasz Serafin & Rafał Weron, 2018.
+"<B><A HREF="/a/gam/jeners/v11y2018i9p2364-d168385.html">Selection of Calibration Windows for Day-Ahead Electricity Price Forecasting</A></B>,"
+<A HREF="/s/gam/jeners.html">Energies</A>, MDPI, vol. 11(9), pages 1-20, September.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Grzegorz Marcjasz & Tomasz Serafin & Rafal Weron, 2018.
+ "<B><A HREF="/p/wuu/wpaper/hsc1806.html">Selection of calibration windows for day-ahead electricity price forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/18/06, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Weron, Rafał, 2014.
+"<B><A HREF="/a/eee/intfor/v30y2014i4p1030-1081.html">Electricity price forecasting: A review of the state-of-the-art with a look into the future</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 30(4), pages 1030-1081.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Rafal Weron, 2014.
+ "<B><A HREF="/p/wuu/wpaper/hsc1407.html">Electricity price forecasting: A review of the state-of-the-art with a look into the future</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/14/07, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downfree">  Bartosz Uniejewski & Jakub Nowotarski & Rafał Weron, 2016.
+"<B><A HREF="/a/gam/jeners/v9y2016i8p621-d75423.html">Automated Variable Selection and Shrinkage for Day-Ahead Electricity Price Forecasting</A></B>,"
+<A HREF="/s/gam/jeners.html">Energies</A>, MDPI, vol. 9(8), pages 1-22, August.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Bartosz Uniejewski & Jakub Nowotarski & Rafal Weron, 2016.
+ "<B><A HREF="/p/wuu/wpaper/hsc1606.html">Automated variable selection and shrinkage for day-ahead electricity price forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/16/06, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downfree"> Florian Ziel & Rafal Weron, 2016.
+ "<B><A HREF="/p/wuu/wpaper/hsc1608.html">Day-ahead electricity price forecasting with high-dimensional structures: Univariate vs. multivariate models</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/16/08, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+<LI class="list-group-item downgate">  Ziel, Florian & Weron, Rafał, 2018.
+"<B><A HREF="/a/eee/eneeco/v70y2018icp396-420.html">Day-ahead electricity price forecasting with high-dimensional structures: Univariate vs. multivariate modeling frameworks</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 70(C), pages 396-420.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Florian Ziel & Rafal Weron, 2018.
+ "<B><A HREF="/p/arx/papers/1805.06649.html">Day-ahead electricity price forecasting with high-dimensional structures: Univariate vs. multivariate modeling frameworks</A></B>,"
+<A HREF="/s/arx/papers.html">Papers</A> 
+1805.06649, arXiv.org.
+
+
+
+</UL></div>
+<LI class="list-group-item downfree"> Rafal Weron & Florian Ziel, 2018.
+ "<B><A HREF="/p/wuu/wpaper/hsc1808.html">Electricity price forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/18/08, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Katarzyna Maciejowska & Rafal Weron, 2019.
+ "<B><A HREF="/p/wuu/wpaper/hsc1901.html">Electricity price forecasting</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/19/01, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Avci, Ezgi & Ketter, Wolfgang & van Heck, Eric, 2018.
+"<B><A HREF="/a/eee/enepol/v123y2018icp390-403.html">Managing electricity price modeling risk via ensemble forecasting: The case of Turkey</A></B>,"
+<A HREF="/s/eee/enepol.html">Energy Policy</A>, Elsevier, vol. 123(C), pages 390-403.
+<LI class="list-group-item downgate">  Özen, Kadir & Yıldırım, Dilem, 2021.
+"<B><A HREF="/a/eee/eneeco/v103y2021ics0140988321004448.html">Application of bagging in day-ahead electricity price forecasting and factor augmentation</A></B>,"
+<A HREF="/s/eee/eneeco.html">Energy Economics</A>, Elsevier, vol. 103(C).
+<LI class="list-group-item downfree">  Bartosz Uniejewski & Rafał Weron, 2018.
+"<B><A HREF="/a/gam/jeners/v11y2018i8p2039-d162196.html">Efficient Forecasting of Electricity Spot Prices with Expert and LASSO Models</A></B>,"
+<A HREF="/s/gam/jeners.html">Energies</A>, MDPI, vol. 11(8), pages 1-26, August.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Bartosz Uniejewski & Rafal Weron, 2018.
+ "<B><A HREF="/p/wuu/wpaper/hsc1802.html">Efficient forecasting of electricity spot prices with expert and LASSO models</A></B>,"
+<A HREF="/s/wuu/wpaper.html">HSC Research Reports</A> 
+HSC/18/02, Hugo Steinhaus Center, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Afanasyev, Dmitriy O. & Fedorova, Elena A., 2019.
+"<B><A HREF="/a/eee/appene/v236y2019icp196-210.html">On the impact of outlier filtering on the electricity price forecasting accuracy</A></B>,"
+<A HREF="/s/eee/appene.html">Applied Energy</A>, Elsevier, vol. 236(C), pages 196-210.
+<LI class="list-group-item downfree"> Luigi Grossi & Fany Nan, 2018.
+ "<B><A HREF="/p/ieb/wpaper/doc2018-10.html">The influence of renewables on electricity price forecasting: a robust approach</A></B>,"
+<A HREF="/s/ieb/wpaper.html">Working Papers</A> 
+2018/10, Institut d'Economia de Barcelona (IEB).
+<LI class="list-group-item downfree"> Luigi Grossi & Fany Nan, 2017.
+ "<B><A HREF="/p/ver/wpaper/06-2017.html">Forecasting electricity prices through robust nonlinear models</A></B>,"
+<A HREF="/s/ver/wpaper.html">Working Papers</A> 
+06/2017, University of Verona, Department of Economics.
+<LI class="list-group-item downgate">  Grossi, Luigi & Nan, Fany, 2019.
+"<B><A HREF="/a/eee/tefoso/v141y2019icp305-318.html">Robust forecasting of electricity prices: Simulations, models and the impact of renewable sources</A></B>,"
+<A HREF="/s/eee/tefoso.html">Technological Forecasting and Social Change</A>, Elsevier, vol. 141(C), pages 305-318.
+<LI class="list-group-item downfree">  Arkadiusz Jędrzejewski & Grzegorz Marcjasz & Rafał Weron, 2021.
+"<B><A HREF="/a/gam/jeners/v14y2021i11p3249-d567421.html">Importance of the Long-Term Seasonal Component in Day-Ahead Electricity Price Forecasting Revisited: Parameter-Rich Models Estimated via the LASSO</A></B>,"
+<A HREF="/s/gam/jeners.html">Energies</A>, MDPI, vol. 14(11), pages 1-17, June.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Arkadiusz Jedrzejewski & Grzegorz Marcjasz & Rafal Weron, 2021.
+ "<B><A HREF="/p/ahh/wpaper/worms2104.html">Importance of the long-term seasonal component in day-ahead electricity price forecasting revisited: Parameter-rich models estimated via the LASSO</A></B>,"
+<A HREF="/s/ahh/wpaper.html">WORking papers in Management Science (WORMS)</A> 
+WORMS/21/04, Department of Operations Research and Business Intelligence, Wroclaw University of Science and Technology.
+
+
+
+</UL></div>
+<LI class="list-group-item downfree"> Katarzyna Maciejowska & Bartosz Uniejewski & Rafa{l} Weron, 2022.
+ "<B><A HREF="/p/arx/papers/2204.11735.html">Forecasting Electricity Prices</A></B>,"
+<A HREF="/s/arx/papers.html">Papers</A> 
+2204.11735, arXiv.org.
+</ol>
+</div>
+
+  <div class="tab-pane fade" id="more" role="tabpanel" aria-labelledby="more-tab">
+    <H2> More about this item</H2>  <h3>Keywords</h3><form action="/cgi-bin/htsearch2" method="post" class="inline"><input type="hidden" name="q" value="Electricity spot price"><button type="submit" value="submit" class="link-button">Electricity spot price</button></form>; <form action="/cgi-bin/htsearch2" method="post" class="inline"><input type="hidden" name="q" value="Forecasting"><button type="submit" value="submit" class="link-button">Forecasting</button></form>; <form action="/cgi-bin/htsearch2" method="post" class="inline"><input type="hidden" name="q" value="Day-ahead market"><button type="submit" value="submit" class="link-button">Day-ahead market</button></form>; <form action="/cgi-bin/htsearch2" method="post" class="inline"><input type="hidden" name="q" value="Long-term seasonal component"><button type="submit" value="submit" class="link-button">Long-term seasonal component</button></form>; <form action="/cgi-bin/htsearch2" method="post" class="inline"><input type="hidden" name="q" value="Electricity spot price Forecasting Day-ahead market Long-term seasonal component "><button type="submit" value="submit" class="link-button">All these keywords</button></form><H3><A HREF="/j/">JEL</A> classification:</h3>
+ <UL> <LI><A HREF="/j/C14.html"><B>C14</B></A> - Mathematical and Quantitative Methods - - Econometric and Statistical Methods and Methodology: General - - - Semiparametric and Nonparametric Methods: General</LI>
+ <LI><A HREF="/j/C22.html"><B>C22</B></A> - Mathematical and Quantitative Methods - - Single Equation Models; Single Variables - - - Time-Series Models; Dynamic Quantile Regressions; Dynamic Treatment Effect Models; Diffusion Processes</LI>
+ <LI><A HREF="/j/C51.html"><B>C51</B></A> - Mathematical and Quantitative Methods - - Econometric Modeling - - - Model Construction and Estimation</LI>
+ <LI><A HREF="/j/C53.html"><B>C53</B></A> - Mathematical and Quantitative Methods - - Econometric Modeling - - - Forecasting and Prediction Models; Simulation Methods</LI>
+ <LI><A HREF="/j/Q47.html"><B>Q47</B></A> - Agricultural and Natural Resource Economics; Environmental and Ecological Economics - - Energy - - - Energy Forecasting</LI>
+ </UL><P>
+<h3>NEP fields</h3>
+ This paper has been announced in the following <A HREF="http://nep.repec.org/">NEP Reports</A>:
+ <UL><LI><A HREF="/n/nep-ene/2016-04-04.html">NEP-ENE-2016-04-04</A> (Energy Economics)</LI>
+<LI><A HREF="/n/nep-for/2016-04-04.html">NEP-FOR-2016-04-04</A> (Forecasting)</LI>
+</UL>
+<h3>Statistics</h3>
+ <A      HREF="http://logec.repec.org/scripts/paperstat.pl?h=RePEc:wuu:wpaper:hsc1605">Access and download statistics</A>
+</div>
+
+<!-- placeholder usernotes tab-->
+ <div class="tab-pane fade" id="correct" role="tabpanel" aria-labelledby="correct-tab">
+    <h2>Corrections</H2>
+    <P>All material on this site has been provided by the respective publishers and authors. You can help correct errors and omissions. When requesting a correction, please mention this item's handle: <I style="word-break:break-all;">RePEc:wuu:wpaper:hsc1605</I>. See <A HREF="/corrections.html">general information</A> about how to correct material in RePEc.
+      </P><P>
+      If you have authored this item and are not yet registered with RePEc, we encourage you to do it <A HREF="https://authors.repec.org/new-user">here</A>. This allows to link your profile to this item. It also allows you to accept potential citations to this item that we are uncertain about.
+      </P><p>If <A HREF="http://citec.repec.org/" target ="_blank">CitEc <i class="bi bi-box-arrow-up-right"></i></a> recognized a bibliographic reference but did not link an item in RePEc to it, you can help with <A HREF="http://citec.repec.org/cgi-bin/get_data.pl?h=RePEc:wuu:wpaper:hsc1605&o=all" target="_blank">this form <I class="bi bi-box-arrow-up-right"></I></A>.</p><P>
+      If you know of missing items citing this one, you can help us creating those links by adding the relevant references in the same way as above, for each refering item. If you are a registered author of this item, you may also want to check the "citations" tab in your <a href="https://authors.repec.org/">RePEc Author Service</A> profile, as there may be some citations waiting for confirmation.
+      </P><P>
+        For technical questions regarding this item, or to correct its authors, title, abstract, bibliographic or download information, contact: Rafal Weron (email available below). General contact details of provider: <A HREF="https://edirc.repec.org/data/hspwrpl.html" target="_blank" style="word-break:break-all;">https://edirc.repec.org/data/hspwrpl.html <i class="bi bi-box-arrow-up-right"></i></A>.
+
+<div id="viewemail">
+<form id="emailForm" action="/cgi-bin/getemail.cgi" method="POST">
+<input type="hidden" name="handle" value="repec:wuu:wpaper:m">
+<div id="captcha_container"></div>
+          <input type="submit" value="View email address">
+      </form>
+      <script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script>
+<div id="emailResponse"></div>
+</div>
+</p><p>
+      Please note that corrections may take a couple of weeks to filter through
+      the various RePEc services.</p>
+</div>
+</div>
+</div>
+<div id="footer" class="row d-print-none">
+  <div class="col-sm-6 more-services">
+    <h3 style="border-bottom: 1px solid #111; position: relative; right:0.9em;">More services and features</h3>
+    <div class="row">
+      <div class="list-group col">
+        <a href="/cgi-bin/myideas.cgi" class="list-group-item">
+          <h4 class="list-group-item-heading">MyIDEAS</h4>
+          <p class="list-group-item-text">Follow serials, authors, keywords &amp; more</p>
+        </a>
+        <a href="http://authors.repec.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">Author registration</h4>
+          <p class="list-group-item-text">Public profiles for Economics researchers</p>
+        </a>
+        <a href="http://ideas.repec.org/top/" class="list-group-item">
+          <h4 class="list-group-item-heading">Rankings</h4>
+          <p class="list-group-item-text">Various research rankings in Economics</p>
+        </a>
+        <a href="http://genealogy.repec.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">RePEc Genealogy</h4>
+          <p class="list-group-item-text">Who was a student of whom, using RePEc</p>
+        </a>
+        <a href="http://biblio.repec.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">RePEc Biblio</h4>
+          <p class="list-group-item-text">Curated articles &amp; papers on economics topics</p>
+        </a>
+      </div>
+      <div class="list-group col">
+        <a href="http://mpra.ub.uni-muenchen.de/" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">MPRA  <i class="bi bi-box-arrow-up-right"></i></h4>
+          <p class="list-group-item-text">Upload your paper to be listed on RePEc and IDEAS</p>
+        </a>
+        <a href="http://nep.repec.org/" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">New papers by email <i class="bi bi-box-arrow-up-right"></i></h4>
+          <p class="list-group-item-text">Subscribe to new additions to RePEc</p>
+        </a>
+        <a href="http://www.econacademics.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">EconAcademics</h4>
+          <p class="list-group-item-text">Blog aggregator for economics research</p>
+        </a>
+        <a href="http://plagiarism.repec.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">Plagiarism</h4>
+          <p class="list-group-item-text">Cases of plagiarism in Economics</p>
+        </a>
+      </div>
+      </div>
+    </div>
+    <div class="col-sm more-services">
+      <h3 style="border-bottom: 1px solid #111;">About RePEc</h3>
+      <div class="list-group col">
+        <a href="http://repec.org/" class="list-group-item" target="_blank">
+	  <h4 class="list-group-item-heading">RePEc home <i class="bi bi-box-arrow-up-right"></i></h4>
+	  <p class="list-group-item-text">Initiative for open bibliographies in Economics</p>
+	</a>
+        <a href="http://blog.repec.org/" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">Blog <i class="bi bi-box-arrow-up-right"></i></h4>
+          <p class="list-group-item-text">News about RePEc</p>
+	</a>
+        <a href="/help.html" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">Help/FAQ <i class="bi bi-box-arrow-up-right"></i></h4>
+          <p class="list-group-item-text">Questions about IDEAS and RePEc</p>
+	</a>
+        <a href="/team.html" class="list-group-item">
+          <h4 class="list-group-item-heading">RePEc team</h4>
+          <p class="list-group-item-text">RePEc volunteers</p>
+	</a>
+        <a href="/archives.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Participating archives</h4>
+          <p class="list-group-item-text">Publishers indexing in RePEc</p>
+	</a>
+        <a href="https://ideas.repec.org/privacy.html" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">Privacy statement <i class="bi bi-box-arrow-up-right"></i></h4>
+	</a>
+      </div>
+    </div>
+    <div class="col-sm more-services">
+      <h3 style="border-bottom: 1px solid #111;">Help us</h3>
+      <div class="list-group col">
+        <a href="/corrections.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Corrections</h4>
+          <p class="list-group-item-text">Found an error or omission?</p>
+	</a>
+        <a href="/volunteers.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Volunteers</h4>
+          <p class="list-group-item-text">Opportunities to help RePEc</p>
+	</a>
+        <a href="/participate.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Get papers listed</h4>
+          <p class="list-group-item-text">Have your research listed on RePEc</p>
+	</a>
+        <a href="/stepbystep.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Open a RePEc archive</h4>
+          <p class="list-group-item-text">Have your institution's/publisher's output listed on RePEc</p>
+	</a>
+	<a href="/getdata.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Get RePEc data</h4>
+          <p class="list-group-item-text">Use data assembled by RePEc</p>
+	</a>
+      </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-12" style="text-align: center; padding-top: 10px;">
+    <div id="sidelogos">
+      <a href="https://ideas.repec.org/">IDEAS</a> is a <a href="http://repec.org/" target="_blank">RePEc <i class="bi bi-box-arrow-up-right"></i></a> service. RePEc uses bibliographic data supplied by the respective publishers.
+    </div>
+  </div>
+  
+  
+</div>
+</div>
+
+</div>
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/share-to-mastodon@0.2.0/dist/share-to-mastodon.js"></script>
+<script src="/css/ideas.js"></script>
+<script src="/css/pushy.js"></script>
+<script>
+$(document).ready(function() {
+    // show active tab on reload
+    if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+
+    // remember the hash in the URL without jumping
+//    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+//       if(history.pushState) {
+//            history.pushState(null, null, '#'+$(e.target).attr('href').substr(1));
+//       } else {
+//            location.hash = '#'+$(e.target).attr('href').substr(1);
+//       }
+//    });
+});
+</script>
+
+</BODY>
+</HTML>

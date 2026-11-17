@@ -1,0 +1,300 @@
+[
+ {
+  "name": "sp_backslash_space",
+  "tex": "a\\ b",
+  "ok": true,
+  "w": 69,
+  "h": 46,
+  "aspect": 1.5
+ },
+ {
+  "name": "tilde_braced",
+  "tex": "\\tilde{r}(k)",
+  "ok": true,
+  "w": 75,
+  "h": 49,
+  "aspect": 1.531
+ },
+ {
+  "name": "tilde_bare",
+  "tex": "\\tilde r(k)",
+  "ok": true,
+  "w": 76,
+  "h": 49,
+  "aspect": 1.551
+ },
+ {
+  "name": "argmin",
+  "tex": "\\arg\\min_{p\\in P} f(p)",
+  "ok": true,
+  "w": 219,
+  "h": 75,
+  "aspect": 2.92
+ },
+ {
+  "name": "argmin_mathrm",
+  "tex": "\\mathrm{arg\\,min}_{p\\in P} f(p)",
+  "ok": true,
+  "w": 288,
+  "h": 54,
+  "aspect": 5.333
+ },
+ {
+  "name": "dfrac",
+  "tex": "\\dfrac{1}{2}",
+  "ok": true,
+  "w": 34,
+  "h": 83,
+  "aspect": 0.41
+ },
+ {
+  "name": "frac",
+  "tex": "\\frac{1}{2}",
+  "ok": true,
+  "w": 27,
+  "h": 65,
+  "aspect": 0.415
+ },
+ {
+  "name": "big",
+  "tex": "\\big(x\\big)",
+  "ok": false,
+  "error": "ParseFatalException: Unknown symbol: \\big, found '\\'  (at char 0), (line:1, col:1)"
+ },
+ {
+  "name": "left_right",
+  "tex": "\\left(x\\right)",
+  "ok": true,
+  "w": 59,
+  "h": 47,
+  "aspect": 1.255
+ },
+ {
+  "name": "cases",
+  "tex": "f=\\begin{cases}a\\\\b\\end{cases}",
+  "ok": false,
+  "error": "ParseFatalException: Unknown symbol: \\begin, found '\\'  (at char 2), (line:1, col:3)"
+ },
+ {
+  "name": "braces",
+  "tex": "P=\\{1,2,3\\}",
+  "ok": true,
+  "w": 239,
+  "h": 48,
+  "aspect": 4.979
+ },
+ {
+  "name": "hash",
+  "tex": "\\#\\{x\\}",
+  "ok": true,
+  "w": 110,
+  "h": 48,
+  "aspect": 2.292
+ },
+ {
+  "name": "substack2",
+  "tex": "\\substack{a\\\\b}",
+  "ok": true,
+  "w": 32,
+  "h": 69,
+  "aspect": 0.464
+ },
+ {
+  "name": "substack3",
+  "tex": "\\substack{a\\\\b\\\\c}",
+  "ok": true,
+  "w": 32,
+  "h": 97,
+  "aspect": 0.33
+ },
+ {
+  "name": "substack_cond",
+  "tex": "\\tilde{r}=\\substack{r(k+s-j)\\ \\mathrm{if}\\ s\\le j\\\\ \\hat{r}(k+s-j)\\ \\mathrm{otherwise}}",
+  "ok": false,
+  "error": "ParseSyntaxException: Unknown symbol: \\le, found '\\'  (at char 44), (line:1, col:45)"
+ },
+ {
+  "name": "mathrm_today",
+  "tex": "\\hat{L}(D=\\mathrm{today})",
+  "ok": true,
+  "w": 246,
+  "h": 62,
+  "aspect": 3.968
+ },
+ {
+  "name": "brace_eq",
+  "tex": "\\hat{L}(D{=}\\mathrm{today})",
+  "ok": true,
+  "w": 246,
+  "h": 62,
+  "aspect": 3.968
+ },
+ {
+  "name": "text_space",
+  "tex": "\\text{the observed slots}",
+  "ok": true,
+  "w": 367,
+  "h": 46,
+  "aspect": 7.978
+ },
+ {
+  "name": "times",
+  "tex": "n_s\\times n_h",
+  "ok": true,
+  "w": 137,
+  "h": 46,
+  "aspect": 2.978
+ },
+ {
+  "name": "leq",
+  "tex": "s-j\\le 0",
+  "ok": false,
+  "error": "ParseFatalException: Unknown symbol: \\le, found '\\'  (at char 3), (line:1, col:4)"
+ },
+ {
+  "name": "mid",
+  "tex": "\\hat{y}(k+h\\mid k)",
+  "ok": true,
+  "w": 212,
+  "h": 54,
+  "aspect": 3.926
+ },
+ {
+  "name": "vdots",
+  "tex": "\\vdots",
+  "ok": true,
+  "w": 31,
+  "h": 46,
+  "aspect": 0.674
+ },
+ {
+  "name": "cdots",
+  "tex": "r(k),\\cdots,r(k-p+1)",
+  "ok": true,
+  "w": 367,
+  "h": 50,
+  "aspect": 7.34
+ },
+ {
+  "name": "prctile",
+  "tex": "q_1(d),q_{99}(d)=\\mathrm{prctile}\\{y(j)\\}",
+  "ok": true,
+  "w": 522,
+  "h": 50,
+  "aspect": 10.44
+ },
+ {
+  "name": "clip",
+  "tex": "\\mathrm{clip}\\left(x,\\,q_1,\\,q_{99}\\right)",
+  "ok": true,
+  "w": 283,
+  "h": 50,
+  "aspect": 5.66
+ },
+ {
+  "name": "sqrtfrac",
+  "tex": "\\sqrt{\\frac{1}{n_d}\\sum_{d=1}^{n_d}E^2}",
+  "ok": true,
+  "w": 209,
+  "h": 131,
+  "aspect": 1.595
+ },
+ {
+  "name": "overbrace",
+  "tex": "\\overbrace{x+y}^{\\text{total}}",
+  "ok": false,
+  "error": "ParseFatalException: Unknown symbol: \\overbrace, found '\\'  (at char 0), (line:1, col:1)"
+ },
+ {
+  "name": "underbrace",
+  "tex": "\\underbrace{x+y}_{\\text{total}}",
+  "ok": false,
+  "error": "ParseFatalException: Unknown symbol: \\underbrace, found '\\'  (at char 0), (line:1, col:1)"
+ },
+ {
+  "name": "color",
+  "tex": "\\color{red}{x}",
+  "ok": false,
+  "error": "ParseFatalException: Unknown symbol: \\color, found '\\'  (at char 0), (line:1, col:1)"
+ },
+ {
+  "name": "mathbf",
+  "tex": "\\mathbf{w}",
+  "ok": true,
+  "w": 44,
+  "h": 46,
+  "aspect": 0.957
+ },
+ {
+  "name": "mathcal",
+  "tex": "\\mathcal{W}",
+  "ok": true,
+  "w": 48,
+  "h": 46,
+  "aspect": 1.043
+ },
+ {
+  "name": "longleftarrow",
+  "tex": "\\theta\\leftarrow\\theta+G\\xi",
+  "ok": true,
+  "w": 205,
+  "h": 50,
+  "aspect": 4.1
+ },
+ {
+  "name": "approx",
+  "tex": "\\lambda\\approx 0.98",
+  "ok": true,
+  "w": 166,
+  "h": 46,
+  "aspect": 3.609
+ },
+ {
+  "name": "pm",
+  "tex": "\\pm 1",
+  "ok": true,
+  "w": 63,
+  "h": 46,
+  "aspect": 1.37
+ },
+ {
+  "name": "partial",
+  "tex": "\\partial x",
+  "ok": true,
+  "w": 53,
+  "h": 46,
+  "aspect": 1.152
+ },
+ {
+  "name": "prime",
+  "tex": "D'_h",
+  "ok": true,
+  "w": 67,
+  "h": 48,
+  "aspect": 1.396
+ },
+ {
+  "name": "norm",
+  "tex": "\\|x\\|_2",
+  "ok": true,
+  "w": 86,
+  "h": 51,
+  "aspect": 1.686
+ },
+ {
+  "name": "colon_eq",
+  "tex": "\\rho(k):=\\frac{n}{288}",
+  "ok": true,
+  "w": 215,
+  "h": 59,
+  "aspect": 3.644
+ },
+ {
+  "name": "text_sub",
+  "tex": "p^{\\ast}(s,h)",
+  "ok": true,
+  "w": 152,
+  "h": 52,
+  "aspect": 2.923
+ }
+]

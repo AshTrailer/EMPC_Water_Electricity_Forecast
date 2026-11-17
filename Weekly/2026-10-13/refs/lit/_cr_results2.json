@@ -1,0 +1,213 @@
+[
+ {
+  "doi": "10.1016/j.eswa.2012.01.039",
+  "title": "A review and comparison of strategies for multi-step ahead time series forecasting based on the NN5 forecasting competition",
+  "year": 2012,
+  "venue": "Expert Systems with Applications",
+  "authors": "Souhaib Ben Taieb; Gianluca Bontempi; Amir F. Atiya; Antti Sorjamaa",
+  "volume": "39",
+  "page": "7067-7083"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2018.06.001",
+  "title": "The M4 Competition: Results, findings, conclusion and way forward",
+  "year": 2018,
+  "venue": "International Journal of Forecasting",
+  "authors": "Spyros Makridakis; Evangelos Spiliotis; Vassilios Assimakopoulos",
+  "volume": "34",
+  "page": "802-808"
+ },
+ {
+  "doi": "10.2469/faj.v48.n5.28",
+  "title": "Global Portfolio Optimization",
+  "year": 1992,
+  "venue": "Financial Analysts Journal",
+  "authors": "Fischer Black; Robert Litterman",
+  "volume": "48",
+  "page": "28-43"
+ },
+ {
+  "doi": "10.1109/access.2020.3014241",
+  "title": "A Deep Learning Based Hybrid Framework for Day-Ahead Electricity Price Forecasting",
+  "year": 2020,
+  "venue": "IEEE Access",
+  "authors": "Rongquan Zhang; Gangqiang Li; Zhengwei Ma",
+  "volume": "8",
+  "page": "143423-143436"
+ },
+ {
+  "doi": "10.3390/en13071667",
+  "title": "Beating the Naïve—Combining LASSO with Naïve Intraday Electricity Price Forecasts",
+  "year": 2020,
+  "venue": "Energies",
+  "authors": "Grzegorz Marcjasz; Bartosz Uniejewski; Rafał Weron",
+  "volume": "13",
+  "page": "1667"
+ },
+ {
+  "doi": "10.3390/en14113249",
+  "title": "Importance of the Long-Term Seasonal Component in Day-Ahead Electricity Price Forecasting Revisited: Parameter-Rich Models Estimated via the LASSO",
+  "year": 2021,
+  "venue": "Energies",
+  "authors": "Arkadiusz Jędrzejewski; Grzegorz Marcjasz; Rafał Weron",
+  "volume": "14",
+  "page": "3249"
+ },
+ {
+  "doi": "10.3390/en11082039",
+  "title": "Efficient Forecasting of Electricity Spot Prices with Expert and LASSO Models",
+  "year": 2018,
+  "venue": "Energies",
+  "authors": "Bartosz Uniejewski; Rafał Weron",
+  "volume": "11",
+  "page": "2039"
+ },
+ {
+  "doi": "10.3390/en9080621",
+  "title": "Automated Variable Selection and Shrinkage for Day-Ahead Electricity Price Forecasting",
+  "year": 2016,
+  "venue": "Energies",
+  "authors": "Bartosz Uniejewski; Jakub Nowotarski; Rafał Weron",
+  "volume": "9",
+  "page": "621"
+ },
+ {
+  "doi": "10.1016/j.eswa.2012.01.039",
+  "title": "A review and comparison of strategies for multi-step ahead time series forecasting based on the NN5 forecasting competition",
+  "year": 2012,
+  "venue": "Expert Systems with Applications",
+  "authors": "Souhaib Ben Taieb; Gianluca Bontempi; Amir F. Atiya; Antti Sorjamaa",
+  "volume": "39",
+  "page": "7067-7083"
+ },
+ {
+  "doi": "10.1016/j.energy.2022.123107",
+  "title": "Data-driven modeling for long-term electricity price forecasting",
+  "year": 2022,
+  "venue": "Energy",
+  "authors": "Paolo Gabrielli; Moritz Wüthrich; Steffen Blume; Giovanni Sansavini",
+  "volume": "244",
+  "page": "123107"
+ },
+ {
+  "doi": "10.1214/13-aoas652",
+  "title": "Modeling and forecasting electricity spot prices: A functional data perspective",
+  "year": 2013,
+  "venue": "The Annals of Applied Statistics",
+  "authors": "Dominik Liebl",
+  "volume": "7",
+  "page": "1562-1592"
+ },
+ {
+  "doi": "10.3390/en18246422",
+  "title": "A Review of Recent Trends in Electricity Price Forecasting Using Deep Learning Techniques",
+  "year": 2025,
+  "venue": "Energies",
+  "authors": "Tomasz Jasiński",
+  "volume": "18",
+  "page": "6422"
+ },
+ {
+  "doi": "10.3390/en18123097",
+  "title": "A Review of Electricity Price Forecasting Models in the Day-Ahead, Intra-Day, and Balancing Markets",
+  "year": 2025,
+  "venue": "Energies",
+  "authors": "Ciaran O’Connor; Mohamed Bahloul; Steven Prestwich; Andrea Visentin",
+  "volume": "18",
+  "page": "3097"
+ },
+ {
+  "doi": "10.1016/j.apenergy.2024.124975",
+  "title": "Bayesian hierarchical probabilistic forecasting of intraday electricity prices",
+  "year": 2025,
+  "venue": "Applied Energy",
+  "authors": "Daniel Nickelsen; Gernot Müller",
+  "volume": "380",
+  "page": "124975"
+ },
+ {
+  "doi": "10.48550/arxiv.2204.11735",
+  "http": 404
+ },
+ {
+  "doi": "10.1016/j.apenergy.2021.118049",
+  "title": "Framework for collaborative intelligence in forecasting day-ahead electricity price",
+  "year": 2022,
+  "venue": "Applied Energy",
+  "authors": "Sergio Beltrán; Alain Castro; Ion Irizar; Gorka Naveran; Imanol Yeregui",
+  "volume": "306",
+  "page": "118049"
+ },
+ {
+  "doi": "10.1016/j.eswa.2012.01.039",
+  "title": "A review and comparison of strategies for multi-step ahead time series forecasting based on the NN5 forecasting competition",
+  "year": 2012,
+  "venue": "Expert Systems with Applications",
+  "authors": "Souhaib Ben Taieb; Gianluca Bontempi; Amir F. Atiya; Antti Sorjamaa",
+  "volume": "39",
+  "page": "7067-7083"
+ },
+ {
+  "doi": "10.1111/j.1468-0084.2008.00541.x",
+  "title": "A Simple Explanation of the Forecast Combination Puzzle*",
+  "year": 2009,
+  "venue": "Oxford Bulletin of Economics and Statistics",
+  "authors": "Jeremy Smith; Kenneth F. Wallis",
+  "volume": "71",
+  "page": "331-355"
+ },
+ {
+  "doi": "10.3905/jpm.2004.110",
+  "title": "Honey, I Shrunk the Sample Covariance Matrix",
+  "year": 2004,
+  "venue": "The Journal of Portfolio Management",
+  "authors": "Olivier Ledoit; Michael Wolf",
+  "volume": "30",
+  "page": "110-119"
+ },
+ {
+  "doi": "10.1093/jjfinec/nbp001",
+  "title": "A Simple Approximate Long-Memory Model of Realized Volatility",
+  "year": 2008,
+  "venue": "Journal of Financial Econometrics",
+  "authors": "F. Corsi",
+  "volume": "7",
+  "page": "174-196"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2019.02.001",
+  "title": "Understanding intraday electricity markets: Variable selection and very short-term price forecasting using LASSO",
+  "year": 2019,
+  "venue": "International Journal of Forecasting",
+  "authors": "Bartosz Uniejewski; Grzegorz Marcjasz; Rafał Weron",
+  "volume": "35",
+  "page": "1533-1547"
+ },
+ {
+  "doi": "10.1109/tpwrs.2016.2521545",
+  "title": "Forecasting Electricity Spot Prices Using Lasso: On Capturing the Autoregressive Intraday Structure",
+  "year": 2016,
+  "venue": "IEEE Transactions on Power Systems",
+  "authors": "Florian Ziel",
+  "volume": "31",
+  "page": "4977-4987"
+ },
+ {
+  "doi": "10.1016/j.eneco.2014.04.003",
+  "title": "The impact of wind power generation on the electricity price in Germany",
+  "year": 2014,
+  "venue": "Energy Economics",
+  "authors": "Janina C. Ketterer",
+  "volume": "44",
+  "page": "270-280"
+ },
+ {
+  "doi": "10.1016/j.eneco.2014.07.014",
+  "title": "An empirical comparison of alternative schemes for combining electricity spot price forecasts",
+  "year": 2014,
+  "venue": "Energy Economics",
+  "authors": "Jakub Nowotarski; Eran Raviv; Stefan Trück; Rafał Weron",
+  "volume": "46",
+  "page": "395-412"
+ }
+]

@@ -1,4 +1,4 @@
-function [value, src, age_min, target_min, src_name] = official_composite(origin, lead_min, cfg)
+function [value, src, age_min, target_min, src_name, allv] = official_composite(origin, lead_min, cfg)
    % OFFICIAL_COMPOSITE  The official forecast as it stood at one origin
    %
    %    One origin in, one forecast vector out, using only runs published at or
@@ -28,6 +28,11 @@ function [value, src, age_min, target_min, src_name] = official_composite(origin
    %       age_min    (n x 1) age of the supplying run at the origin, minutes
    %       target_min (n x 1) int64, the target interval end in NEM minutes
    %       src_name   (n x 1) string, cfg.names(src) or "" where none
+   %       allv       (n x n_prod) the same target priced by EVERY product that
+   %                  reaches it, not only the one that won. The sixth output
+   %                  exists for one question: whether two products agree where
+   %                  their horizons overlap. The chosen value alone cannot
+   %                  answer it, because the selection never keeps both.
    %
    %    See also OFFICIAL_COMPOSITE_LOAD, OFFICIAL_LEAD_AXIS, NEM_MINUTES.
 
@@ -52,15 +57,15 @@ function [value, src, age_min, target_min, src_name] = official_composite(origin
    value = nan(n, 1);
    src = zeros(n, 1);
    age_min = nan(n, 1);
+   allv = nan(n, numel(cfg.products));
 
    for p = 1:numel(cfg.products)
       todo = find(src == 0);
-      if isempty(todo), break; end
       pr = cfg.products(p);
       k = find(pr.eff <= O, 1, 'last');
       if isempty(k), continue; end
 
-      d = T(todo) - pr.eff(k);
+      d = T - pr.eff(k);
       ok = (d >= 0) & (d <= pr.leadmax(k)) & (mod(d, pr.step) == 0);
       if ~any(ok), continue; end
 
@@ -68,9 +73,14 @@ function [value, src, age_min, target_min, src_name] = official_composite(origin
       v = pr.vals((k - 1) * pr.n_col + col);
       good = isfinite(v);
 
-      sel = todo(ok);
+      sel = find(ok);
       sel = sel(good);
-      value(sel) = v(good);
+      allv(sel, p) = v(good);
+
+      if isempty(todo), continue; end
+      hit = ismember(sel, todo);
+      sel = sel(hit);
+      value(sel) = v(hit);
       src(sel) = p;
       % Age is how old the supplying run is AT THE ORIGIN. That is not the
       % row's lead from that run: the two differ by exactly that lead, and

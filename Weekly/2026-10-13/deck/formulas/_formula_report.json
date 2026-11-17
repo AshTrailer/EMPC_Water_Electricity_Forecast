@@ -1,0 +1,1604 @@
+[
+ {
+  "name": "m_err",
+  "tex": "e(k,h) = y\\left(k+h\\right) - \\hat{y}\\left(k+h \\mid k\\right)",
+  "caption": "error of one interval, in dollars per megawatt hour",
+  "state": "OK",
+  "file": "m_err__bf5800a3.png",
+  "w": 1726,
+  "h": 160,
+  "aspect": 10.787,
+  "nat_w_in": 2.877,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 33562,
+  "bbox": [
+   18,
+   12,
+   1714,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m_mse",
+  "tex": "\\mathrm{MSE}(s,h) = \\frac{1}{n_d}\\sum_{d\\,\\in\\,D_{\\mathrm{score}}} e\\left(k(d,s,h),\\,h\\right)^{2}",
+  "caption": "MSE of one cell: mean of the squared errors over the 32 scored days",
+  "state": "OK",
+  "file": "m_mse__6f374841.png",
+  "w": 2056,
+  "h": 278,
+  "aspect": 7.396,
+  "nat_w_in": 3.427,
+  "nat_h_in": 0.463,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 49906,
+  "bbox": [
+   24,
+   13,
+   2043,
+   263
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m_rmse",
+  "tex": "R(s,h) = \\sqrt{\\mathrm{MSE}(s,h)}",
+  "caption": "RMSE of one cell: the number every surface, census and test is built on",
+  "state": "OK",
+  "file": "m_rmse__cc59bee0.png",
+  "w": 1178,
+  "h": 176,
+  "aspect": 6.693,
+  "nat_w_in": 1.963,
+  "nat_h_in": 0.293,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 30211,
+  "bbox": [
+   16,
+   13,
+   1167,
+   154
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m_med_lead",
+  "tex": "\\mathrm{med}_s\\,R(s,h) \\quad \\mathrm{over\\ the\\ 288\\ times\\ of\\ day}",
+  "caption": "the median used for every fixed-lead number",
+  "state": "OK",
+  "file": "m_med_lead__65c3a341.png",
+  "w": 2342,
+  "h": 143,
+  "aspect": 16.378,
+  "nat_w_in": 3.903,
+  "nat_h_in": 0.238,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 54687,
+  "bbox": [
+   23,
+   14,
+   2329,
+   129
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m_med_slot",
+  "tex": "\\mathrm{med}_h\\,R(s,h) \\quad \\mathrm{over\\ the\\ 376\\ leads}",
+  "caption": "the median used for every fixed-time-of-day number",
+  "state": "OK",
+  "file": "m_med_slot__b413c141.png",
+  "w": 1932,
+  "h": 139,
+  "aspect": 13.899,
+  "nat_w_in": 3.22,
+  "nat_h_in": 0.232,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 44413,
+  "bbox": [
+   23,
+   11,
+   1919,
+   121
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m_pooled",
+  "tex": "\\mathrm{pooled} = \\sqrt{\\frac{1}{|\\Omega|}\\sum_{(s,h)\\in\\Omega}R(s,h)^{2}}",
+  "caption": "one number over the whole grid: a fingerprint, never a ranking",
+  "state": "OK",
+  "file": "m_pooled__5ce0ff7a.png",
+  "w": 1641,
+  "h": 317,
+  "aspect": 5.177,
+  "nat_w_in": 2.735,
+  "nat_h_in": 0.528,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 50630,
+  "bbox": [
+   23,
+   20,
+   1630,
+   302
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m_units",
+  "tex": "\\left[e\\right] = \\left[R\\right] = \\frac{\\$}{\\mathrm{MWh}},\\qquad n_d = 32,\\qquad s \\in 1..288,\\qquad h \\in 1..376",
+  "caption": "units, sample count and index ranges, stated once",
+  "state": "OK",
+  "file": "m_units__a37f15fb.png",
+  "w": 3400,
+  "h": 202,
+  "aspect": 16.832,
+  "nat_w_in": 5.667,
+  "nat_h_in": 0.337,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 56734,
+  "bbox": [
+   23,
+   13,
+   3387,
+   187
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m_mse_alt",
+  "tex": "\\mathrm{MSE} = \\frac{1}{32}\\sum_{i=1}^{32} e_i^{2}\\quad \\mathrm{cross\\mbox{-}date;\\ not\\ across\\ slots\\ or\\ leads}",
+  "caption": "the same definition in the short form",
+  "state": "RENDER",
+  "detail": [
+   "ParseFatalException: Unknown symbol: \\mbox, found '\\'  (at char 69), (line:1, col:70)"
+  ]
+ },
+ {
+  "name": "slot",
+  "tex": "u(k,h) = \\mathrm{mod}\\left(s(k)-1+h,\\; n_s\\right)+1",
+  "caption": "target slot of lead h, wrapping the day",
+  "state": "OK",
+  "file": "slot__8256ccb5.png",
+  "w": 1956,
+  "h": 139,
+  "aspect": 14.072,
+  "nat_w_in": 3.26,
+  "nat_h_in": 0.232,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 37151,
+  "bbox": [
+   19,
+   12,
+   1944,
+   122
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "clamp",
+  "tex": "y_c(k) = \\min\\left(\\max\\left(y(k),\\, q_1(d)\\right),\\, q_{99}(d)\\right)",
+  "caption": "clamped price, the scored signal",
+  "state": "OK",
+  "file": "clamp__584dc1d0.png",
+  "w": 2118,
+  "h": 142,
+  "aspect": 14.915,
+  "nat_w_in": 3.53,
+  "nat_h_in": 0.237,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 49316,
+  "bbox": [
+   12,
+   14,
+   2106,
+   128
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "clampq",
+  "tex": "q_1(d),\\,q_{99}(d) = \\mathrm{prctile}\\left(\\left\\{y(j)\\right\\},\\,[1,99]\\right)\\quad \\mathrm{over\\ the\\ 30\\ complete\\ days\\ before\\ } d",
+  "caption": "clamp thresholds, recomputed daily",
+  "state": "OK",
+  "file": "clampq__889554f5.png",
+  "w": 4353,
+  "h": 143,
+  "aspect": 30.441,
+  "nat_w_in": 7.255,
+  "nat_h_in": 0.238,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 102949,
+  "bbox": [
+   18,
+   14,
+   4341,
+   129
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "rlsv",
+  "tex": "G = \\frac{P_{rls}\\,u}{\\lambda + u^{\\top} P_{rls}\\,u},\\qquad \\theta \\leftarrow \\theta + G\\left(z - u^{\\top}\\theta\\right),\\qquad P_{rls} \\leftarrow \\frac{1}{\\lambda}\\left(P_{rls} - G\\,u^{\\top} P_{rls}\\right)",
+  "caption": "vector RLS with exponential forgetting",
+  "state": "OK",
+  "file": "rlsv__d8585ce9.png",
+  "w": 3626,
+  "h": 225,
+  "aspect": 16.116,
+  "nat_w_in": 6.043,
+  "nat_h_in": 0.375,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 60649,
+  "bbox": [
+   18,
+   13,
+   3613,
+   210
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "rlss",
+  "tex": "G = \\frac{P_{rls}\\,u}{\\lambda + P_{rls}\\,u^{2}},\\qquad \\theta \\leftarrow \\theta + G\\left(z - \\theta u\\right),\\qquad P_{rls} \\leftarrow \\frac{(1 - G u)\\,P_{rls}}{\\lambda}",
+  "caption": "scalar RLS, the special case used by Theta-y",
+  "state": "OK",
+  "file": "rlss__60059895.png",
+  "w": 2964,
+  "h": 230,
+  "aspect": 12.887,
+  "nat_w_in": 4.94,
+  "nat_h_in": 0.383,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 51821,
+  "bbox": [
+   18,
+   15,
+   2953,
+   216
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "tmpl",
+  "tex": "T(s) = \\frac{1}{\\min(k_s,\\,n_T)}\\sum_{i=1}^{\\min(k_s,\\,n_T)} y_s^{(i)}",
+  "caption": "rolling per-slot template, n_T = 28 days",
+  "state": "OK",
+  "file": "tmpl__be8a171b.png",
+  "w": 1442,
+  "h": 363,
+  "aspect": 3.972,
+  "nat_w_in": 2.403,
+  "nat_h_in": 0.605,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 37223,
+  "bbox": [
+   18,
+   14,
+   1429,
+   348
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "resid",
+  "tex": "r(k) = y(k) - T_{k-1}\\left(s(k)\\right)",
+  "caption": "residual against the template as it stood before this point",
+  "state": "OK",
+  "file": "resid__4bee5dfa.png",
+  "w": 1320,
+  "h": 142,
+  "aspect": 9.296,
+  "nat_w_in": 2.2,
+  "nat_h_in": 0.237,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 25964,
+  "bbox": [
+   17,
+   14,
+   1308,
+   128
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "diff",
+  "tex": "\\Delta y(k) = y(k) - y(k-1)",
+  "caption": "first difference",
+  "state": "OK",
+  "file": "diff__b79b597f.png",
+  "w": 1282,
+  "h": 142,
+  "aspect": 9.028,
+  "nat_w_in": 2.137,
+  "nat_h_in": 0.237,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 25644,
+  "bbox": [
+   13,
+   14,
+   1269,
+   128
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "off_rule",
+  "tex": "T = O + L \\quad (L \\leq 55\\ \\mathrm{min}),\\qquad T = \\mathrm{ceil}_{30}\\left(O + L\\right) \\quad (L > 55\\ \\mathrm{min})",
+  "caption": "the target the official composite is sampled at",
+  "state": "OK",
+  "file": "off_rule__6f4ba178.png",
+  "w": 3369,
+  "h": 139,
+  "aspect": 24.237,
+  "nat_w_in": 5.615,
+  "nat_h_in": 0.232,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 58682,
+  "bbox": [
+   18,
+   12,
+   3356,
+   122
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "off_pick",
+  "tex": "\\mathrm{choose\\ the\\ first\\ } p \\in \\left\\{\\mathrm{P5MIN},\\ \\mathrm{PREDISPATCH},\\ \\mathrm{PD7DAY}\\right\\}\\ \\mathrm{with}\\ \\mathrm{eff}(p) \\leq O\\ \\mathrm{and}\\ T\\ \\mathrm{in\\ its\\ horizon}",
+  "caption": "causal selection: a run may only be used after it is published",
+  "state": "OK",
+  "file": "off_pick__4c7777bd.png",
+  "w": 5197,
+  "h": 142,
+  "aspect": 36.599,
+  "nat_w_in": 8.662,
+  "nat_h_in": 0.237,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 127645,
+  "bbox": [
+   19,
+   14,
+   5184,
+   128
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "off_age",
+  "tex": "\\mathrm{age} = O - \\mathrm{eff}(p)",
+  "caption": "staleness of the official value at the origin",
+  "state": "OK",
+  "file": "off_age__4ce3ebf5.png",
+  "w": 930,
+  "h": 143,
+  "aspect": 6.503,
+  "nat_w_in": 1.55,
+  "nat_h_in": 0.238,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 21334,
+  "bbox": [
+   20,
+   14,
+   917,
+   129
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "off_col",
+  "tex": "\\mathrm{col} = 1 + \\frac{T - \\mathrm{eff}(p)}{\\mathrm{step}(p)}",
+  "caption": "publication identity: target = effective time + step x (period - 1)",
+  "state": "OK",
+  "file": "off_col__25c8eb19.png",
+  "w": 927,
+  "h": 223,
+  "aspect": 4.157,
+  "nat_w_in": 1.545,
+  "nat_h_in": 0.372,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 23809,
+  "bbox": [
+   19,
+   15,
+   916,
+   210
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "lead_axis",
+  "tex": "\\ell_i = 5i\\ \\mathrm{min}\\ \\ (i = 1\\ldots11),\\qquad \\ell_i = 30\\left(i - 11\\right)\\ \\mathrm{min}\\ \\ (i = 12\\ldots376)",
+  "caption": "the 376-column lead axis",
+  "state": "OK",
+  "file": "lead_axis__83f7329c.png",
+  "w": 3435,
+  "h": 139,
+  "aspect": 24.712,
+  "nat_w_in": 5.725,
+  "nat_h_in": 0.232,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 58571,
+  "bbox": [
+   12,
+   11,
+   3423,
+   120
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "err_e",
+  "tex": "e(k,h) = y_c(k+h) - \\mathrm{clip}\\left(\\hat{y}(k+h\\mid k),\\, q_1,\\, q_{99}\\right)",
+  "caption": "one scored error",
+  "state": "OK",
+  "file": "err_e__c989f5fe.png",
+  "w": 2541,
+  "h": 161,
+  "aspect": 15.783,
+  "nat_w_in": 4.235,
+  "nat_h_in": 0.268,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 50604,
+  "bbox": [
+   18,
+   13,
+   2529,
+   148
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "err_E",
+  "tex": "E(s,h,d) = e(k,h)\\quad \\mathrm{for\\ the\\ } k \\mathrm{\\ with\\ } s(k+h) = s,\\ d(k+h) = d",
+  "caption": "the error cube, one sample per cell per day",
+  "state": "OK",
+  "file": "err_e__5802049a.png",
+  "w": 3363,
+  "h": 139,
+  "aspect": 24.194,
+  "nat_w_in": 5.605,
+  "nat_h_in": 0.232,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 67081,
+  "bbox": [
+   16,
+   12,
+   3350,
+   117
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "err_R",
+  "tex": "R(s,h) = \\sqrt{\\frac{1}{n_d}\\sum_{d\\,\\in\\,D_{score}} E(s,h,d)^{2}}",
+  "caption": "the RMSE surface, n_d = 32 scored days",
+  "state": "OK",
+  "file": "err_r__cd7d1425.png",
+  "w": 1750,
+  "h": 320,
+  "aspect": 5.469,
+  "nat_w_in": 2.917,
+  "nat_h_in": 0.533,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 49847,
+  "bbox": [
+   16,
+   21,
+   1739,
+   307
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "err_pool",
+  "tex": "\\bar{R} = \\sqrt{\\frac{1}{n_s\\,n_h\\,n_d}\\sum_{s,h,d} E(s,h,d)^{2}}\\qquad \\mathrm{fingerprint\\ only,\\ never\\ a\\ ranking\\ basis}",
+  "caption": "the pooled RMSE the deck refuses to rank on",
+  "state": "OK",
+  "file": "err_pool__979528b1.png",
+  "w": 3970,
+  "h": 317,
+  "aspect": 12.524,
+  "nat_w_in": 6.617,
+  "nat_h_in": 0.528,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 100358,
+  "bbox": [
+   16,
+   20,
+   3957,
+   302
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "dm",
+  "tex": "d_i = e^{2}_{m,i} - e^{2}_{o,i},\\qquad DM(s,h) = \\frac{\\bar{d}(s,h)}{\\sqrt{\\widehat{\\mathrm{Var}}\\left(\\bar{d}(s,h)\\right)}}\\quad \\mathrm{NeweyWest,\\ lag\\ 7}",
+  "caption": "paired per-cell Diebold-Mariano",
+  "state": "OK",
+  "file": "dm__f1c5c908.png",
+  "w": 3470,
+  "h": 281,
+  "aspect": 12.349,
+  "nat_w_in": 5.783,
+  "nat_h_in": 0.468,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 77691,
+  "bbox": [
+   18,
+   13,
+   3458,
+   267
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "dm_bh",
+  "tex": "\\mathrm{Benjamini-Hochberg\\ at\\ } \\alpha = 0.05\\ \\mathrm{over\\ all\\ } 108{,}288\\ \\mathrm{cells}",
+  "caption": "false discovery control",
+  "state": "OK",
+  "file": "dm_bh__3913b2a7.png",
+  "w": 3274,
+  "h": 143,
+  "aspect": 22.895,
+  "nat_w_in": 5.457,
+  "nat_h_in": 0.238,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 79349,
+  "bbox": [
+   24,
+   14,
+   3261,
+   129
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m1",
+  "tex": "\\hat{y}(k+h\\mid k) = y_{prev}\\left(u(k,h)\\right)",
+  "caption": "M1 Persistence: the same slot on the previous day",
+  "state": "OK",
+  "file": "m1__4f7473e5.png",
+  "w": 1491,
+  "h": 172,
+  "aspect": 8.669,
+  "nat_w_in": 2.485,
+  "nat_h_in": 0.287,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 30752,
+  "bbox": [
+   12,
+   12,
+   1478,
+   157
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m2",
+  "tex": "\\hat{y}(k+h\\mid k) = T\\left(u(k,h)\\right)",
+  "caption": "M2 Template T28: lead independent",
+  "state": "OK",
+  "file": "m2__e4898b7e.png",
+  "w": 1306,
+  "h": 160,
+  "aspect": 8.162,
+  "nat_w_in": 2.177,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 27069,
+  "bbox": [
+   12,
+   12,
+   1293,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m3",
+  "tex": "\\hat{y}(k+h\\mid k) = \\theta\\left(u(k,h)\\right)\\cdot y_{prev}\\left(u(k,h)\\right)",
+  "caption": "M3 Theta-y: one scalar gain per slot",
+  "state": "OK",
+  "file": "m3__ee538331.png",
+  "w": 2102,
+  "h": 172,
+  "aspect": 12.221,
+  "nat_w_in": 3.503,
+  "nat_h_in": 0.287,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 44510,
+  "bbox": [
+   12,
+   12,
+   2089,
+   157
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m4_rec",
+  "tex": "\\hat{r}(k+s\\mid k) = \\sum_{j=1}^{p}\\phi_j\\,\\tilde{r}(k+s-j),\\qquad \\tilde{r} = r\\ \\mathrm{if}\\ s-j \\leq 0,\\ \\ \\tilde{r} = \\hat{r}\\ \\mathrm{otherwise}",
+  "caption": "M4 residual recursion, iterated",
+  "state": "OK",
+  "file": "m4_rec__b61f89c8.png",
+  "w": 3739,
+  "h": 366,
+  "aspect": 10.216,
+  "nat_w_in": 6.232,
+  "nat_h_in": 0.61,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 72468,
+  "bbox": [
+   17,
+   14,
+   3727,
+   352
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m4",
+  "tex": "\\hat{y}(k+h\\mid k) = T\\left(u(k,h)\\right) + \\hat{r}(k+h\\mid k)",
+  "caption": "M4 T28 + AR4",
+  "state": "OK",
+  "file": "m4__2551d3a3.png",
+  "w": 2044,
+  "h": 160,
+  "aspect": 12.775,
+  "nat_w_in": 3.407,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 40724,
+  "bbox": [
+   12,
+   12,
+   2031,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m5",
+  "tex": "\\hat{y}(k+h\\mid k) = y(k)",
+  "caption": "M5 Carry-forward: lead independent",
+  "state": "OK",
+  "file": "m5__8ac1d8c7.png",
+  "w": 1005,
+  "h": 160,
+  "aspect": 6.281,
+  "nat_w_in": 1.675,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 20711,
+  "bbox": [
+   12,
+   12,
+   993,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m6",
+  "tex": "\\hat{y}(k+h\\mid k) = T\\left(u(k,h)\\right) + D_h\\left[1,\\ r(k),\\ \\ldots,\\ r(k-p+1)\\right]^{\\top}",
+  "caption": "M6 T28 + DMS4: one least-squares row per lead",
+  "state": "OK",
+  "file": "m6__e8e24088.png",
+  "w": 3107,
+  "h": 160,
+  "aspect": 19.419,
+  "nat_w_in": 5.178,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 55781,
+  "bbox": [
+   12,
+   12,
+   3095,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m7",
+  "tex": "\\hat{y}(k+h\\mid k) = y(k) + D'_h\\left[1,\\ \\Delta y(k),\\ \\ldots,\\ \\Delta y(k-p+1)\\right]^{\\top}",
+  "caption": "M7 CF + DMS4",
+  "state": "OK",
+  "file": "m7__637e2e31.png",
+  "w": 3043,
+  "h": 160,
+  "aspect": 19.019,
+  "nat_w_in": 5.072,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 56464,
+  "bbox": [
+   12,
+   12,
+   3031,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m8",
+  "tex": "\\hat{y}(k+h\\mid k) = c_h + a_h\\,y(k) + b_h\\,T\\left(u(k,h)\\right)+ \\sum_{j=1}^{p}\\phi_{hj}\\,r(k-j+1) + \\sum_{j=1}^{p}\\psi_{hj}\\,\\Delta y(k-j+1)",
+  "caption": "M8 Anchor-mix",
+  "state": "OK",
+  "file": "m8__38acd7cd.png",
+  "w": 4515,
+  "h": 366,
+  "aspect": 12.336,
+  "nat_w_in": 7.525,
+  "nat_h_in": 0.61,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 99968,
+  "bbox": [
+   12,
+   14,
+   4502,
+   352
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m8_convex",
+  "tex": "b_h = 1 - a_h,\\qquad a_h \\leftarrow \\mathrm{clip}\\left(a_h,\\,0,\\,1\\right)",
+  "caption": "M8 optional constraint, implemented but not switched on",
+  "state": "OK",
+  "file": "m8_convex__f2a5df9f.png",
+  "w": 1914,
+  "h": 143,
+  "aspect": 13.385,
+  "nat_w_in": 3.19,
+  "nat_h_in": 0.238,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 30909,
+  "bbox": [
+   17,
+   14,
+   1902,
+   129
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m9_fit",
+  "tex": "\\hat{L}(d) = c + b_1\\,L(d-1),\\qquad \\hat{L}(d+1) = c + b_1\\,\\hat{L}(d)",
+  "caption": "M9 daily level recursion, refitted on a 56-day window",
+  "state": "OK",
+  "file": "m9_fit__15c5bef7.png",
+  "w": 2654,
+  "h": 176,
+  "aspect": 15.08,
+  "nat_w_in": 4.423,
+  "nat_h_in": 0.293,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 46812,
+  "bbox": [
+   16,
+   8,
+   2642,
+   157
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m9",
+  "tex": "\\hat{y}(k+h\\mid k) = T\\left(u(k,h)\\right) + \\left(\\hat{L}(D) - \\bar{L}\\right)",
+  "caption": "M9 T28 + level offset",
+  "state": "OK",
+  "file": "m9__fd125087.png",
+  "w": 2005,
+  "h": 181,
+  "aspect": 11.077,
+  "nat_w_in": 3.342,
+  "nat_h_in": 0.302,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 40305,
+  "bbox": [
+   12,
+   12,
+   1993,
+   168
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m10",
+  "tex": "T_{mw}(s) = \\frac{1}{\\left|W\\right|}\\sum_{w\\,\\in\\,W} T_w(s),\\qquad W = \\left\\{7,\\,28,\\,56,\\,112\\right\\}",
+  "caption": "M10 Multi-window template",
+  "state": "OK",
+  "file": "m10__a8050135.png",
+  "w": 2756,
+  "h": 261,
+  "aspect": 10.559,
+  "nat_w_in": 4.593,
+  "nat_h_in": 0.435,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 57951,
+  "bbox": [
+   18,
+   14,
+   2743,
+   248
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m10p",
+  "tex": "\\hat{y}(k+h\\mid k) = T_{mw}\\left(u(k,h)\\right)",
+  "caption": "M10 as a forecast",
+  "state": "OK",
+  "file": "m10p__115034be.png",
+  "w": 1455,
+  "h": 160,
+  "aspect": 9.094,
+  "nat_w_in": 2.425,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 29777,
+  "bbox": [
+   12,
+   12,
+   1443,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m11",
+  "tex": "\\hat{y}(k+h\\mid k) = T_{mw}\\left(u(k,h)\\right) + \\left(\\hat{L}(D) - \\bar{T}_{mw}\\right)",
+  "caption": "M11 MW + level offset",
+  "state": "OK",
+  "file": "m11__3045b3d0.png",
+  "w": 2314,
+  "h": 181,
+  "aspect": 12.785,
+  "nat_w_in": 3.857,
+  "nat_h_in": 0.302,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 46035,
+  "bbox": [
+   12,
+   12,
+   2302,
+   168
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m12_rho",
+  "tex": "\\rho(k) = \\frac{\\#\\left\\{\\mathrm{slots\\ of\\ today\\ already\\ observed}\\right\\}}{n_s}",
+  "caption": "M12 observed share of the day",
+  "state": "OK",
+  "file": "m12_rho__125f1669.png",
+  "w": 1865,
+  "h": 205,
+  "aspect": 9.098,
+  "nat_w_in": 3.108,
+  "nat_h_in": 0.342,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 47218,
+  "bbox": [
+   14,
+   15,
+   1854,
+   191
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m12",
+  "tex": "\\hat{L}(D_{today}) = \\rho(k)\\,\\bar{y}_{run}(k) + \\left(1-\\rho(k)\\right)\\left(c + b_1 L(d-1)\\right)",
+  "caption": "M12 MW + level in run state",
+  "state": "OK",
+  "file": "m12__e51eacb4.png",
+  "w": 2819,
+  "h": 193,
+  "aspect": 14.606,
+  "nat_w_in": 4.698,
+  "nat_h_in": 0.322,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 58517,
+  "bbox": [
+   16,
+   12,
+   2807,
+   178
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m13_ss",
+  "tex": "\\xi_k = A\\,\\xi_{k-1} + w_k,\\qquad w_k \\sim \\mathcal{N}\\left(0, Q_w\\right),\\qquad y(k) = C_k\\,\\xi_k + v_k,\\qquad v_k \\sim \\mathcal{N}\\left(0, R_v\\right)",
+  "caption": "M13 harmonic state space",
+  "state": "OK",
+  "file": "m13_ss__4d04c494.png",
+  "w": 4210,
+  "h": 146,
+  "aspect": 28.836,
+  "nat_w_in": 7.017,
+  "nat_h_in": 0.243,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 65547,
+  "bbox": [
+   16,
+   15,
+   4197,
+   132
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m13_upd",
+  "tex": "\\hat{\\xi}_{k\\mid k-1} = A\\,\\hat{\\xi}_{k-1\\mid k-1},\\qquad K_k = P_{k\\mid k-1}C_k^{\\top}\\left(C_k P_{k\\mid k-1} C_k^{\\top} + R_v\\right)^{-1}",
+  "caption": "M13 predict and gain",
+  "state": "OK",
+  "file": "m13_upd__fa0cda51.png",
+  "w": 3559,
+  "h": 196,
+  "aspect": 18.158,
+  "nat_w_in": 5.932,
+  "nat_h_in": 0.327,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 53554,
+  "bbox": [
+   16,
+   13,
+   3547,
+   183
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m13",
+  "tex": "\\hat{y}(k+h\\mid k) = C_{k+h}A^{h}\\hat{\\xi}_{k\\mid k} = G\\left(h,\\,u(k,h)\\right)\\hat{\\xi}_{k\\mid k}",
+  "caption": "M13 forecast, collapsed onto the precomputed basis",
+  "state": "OK",
+  "file": "m13__ae39931b.png",
+  "w": 2530,
+  "h": 196,
+  "aspect": 12.908,
+  "nat_w_in": 4.217,
+  "nat_h_in": 0.327,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 50596,
+  "bbox": [
+   12,
+   13,
+   2517,
+   183
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m13_g",
+  "tex": "G(h,s) = C_s A^{h},\\qquad \\hat{y}(k+h\\mid k) = G\\left(h,\\,u(k,h)\\right)\\hat{\\xi}_{k\\mid k}",
+  "caption": "M13 basis table, 7 MB, shared by every origin",
+  "state": "OK",
+  "file": "m13_g__840af055.png",
+  "w": 2797,
+  "h": 196,
+  "aspect": 14.27,
+  "nat_w_in": 4.662,
+  "nat_h_in": 0.327,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 52763,
+  "bbox": [
+   18,
+   13,
+   2784,
+   183
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m13_rot",
+  "tex": "\\omega_j = \\frac{2\\pi j}{n_s},\\qquad A^{n_s}\\ \\mathrm{harmonic\\ block} = I",
+  "caption": "M13 the rotation property used as a self check",
+  "state": "OK",
+  "file": "m13_rot__7fda3076.png",
+  "w": 2001,
+  "h": 204,
+  "aspect": 9.809,
+  "nat_w_in": 3.335,
+  "nat_h_in": 0.34,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 38504,
+  "bbox": [
+   19,
+   15,
+   1989,
+   190
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m14",
+  "tex": "T_e(s) = \\frac{\\sum_{i=0}^{K-1}(1-\\alpha)^{i}\\,y^{(i)}(s)}{\\sum_{i=0}^{K-1}(1-\\alpha)^{i}},\\qquad K = \\left\\lfloor \\frac{\\log w_{min}}{\\log(1-\\alpha)}\\right\\rfloor",
+  "caption": "M14 EWMA template, alpha = 0.15, K = 28 days",
+  "state": "OK",
+  "file": "m14__568b604b.png",
+  "w": 2133,
+  "h": 509,
+  "aspect": 4.191,
+  "nat_w_in": 3.555,
+  "nat_h_in": 0.848,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 57894,
+  "bbox": [
+   18,
+   14,
+   2120,
+   496
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m14p",
+  "tex": "\\hat{y}(k+h\\mid k) = T_e\\left(u(k,h)\\right)",
+  "caption": "M14 as a forecast",
+  "state": "OK",
+  "file": "m14p__30d54211.png",
+  "w": 1359,
+  "h": 160,
+  "aspect": 8.494,
+  "nat_w_in": 2.265,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 28121,
+  "bbox": [
+   12,
+   12,
+   1347,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m15",
+  "tex": "S(k) = \\frac{1}{w}\\sum_{i=0}^{w-1} y(k-i),\\qquad \\hat{y}(k+h\\mid k) = S(k)",
+  "caption": "M15 trailing mean, w = 12 points",
+  "state": "OK",
+  "file": "m15__138015e7.png",
+  "w": 2373,
+  "h": 346,
+  "aspect": 6.858,
+  "nat_w_in": 3.955,
+  "nat_h_in": 0.577,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 51046,
+  "bbox": [
+   13,
+   14,
+   2361,
+   332
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m16",
+  "tex": "\\hat{y}(k+h\\mid k) = S(k) + \\left(\\frac{w-1}{2} + h\\right)\\left(S(k) - S(k-1)\\right)",
+  "caption": "M16 delay compensation",
+  "state": "OK",
+  "file": "m16__3fbffdd3.png",
+  "w": 2622,
+  "h": 186,
+  "aspect": 14.097,
+  "nat_w_in": 4.37,
+  "nat_h_in": 0.31,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 52083,
+  "bbox": [
+   12,
+   13,
+   2610,
+   171
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m17",
+  "tex": "S(k) = \\mathrm{median}\\left\\{y(k),\\,\\ldots,\\,y(k-w+1)\\right\\},\\qquad \\hat{y}(k+h\\mid k) = S(k)",
+  "caption": "M17 trailing median",
+  "state": "OK",
+  "file": "m17__3c54a25a.png",
+  "w": 3440,
+  "h": 160,
+  "aspect": 21.5,
+  "nat_w_in": 5.733,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 64429,
+  "bbox": [
+   13,
+   12,
+   3428,
+   147
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m18",
+  "tex": "T_c(s) = \\frac{1}{N_c}\\sum_{d\\,\\in\\,W_c} y_d(s),\\qquad c \\in \\left\\{\\mathrm{weekday},\\ \\mathrm{weekend}\\right\\}",
+  "caption": "M18 class-split template, N_c counts days in the class",
+  "state": "OK",
+  "file": "m18__c899beee.png",
+  "w": 2897,
+  "h": 278,
+  "aspect": 10.421,
+  "nat_w_in": 4.828,
+  "nat_h_in": 0.463,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 67049,
+  "bbox": [
+   18,
+   13,
+   2885,
+   263
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m19_cand",
+  "tex": "\\hat{r}^{(p)}(s) = \\mathrm{filter}\\left(1,\\ \\left[1,\\,-\\phi^{(p)}\\right],\\ 0,\\ r(k-1),\\,\\ldots,\\,r(k-p)\\right)",
+  "caption": "M19 one iterated candidate forecast per order",
+  "state": "OK",
+  "file": "m19_cand__0a6db2df.png",
+  "w": 2989,
+  "h": 160,
+  "aspect": 18.681,
+  "nat_w_in": 4.982,
+  "nat_h_in": 0.267,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 51934,
+  "bbox": [
+   17,
+   12,
+   2976,
+   145
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m19_rule",
+  "tex": "p^{\\ast}(s,h) = \\arg\\min_{p\\,\\in\\,P}\\ \\sum_{d\\,\\in\\,D_{28}}\\left(y_c - \\mathrm{clip}\\left(T(u) + \\hat{r}^{(p)}_{d}\\right)\\right)^{2},\\qquad P = \\left\\{1,2,3,4,5,6,8\\right\\}",
+  "caption": "M19 the order is chosen per cell from trailing error",
+  "state": "OK",
+  "file": "m19_rule__6618206a.png",
+  "w": 4159,
+  "h": 282,
+  "aspect": 14.748,
+  "nat_w_in": 6.932,
+  "nat_h_in": 0.47,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 88418,
+  "bbox": [
+   12,
+   14,
+   4146,
+   269
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "m20",
+  "tex": "\\hat{y}(k+h\\mid k) = T\\left(u(k,h)\\right) + \\hat{r}^{\\left(p^{\\ast}(u,h)\\right)}(h)",
+  "caption": "M20 T28 + AR(n per cell)",
+  "state": "OK",
+  "file": "m20__661763f4.png",
+  "w": 2045,
+  "h": 164,
+  "aspect": 12.47,
+  "nat_w_in": 3.408,
+  "nat_h_in": 0.273,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 40190,
+  "bbox": [
+   12,
+   13,
+   2032,
+   151
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "band48",
+  "tex": "\\mathrm{lag\\ }48\\ \\mathrm{autocorrelation\\ of\\ } R(s,\\cdot):\\ \\mathrm{T28}\\ 0.998,\\ \\ \\mathrm{carry\\text{-}forward}\\ 0.781,\\ \\ \\mathrm{Kalman}\\ 0.675",
+  "caption": "the 48-column daily periodicity of the grid",
+  "state": "OK",
+  "file": "band48__6ac4e77c.png",
+  "w": 4824,
+  "h": 143,
+  "aspect": 33.734,
+  "nat_w_in": 8.04,
+  "nat_h_in": 0.238,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 111838,
+  "bbox": [
+   24,
+   14,
+   4811,
+   129
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ },
+ {
+  "name": "win_share",
+  "tex": "\\mathrm{share}(m) = \\frac{1}{n_s\\,n_h}\\sum_{s,h} \\mathbf{1}\\left[m = \\arg\\min_{m'} R(s,h,m')\\right]",
+  "caption": "the per-cell win census",
+  "state": "OK",
+  "file": "win_share__2b130cf7.png",
+  "w": 2448,
+  "h": 274,
+  "aspect": 8.934,
+  "nat_w_in": 4.08,
+  "nat_h_in": 0.457,
+  "eff_pt": 14.0,
+  "alpha_min": 0,
+  "ink_px": 63624,
+  "bbox": [
+   19,
+   13,
+   2435,
+   258
+  ],
+  "corner": [
+   255,
+   255,
+   255,
+   0
+  ]
+ }
+]

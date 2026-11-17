@@ -1,0 +1,459 @@
+# source: https://eprints.lancs.ac.uk/id/eprint/84905/
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title> Forecasting with temporal hierarchies  - Lancaster EPrints</title>
+    
+    
+    
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MDLDXCK7');</script>
+<!-- End Google Tag Manager -->
+  
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="/img/basic/favicon.ico" type="image/x-icon" />
+    <style>
+      .loader {
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #F5F8FA;
+          z-index: 9998;
+          text-align: center;
+      }
+
+      .plane-container {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+      }
+    </style>
+  
+    <meta name="eprints.eprintid" content="84905" />
+<meta name="eprints.rev_number" content="1610" />
+<meta name="eprints.eprint_status" content="archive" />
+<meta name="eprints.userid" content="13568" />
+<meta content="pure" name="eprints.source" />
+<meta content="disk0/00/08/49/05" name="eprints.dir" />
+<meta name="eprints.datestamp" content="2017-02-27 16:26:01" />
+<meta name="eprints.lastmod" content="2026-07-25 17:50:02" />
+<meta content="2017-02-27 15:16:02" name="eprints.status_changed" />
+<meta name="eprints.type" content="article" />
+<meta content="show" name="eprints.metadata_visibility" />
+<meta content="Athanasopoulos, George" name="eprints.creators_name" />
+<meta content="Hyndman, Rob J." name="eprints.creators_name" />
+<meta content="Kourentzes, Nikolaos" name="eprints.creators_name" />
+<meta content="Petropoulos, Fotios" name="eprints.creators_name" />
+<meta name="eprints.creators_id" content="n.kourentzes@lancaster.ac.uk" />
+<meta content="Forecasting with temporal hierarchies" name="eprints.title" />
+<meta content="pub" name="eprints.ispublished" />
+<meta content="forecastinghierarchical forecastingtemporal aggregationreconciliationforecast combinationmodelling and simulationmanagement science and operations researchinformation systems and management" name="eprints.subjects" />
+<meta name="eprints.divisions" content="mgtsci" />
+<meta content="/dk/atira/pure/subjectarea/asjc/2600/2611" name="eprints.keywords" />
+<meta content="This is the author’s version of a work that was accepted for publication in European Journal of Operational Research. Changes resulting from the publishing process, such as peer review, editing, corrections, structural formatting, and other quality control mechanisms may not be reflected in this document. Changes may have been made to this work since it was submitted for publication. A definitive version was subsequently published in European Journal of Operational Research, 262, (1), 2017 DOI: 10.1016/j.ejor.2017.02.046" name="eprints.note" />
+<meta content="This paper introduces the concept of Temporal Hierarchies for time series forecasting. A temporal hierarchy can be constructed for any time series by means of non-overlapping temporal aggregation. Predictions constructed at all aggregation levels are combined with the proposed framework to result in temporally reconciled, accurate and robust forecasts. The implied combination mitigates modelling uncertainty, while the reconciled nature of the forecasts results in a unified prediction that supports aligned decisions at different planning horizons: from short-term operational up to long-term strategic planning. The proposed methodology is independent of forecasting models. It can embed high level managerial forecasts that incorporate complex and unstructured information with lower level statistical forecasts. Our results show that forecasting with temporal hierarchies increases accuracy over conventional forecasting, particularly under increased modelling uncertainty. We discuss organisational implications of the temporally reconciled forecasts using a case study of Accident \&amp; Emergency departments." name="eprints.abstract" />
+<meta content="2017-10-01" name="eprints.date" />
+<meta name="eprints.date_type" content="published" />
+<meta name="eprints.contact_email" content="n.kourentzes@lancaster.ac.uk" />
+<meta name="eprints.full_text_status" content="public" />
+<meta content="European Journal of Operational Research" name="eprints.publication" />
+<meta content="262" name="eprints.volume" />
+<meta content="1" name="eprints.number" />
+<meta content="60-74" name="eprints.pagerange" />
+<meta name="eprints.pages" content="455723" />
+<meta name="eprints.refereed" content="TRUE" />
+<meta name="eprints.issn" content="0377-2217" />
+<meta content="500" name="eprints.hoa_compliant" />
+<meta content="2017-10-01" name="eprints.hoa_date_pub" />
+<meta name="eprints.hoa_date_fcd" content="2025-06-23" />
+<meta name="eprints.hoa_date_foa" content="2025-06-23" />
+<meta name="eprints.hoa_version_fcd" content="AM" />
+<meta content="FALSE" name="eprints.hoa_exclude" />
+<meta content="  Athanasopoulos, George and Hyndman, Rob J. and Kourentzes, Nikolaos and Petropoulos, Fotios  (2017) Forecasting with temporal hierarchies.  European Journal of Operational Research, 262 (1).  pp. 60-74.  ISSN 0377-2217     " name="eprints.citation" />
+<meta content="https://eprints.lancs.ac.uk/id/eprint/84905/1/Athanasopoulos_2017_TemporalHierarchies.pdf" name="eprints.document_url" />
+<link href="http://purl.org/DC/elements/1.0/" rel="schema.DC" />
+<meta name="DC.relation" content="https://eprints.lancs.ac.uk/id/eprint/84905/" />
+<meta content="Forecasting with temporal hierarchies" name="DC.title" />
+<meta content="Athanasopoulos, George" name="DC.creator" />
+<meta name="DC.creator" content="Hyndman, Rob J." />
+<meta name="DC.creator" content="Kourentzes, Nikolaos" />
+<meta content="Petropoulos, Fotios" name="DC.creator" />
+<meta name="DC.description" content="This paper introduces the concept of Temporal Hierarchies for time series forecasting. A temporal hierarchy can be constructed for any time series by means of non-overlapping temporal aggregation. Predictions constructed at all aggregation levels are combined with the proposed framework to result in temporally reconciled, accurate and robust forecasts. The implied combination mitigates modelling uncertainty, while the reconciled nature of the forecasts results in a unified prediction that supports aligned decisions at different planning horizons: from short-term operational up to long-term strategic planning. The proposed methodology is independent of forecasting models. It can embed high level managerial forecasts that incorporate complex and unstructured information with lower level statistical forecasts. Our results show that forecasting with temporal hierarchies increases accuracy over conventional forecasting, particularly under increased modelling uncertainty. We discuss organisational implications of the temporally reconciled forecasts using a case study of Accident \&amp; Emergency departments." />
+<meta name="DC.date" content="2017-10-01" />
+<meta name="DC.type" content="Journal Article" />
+<meta content="PeerReviewed" name="DC.type" />
+<meta name="DC.format" content="application/pdf" />
+<meta content="en" name="DC.language" />
+<meta content="creative_commons_attribution_noncommercial_noderivatives_4_0_international_license" name="DC.rights" />
+<meta name="DC.identifier" content="https://eprints.lancs.ac.uk/id/eprint/84905/1/Athanasopoulos_2017_TemporalHierarchies.pdf" />
+<meta content="  Athanasopoulos, George and Hyndman, Rob J. and Kourentzes, Nikolaos and Petropoulos, Fotios  (2017) Forecasting with temporal hierarchies.  European Journal of Operational Research, 262 (1).  pp. 60-74.  ISSN 0377-2217     " name="DC.identifier" />
+<link rel="canonical" href="https://eprints.lancs.ac.uk/id/eprint/84905/" />
+<link href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/EndNote/lep-eprint-84905.enw" title="EndNote" type="text/plain; charset=utf-8" rel="alternate" />
+<link title="EP3 XML" rel="alternate" type="application/vnd.eprints.data+xml; charset=utf-8" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/XML/lep-eprint-84905.xml" />
+<link rel="alternate" type="text/n3" title="RDF+N3" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/RDFN3/lep-eprint-84905.n3" />
+<link href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/BibTeX/lep-eprint-84905.bib" rel="alternate" type="text/plain; charset=utf-8" title="BibTeX" />
+<link href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/RIOXX2/lep-eprint-84905.xml" rel="alternate" type="text/xml; charset=utf-8" title="RIOXX2 XML" />
+<link title="RDF+XML" type="application/rdf+xml" rel="alternate" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/RDFXML/lep-eprint-84905.rdf" />
+<link title="OpenURL ContextObject in Span" type="text/plain; charset=utf-8" rel="alternate" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/COinS/lep-eprint-84905.txt" />
+<link type="text/xml; charset=utf-8" rel="alternate" title="MPEG-21 DIDL" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/DIDL/lep-eprint-84905.xml" />
+<link href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/METS/lep-eprint-84905.xml" rel="alternate" type="text/xml; charset=utf-8" title="METS" />
+<link href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/HTML/lep-eprint-84905.html" type="text/html; charset=utf-8" rel="alternate" title="HTML Citation" />
+<link href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/Simple/lep-eprint-84905.txt" title="Simple Metadata" rel="alternate" type="text/plain; charset=utf-8" />
+<link title="Atom" rel="alternate" type="application/atom+xml;charset=utf-8" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/Atom/lep-eprint-84905.xml" />
+<link href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/ContextObject/lep-eprint-84905.xml" title="OpenURL ContextObject" type="text/xml; charset=utf-8" rel="alternate" />
+<link href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/MODS/lep-eprint-84905.xml" rel="alternate" type="text/xml; charset=utf-8" title="MODS" />
+<link type="text/plain" rel="alternate" title="RDF+N-Triples" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/RDFNT/lep-eprint-84905.nt" />
+<link type="text/plain; charset=utf-8" rel="alternate" title="Dublin Core" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/DC/lep-eprint-84905.txt" />
+<link title="ASCII Citation" rel="alternate" type="text/plain; charset=utf-8" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/Text/lep-eprint-84905.txt" />
+<link title="JSON" type="application/json; charset=utf-8" rel="alternate" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/JSON/lep-eprint-84905.js" />
+<link rel="alternate" type="text/plain" title="Reference Manager" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/RIS/lep-eprint-84905.ris" />
+<link rel="alternate" type="text/csv; charset=utf-8" title="Multiline CSV" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/CSV/lep-eprint-84905.csv" />
+<link title="Refer" type="text/plain" rel="alternate" href="https://eprints.lancs.ac.uk/cgi/export/eprint/84905/Refer/lep-eprint-84905.refer" />
+<link href="https://eprints.lancs.ac.uk/" rel="Top" />
+    <link href="https://eprints.lancs.ac.uk/sword-app/servicedocument" rel="Sword" />
+    <link href="https://eprints.lancs.ac.uk/id/contents" rel="SwordDeposit" />
+    <link href="https://eprints.lancs.ac.uk/cgi/search" type="text/html" rel="Search" />
+    <link title="Lancaster EPrints" href="https://eprints.lancs.ac.uk/cgi/opensearchdescription" type="application/opensearchdescription+xml" rel="Search" />
+    <script type="text/javascript">
+// <![CDATA[
+var eprints_http_root = "https://eprints.lancs.ac.uk";
+var eprints_http_cgiroot = "https://eprints.lancs.ac.uk/cgi";
+var eprints_oai_archive_id = "eprints.lancs.ac.uk";
+var eprints_logged_in = false;
+var eprints_logged_in_userid = 0;
+var eprints_logged_in_username = "";
+var eprints_logged_in_usertype = "";
+// ]]></script>
+    <style type="text/css">.ep_logged_in { display: none }</style>
+    <link href="/style/auto-3.4.5.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="/javascript/auto-3.4.5.js">
+//padder
+</script>
+    <link href="/style/app.css" type="text/css" rel="stylesheet" />
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" type="text/css" href="/style/ie6.css" />
+   <![endif]-->
+    <meta name="Generator" content="EPrints 3.4.5" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="en" http-equiv="Content-Language" />
+    
+    
+    <script src="/js/app.js">// <!-- No script --></script>
+  
+  </head>
+  <body>
+    
+      
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDLDXCK7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  
+      <!-- Pre loader -->
+      <div id="loader" class="loader" role="region" aria-label="Page loading">
+          <div class="plane-container">
+              <div class="l-s-2 blink">LOADING</div>
+          </div>
+      </div>     
+  
+    <div id="app" class="paper-loading">
+
+      
+
+      
+  <!--    <epc:pin ref="pagetop"/> -->
+      
+      <div class="invisible-links" role="navigation">
+          <a href="#main_content">Skip to main content</a>
+      </div>
+  
+      <nav class="mainnav navbar navbar-default justify-content-between">
+          <div class="container relative">
+              <a class="offcanvas dl-trigger paper-nav-toggle" data-toggle="offcanvas" aria-expanded="false" aria-label="Toggle navigation">
+                  <i></i>
+              </a>
+              <a class="navbar-brand" href="https://www.lancaster.ac.uk">
+                  <div class="logo"><div class="logo-wrapper">
+                      <img class="d-inline-block align-top" style="height: 60px;" alt="Lancaster University homepage" src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" />
+                  </div></div>
+              </a>
+              <div class="paper_menu">
+                  <div id="dl-menu" class="xv-menuwrapper responsive-menu">
+                      <ul class="dl-menu align-items-center">
+                          <li><a href="http://eprints.lancs.ac.uk">Home</a></li>
+                          <li class="parent"><a href="#">Browse</a>
+                              <ul class="lg-submenu">
+                                  <li><a href="http://eprints.lancs.ac.uk/view/year/">By Year</a></li>
+                                  <li><a href="http://eprints.lancs.ac.uk/view/subjects/">By Subject</a></li>
+                                  <li><a href="http://eprints.lancs.ac.uk/view/divisions/">By Department</a></li>
+                                  <!-- <li><a href="#project">By Project</a></li> -->
+                              </ul>
+                          </li>
+                          <li><a href="https://eprints.lancs.ac.uk/cgi/search/advanced">Search</a></li>
+                          <li><a href="http://eprints.lancs.ac.uk/help">Help</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </nav>
+  
+
+      <main class="page" id="main_content">
+        <div class="search-section">
+          <div class="container">
+            <h1> Forecasting with temporal hierarchies </h1>
+          </div>
+        </div>
+        <div class="container">
+          <div class="ep_summary_content"><div class="ep_summary_content_top"></div><div class="ep_summary_content_left"></div><div class="ep_summary_content_right"></div><div class="ep_summary_content_main">
+
+  <p style="margin-bottom: 1em">
+    
+
+
+    <span class="person_name">Athanasopoulos, George</span> and <span class="person_name">Hyndman, Rob J.</span> and <span class="person_name">Kourentzes, Nikolaos</span> and <span class="person_name">Petropoulos, Fotios</span>
+  
+
+(2017)
+
+<em>Forecasting with temporal hierarchies.</em>
+
+
+    European Journal of Operational Research, 262 (1).
+     pp. 60-74.
+     ISSN 0377-2217
+  
+
+
+  
+
+
+
+  </p>
+
+  
+
+  
+
+    
+  
+    
+      
+      <div class="container">
+        
+          <div class="row">
+            <div class="col-1"><a onmouseover="EPJS_ShowPreview( event, 'doc_preview_49493', 'right' );" onmouseout="EPJS_HidePreview( event, 'doc_preview_49493', 'right' );" onblur="EPJS_HidePreview( event, 'doc_preview_49493', 'right' );" onfocus="EPJS_ShowPreview( event, 'doc_preview_49493', 'right' );" class="ep_document_link" href="https://eprints.lancs.ac.uk/84905/1/Athanasopoulos_2017_TemporalHierarchies.pdf"><img class="ep_doc_icon" src="https://eprints.lancs.ac.uk/84905/1.hassmallThumbnailVersion/Athanasopoulos_2017_TemporalHierarchies.pdf" alt="[thumbnail of TemporalHierarchies_2017_EJOR]" border="0" /></a><div class="ep_preview" id="doc_preview_49493"><div><div><span><img border="0" alt="" src="https://eprints.lancs.ac.uk/84905/1.haspreviewThumbnailVersion/Athanasopoulos_2017_TemporalHierarchies.pdf" id="doc_preview_49493_img" class="ep_preview_image" /><div class="ep_preview_title">Preview</div></span></div></div></div></div>
+            <div class="col-11">
+              
+
+<!-- document citation -->
+
+
+<span class="ep_document_citation">
+<span class="document_format">PDF (TemporalHierarchies_2017_EJOR)</span>
+<br /><span class="document_filename">Athanasopoulos_2017_TemporalHierarchies.pdf</span>
+ - Accepted Version
+
+
+  <br />Available under License Creative Commons Attribution-NonCommercial-NoDerivs.
+
+</span>
+
+<br />
+              <a href="https://eprints.lancs.ac.uk/id/eprint/84905/1/Athanasopoulos_2017_TemporalHierarchies.pdf" class="ep_document_link">Download (455kB)</a>
+              
+			  
+			  
+              
+  
+              <ul>
+              
+                
+              
+                
+              
+              </ul>
+            </div>
+          </div>
+        
+      </div>
+    
+
+  
+
+  
+
+  
+    <h2 id="label-abstract">Abstract</h2>
+    <p style="text-align: left; margin: 1em auto 0em auto" aria-labelledby="label-abstract"><p class="ep_field_para">This paper introduces the concept of Temporal Hierarchies for time series forecasting. A temporal hierarchy can be constructed for any time series by means of non-overlapping temporal aggregation. Predictions constructed at all aggregation levels are combined with the proposed framework to result in temporally reconciled, accurate and robust forecasts. The implied combination mitigates modelling uncertainty, while the reconciled nature of the forecasts results in a unified prediction that supports aligned decisions at different planning horizons: from short-term operational up to long-term strategic planning. The proposed methodology is independent of forecasting models. It can embed high level managerial forecasts that incorporate complex and unstructured information with lower level statistical forecasts. Our results show that forecasting with temporal hierarchies increases accuracy over conventional forecasting, particularly under increased modelling uncertainty. We discuss organisational implications of the temporally reconciled forecasts using a case study of Accident \&amp; Emergency departments.</p></p>
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="col-2 field-label" id="label-type">Item Type:</div>
+      <div class="col-10 field-value" aria-labelledby="label-type">
+        Journal Article
+        
+        
+        
+      </div>
+    </div>
+    
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-publication">Journal or Publication Title:</div>
+          <div class="col-10 field-value" aria-labelledby="label-publication">European Journal of Operational Research</div>
+        </div>
+      
+    
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-note">Additional Information:</div>
+          <div class="col-10 field-value" aria-labelledby="label-note">This is the author’s version of a work that was accepted for publication in European Journal of Operational Research. Changes resulting from the publishing process, such as peer review, editing, corrections, structural formatting, and other quality control mechanisms may not be reflected in this document. Changes may have been made to this work since it was submitted for publication. A definitive version was subsequently published in European Journal of Operational Research, 262, (1), 2017 DOI: 10.1016/j.ejor.2017.02.046</div>
+        </div>
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-keywords">Uncontrolled Keywords:</div>
+          <div class="col-10 field-value" aria-labelledby="label-keywords">/dk/atira/pure/subjectarea/asjc/2600/2611</div>
+        </div>
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-subjects">Subjects:</div>
+          <div class="col-10 field-value" aria-labelledby="label-subjects">?? forecastinghierarchical forecastingtemporal aggregationreconciliationforecast combinationmodelling and simulationmanagement science and operations researchinformation systems and management ??</div>
+        </div>
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-divisions">Departments:</div>
+          <div class="col-10 field-value" aria-labelledby="label-divisions"><a href="https://eprints.lancs.ac.uk/view/divisions/lums/">Lancaster University Management School</a> &gt; <a href="https://eprints.lancs.ac.uk/view/divisions/mgtsci/">Management Science</a></div>
+        </div>
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-eprintid">ID Code:</div>
+          <div class="col-10 field-value" aria-labelledby="label-eprintid">84905</div>
+        </div>
+      
+    
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-userid">Deposited By:</div>
+          <div class="col-10 field-value" aria-labelledby="label-userid">
+
+<a href="https://eprints.lancs.ac.uk/cgi/users/home?screen=User::View&amp;userid=13568"><span class="ep_name_citation"><span class="person_name">ep_importer_pure</span></span></a>
+
+</div>
+        </div>
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-datestamp">Deposited On:</div>
+          <div class="col-10 field-value" aria-labelledby="label-datestamp">27 Feb 2017 16:26</div>
+        </div>
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-refereed">Refereed?:</div>
+          <div class="col-10 field-value" aria-labelledby="label-refereed">Yes</div>
+        </div>
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-ispublished">Published?:</div>
+          <div class="col-10 field-value" aria-labelledby="label-ispublished">Published</div>
+        </div>
+      
+    
+      
+        <div class="row">
+          <div class="col-2 field-label" id="label-lastmod">Last Modified:</div>
+          <div class="col-10 field-value" aria-labelledby="label-lastmod">25 Jul 2026 17:50</div>
+        </div>
+      
+    
+    <div class="row">
+      <div class="col-2 field-label" id="label-uri">URI:</div>
+      <div class="col-10 field-value" aria-labelledby="label-uri"><a href="https://eprints.lancs.ac.uk/id/eprint/84905">https://eprints.lancs.ac.uk/id/eprint/84905</a></div>
+    </div>
+  </div>
+
+  
+  
+
+<!--
+  <epc:if test="!$flags{preview}">
+    <epc:phrase ref="summary_page:actions"/>
+    <div class="container ep_summary_page_actions">
+    <epc:foreach expr="action_list('eprint_summary_page_actions',$item)" iterator="action">
+      <div class="row">
+        <div class="col-2"><epc:print expr="$action.action_icon()" /></div>
+        <div class="col-10"><epc:print expr="$action.action_title()" /></div>
+      </div>
+    </epc:foreach>
+    </div>
+  </epc:if>
+-->
+
+</div><div class="ep_summary_content_bottom"></div><div class="ep_summary_content_after"></div></div>
+        </div>
+      </main>
+
+      
+      <footer>
+          <div class="container">
+              <div class="row" style="justify-content: space-between;">
+                  <div class=" col-lg-4 col-xl-6 col-12 responsive-phone footer-library"><a href="https://www.lancaster.ac.uk/library" class="">
+                      <div class="logo"><div class="logo-wrapper">
+                          <img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/library/library-logo.svg" style="height: 60px" alt="Lancaster University Library homepage" />
+                          <span class="circle"></span>
+                      </div></div>
+                  </a>
+                  </div>
+                  <div class="col-xl-3 responsive-phone">
+                      <div class="h6">Links</div>
+                      <ul class="footer-links">
+                          <li><a href="https://www.eprints.org/uk/index.php/eprints-software/">EPrints</a></li>
+                          <li><a href="http://eprints.lancs.ac.uk/help">FAQ</a></li>
+                          <li><a href="https://www.lancaster.ac.uk/privacy/">Privacy Policy</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-6 col-md-12 col-12 col-xl-3 responsive-phone">
+                      <div class="h6">Connect via Social Media</div>
+                      <ul class="social">
+			      <li class="linktree"><a href="https://linktr.ee/lancasteruniversitylibrary" title="Linktree - Lancaster University Library" aria-label="Linktree - Lancaster University Library"><svg shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 417 512.238"><path fill="#ccd4dc" fill-rule="nonzero" d="M171.274 344.942h74.09v167.296h-74.09V344.942zM0 173.468h126.068l-89.622-85.44 49.591-50.985 85.439 87.829V0h74.086v124.872L331 37.243l49.552 50.785-89.58 85.24H417v70.502H290.252l90.183 87.629L331 381.192 208.519 258.11 86.037 381.192l-49.591-49.591 90.218-87.631H0v-70.502z"></path></svg></a></li>
+                      </ul>
+                      <div class="copyrights">
+                          <p>© 2026 Lancaster University Library</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </footer>
+  
+
+    </div>
+  </body>
+</html>

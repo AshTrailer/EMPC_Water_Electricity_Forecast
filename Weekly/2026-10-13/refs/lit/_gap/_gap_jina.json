@@ -1,0 +1,30 @@
+[
+ {
+  "slug": "temporal_bath_jina",
+  "url": "https://r.jina.ai/https://researchportal.bath.ac.uk/files/153427625/EJOR_2017_Temporal_hierarchies_post_print_.pdf",
+  "status": 200,
+  "chars": 558,
+  "ok": false
+ },
+ {
+  "slug": "temporal_bath_jina",
+  "url": "https://r.jina.ai/https://robjhyndman.com/papers/Temporal.pdf",
+  "status": 200,
+  "chars": 375,
+  "ok": false
+ },
+ {
+  "slug": "ltsc_hsc1605_jina",
+  "url": "https://r.jina.ai/https://alfa.im.pwr.edu.pl/~hugo/RePEc/wuu/wpaper/HSC_16_05.pdf",
+  "status": 200,
+  "chars": 39782,
+  "ok": true
+ },
+ {
+  "slug": "vst_hsc1701_jina",
+  "url": "https://r.jina.ai/https://alfa.im.pwr.edu.pl/~hugo/RePEc/wuu/wpaper/HSC_17_01.pdf",
+  "status": 200,
+  "chars": 46783,
+  "ok": true
+ }
+]

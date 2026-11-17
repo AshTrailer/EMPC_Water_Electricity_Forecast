@@ -1,0 +1,7 @@
+[
+ { "slug": "har_corsi", "doi": "10.1093/jjfinec/nbp001", "note": "Corsi HAR" },
+ { "slug": "midas_ghysels", "doi": "10.1080/07474930600972467", "note": "Ghysels MIDAS" },
+ { "slug": "tracemin", "doi": "10.1080/01621459.2018.1448825", "note": "MinT JASA" },
+ { "slug": "smith_wallis", "doi": "10.1111/j.1468-0084.2008.00541.x", "note": "combination puzzle" },
+ { "slug": "chevillon", "doi": "10.1111/j.1467-6419.2007.00518.x", "note": "direct multi-step survey" }
+]

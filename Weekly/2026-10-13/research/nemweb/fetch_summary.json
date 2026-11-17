@@ -1,0 +1,18 @@
+{
+ "predispatchis": {
+  "listed": 672,
+  "picked": 53,
+  "downloaded": 53,
+  "cached": 0,
+  "failed": 0,
+  "bytes": 52294494
+ },
+ "predispatch": {
+  "listed": 672,
+  "picked": 53,
+  "downloaded": 53,
+  "cached": 0,
+  "failed": 0,
+  "bytes": 23731786
+ }
+}

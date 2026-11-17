@@ -1,0 +1,65 @@
+ M AEMO_Data/PRICE_AND_DEMAND_202608_VIC1.csv
+ M Online_Data_Capture_Script/__pycache__/aemo_common.cpython-312.pyc
+ M Online_Data_Capture_Script/__pycache__/aemo_config.cpython-312.pyc
+ M Online_Data_Capture_Script/__pycache__/aemo_parser.cpython-312.pyc
+ M Predicitor/Anchor_AR_predictor/fit_anchor_mix.m
+ M Predicitor/Anchor_AR_predictor/predict_anchor_mix.m
+ M Predicitor/Shared/rls_scalar_step.m
+ M Predicitor/Shared/rls_vector_step.m
+ M Predicitor/run_predictor_suite.m
+ M Weekly/EMPC/2026-10-08/deck/Capstone_Forecasting_v1.pptx
+ M Weekly/EMPC/2026-10-08/deck/check_deck.py
+ M Weekly/EMPC/2026-10-08/deck/check_deck.txt
+?? "AEMO_Data/HANDOVER_\351\242\204\346\265\213\345\231\250\346\225\264\347\220\206\344\270\216\345\205\250\350\267\250\345\272\246\346\257\224\350\276\203_20261013.md"
+?? AEMO_Data/NEMPRICEANDDEMAND_VIC1_202610130200.csv
+?? AEMO_Data/PRICE_AND_DEMAND_202509_VIC1.csv
+?? AEMO_Data/PRICE_AND_DEMAND_202510_VIC1.csv
+?? AEMO_Data/PRICE_AND_DEMAND_202511_VIC1.csv
+?? AEMO_Data/PRICE_AND_DEMAND_202512_VIC1.csv
+?? AEMO_Data/PRICE_AND_DEMAND_202609_VIC1.csv
+?? AEMO_Data/PRICE_AND_DEMAND_202610_VIC1.csv
+?? "AEMO_Data/REPORT_\351\242\204\346\265\213\345\231\250\346\225\260\346\215\256\344\270\216\351\225\277\346\234\237\344\274\230\345\214\226_20261013.md"
+?? AEMO_Data/forecast_actual_extend_20261008/
+?? AEMO_Data/level_multiwindow_figs/
+?? AEMO_Data/pd7day_20260811_20261009/_build_stats.json
+?? AEMO_Data/predispatch_120d_20260201_20260601/_build_stats.json
+?? AEMO_Data/predispatch_20260811_20261009/_build_stats.json
+?? "Course Material/"
+?? Predicitor/Day_Class_predictor/
+?? Predicitor/EWMA_Template_predictor/
+?? Predicitor/Kalman_predictor/kalman_basis_table.m
+?? Predicitor/Kalman_predictor/kalman_predict_atlas.m
+?? Predicitor/Level_Offset_predictor/
+?? Predicitor/Multi_Window_predictor/
+?? Predicitor/Shared/model_index.m
+?? Predicitor/Shared/model_registry.m
+?? Predicitor/Smoothing_predictor/
+?? Predicitor/compare_surfaces.m
+?? Predicitor/plot_level_multiwindow.m
+?? Predicitor/plot_sweeps.m
+?? Predicitor/run_anchor_template_test.m
+?? Predicitor/run_ar_order_sweep.m
+?? Predicitor/run_ensemble_combos.m
+?? Predicitor/run_full_ensemble_test.m
+?? Predicitor/run_level_multiwindow_test.m
+?? Predicitor/run_surface_comparisons.m
+?? Predicitor/run_update_cadence_sweep.m
+?? Simulation_Log/Ash_20260827/Predicitor_AR/
+?? Simulation_Log/convert_figs_to_png.m
+?? Simulation_Log/figures_png/
+?? Weekly/EMPC/2026-10-08/deck/.~lock.Capstone_Forecasting_v1.pptx#
+?? Weekly/EMPC/2026-10-08/deck/Capstone_Forecasting_v1.pdf
+?? Weekly/EMPC/2026-10-08/deck/Capstone_Update_2026-10-08_EN.pptx
+?? Weekly/EMPC/2026-10-08/deck/PPT_NUMBERS.md
+?? Weekly/EMPC/2026-10-08/deck/_formula_contact_sheet.png
+?? Weekly/EMPC/2026-10-08/deck/_pylibs/
+?? Weekly/EMPC/2026-10-08/deck/_render_check.txt
+?? Weekly/EMPC/2026-10-08/deck/_tmp_fetch_wheel.mjs
+?? Weekly/EMPC/2026-10-08/deck/_tmp_render_formulas.py
+?? Weekly/EMPC/2026-10-08/deck/_wheels/
+?? Weekly/EMPC/2026-10-08/deck/build_update_deck.py
+?? Weekly/EMPC/2026-10-08/deck/formulas/
+?? build_deck.py
+?? deck_text.md
+?? qa_export.ps1
+?? requirements-frozen.txt

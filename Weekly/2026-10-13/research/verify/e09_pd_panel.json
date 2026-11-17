@@ -1,0 +1,41 @@
+{
+  "packs": 5,
+  "members": 1680,
+  "region_rows": 279720,
+  "int_rows": 587752,
+  "region_cols": [
+    "origin",
+    "target",
+    "region",
+    "rrp",
+    "demand",
+    "dispatchable",
+    "net_interchange",
+    "ss_solar",
+    "ss_wind"
+  ],
+  "int_cols": [
+    "origin",
+    "target",
+    "interconnector",
+    "mwflow",
+    "import_limit",
+    "export_limit"
+  ],
+  "region_codes": {
+    "VIC1": 1,
+    "TAS1": 2,
+    "SA1": 3
+  },
+  "interconnector_codes": {
+    "N-Q-MNSP1": 1,
+    "NSW1-QLD1": 2,
+    "T-V-MNSP1": 3,
+    "V-S-MNSP1": 4,
+    "V-SA": 5,
+    "VIC1-NSW1": 6,
+    "NSW1-SA1": 7
+  },
+  "intervention_rows_dropped": 0,
+  "note": "times are minutes since 1970; PDREGION values come from the report of the origin stamped in column 0"
+}

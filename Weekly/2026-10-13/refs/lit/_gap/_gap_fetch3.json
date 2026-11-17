@@ -1,0 +1,23 @@
+[
+ {
+  "slug": "temporal_kourentzes_pdf",
+  "url": "https://kourentzes.com/forecasting/wp-content/uploads/2015/08/TempHier20150814_Kourentzes.pdf",
+  "status": 200,
+  "bytes": 1949712,
+  "isPdf": true
+ },
+ {
+  "slug": "temporal_kourentzes_jina",
+  "url": "https://r.jina.ai/https://kourentzes.com/forecasting/wp-content/uploads/2015/08/TempHier20150814_Kourentzes.pdf",
+  "status": 200,
+  "bytes": 18102,
+  "isPdf": false
+ },
+ {
+  "slug": "temporal_lancs_page",
+  "url": "https://eprints.lancs.ac.uk/id/eprint/84905/",
+  "status": 200,
+  "bytes": 27004,
+  "isPdf": false
+ }
+]

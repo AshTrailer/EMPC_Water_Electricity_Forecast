@@ -1,0 +1,44 @@
+﻿predictor pages, fitted before writing:
+  page 72  stack 14.0 pt   smallest formula 14.0 pt   column height 2.67 in of 5.34
+  page 73  stack 14.0 pt   smallest formula 14.0 pt   column height 4.02 in of 5.34
+  page 74  stack 14.0 pt   smallest formula 14.0 pt   column height 4.14 in of 5.34
+  page 75  stack 14.0 pt   smallest formula 14.0 pt   column height 5.28 in of 5.34
+  page 76  stack 14.0 pt   smallest formula 14.0 pt   column height 2.67 in of 5.34
+  page 77  stack 14.0 pt   smallest formula 14.0 pt   column height 3.28 in of 5.34
+  page 78  stack 14.0 pt   smallest formula 14.0 pt   column height 3.28 in of 5.34
+  page 79  stack 14.0 pt   smallest formula 14.0 pt   column height 4.32 in of 5.34
+  page 80  stack 14.0 pt   smallest formula 14.0 pt   column height 4.07 in of 5.34
+  page 81  stack 14.0 pt   smallest formula 14.0 pt   column height 3.53 in of 5.34
+  page 82  stack 14.0 pt   smallest formula 14.0 pt   column height 2.97 in of 5.34
+  page 83  stack 14.0 pt   smallest formula 14.0 pt   column height 4.14 in of 5.34
+  page 84  stack 12.0 pt   smallest formula 12.0 pt   column height 5.29 in of 5.34
+  page 85  stack 14.0 pt   smallest formula 14.0 pt   column height 4.59 in of 5.34
+  page 86  stack 14.0 pt   smallest formula 14.0 pt   column height 3.28 in of 5.34
+  page 87  stack 14.0 pt   smallest formula 14.0 pt   column height 3.62 in of 5.34
+  page 88  stack 14.0 pt   smallest formula 14.0 pt   column height 2.97 in of 5.34
+  page 89  stack 14.0 pt   smallest formula 14.0 pt   column height 3.77 in of 5.34
+  page 90  stack 14.0 pt   smallest formula 14.0 pt   column height 4.21 in of 5.34
+  page 91  stack 14.0 pt   smallest formula 14.0 pt   column height 3.58 in of 5.34
+  tight pages: 75, 84
+structure and figure pages, fitted before writing:
+  page 92  structure  two columns 4.35 in  tallest 4.85 of 5.22 in
+  page 93  structure  two columns 4.35 in  tallest 4.85 of 5.22 in
+  page 94  figure     8.60 x 5.17 in left, notes 4.85 in right, both of 5.22
+  page 95  figure     8.60 x 5.17 in left, notes 3.94 in right, both of 5.22
+  page 96  figure     8.60 x 5.16 in left, notes 4.25 in right, both of 5.22
+  page 97  figure     8.60 x 2.52 in on top, notes 2.30 in in two 5.90 in columns, total 5.13
+  page 98  figure     8.00 x 5.04 in left, notes 4.25 in right, both of 5.22
+  page 99  figure     8.00 x 5.04 in left, notes 3.94 in right, both of 5.22
+  page 100 figure     8.60 x 4.60 in left, notes 4.85 in right, both of 5.22
+  page 101 figure     8.60 x 4.60 in left, notes 4.25 in right, both of 5.22
+  page 102 figure     8.60 x 4.58 in left, notes 4.55 in right, both of 5.22
+  page 103 figure     9.00 x 2.56 in on top, notes 2.30 in in two 5.90 in columns, total 5.17
+  page 104 figure     10.20 x 2.91 in on top, notes 2.00 in in two 5.90 in columns, total 5.21
+  page 105 figure     9.00 x 2.56 in on top, notes 2.30 in in two 5.90 in columns, total 5.16
+  page 106 index      two columns 4.35 in  tallest 3.34 of 5.22 in
+  page 107 structure  two columns 4.35 in  tallest 5.16 of 5.22 in
+  page 108 structure  two columns 4.35 in  tallest 4.55 of 5.22 in
+wrote C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\2026-10-13\deck\deck_B_new.pptx  (46 pages, 7.5 MB)
+palette check passed: six colours only
+formulas rendered: 721 distinct PNGs in _formula_cache
+every number on these pages traces to deck_numbers_60d

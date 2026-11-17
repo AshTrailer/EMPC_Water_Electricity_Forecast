@@ -1,0 +1,25 @@
+{
+  "from": "20260914",
+  "to": "20260915",
+  "rows": 26832,
+  "feats": [
+    "mw_total",
+    "mwb_-1000",
+    "mwb_-200",
+    "mwb_-50",
+    "mwb_0",
+    "mwb_50",
+    "mwb_100",
+    "mwb_200",
+    "mwb_300",
+    "mwb_500",
+    "mwb_1000",
+    "mwb_3000",
+    "demand"
+  ],
+  "no_curve": 0,
+  "demand_missing": 5206,
+  "demand_exceeds_curve": 0,
+  "units_in_region": 140,
+  "note": "times are minutes since 1970, stored as float64 pairs; features are float32 in feats order"
+}

@@ -1,0 +1,891 @@
+# source: https://ideas.repec.org/a/bla/obuest/v71y2009i3p331-355.html (TXT)
+
+<!DOCTYPE html> 
+<HTML lang="en">
+<HEAD>
+<TITLE>A Simple Explanation of the Forecast Combination Puzzle</TITLE>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha256-pdY4ejLKO67E0CM2tbPtq1DJ3VGDVVdqAR6j3ZwdiE4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awes
+ome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css" />-->
+    <link href="/css/normalnew.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/pushy.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image.jpg" href="/favicon.ico">
+<!--[if lte IE 9]>
+  <script src="/css/html5shiv.min.js"></script>
+  <script src="/css/respond.min.js"></script>
+<![endif]-->
+  <script type='text/javascript'>
+    var captchaContainer = null;
+    var loadCaptcha = function() {
+      captchaContainer = grecaptcha.render('captcha_container', {
+        'sitekey' : '6LdQebIaAAAAACSKxvbloyrkQ_q-MqhOAGgD5PQV',
+        'callback' : function(response) {
+          console.log(response);
+        }
+      });
+    };
+  </script>
+
+<META NAME="handle" CONTENT="RePEc:bla:obuest:v:71:y:2009:i:3:p:331-355"><META NAME="DOI" CONTENT="10.1111/j.1468-0084.2008.00541.x"><META NAME="description" CONTENT="Downloadable! This article presents a formal explanation of the forecast combination puzzle, that simple combinations of point forecasts are repeatedly found to outperform sophisticated weighted combinations in empirical applications. The explanation lies in the effect of finite‐sample error in estimating the combining weights. A small Monte Carlo study and a reappraisal of an empirical study by Stock and Watson [Federal Reserve Bank of Richmond Economic Quarterly (2003) Vol. 89/3, pp. 71–90] support this explanation. The Monte Carlo evidence, together with a large‐sample approximation to the variance of the combining weight, also supports the popular recommendation to ignore forecast error covariances in estimating the weight.">
+<META NAME="keywords" CONTENT="">
+<META NAME="jel_code" CONTENT="">
+<META NAME="author" CONTENT="Jeremy Smith & Kenneth F. Wallis">
+<META NAME="author_shortid" CONTENT="psm85; pwa27">
+<META NAME="title" CONTENT="A Simple Explanation of the Forecast Combination Puzzle">
+<META NAME="download" CONTENT="1">
+<META NAME="freedownload" CONTENT="1">
+<META NAME="date" CONTENT="2009-02-02">
+<META NAME="citation_publication_date" CONTENT="2009">
+<META NAME="citation_authors" content="Jeremy Smith; Kenneth F. Wallis">
+<META NAME="citation_title" content="A Simple Explanation of the Forecast Combination Puzzle">
+<META NAME="citation_abstract" content="This article presents a formal explanation of the forecast combination puzzle, that simple combinations of point forecasts are repeatedly found to outperform sophisticated weighted combinations in empirical applications. The explanation lies in the effect of finite‐sample error in estimating the combining weights. A small Monte Carlo study and a reappraisal of an empirical study by Stock and Watson [Federal Reserve Bank of Richmond Economic Quarterly (2003) Vol. 89/3, pp. 71–90] support this explanation. The Monte Carlo evidence, together with a large‐sample approximation to the variance of the combining weight, also supports the popular recommendation to ignore forecast error covariances in estimating the weight.">
+<META NAME="citation_publisher" content="Department of Economics, University of Oxford">
+<META NAME="citation_journal_title" content="Oxford Bulletin of Economics and Statistics">
+<META NAME="citation_keywords" content="">
+<META NAME="citation_abstract_html_url" content="https://ideas.repec.org/a/bla/obuest/v71y2009i3p331-355.html">
+<META NAME="citation_abstract_pdf_url" content="https://ideas.repec.org/a/bla/obuest/v71y2009i3p331-355.html">
+<META NAME="redif-type" content="article">
+<META NAME="citation_type" content="redif-article">
+<META NAME="citation_year" content="2009">
+<META NAME="citation_volume" content="71">
+<META NAME="citation_issue" content="3">
+
+<META NAME="citation_firstpage" content="331">
+<META NAME="citation_lastpage" content="355">
+<META NAME="twitter:card" content="summary_large_image">
+<META NAME="twitter:site" content="@repec_org">
+<META NAME="twitter:title" content="A Simple Explanation of the Forecast Combination Puzzle, by Jeremy Smi">
+<META NAME="twitter:description" content="This article presents a formal explanation of the forecast combination puzzle, that simple combinations of point forecasts are repeatedly found to outperform sophisticated weighted combinations in emp">
+<META NAME="twitter:image" content="https://ideas.repec.org/cgi-bin/twimage.cgi?a&bla:obuest:v:71:y:2009:i:3:p:331-355">
+<META PROPERTY="og:type" content="article">
+<META PROPERTY="og:title" content="A Simple Explanation of the Forecast Combination Puzzle">
+<META PROPERTY="og:description" content="This article presents a formal explanation of the forecast combination puzzle, that simple combinations of point forecasts are repeatedly found to outperform sophisticated weighted combinations in emp">
+<META PROPERTY="og:url" content="https://ideas.repec.org//a/bla/obuest/v71y2009i3p331-355.html">
+<META PROPERTY="og:image" content="https://ideas.repec.org/cgi-bin/twimage.cgi?a&bla:obuest:v:71:y:2009:i:3:p:331-355">
+<script type="application/ld+json">
+    {
+	"@context": "http://schema.org",
+	"@graph": [
+	  {
+	    "@id": "#periodical",
+	    "@type": "Periodical",
+	    "name": "Oxford Bulletin of Economics and Statistics",
+	    "publisher": "Department of Economics, University of Oxford",
+	    "url": "https://ideas.repec.org/s/bla/obuest.html",
+	    "requiresSubscription": "false"
+          },
+	  {
+	    "@id": "#number",
+	    "@type": "PublicationIssue",
+	    "datePublished": "2009",
+	    "issueNumber": "3"
+          },
+	    {		
+	      "@id": "#volume",
+	      "@type": "PublicationVolume",
+	      "volumeNumber": "71"
+            },
+	  {
+	    "@id": "#article",
+	    "@type": "ScholarlyArticle",
+ 	    "name": "A Simple Explanation of the Forecast Combination Puzzle",
+	    "url": "https://ideas.repec.org//a/bla/obuest/v71y2009i3p331-355.html",
+	    "description": "This article presents a formal explanation of the forecast combination puzzle, that simple combinations of point forecasts are repeatedly found to outperform sophisticated weighted combinations in empirical applications. The explanation lies in the effect of finite‐sample error in estimating the combining weights. A small Monte Carlo study and a reappraisal of an empirical study by Stock and Watson [Federal Reserve Bank of Richmond Economic Quarterly (2003) Vol. 89/3, pp. 71–90] support this explanation. The Monte Carlo evidence, together with a large‐sample approximation to the variance of the combining weight, also supports the popular recommendation to ignore forecast error covariances in estimating the weight.",
+	    "keywords": "",
+	    "pageEnd": "355",
+	    "pageStart": "331",
+	    "pagination": "331-355",
+          
+	    "author": "Jeremy Smith & Kenneth F. Wallis",
+	    "isPartOf": [
+	      {
+	        "@id": "#volume"
+	      },
+	      {	
+	        "@id": "#periodical"
+	      },
+	      {
+	        "@id": "#number"
+	      }
+	    ]
+	 }
+      ]
+    }
+    </script>
+    </HEAD><BODY>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G63YGSJVZ7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G63YGSJVZ7');
+</script>
+
+<div class="container">
+    <div id="header" class="row">
+      <nav class="navbar navbar-collapse navbar-expand-md" role="navigation">
+          <a class="navbar-brand" href="/">
+            <img width="125" src="/ideas4.jpg" border="0" alt="IDEAS home">
+          </a>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-toggle="collapse" data-target="#mobilesearch" aria-controls="mobilesearch" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"><i class="bi-search"></i></span>
+	</button>
+	<div class="collapse" id="mobilesearch">
+	  <div class="form-inline">
+	  <form method="POST" action="/cgi-bin/htsearch2" id="mobilesearch" role="search" class="card card-body">
+            <div class="input-group">
+              <input class="form-control" type="text" name="q" value="" placeholder="Search econ literature">
+              <span class="input-group-btn">
+		<button type="submit" class="btn" style="background-color: #2d4e8b; color: white;" aria-label="Search">
+                <i class="bi-search"></i>
+              </button>
+		<!--<input class="btn btn-default btn-lg fa" type="submit" value="&#xf002;" style="color:white;background-color:#2d4e8b;">-->
+              </span>
+            </div>
+            <a href="/search.html" class="advanced-search">Advanced search</a>
+	  </form>
+	  </div>
+	  </div>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-toggle="collapse" data-target="#mobilemenu" aria-controls="mobilemenu" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>
+	</button>
+	<div class="collapse" id="mobilemenu">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+	      <a class="nav-link" href="/">Economic literature:</a> <a href="/i/p.html">papers</A>, <a href="/i/a.html">articles</A>, <a href="/i/c.html">software</A>, <a href="/i/h.html">chapters</A>, <a href="/i/b.html">books</A>.
+	    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/i/e.html">Authors</a>
+	    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://edirc.repec.org/">Institutions</a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/top/">Rankings</a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/help.html" target="_blank">Help/FAQ  <i class="bi bi-box-arrow-up-right"></i></a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/cgi-bin/myideas.cgi">MyIDEAS <I class="bi bi-lightbulb"></I></a>
+	    </li>
+	    <li class="nav-item">
+	      <span class="nav-text">More options at page bottom</span>
+	    </li>
+          </ul>
+	</div>
+	<div class="d-none d-md-inline">
+          <ul class="nav nav-fill" id="topnav">
+            <li class="nav-item">
+	      <a class="nav-link" href="/">Economic literature</a>
+	    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/i/e.html">Authors</a>
+	    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://edirc.repec.org/">Institutions</a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/top/">Rankings</a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/help.html" target="_blank">Help/FAQ  <i class="bi bi-box-arrow-up-right"></i></a>
+	    </li>
+            <li class="nav-item">
+	      <a class="nav-link" href="/cgi-bin/myideas.cgi" style="color:blue;">MyIDEAS <I class="bi bi-lightbulb"></I> <small>(now improved)</small></a>
+	    </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-12" style="margin-top: -10px;">
+	
+	
+	<div id="sidebar" class="sidebar-nav-fixed pull-right d-none d-print-none d-md-inline col-md-3">
+	  <div class="inline-form">
+	  <form method="POST" action="/cgi-bin/htsearch2" id="topsearch" role="search" class="navbar-form navbar-right">
+            <div class="input-group">
+              <input class="form-control" type="text" name="q" value="" placeholder="Search econ literature">
+              <button type="submit" class="btn" style="background-color: #2d4e8b; color: white;" aria-label="Search">
+                <i class="bi-search"></i>
+              </button>
+	      <!--<input class="btn fa" type="submit" value="&#xf002;" style="color:white;background-color:#2d4e8b;">-->
+            </div>
+            <a href="/search.html" class="advanced-search">Advanced search</a>
+	  </form>
+	  </div>
+	  <div id="menu">
+            <h3>Browse Econ Literature</h3>
+            <ul>
+              <li><a href="/i/p.html">Working papers</a></li>
+              <li><a href="/i/a.html">Journals</a></li>
+              <li><a href="/i/c.html">Software components</a></li>
+              <li><a href="/i/b.html">Books</a></li>
+              <li><a href="/i/h.html">Book chapters</a></li>
+              <li><a href="/j/">JEL classification</a></li>
+            </ul>
+	    
+            <h3>More features</h3>
+            <ul>
+	      <li><a href="http://nep.repec.org/">Subscribe to new research</a></li>
+	      <li><a href="https://biblio.repec.org/">RePEc Biblio</a></li>
+	      <li><a href="https://authors.repec.org/">Author registration</a></li>
+	      <li><a href="/v/">Economics Virtual Seminar Calendar</a></li>
+	      <li><a href="https://confwatcher.b2ideas.eu/"><font color="red">ConfWatcher</font></a> NEW!</li>
+            </ul>
+	  </div>
+	</div>
+	<div class="d-none d-print-block">
+	  <img width="145" src="/ideas4.jpg" border="0" alt="IDEAS home"> Printed from https://ideas.repec.org/a/bla/obuest/v71y2009i3p331-355.html 
+	</div>
+	
+	<div id="main" class="col-12 col-md-9">
+	  <div class="site-overlay"></div>
+	  <div class="d-print-none">
+	    
+<div id="messages" class="col-xs-12">
+<span class="share-block">
+            &nbsp;<a href="https://bsky.app/intent/compose?text=Found%20on%20RePEc/IDEAS:%20https://ideas.repec.org//a/bla/obuest/v71y2009i3p331-355.html%20&#128161;" target="_NEW"><i class="bi bi-bluesky"></i></a>&nbsp;
+            <share-to-mastodon message="Found on RePEc/IDEAS:" url='https://ideas.repec.org//a/bla/obuest/v71y2009i3p331-355.html'><font color="#2d4e8b"><i class="bi bi-mastodon"></i></font></share-to-mastodon>
+            <a class="share-twitter bi bi-twitter-x" href="#" title="Share on Twitter"></a>
+            <a class="share-facebook bi bi-facebook" href="#" title="Share on Facebook"></a>
+            <a class="share-reddit bi bi-reddit" href="#" title="Share on Reddit"></a>
+            <a class="share-linkedin bi bi-linkedin" href="#"  title="Share on LinkedIn"></a>
+            <a class="share-email bi bi-envelope" href="#"  title="Share by Email"></a>
+            <a class="share-print bi bi-printer" href="#" title="Print this page"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span id="myideas">
+
+<a href="/cgi-bin/myideas.cgi" data-bs-toggle="tooltip" data-toggle="tooltip" title="MyIDEAS: not logged in">
+<i class="bi bi-lightbulb"></i>
+<i class="bi bi-lock"></i>&nbsp;</a>
+
+
+ <A HREF="/cgi-bin/myideas.cgi#myibiblio1unassigned"><I class="bi bi-archive-fill"></I>&nbsp;My&nbsp;bibliography</A> 
+ <i class="bi bi-bookmark"></i>&nbsp;<span onclick="loadDoc('https://ideas.repec.org/cgi-bin/myiadd2.cgi',myFunction);return true;">Save this article</span>
+
+
+
+
+</span>
+<script>
+function loadDoc(url,cfunc) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      cfunc(xhttp);
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+function myFunction(xhttp) {
+  document.getElementById("response").innerHTML = xhttp.responseText;
+}
+</script><span id="response"></span>
+</div>
+
+
+	  </div>
+	  <div id="content-block">
+	    
+	    
+
+<div id="title">
+<h1>A Simple Explanation of the Forecast Combination Puzzle</h1></div>
+<div>
+<ul class="nav nav-pills" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="author-abstract-tab" data-bs-toggle="tab" data-toggle="tab" href="#author-abstract" role="tab" aria-controls="author-abstract" aria-selected="true">Author & abstract</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link download-tab" id="download-tab" data-bs-toggle="tab" data-toggle="tab" href="#download" role="tab" aria-controls="download" aria-selected="false">Download</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="refs-tab" data-bs-toggle="tab" data-toggle="tab" href="#refs" role="tab" aria-controls="refs" aria-selected="false">7 References</a>
+  </li>
+      <li class="nav-item">
+    <a class="nav-link" id="cites-tab" href="/r/bla/obuest/v71y2009i3p331-355.html" role="tab" aria-controls="cites" aria-selected="false">159 Citations</a>
+  </li>
+          <li class="nav-item">
+    <a class="nav-link" id="mrel-tab" data-bs-toggle="tab" data-toggle="tab" href="#mrel" role="tab" aria-controls="mrel" aria-selected="false">Most related</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="more-tab" data-bs-toggle="tab" data-toggle="tab" href="#more" role="tab" aria-controls="more" aria-selected="false">Related works & more</a>
+  </li>
+  <!-- Placeholder usernotes pill-->
+  <li class="nav-item">
+    <a class="nav-link" id="correct-tab" data-bs-toggle="tab" data-toggle="tab" href="#correct" role="tab" aria-controls="correct" aria-selected="false">Corrections</a>
+  </li>
+</ul>
+    
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="author-abstract" role="tabpanel" aria-labelledby="author-abstract-tab">
+
+<h2>Author</h2>
+    <div id="author-body">
+      <div id="authortable">
+        <div id="listed-authors">Listed:
+          <ul id="authorlist"><li class="authorname">Jeremy Smith</li>
+<li class="authorname">Kenneth F. Wallis</li>
+</ul></div><div id="registered-authors"> <a href="https://authors.repec.org/">Registered:</a> <ul id="authorregistered"><li><a href="/e/psm85.html">Jeremy  Smith </A></li>
+<li><a href="/e/pwa27.html">Kenneth Frank Wallis </A></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<h2 style="clear:left">Abstract</h2><div id="abstract-body">This article presents a formal explanation of the forecast combination puzzle, that simple combinations of point forecasts are repeatedly found to outperform sophisticated weighted combinations in empirical applications. The explanation lies in the effect of finite‐sample error in estimating the combining weights. A small Monte Carlo study and a reappraisal of an empirical study by Stock and Watson [Federal Reserve Bank of Richmond Economic Quarterly (2003) Vol. 89/3, pp. 71–90] support this explanation. The Monte Carlo evidence, together with a large‐sample approximation to the variance of the combining weight, also supports the popular recommendation to ignore forecast error covariances in estimating the weight.</div>
+<h2>Suggested Citation</h2>
+<div id="biblio-body">
+<LI class="list-group-item downfree">  Jeremy Smith & Kenneth F. Wallis, 2009.
+"<B><A HREF="/a/bla/obuest/v71y2009i3p331-355.html">A Simple Explanation of the Forecast Combination Puzzle</A></B>,"
+<A HREF="/s/bla/obuest.html">Oxford Bulletin of Economics and Statistics</A>, Department of Economics, University of Oxford, vol. 71(3), pages 331-355, June.
+</li>
+Handle: <i style="word-break:break-all">RePEc:bla:obuest:v:71:y:2009:i:3:p:331-355</i>
+<br>DOI: 10.1111/j.1468-0084.2008.00541.x
+<form method="post" action="/cgi-bin/refs.cgi" target="refs" class="form-inline" role="form" style="margin-bottom: 10px;">
+<input type="hidden" name="handle" value="RePEc:bla:obuest:v:71:y:2009:i:3:p:331-355">
+<div class="pull-left" style="padding-right: 2px;">
+<span class="input-group-btn">
+<input class="btn btn-default btn-lg fa" type="submit" value="Export reference" style="background-color:lightgrey;"><i class="bi bi-box-arrow-up-right"></i> as
+<select name="output" size="1">
+<option value="0">HTML</option>
+<option value="0.5">HTML with abstract</option>
+<option value="1">plain text</option>
+<option value="1.5">plain text with abstract</option>
+<option value="2">BibTeX</option>
+<option value="3">RIS (EndNote, RefMan, ProCite)</option>
+<option value="4">ReDIF</option>
+<option value="6">JSON</option>
+</select> 
+</span>
+</div>
+</form></div>
+   </div>
+  <div class="tab-pane fade" id="download" role="tabpanel" aria-labelledby="download-tab">
+    <h2>Download full text from publisher</h2><p></p>
+       <FORM METHOD=GET ACTION="/cgi-bin/get_doc.cgi" target="_blank">
+       <INPUT TYPE=HIDDEN NAME="urn" VALUE="RePEc:bla:obuest:v:71:y:2009:i:3:p:331-355"><INPUT TYPE="radio" NAME="url" VALUE="https://doi.org/10.1111/j.1468-0084.2008.00541.x" checked><B>File URL:</B> <span style="word-break:break-all">https://doi.org/10.1111/j.1468-0084.2008.00541.x</span><BR><B>Download Restriction:</B> no<BR>
+<HR><INPUT TYPE="radio" NAME="url" VALUE="https://libkey.io/10.1111/j.1468-0084.2008.00541.x?utm_source=ideas">
+		<B>File URL:</B> <span style="word-break:break-all">https://libkey.io/10.1111/j.1468-0084.2008.00541.x?utm_source=ideas</span><BR>
+                <B>LibKey link</B>: if access is restricted and if your library uses this service, LibKey will redirect you to where you can use your library subscription to access this item<BR>
+<font size="+2" color="red">---><INPUT TYPE="SUBMIT" class="btn fa" VALUE="Download the selected file &#xf08e;" style="color:white;background-color:#2d4e8b;"><---</font></FORM><P>
+</div>
+
+  <div class="tab-pane fade" id="refs" role="tabpanel" aria-labelledby="refs-tab"><h2>References listed on IDEAS</h2><form method="post" action="/cgi-bin/refs.cgi" target="refs" class="form-inline" role="form" style="margin-bottom: 10px;">
+<input type="hidden" name="handle" value="repec:bla:obuest:v:67:y:2005:i:s1:p:983-994#repec:ecm:emetrp:v:64:y:1996:i:5:p:1067-84#repec:eee:econom:v:105:y:2001:i:1:p:85-110#repec:eee:econom:v:135:y:2006:i:1-2:p:155-186#repec:eee:intfor:v:5:y:1989:i:4:p:559-583#repec:fip:fedreq:y:2003:i:sum:p:71-90:n:v.89no.3#repec:jof:jforec:v:23:y:2004:i:6:p:405-430">
+<div class="pull-left" style="padding-right: 2px;">
+<span class="input-group-btn">
+<input class="btn btn-default btn-lg fa" type="submit" value="Export references" style="background-color:lightgrey;"><i class="bi bi-box-arrow-up-right"></i> as
+<select name="output" size="1">
+<option value="0">HTML</option>
+<option value="0.5">HTML with abstract</option>
+<option value="1">plain text</option>
+<option value="1.5">plain text with abstract</option>
+<option value="2">BibTeX</option>
+<option value="3">RIS (EndNote, RefMan, ProCite)</option>
+<option value="4">ReDIF</option>
+<option value="6">JSON</option>
+</select> 
+</span>
+</div>
+</form>
+<ol class="list-group"><LI class="list-group-item downfree">  Kenneth F. Wallis, 2005.
+"<B><A HREF="/a/bla/obuest/v67y2005is1p983-994.html">Combining Density and Interval Forecasts: A Modest Proposal</A></B>,"
+<A HREF="/s/bla/obuest.html">Oxford Bulletin of Economics and Statistics</A>, Department of Economics, University of Oxford, vol. 67(s1), pages 983-994, December.
+<LI class="list-group-item downfree">  James H. Stock & Mark W. Watson, 2003.
+"<B><A HREF="/a/fip/fedreq/y2003isump71-90nv.89no.3.html">How did leading indicator forecasts perform during the 2001 recession?</A></B>,"
+<A HREF="/s/fip/fedreq.html">Economic Quarterly</A>, Federal Reserve Bank of Richmond, vol. 89(Sum), pages 71-90.
+<LI class="list-group-item downgate">  Clark, Todd E. & West, Kenneth D., 2006.
+"<B><A HREF="/a/eee/econom/v135y2006i1-2p155-186.html">Using out-of-sample mean squared prediction errors to test the martingale difference hypothesis</A></B>,"
+<A HREF="/s/eee/econom.html">Journal of Econometrics</A>, Elsevier, vol. 135(1-2), pages 155-186.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Todd E. Clark & Kenneth D. West, 2004.
+ "<B><A HREF="/p/fip/fedkrw/rwp04-03.html">Using out-of-sample mean squared prediction errors to test the Martingale difference hypothesis</A></B>,"
+<A HREF="/s/fip/fedkrw.html">Research Working Paper</A> 
+RWP 04-03, Federal Reserve Bank of Kansas City.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  West, Kenneth D, 1996.
+"<B><A HREF="/a/ecm/emetrp/v64y1996i5p1067-84.html">Asymptotic Inference about Predictive Ability</A></B>,"
+<A HREF="/s/ecm/emetrp.html">Econometrica</A>, Econometric Society, vol. 64(5), pages 1067-1084, September.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downnone"> West, K.D., 1994.
+ "<B><A HREF="/p/att/wimass/9417.html">Asymptotic Inference About Predictive Ability</A></B>,"
+<A HREF="/s/att/wimass.html">Working papers</A> 
+9417, Wisconsin Madison - Social Systems.
+
+<LI class="list-group-item downfree"> Kenneth D. West, 1994.
+ "<B><A HREF="/p/wpa/wuwpma/9410002.html">Asymptotic Inference About Predictive Ability</A></B>,"
+<A HREF="/s/wpa/wuwpma.html">Macroeconomics</A> 
+9410002, University Library of Munich, Germany.
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Clemen, Robert T., 1989.
+"<B><A HREF="/a/eee/intfor/v5y1989i4p559-583.html">Combining forecasts: A review and annotated bibliography</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 5(4), pages 559-583.
+<LI class="list-group-item downgate">  Clark, Todd E. & McCracken, Michael W., 2001.
+"<B><A HREF="/a/eee/econom/v105y2001i1p85-110.html">Tests of equal forecast accuracy and encompassing for nested models</A></B>,"
+<A HREF="/s/eee/econom.html">Journal of Econometrics</A>, Elsevier, vol. 105(1), pages 85-110, November.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Todd E. Clark & Michael W. McCracken, 1999.
+ "<B><A HREF="/p/fip/fedkrw/99-11.html">Tests of equal forecast accuracy and encompassing for nested models</A></B>,"
+<A HREF="/s/fip/fedkrw.html">Research Working Paper</A> 
+99-11, Federal Reserve Bank of Kansas City.
+
+<LI class="list-group-item downfree"> Todd E. Clark & Michael W. McCracken, 2000.
+ "<B><A HREF="/p/ecm/wc2000/0319.html">Tests of Equal Forecast Accuracy and Encompassing for Nested Models</A></B>,"
+<A HREF="/s/ecm/wc2000.html">Econometric Society World Congress 2000 Contributed Papers</A> 
+0319, Econometric Society.
+<LI class="list-group-item downfree"> Todd E. Clark & Michael McCracken, 1999.
+ "<B><A HREF="/p/sce/scecf9/1241.html">Tests of Equal Forecast Accuracy and Encompassing for Nested Models</A></B>,"
+<A HREF="/s/sce/scecf9.html">Computing in Economics and Finance 1999</A> 
+1241, Society for Computational Economics.
+
+
+</UL></div>
+<LI class="list-group-item downfree">  Mark W. Watson & James H. Stock, 2004.
+"<B><A HREF="/a/jof/jforec/v23y2004i6p405-430.html">Combination forecasts of output growth in a seven-country data set</A></B>,"
+<A HREF="/s/jof/jforec.html">Journal of Forecasting</A>, John Wiley & Sons, Ltd., vol. 23(6), pages 405-430.
+</ol>
+<A TARGET="_blank" HREF="http://citec.repec.org/cgi-bin/get_data.pl?h=RePEc:bla:obuest:v:71:y:2009:i:3:p:331-355&o=all"><B>Full references</B> <i class="bi bi-box-arrow-up-right"></i></A> (including those not matched with items on IDEAS)<P>
+</div>
+
+ <div class="tab-pane fade" id="mrel" role="tabpanel" aria-labelledby="mrel-tab">
+    <h2>Most related items</H2>
+These are the items that most often cite the same works as this one and are cited by the same works as this one.
+<ol class="list-group"><LI class="list-group-item downgate">  Petropoulos, Fotios & Apiletti, Daniele & Assimakopoulos, Vassilios & Babai, Mohamed Zied & Barrow, Devon K. & Ben Taieb, Souhaib & Bergmeir, Christoph & Bessa, Ricardo J. & Bijak, Jakub & Boylan, Joh, 2022.
+"<B><A HREF="/a/eee/intfor/v38y2022i3p705-871.html">Forecasting: theory and practice</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 38(3), pages 705-871.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Fotios Petropoulos & Daniele Apiletti & Vassilios Assimakopoulos & Mohamed Zied Babai & Devon K. Barrow & Souhaib Ben Taieb & Christoph Bergmeir & Ricardo J. Bessa & Jakub Bijak & John E. Boylan & Jet, 2020.
+ "<B><A HREF="/p/arx/papers/2012.03854.html">Forecasting: theory and practice</A></B>,"
+<A HREF="/s/arx/papers.html">Papers</A> 
+2012.03854, arXiv.org, revised Jan 2022.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Rossi, Barbara, 2013.
+"<B><A HREF="/h/eee/ecofch/2-1203.html">Advances in Forecasting under Instability</A></B>,"
+<A HREF="/s/eee/ecofch.html">Handbook of Economic Forecasting</A>, in:  G. Elliott & C. Granger & A. Timmermann (ed.), <A HREF="/b/eee/ecofor/2.html">Handbook of Economic Forecasting</A>, edition 1, volume 2, chapter 0, pages 1203-1324,
+Elsevier.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Barbara Rossi, 2011.
+ "<B><A HREF="/p/duk/dukeec/11-20.html">Advances in Forecasting Under Instability</A></B>,"
+<A HREF="/s/duk/dukeec.html">Working Papers</A> 
+11-20, Duke University, Department of Economics.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Clark, Todd E. & West, Kenneth D., 2007.
+"<B><A HREF="/a/eee/econom/v138y2007i1p291-311.html">Approximately normal tests for equal predictive accuracy in nested models</A></B>,"
+<A HREF="/s/eee/econom.html">Journal of Econometrics</A>, Elsevier, vol. 138(1), pages 291-311, May.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Todd E. Clark & Kenneth D. West, 2005.
+ "<B><A HREF="/p/fip/fedkrw/rwp05-05.html">Approximately normal tests for equal predictive accuracy in nested models</A></B>,"
+<A HREF="/s/fip/fedkrw.html">Research Working Paper</A> 
+RWP 05-05, Federal Reserve Bank of Kansas City.
+
+<LI class="list-group-item downfree"> Kenneth D. West & Todd Clark, 2006.
+ "<B><A HREF="/p/nbr/nberte/0326.html">Approximately Normal Tests for Equal Predictive Accuracy in Nested Models</A></B>,"
+<A HREF="/s/nbr/nberte.html">NBER Technical Working Papers</A> 
+0326, National Bureau of Economic Research, Inc.
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Drechsel, Katja & Scheufele, Rolf, 2012.
+"<B><A HREF="/a/eee/intfor/v28y2012i2p428-445.html">The performance of short-term forecasts of the German economy before and during the 2008/2009 recession</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 28(2), pages 428-445.
+<LI class="list-group-item downgate">  Clements, Michael P. & Harvey, David I., 2011.
+"<B><A HREF="/a/eee/intfor/v27y2011i2p208-223.html">Combining probability forecasts</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 27(2), pages 208-223.
+
+<div class="publishedas"><UL>
+<LI class="list-group-item downgate">  Clements, Michael P. & Harvey, David I., 2011.
+"<B><A HREF="/a/eee/intfor/v27yi2p208-223.html">Combining probability forecasts</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 27(2), pages 208-223, April.
+</UL></div>
+<LI class="list-group-item downfree"> Thomadakis, Apostolos, 2016.
+ "<B><A HREF="/p/pra/mprapa/71589.html">Do Combination Forecasts Outperform the Historical Average? Economic and Statistical Evidence</A></B>,"
+<A HREF="/s/pra/mprapa.html">MPRA Paper</A> 
+71589, University Library of Munich, Germany.
+<LI class="list-group-item downgate">  Ma, Feng & Liu, Jing & Wahab, M.I.M. & Zhang, Yaojie, 2018.
+"<B><A HREF="/a/eee/ecmode/v72y2018icp320-332.html">Forecasting the aggregate oil price volatility in a data-rich environment</A></B>,"
+<A HREF="/s/eee/ecmode.html">Economic Modelling</A>, Elsevier, vol. 72(C), pages 320-332.
+<LI class="list-group-item downgate">  Wang, Xiaoqian & Hyndman, Rob J. & Li, Feng & Kang, Yanfei, 2023.
+"<B><A HREF="/a/eee/intfor/v39y2023i4p1518-1547.html">Forecast combinations: An over 50-year review</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 39(4), pages 1518-1547.
+<LI class="list-group-item downgate">  Guidolin, Massimo & Timmermann, Allan, 2009.
+"<B><A HREF="/a/eee/econom/v150y2009i2p297-311.html">Forecasts of US short-term interest rates: A flexible forecast combination approach</A></B>,"
+<A HREF="/s/eee/econom.html">Journal of Econometrics</A>, Elsevier, vol. 150(2), pages 297-311, June.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Timmermann, Allan & Guidolin, Massimo, 2007.
+ "<B><A HREF="/p/cpr/ceprdp/6188.html">Forecasts of US Short-term Interest Rates: A Flexible Forecast Combination Approach</A></B>,"
+<A HREF="/s/cpr/ceprdp.html">CEPR Discussion Papers</A> 
+6188, Centre for Economic Policy Research.
+
+<LI class="list-group-item downfree"> Massimo Guidolin & Allan Timmerman, 2007.
+ "<B><A HREF="/p/fip/fedlwp/2005-059.html">Forecasts of U.S. short-term interest rates: a flexible forecast combination approach</A></B>,"
+<A HREF="/s/fip/fedlwp.html">Working Papers</A> 
+2005-059, Federal Reserve Bank of St. Louis.
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Jordan, Steven J. & Vivian, Andrew & Wohar, Mark E., 2017.
+"<B><A HREF="/a/eee/intfor/v33y2017i1p102-120.html">Forecasting market returns: bagging or combining?</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 33(1), pages 102-120.
+<LI class="list-group-item downgate">  Yu-Chin Chen & Kenneth S. Rogoff & Barbara Rossi, 2010.
+"<B><A HREF="/a/oup/qjecon/v125y2010i3p1145-1194..html">Can Exchange Rates Forecast Commodity Prices?</A></B>,"
+<A HREF="/s/oup/qjecon.html">The Quarterly Journal of Economics</A>, President and Fellows of Harvard College, vol. 125(3), pages 1145-1194.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Yu-Chin Chen & Kenneth Rogoff & Barbara Rossi, 2008.
+ "<B><A HREF="/p/nbr/nberwo/13901.html">Can Exchange Rates Forecast Commodity Prices?</A></B>,"
+<A HREF="/s/nbr/nberwo.html">NBER Working Papers</A> 
+13901, National Bureau of Economic Research, Inc.
+
+<LI class="list-group-item downfree"> Yu-chin Chen & Kenneth Rogoff & Barbara Rossi, 2010.
+ "<B><A HREF="/p/duk/dukeec/10-07.html">Can Exchange Rates Forecast Commodity Prices?</A></B>,"
+<A HREF="/s/duk/dukeec.html">Working Papers</A> 
+10-07, Duke University, Department of Economics.
+<LI class="list-group-item downfree"> Kenneth Rogoff & Barbara Rossi & Yu-chin Chen, 2008.
+ "<B><A HREF="/p/red/sed008/540.html">Can Exchange Rates Forecast Commodity Prices?</A></B>,"
+<A HREF="/s/red/sed008.html">2008 Meeting Papers</A> 
+540, Society for Economic Dynamics.
+<LI class="list-group-item downfree"> Chen, Yu-chin & Rogoff, Kenneth & Rossi, Barbara, 2008.
+ "<B><A HREF="/p/duk/dukeec/08-03.html">Can Exchange Rates Forecast Commodity Prices?</A></B>,"
+<A HREF="/s/duk/dukeec.html">Working Papers</A> 
+08-03, Duke University, Department of Economics.
+<LI class="list-group-item downfree"> Rogoff, Kenneth S. & Chen, Yu-Chin & Rossi, Barbara, 2010.
+ "<B><A HREF="/p/hrv/faseco/29412033.html">Can Exchange Rates Forecast Commodity Prices?</A></B>,"
+<A HREF="/s/hrv/faseco.html">Scholarly Articles</A> 
+29412033, Harvard University Department of Economics.
+<LI class="list-group-item downfree"> Yu-chin Chen & Kenneth Rogoff & Barbara Rossi, 2008.
+ "<B><A HREF="/p/udb/wpaper/uwec-2008-11-fc.html">Can Exchange Rates Forecast Commodity Prices?</A></B>,"
+<A HREF="/s/udb/wpaper.html">Working Papers</A> 
+UWEC-2008-11-FC, University of Washington, Department of Economics, revised Oct 2009.
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Kim, Hyun Hak & Swanson, Norman R., 2018.
+"<B><A HREF="/a/eee/intfor/v34y2018i2p339-354.html">Mining big data using parsimonious factor, machine learning, variable selection and shrinkage methods</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 34(2), pages 339-354.
+<LI class="list-group-item downfree">  Pablo Pincheira Brown, 2022.
+"<B><A HREF="/a/pcp/pucrev/y2022i89p150-183.html">A Power Booster Factor for Out-of-Sample Tests of Predictability</A></B>,"
+<A HREF="/s/pcp/pucrev.html">Revista Economía</A>, Fondo Editorial - Pontificia Universidad Católica del Perú, vol. 45(89), pages 150-183.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Pincheira, Pablo, 2017.
+ "<B><A HREF="/p/pra/mprapa/77027.html">A Power Booster Factor for Out-of-Sample Tests of Predictability</A></B>,"
+<A HREF="/s/pra/mprapa.html">MPRA Paper</A> 
+77027, University Library of Munich, Germany.
+
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Barbara Rossi & Atsushi Inoue, 2012.
+"<B><A HREF="/a/taf/jnlbes/v30y2012i3p432-453.html">Out-of-Sample Forecast Tests Robust to the Choice of Window Size</A></B>,"
+<A HREF="/s/taf/jnlbes.html">Journal of Business & Economic Statistics</A>, Taylor & Francis Journals, vol. 30(3), pages 432-453, April.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Rossi, Barbara & Inoue, Atsushi, 2011.
+ "<B><A HREF="/p/cpr/ceprdp/8542.html">Out-of-Sample Forecast Tests Robust to the Choice of Window Size</A></B>,"
+<A HREF="/s/cpr/ceprdp.html">CEPR Discussion Papers</A> 
+8542, Centre for Economic Policy Research.
+
+<LI class="list-group-item downfree"> Atsushi Inoue & Barbara Rossi, 2011.
+ "<B><A HREF="/p/fip/fedpwp/11-31.html">Out-of-sample forecast tests robust to the choice of window size</A></B>,"
+<A HREF="/s/fip/fedpwp.html">Working Papers</A> 
+11-31, Federal Reserve Bank of Philadelphia.
+<LI class="list-group-item downfree"> Barbara Rossi & Atsushi Inoue, 2012.
+ "<B><A HREF="/p/upf/upfgen/1404.html">Out-of-sample forecast tests robust to the choice of window size</A></B>,"
+<A HREF="/s/upf/upfgen.html">Economics Working Papers</A> 
+1404, Department of Economics and Business, Universitat Pompeu Fabra.
+
+
+</UL></div>
+<LI class="list-group-item downgate">  Katja Heinisch & Rolf Scheufele, 2018.
+"<B><A HREF="/a/spr/empeco/v54y2018i2d10.1007_s00181-016-1218-x.html">Bottom-up or direct? Forecasting German GDP in a data-rich environment</A></B>,"
+<A HREF="/s/spr/empeco.html">Empirical Economics</A>, Springer, vol. 54(2), pages 705-745, March.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Katja Drechsel & Rolf Scheufele, 2012.
+ "<B><A HREF="/p/snb/snbwpa/2012-16.html">Bottom-up or Direct? Forecasting German GDP in a Data-rich Environment</A></B>,"
+<A HREF="/s/snb/snbwpa.html">Working Papers</A> 
+2012-16, Swiss National Bank.
+
+<LI class="list-group-item downfree"> Drechsel, Katja & Scheufele, Rolf, 2013.
+ "<B><A HREF="/p/zbw/iwhdps/iwh-7-13.html">Bottom-up or Direct? Forecasting German GDP in a Data-rich Environment</A></B>,"
+<A HREF="/s/zbw/iwhdps.html">IWH Discussion Papers</A> 
+7/2013, Halle Institute for Economic Research (IWH).
+
+
+</UL></div>
+<LI class="list-group-item downfree">  Joseph P. Byrne & Dimitris Korobilis & Pinho J. Ribeiro, 2018.
+"<B><A HREF="/a/wly/iecrev/v59y2018i1p329-357.html">On The Sources Of Uncertainty In Exchange Rate Predictability</A></B>,"
+<A HREF="/s/wly/iecrev.html">International Economic Review</A>, Department of Economics, University of Pennsylvania and Osaka University Institute of Social and Economic Research Association, vol. 59(1), pages 329-357, February.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Byrne, Joseph P. & Korobilis, Dimitris & Ribeiro, Pinho J., 2014.
+ "<B><A HREF="/p/edn/sirdps/612.html">On the Sources of Uncertainty in Exchange Rate Predictability</A></B>,"
+<A HREF="/s/edn/sirdps.html">SIRE Discussion Papers</A> 
+2015-24, Scottish Institute for Research in Economics (SIRE).
+
+<LI class="list-group-item downfree"> Byrne, Joseph P & Korobilis, Dimitris & Ribeiro, Pinho J, 2014.
+ "<B><A HREF="/p/pra/mprapa/58956.html">On the Sources of Uncertainty in Exchange Rate Predictability</A></B>,"
+<A HREF="/s/pra/mprapa.html">MPRA Paper</A> 
+58956, University Library of Munich, Germany.
+<LI class="list-group-item downfree"> Joseph P. Byrne & Dimitris Korobilis & Pinho J. Ribeiro, 2014.
+ "<B><A HREF="/p/gla/glaewp/2014_16.html">On the Sources of Uncertainty in Exchange Rate Predictability</A></B>,"
+<A HREF="/s/gla/glaewp.html">Working Papers</A> 
+2014_16, Business School - Economics, University of Glasgow.
+
+
+</UL></div>
+<LI class="list-group-item downfree">  Raffaella Giacomini & Barbara Rossi, 2010.
+"<B><A HREF="/a/jae/japmet/v25y2010i4p595-620.html">Forecast comparisons in unstable environments</A></B>,"
+<A HREF="/s/jae/japmet.html">Journal of Applied Econometrics</A>, John Wiley & Sons, Ltd., vol. 25(4), pages 595-620.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Giacomini, Raffaella & Rossi, Barbara, 2008.
+ "<B><A HREF="/p/duk/dukeec/08-4.html">Forecast Comparisons in Unstable Environments</A></B>,"
+<A HREF="/s/duk/dukeec.html">Working Papers</A> 
+08-04, Duke University, Department of Economics.
+
+
+
+</UL></div>
+<LI class="list-group-item downfree"> Andrea Bastianin & Marzio Galeotti & Matteo Manera, 2011.
+ "<B><A HREF="/p/bep/unimip/unimi-1109.html">Forecast Evaluation in Call Centers: Combined Forecasts, Flexible Loss Functions and Economic Criteria</A></B>,"
+<A HREF="/s/bep/unimip.html">UNIMI - Research Papers in Economics, Business, and Statistics</A> 
+unimi-1109, Universitá degli Studi di Milano.
+
+<div class="otherversion"><UL>
+<LI class="list-group-item downfree"> Bastianin, Andrea & Galeotti, Marzio & Manera, Matteo, 2016.
+ "<B><A HREF="/p/pra/mprapa/76308.html">Statistical and Economic Evaluation of Time Series Models for Forecasting Arrivals at Call Centers</A></B>,"
+<A HREF="/s/pra/mprapa.html">MPRA Paper</A> 
+76308, University Library of Munich, Germany.
+<LI class="list-group-item downfree"> Andrea BASTIANIN & Marzio GALEOTTI & Matteo MANERA, 2011.
+ "<B><A HREF="/p/mil/wpdepa/2011-08.html">Forecast evaluation in call centers: combined forecasts, flexible loss functions and economic criteria</A></B>,"
+<A HREF="/s/mil/wpdepa.html">Departmental Working Papers</A> 
+2011-08, Department of Economics, Management and Quantitative Methods at Università degli Studi di Milano.
+
+
+</UL></div>
+<LI class="list-group-item downfree"> Prasad S Bhattacharya & Dimitrios D Thomakos, 2011.
+ "<B><A HREF="/p/een/camaaa/2011-05.html">Improving Forecasting Performance by Window and Model Averaging</A></B>,"
+<A HREF="/s/een/camaaa.html">CAMA Working Papers</A> 
+2011-05, Centre for Applied Macroeconomic Analysis, Crawford School of Public Policy, The Australian National University.
+<LI class="list-group-item downgate">  Ahmed, Shamim & Liu, Xiaoquan & Valente, Giorgio, 2016.
+"<B><A HREF="/a/eee/intfor/v32y2016i1p75-97.html">Can currency-based risk factors help forecast exchange rates?</A></B>,"
+<A HREF="/s/eee/intfor.html">International Journal of Forecasting</A>, Elsevier, vol. 32(1), pages 75-97.
+</ol>
+</div>
+
+  <div class="tab-pane fade" id="more" role="tabpanel" aria-labelledby="more-tab">
+    <H2> More about this item</H2><h3>Statistics</h3>
+ <A      HREF="http://logec.repec.org/scripts/paperstat.pl?h=RePEc:bla:obuest:v:71:y:2009:i:3:p:331-355">Access and download statistics</A>
+</div>
+
+<!-- placeholder usernotes tab-->
+ <div class="tab-pane fade" id="correct" role="tabpanel" aria-labelledby="correct-tab">
+    <h2>Corrections</H2>
+    <P>All material on this site has been provided by the respective publishers and authors. You can help correct errors and omissions. When requesting a correction, please mention this item's handle: <I style="word-break:break-all;">RePEc:bla:obuest:v:71:y:2009:i:3:p:331-355</I>. See <A HREF="/corrections.html">general information</A> about how to correct material in RePEc.
+      </P><P>
+      If you have authored this item and are not yet registered with RePEc, we encourage you to do it <A HREF="https://authors.repec.org/new-user">here</A>. This allows to link your profile to this item. It also allows you to accept potential citations to this item that we are uncertain about.
+      </P><p>If <A HREF="http://citec.repec.org/" target ="_blank">CitEc <i class="bi bi-box-arrow-up-right"></i></a> recognized a bibliographic reference but did not link an item in RePEc to it, you can help with <A HREF="http://citec.repec.org/cgi-bin/get_data.pl?h=RePEc:bla:obuest:v:71:y:2009:i:3:p:331-355&o=all" target="_blank">this form <I class="bi bi-box-arrow-up-right"></I></A>.</p><P>
+      If you know of missing items citing this one, you can help us creating those links by adding the relevant references in the same way as above, for each refering item. If you are a registered author of this item, you may also want to check the "citations" tab in your <a href="https://authors.repec.org/">RePEc Author Service</A> profile, as there may be some citations waiting for confirmation.
+      </P><P>
+        For technical questions regarding this item, or to correct its authors, title, abstract, bibliographic or download information, contact: Wiley Content Delivery (email available below). General contact details of provider: <A HREF="https://edirc.repec.org/data/sfeixuk.html" target="_blank" style="word-break:break-all;">https://edirc.repec.org/data/sfeixuk.html <i class="bi bi-box-arrow-up-right"></i></A>.
+
+<div id="viewemail">
+<form id="emailForm" action="/cgi-bin/getemail.cgi" method="POST">
+<input type="hidden" name="handle" value="repec:bla:obuest:m">
+<div id="captcha_container"></div>
+          <input type="submit" value="View email address">
+      </form>
+      <script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script>
+<div id="emailResponse"></div>
+</div>
+</p><p>
+      Please note that corrections may take a couple of weeks to filter through
+      the various RePEc services.</p>
+</div>
+</div>
+</div>
+<div id="footer" class="row d-print-none">
+  <div class="col-sm-6 more-services">
+    <h3 style="border-bottom: 1px solid #111; position: relative; right:0.9em;">More services and features</h3>
+    <div class="row">
+      <div class="list-group col">
+        <a href="/cgi-bin/myideas.cgi" class="list-group-item">
+          <h4 class="list-group-item-heading">MyIDEAS</h4>
+          <p class="list-group-item-text">Follow serials, authors, keywords &amp; more</p>
+        </a>
+        <a href="http://authors.repec.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">Author registration</h4>
+          <p class="list-group-item-text">Public profiles for Economics researchers</p>
+        </a>
+        <a href="http://ideas.repec.org/top/" class="list-group-item">
+          <h4 class="list-group-item-heading">Rankings</h4>
+          <p class="list-group-item-text">Various research rankings in Economics</p>
+        </a>
+        <a href="http://genealogy.repec.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">RePEc Genealogy</h4>
+          <p class="list-group-item-text">Who was a student of whom, using RePEc</p>
+        </a>
+        <a href="http://biblio.repec.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">RePEc Biblio</h4>
+          <p class="list-group-item-text">Curated articles &amp; papers on economics topics</p>
+        </a>
+      </div>
+      <div class="list-group col">
+        <a href="http://mpra.ub.uni-muenchen.de/" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">MPRA  <i class="bi bi-box-arrow-up-right"></i></h4>
+          <p class="list-group-item-text">Upload your paper to be listed on RePEc and IDEAS</p>
+        </a>
+        <a href="http://nep.repec.org/" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">New papers by email <i class="bi bi-box-arrow-up-right"></i></h4>
+          <p class="list-group-item-text">Subscribe to new additions to RePEc</p>
+        </a>
+        <a href="http://www.econacademics.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">EconAcademics</h4>
+          <p class="list-group-item-text">Blog aggregator for economics research</p>
+        </a>
+        <a href="http://plagiarism.repec.org/" class="list-group-item">
+          <h4 class="list-group-item-heading">Plagiarism</h4>
+          <p class="list-group-item-text">Cases of plagiarism in Economics</p>
+        </a>
+      </div>
+      </div>
+    </div>
+    <div class="col-sm more-services">
+      <h3 style="border-bottom: 1px solid #111;">About RePEc</h3>
+      <div class="list-group col">
+        <a href="http://repec.org/" class="list-group-item" target="_blank">
+	  <h4 class="list-group-item-heading">RePEc home <i class="bi bi-box-arrow-up-right"></i></h4>
+	  <p class="list-group-item-text">Initiative for open bibliographies in Economics</p>
+	</a>
+        <a href="http://blog.repec.org/" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">Blog <i class="bi bi-box-arrow-up-right"></i></h4>
+          <p class="list-group-item-text">News about RePEc</p>
+	</a>
+        <a href="/help.html" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">Help/FAQ <i class="bi bi-box-arrow-up-right"></i></h4>
+          <p class="list-group-item-text">Questions about IDEAS and RePEc</p>
+	</a>
+        <a href="/team.html" class="list-group-item">
+          <h4 class="list-group-item-heading">RePEc team</h4>
+          <p class="list-group-item-text">RePEc volunteers</p>
+	</a>
+        <a href="/archives.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Participating archives</h4>
+          <p class="list-group-item-text">Publishers indexing in RePEc</p>
+	</a>
+        <a href="https://ideas.repec.org/privacy.html" class="list-group-item" target="_blank">
+          <h4 class="list-group-item-heading">Privacy statement <i class="bi bi-box-arrow-up-right"></i></h4>
+	</a>
+      </div>
+    </div>
+    <div class="col-sm more-services">
+      <h3 style="border-bottom: 1px solid #111;">Help us</h3>
+      <div class="list-group col">
+        <a href="/corrections.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Corrections</h4>
+          <p class="list-group-item-text">Found an error or omission?</p>
+	</a>
+        <a href="/volunteers.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Volunteers</h4>
+          <p class="list-group-item-text">Opportunities to help RePEc</p>
+	</a>
+        <a href="/participate.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Get papers listed</h4>
+          <p class="list-group-item-text">Have your research listed on RePEc</p>
+	</a>
+        <a href="/stepbystep.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Open a RePEc archive</h4>
+          <p class="list-group-item-text">Have your institution's/publisher's output listed on RePEc</p>
+	</a>
+	<a href="/getdata.html" class="list-group-item">
+          <h4 class="list-group-item-heading">Get RePEc data</h4>
+          <p class="list-group-item-text">Use data assembled by RePEc</p>
+	</a>
+      </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-12" style="text-align: center; padding-top: 10px;">
+    <div id="sidelogos">
+      <a href="https://ideas.repec.org/">IDEAS</a> is a <a href="http://repec.org/" target="_blank">RePEc <i class="bi bi-box-arrow-up-right"></i></a> service. RePEc uses bibliographic data supplied by the respective publishers.
+    </div>
+  </div>
+  
+  
+</div>
+</div>
+
+</div>
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/share-to-mastodon@0.2.0/dist/share-to-mastodon.js"></script>
+<script src="/css/ideas.js"></script>
+<script src="/css/pushy.js"></script>
+<script>
+$(document).ready(function() {
+    // show active tab on reload
+    if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+
+    // remember the hash in the URL without jumping
+//    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+//       if(history.pushState) {
+//            history.pushState(null, null, '#'+$(e.target).attr('href').substr(1));
+//       } else {
+//            location.hash = '#'+$(e.target).attr('href').substr(1);
+//       }
+//    });
+});
+</script>
+
+</BODY>
+</HTML>

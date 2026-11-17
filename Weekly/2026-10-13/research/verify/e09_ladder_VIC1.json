@@ -1,0 +1,24 @@
+{
+  "region": "VIC1",
+  "drop_semi": false,
+  "rows": 9216,
+  "days": 32,
+  "days_skipped": 0,
+  "intervals_without_price": 0,
+  "extra_mw": 2000,
+  "cols": [
+    "end_min",
+    "demand",
+    "price",
+    "price_at_demand",
+    "price_at_demand_plus_2000",
+    "q_low",
+    "q_high",
+    "mw_total",
+    "mw_le0",
+    "mw_le0_semi",
+    "mw_semi_at_demand",
+    "edge_flag"
+  ],
+  "note": "q_low and q_high bound the dispatch the settled price implies; edge_flag 2 means the price sits below the stack, 1 above it, 0 inside"
+}

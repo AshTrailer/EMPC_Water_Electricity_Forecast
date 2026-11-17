@@ -1,0 +1,49 @@
+{
+  "format": "pptx",
+  "verdict": "pass",
+  "checks": [
+    {
+      "id": "package",
+      "status": "pass"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "24 September"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "cross-source"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "6%"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "AI assistance"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Validate our own data"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "pump"
+    },
+    {
+      "id": "count",
+      "status": "pass",
+      "expected": 2,
+      "actual": 2
+    }
+  ],
+  "summary": {
+    "slides": 2
+  }
+}

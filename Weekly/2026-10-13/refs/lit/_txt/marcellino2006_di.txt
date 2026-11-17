@@ -1,0 +1,3546 @@
+
+=== page 1 ===
+ 
+ 
+ 
+ 
+ 
+ 
+Institutional Members: CEPR, NBER and Università Bocconi 
+ 
+ 
+ 
+ 
+WORKING PAPER SERIES 
+ 
+ 
+ 
+A Comparison of Direct and Iterated Multistep 
+AR Methods for Forecasting Macroeconomic 
+Time Series 
+ 
+ 
+ 
+Massimiliano Marcellino, James H. Stock and Mark W. Watson 
+ 
+ 
+ 
+ 
+ 
+Working Paper n. 285 
+ 
+ 
+ 
+March 2005 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IGIER – Università Bocconi, Via Salasco 5, 20136 Milano –Italy 
+http://www.igier.uni-bocconi.it 
+ 
+ 
+The opinion expressed in the working papers are those the authors alone, and not those of the Institute 
+which takes non institutional policy position, nor of CEPR, NBER or Università Bocconi.  
+
+=== page 2 ===
+ 
+ 
+ 
+ 
+A Comparison of Direct and Iterated Multistep AR Methods  
+ 
+for Forecasting Macroeconomic Time Series 
+ 
+ 
+ 
+ 
+ 
+Massimiliano Marcellino 
+ 
+Istituto di Economia Politica, Universita Bocconi and IGIER 
+ 
+ 
+ 
+James H. Stock 
+ 
+Department of Economics, Harvard University 
+and the NBER 
+ 
+ 
+and 
+ 
+ 
+Mark W. Watson* 
+ 
+Department of Economics and Woodrow Wilson School, Princeton University 
+and the NBER 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+*The authors thank Frank Schorfheide and Ken West for comments.  This research was 
+funded in part by NSF grant SBR-0214131. 
+
+=== page 3 ===
+ 
+Abstract 
+ 
+“Iterated” multiperiod ahead time series forecasts are made using a one-period 
+ahead model, iterated forward for the desired number of periods, whereas “direct” 
+forecasts are made using a horizon-specific estimated model, where the dependent 
+variable is the multi-period ahead value being forecasted.  Which approach is better is an 
+empirical matter: in theory, iterated forecasts are more efficient if correctly specified, but 
+direct forecasts are more robust to model misspecification.  This paper compares 
+empirical iterated and direct forecasts from linear univariate and bivariate models by 
+applying simulated out-of-sample methods to 171 U.S. monthly macroeconomic time 
+series spanning 1959 – 2002.  The iterated forecasts typically outperform the direct 
+forecasts, particularly if the models can select long lag specifications.  The relative 
+performance of the iterated forecasts improves with the forecast horizon. 
+ 
+Keywords:  multistep forecasts, VAR forecasts, forecast comparisons 
+ 
+JEL Numbers:  C32, E37, E47 
+
+=== page 4 ===
+1. Introduction 
+ 
+A forecaster making a multiperiod time series forecast – for example, forecasting 
+the unemployment rate six months hence – confronts a choice between using a one-
+period model iterated forward, or instead using a multiperiod model estimated with a loss 
+function tailored to the forecast horizon.  In the case of univariate linear models and 
+quadratic loss, the “iterated” forecast (sometimes called a “plug-in” forecast) entails first 
+estimating an autoregression, then iterating upon that autoregression to obtain the 
+multiperiod forecast.  In contrast, the forecast based on the multiperiod model – which, 
+following the literature, we shall call the “direct” forecast – entails regressing a 
+multiperiod-ahead value of the dependent variable on current and past values of the 
+variable.  For example, the direct forecast of the unemployment rate six months from now 
+might entail the regression of the unemployment rate, six months hence, against a 
+constant and current and past values of the unemployment rate.  But which forecast, the 
+iterated or the direct, should the forecaster use in practice? 
+The theoretical literature on this problem tends to emphasize the advantages of the 
+direct over indirect forecasts.  The idea that direct multiperiod forecasts can be more 
+efficient than iterated forecasts dates at least to Cox (1961), who made the suggestion in 
+the context of exponential smoothing, and to Klein (1968), who suggested direct 
+multiperiod estimation of dynamic forecasting models.  Contributions to the theory of 
+iterated vs. direct forecasts include Findley (1983, 1985), Weiss (1991), Tiao and Xu 
+(1993), Lin and Granger (1994), Tiao and Tsay (1994),  Clements and Hendry (1996), 
+Bhansali (1996, 1997), Kang (2003), Chevillon and Hendry (2003), and Schorfheide 
+(2003).  Bhansali (1999) provides a nice survey of this theoretical literature, and Ing 
+(2003) gives a complete treatment of first-order asymptotics for stationary 
+autoregressions. 
+Choosing between iterated and direct forecasts involves a tradeoff between bias 
+and estimation variance:  the iterated method produces more efficient parameter estimates 
+than the direct method, but it is prone to bias if the one-step ahead model is misspecified.  
+Ignoring estimation uncertainty, if both the iterated model and the direct model have p 
+lags of the dependent variable but the true autoregressive order exceeds p, then the 
+ 
+1
+
+=== page 5 ===
+asymptotic mean squared forecast error (MSFE) of the direct forecast typically is less 
+than (and cannot exceed) the MSFE of the iterated forecast (e.g. Findley (1983)).  On the 
+other hand, if the true autoregressive order is p or less, then (still ignoring estimation 
+uncertainty) the MSFEs of the direct and iterated methods are the same; because the 
+iterated parameter estimator is more efficient, the MSFE including estimation uncertainty 
+is less for the iterated method when the autoregressive order is correctly specified.  
+Because it seems implausible that typically low-order autoregressive models are correctly 
+specified, in the sense of estimating the best linear predictor, the theoretical literature 
+tends to conclude that the robustness of the direct forecast to model misspecification 
+makes it a more attractive procedure than the bias-prone iterated forecast (Bhansali 
+(1999), Ing (2003)). 
+Because the relative efficiency of iterated vs. direct forecasts is theoretically 
+ambiguous and depends on the unknown population best linear projection, the question of 
+which method to choose is an empirical one.  Given the practical importance of the 
+question, there are surprisingly few empirical studies of the relative performance of 
+iterated vs. direct forecasts.  Findley (1983, 1985) studies univariate models of two of 
+Box and Jenkin’s (1976) series (chemical process temperature and sunspots), and Liu 
+(1996) studies univariate autoregressive forecasts of four economic time series.  Ang, 
+Piazzesi, and Wei (2003) find that, at least during the 1990s, iterated forecasts of U.S. 
+GDP growth outperform direct forecasts using a measure of short-term interest rates and 
+the term spread.  The largest empirical study we are aware of is Kang (2003), who studies 
+univariate autoregressive models of nine U.S. economic time series with mixed results, 
+concluding that the direct method “may or may not improve forecast accuracy” relative to 
+the iterated method (Kang, 2003, p. 398). 
+This paper undertakes a large-scale empirical comparison of iterated vs. direct 
+forecasts using data on 171 U.S. macroeconomic time series variables, available monthly 
+from 1959 to 2002.   Rather than narrowing in on individual series, this study considers 
+the larger questions of whether the iterated or direct forecasts are more accurate on 
+average for the population of U.S. macroeconomic time series, and whether the 
+distribution of MSFEs for direct forecasts is statistically and substantively below the 
+distribution of MSFEs for iterated forecasts.  Using these data, we compare iterated and 
+ 
+2
+
+=== page 6 ===
+direct forecasts based on univariate autoregressions and bivariate vector autoregressions; 
+in both cases, we consider models with fixed lag order and models with data-dependent 
+lag order choices, using the Akaike Information Criterion (AIC) or, alternatively, the 
+Bayes Information Criterion (BIC).1  Multiperiod forecasts are computed for horizons of 
+3, 6, 12, and 24 months.  The experimental design uses a pseudo out-of-sample (or 
+“recursive”) forecasting framework; for example, forecasts for the twelve months from 
+January 1985 to December 1985 are computed from models estimated and selected using 
+only data available through December 1984. 
+This study yields surprisingly sharp results.  First, iterated forecasts tend to have 
+lower sample MSFEs than direct forecasts, particularly if the lag length in the one-period 
+ahead model is selected by AIC.  Second, these improvements tend to be modest, as one 
+would expect if the main source of the improvements is reduction in estimation 
+uncertainty of the parameters.  Third, direct forecasts become increasingly less desirable 
+as the forecast horizon lengthens;  this too is consistent with the efficiency of the iterated 
+forecasts outweighing the robustness of the direct forecasts.  Fourth, for series measuring 
+wages, prices, and money, direct forecasts improve upon iterated forecasts based on low-
+order autoregressions, but not upon iterated forecasts from high-order autoregressions, a 
+finding that is consistent with these series having, in effect, a large moving average root 
+(or long lags in the optimal linear predictor), as suggested by Nelson and Schwert (1977) 
+and Schwert (1987).  In contrast, iterated forecasts from low-order autoregressive models 
+outperform direct forecasts for real activity measures and the other macroeconomic 
+variables in our data set.  
+ 
+2. Forecasting Models and Methods of Comparison 
+ 
+This section describes the iterated and direct forecasting models and estimators.  
+We begin with two general observations. 
+                                                 
+1Because possible model misspecification is central to this comparison, data-dependent 
+lag order choice can play an important role:  selecting a high-order one-period model can 
+reduce bias but increase estimation uncertainty, and thus increase total MSFE, relative to 
+a lower order direct model (Bhansali (1997)). 
+ 
+3
+
+=== page 7 ===
+First, many macroeconomic time series appear to be nonstationary in the sense of 
+having one or more unit roots.  The strategy adopted here is to transform the series of 
+interest to approximate stationarity by taking its first or second difference as needed, to 
+estimate the forecasting model, then to compute the h-step ahead forecast of the original 
+series produced by that model.  For example, the logarithm of real GDP is first 
+transformed by taking its first difference, ∆logGDPt, the forecasting models are estimated 
+using ∆logGDPt, and these models are then used to compute the forecast of the level of 
+the logarithm of GDP, h periods ahead.  The transformations used for each series are 
+discussed in the next section and in the data appendix. 
+Second, all forecasts are recursive (pseudo out-of-sample), that is, forecasts are 
+based only on values of the series up to the date at which the forecast is made.  
+Parameters are then reestimated in each period, for each forecasting model, using data 
+from the beginning of the sample through the current forecasting date.  For forecasts 
+entailing data-based model selection, the order of the model is also selected recursively, 
+and thus can change over the sample as new information is added to the forecast data set. 
+ 
+2.1  Univariate Models 
+Let Xt denote the level or logarithm of the series of interest.  The objective is to 
+compute forecasts of Xt+h, using information at time t.  Let yt denote the stationary 
+transformation of the series after taking first or second differences.  Specifically, suppose 
+that Xt is integrated of order d (is I(d)); then yt = ∆dXt, where d  = 0, 1, or 2 as appropriate. 
+Iterated AR forecasts.  The one-step ahead AR model for yt is 
+ 
+yt+1  = α  + 
+1
+1
+p
+i
+t
+i
+i
+y
+φ
++ −
+=∑
+ + εt. 
+ 
+ 
+ 
+ 
+(2.1) 
+ 
+For the iterated AR forecasts, the parameters α, φ1,…,φp in (2.1) are estimated recursively 
+by OLS, and the forecasts of yt+h are constructed recursively as, 
+ 
+/
+1
+ˆ
+ˆ
+ˆ
+ˆ
+p
+I
+t h t
+i
+t h i t
+i
+y
+α
+φ
++
+=
+=
++∑
+/
+Iy + −
+, 
+ 
+ 
+ 
+ 
+(2.2) 
+ 
+4
+
+=== page 8 ===
+ 
+where 
+ for j ≤ t.  Forecasts of Xt+h are then computed by accumulating the values 
+of 
+ as appropriate in the I(0), I(1) and I(2) cases: 
+/
+ˆ j t
+j
+y
+=
+/t
+y
+ˆ I
+t k
+y +
+ 
+|
+|
+|
+1
+|
+1
+1
+ˆ
+   if 
+ is I(0)
+ˆ
+ˆ
+  if 
+ is I(1)
+ˆ
+  if 
+ is I(2)
+I
+t h t
+t
+h
+I
+I
+t h t
+t
+t i t
+t
+i
+h
+i
+I
+t
+t
+j t
+t
+i
+j
+y
+X
+X
+X
+y
+X
+X
+y
+X
++
++
++
+=
++
+=
+=
+
+
+
+
+=
++
+
+
+
++
+
+
+∑
+∑∑
+ 
+ 
+ 
+(2.3) 
+ 
+Direct forecasts.  The direct estimates of the parameters are the recursive 
+minimizers of the mean squared error of the h-step ahead criterion function.  
+Accordingly, the parameters are estimated by the OLS regression in which the regressors 
+are a constant and yt,…,yt–p+1 and the dependent variable is 
+h
+t h
+y + , where  
+ 
+h
+t h
+y + = 
+ 
+ 
+(2.4) 
+2
+1
+1
+  if 
+ is I(0)
+  if 
+ is I(1)
+if 
+ is I(2)
+t h
+t
+t h
+t
+t
+h
+i
+t
+j
+t h
+t
+t
+t
+i
+j
+X
+X
+X
+X
+X
+X
+X
+X
+h X
+X
++
++
++
++
+=
+=
+
+
+
+−
+
+
+
+∆
+=
+−
+−∆
+∑∑
+ 
+The direct forecasting regression model is, 
+ 
+h
+t h
+y + = β  + 
+1
+1
+p
+i
+t
+i
+i
+y
+ρ
++ −
+=∑
+ + εt+h  
+ 
+ 
+ 
+(2.5) 
+ 
+The direct estimator of the coefficients is obtained by the recursive estimation of 
+(2.5) by OLS, where data through period t are used (so that the last observation includes 
+ on the left hand side of the regression).  The direct forecasts of 
+h
+ty
+h
+t h
+y + are 
+ 
+ 
+5
+
+=== page 9 ===
+,
+ˆ D h
+t h
+y + = 
+1
+1
+ˆ
+ˆ
+p
+i
+t
+i
+i
+y
+β
+ρ
++ −
+=
++∑
+ . 
+ 
+ 
+ 
+ 
+(2.6) 
+ 
+Forecasts of Xt+h are then computed from the 
+,
+ˆ D h
+t h
+y + as appropriate in the I(0), I(1) and I(2) 
+cases: 
+,
+/
+ˆ
+ˆ
+/
+D
+D h
+t h t
+t h t
+X
+y
++
++
+=
+ for I(0),  
+ = 
+/
+ˆ D
+t h t
+X +
+,
+ˆ D h
+t h
+y + + Xt for I(1) and 
+ = 
+/
+ˆ D
+t h t
+X +
+,
+ˆ D h
+t h
+y + + Xt + h∆Xt for 
+I(2). 
+Lag length determination.  Four different methods were used to determine the lag 
+order p:  (1) p = 4 (fixed); (2) p = 12 (fixed); (3) p chosen by the Akaike Information 
+Criterion (AIC), with 0 ≤ p ≤ 12, and (4) p chosen by the Bayes Information Criterion 
+(BIC), with 0 ≤ p ≤ 12.  For the iterated forecasts, the AIC and BIC were computed 
+using the standard formulas based on the sum of squared residuals (SSR) from the one-
+step ahead regression.  For the direct forecasts, the AIC and BIC were computed using 
+the SSR from the estimated h-step ahead regression (2.5).  The AIC and BIC were 
+recomputed at each date, so the order of the selected forecasting model can change from 
+one period to the next, where the model selection and parameter estimates are based only 
+on data through the date of the forecast (period t). 
+These four choices cover leading cases of theoretical interest.  If the true lag order 
+p0 is finite and if the maximum lag considered exceeds p0, then the BIC provides a 
+consistent estimator of p0 and the iterated estimator with BIC is asymptotically efficient.  
+If p0 is infinite, then the direct estimator with AIC model selection achieves an efficiency 
+bound for direct estimators and this bound is below that for all iterated estimators (see 
+Bhansali (1996) for a precise statement of this result; he shows that the direct estimator 
+bound also is achieved using Shibata’s (1980) lag length selector).  In finite samples, 
+however, BIC and AIC lag length selection introduces additional sampling uncertainty 
+and the short (4 lag) and long (12 lag) fixed-lag autoregressions provide benchmarks 
+against which to compare the BIC and AIC forecasts.2 
+                                                 
+2Other possible lag-length selection methods are possible but are not pursued here.  For 
+example, Bhansali (1999) and Schorfheide (2003) suggest selecting the order of the 
+iterated model based on the h-step ahead SSR of the iterated forecasts, rather than (as is 
+conventional and as we do) based on the one-step ahead SSR. 
+ 
+6
+
+=== page 10 ===
+ 
+2.2  Multivariate Models 
+We also consider iterated and direct forecasts computed using bivariate vector 
+autoregressions (VARs).  For two series i and j, the iterated VARs are specified in terms 
+of the stationary transforms yit and yjt.  The iterated forecast is then obtained by iterating 
+forward the VAR and then applying the transformation (2.3).  The h-step direct forecast 
+for series i is obtained from the OLS regression of 
+,
+h
+i t h
+y
++ against a constant and p lags 
+each of yit and yjt.  In both the iterated and direct models, the same number of lags p is 
+used for both regressors.  The same four methods of lag determination are used as in the 
+analysis of the univariate models. 
+ 
+2.3  Estimation and Forecast Sample Periods 
+Let T0 denote the first observation used in estimation of the regressions, T1 denote 
+the date at which the first pseudo out-of-sample forecast is made, and T2 denote the date 
+at which the final pseudo out-of-sample forecast is made.  The date T0 is the date at which 
+the first observation is available (for most series, 1959:1), plus twelve (because twelve 
+lags are used for the long-lagged models), plus the order of integration of the series (to 
+allow for first and second differences).  For most series, the initial forecast date T1 is 
+1979:1; for series that start after 1959:1, T1 is the later of 1979:1 or the first observation 
+for which all regressions can be estimated using a minimum of 120 observations.  The 
+final forecast date depends on the forecast horizon, and is the date of the last available 
+observation (2002:12) minus the forecast horizon h.  Thus, for most series, pseudo out-of-
+sample forecasts ˆ
+t h
+X + were computed for t = 1979:1 to 2002:12 – h. 
+The pseudo out-of-sample forecast error is et+h = ˆ
+t h
+X + – Xt+h, and the sample 
+MSFE is, 
+ 
+MSFE = 
+2
+1
+2
+2
+1
+1
+1
+T
+t h
+t T
+e
+T
+T
++
+=
+−
++ ∑
+. 
+ 
+ 
+ 
+ 
+(2.7) 
+ 
+ 
+7
+
+=== page 11 ===
+The sample MSFE is computed for each series (171 series), for each forecasting method 
+(iterated, with 4 lag choices, and direct, with 4 lags choices), and for each horizon (3, 6, 
+12, and 24 months).  For a given series and horizon, the empirical efficiency of 
+comparable direct and indirect forecasts is assessed by comparing the respective MSFEs. 
+ 
+2.4  Parametric Bootstrap Method for Comparing Iterated v. Direct Forecasts 
+The sample MSFE might be less for a direct than an iterated forecast either 
+because the direct forecast is more efficient in population or because of sampling 
+variability.  For a single series, the null hypothesis that a direct forecast fails to improve 
+upon an indirect forecast can be tested using suitable versions of tests proposed by West 
+(1996) and Clark and McCracken (2001) for comparing simulated out-of-sample 
+forecasts.  Our focus, however, is on whether the direct method improves upon the 
+iterated method on average over the population of macroeconomic variables of interest.  
+Thus the objects of interest in this study are summary measures of the distribution of the 
+relative MSFEs, for example the mean relative MSFE of the direct estimator, relative to 
+the iterated estimator, across the population of U.S. macroeconomic series, from which 
+we have a sample of 171 series.  This comparison of empirical distributions of direct and 
+iterated estimators goes beyond the theoretical results available in the forecast evaluation 
+literature. 
+To assess the statistical significance of our summary statistics, we therefore 
+implemented a parametric bootstrap that examined the spread of the distribution of 
+relative MSFEs under the null hypothesis that the iterated forecasting model is correctly 
+specified, so that the iterated forecast is efficient.  The parametric bootstrap has the 
+following steps. 
+ 
+1. For each series i, i = 1,…,171, an autoregressive model of order pi is estimated 
+using the full sample, producing the (one-step ahead) residuals eit. 
+2. Previous research suggests that these series are well modeled by a factor model 
+with a small number of factors (e.g. Stock and Watson (2002a, 2002b)).  
+Accordingly, a static factor model with four factors is fit to these residuals, where 
+the factor loadings and error variances are estimated using principal components.  
+ 
+8
+
+=== page 12 ===
+Separate factor models (different factor loadings and idiosyncratic variances) 
+were estimated in the pre-1982:12 and post-1983:1 periods, where the break point 
+was chosen approximately to coincide with the decline in volatility of many U.S. 
+macroeconomic time series (McConnell and Perez-Quiros (2000), Kim and 
+Nelson (1999)). 
+3. Using the estimated parameters from the dynamic factor models, a pseudo-
+random data set consisting of 171 series was computed, where the sample periods 
+for the pseudo data are the same as the actual data.  From these pseudo-random 
+data, recursive iterated and direct forecasts are computed as described above, 
+along with their MSFEs.  This process is repeated 200 times.  This produces an 
+empirical distribution of direct MSFEs, relative to iterated MSFEs, under the 
+hypothesis that the true AR lag length is pi, i = 1,…,171. 
+4. This procedure is repeated for each of the four lag selection methods.  For p = 4 
+(fixed), pi is fixed at 4, and similarly for p = 12 (fixed).  For the AIC method, pi is 
+determined by AIC prior to estimation in step #1, and similarly for the BIC 
+method. 
+ 
+This algorithm provides an estimate of the distribution of relative MSFEs under 
+the null hypothesis that the iterated model is correctly specified (so that the iterated 
+model is asymptotically efficient), where this distribution allows for both sampling 
+uncertainty in the MSFEs and heterogeneity among and time variation of the 
+autoregressive processes.  This distribution allows for a comparison of the observed 
+population distribution of relative MSFEs to their null distribution.  This distribution also 
+can be used to compute bootstrap p-values.  For example, consider the comparison of the 
+direct estimator with p = 4 to the iterated estimator with p = 4.  The bootstrap p-value of 
+the hypothesis that the median relative MSFE (where the median is computed across all 
+171 series for the given horizon) equals its population value that would obtain were the 
+iterated model correctly specified so that the iterated estimator is efficient, against the 
+alternative that the direct estimator is more efficient, is the fraction of the 200 bootstrap 
+draws of the median that are less than the median ratio actually observed in the data. 
+ 
+ 
+9
+
+=== page 13 ===
+3. The Data 
+ 
+The data set consists of 171 major monthly U.S. macroeconomic time series.  The 
+full data set spans 1959:1 – 2002:12, and most series are available over this full sample.  
+The data set consists of five categories of series:   
+(A) Income, output, sales, and capacity utilization (38 Series);  
+(B) Employment and unemployment (27 Series);  
+(C) Construction, inventories and orders (37 Series); 
+(D) Interest rates and asset prices (34 Series); and  
+(E) Nominal prices, wages, and money (35 Series). 
+The series and their spans are listed in the data appendix. 
+The series were subject to three transformations and manipulations.  First, series 
+that represent quantities, indexes, and price levels were transformed to logarithms; 
+interest rates, unemployment rates, etc. were left in the original levels; this yields the Xit 
+series in the notation of Section 2. 
+Second, these series were then differenced so that the resulting series were 
+integrated of order zero, yielding the yit series in the notation of Section 2.  Generally 
+speaking, real quantities and real prices were treated as I(1).  For our primary set of 
+results, we treated nominal prices, wages, and money as I(1).  There is disagreement 
+among practitioners about whether it is best to treat these series as I(1) or I(2), however, 
+so we repeated the analysis treating the series in category (E), prices, wages, and money, 
+as I(2).  The results of this sensitivity analysis are discussed briefly in the next section. 
+Third, a few of the resulting yit series contained large outliers.  So that these 
+outliers would not dominate the results, observations were dropped when |yit| exceeded its 
+median by more than six times its interquartile range. 
+ 
+4. Results for Univariate Autoregressions 
+ 
+Table 1 summarizes the distributions of the ratios of the MSFE of the direct 
+forecast to the MSFE of the iterated forecast, where the forecasts are based on the same 
+method of lag selection, for different forecast horizons.  For example, across the 171 
+ 
+10
+
+=== page 14 ===
+series, when p = 4 lags are used for both the iterated and direct forecast and the forecast 
+horizon is h = 3, the mean relative MSFE is 0.99, indicating that the direct estimator on 
+average makes a very slight improvement over the indirect estimator, at least by this 
+measure.  In 10% of the 171 series, relative MSFE is less than .96 at this horizon, while 
+in 10% of the series the relative MSFE exceeds 1.02.  The numbers in parentheses in 
+Table 1 are the bootstrap p-values for the test of the hypothesis that the iterated estimator 
+is efficient, computed as described in Section 2.4.  For example, the bootstrap p-value of 
+the mean relative MSFE for the p = 4 lag model at horizon h = 3 is <.005; according to 
+the bootstrap null distribution, were the iterated model correctly specified, the probability 
+of observing a mean relative MSFE of .99 or less is less than 0.5%.3 
+Inspection of Table 1 suggests that whether the iterated or direct estimator is 
+preferred depends on the method of lag selection.  For the short lag selection methods (p 
+= 4 and BIC), the direct estimator is preferred; this is particularly true for the BIC, where 
+the improvements in the lower tail of the distribution are substantial, at least through the 
+12-month horizon.  According to the bootstrap p-values, these improvements generally 
+are statistically significant.  In contrast, within the long-lag models, the iterated estimator 
+is preferable, and the direct estimator typically does not improve substantially upon the 
+iterated estimator.  At the longer 24-month horizon, the iterated forecast is generally 
+preferable to the direct forecast for all four lag selection methods.  Indeed, at this horizon 
+the direct forecasts can be markedly worse than the iterated forecasts:  the 90th percentile 
+of the distribution of relative MSFEs at h = 24 exceeds 1.2 for all four lag methods. 
+Table 2 breaks down the overall results in Table 1 into two categories of series, 
+the 35 series on nominal prices, wages, and money, and the remaining 136 series.  The 
+conclusions are substantially different for these two sets of series.  Once the price, wage, 
+and money series are excluded, the iterated forecast is universally preferred to the direct 
+forecast at all horizons.  Even in the few cases that the direct estimator has a small p-
+value, the actual MSFE ratio is one or very nearly so, indicating that the improvement 
+from the direct forecast too small to be of practical forecasting value.  In contrast, for the 
+price, wage, and money series, the direct estimator provides statistically significant 
+                                                 
+3If the iterated model is correctly specified, then the direct estimator is inefficient and the 
+relative MSFE ratio would tend to exceed one. 
+ 
+11
+
+=== page 15 ===
+improvements over the indirect estimator at all horizons, and at all points in the 
+distribution, for both short-lag models; in some cases, these improvements are large from 
+a practical perspective (for example, the mean relative MSFE at h = 6 and h = 12 for the 
+BIC model is .86).  But using longer lags in the iterated model eliminates most if not all 
+of the advantages of the direct forecast; for example, at h = 12, the mean relative MSFE 
+for the 4 lag forecasts is .87, but this rises to 1.00 for the 12 lag forecasts, a value that is 
+statistically significant but provides no practical improvement from using the direct 
+method. 
+Table 3 summarizes the mean and median relative MSFEs of the various 
+forecasts, all relative to the iterated 4-lag forecasts (so the entry for the iterated AR(4) 
+column is 1.00 by construction), for all series together (part A) and for the two groups of 
+non-price and price series separately (parts B and C).  Also reported are the fraction of 
+series among the 171 series for which a given forecast is has the smallest MSFE at that 
+horizon among the eight competitors.  Several results stand out.  If prices, wages, and 
+money are excluded, then the iterated forecasts produce the lowest MSFEs in the clear 
+majority of cases; the forecasts that are most frequently best are the short-lag iterated 
+forecasts.  On average, direct forecasts produce higher MSFEs than the iterated AR(4), 
+sometimes by a substantial margin.  The relative performance of the iterated forecasts 
+improves as the horizon lengthens.  For the price, wage, and money series, the short-lag 
+iterated forecasts are not successful, and for nearly half these series the direct forecasts 
+are better at short horizons.  As the horizon lengthens, however, the iterated forecasts 
+become more desirable. 
+The fact that short-lag iterated forecasts are most successful for the non-price 
+series and long-lag iterated forecasts are most successful for the price series suggests that 
+iterated forecasts with a data-dependent lag choice that can select long-lagged models 
+should be best in some average sense.  This is in fact the case.  For all series combined 
+(Table 3, part A), the mean and median MSFE of the iterated AIC forecast, relative to the 
+iterated AR(4), is as small or smaller than the relative MSFEs of all the other forecasts, at 
+all horizons. 
+As a sensitivity check, the results for the price, wage, and money variables (the 
+variables in category E in the data appendix) were recomputed, treating these variables as 
+ 
+12
+
+=== page 16 ===
+I(2) instead of I(1).  The results are summarized in part D of Table 3; full results are 
+available on the Web4.  In the I(2) specification, the iterated AR(4) forecasts have larger 
+MSFEs, relative to the other forecasts, than they do in the I(1) specification, so that the 
+mean relative MSFEs are smaller in part D than in part C.  Adjusting for this difference in 
+the denominators, however, one can see that the general pattern in part D is the same as 
+in the I(1) specifications in part D.  In particular, the long lag specifications outperform 
+the short-lag specifications, and the iterated long-lag forecasts tend to have the best 
+average performance, especially as the horizon increases. 
+The different results for the wage and price series suggest that the population best 
+linear projections for the non-price series tend to be short, whereas they tend to be long 
+for the price, wage, and money series.  In particular, there could be large moving average 
+root in ARIMA models of prices, wages, and money, where the number of autoregressive 
+lags is short.  This possibility has been previously suggested by Nelson and Schwert 
+(1977) and Schwert (1987) and is consistent with the long-lag lengths for backward-
+looking Phillips curve specifications that Brayton, Roberts, and Williams (1999) argue is 
+appropriate for postwar U.S. data.  To examine this possibility, Table 4 reports estimated 
+ARIMA(2,1,1) and ARIMA(1,2,1) models for the eight wage and price inflation series 
+for which a direct forecast exhibited the greatest improvement, relative to the iterated 
+AR(4) forecast.  In all cases, the MA coefficient is large, in a few cases exceeding .9.  
+This large moving average root occurs in both the I(1) specifications and the I(2) 
+specifications for these series, so it is not a simple consequence of overdifferencing.  
+These large moving average coefficients are consistent with a slow decay in the 
+coefficients of the optimal linear predictor for the price and wage series and are 
+consistent with the relatively poor performance of the short-lag iterated estimators, and 
+the relatively good performance of the long-lag direct and iterated estimators, for these 
+series. 
+ 
+                                                 
+4 www.wws.princeton.edu/~mwatson/ 
+ 
+13
+
+=== page 17 ===
+5. Results for Bivariate Forecasts 
+ 
+This data set contains a total of 171×170 = 29,070 different possible pairs of 
+series.  To keep the computations tractable, we used a stratified random subsample of 
+these VARs.  There are five categories of series, listed as (A) through (E), in Section 3.  
+This produces 10 possible pairs of nonrepeated series categories (AB, AC, .., BC, 
+BD,..,DE).  From each pair of categories, 200 pairs of series are randomly drawn (one 
+from each category, with replacement), for a total of 2000 pairs of series.  This set of 
+2000 pairs of series constitutes the data set for the bivariate forecasts.  At each horizon 
+and for each forecasting method (iterated or direct, four lag selection methods), a total of 
+4000 forecasts are computed from the 2000 pairs, one for each series in the pair. 
+The iterated and direct forecasts are compared, for the same lag length selection 
+method, in Table 5, for all the series combined (this is the bivariate counterpart of Table 
+1).  The conclusions are similar to those for the univariate models.  Generally speaking, 
+the long-lag (p = 12 or AIC) direct forecasts offer little or no average improvements over 
+the long-lag iterated forecasts.  For a subset of the pairs, the direct forecasts have lower 
+MSFEs than the iterated forecasts for the short-lag selection methods. 
+Table 6 summarizes the performance of the various forecasting methods, relative 
+to the iterated VAR(4) benchmark (this is the bivariate counterpart of Table 3).  The 
+results are qualitatively similar to those found using the univariate models.  For the pairs 
+that do not contain a nominal price, wage or money series (part B of Table 3), the short-
+lag iterated methods are most frequently best, and the iterated methods outperform the 
+direct methods in approximately three-fourths of the series.  For the price, wage, and 
+money series (part D), the short-lag iterated methods are infrequently best, and are beaten 
+by the long-lag iterated methods and, at short horizons, the long-lag direct methods.  At 
+long horizons, the direct methods still outperform the iterated AR(4) benchmark for these 
+series, but do not outperform the long-lag iterated method.  Looking across all variables, 
+the iterated method with AIC lag selection tends to produce the lowest, or nearly lowest, 
+MSFE on average across all horizons. 
+ 
+ 
+14
+
+=== page 18 ===
+6. Discussion 
+ 
+The main finding from this study is that, for our large data set of monthly U.S. 
+macroeconomic time series, iterated forecasts tend to have smaller MSFEs than direct 
+forecasts, particularly if the iterated forecasts are computed using AIC lag length 
+selection.  The relative performance of the direct forecasts deteriorates as the forecast 
+horizon increases.  These findings are consistent with the view that the single-period 
+models, upon which the iterated forecasts are based, are not badly misspecified in the 
+sense that they provide good approximations to the best linear predictor;  accordingly, the 
+reduction in estimation variance arising from estimating the one-period ahead model 
+outweighs the reduction in bias obtained from the direct multiperiod model. 
+There is considerable heterogeneity in these data with respect to the best lag order 
+of the one-period model:  for nominal price, wage, and money series, a long lag order is 
+indicated, whereas for the other series a short lag order is more appropriate.  Overall, this 
+heterogeneity appears to be handled adequately by using AIC lag length selection when 
+specifying the model for the iterated forecast. 
+It is interesting to note that these findings in favor of the iterated forecasts are at 
+odds with some of the theoretical literature, which emphasizes the robustness and bias 
+reduction of the direct forecasts in contrast to the special parametric, finite-lag 
+assumptions that underlie optimality properties for the iterated forecasts (cf. Bhansali 
+(1999), Ing (2003)).  It appears that, in practice, the robustness and bias reduction 
+obtained using direct forecasts does not justify the price paid in terms of increased 
+sampling variance. 
+ 
+15
+
+=== page 19 ===
+Data Appendix 
+ 
+This appendix lists the time series used in the empirical analysis. The series were 
+either taken directly from the DRI-McGraw Hill Basic Economics database, in which 
+case the original mnemonics are used, or they were produced by authors' calculations 
+based on data from that database, in which case the authors’ calculations and original 
+DRI/McGraw series mnemonics are summarized in the data description field.  Following 
+the series name is a transformation code, the sample period for the data series, and a short 
+data description. The transformations are (Lev) level of the series; (∆) first difference; 
+(Ln) logarithm of the series; (∆Ln) first difference of the logarithm.  The following 
+abbreviations appear in the data descriptions:  SA = seasonally adjusted;  NSA = not 
+seasonally adjusted; SAAR = seasonally adjusted at an annual rate; AC = Authors’ 
+calculations.  
+ 
+Series 
+Trans. 
+Sample Period 
+Description 
+(A) Income, Output, Sales, Capacity Utilization 
+msmq 
+∆Ln 
+1967:1-2001:7 
+sales, business - manufacturing (chained) 
+ips11 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  products, total 
+ips299 
+∆Ln 
+1959:1-2002:12 
+industrial production  index -  final products 
+ips12 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  consumer goods 
+ips13 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  durable consumer goods 
+ips18 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  nondurable consumer goods 
+ips25 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  business equipment 
+ipi 
+∆Ln 
+1959:1-2002:10 
+industrial production:intermediate products (1992=100,sa) 
+ips32 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  materials 
+ips34 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  durable goods materials 
+ips38 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  nondurable goods materials 
+ips43 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  manufacturing (sic) 
+ipd 
+∆Ln 
+1959:1-2002:10 
+industrial production:durable manufacturing (1992=100,sa) 
+ipn 
+∆Ln 
+1959:1-2002:10 
+industrial production:nondurable manufacturing (1992=100,sa) 
+ipmin 
+∆Ln 
+1959:1-2002:10 
+industrial production:mining (1992=100,sa) 
+iput 
+∆Ln 
+1959:1-2002:10 
+industrial production:utilities (1992-=100,sa) 
+utl10 
+Lev 
+1967:1-2002:12 
+capacity utilization - total index 
+utl11 
+Lev 
+1959:1-2002:12 
+capacity utilization - manufacturing (sic) 
+utl13 
+Lev 
+1967:1-2002:12 
+capacity utilization - durable manufacturing (naics) 
+utl25 
+Lev 
+1967:1-2002:12 
+capacity utilization - nondurable manufacturing (naics) 
+utl35 
+Lev 
+1967:1-2002:12 
+capacity utilization - mining naics=21 
+utl36 
+Lev 
+1967:1-2002:12 
+capacity utilization - electric and gas utilities 
+gmpyq 
+∆Ln 
+1959:1-2002:12 
+personal income (chained) (series #52) (bil 92$,saar) 
+gmyxpq 
+∆Ln 
+1959:1-2002:12 
+personal income less transfer payments (chained) (#51) (bil 92$,saar) 
+gmcq 
+∆Ln 
+1967:1-2002:12 
+personal consumption expend (chained) - total (bil 92$,saar) 
+gmcdq 
+∆Ln 
+1967:1-2002:12 
+pers consumption expend (chained) - total durables (bil 1996$,saar) 
+gmcnq 
+∆Ln 
+1967:1-2002:12 
+personal consumption expend (chained) - nondurables (bil 96$,saar) 
+gmcsq 
+∆Ln 
+1967:1-2002:12 
+personal consumption expend (chained) - services (bil 92$,saar) 
+gmcanq 
+∆Ln 
+1967:1-2002:12 
+personal cons expend (chained) - new cars (bil 1996$,saar) 
+wtq 
+∆Ln 
+1959:1-2001:7 
+merch wholesalers:total (mil of chained 1996 dollars)(sa) 
+wtdq 
+∆Ln 
+1959:1-2001:7 
+merch wholesalers:durable goods total (mil of chained 1996 dollars)(sa) 
+msdq 
+∆Ln 
+1959:1-2001:7 
+mfg & trade:mfg; durable goods (mil of chained 1996 dollars)(sa) 
+ 
+16
+
+=== page 20 ===
+msmtq 
+∆Ln 
+1959:1-2001:7 
+mfg & trade:total (mil of chained 1996 dollars)(sa) 
+msnq 
+∆Ln 
+1959:1-2001:7 
+mfg & trade:mfg;nondurable goods (mil of chained 1996 dollars)(sa) 
+wtnq 
+∆Ln 
+1959:1-2001:7 
+merch wholesalers:nondurable goods (mil of chained 1996 dollars)(sa) 
+rtdrq 
+∆Ln 
+1967:1-2001:4 
+retail sales durables, real (rtdr/pucd) (AC) 
+rtnrq 
+∆Ln 
+1967:1-2001:4 
+retail sales nondurables, real (rtnr/pu882) (AC) 
+ips10 
+∆Ln 
+1959:1-2002:12 
+industrial production index -  total index 
+(B) Employment and Unemployment 
+lpnag 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:total (thous.,sa) 
+lhu26 
+Lev 
+1959:1-2002:12 
+unemploy.by duration:persons unempl.15 to 26 wks (thous.,sa) 
+lpgd 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:goods-producing (thous.,sa) 
+lhu15 
+Lev 
+1959:1-2002:12 
+unemploy.by duration:persons unempl.15 wks + (thous.,sa) 
+lp 
+∆Ln 
+1959:1-2002:12 
+employees on nonag payrolls:total, private (thous,sa) 
+lpcc 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:contract construction (thous.,sa) 
+lhelx 
+Ln 
+1959:1-2002:12 
+employment:ratio; help-wanted ads:no. unemployed clf 
+lhu5 
+Lev 
+1959:1-2002:12 
+unemploy.by duration:persons unempl.less than 5 wks (thous.,sa) 
+lhu14 
+Lev 
+1959:1-2002:12 
+unemploy.by duration:persons unempl.5 to 14 wks (thous.,sa) 
+lpsp 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:service-producing (thous.,sa) 
+lptu 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:trans. & public utilities (thous.,sa) 
+lpt 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:wholesale & retail trade (thous.,sa) 
+lpfr 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:finance,insur.&real estate (thous.,sa 
+lps 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:services (thous.,sa) 
+lpgov 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:government (thous.,sa) 
+lw 
+Dif 
+1964:1-2002:12 
+avg. weekly hrs. of prod. wkrs.:total private (sa) 
+lphrm 
+Lev 
+1959:1-2002:12 
+avg. weekly hrs. of production wkrs.:manufacturing (sa) 
+lpmosa 
+Lev 
+1959:1-2002:12 
+avg.  weekly hrs. of prod. wkrs.:mfg.,overtime hrs. (sa) 
+lhu680 
+Lev 
+1959:1-2002:12 
+unemploy.by duration:average(mean)duration in weeks (sa) 
+lhur 
+Lev 
+1959:1-2002:12 
+unemployment rate:all workers, 16 years & over (%,sa) 
+lpen 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:nondurable goods (thous.,sa) 
+lpem 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:manufacturing (thous.,sa) 
+lhel 
+∆Ln 
+1959:1-2002:12 
+index of help-wanted advertising in newspapers (1967=100;sa) 
+lped 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:durable goods (thous.,sa) 
+lhem 
+∆Ln 
+1959:1-2002:12 
+civilian labor force:employed, total (thous.,sa) 
+lhnag 
+∆Ln 
+1959:1-2002:12 
+civilian labor force:employed, nonagric.industries (thous.,sa) 
+lpmi 
+∆Ln 
+1959:1-2002:12 
+employees on nonag. payrolls:mining (thous.,sa) 
+(C) Construction, Inventories and Orders 
+hssou 
+Ln 
+1959:1-2002:12 
+housing starts:south (thous.u.)s.a. 
+contc 
+∆Ln 
+1964:1-2002:12 
+construct.put in place:total priv & public 1987$(mil$,saar) 
+conpc 
+∆Ln 
+1964:1-2002:12 
+construct.put in place:total private 1987$(mil$,saar) 
+conqc 
+∆Ln 
+1964:1-2002:12 
+new construction put in place - public (c30) 
+condo9 
+Ln 
+1963:1-2002:12 
+construct.contracts:comm'l & indus.bldgs(mil.sq.ft.floor sp.;sa) 
+hniv 
+Ln 
+1963:1-2002:12 
+new 1-family houses for sale at end of month (thous,sa) 
+hnr 
+Ln 
+1963:1-2002:12 
+new 1-family houses, month's supply @ current sales rate(ratio) 
+hns 
+Ln 
+1963:1-2002:12 
+new 1-family houses sold during month (thous,saar) 
+hsbr 
+Ln 
+1959:1-2002:12 
+housing authorized:total new priv housing units (thous.,saar) 
+hswst 
+Ln 
+1959:1-2002:12 
+housing starts:west (thous.u.)s.a. 
+hmob 
+Ln 
+1959:1-2002:12 
+mobile homes:manufacturers' shipments (thous.of units,saar) 
+hsmw 
+Ln 
+1959:1-2002:12 
+housing starts:midwest(thous.u.)s.a. 
+hsne 
+Ln 
+1959:1-2002:12 
+housing starts:northeast (thous.u.)s.a. 
+hsfr 
+Ln 
+1959:1-2002:12 
+housing starts:nonfarm(1947-58);total farm&nonfarm(1959-)(thous.,sa 
+ivmtq 
+∆Ln 
+1959:1-2001:7 
+mfg & trade inventories:total (mil of chained 1996)(sa) 
+ivmfgq 
+∆Ln 
+1959:1-2001:7 
+inventories, business, mfg (mil of chained 1996 dollars, sa) 
+ivmfdq 
+∆Ln 
+1959:1-2001:7 
+inventories, business durables (mil of chained 1996 dollars, sa) 
+ivmfnq 
+∆Ln 
+1959:1-2001:7 
+inventories, business, nondurables (mil of chained 1996 dollars, sa) 
+ivwrq 
+∆Ln 
+1959:1-2001:7 
+mfg & trade inv:merchant wholesalers (mil of chained 1996 dollars)(sa) 
+ivrrq 
+∆Ln 
+1959:1-2001:7 
+mfg & trade inv:retail trade (mil of chained 1996 dollars)(sa) 
+ivsrq 
+∆Ln 
+1959:1-2001:7 
+ratio for mfg & trade:inventory/sales (chained 1996 dollars, sa) 
+ivsrmq 
+∆Ln 
+1959:1-2001:7 
+ratio for mfg & trade:mfg;inventory/sales (1996$)(s.a.) 
+ivsrwq 
+∆Ln 
+1959:1-2001:7 
+ratio for mfg & trade:wholesaler;inventory/sales(1996$)(s.a.) 
+ivsrrq 
+∆Ln 
+1959:1-2001:7 
+ratio for mfg & trade:retail trade;inventory/sales(1996$)(s.a.) 
+pmi 
+Lev 
+1959:1-2002:12 
+purchasing managers' index (sa) 
+pmp 
+Lev 
+1959:1-2002:12 
+napm production index (percent) 
+pmno 
+Lev 
+1959:1-2002:12 
+napm new orders index (percent) 
+pmdel 
+Lev 
+1959:1-2002:12 
+napm vendor deliveries index (percent) 
+pmnv 
+Lev 
+1959:1-2002:12 
+napm inventories index (percent) 
+ 
+17
+
+=== page 21 ===
+pmemp 
+Lev 
+1959:1-2002:12 
+napm employment index (percent) 
+pmcp 
+Lev 
+1959:1-2002:12 
+napm commodity prices index (percent) 
+mocmq 
+∆Ln 
+1959:1-2002:12 
+new orders (net) - consumer goods & materials, 1996 dollars (bci) 
+msondq 
+∆Ln 
+1959:1-2002:12 
+new orders, nondefense capital goods, in 1996 dollars (bci) 
+moq 
+∆Ln 
+1959:1-2001:5 
+mfg new orders: all manufacturing industries, total, real (mo/pwfsa)  (AC) 
+mdoq 
+∆Ln 
+1959:1-2001:5 
+mfg new orders: durable goods industries, total, real (mdo/pwfsa)  (AC) 
+muq 
+∆Ln 
+1959:1-2001:5 
+mfg unfilled orders: all manufacturing industries, total (mu/pwfsa) (AC) 
+mduq 
+∆Ln 
+1959:1-2001:5 
+mfg unfilled orders: durable goods industries, total (mdu/pwfsa) (AC) 
+(D) Interest Rates and Asset Prices 
+fygt10 
+∆ 
+1959:1-2002:12 
+interest rate:u.s.treasury const maturities,10-yr.(% per ann,nsa) 
+fclnq 
+∆Ln 
+1959:1-2002:12 
+commercial & industrial loans oustanding in 1996 dollars (bci) 
+fsncom 
+∆Ln 
+1959:1-2002:12 
+nyse common stock price index:composite (12/31/65=50) 
+fsnin 
+∆Ln 
+1966:1-2002:12 
+nyse common stock price index:industrial (12/31/65=50) 
+fsntr 
+∆Ln 
+1966:1-2002:12 
+nyse common stock price index:transportation (12/31/65=50) 
+fsnut 
+∆Ln 
+1966:1-2002:12 
+nyse common stock price index:utility (12/31/65=50) 
+fsnfi 
+∆Ln 
+1966:1-2002:12 
+nyse common stock price index:finance (12/31/65=50) 
+fspcom 
+∆Ln 
+1959:1-2002:12 
+s&p's common stock price index:composite (1941-43=10) 
+fsnfi 
+∆Ln 
+1966:1-2002:12 
+nyse common stock price index:finance (12/31/65=50) 
+fspin 
+∆Ln 
+1959:1-2002:12 
+s&p's common stock price index:industrials (1941-43=10) 
+fsdxp 
+Lev 
+1959:1-2002:12 
+s&p's composite common stock:dividend yield (% per annum) 
+fspxe 
+Lev 
+1959:1-2002:12 
+s&p's composite common stock:price-earnings ratio (%,nsa) 
+fyff 
+∆ 
+1959:1-2002:12 
+interest rate:federal funds (effective) (% per annum,nsa) 
+fygm3 
+∆ 
+1959:1-2002:12 
+interest rate:u.s.treasury bills,sec mkt,3-mo.(% per ann,nsa) 
+fygm6 
+∆ 
+1959:1-2002:12 
+interest rate:u.s.treasury bills,sec mkt,6-mo.(% per ann,nsa) 
+fygt1 
+∆ 
+1959:1-2002:12 
+interest rate:u.s.treasury const maturities,1-yr.(% per ann,nsa) 
+fygt5 
+∆ 
+1959:1-2002:12 
+interest rate:u.s.treasury const maturities,5-yr.(% per ann,nsa) 
+fm2dq 
+∆Ln 
+1959:1-2002:2 
+money supply - m2 in 1996 dollars (bci) 
+fyaaac 
+∆ 
+1959:1-2002:12 
+bond yield:moody's aaa corporate (% per annum) 
+fybaac 
+∆ 
+1959:1-2002:12 
+bond yield:moody's baa corporate (% per annum) 
+fymcle 
+∆ 
+1963:1-2002:12 
+effective interest rate:conventional home mtge loans closed(%) 
+sfygm3 
+Lev 
+1959:1-2002:12 
+fygm3-fyff (AC) 
+sfygm6 
+Lev 
+1959:1-2002:12 
+fygm6-fyff (AC) 
+sfygt1 
+Lev 
+1959:1-2002:12 
+fygt1-fyff (AC) 
+sfygt5 
+Lev 
+1959:1-2002:12 
+fygt5-fyff (AC) 
+sfygt10 
+Lev 
+1959:1-2002:12 
+fygt10-fyff (AC) 
+sfyaaac 
+Lev 
+1959:1-2002:12 
+fyaaac-fyff (AC) 
+sfybaac 
+Lev 
+1959:1-2002:12 
+fybaac-fyff (AC) 
+sfymcle 
+Lev 
+1963:1-2002:12 
+fymcle-fyff (AC) 
+exrus 
+∆Ln 
+1959:1-2002:12 
+united states;effective exchange rate(merm)(index no.) 
+exrsw 
+∆Ln 
+1959:1-2002:12 
+foreign exchange rate:switzerland (swiss franc per u.s.$) 
+exrjan 
+∆Ln 
+1959:1-2002:12 
+foreign exchange rate:japan (yen per u.s.$) 
+exruk 
+∆Ln 
+1959:1-2002:12 
+foreign exchange rate:united kingdom (cents per pound) 
+exrcan 
+∆Ln 
+1959:1-2002:12 
+foreign exchange rate:canada (canadian $ per u.s.$) 
+(E) Nominal Prices, Wages, and Money 
+fm1 
+∆Ln 
+1959:1-2002:12 
+money stock:m1(curr,trav.cks,dem dep,other ck'able dep)(bil$,sa) 
+fm2 
+∆Ln 
+1959:1-2002:12 
+money stock:m2(m1+o'nite rps,euro$,g/p&b/d mmmfs&sav&sm time dep(bil$, 
+fm3 
+∆Ln 
+1959:1-2002:12 
+money stock:m3(m2+lg time dep,term rp's&inst only mmmfs)(bil$,sa) 
+fmfba 
+∆Ln 
+1959:1-2002:12 
+monetary base, adj for reserve requirement changes(mil$,sa) 
+fmrra 
+∆Ln 
+1959:1-2002:12 
+depository inst reserves:total,adj for reserve req chgs(mil$,sa) 
+leh 
+∆Ln 
+1964:1-2002:12 
+avg hr earnings of prod wkrs:total private nonagric ($,sa) 
+lehcc 
+∆Ln 
+1959:1-2002:12 
+avg hr earnings of constr wkrs:construction ($,sa) 
+lehm 
+∆Ln 
+1959:1-2002:12 
+avg hr earnings of prod wkrs:manufacturing ($,sa) 
+lehtu 
+∆Ln 
+1964:1-2002:12 
+avg hr earnings of nonsupv wkrs:trans & public util($,sa) 
+lehtt 
+∆Ln 
+1964:1-2002:12 
+avg hr earnings of prod wkrs:wholesale & retail trade(sa) 
+lehfr 
+∆Ln 
+1964:1-2002:12 
+avg hr earnings of nonsupv wkrs:finance,insur,real est($,sa) 
+lehs 
+∆Ln 
+1964:1-2002:12 
+avg hr earnings of nonsupv wkrs:services ($,sa) 
+pwfsa 
+∆Ln 
+1959:1-2002:12 
+producer price index:finished goods (82=100,sa) 
+pwfcsa 
+∆Ln 
+1959:1-2002:12 
+producer price index:finished consumer goods (82=100,sa) 
+pwimsa 
+∆Ln 
+1959:1-2002:12 
+producer price index:intermed mat.supplies & components(82=100,sa) 
+pwcmsa 
+∆Ln 
+1959:1-2002:12 
+producer price index:crude materials (82=100,sa) 
+pwfxsa 
+∆Ln 
+1967:1-2002:12 
+producer price index:finished goods,excl. foods (82=100,sa) 
+psm99q 
+∆Ln 
+1959:1-2002:12 
+index of sensitive materials prices (1990=100)(bci-99a) 
+punew 
+∆Ln 
+1959:1-2002:12 
+cpi-u:all items (82-84=100,sa) 
+ 
+18
+
+=== page 22 ===
+pu81 
+∆Ln 
+1967:1-2002:12 
+cpi-u:food & beverages (82-84=100,sa) 
+puh 
+∆Ln 
+1967:1-2002:12 
+cpi-u:housing (82-84=100,sa) 
+pu83 
+∆Ln 
+1959:1-2002:12 
+cpi-u:apparel & upkeep (82-84=100,sa) 
+pu84 
+∆Ln 
+1959:1-2002:12 
+cpi-u:transportation (82-84=100,sa) 
+pu85 
+∆Ln 
+1959:1-2002:12 
+cpi-u:medical care (82-84=100,sa) 
+pu882 
+∆Ln 
+1959:1-2002:12 
+cpi-u:nondurables (1982-84=100,sa) 
+puc 
+∆Ln 
+1959:1-2002:12 
+cpi-u:commodities (82-84=100,sa) 
+pucd 
+∆Ln 
+1959:1-2002:12 
+cpi-u:durables (82-84=100,sa) 
+pus 
+∆Ln 
+1959:1-2002:12 
+cpi-u:services (82-84=100,sa) 
+puxf 
+∆Ln 
+1959:1-2002:12 
+cpi-u:all items less food (82-84=100,sa) 
+puxhs 
+∆Ln 
+1959:1-2002:12 
+cpi-u:all items less shelter (82-84=100,sa) 
+puxm 
+∆Ln 
+1959:1-2002:12 
+cpi-u:all items less midical care (82-84=100,sa) 
+gmdc 
+∆Ln 
+1959:1-2002:12 
+pce,impl pr defl:pce (1987=100) 
+gmdcd 
+∆Ln 
+1959:1-2002:12 
+pce,impl pr defl:pce; durables (1987=100) 
+gmdcn 
+∆Ln 
+1959:1-2002:12 
+pce,impl pr defl:pce; nondurables (1996=100) 
+gmdcs 
+∆Ln 
+1959:1-2002:12 
+pce,impl pr defl:pce; services (1987=100) 
+ 
+19
+
+=== page 23 ===
+References 
+ 
+Ang, A., M. Piazzesi, and M. Wei (2003), “What Does the Yield Curve Tell Us About 
+GDP Growth?” manuscript, Columbia University. 
+Bhansali, R.J. (1996), “Asymptotically Efficient Autogressive Model Selection for 
+Multistep Prediction,” Ann. Inst. Statist. Math., Vol. 48, No. 3, pp. 577-602. 
+Bhansali, R.J. (1997), “Direct Autoregressive Predictions for Multistep Prediction: Order 
+Selection and Performance Relative to the Plug In Predictors,” Statistica Sinca, 7, 
+pp. 425-449. 
+Bhansali, R.J. (1999), “Parameter Estimation and Model Selection for Multistep 
+Prediction of a Time Series:  A Reivew,” ch. 6 in Asymptotics, Nonparametrics, 
+and Time Series, S. Ghosh (ed.), Marcel Dekker, 201 – 225. 
+Box, G.E.P. and G.M. Jenkins (1976), Time Series Analysis:  Forecasting and Control, 
+2nd edition.  Holden Day, New York. 
+Brayton, F., J. Roberts and J. Williams (1999), “What’s Happened to the Phillips Curve?” 
+manuscript, Feds Working Paper 1999-49, U.S. Federal Reserve Board. 
+Chevillon, G. and D.F. Hendry (2003), “Direct Multi-step Estimation for Forecasting 
+Economic Processes,” mimeo, University of Oxford. 
+Clark T.E., McCracken M.W.  (2001)  “Tests of equal forecast accuracy and 
+encompassing for nested models,”  Journal of Econometrics 105:  85–100. 
+Clements, M.P. and D.F. Hendry (1996), “Multi-Step Estimation for Forecasting,” 
+Oxford Bulletin of Economics and Statistics 58, 657 – 684. 
+Cox, D.R. (1961), “Prediction by Exponentially Weighted Moving Averages and Related 
+Methods,” JRSS, B23, pp. 414-422. 
+Findley, D.F. (1983), “On the Use of Multiple Models for Multi-period Forecasting,” 
+Porceedings of the Business and Statistics Section, American Statistical 
+Association,pp. 528-531. 
+Findley, D.F. (1985), “Model Selection for Multi-Step-Ahead Forecasting,” in 
+Proceedings of the 7th Symposium on Identification and System Parameter 
+Estimation (H.A. Baker and P.C. Young, eds.). Pergamon, Oxford, 1039 – 1044. 
+ 
+20
+
+=== page 24 ===
+Ing., C.-K. (2003), “Multistep Prediction in Autoregressive Processes,” Econometric 
+Theory, 19, pp. 254-279. 
+Kang, I.-B. (2003), “Multi-period Forecasting Using Different Models for Different 
+Horizons: An Application to U.S. Economic Time Series Data,” International 
+Journal of Forecasting, 19, pp. 387-400. 
+Kim, Chang-Jin, and Charles R. Nelson.  “Has the U.S. Economy Become More Stable?  
+A Bayesian Approach Based on a Markov-Switching Model of the Business 
+Cycle,” The Review of Economics and Statistics 81, 1999, 608 – 616. 
+Klein, L.R. (1968), An Essay on the Theory of Economics Prediction, Yrjö Jansen 
+lectures.  Helsinki, Finland:  Sanomaprint. 
+Lin, J.-L. and C.W.G. Granger (1994), “Forecasting from Non-linear Models in Practice,: 
+Journal  of Forecasting, 13, pp. 1-9. 
+Liu, S.-I. (1996), “Model Selection for Multiperiod Forecasts,” Biometrika 83, 861 – 873. 
+McConnell, Margaret M, and Gabriel Perez-Quiros.  “Output Fluctuations in the United 
+States: What has Changed Since the Early 1980’s,” American Economic Review 
+90(5), 2000, pp. 1464 – 1476. 
+Nelson, C.R. and G.W. Schwert (1977), “On Testing the Hypothesis that the Real Rate of 
+Interest is Constant,” American Economic Review 67, 478 – 486. 
+Schorfheide, F. (2003), “VAR Forecasting under Misspecification,” mimeo, University of 
+Pennsylvania. 
+Schwert, G.W. (1987), “Effects of Model Misspecification on Tests for Unit Roots in 
+Macroeconomic Data,” Journal of Monetary Economics 20, 73 – 103. 
+Shibata, R. (1980), “Asymptotically Efficient Selection of the Order of the Model for 
+Estimating Parameters of a Linear Process.” Annals of Statistics, Vol. 8, No. 1, 
+pp. 1470-164. 
+Stock, J.H. and M.W. Watson, “Forecasting Using Principal Components from a Large 
+Number of Predictors,” Journal of the American Statistical Association, 97 
+(2002a), 1167–1179. 
+Stock, J.H. and M.W. Watson, “Macroeconomic Forecasting Using Diffusion Indexes,” 
+Journal of Business and Economic Statistics, 20, no. 2 (2002b), 147–162 (with 
+M.W. Watson). 
+ 
+21
+
+=== page 25 ===
+Tiao, G.C. and D. Xu (1993), “Robustness of MLE for Multi-step Predictions: The 
+Exponential Smoothing Case,” Biometrika, 80, pp. 623-641. 
+Tiao, G.C. and R.S. Tsay (1994), “Some Advances in Non-linear and Adaptive 
+Modelling in Time-series,” Journal of Forecasting, 13, pp. 109-131. 
+Weiss, A.A. (1991), “Multi-step Estimation and Forecasting in Dynamic Models,” 
+Journal of Econometrics, 48, pp. 135-149. 
+West, K.D. (1996), “Asymptotic Inference about Predictive Ability,”  Econometrica 64,  
+1067 – 1084. 
+ 
+22
+
+=== page 26 ===
+Table 1 
+Distributions of relative MSFEs of direct vs. iterated univariate forecasts based on 
+the same lag selection method:  All Series 
+  
+Forecast Horizon 
+ 
+Lag Selection 
+ 
+Mean/Percentile 
+ 
+3 
+6 
+12 
+24 
+mean 
+0.99 (<.005) 
+0.99 (<.005) 
+1.00 (<.005) 
+1.05 (0.72) 
+0.10 
+0.96 (<.005) 
+0.91 (<.005) 
+0.86 (<.005) 
+0.82 (<.005) 
+0.25 
+0.99 (<.005) 
+0.98 (<.005) 
+0.97 (<.005) 
+0.99 (0.35) 
+0.50 
+1.00 (0.02) 
+1.00 (<.005) 
+1.01 (0.23) 
+1.05 (0.98) 
+0.75 
+1.01 (0.76) 
+1.02 (0.77) 
+1.04 (0.71) 
+1.12 (1.00) 
+ 
+ 
+AR(4) 
+0.90 
+1.02 (0.85) 
+1.04 (0.90) 
+1.10 (0.94) 
+1.23 (1.00) 
+mean 
+1.01 (0.99) 
+1.01 (0.76) 
+1.03 (0.50) 
+1.10 (0.97) 
+0.10 
+0.99 (0.01) 
+0.97 (<.005) 
+0.95 (0.01) 
+0.93 (0.10) 
+0.25 
+1.00 (0.01) 
+0.99 (0.03) 
+1.00 (0.50) 
+1.02 (1.00) 
+0.50 
+1.00 (0.14) 
+1.01 (0.09) 
+1.03 (0.91) 
+1.09 (1.00) 
+0.75 
+1.01 (0.91) 
+1.02 (0.64) 
+1.06 (0.81) 
+1.17 (0.99) 
+ 
+ 
+AR(12) 
+0.90 
+1.02 (0.96) 
+1.05 (0.96) 
+1.11 (0.94) 
+1.29 (0.98) 
+mean 
+0.98 (<.005) 
+0.97 (<.005) 
+0.99 (0.01) 
+1.05 (0.92) 
+0.10 
+0.92 (<.005) 
+0.86 (<.005) 
+0.87 (<.005) 
+0.90 (0.01) 
+0.25 
+0.97 (<.005) 
+0.96 (<.005) 
+0.97 (<.005) 
+0.98 (0.28) 
+0.50 
+1.00 (0.01) 
+1.00 (0.04) 
+1.01 (0.39) 
+1.04 (0.98) 
+0.75 
+1.01 (0.36) 
+1.02 (0.59) 
+1.03 (0.55) 
+1.12 (0.98) 
+ 
+ 
+AR(BIC) 
+0.90 
+1.03 (0.99) 
+1.05 (0.98) 
+1.10 (0.93) 
+1.20 (0.94) 
+mean 
+1.00 (0.17) 
+1.01 (0.34) 
+1.02 (0.36) 
+1.09 (1.00) 
+0.10 
+0.97 (<.005) 
+0.95 (<.005) 
+0.94 (<.005) 
+0.91 (<.005) 
+0.25 
+0.98 (<.005) 
+0.98 (<.005) 
+0.98 (0.01) 
+1.00 (0.96) 
+0.50 
+1.00 (<.005) 
+1.00 (0.27) 
+1.02 (0.77) 
+1.07 (1.00) 
+0.75 
+1.01 (0.47) 
+1.03 (0.90) 
+1.06 (0.91) 
+1.18 (1.00) 
+ 
+ 
+AR(AIC) 
+0.90 
+1.04 (0.98) 
+1.06 (0.88) 
+1.11 (0.82) 
+1.29 (1.00) 
+ 
+Notes:  The first entry in each cell is the indicated summary measure of the distribution of 
+the ratio of the MSFE for the direct forecast to the MSFE of the iterated forecast for the 
+lag selection method listed in the first column and the horizon indicated in the column 
+heading.  For each cell, the distribution and summary measure is computed over the 171 
+series being forecasted.  The entry in parentheses is the p-value of the test of the 
+hypothesis that the iterated model is efficient, against the alterative that the direct model 
+is more efficient, computed using the parametric bootstrap algorithm described in Section 
+2. 
+ 
+23
+
+=== page 27 ===
+Table 2 
+Distributions of relative MSFEs of direct vs. iterated univariate forecasts based on 
+the same lag selection method, by category of series 
+ 
+Forecast Horizon 
+Model 
+Mean/Percentile 
+3 
+6 
+12 
+24 
+A.  Excluding prices, wages, and money 
+mean 
+1.00 (<.005) 
+1.01 (0.23) 
+1.03 (0.93) 
+1.09 (1.00) 
+0.10 
+0.98 (<.005) 
+0.96 (<.005) 
+0.96 (0.01) 
+0.94 (0.18) 
+0.25 
+0.99 (<.005) 
+0.99 (0.01) 
+0.99 (0.12) 
+1.01 (1.00) 
+0.50 
+1.00 (0.30) 
+1.00 (0.12) 
+1.01 (0.62) 
+1.06 (1.00) 
+0.75 
+1.01 (0.91) 
+1.02 (0.84) 
+1.05 (0.91) 
+1.14 (1.00) 
+ 
+ 
+AR(4) 
+0.90 
+1.02 (0.96) 
+1.04 (0.95) 
+1.10 (0.96) 
+1.32 (1.00) 
+mean 
+1.01 (1.00) 
+1.01 (0.88) 
+1.03 (0.80) 
+1.11 (1.00) 
+0.10 
+0.99 (0.01) 
+0.97 (0.01) 
+0.96 (0.08) 
+0.93 (0.16) 
+0.25 
+1.00 (0.01) 
+0.99 (0.04) 
+1.00 (0.81) 
+1.03 (1.00) 
+0.50 
+1.00 (0.22) 
+1.01 (0.11) 
+1.03 (0.94) 
+1.11 (1.00) 
+0.75 
+1.01 (0.67) 
+1.02 (0.53) 
+1.06 (0.90) 
+1.18 (1.00) 
+ 
+ 
+AR(12) 
+0.90 
+1.02 (0.95) 
+1.04 (0.81) 
+1.12 (0.94) 
+1.31 (0.99) 
+mean 
+1.00 (<.005) 
+1.00 (0.02) 
+1.03 (0.86) 
+1.07 (0.97) 
+0.10 
+0.96 (<.005) 
+0.95 (<.005) 
+0.97 (0.19) 
+0.94 (0.19) 
+0.25 
+0.98 (<.005) 
+0.99 (<.005) 
+0.99 (0.11) 
+1.00 (0.99) 
+0.50 
+1.00 (0.09) 
+1.00 (0.28) 
+1.02 (0.83) 
+1.05 (1.00) 
+0.75 
+1.01 (0.36) 
+1.02 (0.69) 
+1.05 (0.88) 
+1.13 (0.99) 
+ 
+ 
+BIC 
+0.90 
+1.03 (0.97) 
+1.05 (0.95) 
+1.11 (0.95) 
+1.26 (1.00) 
+mean 
+1.01 (0.90) 
+1.01 (0.91) 
+1.04 (0.94) 
+1.11 (1.00) 
+0.10 
+0.97 (0.04) 
+0.95 (0.01) 
+0.96 (0.34) 
+0.95 (0.60) 
+0.25 
+0.99 (<.005) 
+0.99 (0.32) 
+0.99 (0.38) 
+1.02 (1.00) 
+0.50 
+1.00 (0.03) 
+1.01 (0.56) 
+1.02 (0.92) 
+1.10 (1.00) 
+0.75 
+1.02 (0.81) 
+1.03 (0.94) 
+1.07 (0.98) 
+1.18 (1.00) 
+ 
+ 
+AIC 
+0.90 
+1.04 (1.00) 
+1.06 (0.88) 
+1.12 (0.92) 
+1.32 (1.00) 
+B.  Prices, wages, and money only 
+mean 
+0.96 (<.005) 
+0.90 (<.005) 
+0.87 (<.005) 
+0.90 (<.005) 
+0.10 
+0.90 (<.005) 
+0.70 (<.005) 
+0.57 (<.005) 
+0.62 (<.005) 
+0.25 
+0.95 (<.005) 
+0.86 (<.005) 
+0.78 (<.005) 
+0.77 (<.005) 
+0.50 
+0.98 (<.005) 
+0.92 (<.005) 
+0.93 (<.005) 
+0.96 (<.005) 
+0.75 
+1.00 (<.005) 
+0.98 (<.005) 
+0.99 (<.005) 
+1.06 (0.30) 
+ 
+ 
+AR(4) 
+0.90 
+1.00 (<.005) 
+1.00 (<.005) 
+1.05 (0.13) 
+1.11 (0.33) 
+mean 
+1.00 (0.09) 
+1.01 (0.14) 
+1.00 (0.01) 
+1.04 (0.11) 
+0.10 
+0.98 (0.01) 
+0.96 (<.005) 
+0.92 (<.005) 
+0.89 (0.03) 
+0.25 
+0.99 (<.005) 
+0.98 (<.005) 
+0.95 (<.005) 
+0.96 (0.04) 
+0.50 
+1.00 (0.08) 
+1.01 (0.31) 
+1.01 (0.13) 
+1.04 (0.45) 
+0.75 
+1.01 (0.87) 
+1.03 (0.84) 
+1.04 (0.20) 
+1.13 (0.56) 
+ 
+ 
+AR(12) 
+0.90 
+1.02 (0.85) 
+1.06 (0.98) 
+1.07 (0.24) 
+1.20 (0.26) 
+mean 
+0.93 (<.005) 
+0.86 (<.005) 
+0.86 (<.005) 
+0.96 (0.01) 
+0.10 
+0.74 (<.005) 
+0.56 (<.005) 
+0.56 (<.005) 
+0.68 (0.01) 
+0.25 
+0.91 (0.17) 
+0.81 (0.01) 
+0.72 (<.005) 
+0.79 (<.005) 
+0.50 
+0.95 (<.005) 
+0.88 (<.005) 
+0.91 (<.005) 
+0.97 (0.01) 
+0.75 
+1.00 (<.005) 
+0.98 (<.005) 
+1.00 (<.005) 
+1.09 (0.76) 
+ 
+ 
+BIC 
+0.90 
+1.04 (0.98) 
+1.02 (0.18) 
+1.06 (0.25) 
+1.14 (0.38) 
+mean 
+0.98 (<.005) 
+0.98 (<.005) 
+0.96 (<.005) 
+1.00 (<.005) 
+0.10 
+0.92 (0.01) 
+0.87 (<.005) 
+0.85 (<.005) 
+0.81 (<.005) 
+0.25 
+0.95 (<.005) 
+0.96 (0.01) 
+0.89 (<.005) 
+0.90 (<.005) 
+0.50 
+0.99 (<.005) 
+0.99 (<.005) 
+0.99 (0.01) 
+1.00 (0.01) 
+0.75 
+1.01 (0.17) 
+1.01 (0.10) 
+1.03 (0.10) 
+1.07 (0.07) 
+ 
+ 
+AIC 
+0.90 
+1.02 (0.50) 
+1.06 (0.89) 
+1.06 (0.10) 
+1.18 (0.23) 
+ 
+Notes:  See the notes to Table 1. 
+ 
+24
+
+=== page 28 ===
+Table 3 
+Relative MSFEs of each univariate forecast method, relative to iterated AR(4),  
+and the fraction of times each forecast method is best 
+ 
+ 
+ 
+Iterated 
+Direct 
+Forecast 
+Horizon 
+Summary 
+statistic 
+AR(4) 
+AR(12) 
+BIC 
+AIC 
+sum 
+AR(4) 
+AR(12) 
+BIC 
+AIC 
+sum 
+A. All series 
+ 
+mean 
+1.00 
+0.99 
+1.01 
+0.99 
+ 
+0.99 
+0.99 
+0.99 
+0.99 
+ 
+3 
+median 
+1.00 
+1.00 
+1.00 
+1.00 
+ 
+1.00 
+1.00 
+1.00 
+1.00 
+ 
+ 
+fraction best 
+0.16 
+0.22 
+0.19 
+0.10 
+0.67 
+0.06 
+0.13 
+0.06 
+0.09 
+.33 
+ 
+mean 
+1.00 
+0.97 
+1.01 
+0.97 
+ 
+0.99 
+0.98 
+0.98 
+0.98 
+ 
+6 
+median 
+1.00 
+1.00 
+1.00 
+1.00 
+ 
+1.00 
+1.01 
+1.01 
+1.00 
+ 
+ 
+fraction best 
+0.18 
+0.25 
+0.15 
+0.16 
+0.74 
+0.09 
+0.12 
+0.05 
+0.05 
+.26 
+ 
+mean 
+1.00 
+0.98 
+1.00 
+0.97 
+ 
+1.00 
+1.01 
+1.00 
+1.00 
+ 
+12 
+median 
+1.00 
+1.01 
+1.01 
+1.00 
+ 
+1.01 
+1.03 
+1.02 
+1.02 
+ 
+ 
+fraction best 
+0.30 
+0.22 
+0.13 
+0.15 
+0.80 
+0.06 
+0.08 
+0.05 
+0.04 
+.20 
+ 
+mean 
+1.00 
+1.02 
+1.00 
+1.00 
+ 
+1.05 
+1.10 
+1.06 
+1.09 
+ 
+24 
+median 
+1.00 
+1.01 
+1.01 
+1.00 
+ 
+1.05 
+1.10 
+1.06 
+1.08 
+ 
+ 
+fraction best 
+0.31 
+0.22 
+0.13 
+0.16 
+0.82 
+0.08 
+0.05 
+0.04 
+0.04 
+.18 
+B.  Excluding Prices, Wages, and Money 
+ 
+mean 
+1.00 
+1.02 
+1.01 
+1.02 
+ 
+1.00 
+1.03 
+1.01 
+1.02 
+ 
+3 
+median 
+1.00 
+1.02 
+1.00 
+1.01 
+ 
+1.00 
+1.01 
+1.00 
+1.01 
+ 
+ 
+fraction best 
+0.21 
+0.18 
+0.24 
+0.09 
+0.72 
+0.07 
+0.09 
+0.08 
+0.07 
+.28 
+ 
+mean 
+1.00 
+1.01 
+1.02 
+1.01 
+ 
+1.01 
+1.03 
+1.02 
+1.02 
+ 
+6 
+median 
+1.00 
+1.02 
+1.01 
+1.00 
+ 
+1.00 
+1.02 
+1.02 
+1.01 
+ 
+ 
+fraction best 
+0.22 
+0.21 
+0.18 
+0.16 
+0.77 
+0.10 
+0.07 
+0.05 
+0.04 
+.23 
+ 
+mean 
+1.00 
+1.03 
+1.01 
+1.01 
+ 
+1.03 
+1.06 
+1.04 
+1.05 
+ 
+12 
+median 
+1.00 
+1.02 
+1.01 
+1.01 
+ 
+1.01 
+1.05 
+1.03 
+1.03 
+ 
+ 
+fraction best 
+0.37 
+0.17 
+0.16 
+0.13 
+0.83 
+0.07 
+0.04 
+0.06 
+0.02 
+.17 
+ 
+mean 
+1.00 
+1.05 
+1.01 
+1.02 
+ 
+1.09 
+1.15 
+1.09 
+1.14 
+ 
+24 
+median 
+1.00 
+1.02 
+1.01 
+1.00 
+ 
+1.06 
+1.12 
+1.07 
+1.10 
+ 
+ 
+fraction best 
+0.35 
+0.18 
+0.13 
+0.16 
+0.82 
+0.10 
+0.03 
+0.04 
+0.04 
+.18 
+C. Prices, Wages, and Money  
+ 
+mean 
+1.00 
+0.85 
+0.98 
+0.88 
+ 
+0.96 
+0.86 
+0.91 
+0.86 
+ 
+3 
+median 
+1.00 
+0.86 
+0.99 
+0.88 
+ 
+0.98 
+0.87 
+0.91 
+0.87 
+ 
+ 
+fraction best 
+0.00 
+0.34 
+0.03 
+0.14 
+0.51 
+0.06 
+0.29 
+0.00 
+0.17 
+.49 
+ 
+mean 
+1.00 
+0.79 
+0.96 
+0.82 
+ 
+0.90 
+0.79 
+0.83 
+0.80 
+ 
+6 
+median 
+1.00 
+0.81 
+0.99 
+0.83 
+ 
+0.92 
+0.82 
+0.85 
+0.82 
+ 
+ 
+fraction best 
+0.00 
+0.40 
+0.03 
+0.14 
+0.57 
+0.06 
+0.29 
+0.06 
+0.09 
+.43 
+ 
+mean 
+1.00 
+0.80 
+0.96 
+0.83 
+ 
+0.87 
+0.80 
+0.83 
+0.81 
+ 
+12 
+median 
+1.00 
+0.84 
+0.97 
+0.86 
+ 
+0.93 
+0.87 
+0.88 
+0.86 
+ 
+ 
+fraction best 
+0.06 
+0.40 
+0.03 
+0.20 
+0.69 
+0.03 
+0.23 
+0.00 
+0.11 
+.31 
+ 
+mean 
+1.00 
+0.90 
+0.96 
+0.93 
+ 
+0.90 
+0.90 
+0.93 
+0.90 
+ 
+24 
+median 
+1.00 
+0.89 
+0.99 
+0.91 
+ 
+0.96 
+0.94 
+0.95 
+0.93 
+ 
+ 
+fraction best 
+0.14 
+0.34 
+0.17 
+0.17 
+0.82 
+0.03 
+0.11 
+0.03 
+0.03 
+.18 
+D. Prices, Wages, and Money (I(2) specification) 
+3 
+mean 
+   1.00   
+   0.85  
+   0.91  
+   0.85  
+ 
+   0.97  
+   0.85      0.87    0.85 
+ 
+6 
+mean 
+   1.00   
+   0.78  
+   0.87  
+   0.79  
+ 
+   0.91  
+   0.79      0.80    0.78 
+ 
+12 
+mean 
+   1.00   
+   0.76  
+   0.87  
+   0.77  
+ 
+   0.89  
+   0.77      0.78    0.77 
+ 
+24 
+mean 
+   1.00   
+   0.78  
+   0.88  
+   0.79  
+ 
+   0.87  
+   0.79      0.80    0.79 
+ 
+Notes:  The entries in the “mean” rows are the mean relative MSFE for the indicated 
+group of series at the indicated horizon, for the column forecasting method, relative to the 
+MSFE for the iterated AR(4) benchmark forecast, where the mean is computed across the 
+171 series.  The entries in the “median” rows are the median of this relative MSFE across 
+the 171 series.  The “fraction best” row reports the fraction of the 171 series in which the 
+column forecasting method has the smallest MSFE among the eight possibilities; the sum 
+of these fractions is reported in the “sum” columns respectively for all iterated and for all 
+direct forecasts. 
+ 
+ 
+25
+
+=== page 29 ===
+Table 4 
+ARMA(2,1) and ARIMA(1,1,1) models for selected price and wage inflation series. 
+ 
+(1–φ1L–φ2L2) yt = (1– θ L)εt 
+(1–φL)∆yt = (1– θ L)εt 
+Series 
+φ1 
+φ2 
+θ 
+φ 
+θ 
+Wages, Construction 
+(lehcc) 
+0.57 
+(0.04) 
+0.41 
+(0.04) 
+0.93 
+(0.02) 
+–0.42 
+(0.04) 
+0.93 (0.02) 
+Wages, Trade and Utilities 
+(lehtu) 
+0.78 
+(0.05) 
+0.21 
+(0.05) 
+0.91 
+(0.02) 
+–0.21 
+(0.05) 
+0.92 (0.02) 
+PPI, Int. Materials 
+(pwimsa) 
+0.76 
+(0.09) 
+0.13 
+(0.07) 
+0.50 
+(0.09) 
+–0.05 
+(0.06) 
+0.66 (0.05) 
+CPI, Food 
+(pu81) 
+1.27 
+(0.7) 
+–0.30 
+(0.06) 
+0.87 
+(0.05) 
+0.32 
+(0.05) 
+0.93 (0.02) 
+CPI, Housing 
+(puh) 
+1.12 
+(0.08) 
+–0.15 
+(0.07) 
+0.77 
+(0.06) 
+0.17 
+(0.07) 
+0.81 (0.04) 
+CPI, Apparel 
+(pu83) 
+1.04 
+(0.05) 
+–0.04 
+(0.05) 
+0.94 
+(0.02) 
+0.03 
+(0.05) 
+0.93 (0.02) 
+CPI, Services 
+(pus) 
+0.91 
+(0.07) 
+0.06 
+(0.06) 
+0.69 
+(0.05) 
+–0.02 
+(0.06) 
+0.76 (0.04) 
+PCE, Durables 
+(gmdcd) 
+1.04 
+(0.06) 
+–0.06 
+(0.06) 
+0.82 
+(0.04) 
+0.08 
+(0.05) 
+0.85 (0.03) 
+ 
+Notes: Entries are estimated ARIMA coefficients and standard errors (in parentheses); 
+series mnemonics appear in parentheses in the first column. 
+ 
+ 
+26
+
+=== page 30 ===
+Table 5 
+Distributions of relative MSFEs of direct vs. iterated bivariate forecasts based on 
+the same lag selection method:  All Series 
+  
+Forecast Horizon 
+ 
+Model 
+ 
+Mean/Percentile 
+ 
+3 
+6 
+12 
+24 
+mean 
+1.00 
+1.00 
+1.02 
+1.09 
+0.10 
+0.96 
+0.90 
+0.86 
+0.83 
+0.25 
+0.99 
+0.97 
+0.97 
+0.97 
+0.50 
+1.00 
+1.01 
+1.02 
+1.07 
+0.75 
+1.02 
+1.04 
+1.08 
+1.19 
+ 
+ 
+AR(4) 
+0.90 
+1.03 
+1.08 
+1.17 
+1.38 
+mean 
+1.02 
+1.04 
+1.07 
+1.16 
+0.10 
+0.99 
+0.97 
+0.95 
+0.91 
+0.25 
+1.00 
+1.00 
+1.01 
+1.03 
+0.50 
+1.01 
+1.03 
+1.06 
+1.13 
+0.75 
+1.02 
+1.06 
+1.12 
+1.28 
+ 
+ 
+AR(12) 
+0.90 
+1.05 
+1.10 
+1.19 
+1.44 
+mean 
+0.98 
+0.97 
+0.99 
+1.06 
+0.10 
+0.88 
+0.80 
+0.80 
+0.80 
+0.25 
+0.96 
+0.94 
+0.94 
+0.95 
+0.50 
+1.00 
+1.00 
+1.01 
+1.04 
+0.75 
+1.02 
+1.04 
+1.06 
+1.16 
+ 
+ 
+BIC 
+0.90 
+1.05 
+1.09 
+1.15 
+1.31 
+mean 
+1.01 
+1.02 
+1.06 
+1.15 
+0.10 
+0.94 
+0.92 
+0.89 
+0.87 
+0.25 
+0.98 
+0.98 
+0.98 
+1.00 
+0.50 
+1.01 
+1.02 
+1.05 
+1.11 
+0.75 
+1.04 
+1.07 
+1.12 
+1.27 
+ 
+ 
+AIC 
+0.90 
+1.09 
+1.14 
+1.23 
+1.48 
+ 
+Notes:  The entries are based on the 2000 randomly selected pairs of series (4000 
+forecasts for method and horizon), drawn as described in the text.  The “mean” and 
+“median” entries are those summary statistics for the relative MSFEs of the column 
+forecasting method, relative to the iterated VAR(4).  See the notes to Table 1. 
+ 
+27
+
+=== page 31 ===
+ 
+28
+Table 6   
+Relative MSFEs of each bivariate forecast method, relative to iterated VAR(4),  
+and the fraction of times each forecast method is best 
+ 
+ 
+Iterated forecasts 
+Direct forecasts 
+Forecast 
+Horizon 
+Percentile 
+AR(4) 
+AR(12) 
+BIC 
+AIC 
+sum 
+AR(4) 
+AR(12) 
+BIC 
+AIC 
+sum 
+A.  All Variables 
+ 
+mean 
+1.00 
+1.03 
+1.04 
+1.01 
+ 
+1.00 
+1.05 
+1.02 
+1.02 
+ 
+3 
+median 
+1.00 
+1.04 
+1.01 
+1.01 
+ 
+1.01 
+1.05 
+1.01 
+1.02 
+ 
+ 
+fraction best 
+0.16 
+0.14 
+0.27 
+0.12 
+0.69 
+0.09 
+0.06 
+0.09 
+0.08 
+1 
+ 
+mean 
+1.00 
+1.00 
+1.05 
+0.99 
+ 
+1.00 
+1.04 
+1.01 
+1.02 
+ 
+6 
+median 
+1.00 
+1.03 
+1.02 
+1.00 
+ 
+1.01 
+1.05 
+1.02 
+1.03 
+ 
+ 
+fraction best 
+0.19 
+0.19 
+0.24 
+0.15 
+0.77 
+0.07 
+0.06 
+0.07 
+0.05 
+1 
+ 
+mean 
+1.00 
+1.01 
+1.05 
+0.99 
+ 
+1.02 
+1.07 
+1.03 
+1.05 
+ 
+12 
+median 
+1.00 
+1.03 
+1.03 
+1.00 
+ 
+1.02 
+1.09 
+1.03 
+1.06 
+ 
+ 
+fraction best 
+0.22 
+0.21 
+0.19 
+0.16 
+0.78 
+0.06 
+0.08 
+0.06 
+0.04 
+1 
+ 
+mean 
+1.00 
+1.04 
+1.04 
+1.00 
+ 
+1.09 
+1.19 
+1.09 
+1.15 
+ 
+24 
+median 
+1.00 
+1.03 
+1.02 
+1.00 
+ 
+1.07 
+1.15 
+1.06 
+1.11 
+ 
+ 
+fraction best 
+0.23 
+0.23 
+0.19 
+0.17 
+0.82 
+0.04 
+0.06 
+0.05 
+0.04 
+1 
+B.  Pairs not including wages, prices, or money 
+ 
+mean 
+1.00 
+1.06 
+1.03 
+1.02 
+ 
+1.01 
+1.08 
+1.02 
+1.04 
+ 
+3 
+median 
+1.00 
+1.06 
+1.01 
+1.01 
+ 
+1.01 
+1.06 
+1.01 
+1.03 
+ 
+ 
+fraction best 
+0.19 
+0.10 
+0.29 
+0.13 
+0.71 
+0.09 
+0.03 
+0.11 
+0.07 
+.29 
+ 
+mean 
+1.00 
+1.04 
+1.04 
+1.01 
+ 
+1.02 
+1.08 
+1.03 
+1.05 
+ 
+6 
+median 
+1.00 
+1.04 
+1.01 
+1.01 
+ 
+1.02 
+1.07 
+1.02 
+1.04 
+ 
+ 
+fraction best 
+0.22 
+0.16 
+0.25 
+0.16 
+0.79 
+0.07 
+0.05 
+0.08 
+0.04 
+.21 
+ 
+mean 
+1.00 
+1.04 
+1.04 
+1.01 
+ 
+1.05 
+1.12 
+1.05 
+1.08 
+ 
+12 
+median 
+1.00 
+1.04 
+1.02 
+1.01 
+ 
+1.03 
+1.11 
+1.04 
+1.06 
+ 
+ 
+fraction best 
+0.24 
+0.18 
+0.19 
+0.17 
+0.78 
+0.07 
+0.06 
+0.07 
+0.04 
+.22 
+ 
+mean 
+1.00 
+1.07 
+1.02 
+1.01 
+ 
+1.12 
+1.22 
+1.11 
+1.17 
+ 
+24 
+median 
+1.00 
+1.04 
+1.01 
+1.00 
+ 
+1.08 
+1.16 
+1.07 
+1.12 
+ 
+ 
+fraction best 
+0.24 
+0.19 
+0.21 
+0.18 
+0.82 
+0.04 
+0.06 
+0.05 
+0.04 
+.18 
+C.  Non price, wage, money variables in pairs that include a price, wage, money variable 
+ 
+mean 
+1.00 
+1.09 
+1.01 
+1.04 
+ 
+1.01 
+1.11 
+1.01 
+1.08 
+ 
+3 
+median 
+1.00 
+1.08 
+1.00 
+1.02 
+ 
+1.01 
+1.09 
+1.01 
+1.06 
+ 
+ 
+fraction best 
+0.24 
+0.03 
+0.40 
+0.07 
+0.74 
+0.09 
+0.02 
+0.11 
+0.04 
+.26 
+ 
+mean 
+1.00 
+1.08 
+1.01 
+1.03 
+ 
+1.03 
+1.12 
+1.04 
+1.10 
+ 
+6 
+median 
+1.00 
+1.08 
+1.00 
+1.02 
+ 
+1.02 
+1.11 
+1.03 
+1.08 
+ 
+ 
+fraction best 
+0.27 
+0.04 
+0.40 
+0.11 
+0.82 
+0.07 
+0.02 
+0.07 
+0.02 
+.18 
+ 
+mean 
+1.00 
+1.09 
+1.02 
+1.04 
+ 
+1.08 
+1.18 
+1.08 
+1.16 
+ 
+12 
+median 
+1.00 
+1.07 
+1.01 
+1.02 
+ 
+1.05 
+1.15 
+1.06 
+1.13 
+ 
+ 
+fraction best 
+0.32 
+0.11 
+0.33 
+0.12 
+0.88 
+0.05 
+0.02 
+0.05 
+0.03 
+.12 
+ 
+mean 
+1.00 
+1.10 
+1.03 
+1.05 
+ 
+1.17 
+1.36 
+1.17 
+1.31 
+ 
+24 
+median 
+1.00 
+1.07 
+1.01 
+1.02 
+ 
+1.15 
+1.30 
+1.13 
+1.25 
+ 
+ 
+fraction best 
+0.30 
+0.17 
+0.27 
+0.14 
+0.88 
+0.04 
+0.03 
+0.05 
+0.01 
+.12 
+D. Price, wage, money variables 
+ 
+mean 
+1.00 
+0.88 
+1.11 
+0.93 
+ 
+0.97 
+0.89 
+1.01 
+0.90 
+ 
+3 
+median 
+1.00 
+0.88 
+1.04 
+0.94 
+ 
+0.98 
+0.89 
+1.01 
+0.90 
+ 
+ 
+fraction best 
+0.02 
+0.36 
+0.05 
+0.13 
+0.56 
+0.06 
+0.20 
+0.03 
+0.17 
+.44 
+ 
+mean 
+1.00 
+0.81 
+1.14 
+0.89 
+ 
+0.91 
+0.83 
+0.93 
+0.84 
+ 
+6 
+median 
+1.00 
+0.81 
+1.08 
+0.89 
+ 
+0.93 
+0.85 
+0.95 
+0.85 
+ 
+ 
+fraction best 
+0.01 
+0.46 
+0.04 
+0.15 
+0.66 
+0.06 
+0.15 
+0.04 
+0.09 
+.34 
+ 
+mean 
+1.00 
+0.81 
+1.14 
+0.89 
+ 
+0.88 
+0.83 
+0.92 
+0.84 
+ 
+12 
+median 
+1.00 
+0.83 
+1.11 
+0.89 
+ 
+0.91 
+0.85 
+0.96 
+0.86 
+ 
+ 
+fraction best 
+0.07 
+0.40 
+0.06 
+0.14 
+0.67 
+0.07 
+0.20 
+0.02 
+0.07 
+.33 
+ 
+mean 
+1.00 
+0.89 
+1.09 
+0.92 
+ 
+0.92 
+0.95 
+0.97 
+0.94 
+ 
+24 
+median 
+1.00 
+0.86 
+1.07 
+0.92 
+ 
+0.94 
+0.96 
+1.00 
+0.94 
+ 
+ 
+fraction best 
+0.14 
+0.41 
+0.04 
+0.19 
+0.78 
+0.04 
+0.10 
+0.04 
+0.08 
+.22 
+Notes:  The entries are based on the 2000 randomly selected pairs of series (4000 
+forecasts for method and horizon), drawn as described in the text.  The “mean” and 
+“median” entries are those summary statistics for the relative MSFEs of the column 
+forecasting method, relative to the iterated VAR(4).  See the notes to Table 3. 

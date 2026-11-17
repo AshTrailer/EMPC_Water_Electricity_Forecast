@@ -1,0 +1,3908 @@
+
+=== page 1 ===
+Hierarchical forecasting for aggregated curves with
+an application to day-ahead electricity price
+auctions
+Paul Ghelasi∗, Florian Ziel†
+University of Duisburg-Essen, Germany
+May 26, 2023
+Abstract
+Aggregated curves are common structures in economics and finance, and the most
+prominent examples are supply and demand curves. In this study, we exploit the fact
+that all aggregated curves have an intrinsic hierarchical structure, and thus hierarchi-
+cal reconciliation methods can be used to improve the forecast accuracy. We provide
+an in-depth theory on how aggregated curves can be constructed or deconstructed,
+and conclude that these methods are equivalent under weak assumptions. We consider
+multiple reconciliation methods for aggregated curves, including previously established
+bottom-up, top-down, and linear optimal reconciliation approaches. We also present a
+new benchmark reconciliation method called ’aggregated-down’ with similar complex-
+ity to bottom-up and top-down approaches, but it tends to provide better accuracy
+in this setup. We conducted an empirical forecasting study on the German day-ahead
+power auction market by predicting the demand and supply curves, where their equi-
+librium determines the electricity price for the next day. Our results demonstrate that
+hierarchical reconciliation methods can be used to improve the forecasting accuracy of
+aggregated curves.
+Keywords: Aggregation, coherent forecasts, reconciliation, hierarchical time series, forecast
+combinations.
+∗Corresponding author. Email addresses: paul.ghelasi@mail.com; paul.ghelasi@stud.uni-due.de
+†Chair of Environmental Economics,
+esp.
+Economics of Renewable Energy.
+Email address:
+florian.ziel@uni-due.de
+1
+arXiv:2305.16255v1  [stat.AP]  25 May 2023
+
+=== page 2 ===
+1
+Introduction and motivation
+Curves are frequently encountered structures in various scientific disciplines, and especially
+in economics and finance. Prominent examples are supply and demand curves [Marshall,
+2009, Mankiw, 2014, Pindyck et al., 1995]. Other well-known examples are forwards and
+futures price curves [Hull, 2003], yield curves [G¨urkaynak et al., 2007], Engel curves [Aitchi-
+son and Brown, 1954, Banks et al., 1997], Philips curve [Phillips, 1958], and various types
+of cost curves [Pindyck et al., 1995, Eiteman and Guthrie, 1952]. The accurate estimation
+of these curves is important because other measures such as equilibrium values can be de-
+rived from them, and modeling a curve as a whole has the benefit of preserving additional
+information such as its shape or slope, which could be very useful in deriving the strategies
+of market participants, equilibrium values, or probabilistic forecasts, rather than modeling
+the equilibrium prices directly [Ziel and Steinert, 2016].
+It is important to note that we refer to curves as a single observation at a point in time,
+as is the case in functional data analysis (FDA) [Shang and Hyndman, 2017, Hyndman
+and Ullah, 2007, Shang and Hyndman, 2011]. In this study, we consider finite-dimensional
+representations of curves given by a finite grid of x-values and their corresponding y-values,
+often referred to as f(x).
+Every curve with well-defined increments can be readily aggre-
+gated or disaggregated into marginal and cumulative values. For example, Figure 1 shows
+a simulated curve and its corresponding marginal values at each step.
+The cumulative
+values can be obtained from the marginal values by cumulatively summing them up, and
+the marginal values can be obtained from the cumulative values by discrete differentiation.
+Hence, from a computational point of view, a curve is simply a vector of aggregated val-
+ues.
+This inherent structure of aggregated curves can be interpreted as a hierarchy, and
+thus hierarchical time series theory can be applied to potentially improve the forecasting
+accuracy [Hyndman and Athanasopoulos, 2018].
+An hierarchical time series is a set of time series that naturally relate to each other,
+i.e. sum up or break down, according to a certain logic [Hyndman and Athanasopoulos,
+2018, Wickramasuriya et al., 2019, Spiliotis et al., 2021]. This property is referred to as
+coherency and it is generally not given for individual forecasts.
+Approaches that allow
+independently forecasted time series at certain or all levels of the hierarchy to be made
+coherent are referred to as reconciliation methods.
+Notable advances have been recently made in optimal reconciliation approaches as well
+2
+
+=== page 3 ===
+Figure 1: Example curve with marginal steps
+as in improving classic approaches, such as top-down and bottom-up approaches, in terms of
+their forecasting accuracy Hyndman and Athanasopoulos [2018]. Most notable is the opti-
+mal minimum trace reconciling method Wickramasuriya et al. [2019]. Other methods have
+also been proposed, such as a game-theoretically optimal reconciliation approach [Van Er-
+ven and Cugliari, 2015], averaging approaches called level conditional coherent (LCC) and
+combined conditional coherent (CCC) point forecasts [Di Fonzo and Girolimetto, 2021, Hol-
+lyman et al., 2021] and machine-learning based reconciliation [Spiliotis et al., 2021], [Br´eg`ere
+and Huard, 2022], [Huard et al., 2020].
+In this study, we introduce four novel features into the field of hierarchical forecast-
+ing.
+First, we exploit the fact that all aggregated curves have an implicit hierarchical
+structure and that reconciliation approaches can be used to potentially improve their fore-
+cast accuracy. To our knowledge, this is the first time that aggregated curves have been
+treated as hierarchical structures. We consider various methods of constructing and de-
+construction the curves, including different representations of aggregated curves. Second,
+we introduce a new, simple reconciliation approach called aggregated-down with similar
+complexity to the top-down approach, which we recommend using as a benchmark method
+3
+
+=== page 4 ===
+alongside bottom-up and top-down approaches. Third, we study minimum trace optimal
+reconciliation approaches for aggregated curves in detail. In particular, we provide a result
+to show that under some assumptions, the reconciliation approach is independent of the
+representation of the curve. Finally, we applied all of these approaches in an empirical
+setting to forecast the supply and demand curves for day-ahead electricity price auctions.
+We conclude that forecast accuracy can be improved through hierarchical reconciliation.
+To assess the effect of hierarchical reconciliation approaches on aggregated curves in an
+empirical setting we consider an application to the German day-ahead electricity markets.
+In this auction-based market, submitted bids are aggregated to form supply and demand
+curves [Narajewski and Ziel, 2022]. The intersection of the curves yields the day-ahead
+electricity price. Hence, the market mechanism itself fits our idea of aggregated curves, and
+thus the application of hierarchical forecasting is a natural extension.
+Ziel and Steinert [2016, 2018], Haben et al. [2021a] forecast the day-ahead electricity
+price by forecasting the corresponding bids, aggregating them to form supply and demand
+curves, and computing the resulting intersection of these curves to yield the final price fore-
+casts. This implicit application of the simple bottom-up reconciliation approach improved
+both point and probabilistic price forecasts. Recent related papers Kulakov [2020], Mestre
+et al. [2020], Soloviova and Vargiolu [2021] which forecast electricity supply and demand
+curves show similar findings.
+The remainder of this paper is organized as follows. In Section 2, we introduce the
+notation for the inherent hierarchical structure of aggregated curves. We also describe dif-
+ferent ways to construct and represent curves via aggregation and/or disaggregation. In
+Section 3, we present the reconciliation approaches that we consider in this study, including
+the new aggregated-down approach and their simplified formulas according to the specific
+hierarchical structure of aggregated curves. Furthermore, we show that under some as-
+sumptions, the reconciliation approach is independent of the previously introduced curve
+representations. In Section 4, we present a simulation study of the new aggregated-down
+approach where we analyze and compare with the other reconciliation methods considered
+in this study. In Section 5, we introduce the market clearing mechanism for the German
+day-ahead electricity market and the model used to forecast the day-ahead supply and de-
+mand curves. We also present our empirical study, the data used, and the empirical results.
+We summarize the results and provide our conclusions in Section 6.
+4
+
+=== page 5 ===
+2
+Hierarchical structure of aggregated curves
+The hierarchical structure of a curve can be represented in multiple ways, i.e. the relation-
+ship between the bottom-level or marginal values and the curve itself, or the aggregated
+values. The curve can be obtained from an aggregation procedure with the marginals. Al-
+ternatively, we can start with the curve and describe a disaggregation relationship to obtain
+the bottom values.
+However, a natural method of representation that we refer to as the canonical structure
+of an aggregated curve is shown in Figure 2. At the end of this section, we also discuss
+other representations.
+2.1
+Canonical representation
+The canonical representation of an aggregated curve at we illustrate in Figure 2 is regarded
+as the standard representation. This representation also appears naturally when modeling
+auction curves in economics [Ziel and Steinert, 2016]. It can be obtained by considering
+the bottom values together with an aggregation procedure to receive the aggregated values,
+but also the other way around.
+an
+an−1
+. . .
+a2
+a1=
+b1
+b2
+2.5
+bn−1
+bn
+Figure 2: Hierarchical structure of an aggregated curve
+Based on the first approach above, we introduce the following notation.
+Let b =
+(b1, . . . , bn)′ be the n-dimensional vector of bottom-level or marginal values with n > 1,
+5
+
+=== page 6 ===
+as shown in Figure 2. Now, we introduce their aggregation by the vector a = (a1, . . . , an)′,
+which is an n-dimensional vector of aggregated or cumulative values starting from the top
+level, where ai for i ∈{1, . . . , n} represents the curve at point i. Formally, this is defined
+as
+ai =
+i
+X
+j=1
+bj,
+(1)
+i.e. the cumulative sum of b. In addition, the recursive relationship holds
+ai = ai−1 + bi for 1 ≤i < n and a1 = b1.
+(2)
+We note that Equation (2) is simply the mathematical representation of Figure 2. The top
+level an is the most aggregated level.
+Alternatively, we can introduce the canonical representation starting from the aggre-
+gated values a. Then, we can obtain the bottom values b by disaggregation or differencing
+with an initial value for b1:
+bi = ai −ai−1, for 1 < i ≤n and b1 = a1.
+(3)
+Furthermore, we can express b as b = Da where D is an invertible n-dimensional quadratic
+matrix defined as
+Dn =
+
+
+1
+0
+. . .
+0
+0
+−1
+1
+. . .
+0
+0
+...
+...
+...
+...
+...
+0
+0
+. . .
+−1
+1
+
+
+.
+(4)
+Consequently, the matrix representation of equation (1) is a = D−1
+n b where D−1
+n
+is a lower-
+left triangular matrix with ones on the diagonal and lower triangle.
+s Using the definitions
+of aggregated values a and bottom-level values b we can compactly write all of the values
+shown in Figure (2) as the (2n −1)-dimensional vector
+y =
+
+
+an
+...
+a2
+b
+
+
+(5)
+which contains the values of a in inverse order except for its first value a1, which matches b1.
+Thus, (y1, . . . , yn)′ may be regarded as aggregated values and (yn, . . . , y2n−1)′ as bottom-
+level values.
+6
+
+=== page 7 ===
+The aggregation relationship within y can be represented using the (2n −1) × n-
+dimensional summation matrix S, which describes the hierarchical structure of the con-
+sidered data such that y = Sb holds. For the considered canonical representation we have
+S =
+
+1n−1
+Un−1
+In
+
+=
+
+
+1
+1
+· · ·
+1
+1
+1
+1
+· · ·
+1
+0
+...
+...
+...
+...
+...
+1
+1
+· · ·
+0
+0
+1
+0
+· · ·
+0
+0
+0
+1
+· · ·
+0
+0
+...
+...
+...
+...
+...
+0
+0
+· · ·
+1
+0
+0
+0
+· · ·
+0
+1
+
+
+,
+(6)
+where Un−1 is a unit anti-diagonal upper-left triangular matrix of dimension (n −1) and
+In is an identity matrix of dimension n.
+Other situations can be considered where even more parts of the hierarchical curve
+are available. Using the notation bi:j = Pj
+l=i bl the canonical setting uses b1:j for j > 1
+for the aggregated values, i.e. a = (b1:1, b1:2, . . . , b1:n)′. We could also consider a setting
+where, e.g. b2:3 = b2 + b3, is also available, which would enrich the hierarchical structure
+with this additional information. However, the resulting structures that include general bi:j
+combinations could include up to n(n −1)/2 values in the corresponding y vector. This
+would increase computational costs substantially, so we only study the specific structure
+where forecasts by (or equivalently ba and bb) are available to the forecaster.
+2.2
+Other representations of aggregated curves
+In this subsection, we discuss representations other than the canonical one for aggregated
+curves. We generalize the representation scheme so the canonical representation is embed-
+ded. In particular, we consider a situation where the aggregated values a are given and the
+scope involves defining a disaggregation rule to receive the bottom values b.
+We introduce k as the element of a where from we start the disaggregation rule. In
+the canonical representation we disaggregate a starting from the first value k = 1 of the
+curve, i.e. for k = 1 it holds that bk = ak, bi = ai −ai−1 for i > k (see Equation (3)). This
+starting point of aggregation/disaggregation k could be changed to achieve an alternative
+7
+
+=== page 8 ===
+i
+1
+2
+3
+4
+5
+6
+a
+ai
+1
+4
+6
+7
+10
+15
+b[1]
+b[1],i
+1
+3
+2
+1
+3
+5
+b[3]
+b[3],i
+-3
+-2
+6
+1
+3
+5
+b[6]
+b[6],i
+-3
+-2
+-1
+-3
+-5
+15
+Table 1: Different disaggregation results for k = 1, 3, 6 and a specific a of length n = 6.
+bottom-values vector b[k]. Clearly, b = b[1] and if we start disaggregating from the end, i.e.
+k = n, we obtain b[n],1 = an, b[n],2 = an−1 −an, and in general, b[n],i = an−i+1 −an−i+2.
+Thus, b[n],i has the opposite sign to bi for i < n. However, this approach can be embedded
+in the canonical representation, which we receive by defining bi = b[n],n−i+1. Thus, the
+theory of canonical representations can also be applied.
+If we consider the disaggregation procedure with an initial value at k where 1 < k < n
+with the corresponding value b[k],k = ak, then we obtain a representation that is substan-
+tially different from the b[1] and b[n] situations. The reason for this difference is that we
+require two directions of aggregation, with one for bottom values larger than k and the
+other one for smaller values. Thus, we have
+b[k],i =
+
+
+
+
+
+
+
+
+
+
+
+
+
+ai −ai−1
+, if i > k
+ai −ai+1
+, if i < k
+ai
+, if i = k
+(7)
+We observe that the special cases of b[1] (the canonical representation) and b[n] can be
+defined using the definition (7).
+For illustrative purposes and to easier understand, we
+provide an n = 6-dimensional example for k = 1, 3, 6 in Table 1.
+In the general b[k] setting, the summation matrix S[k] is given by
+S[k] =
+
+
+On−k,k−1
+1n−k
+Un−k
+Lk−1
+1k−1
+Ok−1,n−k
+In
+
+
+(8)
+where Lk−1 is a (k −1)-dimensional matrix that contains 1 on the lower anti-diagonal. The
+general summation matrix S[k] in (8) also nests the canonical case S in (6) for k = 1. The
+8
+
+=== page 9 ===
+vector y[k] in the corresponding hierarchy that satisfies y[k] = S[k]b is
+y[k] =
+
+a[−k]
+b[k]
+
+
+(9)
+where we define a[−k] as the reversed vector a without the kth element, i.e.
+a[−k] =
+(an, . . . , ak+1, ak−1, . . . , a1)′. Clearly, for k = 1 we have y = y[k] (see definition (9)).
+However, the different representations of the hierarchical structure are actually only
+formal representations and do not automatically provide different reconciled forecasts by
+themselves, as shown at the end of the next section. To show that this is the case, we
+observe that the following relations hold:
+ai =
+
+
+
+
+
+Pi
+j=k b[k],j
+, if i > k
+Pk
+j=i b[k],j
+, if i ≤k
+(10)
+and
+bi =
+
+
+
+
+
+
+
+
+
+
+
+
+
+a1
+, if i = 1
+−b[k],i−1
+, if 1 < i < k + 1
+b[k],i
+, if i ≥k + 1.
+(11)
+These relations help us define Equation (7) in matrix form as b[k] = A[k]a with matrix
+A[k], which yields y[k] = S[k]A[k]a. For k = 1, we have A[k] = Dn from Equation (4). A[k]
+has the form:
+A[k] =
+
+
+Ik−1 +
+
+0k−2+1
+−Ik−2
+0
+0′
+k−2+1
+
+
+
+0k−2
+−1
+
+
+Ok−1,n−k
+0′
+k−1
+1
+0′
+n−k
+On−k,k−1
+
+
+−1
+0n−k−1
+
+
+In−k +
+
+0n−k−1
+0
+−In−k−1
+0′
+n−k−1
+
+
+
+
+.
+(12)
+In addition, according to definition (9), a matrix B[k] exists that satisfies y = B[k]y[k].
+We note that B[k] has the structure
+B[k] =
+
+
+In−k
+On−k,k−1
+On−k,k−1
+0n−k
+On−k,n−k
+0′
+n−k
+0′
+k−1
+0′
+k−1
+1
+0′
+n−k
+Ok−1,n−k
+Ik−1
+Ok−1,k−1
+0k−1
+Ok−1,n−k
+Ok−1,n−k
+Ok−1,k−1
+−Ik−1
+0k−1
+Ok−1,n−k
+On−k,n−k
+On−k,k−1
+On−k,k−1
+0n−k
+In−k
+
+
+.
+(13)
+9
+
+=== page 10 ===
+Furthermore, it is easy to check that B[k] is orthogonal, i.e. it holds B−1
+[k] = B′
+[k]. We observe
+that B[k] is a generalized permutation matrix that contains permutations and reflection
+components.
+Finally, using y = B[k]y[k], y[k] = S[k]A[k]a and a = D−1
+n b we obtain that y =
+B[k]S[k]A[k]D−1
+n b. Thus, it holds that S = B[k]S[k]A[k]D−1
+n
+for all k, which is valuable for
+further analysis.
+3
+Reconciliation approaches
+In general, the hierarchical structure does not hold if each time series is forecasted individu-
+ally. As stated by Wickramasuriya et al. [2019], we call these individual forecasts incoherent
+or base forecasts, and denote them by by. The coherent or reconciled forecasts for which
+the structure in Figure 2 holds are denoted by ey, and they formally satisfy: ey = Seb, where
+eb are the bottom values in ey.
+The coherency of forecasts is a desired property of aggregated curves for further anal-
+ysis, e.g. for trading applications, but the main application of reconciliation is generating
+accurate values for the aggregated level a.
+All linear reconciliation approaches for any
+hierarchical structure can be compactly written in matrix notation as
+ey = SP by
+(14)
+The (2n −1) × n-dimensional mapping matrix P maps the base forecasts y to the bottom
+level, [Hyndman and Athanasopoulos, 2018]. P is different for each reconciliation approach.
+The product SP is sometimes referred to as the reconciliation or projection matrix.
+In the previous section, we described the canonical representation and other repre-
+sentations.
+We note that they imply the same hierarchical structure and it holds that
+S = B[k]S[k]A[k]D−1
+n . Furthermore, the results are actually equivalent for specific recon-
+ciliation approaches considered in the simulation study and application, i.e. they are not
+affected by the choice of k (see Section (3.4) for more details). Therefore, in the following
+subsections, we only consider the canonical representation.
+3.1
+Simple benchmark approaches
+Table 2 summarizes the formulas for our three benchmark reconciliation approaches: bottom-
+up, top-down and aggregated-down. The first two approaches are well-established proce-
+10
+
+=== page 11 ===
+dures, so we will not provide their details but instead we refer to previous studies (Hyndman
+and Athanasopoulos [2018], Gross and Sohl [1990]). For the top-down and aggregated down
+methods, we provide three options for calculating the disaggregating proportions, i.e., using
+the average ratio (ar), ratio of averages (ra), and forecasted values (fo). Many more options
+could be considered for the top-down approach (Gross and Sohl [1990]). We describe the
+new aggregated-down approach in the next subsection.
+Method
+Mapping matrix P
+Bottom-up
+Pbu =
+h
+On×(n−1)
+In
+i
+Top-down
+Ptd =
+h
+p
+On×(2n−2)
+i
+p = (p1, . . . , pn)′
+Average ratio: bpar,j = 1
+T
+PT
+t=1
+bj,t
+an,t
+Ratio of averages: bpra,j =
+1
+T
+PT
+t=1 bj,t
+1
+T
+PT
+t=1 an,t
+Forecasted values:
+bpfo,j =
+
+
+
+
+
+
+
+
+
+
+
+
+
+bbn
+ban−1+bbn ,
+for j = n
+bbj
+baj−1+bbj
+Qn−1
+i=j
+
+bai
+bai+bi+1
+
+for 1 < j < n,
+Qn−1
+i=1
+
+bai
+bai+bi+1
+
+for j = 1.
+Aggregated-down
+Pad =
+h
+Qn×n
+On×(n−1)
+i
+Qn×n = Antidiag(q) = Antidiag((q1, . . . qn)′)
+q1 = 1
+Average ratio: bqar,j = 1
+T
+PT
+t=1
+aj,t−aj−1,t
+aj,t
+= 1
+T
+PT
+t=1
+bj,t
+aj,t
+Ratio of averages: bqra,j =
+1
+T
+PT
+t=1 aj,t−aj−1,t
+1
+T
+PT
+t=1 aj,t
+=
+1
+T
+PT
+t=1 bj,t
+1
+T
+PT
+t=1 aj,t
+Forecasted values: bqfo,j = baj−baj−1
+baj
+for j > 1,
+Table 2: Reconciliation methods and their formulas for aggregated curves (O·×· is a zero
+matrix of indicated dimensions)
+We use bu as an abbreviation for bottom-up, and tdar, tdra, tdfo for the top-down
+approaches using the average ratio, the ratio of averages, and forecasted values respectively.
+3.2
+Aggregated-down approach
+The aggregated-down approach is essentially a localized top-down approach, where the
+disaggregating proportions are calculated based on the node above and not based on the top-
+11
+
+=== page 12 ===
+most aggregated level. The motivation for this approach is based on the simple assumption
+that proportions calculated using values that are closer in the hierarchical structure are
+expected to be more accurate than when using values that are further away. We provide
+support for this assumption based on our simulation study in the next section.
+We denote the corresponding disaggregating proportions by qj where q = (q1, . . . , qn)′
+is the vector of proportions. By design (see Fig. 2), it holds that
+bj = qjan−j+1.
+(15)
+Thus, qj is the disaggregation proportion for bj given an−j+1 at the corresponding connec-
+tion of the tree.
+The mapping matrix is defined as
+Pad =
+h
+Q
+On×(n−1)
+i
+,
+where Q = Antidiag(q) is a n × n anti-diagonal matrix with the elements on the anti-
+diagonal starting from top to bottom, i.e.,
+Q =
+
+
+0
+. . .
+0
+q1
+0
+. . .
+q2
+0
+...
+...
+...
+...
+qn
+0
+. . .
+0
+
+
+.
+We require that q1 = 1 every time, which corresponds to ˜b1 = ˆb1. Analogous to the
+top-down approach, the proportions can be estimated using various methods, which are
+summarized in Table 2. It should be noted that the methods for calculating the average
+ratio and ratio of averages proportion calculation methods have similar complexity for
+the top-down and aggregated-down approaches. However, the formula for calculating the
+aggregated-down approach using the forecasted values by is much simpler than that for the
+top-down approach.
+We use adar, adra, adfo as abbreviations for the aggregated-down approaches using the
+average ratio, the ratio of averages, and forecasted values, respectively (see Table 2).
+3.3
+Optimal reconciliation approach
+Hyndman and Athanasopoulos [2018] and Wickramasuriya et al. [2019] introduced the
+optimal reconciliation approach by showing that the optimal mapping matrix that obtains
+12
+
+=== page 13 ===
+the best, unbiased coherent forecasts is given by
+Pop = (S′W −1S)−1S′W −1
+(16)
+where W = Var[y −by] is the variance-covariance matrix of the base forecast errors. Equa-
+tion (16) is the result obtained by minimizing the variance of the coherent forecasts. W
+is not known and must be estimated. We consider multiple estimators for W , which are
+listed below. The first five estimators were proposed by Hyndman and Athanasopoulos
+[2018] and Wickramasuriya et al. [2019].
+1. Wopols = I2n−1, where I2n−1 is the identity matrix. For the optimal projection matrix
+P in the aggregated curves setting, we have Popols = (S′S)−1S′ . We note that S′S
+is of full rank and invertible because it holds
+S′S = [1n−1 : Un−1]′[1n−1 : Un−1] + In =
+
+
+n
+n −1
+n −2
+· · ·
+2
+1
+n −1
+n
+n −2
+· · ·
+2
+1
+n −2
+n −2
+n −1
+· · ·
+2
+1
+...
+...
+...
+...
+...
+...
+2
+2
+2
+· · ·
+3
+1
+1
+1
+1
+· · ·
+1
+2
+
+
+.
+Thus, we obtain Popols = ([1n−1 : Un−1]′[1n−1 : Un−1] + In)−1 S′. However, the as-
+sumption that Var[y −by] is constant is usually not realistic in an aggregated curve
+setting because we expect a tendency towards larger variances for higher aggregation
+levels. We use opols as an abbreviation for this approach.
+2. Woplambda = Λ, Λ = Diag(S1n), where S is the summation matrix and 1n is a unit
+vector of the same dimension as the number of bottom-level time series. In our ag-
+gregated curves setting, it holds that Diag(Λ) = S1n = (n, n −1, . . . , 2, 1, 1, . . . , 1)′,
+which means that the higher aggregated values of the curves are weighted less, pro-
+portional to their level of aggregation starting from 1 as the lowest and n as the
+top. This corresponds to a setting where all bottom-level forecasts b have the same
+variance and are uncorrelated. We use oplambda as an abbreviation for this approach.
+3. Wopwls = c
+Wdcov, where c
+Wdcov is an estimator for Wdcov = Diag(Wcov) with Wcov
+as the covariance matrix of the errors associated with y. Wcov can be estimated by
+13
+
+=== page 14 ===
+the sample covariance c
+Wcov , i.e. c
+Wcov = 1
+nE′E = 1
+n
+Pn
+i=1 eie′
+i and E is the matrix
+of residuals generated by and arranged in the same order as the base forecasts. The
+Wopwls approach may be regarded as a generalization of the Woplambda approach.
+This design corresponds to a setting where the individual forecast errors have different
+variances but are uncorrelated. We use opwls as an abbreviation for this approach.
+4. Wopcov = c
+Wcov, where Wcov is the full sample covariance matrix of the error terms.
+The underlying setting corresponds to a situation where the forecast errors have
+varying variances and exhibit linear dependence. We use opcov as an abbreviation
+for this approach.
+5. Wopshrink = λc
+Wdcov + (1 −λ)c
+Wcov, where λ is the shrinkage intensity parameter.
+Sch¨afer and Strimmer [2005] proposed setting
+λ =
+P
+i̸=j d
+Var(brij)
+P
+i̸=j br2
+ij
+,
+where brij is the ijth element of the 1-step-ahead sample correlation matrix.
+The
+authors implemented the formulas in the corpcor R package. We use opshrink as an
+abbreviation for this approach.
+6. Ledoit-Wolf covariance matrix estimator with shrinkage toward constant correlation
+[Ledoit and Wolf, 2004]: Wopledoitwolf = δF + (1 −δ)c
+Wcov, where c
+Wcov is the sample
+covariance matrix, F is the shrinkage target with constant correlation defined with
+element fij = ¯r
+p
+bwii bwjj on the ith row and jth column, bwij is the corresponding
+element of c
+Wcov, and
+¯r =
+2
+(N −1)N
+N−1
+X
+i=1
+N
+X
+j=i+1
+rij,
+rij =
+bwij
+√
+bwii, bwjj . The estimator of the shrinkage intensity δ was introduced by [Ledoit
+and Wolf, 2004]. We use opledoitwolf as an abbreviation for this approach.
+7. Covariance matrix estimation using graphical lasso [Friedman et al., 2008]:
+Wopglasso =
+
+W11
+w12
+w′
+12
+w22
+
+,
+where Wopglasso is partitioned as shown and estimated by using coordinated descent
+to solve
+βopglasso = arg min
+β
+1
+2∥W 1/2
+11 β −b∥2 + ρ∥β∥1
+
+,
+14
+
+=== page 15 ===
+where b = W −1/2
+11
+b
+w12.
+The optimal β is used to generate the optimal w12 =
+W11βopglasso.
+Initially, Wopglasso is set to W = c
+Wcov + ρIn.
+We used the algo-
+rithm as implemented by [Friedman et al., 2008] in the glasso R package. We use
+opglasso as an abbreviation for this approach.
+3.4
+Optimal reconciliation for other representations
+Next, we briefly describe the optimal reconciliation approach for other representations. In
+this situation, for some k, we have
+e
+P[k] = (S′
+[k]W −1
+[k] S[k])−1S′
+[k]W −1
+[k] .
+Furthermore, we can show that under mild assumptions regarding the forecast method and
+the reconciling matrix W[k], the reconciliation approach preserves the hierarchical structure,
+which holds in the sense that the result does not depend on the choice of k:
+Theorem 1. If by = B[k]by[k] and W −1
+[k] = B′
+[k]W −1B[k] then it holds that
+ey = B[k]ey[k].
+The proof is presented in the Appendix. We recall that B[k] is orthogonal, and thus the
+assumption by = B[k]by[k] is satisfied if the forecasting algorithm that provides by is invariant
+to orthogonal transformations, e.g., this holds for linear regressions. In addition, we note
+that W −1
+[k] = B′
+[k]W −1B[k] is trivially satisfied if W = I2n−1 due to orthogonality of B[k].
+4
+Simulation study
+The new aggregated-down approach is motivated based on the simple idea of closeness, i.e.
+proportions calculated using values that are closer in the hierarchical structure are expected
+to be more accurate than those calculated when using values that are further away due to
+avoidance of error aggregation. To support this claim, we conducted a simulation study,
+which also allowed us to compare the performance with other approaches.
+4.1
+Study design
+15
+
+=== page 16 ===
+Number of historical observations (N)
+N ∈{16, 64, 256}
+Number of bottom-level values (n)
+n ∈{4, 16, 64}
+Coefficient matrix (Φ)
+Φ = aIn for a ∈{0.2, 0.5, 0.7, 0.95}
+Error variance-covariance matrix (A)
+A = In
+Table 3: Simulation study setup: combinations for a VAR(1) process.
+We simulated Vector Auto-Regressive VAR(1) processes for the bottom-level values. We
+replicated the simulation 1000 times for each combination of the parameters specified in
+Table 3.
+We also considered the case of correlated errors with the variance-covariance matrix
+A = 0.3In + 0.711′ in combination with the coefficient matrix Φ = 0.7In. We generated
+the aggregated values from the bottom-level simulations and fitted an Auto-Regressive
+AR(1) process without intercept for each level of the hierarchy. We calculated the forecast
+accuracy from 1-step-ahead forecasts for each level. Next, we computed the root mean
+square errors (RMSE) value of each reconciling approach considered.
+4.2
+Study results
+The results are shown in Table 4 for the setup with Φ = 0.7In and A = In. We left out the
+results for the average ratio and ratio of averages approaches for top-down and aggregated-
+down since they were always greatly inferior to those obtained using the base case. We
+also omit some optimal methods for brevity because these tended to produce very similar
+results.
+No. of bottom-level values (n)
+4
+16
+64
+No. of observations (N)
+16
+64
+256
+16
+64
+256
+16
+64
+256
+base
+1.40
+1.39
+1.32
+2.24
+2.27
+2.24
+4.33
+4.13
+4.15
+bu
+1.40
+1.39
+1.32
+2.25
+2.26
+2.24
+4.32
+4.12
+4.15
+tdfo
+18.0
+8.07
+1.61
+55.7
+99.5
+74.1
+24200
+1610
+605
+adfo
+1.42
+1.39
+1.32
+2.26
+2.27
+2.24
+4.35
+4.13
+4.15
+opols
+1.39
+1.39
+1.32
+2.23
+2.27
+2.24
+4.33
+4.12
+4.15
+opwls
+1.39
+1.39
+1.32
+2.22
+2.26
+2.24
+4.30
+4.12
+4.15
+oplambda
+1.39
+1.39
+1.32
+2.21
+2.26
+2.24
+4.29
+4.12
+4.15
+opshrink
+1.39
+1.39
+1.32
+2.23
+2.27
+2.24
+4.35
+4.13
+4.15
+Table 4: Simulation study RMSE results for the VAR(1) setup Φ = 0.7In and A = In for
+selected reconciliation methods
+16
+
+=== page 17 ===
+The key finding from this simulation study is that the aggregated-down approach using
+forecasted values was very similar to the other methods, and even optimal ones. By con-
+trast, the top-down approach using forecasted values was markedly inferior in the setups
+considered. As expected, the accuracy generally decreases as more bottom-levels (n) were
+added. However, this was disproportionally the case with the top-down approach, which
+was caused by extreme sensitivity to outliers because the proportions were multiplicatively
+connected and common factors were present across the hierarchy. We refer to this issue as
+the error inheritance of proportions.
+This situation is clear when we consider the formulas. For illustrative purposes, we
+consider the simplest proportions ˆpfo,n, and ˆpfo,n−1:
+ˆpfo,n =
+ˆbn
+ˆan−1 + ˆbn
+,
+ˆpfo,n−1 =
+ˆbn−1
+ˆan−2 + ˆbn−1
+ˆan−1
+ˆan−1 + ˆbn
+|
+{z
+}
+=1−ˆpfo,n
+Clearly, the formulas are sensitive to outliers when the denominator ˆan−1 +ˆbn is very small,
+i.e.
+when ˆan−1 ≈−ˆbn.
+If this is the case, then all of the subsequent proportions will
+generally be outliers because ˆpfo,n is part of ˆpfo,n−1, and so on. It should be noted that
+this occurs if we allow negative values. If we only consider monotonously increasing curves,
+then these outliers do not occur, as shown in Table 6, where we simulated a strictly positive
+AR(1) process leading to errors close to the other methods. To understand the sensitivity to
+outliers, Table 7 shows the results for the same setup with all outliers defined as |ˆpfo,1| > 50
+removed. The errors improved for greatly tdfo, especially with increasing values of N.
+This issue is essentially error aggregation and is important considering the specific
+hierarchical structure of aggregated curves because the hierarchy considered is completely
+vertical and each additional point on the curve deepens the hierarchy instead of widening
+it.
+Thus, if we allow for negative values, the outliers become larger for tdfo when the
+hierarchy is deeper. The aggregated-down approach is not sensitive to this distance issue
+since proportions are not multiplicative, but instead they are always calculated using values
+immediately above the hierarchy level considered, and non-monotonic curves can be easily
+accommodated. The other simulation setups yielded similar results, as shown in Appendix
+Tables 8, 9, 10, and 11.
+It is important to note that we consider the aggregated-down approach as a simple
+benchmark approach.
+It is not equivalent to more sophisticated optimal reconciliation
+17
+
+=== page 18 ===
+methods. Nevertheless, aggregated-down has the advantages of being intuitive and using
+very simple formulas for calculating proportion, especially compared to the top-down ap-
+proaches, and is programmatically simple as well as efficient. Furthermore, it is not affected
+by the error aggregating issue, unlike the top-down approach.
+5
+Application
+5.1
+Supply and demand curves on day-ahead electricity markets
+The European day-ahead electricity market is a daily, blind auction market where electricity
+prices are determined for each hour of the next day. The auction closes at 12:00 CET each
+day until when the market participants, i.e. the buyers and sellers, can submit buy (bid)
+and sell (ask) orders for each hour of the next day. These bids are the volumes that buyers
+are willing to buy and that producers are willing to sell at certain prices. For the time range
+of data considered, bid volumes can be specified for prices ranging from -500 EUR/MWh up
+to 3000 EUR/MWh with an increment of 0.1 EUR/MWh1. After gate closure, the volumes
+bid across all participating countries are aggregated and unique prices and volumes are
+generated for each separate market area.
+One of these areas is Germany-Luxembourg,
+which we modeled and forecasted in this study. The market clearing results as well as the
+24 supply and demand curves are published shortly after gate closure at 12:00 CET. All
+major relevant aspects of the German day-ahead electricity market are illustrated in Figure
+3 (see Petropoulos et al. [2022] for more details). Only selected prices can be bid on out of
+a total of 35001 possible prices, so the curves have a characteristic step-like appearance due
+to the many zero-volume prices, i.e. prices that were not bid on Ziel and Steinert [2016].
+Figure 4 shows the German volumes bid for each price for a selected day and hour. In
+total, there are 35001 prices that can be bid on for each hour, where most usually have a
+volume of zero, as can be observed by the many empty intervals between the bars . Certain
+prices are generally preferred by market participants, such as multiples of 10 and those
+in the vicinity of 40 EUR/MWh, as shown by the clusters formed around these prices in
+Figure 4. The hourly bids are aggregated to produce the day-ahead supply and demand
+curves for each hour, as shown in Figure 5.
+1Since 2022-05-11 the upper price limit was increased to 4000 EUR/MWh.
+18
+
+=== page 19 ===
+Figure 3: German-Luxembourg day-ahead market: Hourly day-ahead electricity price time
+series with relevant commodity price time series (top left) with corresponding 24 supply
+and demand curves on the price grid between -60 and 120 EUR/MWh for 5 May 2020 with
+highlighted curves for 11:00 (top right), power generation, import and consumption time
+series (bottom left), and bid structure of 5 May 2020 11:00 (bottom right).
+5.2
+The X-Model
+The X-Model introduced by [Ziel and Steinert, 2016] is an approach for forecasting day-
+ahead electricity prices as the intersection of supply and demand curves. The electricity
+prices are not modeled directly but instead they are obtained from the forecasts of the
+whole day-ahead curves as their intersection.
+[Ziel and Steinert, 2016, 2018, Haben et al., 2021a, Kulakov, 2020] modeled the day-
+ahead supply and demand curves by grouping the prices into price classes, thus drastically
+reducing the dimensionality, e.g., from 350001 prices to a few price classes (40 in our
+study), to make the problem computationally feasible.
+The prices are split into price
+classes by inverting the supply and demand curves at a pre-specified grid of equidistant
+volumes [Ziel and Steinert, 2016]. The result is shown in Figure 5, where the curves are
+approximated by ca. 20 points each. This form of dimensionality reduction via binning can
+19
+
+=== page 20 ===
+(a) Volumes bid on all prices
+(b) Volumes bid on selected price range
+Figure 4: Volume bid per price for 2019-03-01 12:00:00, i.e. marginal values of the Supply
+and Demand curves. Volumes bid per price class are also shown, i.e. the marginal values
+of the Supply and Demand approximations. The bottom plots represent a magnification
+around 0.
+be interpreted as a special case of applying FDA where the basis functions are constants,
+i.e.
+dummy variables, that do not overlap.
+This works very well in our case because
+the original curves are not smooth. An additional advantage is computability because it
+would be quite costly to smoothen the curves first, model them, and then un-smooth them
+again for the final representation. [Ziel and Steinert, 2016] use a simple but very effective
+20
+
+=== page 21 ===
+Figure 5: Supply and Demand curves for 2019-03-01 12:00:00, created by the cumulative
+aggregation of marginal volumes from Figure 4. Approximations of the Supply and Demand
+curves, created by cumulative aggregation of the price classes, are also shown. The plot on
+the right represents a magnification around the intersection point.
+method for reconstructing the forecasted curves from the price class approximations, i.e.,
+by using historical proportions for each price. This method was shown to capture the shape
+of the original curves very well without requiring vast computational resources. However,
+this reconstruction step is only important for calculating the price as the intersection of
+the supply and demand curves and does not affect the forecasting accuracy of the curves
+themselves, hence we refer to the original X-model paper for more information [Ziel and
+Steinert, 2016] as well as other papers that use more classical FDA approaches to implement
+the X-model [Soloviova and Vargiolu, 2021, Soloviova].
+Thus, the response variable is the sum of the volume within a price class, which is
+modeled separately for every hour and class. For 40 price classes comprising both supply
+and demand, a total of 40 × 24 regressions must be conducted to forecast curves for all
+hours in the next day. [Ziel and Steinert, 2016] modeled each price class volume marginally,
+and thus the supply and demand curves were generated by cumulatively summing up the
+forecasted values, which is equivalent to forecasting only the bottom-level values and using
+the bottom-up reconciliation approach described earlier. In this study, we modeled both the
+marginal and cumulative responses, and used them to compare and contrast the different
+21
+
+=== page 22 ===
+reconciliation approaches. It should be noted that the method using marginal values will
+always be equivalent to the bottom-up approach.
+To model the responses, we used a combination of autoregressive and external regressors.
+Let then X(c)
+S,d,h and X(c)
+D,d,h be the supply and demand volumes at day d and hour h of price
+class c among the price classes generated for the supply and demand curves, respectively.
+These constitute the bulk of the regressor matrix because each price class volume will
+depend on its lags according to a specific lag structure. The external regressors are denoted
+by X(1)
+X,d,h, . . . , X(MX)
+X,d,h for a total of MX external regressors, and they comprise the prices for
+coal, gas, oil and CO2 emissions (EUAs), the day-ahead prices and volumes on the previous
+day, as well as the day-ahead forecasts for the country-wide load, solar, onshore wind, and
+offshore wind production. The day-ahead data were taken from www.epexspot.com and the
+forecasts from www.entsoe.eu.
+Let MS and MD be the number of price classes for the supply and demand curves,
+respectively. Then. all regressors can be compactly written as
+Xd,h = (X1,d,h, . . . , XM,d,h)′ =
+
+X(c∈CS)
+S,d,h
+
+,
+
+X(c∈CD)
+D,d,h
+
+,
+
+X(c∈CX)
+X,d,h
+′
+,
+where CS and CD are the sets of price classes for the supply and demand sides, respectively,
+CX is the set of external regressors CX =
+n
+X(1)
+X,d,h1, . . . , X(MX)
+X,d,h
+o
+, and M = MS+MD+MX.
+To capture the weekly seasonality, we also included dummy regressors for every day of
+the week which we denoted by a function Wk(d) that returns the day of the week d. The
+full model can be written as
+Xm,d,h =
+M
+X
+k=1
+24
+X
+j=1
+X
+k∈Im,h(l,j)
+ϕm,h,l,j,kXl,d−k,j +
+7
+X
+k=2
+ψm,h,kWk(d) + εm,d,h,
+for m ∈{1, . . . , MS + MD} and Im,h(l, j) represents the sets of possible lags, which we
+defined as
+Im,h(l, j) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+{1, . . . , 30}, for m = l and h = j
+{1, . . . , 8}, for (m = l and h̸ = j) or (m̸ = l and h = j)
+{1}, for m̸ = l and h̸ = j
+.
+We fitted the models using lasso [Ziel and Steinert, 2016] as implemented in the glmnet R
+package.
+22
+
+=== page 23 ===
+5.3
+Data and results
+We conducted a day-ahead rolling window forecasting study for each day between 2019-
+01-01 and 2019-06-30. We used a rolling window length of 730 = 2 × 365 days to forecast
+each day. The price classes were generated only once for the first day-ahead forecast, i.e.
+using the 2017 and 2018 data, and they were kept constant throughout the study. All data
+were hourly except for coal, gas, oil, and EUA prices, which were daily. We used marginal
+values as regressors to forecast the marginal values bbi and cumulative values as regressors
+to forecast the cumulative values bai. We chose ban ←bb1 for each day and hour, as in Figure
+2.
+To measure the forecasting accuracy, we used two popular error measures comprising
+the mean absolute errors (MAE) defined as
+MAEtest
+m
+=
+1
+24 · #(D)
+X
+d∈D
+23
+X
+h=0
+|Xm,d,h −b
+Xm,d,h|
+and the RMSE defined as
+RMSEtest
+m
+=
+1
+#(D)
+X
+d∈D
+v
+u
+u
+t 1
+24
+23
+X
+h=0
+(Xm,d,h −b
+Xm,d,h)2
+where D is a set containing all 181 forecasted days, #(·) is a function that returns the
+number of elements in a set, and b
+Xm,d,h represents the respective forecasted value.
+The averages over the MAEs and RMSEs for the overall price classes are shown in Fig-
+ure 6. The top-down and aggregated-down approaches using historical proportions yielded
+worse results than the simple bottom-up method. Therefore, we do not include these re-
+sults but they can be inspected in the comprehensive Tables 12 and 13. For the supply
+curve, the optimal lambda reconciliation approach obtained the smallest MAE on average,
+approximately 33 MWh lower than that with the marginal model. For the demand curve,
+the optimal shrinkage reconciliation approach returned the smallest MAE on average, ap-
+proximatively 97 MWh lower than that of with the marginal model. Similar results were
+obtained in terms of RMSEs, with differences of approx. 39 MWh and 109 MWh for the
+supply and demand curves respectively.
+Table 5 shows the absolute MAE and percentage differences for some selected classes
+and the mean over all classes.
+Again, we do not include the results for the top-down
+and aggregated-down approaches using historical proportions for the same reasons stated
+23
+
+=== page 24 ===
+Supply
+Demand
+Unit
+Price class:
+-500.0
+-49.9
+5.7
+3000.0
+Mean
+3000.0
+7.0
+-6.9
+-500.0
+Mean
+marginal
+1591
+1827
+1941
+2087
+1897
+2051
+1951
+19664
+1958
+1957
+MW
+cumulative
+-3.478
+0.084
+0.015
+-0.584
+-0.290
+-2.540
+0.907
+1.307
+2.689
+-1.141
+∆%
+bu
+0.000
+0.000
+0.000
+0.000
+0.000
+0.000
+0.000
+0.000
+0.000
+0.000
+∆%
+tdfo
+11.970
+3.403
+2.697
+-0.940
+2.536
+-0.413
+0.958
+1.135
+2.934
+0.404
+∆%
+adfo
+0.000
+-1.070
+-1.059
+-0.940
+-0.780
+0.000
+0.398
+0.850
+2.934
+-1.359
+∆%
+opols
+-0.472
+-1.496
+-1.667
+-1.163
+-1.183
+-1.349
+-0.409
+-0.054
+2.655
+-1.756
+∆%
+opwls
+3.021
+-1.684
+-2.120
+-2.607
+-1.597
+-2.860
+-2.495
+-2.379
+1.053
+-2.633
+∆%
+oplambda
+-0.207
+-1.821
+-2.115
+-2.194
+-1.782
+-1.222
+-2.075
+-1.826
+1.289
+-2.336
+∆%
+opcov
+0.985
+1.034
+0.868
+-0.011
+0.984
+-0.260
+-1.600
+-1.334
+-3.914
+-2.373
+∆%
+opshrink
+0.289
+-1.668
+-1.899
+-1.785
+-1.346
+-4.102
+-4.443
+-4.235
+-4.168
+-4.979
+∆%
+opledoitwolf
+0.986
+1.035
+0.869
+-0.010
+0.984
+-0.261
+-1.598
+-1.331
+-3.906
+-2.371
+∆%
+opglasso
+0.986
+1.032
+0.867
+-0.010
+0.984
+-0.266
+-1.607
+-1.341
+-3.920
+-2.379
+∆%
+MAE Min
+cumulative
+oplambda
+opwls
+opwls
+oplambda
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+Table 5: Absolute MAE and percentage differences relative to the base case (marginal)
+for selected classes and reconciliation methods.
+Here, the marginal case is the original
+implementation in the X-Model paper, which corresponds to the bottom-up (bu) case.
+for Figure 6.
+When using historical values to calculate the proportions, the top-down
+approach was superior to aggregated-down. However, using forecasted values to calculate
+the proportions for the aggregated-down approach yielded better results than the bottom-
+up case on average.
+The top-down approach still yielded less accurate values than the
+bottom-up approach even when using forecasted values to calculate the proportions. Hence,
+aggregated-down was superior to bottom-up and top-down only when using forecasted
+values for the proportions.
+Tables 12 and 13 in the Appendix show the detailed MAEs and RMSEs over each price
+class. For the supply curve, no approach consistently yielded the lowest errors across all
+price classes. For example, the first three price classes had the lowest MAEs and RMSEs
+using the simple bottom-up approach. The cumulative and marginal models in the tables
+refer to simply forecasting all bottom-level values with the corresponding marginal or cu-
+mulative regressors and simply cumulatively summing them up, which corresponds to a
+bottom-up approach. It should be noted that in the results tables, the explicit bottom-up
+approach is equal to the cumulative approach per definition. The optimal weighted least
+squares (WLS) reconciliation approach yielded the lowest errors for the largest number
+of classes, followed by the shrinkage and lambda approaches. For the demand curve, the
+results were consistent for all classes, where the lowest errors were achieved by the optimal
+24
+
+=== page 25 ===
+(a) MAE
+(b) RMSE
+Figure 6: Average MAE and RMSE over all considered reconciliation approaches for the
+Supply and Demand curves.
+shrinkage reconciliation approach (option 5 among the Section 3.3).
+6
+Conclusions
+In this study, we considered the hierarchical structure of aggregated curves and differ-
+ent representations. We presented several reconciliation methods comprising established
+bottom-up, top-down, and minimum-trace optimal reconciliation approaches in an aggre-
+gated curves setting [Wickramasuriya et al., 2019].
+In addition, we introduced a new
+25
+
+=== page 26 ===
+aggregated-down approach with comparable methodological complexity to the bottom-up
+and top-down approaches. We provided a theoretical insight that under mild assumptions
+regarding the forecasting and reconciling method, the reconciling result is independent of
+the representation of the curve. These approaches were then applied in a simulation study,
+and for forecasting the supply and demand curves of the German day-ahead electricity
+market. In the latter case, we showed that the reconciling approaches for aggregated curves
+can improve forecasting accuracy compared with the standard approaches.
+The results showed that there is a single reconciliation method did not outperform
+the others every time.
+However, the Section 3.3 (optimal approaches), particularly the
+shrinkage, WLS, and lambda approaches, obtained the best results in most cases, where
+they obtained considerable improvements compared with the bottom-up base case. The
+reconciliation method that improves the forecast by the greates amount will probably be
+specific to the data.
+We suggest that it may be useful to consider multiple methods because even simple
+approaches such as Section 3.2 (aggregated-down) yielded improvements at certain points
+on the curve compared with the bottom-up approach, which is the current state-of-the-art
+method [Ziel and Steinert, 2016, 2018, Haben et al., 2021b]. Based on our finding that
+the top-down approach did not improve the forecasts on average whereas the aggregated-
+down approach using forecasted values to calculate proportions obtained improvements,
+we conclude that the aggregated-down approach can be applied as a simple benchmark
+method that is superior to top-down. In addition, we conclude that it is important to have
+access to all base forecasts to calculate the proportions because they can lead to substantial
+improvements in the forecasts compared with only using historical values.
+Our study could be extended further by including more recent approaches, such as
+machine-learning-based [Spiliotis et al., 2021] and conditional coherency reconciliation meth-
+ods [Di Fonzo and Girolimetto, 2021]. Averaging or using different reconciliation approaches
+for each point on the aggregated curve could also be considered, especially if coherency is
+not necessary.
+26
+
+=== page 27 ===
+7
+Appendix
+7.1
+Proof of Theorem 1
+Consider ey = SP by. With the definition of P , S = B[k]S[k]A[k]D−1
+n , and the assumptions
+that by = B[k]by[k] and W −1
+[k] = B′
+[k]W −1B[k], it holds that:
+ey = S(S′W −1S)−1S′W −1by
+= B[k]S[k]A[k]D−1
+n
+ (B[k]S[k]A[k]D−1
+n )′W −1B[k]S[k]A[k]D−1
+n
+−1 (B[k]S[k]A[k]D−1
+n )′W −1by
+= B[k]S[k]A[k]D−1
+n
+
+DnA−1
+[k] (S′
+[k]B′
+[k]W −1B[k]S[k])−1(A−1
+[k] )′D′
+n
+
+(D−1
+n )′A′
+[k]S′
+[k]B′
+[k]W −1by
+= B[k]S[k](S′
+[k]B′
+[k]W −1B[k]S[k])−1S′
+[k]B′
+[k]W −1B[k] by[k]
+= B[k]S[k](S′
+[k]W −1
+[k] S[k])−1S′
+[k]W −1
+[k] by[k] = B[k] ey[k].
+7.2
+Results tables
+No. of bottom-level values (n)
+4
+16
+64
+No. of observations (N)
+16
+64
+256
+16
+64
+256
+16
+64
+256
+base
+5.14
+4.98
+4.52
+6.46
+6.22
+5.95
+11.83
+11.80
+11.52
+bu
+5.41
+5.13
+4.58
+7.69
+7.48
+7.17
+18.47
+21.18
+20.43
+tdfo
+4.98
+4.97
+4.55
+6.69
+6.45
+6.20
+14.16
+14.62
+14.62
+adfo
+5.08
+4.97
+4.52
+6.39
+6.23
+5.97
+11.80
+11.82
+11.54
+opols
+5.09
+4.97
+4.51
+6.42
+6.20
+5.93
+11.81
+11.79
+11.50
+opwls
+5.17
+5.01
+4.52
+6.56
+6.25
+5.94
+11.90
+11.81
+11.47
+oplambda
+5.15
+5.00
+4.51
+6.50
+6.23
+5.94
+11.87
+11.79
+11.46
+opshrink
+5.22
+5.05
+4.56
+6.82
+7.07
+7.72
+13.21
+18.57
+24.27
+Table 6: Simulation study RMSE results for the squared simulated values of the VAR(1)
+setup Φ =
+√
+0.7In and A = In estimated by an AR(1) model, for selected reconciliation
+methods.
+27
+
+=== page 28 ===
+No. of bottom-level values (n)
+4
+16
+64
+No. of observations (N)
+16
+64
+256
+16
+64
+256
+16
+64
+256
+base
+5.14
+4.98
+4.52
+6.46
+6.22
+5.95
+11.83
+11.80
+11.52
+bu
+5.41
+5.13
+4.58
+7.69
+7.48
+7.17
+18.47
+21.18
+20.43
+tdfo
+4.98
+4.97
+4.55
+6.69
+6.45
+6.20
+14.16
+14.62
+14.62
+adfo
+5.08
+4.97
+4.52
+6.39
+6.23
+5.97
+11.80
+11.82
+11.54
+opols
+5.09
+4.97
+4.51
+6.42
+6.20
+5.93
+11.81
+11.79
+11.50
+opwls
+5.17
+5.01
+4.52
+6.56
+6.25
+5.94
+11.90
+11.81
+11.47
+oplambda
+5.15
+5.00
+4.51
+6.50
+6.23
+5.94
+11.87
+11.79
+11.46
+opshrink
+5.22
+5.05
+4.56
+6.82
+7.07
+7.72
+13.21
+18.57
+24.27
+Table 7: Simulation study RMSE results for the VAR(1) setup Φ = 0.7In and A = In for
+selected reconciliation methods, with outliers removed. Outliers were defined as simulations
+for which ˆpfo,1 > 50.
+No. of bottom-level values (n)
+4
+16
+64
+No. of observations (N)
+16
+64
+256
+16
+64
+256
+16
+64
+256
+base
+1.41
+1.39
+1.32
+2.24
+2.27
+2.24
+4.32
+4.12
+4.15
+bu
+1.41
+1.39
+1.32
+2.25
+2.26
+2.24
+4.31
+4.12
+4.15
+tdfo
+7.99
+2.08
+2.16
+1700
+16.26
+13.03
+163000
+9040
+15000
+adfo
+1.42
+1.39
+1.32
+2.26
+2.27
+2.24
+4.33
+4.13
+4.15
+opols
+1.40
+1.39
+1.32
+2.23
+2.27
+2.24
+4.31
+4.12
+4.15
+opwls
+1.39
+1.39
+1.32
+2.22
+2.26
+2.24
+4.29
+4.12
+4.15
+oplambda
+1.39
+1.39
+1.32
+2.21
+2.26
+2.24
+4.28
+4.12
+4.15
+opshrink
+1.40
+1.39
+1.32
+2.23
+2.27
+2.24
+4.34
+4.13
+4.15
+Table 8: Simulation study RMSE results for the VAR(1) setup Φ = 0.5In and A = In for
+selected reconciliation methods
+No. of bottom-level values (n)
+4
+16
+64
+No. of observations (N)
+16
+64
+256
+16
+64
+256
+16
+64
+256
+base
+1.41
+1.39
+1.32
+2.24
+2.27
+2.24
+4.31
+4.12
+4.15
+bu
+1.40
+1.39
+1.32
+2.24
+2.26
+2.24
+4.31
+4.13
+4.15
+tdfo
+65.8
+5.41
+8.39
+9670
+590
+889
+9390000
+4610
+7220
+adfo
+1.42
+1.39
+1.32
+2.26
+2.27
+2.24
+4.32
+4.12
+4.15
+opols
+1.40
+1.38
+1.32
+2.23
+2.27
+2.24
+4.30
+4.12
+4.15
+opwls
+1.40
+1.38
+1.32
+2.22
+2.26
+2.24
+4.28
+4.11
+4.15
+oplambda
+1.39
+1.38
+1.32
+2.22
+2.26
+2.24
+4.27
+4.11
+4.15
+opshrink
+1.40
+1.38
+1.32
+2.23
+2.26
+2.24
+4.33
+4.13
+4.15
+Table 9: Simulation study RMSE results for the VAR(1) setup Φ = 0.2In and A = In for
+selected reconciliation methods
+28
+
+=== page 29 ===
+No. of bottom-level values (n)
+4
+16
+64
+No. of observations (N)
+16
+64
+256
+16
+64
+256
+16
+64
+256
+base
+1.41
+1.39
+1.32
+2.26
+2.26
+2.24
+4.35
+4.14
+4.15
+bu
+1.40
+1.39
+1.32
+2.27
+2.26
+2.23
+4.38
+4.13
+4.15
+tdfo
+14.9
+2.71
+1.55
+31
+20.7
+574
+16500
+132
+240
+adfo
+1.43
+1.39
+1.33
+2.29
+2.26
+2.24
+4.38
+4.14
+4.15
+opols
+1.39
+1.39
+1.32
+2.24
+2.26
+2.24
+4.34
+4.14
+4.15
+opwls
+1.39
+1.39
+1.32
+2.22
+2.25
+2.23
+4.30
+4.13
+4.15
+oplambda
+1.38
+1.39
+1.32
+2.22
+2.25
+2.23
+4.30
+4.13
+4.15
+opshrink
+1.39
+1.39
+1.32
+2.24
+2.26
+2.23
+4.35
+4.14
+4.15
+Table 10: Simulation study RMSE results for the VAR(1) setup Φ = 0.95In and A = In
+for selected reconciliation methods
+No. of bottom-level values (n)
+4
+16
+64
+No. of observations (N)
+16
+64
+256
+16
+64
+256
+16
+64
+256
+base
+2.02
+2.01
+1.89
+5.99
+6.15
+5.87
+23.32
+22.42
+22.69
+bu
+2.00
+2.01
+1.89
+5.86
+6.13
+5.86
+22.93
+22.33
+22.65
+tdfo
+2.58
+2.07
+1.90
+1440
+6.19
+5.97
+30400000
+23.2
+23.4
+adfo
+2.03
+2.01
+1.89
+6.00
+6.15
+5.87
+23.32
+22.42
+22.69
+opols
+2.02
+2.01
+1.89
+5.99
+6.15
+5.87
+23.32
+22.42
+22.69
+opwls
+2.01
+2.01
+1.89
+5.93
+6.14
+5.87
+23.12
+22.37
+22.67
+oplambda
+2.01
+2.01
+1.89
+5.97
+6.15
+5.87
+23.30
+22.41
+22.69
+opshrink
+2.01
+2.01
+1.89
+5.92
+6.15
+5.87
+23.08
+22.32
+22.68
+Table 11: Simulation study RMSE results for the VAR(1) setup Φ = 0.7In and A =
+0.3In + 0.711′ for selected reconciliation methods
+29
+
+=== page 30 ===
+S-500.0
+S-171.5
+S-99.0
+S-76.0
+S-49.9
+S5.7
+S24.0
+S30.9
+S35.9
+S40.4
+S45.0
+S50.0
+S57.2
+S69.0
+S86.5
+S153.7
+S260.0
+S1600.0
+S3000.0
+Mean
+MAE
+Marginal
+1591
+1519
+1503
+1646
+1827
+1941
+2034
+2060
+2010
+1972
+1949
+1958
+1956
+1982
+1980
+1982
+1981
+2063
+2087
+1897
+Cumulative
+1535
+1494
+1519
+1662
+1829
+1941
+2031
+2098
+1987
+1956
+1956
+1962
+1935
+1974
+1967
+1980
+1980
+2050
+2075
+1891
+bu
+1591
+1519
+1503
+1646
+1827
+1941
+2034
+2060
+2010
+1971
+1949
+1957
+1956
+1982
+1980
+1982
+1981
+2063
+2087
+1897
+tdar
+3496
+3191
+2765
+2354
+2503
+2680
+2804
+2820
+2694
+2532
+2364
+2277
+2188
+2064
+2020
+2031
+2001
+2047
+2068
+2468
+tdra
+3430
+3142
+2733
+2358
+2507
+2671
+2808
+2829
+2704
+2546
+2381
+2289
+2196
+2072
+2027
+2037
+2004
+2048
+2068
+2466
+tdfo
+1781
+1703
+1666
+1756
+1889
+1993
+2087
+2111
+2045
+2003
+1972
+1968
+1954
+1976
+1973
+1986
+1975
+2045
+2068
+1945
+adar
+1591
+1498
+1568
+2171
+2832
+3189
+3189
+3117
+2969
+2882
+2804
+2848
+2886
+2966
+2965
+2975
+3017
+3141
+3198
+2727
+adra
+1591
+1498
+1568
+2133
+2769
+3104
+3122
+3061
+2910
+2824
+2753
+2797
+2842
+2927
+2934
+2951
+2997
+3127
+3186
+2689
+adfo
+1591
+1495
+1518
+1642
+1808
+1921
+2009
+2079
+1972
+1942
+1941
+1948
+1922
+1962
+1957
+1969
+1970
+2041
+2068
+1882
+opols
+1583
+1506
+1513
+1635
+1800
+1909
+2009
+2043
+1974
+1941
+1922
+1928
+1917
+1951
+1953
+1967
+1962
+2037
+2063
+1874
+opwls
+1639
+1553
+1534
+1643
+1796
+1900
+1997
+2021
+1963
+1928
+1900
+1901
+1896
+1931
+1934
+1947
+1937
+2009
+2033
+1866
+oplambda
+1587
+1511
+1511
+1631
+1794
+1900
+1998
+2024
+1965
+1931
+1903
+1906
+1901
+1936
+1940
+1954
+1944
+2017
+2041
+1863
+opcov
+1606
+1566
+1557
+1687
+1846
+1958
+2051
+2072
+2010
+1978
+1956
+1961
+1963
+2002
+2007
+2016
+2002
+2067
+2087
+1915
+opshrink
+1595
+1535
+1526
+1644
+1797
+1904
+1993
+2017
+1959
+1928
+1908
+1910
+1909
+1952
+1959
+1972
+1963
+2029
+2050
+1871
+opledoitwolf
+1606
+1566
+1557
+1687
+1846
+1958
+2051
+2072
+2010
+1978
+1956
+1961
+1963
+2002
+2007
+2016
+2002
+2067
+2087
+1915
+opglasso
+1606
+1566
+1557
+1687
+1846
+1958
+2051
+2072
+2010
+1978
+1956
+1961
+1963
+2002
+2008
+2016
+2002
+2067
+2087
+1915
+MAE Minimum
+Cumulative
+Cumulative
+Marginal
+oplambda
+oplambda
+opwls
+opshrink
+opshrink
+opshrink
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+oplambda
+RMSE
+Marginal
+1846
+1771
+1756
+1911
+2097
+2228
+2330
+2361
+2316
+2273
+2249
+2254
+2251
+2282
+2275
+2279
+2283
+2367
+2393
+2185
+Cumulative
+1788
+1746
+1771
+1926
+2099
+2230
+2329
+2397
+2294
+2256
+2264
+2262
+2236
+2276
+2268
+2284
+2285
+2355
+2379
+2181
+bu
+1846
+1771
+1756
+1911
+2097
+2228
+2330
+2361
+2316
+2273
+2249
+2254
+2251
+2282
+2275
+2279
+2283
+2367
+2393
+2185
+tdar
+3831
+3522
+3109
+2680
+2821
+3021
+3150
+3161
+3022
+2855
+2681
+2590
+2495
+2363
+2316
+2331
+2302
+2350
+2370
+2788
+tdra
+3769
+3477
+3081
+2685
+2823
+3012
+3150
+3167
+3030
+2866
+2696
+2601
+2501
+2368
+2324
+2338
+2305
+2351
+2370
+2785
+tdfo
+2051
+1973
+1945
+2043
+2179
+2301
+2397
+2420
+2357
+2313
+2283
+2274
+2257
+2280
+2274
+2287
+2278
+2347
+2370
+2244
+adar
+1846
+1749
+1826
+2447
+3139
+3519
+3526
+3460
+3330
+3244
+3176
+3229
+3275
+3370
+3378
+3394
+3450
+3589
+3650
+3084
+adra
+1846
+1749
+1826
+2409
+3073
+3433
+3455
+3404
+3271
+3187
+3123
+3178
+3230
+3331
+3349
+3371
+3431
+3574
+3637
+3046
+adfo
+1846
+1746
+1771
+1906
+2077
+2209
+2307
+2377
+2275
+2239
+2246
+2247
+2223
+2264
+2256
+2271
+2274
+2344
+2370
+2171
+opols
+1835
+1754
+1763
+1898
+2069
+2197
+2302
+2340
+2271
+2235
+2224
+2224
+2213
+2249
+2249
+2265
+2263
+2338
+2364
+2161
+opwls
+1893
+1804
+1786
+1909
+2067
+2189
+2289
+2314
+2257
+2218
+2194
+2192
+2186
+2222
+2225
+2238
+2231
+2303
+2326
+2150
+oplambda
+1840
+1759
+1760
+1893
+2062
+2187
+2289
+2317
+2259
+2221
+2199
+2199
+2193
+2229
+2232
+2247
+2240
+2313
+2337
+2146
+opcov
+1881
+1834
+1829
+1977
+2143
+2275
+2375
+2395
+2331
+2293
+2274
+2276
+2277
+2318
+2320
+2332
+2319
+2384
+2405
+2223
+opshrink
+1856
+1792
+1787
+1919
+2080
+2207
+2303
+2326
+2266
+2229
+2213
+2212
+2209
+2253
+2258
+2270
+2261
+2329
+2351
+2164
+opledoitwolf
+1881
+1834
+1829
+1977
+2143
+2275
+2375
+2395
+2331
+2293
+2274
+2276
+2277
+2318
+2320
+2332
+2319
+2384
+2405
+2223
+opglasso
+1881
+1834
+1829
+1977
+2143
+2275
+2375
+2395
+2331
+2293
+2274
+2276
+2277
+2318
+2320
+2332
+2319
+2384
+2405
+2223
+RMSE Minimum
+Cumulative
+Cumulative
+Marginal
+oplambda
+oplambda
+oplambda
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+opwls
+oplambda
+Table 12: MAE and RMSE for the Supply curve and all considered reconciliation methods
+30
+
+=== page 31 ===
+D3000.0
+D1001.1
+D250.1
+D155.1
+D76.0
+D50.1
+D42.1
+D35.5
+D30.1
+D25.1
+D19.1
+D11.1
+D7.0
+D-6.9
+D-58.9
+D-76.9
+D-90.0
+D-146.0
+D-180.0
+D-388.8
+D-500.0
+Mean
+MAE
+Marginal
+2051
+2042
+2005
+2003
+1962
+1950
+1964
+1946
+1961
+1969
+1958
+1952
+1951
+1966
+2005
+1906
+1818
+1883
+1913
+1942
+1957
+1957
+Cumulative
+1999
+1998
+1945
+1932
+1893
+1869
+1883
+1866
+1874
+1937
+1950
+1946
+1968
+1992
+2039
+1893
+1803
+1894
+1961
+1984
+2010
+1935
+bu
+2051
+2042
+2005
+2003
+1962
+1950
+1964
+1946
+1961
+1969
+1958
+1952
+1951
+1966
+2005
+1906
+1818
+1883
+1913
+1942
+1957
+1957
+tdar
+2781
+2790
+2827
+2801
+2616
+2481
+2343
+2210
+2116
+2161
+2070
+1940
+1911
+1934
+1944
+1895
+1816
+1899
+1983
+2021
+2015
+2217
+tdra
+2767
+2775
+2812
+2784
+2602
+2473
+2340
+2209
+2120
+2170
+2083
+1945
+1910
+1932
+1941
+1892
+1816
+1901
+1985
+2022
+2015
+2214
+tdfo
+2042
+2032
+1976
+1973
+1944
+1929
+1945
+1925
+1939
+1960
+1961
+1966
+1969
+1989
+2040
+1929
+1845
+1930
+1967
+1994
+2015
+1965
+adar
+2051
+2043
+2028
+1991
+1932
+1965
+2011
+2104
+2244
+2344
+2321
+2517
+2829
+2983
+2940
+2953
+2779
+2806
+2911
+3013
+3042
+2467
+adra
+2051
+2044
+2032
+1995
+1934
+1963
+2001
+2085
+2215
+2309
+2280
+2460
+2765
+2922
+2873
+2879
+2713
+2744
+2847
+2942
+2968
+2430
+adfo
+2051
+1996
+1944
+1928
+1889
+1863
+1869
+1851
+1854
+1915
+1926
+1930
+1958
+1983
+2030
+1886
+1804
+1899
+1967
+1987
+2015
+1931
+opols
+2023
+1996
+1940
+1925
+1879
+1854
+1862
+1845
+1862
+1901
+1911
+1923
+1943
+1965
+2018
+1890
+1803
+1898
+1951
+1985
+2009
+1923
+opwls
+1992
+1984
+1932
+1917
+1874
+1855
+1868
+1851
+1867
+1894
+1893
+1897
+1902
+1919
+1979
+1869
+1781
+1887
+1927
+1956
+1978
+1906
+oplambda
+2026
+1999
+1942
+1926
+1878
+1855
+1865
+1847
+1863
+1891
+1892
+1900
+1910
+1930
+1991
+1880
+1794
+1886
+1929
+1960
+1983
+1912
+opcov
+2045
+2031
+1975
+1932
+1900
+1883
+1890
+1874
+1895
+1925
+1919
+1918
+1919
+1940
+1994
+1866
+1788
+1835
+1851
+1869
+1881
+1911
+opshrink
+1967
+1957
+1904
+1879
+1844
+1823
+1831
+1818
+1833
+1863
+1860
+1860
+1864
+1883
+1940
+1823
+1739
+1803
+1834
+1860
+1876
+1860
+opledoitwolf
+2045
+2031
+1975
+1932
+1900
+1883
+1890
+1874
+1895
+1925
+1919
+1919
+1920
+1940
+1994
+1866
+1788
+1835
+1851
+1869
+1881
+1911
+opglasso
+2045
+2031
+1975
+1932
+1900
+1883
+1890
+1874
+1894
+1924
+1918
+1918
+1919
+1940
+1993
+1866
+1788
+1835
+1851
+1869
+1881
+1911
+MAE Minimum
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+RMSE
+Marginal
+2377
+2367
+2337
+2329
+2284
+2273
+2284
+2267
+2276
+2284
+2276
+2273
+2272
+2291
+2328
+2224
+2133
+2194
+2221
+2247
+2263
+2276
+Cumulative
+2324
+2320
+2269
+2257
+2210
+2190
+2200
+2174
+2179
+2241
+2249
+2244
+2268
+2298
+2343
+2188
+2100
+2183
+2251
+2272
+2301
+2241
+bu
+2377
+2367
+2337
+2329
+2284
+2273
+2284
+2267
+2276
+2284
+2276
+2273
+2272
+2291
+2328
+2224
+2133
+2194
+2221
+2247
+2263
+2276
+tdar
+3129
+3140
+3173
+3142
+2948
+2802
+2673
+2541
+2443
+2488
+2393
+2263
+2234
+2259
+2262
+2207
+2120
+2195
+2278
+2310
+2305
+2538
+tdra
+3117
+3127
+3161
+3127
+2935
+2795
+2671
+2540
+2447
+2498
+2406
+2269
+2233
+2258
+2260
+2205
+2120
+2197
+2279
+2311
+2305
+2536
+tdfo
+2359
+2350
+2299
+2291
+2258
+2246
+2264
+2244
+2253
+2276
+2274
+2277
+2281
+2302
+2348
+2230
+2147
+2223
+2259
+2284
+2305
+2275
+adar
+2377
+2370
+2356
+2311
+2250
+2298
+2350
+2448
+2586
+2685
+2660
+2847
+3149
+3305
+3264
+3270
+3099
+3109
+3215
+3322
+3351
+2791
+adra
+2377
+2371
+2359
+2315
+2251
+2294
+2340
+2429
+2558
+2650
+2620
+2791
+3088
+3247
+3199
+3199
+3033
+3049
+3154
+3253
+3278
+2755
+adfo
+2377
+2317
+2269
+2254
+2207
+2186
+2189
+2160
+2160
+2220
+2227
+2230
+2258
+2289
+2333
+2182
+2104
+2188
+2257
+2275
+2305
+2237
+opols
+2344
+2313
+2263
+2246
+2195
+2173
+2178
+2155
+2166
+2203
+2209
+2222
+2241
+2269
+2319
+2183
+2098
+2186
+2240
+2272
+2298
+2227
+opwls
+2307
+2297
+2252
+2235
+2186
+2167
+2178
+2160
+2172
+2196
+2192
+2196
+2201
+2224
+2280
+2161
+2075
+2174
+2213
+2241
+2262
+2208
+oplambda
+2347
+2316
+2264
+2245
+2192
+2171
+2177
+2157
+2168
+2193
+2191
+2199
+2209
+2235
+2291
+2172
+2087
+2174
+2215
+2245
+2267
+2215
+opcov
+2401
+2385
+2329
+2277
+2235
+2217
+2223
+2208
+2226
+2255
+2245
+2243
+2243
+2268
+2319
+2186
+2103
+2153
+2170
+2187
+2200
+2242
+opshrink
+2286
+2274
+2224
+2197
+2155
+2136
+2144
+2130
+2144
+2171
+2166
+2167
+2169
+2192
+2245
+2121
+2039
+2098
+2125
+2148
+2164
+2166
+opledoitwolf
+2401
+2385
+2329
+2277
+2235
+2217
+2223
+2208
+2227
+2255
+2245
+2243
+2243
+2268
+2319
+2186
+2103
+2153
+2170
+2187
+2200
+2242
+opglasso
+2401
+2385
+2329
+2276
+2235
+2217
+2223
+2208
+2226
+2254
+2245
+2243
+2242
+2268
+2319
+2186
+2103
+2153
+2170
+2187
+2199
+2241
+RMSE Minimum
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+opshrink
+Table 13: MAE and RMSE for the Demand curve and all considered reconciliation methods
+31
+
+=== page 32 ===
+References
+A. Marshall. Principles of economics: unabridged eighth edition. Cosimo, Inc., 2009.
+N. G. Mankiw. Principles of economics. Cengage Learning, 2014.
+R. S. Pindyck, D. L. Rubinfeld, and P. L. Mehta. Microeconomics, volume 4. Prentice Hall
+Englewood Cliffs, NJ, 1995.
+J. C. Hull. Options futures and other derivatives. Pearson Education India, 2003.
+R. S. G¨urkaynak, B. Sack, and J. H. Wright. The us treasury yield curve: 1961 to the
+present. Journal of monetary Economics, 54(8):2291–2304, 2007.
+J. Aitchison and J. A. Brown. A synthesis of engel curve theory. The Review of Economic
+Studies, 22(1):35–46, 1954.
+J. Banks, R. Blundell, and A. Lewbel.
+Quadratic engel curves and consumer demand.
+Review of Economics and statistics, 79(4):527–539, 1997.
+A. W. Phillips.
+The relation between unemployment and the rate of change of money
+wage rates in the united kingdom, 1861-1957. Economica, 25(100):283–299, 1958. ISSN
+00130427, 14680335. URL http://www.jstor.org/stable/2550759.
+W. J. Eiteman and G. E. Guthrie. The shape of the average cost curve. The American
+economic review, 42(5):832–838, 1952.
+F. Ziel and R. Steinert. Electricity price forecasting using sale and purchase curves: The x-
+model. Energy Economics, 59:435–454, 2016. ISSN 0140-9883. doi: https://doi.org/10.
+1016/j.eneco.2016.08.008. URL https://www.sciencedirect.com/science/article/
+pii/S0140988316302080.
+H. L. Shang and R. J. Hyndman. Grouped functional time series forecasting: An application
+to age-specific mortality rates. Journal of Computational and Graphical Statistics, 26
+(2):330–343, 2017.
+R. J. Hyndman and M. S. Ullah. Robust forecasting of mortality and fertility rates: A
+functional data approach. Computational Statistics & Data Analysis, 51(10):4942–4956,
+2007.
+32
+
+=== page 33 ===
+H. L. Shang and R. J. Hyndman. Nonparametric time series forecasting with dynamic
+updating. Mathematics and Computers in Simulation, 81(7):1310–1324, 2011.
+R. J. Hyndman and G. Athanasopoulos. Forecasting: principles and practice. OTexts,
+2018. URL https://otexts.com/fpp2/.
+S. L. Wickramasuriya, G. Athanasopoulos, and R. J. Hyndman. Optimal forecast recon-
+ciliation for hierarchical and grouped time series through trace minimization. Journal
+of the American Statistical Association, 114(526):804–819, 2019. URL https://www.
+tandfonline.com/doi/full/10.1080/01621459.2018.1448825.
+E. Spiliotis, M. Abolghasemi, R. J. Hyndman, F. Petropoulos, and V. Assimakopoulos.
+Hierarchical forecast reconciliation with machine learning.
+Applied Soft Computing,
+page 107756, 2021.
+T. Van Erven and J. Cugliari. Game-theoretically optimal reconciliation of contemporane-
+ous hierarchical time series forecasts. In Modeling and stochastic learning for forecasting
+in high dimensions, pages 297–317. Springer, 2015.
+T. Di Fonzo and D. Girolimetto. Forecast combination based forecast reconciliation: in-
+sights and extensions. arXiv preprint arXiv:2106.05653, 2021.
+R. Hollyman, F. Petropoulos, and M. E. Tipping. Understanding forecast reconciliation.
+European Journal of Operational Research, 294(1):149–160, 2021.
+M. Br´eg`ere and M. Huard. Online hierarchical forecasting for power consumption data.
+International Journal of Forecasting, 38(1):339–351, 2022.
+M. Huard, R. Garnier, and G. Stoltz. Hierarchical robust aggregation of sales forecasts at
+aggregated levels in e-commerce, based on exponential smoothing and holt’s linear trend
+method. arXiv preprint arXiv:2006.03373, 2020.
+M. Narajewski and F. Ziel. Optimal bidding in hourly and quarter-hourly electricity price
+auctions: trading large volumes of power with market impact and transaction costs.
+Energy Economics, 110:105974, 2022.
+F. Ziel and R. Steinert.
+Probabilistic mid-and long-term electricity price forecasting.
+Renewable and Sustainable Energy Reviews, 94:251–266, 2018.
+33
+
+=== page 34 ===
+S. Haben, J. Caudron, and J. Verma. Probabilistic day-ahead wholesale price forecast: A
+case study in great britain. Forecasting, 3(3):596–632, 2021a.
+S. Kulakov. X-model: Further development and possible modifications. Forecasting, 2(1):
+20–35, 2020.
+G. Mestre, J. Portela, A. M. San Roque, and E. Alonso.
+Forecasting hourly supply
+curves in the italian day-ahead electricity market with a double-seasonal sarmahx model.
+International Journal of Electrical Power & Energy Systems, 121:106083, 2020.
+M. Soloviova and T. Vargiolu. Efficient representation of supply and demand curves on
+day-ahead electricity markets. Journal of Energy Markets, 14(1), 2021.
+C. W. Gross and J. E. Sohl. Disaggregation methods to expedite product line forecasting.
+Journal of forecasting, 9(3):233–254, 1990.
+J. Sch¨afer and K. Strimmer. A shrinkage approach to large-scale covariance matrix esti-
+mation and implications for functional genomics. Statistical applications in genetics and
+molecular biology, 4(1), 2005.
+O. Ledoit and M. Wolf. Honey, i shrunk the sample covariance matrix. The Journal of
+Portfolio Management, 30(4):110–119, 2004.
+J. Friedman, T. Hastie, and R. Tibshirani. Sparse inverse covariance estimation with the
+graphical lasso. Biostatistics, 9(3):432–441, 2008.
+F. Petropoulos, D. Apiletti, V. Assimakopoulos, M. Z. Babai, D. K. Barrow, S. B. Taieb,
+et al. Forecasting: theory and practice. International Journal of Forecasting, 2022.
+M. Soloviova. Modeling of supply and demand curves for day-ahead electricity market.
+Seminario Dottorato 2019/20, page 113.
+S. Haben, J. Caudron, and J. Verma. Probabilistic day-ahead wholesale price forecast:
+A case study in great britain. Forecasting, 3(3):596–632, 2021b. ISSN 2571-9394. doi:
+10.3390/forecast3030038. URL https://www.mdpi.com/2571-9394/3/3/38.
+34

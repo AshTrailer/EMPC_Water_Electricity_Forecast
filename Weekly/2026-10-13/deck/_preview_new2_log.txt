@@ -1,0 +1,4 @@
+scaled copy: C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\2026-10-13\deck\_preview_tmp\scaled.pptx  (9 slides, factor 0.5714)
+dpi 175   pages 2   missing fonts []
+  page 7    page-0001.png  2334x1313
+  page 9    page-0002.png  2334x1313

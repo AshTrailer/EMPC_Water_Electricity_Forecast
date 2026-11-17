@@ -1,0 +1,67 @@
+Need to have prediction phase, not only using filter to track past data
+
+As conclusion, have to build up a predictor. Decide the way that we build up the predictor, is it recursion or predicte in one step, is it recaculate every single time step or every maybe 30 mins or more.
+
+Also have to think about the how many steps we need to predict. Since we are think about a problem for pump optimisation, we cannot just predict for only one step further, we have to predict for maybe 6 hours or 12 hours or 24 hours or even more. if using the recursion predictor, how to check about the predict error. For example, we have ehat_{(t0+2)|t0}, and for next time step we have ehat_{(t1+1)|t1, they all predict based on history data, so the more time step we predict, the matrix will be more complicate and the computation resource will cost more. If using predict in one time, we have to think about if the model we use is enough accuracy that prediction error will still be small after hours. If not, then we have to recalcuate the prediction after some time steps. Probably we can check the prediction error with the real data, to check after how many times that our prediction model start far from the real data.
+
+
+Need to have all thinking and the equation write down in paper before next meeing in Thursday for more detailed discussion.
+
+May try “Prophet”  model and Kalmen filter for next testing.Need mathematics solution for theory prediction error. And may be for furture terms, we can compare the AEMO furture prediction model and our model for who have more accuarcy prediction. Also may use HMM for state judgement? The predictor actual job is to solve out the trend and maximum and minimum of the trend so we can solve out when and how many pump we have to use. We can now just based on past data, such as the data on 1st of Jan(or even more data? have to test), and use these data to predict next 6/12/24 hours by different method.
+
+Professor also mention that we had better to record what we think and simulation date also equaiotn for furture report writing.
+
+
+Meeting Notes — Project Meeting #2
+Project: Forecasting of Electricity Prices for Economic Model Predictive Control of Pumping in Water Supply Systems
+Meeting Date: Friday, 14 August 2020, 2:00 pm
+Next Meeting: Thursday, 20 August 2020
+Attendees: [Names]
+1. Summary
+The supervisor reviewed our progress and made one central point: filtering past data is not enough — we must build a genuine predictor with a prediction phase. Before the next meeting, all design reasoning and equations for the predictor must be written down. The predictor's real job is to extract the price trend and its maxima/minima so the EMPC knows when and how much to pump.
+2. Key Points Discussed
+2.1 A Prediction Phase Is Mandatory
+Moving average / moving median filters only smooth and track past data. They have no predictive power. Conclusion: we have to build up a real predictor that forecasts future electricity prices, not just a filter.
+2.2 Two Architecture Decisions to Be Made (and Written Down)
+Decision A — Prediction scheme: recursive vs direct multi-step
+Recursive prediction: predict one step, then feed the prediction back as pseudo-observation for the next step. Problems: errors accumulate; the covariance/matrix structure grows more complex with each step; computational cost increases with horizon. Example: $\hat{e}_{(t_0+2)|t_0}$ and $\hat{e}_{(t_1+1)|t_1}$ are both based on history, but with different recursion depths.
+Direct multi-step prediction: build a model that directly maps current data to a forecast k hours ahead. Problem: is the model accurate enough that the prediction error stays small after several hours? If not, we have to recompute the prediction after some time steps.
+Validation approach: check the prediction error against real data and find after how many steps our prediction starts to deviate significantly from reality. This number guides the choice between the two schemes.
+Decision B — Recalculation frequency
+Recalculate the prediction at every single time step, or every 30 minutes, or less frequently?
+This is a trade-off between computational cost and freshness of the forecast, and it should follow from the error growth analysis of Decision A.
+2.3 Prediction Horizon
+We cannot predict only one step ahead. For pump optimisation we need forecasts for 6, 12, or 24 hours — or even more. The horizon choice must be justified.
+2.4 Theoretical Prediction Error
+A mathematical solution for the theoretical prediction error is required (e.g., error covariance propagation in recursive prediction; error bounds under model mismatch for direct prediction). This theory should later be checked against simulation results and real data.
+2.5 Technical Approach
+Try Prophet and Kalman filter for the next round of testing, and compare them.
+HMM may be used for state judgement — not for prediction itself, but to decide which regime we are in (e.g., high-price vs low-price period, weekday vs weekend pattern). The state information can support the predictor.
+The predictor's real job: solve out the trend and the maxima/minima of the trend. We do not need perfect point-by-point accuracy — we need to know when the price will be high and when it will be low, so we can solve when and how many pumps to use. This understanding should shape the predictor design and the error metrics.
+Immediate experiment: use past data (e.g., from 1 Jan — whether more data is needed has to be tested) and predict the next 6/12/24 hours using the different methods.
+Future benchmark: compare our predictor against AEMO's own forecast model and see which one gives better accuracy. Beating AEMO's forecast when tested against historical data is the success criterion of the project.
+2.6 Documentation Habit
+Record everything — all our thinking, equations, and simulation data. This material will form the basis of the future project report.
+3. My Own Reflections (Written While Drafting These Notes)
+My thoughtCorresponds toStatusRecursive prediction accumulates error; matrices grow complex; computation growsDecision A (recursive scheme)Needs to be formalised with covariance propagation equationsDirect prediction may lose accuracy after hours, so we must recompute periodicallyDecision A/B (recalculation)Needs error-growth experiment with real dataCheck against real data how many steps until the prediction driftsValidation approachSupervisor explicitly endorsedHMM only gives statistical correlation, may not be directly usefulHMM's roleSupervisor clarified: HMM is for state judgement, not direct predictionRLS only tracks, it does not predictFiltering vs predictionConfirmed by supervisor: filtering ≠ predictionThe predictor's job is to extract trend and extremaPurpose of predictorAgrees with supervisor's viewTest with 1 Jan dataExperimental setupSupervisor approved; data quantity to be tested
+4. Deliverables for Thursday Meeting
+A written document containing:
+Full mathematical description of the predictor candidates
+Prophet: trend + periodic + holiday decomposition
+Kalman filter: state-space formulation with AR structure
+Recursive vs direct prediction: formula derivations
+Theoretical prediction error analysis (the core deliverable):
+Error covariance propagation over the prediction horizon
+When and how fast the error becomes unacceptable
+Recalculation strategy: based on the error growth, how often should we recompute (every step / every 30 min / longer)?
+Prediction horizon justification: 6 vs 12 vs 24 h
+Initial experiment plan:
+Which historical data window to use (and how much is enough)
+Run Prophet and Kalman filter on the same data
+Compare 6/12/24 h prediction errors
+Compare theoretical error bound vs actual error
+HMM state-judgement concept (outline only, no implementation required yet)
+Error metrics proposal: point-wise MSE vs hit-rate on trend extrema timing
+
+
+

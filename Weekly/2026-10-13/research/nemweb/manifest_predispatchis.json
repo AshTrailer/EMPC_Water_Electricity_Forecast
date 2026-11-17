@@ -1,0 +1,327 @@
+{
+ "dir": "PredispatchIS_Reports",
+ "from": "202610120000",
+ "to": "202610130300",
+ "listed": 672,
+ "picked": 53,
+ "manifest": [
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120000_20261011233206.zip",
+   "eff": "202610120000",
+   "bytes": 1011916,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120030_20261012000152.zip",
+   "eff": "202610120030",
+   "bytes": 993344,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120100_20261012003153.zip",
+   "eff": "202610120100",
+   "bytes": 978516,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120130_20261012010153.zip",
+   "eff": "202610120130",
+   "bytes": 959652,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120200_20261012013145.zip",
+   "eff": "202610120200",
+   "bytes": 944170,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120230_20261012020139.zip",
+   "eff": "202610120230",
+   "bytes": 927408,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120300_20261012023140.zip",
+   "eff": "202610120300",
+   "bytes": 911365,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120330_20261012030142.zip",
+   "eff": "202610120330",
+   "bytes": 890276,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120400_20261012033157.zip",
+   "eff": "202610120400",
+   "bytes": 874100,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120430_20261012040157.zip",
+   "eff": "202610120430",
+   "bytes": 858430,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120500_20261012043143.zip",
+   "eff": "202610120500",
+   "bytes": 841057,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120530_20261012050144.zip",
+   "eff": "202610120530",
+   "bytes": 821642,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120600_20261012053150.zip",
+   "eff": "202610120600",
+   "bytes": 808504,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120630_20261012060144.zip",
+   "eff": "202610120630",
+   "bytes": 793528,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120700_20261012063145.zip",
+   "eff": "202610120700",
+   "bytes": 776277,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120730_20261012070130.zip",
+   "eff": "202610120730",
+   "bytes": 753059,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120800_20261012073148.zip",
+   "eff": "202610120800",
+   "bytes": 738174,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120830_20261012080138.zip",
+   "eff": "202610120830",
+   "bytes": 718136,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120900_20261012083133.zip",
+   "eff": "202610120900",
+   "bytes": 701101,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610120930_20261012090133.zip",
+   "eff": "202610120930",
+   "bytes": 684331,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121000_20261012093134.zip",
+   "eff": "202610121000",
+   "bytes": 668321,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121030_20261012100119.zip",
+   "eff": "202610121030",
+   "bytes": 648003,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121100_20261012103120.zip",
+   "eff": "202610121100",
+   "bytes": 624792,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121130_20261012110127.zip",
+   "eff": "202610121130",
+   "bytes": 604448,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121200_20261012113128.zip",
+   "eff": "202610121200",
+   "bytes": 594014,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121230_20261012120128.zip",
+   "eff": "202610121230",
+   "bytes": 573143,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121300_20261012123236.zip",
+   "eff": "202610121300",
+   "bytes": 1414960,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121330_20261012130222.zip",
+   "eff": "202610121330",
+   "bytes": 1397745,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121400_20261012133222.zip",
+   "eff": "202610121400",
+   "bytes": 1373566,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121430_20261012140223.zip",
+   "eff": "202610121430",
+   "bytes": 1357276,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121500_20261012143223.zip",
+   "eff": "202610121500",
+   "bytes": 1353233,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121530_20261012150209.zip",
+   "eff": "202610121530",
+   "bytes": 1307888,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121600_20261012153224.zip",
+   "eff": "202610121600",
+   "bytes": 1295915,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121630_20261012160211.zip",
+   "eff": "202610121630",
+   "bytes": 1269456,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121700_20261012163211.zip",
+   "eff": "202610121700",
+   "bytes": 1253269,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121730_20261012170212.zip",
+   "eff": "202610121730",
+   "bytes": 1232814,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121800_20261012173212.zip",
+   "eff": "202610121800",
+   "bytes": 1212271,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121830_20261012180212.zip",
+   "eff": "202610121830",
+   "bytes": 1201541,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121900_20261012183214.zip",
+   "eff": "202610121900",
+   "bytes": 1185331,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610121930_20261012190214.zip",
+   "eff": "202610121930",
+   "bytes": 1161164,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610122000_20261012193200.zip",
+   "eff": "202610122000",
+   "bytes": 1146571,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610122030_20261012200200.zip",
+   "eff": "202610122030",
+   "bytes": 1131636,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610122100_20261012203200.zip",
+   "eff": "202610122100",
+   "bytes": 1110130,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610122130_20261012210202.zip",
+   "eff": "202610122130",
+   "bytes": 1101687,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610122200_20261012213202.zip",
+   "eff": "202610122200",
+   "bytes": 1072932,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610122230_20261012220202.zip",
+   "eff": "202610122230",
+   "bytes": 1062045,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610122300_20261012223203.zip",
+   "eff": "202610122300",
+   "bytes": 1043834,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610122330_20261012230204.zip",
+   "eff": "202610122330",
+   "bytes": 1031411,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610130000_20261012233149.zip",
+   "eff": "202610130000",
+   "bytes": 1013009,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610130030_20261013000150.zip",
+   "eff": "202610130030",
+   "bytes": 992250,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610130100_20261013003150.zip",
+   "eff": "202610130100",
+   "bytes": 976733,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610130130_20261013010151.zip",
+   "eff": "202610130130",
+   "bytes": 959742,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCHIS_202610130200_20261013013152.zip",
+   "eff": "202610130200",
+   "bytes": 938378,
+   "status": "downloaded"
+  }
+ ]
+}

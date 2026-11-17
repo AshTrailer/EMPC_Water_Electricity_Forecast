@@ -1,0 +1,263 @@
+{
+ "dpi": 300,
+ "count": 16,
+ "all_pass": true,
+ "items": [
+  {
+   "key": "rolling_template",
+   "pass": true,
+   "file": "rolling_template.png",
+   "px": [
+    1463,
+    157
+   ],
+   "ink_ratio": 0.1366,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 30,
+   "single_line_guess": true,
+   "aspect": 9.32
+  },
+  {
+   "key": "persistence",
+   "pass": true,
+   "file": "persistence.png",
+   "px": [
+    1457,
+    157
+   ],
+   "ink_ratio": 0.142,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 30,
+   "single_line_guess": true,
+   "aspect": 9.28
+  },
+  {
+   "key": "carry_forward",
+   "pass": true,
+   "file": "carry_forward.png",
+   "px": [
+    1703,
+    131
+   ],
+   "ink_ratio": 0.1129,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 24,
+   "single_line_guess": true,
+   "aspect": 13.0
+  },
+  {
+   "key": "template_fill",
+   "pass": true,
+   "file": "template_fill.png",
+   "px": [
+    534,
+    157
+   ],
+   "ink_ratio": 0.108,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 30,
+   "single_line_guess": true,
+   "aspect": 3.4
+  },
+  {
+   "key": "t_ar4",
+   "pass": true,
+   "file": "t_ar4.png",
+   "px": [
+    1362,
+    326
+   ],
+   "ink_ratio": 0.0666,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 26,
+   "single_line_guess": true,
+   "aspect": 4.18
+  },
+  {
+   "key": "t_dms4",
+   "pass": true,
+   "file": "t_dms4.png",
+   "px": [
+    1786,
+    301
+   ],
+   "ink_ratio": 0.0646,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 24,
+   "single_line_guess": true,
+   "aspect": 5.93
+  },
+  {
+   "key": "cf_dms4",
+   "pass": true,
+   "file": "cf_dms4.png",
+   "px": [
+    1330,
+    172
+   ],
+   "ink_ratio": 0.1177,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 28,
+   "single_line_guess": true,
+   "aspect": 7.73
+  },
+  {
+   "key": "theta_y",
+   "pass": true,
+   "file": "theta_y.png",
+   "px": [
+    1476,
+    139
+   ],
+   "ink_ratio": 0.134,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 26,
+   "single_line_guess": true,
+   "aspect": 10.62
+  },
+  {
+   "key": "anchor_mix_a",
+   "pass": true,
+   "file": "anchor_mix_a.png",
+   "px": [
+    1969,
+    131
+   ],
+   "ink_ratio": 0.1298,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 24,
+   "single_line_guess": true,
+   "aspect": 15.03
+  },
+  {
+   "key": "anchor_mix_b",
+   "pass": true,
+   "file": "anchor_mix_b.png",
+   "px": [
+    1948,
+    301
+   ],
+   "ink_ratio": 0.0687,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 24,
+   "single_line_guess": true,
+   "aspect": 6.47
+  },
+  {
+   "key": "residual_def",
+   "pass": true,
+   "file": "residual_def.png",
+   "px": [
+    1104,
+    130
+   ],
+   "ink_ratio": 0.1643,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 28,
+   "single_line_guess": true,
+   "aspect": 8.49
+  },
+  {
+   "key": "delta_y",
+   "pass": true,
+   "file": "delta_y.png",
+   "px": [
+    1271,
+    130
+   ],
+   "ink_ratio": 0.154,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 28,
+   "single_line_guess": true,
+   "aspect": 9.78
+  },
+  {
+   "key": "template_def",
+   "pass": true,
+   "file": "template_def.png",
+   "px": [
+    995,
+    248
+   ],
+   "ink_ratio": 0.1016,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 26,
+   "single_line_guess": true,
+   "aspect": 4.01
+  },
+  {
+   "key": "p5_gap",
+   "pass": true,
+   "file": "p5_gap.png",
+   "px": [
+    1132,
+    130
+   ],
+   "ink_ratio": 0.1726,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 28,
+   "single_line_guess": true,
+   "aspect": 8.71
+  },
+  {
+   "key": "rmse",
+   "pass": true,
+   "file": "rmse.png",
+   "px": [
+    1268,
+    347
+   ],
+   "ink_ratio": 0.0862,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 26,
+   "single_line_guess": true,
+   "aspect": 3.65
+  },
+  {
+   "key": "y_clamp",
+   "pass": true,
+   "file": "y_clamp.png",
+   "px": [
+    1520,
+    106
+   ],
+   "ink_ratio": 0.1787,
+   "touches_canvas_edge_before_crop": false,
+   "corners_transparent": true,
+   "dpi": 300,
+   "fontsize": 22,
+   "single_line_guess": true,
+   "aspect": 14.34
+  }
+ ]
+}

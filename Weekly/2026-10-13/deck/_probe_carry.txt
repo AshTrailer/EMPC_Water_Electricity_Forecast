@@ -1,0 +1,38 @@
+=== 1. theme comparison ===
+python-pptx default    {'dk1': 'windowText', 'lt1': 'window', 'dk2': '1F497D', 'lt2': 'EEECE1', 'accent1': '4F81BD', 'accent2': 'C0504D', 'accent3': '9BBB59', 'accent4': '8064A2', 'accent5': '4BACC6', 'accent6': 'F79646', 'hlink': '0000FF', 'folHlink': '800080'}
+Capstone_Forecasting_D {'dk1': 'windowText', 'lt1': 'window', 'dk2': '1F497D', 'lt2': 'EEECE1', 'accent1': '4F81BD', 'accent2': 'C0504D', 'accent3': '9BBB59', 'accent4': '8064A2', 'accent5': '4BACC6', 'accent6': 'F79646', 'hlink': '0000FF', 'folHlink': '800080'}
+Capstone_Weekly_2026-0 {'dk1': 'windowText', 'lt1': 'window', 'dk2': '1F497D', 'lt2': 'EEECE1', 'accent1': '4F81BD', 'accent2': 'C0504D', 'accent3': '9BBB59', 'accent4': '8064A2', 'accent5': '4BACC6', 'accent6': 'F79646', 'hlink': '0000FF', 'folHlink': '800080'}
+Capstone_Update_2026-1 {'dk1': 'windowText', 'lt1': 'window', 'dk2': '1F497D', 'lt2': 'EEECE1', 'accent1': '4F81BD', 'accent2': 'C0504D', 'accent3': '9BBB59', 'accent4': '8064A2', 'accent5': '4BACC6', 'accent6': 'F79646', 'hlink': '0000FF', 'folHlink': '800080'}
+
+=== 2. schemeClr elements with their children ===
+-- Capstone_Forecasting_Deck.pptx
+    234 x  <a:schemeClr val="accent1"/>
+          on slides [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] ... (26)
+     78 x  <a:schemeClr val="lt1"/>
+          on slides [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] ... (26)
+-- Capstone_Weekly_2026-09-23.pptx
+    156 x  <a:schemeClr val="accent1"/>
+          on slides [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] ... (22)
+     52 x  <a:schemeClr val="lt1"/>
+          on slides [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] ... (22)
+-- Capstone_Update_2026-10-08_EN.pptx
+     30 x  <a:schemeClr val="accent1"/>
+          on slides [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+     10 x  <a:schemeClr val="lt1"/>
+          on slides [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+=== 3. relationships held by the slides, other than the layout ===
+-- Capstone_Forecasting_Deck.pptx
+   image                    61   ['p6 /ppt/media/image1.png', 'p7 /ppt/media/image3.png', 'p7 /ppt/media/image2.png', 'p7 /ppt/media/image4.png']
+   slideLayout              26   []
+-- Capstone_Weekly_2026-09-23.pptx
+   slideLayout              22   []
+   image                    11   ['p6 /ppt/media/image1.png', 'p12 /ppt/media/image3.png', 'p12 /ppt/media/image2.png', 'p15 /ppt/media/image5.png']
+-- Capstone_Update_2026-10-08_EN.pptx
+   slideLayout              11   []
+   image                     5   ['p5 /ppt/media/image1.png', 'p5 /ppt/media/image2.png', 'p6 /ppt/media/image3.png', 'p7 /ppt/media/image4.png']
+
+=== 4. non-picture relationship ids referenced inside slide XML ===
+-- Capstone_Forecasting_Deck.pptx                 {'blip embed': 61}
+-- Capstone_Weekly_2026-09-23.pptx                {'blip embed': 11}
+-- Capstone_Update_2026-10-08_EN.pptx             {'blip embed': 5}

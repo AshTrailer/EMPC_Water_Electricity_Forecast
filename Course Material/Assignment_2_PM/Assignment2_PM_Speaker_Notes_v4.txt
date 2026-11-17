@@ -1,0 +1,37 @@
+ENGR90037 Capstone - Assignment 2 Part 2
+Speaker notes for Assignment2_PM_Slides_v4.pptx
+Length: 586 words, about 4.2 minutes at 140 words per minute.
+
+SLIDE 1 - What we are building, and where it stands  (288 words, about 2.1 min)
+
+Good morning. I am Ash, the project manager. Two slides: what we are building, where we are, what slowed us down, and what we changed.
+
+The project is a cheaper way to pump water. A water utility keeps its tanks filled and supplies homes around the clock, and it pays the wholesale power price, which moves every five minutes. Pumping in the cheap intervals costs far less, but you cannot simply pump at three in the morning: the tank still has to stay inside its safe limits.
+
+So we built two things: a price forecast, and a controller that turns that forecast into a pump plan. The forecast is judged on how close it gets to the prices that actually happened. The controller is judged on pumping cost, against running on the market operator's own forecast.
+
+That operator is AEMO, the Australian Energy Market Operator. It runs the wholesale electricity market and publishes its own price forecast, which is our benchmark. The other benchmark on the slide, a plan that already knows tomorrow's prices, is the theoretical best case.
+
+Where we are: four milestones were due by 16 October, and all four are met. Three of them were the pieces, built between August and September. The fourth was joining the forecast to the controller, live since 24 September. Ahead is the mid-semester review on 13 November, then the final report in June.
+
+The first cost result is at the bottom. Over 60 days our plan cost about 6% less than running on AEMO's own forecast, and about 6% more than that theoretical best. Daily rankings move around, so this is early evidence, not a proven saving.
+
+The milestones were met. The work inside them was not on time.
+
+SLIDE 2 - Why the work ran late, and what we changed  (298 words, about 2.1 min)
+
+Three things ran late.
+
+First, the market data. AEMO publishes three forecast products. They update at different speeds, look different distances ahead, and are not in the same format. Turning them into one series took about a month longer than we planned.
+
+Second, testing. We assumed one horizon and one time of day would be enough. Accuracy moved with both, so testing ran about five weeks long, and the controller, which needed that output, fell four weeks behind.
+
+Third, our own mistake, and the only red one on the slide. Our capture code stamped some prices with the wrong clock, and a parsing bug dropped most records. Our controls showed us stalled tasks; they did not look at the data itself. Repair and rebuild took a week.
+
+Each now has a change behind it. Before any number leaves the team, a cross-source check confirms every price record has the right time and nothing is missing. The three of us each own one end-to-end test that crosses into someone else's part, so a handover cannot fail quietly. And decisions and blockers are written down every week, against a schedule I rebuilt and now check weekly.
+
+One task now sits on the critical path. We have an early saving and we do not yet know whether it holds day to day. That has to be settled before 13 November, and the slips have used up our slack, so the second half has less room than the charter assumed.
+
+Two lessons. First, check our own data before blaming the feed: the fault that cost a week was ours, so no result is reported until the data gate passes. Second, fix the comparison before choosing a model: the window and the measure are now agreed first.
+
+Thank you. Happy to take questions.

@@ -1,0 +1,8 @@
+﻿cols 1..328 have all 288 slots; col 329 has 283, col 376 has 1
+counts on the tail: [283, 163, 43]
+
+T28 med32 1h/24h/7.6d: [43.46, 43.46, 43.69]
+official med 1h/24h/7.6d: [19.49, 36.29, 67.74]
+
+the tail columns the official covers with one slot: 329 to 376
+n_h: 376  last lead min: 10980

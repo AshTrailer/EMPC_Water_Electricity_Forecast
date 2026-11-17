@@ -1,0 +1,575 @@
+DUID,REGIONID,DISPATCH_TYPE,CATEGORY,CLASS,FUEL,FUEL_DESC,TECH,REGCAP_MW
+-,QLD1,Generating Unit,Market,Non-Scheduled,Fossil,Black Coal,Combustion,25
+ADPBA1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,7.76
+ADPMH1,SA1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,1.44
+ADPPV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,24.75
+ADPPV2,SA1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,0.2
+ADPPV3,SA1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,0.02
+AGLHAL,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas / Diesel,Combustion,217
+AGLSOM,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,170
+ALDGASF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,535.213
+ANGAST1,SA1,Generating Unit,Market,Scheduled,Fossil,Diesel,Combustion,50
+APPIN,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,55.6
+ARWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,241.59
+AVLSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,254.1
+BAKING1,QLD1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,17.5
+BALB1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,30
+BALDHWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,106.6
+BANGOWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,159
+BANGOWF2,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,84.8
+BANN1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,100
+BAPS,VIC1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,12.85
+BARCALDN,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,37
+BARCSF1,QLD1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,20
+BARKIPS1,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,211
+BARRON-1,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,30
+BARRON-2,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,30
+BASTYAN,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,79.9
+BBATTERY1,QLD1,Bidirectional Unit,market,Scheduled,Battery Storage,Grid,Storage,67
+BBTHREE1,TAS1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,35
+BBTHREE2,TAS1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,35
+BBTHREE3,TAS1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,35
+BDL01,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,46
+BDL02,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,46
+BDONGHYD,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,19
+BERYLSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,98
+BHB1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,66
+BLOWERNG,NSW1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,80
+BLUEGSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,183
+BLUFF1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,52.5
+BLYTHB1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,281
+BNGSF1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,135
+BNGSF2,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,135
+BOCORWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,113.18
+BODWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,113.19
+BOLIVAR1,SA1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Sewerage / Waste Water,Renewable,9.9
+BOLIVPS1,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,128
+BOMENSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,121
+BOWWBA1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,3
+BOWWDG1,SA1,Generating Unit,Market,Non-Scheduled,Fossil,Diesel,Combustion,0.66
+BOWWPV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,8.25
+BPLANDF1,QLD1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,2
+BRAEMAR1,QLD1,Generating Unit,Market,Scheduled,Fossil,Coal Seam Methane,Combustion,168
+BRAEMAR2,QLD1,Generating Unit,Market,Scheduled,Fossil,Coal Seam Methane,Combustion,168
+BRAEMAR3,QLD1,Generating Unit,Market,Scheduled,Fossil,Coal Seam Methane,Combustion,168
+BRAEMAR5,QLD1,Generating Unit,Market,Scheduled,Fossil,Coal Seam Methane,Combustion,173
+BRAEMAR6,QLD1,Generating Unit,Market,Scheduled,Fossil,Coal Seam Methane,Combustion,173
+BRAEMAR7,QLD1,Generating Unit,Market,Scheduled,Fossil,Coal Seam Methane,Combustion,173
+BRDDBES1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,240
+BRDDSF01,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,368
+BRNDBES1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,215
+BROKENH1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,53.76
+BROOKLYN,VIC1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,2.83
+BROWNMT,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,5
+BRYB1WF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,180.6
+BRYB2WF2,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,109
+BULBES1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,24
+BULGANA1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,204
+BUNGAMB1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,217
+BURRIN,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,34
+BUSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,101
+BUTLERSG,TAS1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,14.4
+BW01,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,660
+BW02,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,660
+BW03,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,660
+BW04,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,660
+BWTR1,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Bagasse,Combustion,38
+CALL_B_1,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,350
+CALL_B_2,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,350
+CAPBES1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,125
+CAPTL_WF,NSW1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,140
+CATHROCK,SA1,Generating Unit,Market,Non-Scheduled*,Wind,Wind,Renewable,66
+CBWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,19.8
+CBWWBA1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,2.16
+CBWWBG1,SA1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Biogas - sludge,Combustion,0.664
+CBWWDG1,SA1,Generating Unit,Market,Non-Scheduled,Fossil,Diesel,Combustion,2
+CBWWDG2,SA1,Generating Unit,Market,Non-Scheduled,Fossil,Diesel,Combustion,0.72
+CBWWPV1,SA1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,2.75
+CBWWPV2,SA1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,1.08
+CESF1,NSW1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,0.205
+CETHANA,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,85
+CG1,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,181
+CG2,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,181
+CG3,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,181
+CG4,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,181
+CGBESS01,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,90.5
+CHALLHWF,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,52.5
+CHBESS1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,134
+CHILDSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,64.38
+CHPSTWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,6.15
+CHYTWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,57.6
+CLARESF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,110.262
+CLAYTON,VIC1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,11
+CLEMGPWF,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,57
+CLERMSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,92.5
+CLOVER,VIC1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,37.5
+CLRKCWF1,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,345.5
+CLRKCWF2,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,103.5
+CLUNY,TAS1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,19
+CNUNDAWF,SA1,Generating Unit,Market,Non-Scheduled*,Wind,Wind,Renewable,46
+CODRNGTON,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,18.2
+COHUNSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,31
+COLEASF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,180
+COLUMSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,217
+COLWF01,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,226
+CONDONG1,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Bagasse,Combustion,30
+COOPGWF1,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,452
+COPTNHYD,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,22.5
+CPP_3,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,466
+CPP_4,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,420
+CPSA,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,143
+CROOKWF2,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,96.04
+CROOKWF3,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,57
+CROWLWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,79.95
+CRURWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,141
+CRWARP1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,186
+CRWASF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,36
+CSPVPS1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,42
+CTHLWF1,TAS1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,148
+CULLRGWF,NSW1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,30
+CUSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,466
+DALNTH1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,30
+DARLSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,324
+DARTM1,VIC1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,185
+DAYDSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,167
+DDPS1,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,644
+DDSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,121
+DEVILS_G,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,60
+DIAPURWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,8
+DPNTB1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,25
+DRYCGT1,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,52
+DRYCGT2,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,52
+DRYCGT3,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,52
+DULAWF1,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,180
+DUNDWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,168
+DUNDWF2,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,46
+DUNDWF3,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,121
+EASTCRK,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,5.056
+EASTCRK2,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,4.492
+EDENVSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,180
+EILDON1,VIC1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,60
+EILDON2,VIC1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,60
+EILDON3,VIC1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,4.5
+ELAINWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,83.6
+EMERASF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,88
+ER01,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,720
+ER02,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,720
+ER03,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,720
+ER04,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,720
+ERB01,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,614.6
+ERB02,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,351
+ERGT01,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Diesel,Combustion,41.5
+FINLYSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,162.36
+FISHER,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,43.2
+FLYCRKWF,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,145
+FNWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,4
+FSWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,8
+GANGARR1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,162
+GANNB1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,30
+GANNSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,55
+GB01,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Diesel,Combustion,50
+GERMCRK,QLD1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,44.976
+GESF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,264
+GIRGSF,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,93.31
+GLBWNHYD,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,5.5
+GLENMAG1,VIC1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,3.8
+GLENNCRK,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,12.78
+GLENSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,126
+GLRWNSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,132
+GNNDHSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,144
+GOESF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,348.6
+GOONSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,85
+GORDON,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,432
+GPWFEST1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,248
+GPWFEST2,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,260.4
+GPWFEST3,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,248
+GPWFWST1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,266
+GPWFWST2,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,310
+GRANGEAV,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,2
+GRANWF1,TAS1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,110
+GREENB1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,259.2
+GRIFSF1,NSW1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,27.2
+GROSV1,QLD1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,21.287
+GROSV2,QLD1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,15.205
+GSTONE1,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,280
+GSTONE2,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,280
+GSTONE3,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,280
+GSTONE4,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,280
+GSTONE5,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,280
+GSTONE6,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,280
+GSWF1A,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,209
+GSWF1B1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,203
+GULLRSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,10
+GULLRWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,165
+GULLRWF2,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,110
+GUNNING1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,46.5
+GUSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,122.775
+GUTHEGA,NSW1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,60
+HALAMRD1,VIC1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,8.984
+HALLWF1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,94.5
+HALLWF2,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,71.4
+HAMISF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,57.5
+HASTING1,VIC1,Generating Unit,Market,Non-Scheduled,Fossil,Ethane,Combustion,14.817
+HASTING2,VIC1,Generating Unit,Market,Non-Scheduled,Fossil,Ethane,Combustion,14.817
+HASTING3,VIC1,Generating Unit,Market,Non-Scheduled,Fossil,Ethane,Combustion,14.817
+HAUGHT11,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,132
+HAYMSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,57.75
+HBESS1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,200
+HD1WF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,96.6
+HDWF1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,102.4
+HDWF2,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,102.4
+HDWF3,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,112
+HEPWIND1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,4.1
+HEZ1,NSW1,Generating Unit,Market,Scheduled,Fossil,Diesel,Combustion,28
+HILLSTN1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,110
+HLMSEW01,VIC1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,0.25
+HPR1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Wind,Storage,150
+HUGSF1,QLD1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,20.97
+HUMENSW,NSW1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,29
+HUMEV,VIC1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,29
+HUNTER1,NSW1,Generating Unit,Market,Scheduled,Fossil,Natrual Gas/ Diesel,Combustion,375
+HUNTER2,NSW1,Generating Unit,Market,Scheduled,Fossil,Natrual Gas/ Diesel,Combustion,375
+HVWWBA1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,5
+HVWWPV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,11
+ICSM,QLD1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Bagasse,Combustion,25
+INVICTA,QLD1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Bagasse,Combustion,50.3
+JACKSGUL,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,2.3
+JBUTTERS,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,144
+JEMALNG1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,55
+JLA01,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,51
+JLA02,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,51
+JLA03,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,51
+JLA04,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,51
+JLB01,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,76
+JLB02,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,76
+JLB03,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,76
+JNDABNE1,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,1.1
+JOUNAMA1,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,14
+JUNEESF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,36
+KABANWF1,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,156
+KAREEYA1,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,21
+KAREEYA2,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,21
+KAREEYA3,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,21
+KAREEYA4,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,21
+KAREEYA5,QLD1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,7
+KARSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,104
+KEEPIT,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,6
+KEPBG1,QLD1,Generating Unit,Market,Non-Scheduled,Battery Storage,Grid,Storage,2
+KEPBL1,QLD1,Load,Market,Non-Scheduled,Battery Storage,Grid,Storage,2
+KEPSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,16
+KEPWF1,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,43
+KERNGSP1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,37
+KESSB1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,185
+KIAMSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,239
+KIATAWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,31.05
+KIDSPHG1,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,126
+KINGASF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,47
+KPP_1,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,744
+KSP1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,50
+LADBROK1,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,40
+LADBROK2,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,40
+LANCSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,94
+LBB1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,25
+LDBESS1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,755.08
+LEM_WIL,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,81.6
+LGAPBS1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,10.8
+LGAPWF1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,126
+LGAPWF2,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,86
+LILYSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,118
+LIMBESS1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,141
+LIMOSF11,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,275
+LIMOSF21,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,38
+LI_WY_CA,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,173.7
+LKBONNY1,SA1,Generating Unit,Market,Non-Scheduled*,Wind,Wind,Renewable,80.5
+LKBONNY2,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,159
+LKBONNY3,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,39
+LK_ECHO,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,32.4
+LNGS1,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,156
+LNGS2,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,156
+LONGFORD,VIC1,Generating Unit,Market,Non-Scheduled,Fossil,Natural Gas,Combustion,22
+LONSDALE,SA1,Generating Unit,Market,Scheduled,Fossil,Diesel,Combustion,20
+LOYYB1,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,500
+LOYYB2,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,500
+LRSF1,QLD1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,17
+LUCAS2S2,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,4.6
+LUCASHGT,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,12.65
+LVES1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,140
+LYA1,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,560
+LYA2,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,530
+LYA3,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,560
+LYA4,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,560
+MACARTH1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,420
+MACKNTSH,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,79.9
+MANNSF2,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,37
+MANNUMB1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,131.7
+MANSLR1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,50
+MAPS2PV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,16.5
+MAPS3PV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,16.5
+MAROOWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,6.8
+MARYRSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,33
+MBAHNTH,QLD1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,63.42
+MBPS2PV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,13.75
+MCINTYR1,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,923
+MCKAY1,VIC1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,300
+MEADOWBK,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,40
+MERCER01,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,131.2
+METZSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,135
+MEWF1,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,180
+MIDDLSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,30
+MINTARO,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,90
+MLB01,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,440
+MLSP1,NSW1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,12
+MLWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,20
+MOKOSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,58
+MOLNGSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,36
+MOORABS1,VIC1,Bidirectional Unit,Market,Non-Scheduled,Battery Storage,Grid,Storage,2
+MOORAWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,312
+MORANBAH,QLD1,Generating Unit,Market,Non-Scheduled,Fossil,Coal Seam Methane,Combustion,12.56
+MOREESF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,57.064
+MORTLK11,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,283
+MORTLK12,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,283
+MOUSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,99
+MP1,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,700
+MP2,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,700
+MPP_1,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,426
+MPP_2,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,426
+MREHA1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,215.8
+MREHA2,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,215.8
+MREHA3,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,215.4
+MRNBESS1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,336
+MRTLSWF1,VIC1,Generating Unit,market,Semi-Scheduled,Wind,Wind,Renewable,157.5
+MSTUART1,QLD1,Generating Unit,Market,Scheduled,Fossil,Kerosene,Combustion,144
+MSTUART2,QLD1,Generating Unit,Market,Scheduled,Fossil,Kerosene,Combustion,144
+MSTUART3,QLD1,Generating Unit,Market,Scheduled,Fossil,Kerosene,Combustion,131
+MTGELWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,138
+MTMILLAR,SA1,Generating Unit,Market,Non-Scheduled*,Wind,Wind,Renewable,70
+MUCRKSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,154
+MULWASF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,31
+MURRAY,VIC1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,1500
+MUSSELR1,TAS1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,168
+MUWAWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,231.8
+MUWAWF2,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,209
+MWPS1PV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,solar,Renewable,5.5
+MWPS2PV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,5.5
+MWPS3PV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,7.5
+MWPS4PV1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,5.5
+NASF1,NSW1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,10
+NBHWF1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,132.3
+NESBESS1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,126
+NESBESS2,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,126
+NEVERSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,132
+NEWENSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,235
+NEWENSF2,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,235
+NPS,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,500
+NUMURSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,112
+NYNGAN1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,102.141
+OAKEY1,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,141
+OAKEY1SF,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,30
+OAKEY2,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,141
+OAKEY2SF,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,65
+OAKLAND1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,67
+OAKY2,QLD1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,15
+OAKYCREK,QLD1,Generating Unit,Market,Non-Scheduled,Fossil,Coal Seam Methane,Combustion,20
+ORABESS1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,439
+OSB-AG,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,180
+PALOONA,TAS1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,28
+PAREPS1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,99
+PAREPW1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,210
+PARSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,55
+PIBESS1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,7
+PINDARI,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,6.7
+PLBESS1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,344.4
+POAT110,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,100
+POAT220,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,200
+POR01,SA1,Generating Unit,Market,Scheduled,Fossil,Diesel,Combustion,50
+POR03,SA1,Generating Unit,Market,Scheduled,Fossil,Diesel,Combustion,23.5
+PPCCGT,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,478
+PTSTAN1,SA1,Generating Unit,Market,Scheduled,Fossil,Diesel,Combustion,57.6
+PUMP1,QLD1,Load,Market,Scheduled,-,-,-,240
+PUMP2,QLD1,Load,Market,Scheduled,-,-,-,240
+QBYNB1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,10
+QPS1,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,29
+QPS2,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,24
+QPS3,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,24
+QPS4,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,24
+QPS5,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,128
+QPSFB1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,96
+QPSFB2,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Solar,Storage,27
+RACOMIL1,QLD1,Generating Unit,Non-Market,Non-Scheduled,Renewable/ Biomass / Waste,Bagasse,Combustion,48
+RANGEB1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,260
+REECE1,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,115.6
+REECE2,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,115.6
+REPULSE,TAS1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,28
+RESS1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,80
+RIVNB2,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,65
+ROMA_7,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,40
+ROMA_8,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,40
+ROWALLAN,TAS1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,10.5
+ROYALLA1,NSW1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,20
+RPCG,QLD1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Bagasse,Combustion,30
+RRSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,128
+RUBICON,VIC1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,13
+RUGBYR1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,83
+RYANCWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,218.4
+RYEPARK1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,396
+SALTCRK1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,54
+SAPHWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,270
+SEBSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,110
+SHEP1,VIC1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Sewerage / Waste Water,Combustion,1.1
+SHGEN,NSW1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,240
+SHOAL1,NSW1,Generating Unit,Non-Market,Non-Scheduled,Fossil,Natural Gas,Combustion,54
+SHPUMP,NSW1,Load,Market,Scheduled,-,-,-,240
+SITHE01,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,125
+SKSF1,NSW1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,15
+SMCSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,143
+SMFBESS1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,153.65
+SMFBESS2,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,153.65
+SMTHBES1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,69.4
+SNAPPER1,SA1,Generating Unit,Market,Scheduled,Fossil,Diesel,Combustion,154
+SNB01,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,337.4
+SNB02,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,337.4
+SNOWNTH1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,144
+SNOWSTH1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,126
+SNOWTWN1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,99
+SNOWYP,NSW1,Load,Market,Scheduled*,Hydro,Water,Renewable,600
+SNUG1,SA1,Generating Unit,Market,Scheduled,Fossil,Diesel,Combustion,63
+SNUG2,SA1,Generating Unit,Non-Market,Non-Scheduled,Fossil,Diesel,Combustion,21
+SNUG3,SA1,Generating Unit,Non-Market,Non-Scheduled,Fossil,Diesel,Combustion,21
+SNUGNL1,SA1,Generating Unit,Non-Market,Non-Scheduled,Fossil,Diesel,Combustion,21
+SRSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,85.26
+STABESS1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,317
+STAN-1,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,365
+STAN-2,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,365
+STAN-3,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,365
+STAN-4,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,365
+STAPYLTON1,QLD1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,3
+STARHLWF,SA1,Generating Unit,Market,Non-Scheduled*,Wind,Wind,Renewable,34.5
+STOCKYD1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,531
+STUBSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,255
+STUBSF2,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,248
+STWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,198.94
+SUNRSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,228
+SUNTPSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,175
+SWANBBF1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,331.2
+SWAN_E,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,385
+TABMILL2,QLD1,Generating Unit,Non-Market,Non-Scheduled,Renewable/ Biomass / Waste,Bagasse,Combustion,24
+TAHMOOR1,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,7.042
+TALWA1,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,440
+TALWB1,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,320
+TARALGA1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,106.8
+TARBESS1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,393
+TARONG#1,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,350
+TARONG#2,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,350
+TARONG#3,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,350
+TARONG#4,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,350
+TARRALEA,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,90
+TATIARA1,SA1,Generating Unit,Market,Non-Scheduled,Fossil,Diesel,Combustion,0.5
+TATURA01,VIC1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Sewerage / Waste Water,Combustion,1.1
+TB2B1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,50
+TB2SF1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,105
+TB3B1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,263
+TBSF1,SA1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,108
+TEMPB1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,138
+TGNSS1,VIC1,Generating Unit,Market,Non-Scheduled,Fossil,Natural Gas,Combustion,10
+THEDROP1,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,2.5
+TIB1,SA1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,250
+TIMWEST,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,7.2
+TITREE,QLD1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,2
+TNPS1,QLD1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,443
+TOORAWF,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,21
+TORRB2,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas / Fuel Oil,Combustion,200
+TORRB3,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas / Fuel Oil,Combustion,200
+TORRB4,SA1,Generating Unit,Market,Scheduled,Fossil,Natural Gas / Fuel Oil,Combustion,200
+TOWER,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Waste Coal Mine Gas,Combustion,41.2
+TREVALLN,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,93
+TRGBESS1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,144.4
+TRIBUTE,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,82.8
+TULLYSM1,QLD1,Generating Unit,Non-Market,Non-Scheduled,Renewable/ Biomass / Waste and Fossil,Bagasse and Diesel,Combustion,32
+TUMUT3,NSW1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,1500
+TUNGATIN,TAS1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,125
+TVCC201,TAS1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,208.6
+TVPP104,TAS1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,58
+ULPBESS1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,197
+UPPTUMUT,NSW1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,616
+URANQ11,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,166
+URANQ12,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,166
+URANQ13,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,166
+URANQ14,NSW1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,166
+UWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,414
+VALDORA1,QLD1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,15
+VBB1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,360
+VP5,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,660
+VP6,NSW1,Generating Unit,Market,Scheduled,Fossil,Black Coal,Combustion,660
+VPGS1,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,50
+VPGS2,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,50
+VPGS3,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,50
+VPGS4,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,50
+VPGS5,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,50
+VPGS6,VIC1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,50
+W/HOE#1,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,285
+W/HOE#2,QLD1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,285
+WAGGNSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,55
+WALGRV1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,50
+WAMBOWF1,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,252
+WAMBOWF2,QLD1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,254
+WANDB1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,123
+WANDSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,159
+WANDSF2,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,310
+WARWSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,39
+WARWSF2,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,39
+WATERLWF,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,130.8
+WAUBRAWF,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,192
+WDBESS1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,272.48
+WDBESS2,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,269.8
+WDGPH1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,501
+WDLNGN01,NSW1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,7
+WELLSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,216
+WELNSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,436
+WEMENSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,97.5
+WESTILL1,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Diesel,Combustion,1
+WGWF1,SA1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,122
+WHILL1,QLD1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,12
+WHIT1,QLD1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,1
+WHITSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,57.5
+WILGAPK,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Coal Seam Methane,Combustion,10
+WILGB01,NSW1,Generating Unit,Market,Non-Scheduled,Fossil,Coal Seam Methane,Combustion,12
+WILLBES1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,262
+WILLHOV1,VIC1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,1.5
+WINGF1_1,SA1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,4.12
+WINGF2_1,SA1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,4.12
+WINTSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,107
+WKIEWA1,VIC1,Generating Unit,Market,Scheduled,Hydro,Water,Renewable,80
+WLWLSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,201.6
+WLWLSF2,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,201.6
+WNSF1,VIC1,Generating Unit,Market,Non-Scheduled,Solar,Solar,Renewable,26.4
+WOLARSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,324
+WOLLERT1,VIC1,Generating Unit,Market,Non-Scheduled,Renewable/ Biomass / Waste,Landfill Methane / Landfill Gas,Combustion,7
+WONWP,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,12
+WOODLWN1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,48.3
+WOOLES1,QLD1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,280
+WOOLGSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,222.5
+WOOLNTH1,TAS1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,140
+WOORB1,VIC1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,491
+WPWF,SA1,Generating Unit,Market,Non-Scheduled*,Wind,Wind,Renewable,90.75
+WRSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,22
+WRWF1,NSW1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,175
+WSTWYSF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,105
+WTAHB1,NSW1,Bidirectional Unit,Market,Scheduled,Battery Storage,Grid,Storage,1095.84
+WUNUSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,93.5
+WYANGALA,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,20
+WYANGALB,NSW1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,4
+WYASF1,NSW1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,62
+YABULU,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,160
+YABULU2,QLD1,Generating Unit,Market,Scheduled,Fossil,Natural Gas,Combustion,82
+YAMBUKWF,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,30
+YARANSF1,QLD1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,121
+YARWUN_1,QLD1,Generating Unit,Market,Non-Scheduled**,Fossil,Natural Gas,Combustion,154
+YATSF1,VIC1,Generating Unit,Market,Semi-Scheduled,Solar,Solar,Renewable,94
+YAWWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,7.2
+YENDWF1,VIC1,Generating Unit,Market,Semi-Scheduled,Wind,Wind,Renewable,144.4
+YSWF1,VIC1,Generating Unit,Market,Non-Scheduled,Wind,Wind,Renewable,28.7
+YWNGAHYD,VIC1,Generating Unit,Market,Non-Scheduled,Hydro,Water,Renewable,9
+YWPS1,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,360
+YWPS2,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,360
+YWPS3,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,380
+YWPS4,VIC1,Generating Unit,Market,Scheduled,Fossil,Brown Coal,Combustion,380

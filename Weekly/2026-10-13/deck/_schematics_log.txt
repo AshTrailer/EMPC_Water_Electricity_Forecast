@@ -1,0 +1,2 @@
+wrote C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\2026-10-13\deck\schematics\s1_official_chain.png
+wrote C:\Ash\Projects\EMPC_Water_Electricity_Forecast\Weekly\2026-10-13\deck\schematics\s2_reading_grid.png

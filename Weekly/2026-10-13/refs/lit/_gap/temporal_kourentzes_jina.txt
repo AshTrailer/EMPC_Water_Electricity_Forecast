@@ -1,0 +1,742 @@
+# source: https://r.jina.ai/https://kourentzes.com/forecasting/wp-content/uploads/2015/08/TempHier20150814_Kourentzes.pdf
+Title: Slide 1
+
+URL Source: https://kourentzes.com/forecasting/wp-content/uploads/2015/08/TempHier20150814_Kourentzes.pdf
+
+Published Time: Tue, 21 Mar 2023 05:20:22 GMT
+
+Number of Pages: 37
+
+Markdown Content:
+Forecasting with Temporal Hierarchies 
+
+n.kourentzes@lancaster.ac.uk 
+
+http://nikolaos.kourentzes.com 
+
+University of Sydney 
+
+14 th August 2015 
+
+Nikolaos Kourentzes 
+
+Fotios Petropoulos Rob J Hyndman 
+
+George Athanasopoulos 
+
+Monash University 
+
+Monash University  Cardiff University 
+
+Lancaster University 
+
+> Lancaster Centre for
+
+Forecasting 
+
+> www.forecasting-centre.com
+
+## O u t l i n e 
+
+1. Motivation 2. Temporal Hierarchies 
+
+3. Do they work? Empirical results 
+
+4. Significance for practice – Predicting A&E 6. Cross-temporal hierarchies & decision making 
+
+> Lancaster Centre for
+
+Forecasting 
+
+> www.forecasting-centre.com
+
+## D e c i s i o n m a k i n g a n d f o r e c a s t i n g 
+
+Decision making in organisations has at its core an element of forecasting 
+
+ Accurate forecasts lead to reduced uncertainty  better decisions 
+
+ Forecasts maybe implicit or explicit 
+
+Forecasts aims to provide information about the future, conditional on historical and current knowledge 
+
+Company targets and plans aim to provide direction towards a desirable future. 
+
+Present 
+
+Target 
+
+Forecast 
+
+Forecast 
+
+Difference between targets and forecasts, at different horizons, provide useful feedback D e c i s i o n m a k i n g a n d f o r e c a s t i n g 
+
+Forecasts are central in decisions relating to: 
+
+• Inventory management 
+
+• Promotional and marketing activities 
+
+• Logistics 
+
+• Human resource planning 
+
+• Purchasing and procurement 
+
+• Cash flow management 
+
+• Building new production/storage unit 
+
+• Entering new markets 
+
+• …
+
+Accurate forecasts can support 
+
+- Decision making 
+
+- Identifying and capitalising on opportunities 
+
+- Cost saving Decisions need to be aligned: 
+
+• Operational short-term decisions 
+
+• Tactical medium-term decisions 
+
+• Strategic long-term decisions 
+
+Short er term plans are bottom-up and based mainly on statistical forecasts & expert adjustments. 
+
+Long er term plans are top-down and based mainly on managerial expertise factoring in 
+
+unstructured information and organisational environment. 
+
+Given different sources of information (and views) forecasts will differ  plans and decisions not aligned. 
+
+Objective : construct a framework to reconcile forecasts of different levels and eventually align decisions  less waste & costs, agility to take advantage of opportunities. 
+
+## D e c i s i o n m a k i n g a n d f o r e c a s t i n g T h e I d e a 
+
+• Given some time series data we can temporally aggregate it 
+
+• Temporal aggregation strengthens and attenuates different elements of the series: 
+
+ at an aggregate level trend/cycle is easy to distinguish 
+
+ at a disaggregate level high frequency elements like seasonality typically dominate. 
+
+• Modelling a time series at a very disaggregate level (e.g. weekly)  short-term forecast. The opposite is true for aggregate levels (e.g. annual) 
+
+• Propose Temporal Hierarchies that provide a framework to optimally combine information from various levels ( irrespective of forecasting method )to i) reconcile forecasts; ii) avoid over-reliance on a single planning level .M o t i v a t i o n 
+
+Temporal Hierarchies build on two ideas: 
+
+1. The Multiple Aggregation Prediction Algorithm (MAPA) [Kourentzes et al., 2014] 
+
+2. Optimal combination for cross-section hierarchical forecasts [Hyndman et al., 2011; Athanasopoulos et al., 2009] M o t i v a t i o n - M A PA 
+
+Multiple Aggregation Prediction Algorithm 
+
+Step 1: 
+
+Aggregation 
+
+.
+
+.
+
+.
+
+...  
+
+> 1
+
+Y  
+
+> 2
+
+Y  
+
+> 3
+
+Y 
+
+> K
+
+Y2k3kKk 
+
+Step 2: 
+
+Forecasting 
+
+ETS Model Selection 
+
+ETS Model Selection 
+
+ETS Model Selection 
+
+ETS 
+
+Model Selection 
+
+...
+
+.
+
+.
+
+.  
+
+> 1
+
+b  
+
+> 1
+
+s 
+
+> 2
+
+b 
+
+> 2
+
+s  
+
+> 3
+
+b  
+
+> 3
+
+s K
+
+b K
+
+s  
+
+> 2
+
+l  3
+
+l 
+
+> K
+
+l  1
+
+l
+
+Step 3: 
+
+Combination 
+
++lbs  
+
+> 1
+
+ˆY1
+
+K1
+
+K1
+
+K
+
+Strengthens and 
+
+attenuates 
+
+components 
+
+Estimation of 
+
+parameters at multiple 
+
+levels 
+
+Robustness on model 
+
+selection and 
+
+parameterisation M o t i v a t i o n - M A PA 
+
+The good bits: 
+
+• Very good at picking up long term dynamics  aggregation filters high frequency elements and strengthens low frequency ones; 
+
+• Lessens importance of model selection/parameter estimation 
+
+forecast combination; 
+
+• Removes the need to select a single aggregation level; 
+
+• Increases accuracy over base forecasts. 
+
+The bad bits: 
+
+• Described for exponential smoothing (ETS), not readily usable for other 
+
+forecasting methods. Does not incorporate human judgement; 
+
+• Ad-hoc combination weights  evidence that better weights must 
+
+exist. M o t i v a t i o n - H i e r a r c h i c a l F o r e c a s t i n g 
+
+In many forecasting applications there are multiple time series that are hierarchically organised: 
+
+• Product categories 
+
+• Market segments 
+
+• Geographical 
+
+• Supply channels 
+
+• etc. There are two major advantages in considering hierarchical structure in 
+
+forecasting: 
+
+• Improve accuracy 
+
+• Reconcile forecasts  Decision making advantages M o t i v a t i o n - H i e r a r c h i c a l F o r e c a s t i n g 
+
+A typical example of hierarchical forecasting comes from cross-sectional applications. For example let us suppose we want to forecast student admissions:  
+
+> Enrolled students
+> UK/EU International
+> Management Science
+> Management
+> Science
+> Maths & Stats
+> Maths & Stats
+
+Reconciling forecasts across levels helps improve accuracy and align decision making. M o t i v a t i o n - H i e r a r c h i c a l F o r e c a s t i n g 
+
+Top-down hierarchical methods:  
+
+> Enrolled students
+> UK/EU International
+> Management Science
+> Management Science
+> Maths & Stats
+> Maths & Stats
+
+• At the top level forecasting should be easier (noise is reduced) 
+
+• But details from the lower levels are lost 
+
+• Single level dominates 
+
+Forecast here 
+
+Disaggregate M o t i v a t i o n - H i e r a r c h i c a l F o r e c a s t i n g 
+
+Top-down hierarchical methods: 
+
+Enrolled students 
+
+UK/EU  International 
+
+Management Science 
+
+Management 
+
+Science 
+
+Maths & Stats 
+
+Maths & 
+
+Stats 
+
+• Bottom level details are retained 
+
+• But typically very noisy 
+
+• Single level dominates 
+
+Forecast here 
+
+Aggregate M o t i v a t i o n - H i e r a r c h i c a l F o r e c a s t i n g 
+
+Optimal combination  
+
+> Enrolled students
+> UK/EU International
+> Management Science
+> Management Science
+> Maths & Stats
+> Maths & Stats
+
+• “Optimally” combine forecasts from all levels to produce reconciled cross-
+
+sectional forecasts 
+
+• No single level dominates  weights derived from hierarchy structure 
+
+Forecast at 
+
+all levels Te m p o r a l H i e r a r c h i e s 
+
+Analogously we can construct temporal hierarchies, where now we consider for 
+
+a single time series multiple levels of temporal aggregation .
+
+The idea is that similarly to cross-sectional hierarchies, we can take advantage of 
+
+the structure to increase accuracy at short and long term and align forecasts of different horizons .Te m p o r a l H i e r a r c h i e s - N o t a t i o n 
+
+Non-overlapping temporal aggregation to k th level: 
+
+Annual 
+
+Semi-annual 
+
+Quarterly 
+
+Observations at each aggregation level Te m p o r a l H i e r a r c h i e s - N o t a t i o n 
+
+Collecting the observations from the different levels in a column: 
+
+We can define a “summing” matrix S so that: 
+
+Lowest level observations 
+
+Annual 
+
+Semi-annual 
+
+Quarter E x a m p l e : M o n t h l y 
+
+Aggregation levels k are selected so that we do not get fractional seasonalities Te m p o r a l H i e r a r c h i e s - F o r e c a s t i n g 
+
+We can arrange the forecasts from each level in a similar fashion: 
+
+The reconciliation model is:  Reconciliation errors 
+
+how much the 
+
+forecasts across levels 
+
+do not agree 
+
+Summing matrix 
+
+Reconciled forecasts 
+
+Unknown conditional means of the future values at lowest level 
+
+The reconciliation error has zero mean and covariance matrix Te m p o r a l H i e r a r c h i e s - F o r e c a s t i n g 
+
+If was known then we can write (GLS estimator): 
+
+But in general it is not know, so we need to estimate it. It can be shown that is not identifiable (you need to know the reconciled forecasts, before you reconcile them), however: 
+
+Reconciliation errors 
+
+Covariance of forecast errors 
+
+So our problem becomes: Te m p o r a l H i e r a r c h i e s - F o r e c a s t i n g 
+
+All we need now is an estimation of W
+
+> Sample covariance of
+> in-sample
+> errors
+
+In principle this is fine, but its sample size is controlled by the number of top-level (annual) observations. For example 104 observations at weekly level, results 
+
+in just 2 sample points (2 years). 
+
+So the estimation of is typically weak in practice. Te m p o r a l H i e r a r c h i e s - F o r e c a s t i n g 
+
+We propose three ways to estimate it, with increasing simplifying assumptions. 
+
+Using as example quarterly data the approximations are: 
+
+Hierarchy variance scaling 
+
+Series variance scaling 
+
+Structural scaling 
+
+Diagonal of 
+
+covariance matrix 
+
+ less elements to estimate 
+
+Assume within level 
+
+equal variances. This is what conventional forecasting does. Increases sample size. 
+
+Assume proportional error variances. No need for estimates  can be used when unknown (e.g. expert forecasts). A n e x a m p l e 
+
+Monthly  Bi-monthly 
+
+Quarterly  4-monthly 
+
+Semi-annually  Yearly 
+
+The forecast (blue line) is the result of reconciling the forecasts across all temporal 
+
+aggregation levels. Here ETS was used, but any model can be used and it does not have to be the same across levels .ETS  ARIMA 
+
+## E v a l u a t i o n o n t h e M 3 d a t a s e t 
+
+BU : Bottom-Up; WLS H: Hierarchy scaling; WLS v: Variance scaling; WLS s: Structural scaling 1453 series, forecast t+1 - t+18 months ahead 
+
+Monthly dataset  % error change over base  % error change over base E v a l u a t i o n o n t h e M 3 d a t a s e t 
+
+BU : Bottom-Up; WLS H: Hierarchy scaling; WLS v: Variance scaling; WLS s: Structural scaling 
+
+756 series, forecast t+1 - t+8 quarters ahead 
+
+Quarterly dataset  % error change over base  % error change over base 
+
+ETS  ARIMA Comparison with other M3 results (symmetric Mean Absolute Percentage Error): 
+
+• Monthly dataset 
+
+‒ Temporal : 13.61% (WLS S)
+
+‒ ETS : 14.45% [Hyndman et al., 2002] 
+
+‒ MAPA : 13.89% [Kourentzes et al., 2014] 
+
+‒ Weighted MAPA: 13.69% 
+
+‒ Theta : 13.85% (best original performance) [Makridakis & Hibon, 2000] 
+
+• Quarterly dataset 
+
+‒ Temporal : 9.70% (WLS V)
+
+‒ ETS : 9.94% [Hyndman et al., 2002] 
+
+‒ MAPA : 10.18% [Kourentzes et al., 2014] 
+
+‒ Weighted MAPA: 9.58% 
+
+‒ Theta : 8.96% (best original performance) [Makridakis & Hibon, 2000] 
+
+## E v a l u a t i o n o n t h e M 3 d a t a s e t • Temporal aggregation filters information: 
+
+‒ Multiple views of the series; 
+
+‒ When forecasts reconciled  equivalent to shrinkage [Current work] 
+
+• Forecast combinations: 
+
+‒ Reduce forecast error variance; 
+
+‒ Reduce model uncertainty in terms of specification & estimation 
+
+supported by simulations. 
+
+• Independent of forecasting model: 
+
+‒ Any base forecasting method can be used; 
+
+‒ Does not need to be the same across levels; 
+
+‒ Forecasts may be produced/adjusted by human experts. 
+
+• Reconciled forecasts: 
+
+‒ Forecasts agree across different forecast horizons/objectives. 
+
+## W h a t d o Te m p o r a l H i e r a r c h i e s d o ? A n a p p l i c a t i o n : P r e d i c t i n g A & E a d m i s s i o n s 
+
+A major challenge in running A&E wards is predicting the staffing requirements. 
+
+Objectives :
+
+• Staffing schedules (up to 4 weeks ahead) 
+
+• Staff planning and procurement (3 months ahead) 
+
+• Staff training (1 year ahead) 
+
+• Calibrate existing plans (1 week) 
+
+Why? 
+
+• In the UK A&E departments need to service 95% of patients within 4 
+
+hours. 
+
+• This is difficult to achieve due to staffing problems, shortages, bed capacity, etc. A n a p p l i c a t i o n : P r e d i c t i n g A & E a d m i s s i o n s 
+
+Collect weekly data for UK A&E wards. 13 time series: covering different types of emergencies and different severities 
+
+(measured as time to treatment) 
+
+Span from week 45 2010 (7 th Nov 2010) to week 24 2015 (7 th June 2015) Series are at England level (not local authorities). 
+
+Accurately predict to support staffing and training decisions. 
+
+Aligning the short and long term forecasts is important for consistency of planning and budgeting. 
+
+Test set: 52 weeks. 
+
+Rolling origin evaluation. Forecast horizons of interest: t+1, t+4, t+52 (1 week, 1 month, 1 year). Evaluation MASE (relative to base model) As a base model auto.arima (forecast package R) is used. A n a p p l i c a t i o n : P r e d i c t i n g A & E a d m i s s i o n s    
+
+> Total Emergency Admissions via A&E
+> Weekly Bi-Weekly
+> Monthly Quarterly
+> Semi-annual Annual
+
+Red is the prediction of the base model (ARIMA) 
+
+Blue is the temporal hierarchy reconciled forecasts (based on ARIMA) 
+
+Observe how information is `borrowed’ between temporal levels. Base models for 
+
+instance provide very poor weekly and annual forecasts A n a p p l i c a t i o n : P r e d i c t i n g A & E a d m i s s i o n s 
+
+• Accuracy gains at all planning horizons 
+
+• Crucially, forecasts are reconciled leading to aligned plans D e c i s i o n m a k i n g a n d h i e r a r c h i c a l f o r e c a s t i n g 
+
+Hierarchical (or grouped) forecasting can improve accuracy, but their true strength lies in the reconciliation of the forecasts  aligning forecasts is crucial for decision making. 
+
+Is the reconciliation achieved useful for decision making? 
+
+Cross-sectional  Temporal 
+
+• Reconcile across different items. 
+
+• Units may change at different levels of hierarchy. 
+
+• Suppose an electricity demand 
+
+hierarchy: lower and higher levels have same units. All levels relevant for decision making. 
+
+• Suppose a supply chain hierarchy. 
+
+Weekly sales of SKU are useful. Weekly 
+
+sales of organisation are not! Needed at different time scale. 
+
+• Reconcile across time units/horizons. 
+
+• Units of items do not change. 
+
+• Consider our application. NHS 
+
+admissions short and long term are 
+
+useful for decision making. 
+
+• Suppose a supply chain hierarchy. Weekly sales of SKU is useful for operations. Yearly sales of a single SKU 
+
+may be useful, but often not! 
+
+• Operational  Tactical  Strategic forecasts. C r o s s - t e m p o r a l h i e r a r c h i e s 
+
+Temporal hierarchies permit aligning operational, tactical and strategic planning, while offering accuracy gains  useful for decision making BUT there can be cases that strategic level forecasts are not required for each 
+
+item, but at an aggregate level. 
+
+Let us consider tourism demand for Australia as an example. Local 
+
+authorities can make use of detailed 
+
+forecasts (temporal/spatial) but at a country level weekly forecasts are of limited use. 
+
+• Temporal: tactical  strategic 
+
+• Cross-sectional: local  country 
+
+Cross temporal can support decisions at both dimensions: • Tactical/local; • strategic/local; • tactical/country; • strategic/country C r o s s - t e m p o r a l h i e r a r c h i e s : T o u r i s m d e m a n d 
+
+56 (bottom level) quarterly 
+
+tourism demand series 
+
+Athanasopoulos et al. (2011) 
+
+• 6 years in-sample 
+
+• 3 years out-of-sample 
+
+horizon: up to 2 years 
+
+• rolling origin evaluation 
+
+MAPE % 
+
+Cross-temporal 
+
+hierarchical forecasts: 
+
+• Most accurate 
+
+• Most complete reconciliation (one 
+
+number forecast) 
+
+• Flexible decision making support C o n c l u s i o n s 
+
+• Temporal hierarchies provide a new class of hierarchical forecasts that can be 
+
+produced for any time series. 
+
+• Applicable to forecasts produced by any means  theoretically elegant hierarchical combination of forecasts. 
+
+• Joins operational, tactical and strategic decision making by reconciling forecasts 
+
+ satisfies a business need that has remained unmet 
+
+• Potential to increase forecasting accuracy and mitigate modelling uncertainty 
+
+• Combining cross-sectional and temporal hierarchies: forecasts reconciled across conventional hierarchy and forecast horizons  one number forecast 
+
+superior decision making. C a n t h e s e b e u s e d ? 
+
+• Multiple Aggregation Prediction Algorithm (MAPA) 
+
+‒ Kourentzes, N.; Petropoulos, F. & Trapero, J. R. Improving forecasting by estimating time series structural components across multiple frequencies. 
+
+International Journal of Forecasting, 2014 , 30 , 291-302 
+
+‒ Petropoulos, F. & Kourentzes, N. Improving forecasting via multiple temporal 
+
+aggregation. Foresight: The International Journal of Applied Forecasting, 2014 ,
+
+2014 , 12-17 (Easier introduction!) 
+
+‒ R package on CRAN: MAPA 
+
+‒ All papers, code and examples available on my website (http://nikolaos.kourentzes.com )
+
+• Hierarchical (cross-sectional) forecasting 
+
+‒ Hyndman, R. J.; Ahmed, R. A.; Athanasopoulos, G. & Shang, H. L. Optimal combination forecasts for hierarchical time series. Computational Statistics and Data Analysis, 2011 , 55 , 2579-2589 
+
+‒ Athanasopoulos, G.; Ahmed, R. A. & Hyndman, R. J. Hierarchical forecasts for 
+
+Australian domestic tourism. International Journal of Forecasting, 2009 , 25 , 146-166 
+
+‒ R package on CRAN: hts 
+
+• Temporal Hierarchies  Working paper and R code soon on my website! Thank you for your attention! Questions? 
+
+## Nikolaos Kourentzes 
+
+Lancaster University Management School 
+
+Lancaster Centre for Forecasting - Lancaster, LA1 4YX 
+
+email:  n.kourentzes@lancaster.ac.uk 
+
+Forecasting blog:  http ://nikolaos.kourentzes.com 
+
+www.forecasting-centre.com /
+
+> Lancaster Centre for
+
+Forecasting

@@ -1,0 +1,56 @@
+{
+  "format": "docx",
+  "verdict": "pass",
+  "checks": [
+    {
+      "id": "package",
+      "status": "pass"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Objective and scope"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Stakeholders"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Performance measurement"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Declaration of AI use"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "one hour"
+    }
+  ],
+  "summary": {
+    "paragraphs": 24,
+    "tables": [],
+    "sections": [
+      {
+        "page_twips": {
+          "w": "11906",
+          "h": "16838"
+        },
+        "margins_twips": {
+          "top": "1440",
+          "right": "1803",
+          "bottom": "1440",
+          "left": "1803",
+          "header": "720",
+          "footer": "720",
+          "gutter": "0"
+        }
+      }
+    ]
+  }
+}

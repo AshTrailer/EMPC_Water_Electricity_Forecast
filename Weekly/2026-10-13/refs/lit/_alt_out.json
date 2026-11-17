@@ -1,0 +1,116 @@
+[
+ {
+  "slug": "har_corsi",
+  "doi": "10.1093/jjfinec/nbp001",
+  "note": "Corsi HAR",
+  "title": "A Simple Approximate Long-Memory Model of Realized Volatility",
+  "year": 2008,
+  "all": [
+   "https://doi.org/10.1093/jjfinec/nbp001",
+   "http://hdl.handle.net/10.1093/jjfinec/nbp001",
+   "http://hdl.handle.net/11568/887300",
+   "http://hdl.handle.net/10278/38476"
+  ],
+  "s2": {
+   "title": "A Simple Approximate Long-Memory Model of Realized Volatility",
+   "year": 2008,
+   "venue": "",
+   "oaPdf": "",
+   "abstract": "",
+   "ids": {
+    "MAG": "2146134639",
+    "DOI": "10.1093/JJFINEC/NBP001",
+    "CorpusId": 154897050
+   }
+  }
+ },
+ {
+  "slug": "midas_ghysels",
+  "doi": "10.1080/07474930600972467",
+  "note": "Ghysels MIDAS",
+  "title": "MIDAS Regressions: Further Results and New Directions",
+  "year": 2007,
+  "all": [
+   "https://doi.org/10.1080/07474930600972467",
+   "https://research.manchester.ac.uk/en/publications/f74589ab-dcbe-4139-a83b-aae91261fae7",
+   "http://www.tandfonline.com/doi/abs/10.1080/07474930600972467"
+  ],
+  "s2": {
+   "title": "MIDAS Regressions: Further Results and New Directions",
+   "year": 2007,
+   "venue": "",
+   "oaPdf": "https://doi.org/10.2139/ssrn.885683",
+   "abstract": "",
+   "ids": {
+    "MAG": "2053752134",
+    "DOI": "10.1080/07474930600972467",
+    "CorpusId": 7126596
+   }
+  }
+ },
+ {
+  "slug": "tracemin",
+  "doi": "10.1080/01621459.2018.1448825",
+  "note": "MinT JASA",
+  "title": "Optimal Forecast Reconciliation for Hierarchical and Grouped Time Series Through Trace Minimization",
+  "year": 2018,
+  "all": [
+   "https://figshare.com/articles/journal_contribution/Optimal_forecast_reconciliation_for_hierarchical_and_grouped_time_series_through_trace_minimization/21521592",
+   "https://doi.org/10.1080/01621459.2018.1448825",
+   "https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp22-17.pdf",
+   "http://hdl.handle.net/10.1080/01621459.2018.1448825",
+   "https://figshare.com/articles/dataset/Optimal_Forecast_Reconciliation_for_Hierarchical_and_Grouped_Time_Series_Through_Trace_Minimization/7261613",
+   "https://doi.org/10.26180/21521592.v1",
+   "https://doi.org/10.6084/m9.figshare.7261613.v1"
+  ],
+  "s2": {
+   "title": "Optimal Forecast Reconciliation for Hierarchical and Grouped Time Series Through Trace Minimization",
+   "year": 2018,
+   "venue": "Journal of the American Statistical Association",
+   "oaPdf": "https://figshare.com/articles/journal_contribution/Optimal_forecast_reconciliation_for_hierarchical_and_grouped_time_series_through_trace_minimization/21521592",
+   "abstract": "ABSTRACT Large collections of time series often have aggregation constraints due to product or geographical groupings. The forecasts for the most disaggregated series are usually required to add-up exactly to the forecasts of the aggregated series, a constraint we refer to as “coherence.” Forecast reconciliation is the process of adjusting forecasts to make them coherent. The reconciliation algorithm proposed by Hyndman et al. (2011) is based on a generalized least squares estimator that requires an estimate of the covariance matrix of the coherency errors (i.e., the errors that arise due to incoherence). We show that this matrix is impossible to estimate in practice due to identifiability conditions. We propose a new forecast reconciliation approach that incorporates the information from a full covariance matrix of forecast errors in obtaining a set of coherent forecasts. Our approach m",
+   "ids": {
+    "MAG": "2790781641",
+    "DOI": "10.1080/01621459.2018.1448825",
+    "CorpusId": 125978606
+   }
+  }
+ },
+ {
+  "slug": "smith_wallis",
+  "doi": "10.1111/j.1468-0084.2008.00541.x",
+  "note": "combination puzzle",
+  "title": "A Simple Explanation of the Forecast Combination Puzzle*",
+  "year": 2009,
+  "all": [
+   "https://doi.org/10.1111/j.1468-0084.2008.00541.x",
+   "http://www.blackwell-synergy.com/doi/abs/10.1111/j.1468-0084.2008.00541.x"
+  ],
+  "s2": {
+   "title": "A Simple Explanation of the Forecast Combination Puzzle",
+   "year": 2009,
+   "venue": "",
+   "oaPdf": "",
+   "abstract": "",
+   "ids": {
+    "MAG": "2137918734",
+    "DOI": "10.1111/J.1468-0084.2008.00541.X",
+    "CorpusId": 73625125
+   }
+  }
+ },
+ {
+  "slug": "chevillon",
+  "doi": "10.1111/j.1467-6419.2007.00518.x",
+  "note": "direct multi-step survey",
+  "title": "DIRECT MULTI‐STEP ESTIMATION AND FORECASTING",
+  "year": 2007,
+  "all": [
+   "https://doi.org/10.1111/j.1467-6419.2007.00518.x",
+   "http://www.blackwell-synergy.com/servlet/useragent?func=synergy&amp;synergyAction=showTOC&amp;journalCode=joes&amp;volume=21&amp;issue=4&amp;year=2007&amp;part=null"
+  ],
+  "s2": {
+   "http": 404
+  }
+ }
+]

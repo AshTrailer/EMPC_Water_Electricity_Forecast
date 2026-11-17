@@ -1,0 +1,38 @@
+{
+  "leads_min": [
+    60,
+    1440,
+    10980
+  ],
+  "leads_h": [
+    1,
+    24,
+    183
+  ],
+  "cols": [
+    12,
+    58,
+    376
+  ],
+  "official_med_over_slots": [
+    19.486913470036235,
+    36.2898297639519,
+    67.742076650804535
+  ],
+  "corrected_med_over_slots": [
+    18.783403772612004,
+    31.354122715172519,
+    61.1801916827117
+  ],
+  "template_med_over_slots": [
+    43.460615178450048,
+    43.460615178450048,
+    43.460615178450048
+  ],
+  "cross_col_uncorrected": 84,
+  "cross_col_corrected": 197,
+  "median_over_slots_of_column_medians_official": 51.131718679372952,
+  "median_over_slots_of_column_medians_corrected": 40.864072481442278,
+  "correction_window_days": 14,
+  "object": "per-cell R over the 32 scored days, then the median over the 288 times of day at one lead"
+}

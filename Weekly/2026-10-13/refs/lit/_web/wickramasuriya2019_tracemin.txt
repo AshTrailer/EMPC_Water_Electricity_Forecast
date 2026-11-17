@@ -1,0 +1,911 @@
+# source: https://r.jina.ai/https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp22-17.pdf
+
+Title: wp22-17.pdf
+
+URL Source: https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp22-17.pdf
+
+Number of Pages: 45
+
+Markdown Content:
+ISSN 1440-771X 
+
+# Department of Econometrics and Business Statistics 
+
+> http://business.monash.edu/econometrics-and-business-statistics/research/publications
+> December 2017
+> Working Paper 22/17
+
+# Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+# Shanika L Wickramasuriya, George Athanasopoulos and Rob J Hyndman Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Shanika L Wickramasuriya 
+
+Department of Econometrics and Business Statistics, Monash University, VIC 3800, Australia. Email: shanika.wickramasuriya@gmail.com 
+
+George Athanasopoulos 
+
+Department of Econometrics and Business Statistics, Monash University, VIC 3800, Australia. Email: george.athanasopoulos@monash.edu 
+
+Rob J Hyndman 
+
+Department of Econometrics and Business Statistics, Monash University, VIC 3800, Australia. Email: rob.hyndman@monash.edu 23 January 2018 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Abstract 
+
+Large collections of time series often have aggregation constraints due to product or geographical groupings. The forecasts for the most disaggregated series are usually required to add-up exactly to the forecasts of the aggregated series, a constraint we refer to as “coherence”. Forecast reconciliation is the process of adjusting forecasts to make them coherent. The reconciliation algorithm proposed by Hyndman et al. (2011) is based on a generalized least squares estimator that requires an estimate of the covariance matrix of the coherency errors (i.e., the errors that arise due to incoherence). We show that this matrix is impossible to estimate in practice due to identifiability conditions. We propose a new forecast reconciliation approach that incorporates the information from a full covariance matrix of forecast errors in obtaining a set of coherent forecasts. Our approach minimizes the mean squared error of the coherent forecasts across the entire collection of time series under the assumption of unbiasedness. The minimization problem has a closed form solution. We make this solution scalable by providing a computationally efficient representation. We evaluate the performance of the proposed method compared to alternative methods using a series of simulation designs which take into account various features of the collected time series. This is followed by an empirical application using Australian domestic tourism data. The results indicate that the proposed method works well with artificial and real data. 
+
+Keywords: Aggregation, Australian tourism, Coherent forecasts, contemporaneous error correla-tion, forecast combinations, spatial correlations. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 2Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+# 1 Introduction 
+
+Many applications require forecasts of large collections of related time series that can be or-ganized in a hierarchical structure. For example, sales of a multinational company can be disaggregated in a geographical hierarchy into countries, regions, cities and stores. The com-pany will usually require forecasts of total sales, national sales, regional sales, down to sales for an individual store, and these forecasts should add up appropriately across the hierarchy. The company may also produce many products that form a product hierarchy, divided into groups and sub-groups of products. Then forecasts of total sales, and sales within each product grouping are also required. The cross-product of these two hierarchies often results in a very large collection, comprising millions of individual time series of sales for each product type in each store. A large collection of time series with aggregation constraints is called a “grouped time series” (Hyndman, Lee, and Wang, 2016). When the grouping structure is a single hierarchy, we call the collection a “hierarchical time series”. When forecasting these structures, it is desirable to obtain “coherent” forecasts; that is, the forecasts of aggregates should be equal to the sum of the corresponding disaggregated forecasts. In this way, the forecasts should mimic the properties of the real data. A simple approach is to forecast all of the most disaggregated series, and add the results to form forecasts of the various aggregated series. This is known as “bottom-up” forecasting (see Orcutt, Watt, and Edwards, 1968; Dunn, Williams, and Dechaine, 1976; Shlifer and Wolff, 1979, among others). However, this ignores relationships between series, and performs particularly poorly on highly disaggregated data which tend to have a low signal-to-noise ratio. If we ignore the aggregation constraints, we could simply forecast all the series in a collection independently. However, it is very unlikely (unless extremely simple forecasting methods are used) that the resulting set of forecasts will be coherent. Further, this approach also ignores the relationships between series. Hyndman et al. (2011) proposed a solution to this problem using least squares reconciliation. Their method involves forecasting all series at all levels of aggregation independently (we refer to these as base forecasts), and then uses a regression model to optimally combine these forecasts to give a set of coherent forecasts (we refer to these as reconciled forecasts). In the regression, the independent base forecasts are modeled as the sum of the expected values of the future 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 3Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+series and an error term. If the base forecasts are unbiased and the covariance matrix of the error is known, then the generalized least squares (GLS) gives the minimum variance unbiased estimate of the expected values of the disaggregated time series. However, we shall show that the covariance matrix is non-identifiable and therefore impossible to estimate. Hyndman et al. (2011) and Athanasopoulos, Ahmed, and Hyndman (2009) reverted to using ordinary least squares (OLS) to compute reconciled forecasts and showed that their method works well compared to the most commonly implemented approaches. Hyndman, Lee, and Wang (2016) suggested using weighted least squares (WLS), taking account of the variances on the diagonal of the variance-covariance matrix but ignoring the off-diagonal covariance elements. Furthermore, estimates of the variances are not readily available in practice, and so Hyndman, Lee, and Wang (2016) proposed that the variances of the base forecast errors be used instead. However they provided no theoretical justification for this proxy; we provide the missing justification in this paper. Moreover, they introduced several algorithms to speed up the computations involved so that these methods (OLS and WLS) could handle very large collections of time series efficiently. Another theoretical contribution to the field of hierarchical forecasting was proposed by van Erven and Cugliari (2014) using a Game-Theoretically OPtimal (GTOP) reconciliation method. They select the set of reconciled predictions such that the total weighted quadratic loss of the reconciled predictions will never be greater than the total weighted quadratic loss of the base predictions. While this approach has some advantages in that it requires fewer assumptions about the forecasts and forecast errors, it does not have a closed form solution, and does not scale well for very large collections of time series. More recently, Park and Nassar (2014) introduced a disaggregation (“top-down”) approach to forecasting hierarchical time series using a Bayesian framework. They proposed a probabilistic model with dynamically evolving latent variables to detect changes of proportions in time series at each level of disaggregation. However, Hyndman et al. (2011) showed that any top-down method introduces bias into the reconciled forecasts at each disaggregation level even if the base forecasts are unbiased. Additionally, the approach of Park and Nassar (2014) cannot easily be generalized to handle grouped but non-hierarchical collections of time series. Our approach is to extend the work of Hyndman et al. (2011) and Hyndman, Lee, and Wang (2016) and frame the problem in terms of finding a set of minimum variance unbiased estimates of future values of all time series across the entire collection. That is, we minimize the sum of 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 4Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+variances of the reconciled forecast errors under the property of unbiasedness. We refer to the approach as MinT (minimum trace) reconciliation. An interesting feature of the MinT approach is that it results in a unique analytical solution which incorporates information about the correlation structure of the collection. Similarly to van Erven and Cugliari (2014), we show that the resulting coherent forecasts are guaranteed to be at least as good the base forecasts. Furthermore, the proposed solution has an equivalent representation which allows for greater computational efficiency in obtaining a set of reconciled forecasts for very large collections of time series. A related strand of literature considers incoherencies in the temporal dimension. Specifically, this literature deals with forecasts of a time series observed across different sampling frequen-cies. Two of the latest contributions are Athanasopoulos et al. (2017) and Sayal et al. (2016). Athanasopoulos et al. (2017) build what they refer to as temporal hierarchies using aggregation of non-overlapping observations to construct aggregate series of different frequencies up to the annual level. They then generate forecasts for each level independently and combine these using OLS and WLS (among other methods) to generate a set of optimally reconciled forecasts across all levels of temporal aggregation. They show that forecasting with temporal hierarchies increases forecast accuracy particularly under increased model uncertainty. Sayal et al. (2016) introduce a new statistical procedure, namely wavelet benchmarking, for reconciling incon-sistencies across different frequencies in data sets such as those often observed from national accounts. They show that their method substantially outperforms regularly used approaches. The rest of the paper is structured as follows. Section 2 introduces the necessary notation, revises the GLS reconciliation of Hyndman et al. (2011) and introduces the MinT approach. Section 3 presents a variety of Monte Carlo experiments followed by a detailed empirical example for forecasting tourism flows in Australia in Section 4. Section 5 concludes with a discussion of possible future research. 
+
+# 2 Forecast reconciliation for hierarchical and grouped time series 
+
+2.1 Notation 
+
+Following the notation in Hyndman, Lee, and Wang (2016), we let yt be an m-vector contain-ing all observations at time t, and bt be an n-vector containing the observations at the most 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 5Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+disaggregated level only. This leads to the convenient general matrix representation 
+
+yt = Sb t, (1) where S is a “summing matrix” of order m × n which aggregates the bottom level series to the series at aggregation levels above. Insert Figure 1 about here. To take a specific example, consider the small hierarchical time series depicted in the tree diagram in Figure 1. Each parent comprises the sum of its children. Let yt denote the observation at time t at the most aggregate level 0; yA,t and yB,t the observations at aggregation level 1; and 
+
+yAA ,t, yAB ,t, . . . , yBB ,t the observations at the lowest disaggregate level. In this example, n = 5, 
+
+m = 8, yt = [ yt, yA,t, yB,t, yAA ,t, yAB ,t, yAC ,t, yBA ,t, yBB ,t]′, bt = [ yAA ,t, yAB ,t, yAC ,t, yBA ,t, yBB ,t]′ and the summing matrix is given by 
+
+S =
+
+
+
+1 1 1 1 11 1 1 0 00 0 0 1 1
+
+In
+
+
+
+,where In is an identity matrix of dimension n = 5. The same general notation can apply to any large collection of time series subject to aggregation constraints. Each aggregation constraint is represented by a row in the summing matrix S.Let ˆ yT (h) be a vector of h-step-ahead base forecasts for each time series in the collection, made using data up to time T, and stacked in the same order as yt. Note that any method may have been used to produce these forecasts. Then all linear reconciliation methods can be written as ˜yT (h) = SP ˆyT (h), (2) for some appropriately selected matrix P of order n × m, where ˜ yT (h) is a set of reconciled forecasts which are now coherent by construction. Hence the basic idea of forecast reconciliation methods is to linearly map a given set of base forecasts to a set of reconciled forecasts. The role of P is to project the base forecasts into bottom level disaggregated forecasts which are then summed by S.
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 6Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+For example, setting P = [ 0n×(m−n) In
+
+] where 0i×j is the i × j null matrix, bottom level base forecasts are extracted from ˆ yT (h) and then summed by S to return bottom-up forecasts. On the other hand, setting P = [ p 0n×(m−1)
+
+], the set of proportions p = [ p1, p2, . . . , pn] distribute the top-level base forecasts to the bottom level which are then summed by S to return top-down forecasts. For further discussion of P matrices for various hierarchical forecasting methods, see Athanasopoulos, Ahmed, and Hyndman (2009). Let ˆeT (h) = yT+h − ˆyT (h) (3) be the h-step-ahead conditionally stationary base forecast errors with E [ ˆeT (h)|I T ] = 0 where 
+
+I T = y1, y2, . . . , yT denote data observed up to time T. This implies that the base forecasts are unbiased, i.e., E [ ˆyT (h)|I T ] = E[yT+h|I T ]. Let ˆbT (h) be the bottom level base forecasts with E [ ˆbT (h)|I T ] = βT (h), hence E [ ˆyT (h)|I T ] = SβT (h). Then a set of reconciled forecasts will also be unbiased iff SPS = S or equivalently PS = In, as then from Eq. (2) we have 
+
+E[ ˜yT (h)|I T ] = SβT (h).
+
+2.2 GLS reconciliation 
+
+Hyndman et al. (2011) proposed the “optimal combination” approach, based on the regression model ˆyT (h) = SβT (h) + εh, (4) where βT (h) = E[bT+h|I T ] is the unknown mean of the most disaggregate series at the bottom level and εh is the coherency error which is independent of observations y1, y2, . . . , yT with mean zero and covariance matrix Var (εh|I T ) = Σh. If Σh was known, the GLS estimator of βT (h)
+
+would be the minimum variance unbiased estimator, which would lead to reconciled forecasts given by ˜yT (h) = S(S′Σ†
+
+> h
+
+S)−1S′Σ† 
+
+> h
+
+ˆyT (h), (5) where Σ† 
+
+> h
+
+is a generalized inverse of Σh which is often (near) singular due to the aggregation involved in yt. Hence for the optimal combination approach, P = ( S′Σ†
+
+> h
+
+S)−1S′Σ†
+
+> h
+
+.
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 7Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+In general Σh is not known and is not identifiable. To see this, note that the residuals from the regression model in Eq. (4) are given by 
+
+˜εh = ˆyT (h) − ˜yT (h) = ( Im − SP ) ˆyT (h), (6) so that Var ( ˜εh|I T ) = ( Im − SP )Σh(Im − SP )′. (7) In order for Σh to be identified, (Im − SP ) must be invertible and therefore of full rank. However, 
+
+SPS = S implies that S′SPS = S′S, and because S′S is positive definite, we have PS = In.
+
+(Im − SP ) is idempotent and therefore, Rank (Im − SP ) = tr (Im − SP ) = tr (Im) − tr (In) = m − n,and (Im − SP ) is rank deficient, and consequently Σh cannot be identified. Hyndman et al. (2011) avoided estimating Σh by using OLS, replacing Σh by kh Im where kh > 0is a constant. 
+
+2.3 Minimum trace (MinT) reconciliation 
+
+Let the h-step-ahead base forecast errors be defined as (3) and reconciled forecast errors be defined as ˜et(h) = yt+h − ˜yt(h) (8) for t = 1, 2, . . . , where ˜ yt(h) are the h-step-ahead reconciled forecasts using information up to and including time t, and yt+h are the observed values of all series at time t + h. It should be noted that the reconciled forecast errors, ˜ et given by Eq. (8), and the estimated coherency errors, ˜εt given by Eq. (6), are conceptually different. The former is the forecast error of reconciled forecasts while the latter is the error due to the incoherency of the base forecasts. Hyndman et al. (2011) confused these two errors. 
+
+Lemma 1. For any P such that SPS = S, the covariance matrix of the h-step-ahead reconciled forecast errors is given by 
+
+Var [yt+h − ˜yt(h)|It] = SPW hP′S′,
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 8Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+where ˜yt(h) is given by Eq. (2) and Wh = E[ ˆet(h) ˆe′
+
+> t
+
+(h)|It] is the variance-covariance matrix of the h-step-ahead base forecast errors. Proof. See Appendix A.1. An important feature of Lemma 1 is that it can be used to construct prediction intervals for any hierarchical or grouped forecasting approaches that generate unbiased reconciled forecasts, conditional on the base forecasts being unbiased. An important feature of Lemma 1 is that we obtain an expression for the variance of the coherent forecast errors. Assuming the forecast errors are normally distributed, this can be used to construct prediction intervals for any hierarchical or grouped forecasting approaches that generate unbiased coherent forecasts, conditional on the base forecasts being unbiased. The application of this result depends on having a reliable estimator for Wh, which we discuss in Section 2.4. We wish to find the value of P that minimizes the trace of Var [yt+h − ˜yt(h)|It] subject to it satisfying SPS = S. This would give the best (minimum variance) linear unbiased reconciled forecasts. We refer to this as MinT (minimum trace) reconciliation. 
+
+Theorem 1. Let Wh be the positive definite covariance matrix of the h-step-ahead base forecast errors. Then the optimal reconcilation matrix, which minimizes tr [SPW hP′S′] such that SPS = S, is given by 
+
+P = ( S′W −1 
+
+> h
+
+S)−1S′W −1 
+
+> h
+
+, (9) 
+
+or equivalently by 
+
+P = J − JW hU(U′WhU)−1U′, (10) 
+
+where the m × n summing matrix is partitioned as S′ =
+
+[
+
+C′ In
+
+]
+
+, J = [ 0n×m∗ In
+
+], U′ =
+
+[
+
+Im∗ −C
+
+]
+
+, and m ∗ = m − n. Proof. See Appendix A.2. Computing P using Eq. (10) requires the inversion of an m∗ × m∗ matrix (where m∗ < n in most applications), compared to the inversion of two matrices of orders n × n and m × m (where 
+
+n < m) required for the formulation in Theorem 1. Hence, the alternative representation is significantly less demanding in terms of computation. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 9Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+The reconciled forecasts from the MinT approach are computed by ˜yT (h) = S(S′W −1 
+
+> h
+
+S)−1S′W −1 
+
+> h
+
+ˆyT (h) = S[J − JW hU(U′WhU)−1U′] ˆyT (h). (11) Dagum and Cholette (2006) also describe this alternative solution, although they derive it under the assumption that Cov ( ˆe1, h, ˆ e2, h) = 0, where ˆ e2, h is the vector of base forecast errors from the most disaggregated series, and ˆ e1, h is the vector of base forecast errors from all other series. Moreover, this result coincides with the work of Stone (1976) and Byron (1978) in the area of balancing national income accounts. As shown in the proof of Theorem 1 (see A.2), the MinT reconciled forecasts computed by Eq. (11) also minimize the following objective function: ˜yT (h) = min  
+
+> ˇyT(h)∈A
+
+[ ˆyT (h) − ˇyT (h)] ′W −1 
+
+> h
+
+[ ˆyT (h) − ˇyT (h)] ,where A = { ˇy ∈ Rm : U′ ˇyT (h) = 0} is a closed, convex set. Following a similar argument to van Erven and Cugliari (2014), the generalized Pythagorean inequality (Cesa-Bianchi and Lugosi, 2006) for the Bregman divergence related to the Legendre function F(x) = x′W −1 
+
+> h
+
+x
+
+shows that 
+
+[yT+h − ˆyT (h)] ′W −1 
+
+> h
+
+[yT+h − ˆyT (h)] ≥ [yT+h − ˜yT (h)] ′W −1 
+
+> h
+
+[yT+h − ˜yT (h)] + [ ˜yT (h) − ˆyT (h)] ′W −1 
+
+> h
+
+[ ˜yT (h) − ˆyT (h)] 
+
+for all B = {yT+h ∈ Rm : U′yT+h = 0}. Hence, 
+
+[yT+h − ˆyT (h)] ′W −1 
+
+> h
+
+[yT+h − ˆyT (h)] ≥ [yT+h − ˜yT (h)] ′W −1 
+
+> h
+
+[yT+h − ˜yT (h)] 
+
+for all B, showing that the MinT reconciled forecasts are at least as good as the incoherent base forecasts. Because Hyndman et al. (2011) confused the forecast errors with the coherency errors, they expressed the GLS solution in Eq. (5) using the matrix Wh rather than Σh, thus giving Eq. (9). They justified the use of OLS by assuming that the base forecast errors of the bottom level series are additive like the data (the “error-additivity assumption”), and showed that using the Moore-Penrose generalized inverse would then reduce the GLS solution to an OLS solution. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 10 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Theorem 1 provides further insight into this result. Let ˆ at(h) be the bottom level base forecast errors and let Vh = Var [ ˆat(h)|It]. Then the error-additivity assumption is that ˆ et(h) = S ˆat(h),and so Wh = SV hS′ is singular. The variance covariance matrix of the reconciled forecast errors is then given by Var [yT+h − ˜yT (h)|It] = SPSV h(SPS )′ = SV hS′ which is independent of P.Consequently, under the error-additivity assumption, any matrix that satisfies SPS = S will be a minimium variance MinT solution. Applying the Moore-Penrose inverse of Wh when computing Eq. (9) will lead to the OLS solution P = ( S′S)−1S′ (using Fact 6.4.8 of Bernstein, 2005). On the other hand, applying the Moore-Penrose inverse when computing Eq. (10) yields 
+
+P = J − JSV hS′U(U′SV hS′U)−1U′ = J,as S′U = 0. This is the bottom-up approach. 
+
+2.4 Alternative estimators for Wh
+
+Note that the MinT and GLS solutions differ only in the covariance matrix that enters the estimators. In the GLS estimator in Eq. (5), Σh is the covariance matrix of the coherency errors, which we have shown cannot be identified, whereas in the MinT estimator in Eq. (11), Wh is the covariance matrix of the base forecast errors. Although Wh does not suffer from a lack of identification, it is nevertheless challenging to estimate, especially for h > 1. This section discusses several alternatives, which the next section then evaluates using a series of Monte Carlo experiments and an empirical application. 1. Set Wh = kh I, ∀h, where kh > 0. This is the most simplifying assumption to make, and collapses the MinT estimator to the OLS estimator of Hyndman et al. (2011). This is optimal only under some special conditions, such as when the base forecast errors are uncorrelated and equivariant. However, these conditions are impossible to satisfy in applications of hierarchical and grouped time series. 2. Set Wh = khdiag ( ˆW1), ∀h, where kh > 0 and ˆW1 = 1
+
+T
+
+> T
+
+# ∑
+
+> t=1
+
+ˆet(1) ˆet(1)′
+
+is the unbiased sample estimator of the in-sample one-step-ahead base forecast errors as defined in Eq. (3). In this case MinT can be described as a WLS estimator. A similar estimator is used in Hyndman, Lee, and Wang (2016), but they provide no theoretical 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 11 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+justification. Athanasopoulos et al. (2017) also implemented this estimator when applying temporal hierarchies. In what follows, we denote this as WLS v (i.e., WLS applying variance scaling). 3. Set Wh = khΛ, ∀h, where kh > 0 and Λ = diag (S1) with 1 being a unit column vector of dimension n. This specification is proposed by Athanasopoulos et al. (2017) for temporal hierarchies and assumes that each of the bottom level base forecast errors has a variance 
+
+kh and are uncorrelated between nodes. Hence, each element of the diagonal Λ matrix contains the number of forecast error variances contributing to that aggregation level. This estimator depends only on the grouping structure of the collection, and therefore we refer to it as an estimator that applies structural scaling and denote it by WLS s. Its advantage over OLS is that it assumes equivariant forecast errors only at the bottom level of the structure and not across all levels which is unrealistically assumed by OLS. It is particularly useful in cases where forecast errors are not available; for example, in cases where the base forecasts are generated by judgemental forecasting. 4. Set Wh = kh ˆW1, ∀h, where kh > 0, the unrestricted sample covariance estimator for 
+
+h = 1. Even though this is relatively simple to obtain, it may not be a good estimate when 
+
+m > T or when m is of the same order as T. In the results that follow, we denote this as MinT(Sample). 5. Set Wh = kh ˆW ∗
+
+> 1, D
+
+, ∀h, where kh > 0, ˆ W ∗ 
+
+> 1, D
+
+= λD ˆW1, D + ( 1 − λD ) ˆW1 is a shrinkage estimator with diagonal target, ˆW1, D is a diagonal matrix comprising the diagonal entries of ˆW1, and 
+
+λD is the shrinkage intensity parameter. Thus, off-diagonal elements of ˆW1 are shrunk towards zero and diagonal elements (variances) remain unchanged. Schäfer and Strimmer (2005) proposed a scale and location invariant shrinkage estimator by parameterizing the shrinkage in terms of variances and correlations rather than variances and covariances. Assuming that the variances are constant, they proposed the shrinkage intensity parameter ˆλD = ∑i6 =ĵ Var (ˆrij )
+
+∑i6 =j ˆr2
+
+> ij
+
+,where ˆ rij is the ij th element of ˆ R1, the 1-step-ahead sample correlation matrix to shrink it towards an identity matrix. We denote this as MinT(Shrink) in the results that follow. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 12 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+In all of these estimates, the proportionality constant kh cancels out when Wh is used in Eq. (11). However, it becomes important if the estimates are used to construct prediction intervals using Lemma 1. We leave this issue to a later paper. 
+
+# 3 Monte Carlo experiments 
+
+In order to evaluate the performance of the MinT approach we carried-out simulations for five different designs. Sections 3.1 and 3.2 explore the impact of the correlation structure between series on the reconciled forecasts. Section 3.3 aims to capture an important observed feature of hierarchical and grouped time series, namely that more aggregated series are smoother than less aggregated series. Section 3.4 considers reconciliation where the data contain a seasonal component. Finally, Section 3.5 considers a genuinely ‘large’ hierarchy. 
+
+3.1 Exploring the effect of correlation 
+
+We first consider the simplest possible hierarchy for which two bottom level series are generated and aggregated to the total yt. The assumed data generating processes for the bottom level series is a bivariate VAR(1) 
+
+Bz t = Φzt−1 + ηt,where 
+
+B =
+
+1 γ
+
+0 1
+
+ , Φ =
+
+α 00 β
+
+ , zt =
+
+yA,t
+
+yB,t
+
+ , ηt =
+
+ηA,t
+
+ηB,t
+
+ ,and ηA,t ∼ N (0, σ2
+
+> A
+
+) and ηB,t ∼ N (0, σ2
+
+> B
+
+) are independent Gaussian white noise error pro-cesses. This structure implies that yA,t does not have a contemporaneous effect on yB,t. The contemporaneous error correlation matrix is given by Cor (B−1ηt) = 
+
+1 ρρ 1
+
+ , where ρ = −γσ B
+
+√
+
+σ2 
+
+> A
+
++ σ2
+
+> B
+
+γ2
+
+.Therefore we control the correlation by setting 
+
+γ = −ρ
+
+√1 − ρ2
+
+σA
+
+σB
+
+.
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 13 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Simulation setup 
+
+Using two sets of parameters, {α = 0.8, β = 0.4 } and {α = 0.4, β = 0.8 }, we generated 192 observations for each of the two bottom level series, which were then aggregated to give the third series. In both cases, σ2 
+
+> A
+
+= 2 and σ2 
+
+> B
+
+= 4 were used. The data were divided into training and test sets, comprising the first 180 and the last 12 observations, respectively. For each series, 1- to 12-step-ahead base forecasts were generated from an ARIMA model fitted to the training set using the default settings in the automated algorithm of Hyndman and Khandakar (2008) and implemented in the forecast package for R (Hyndman, 2017). The base forecasts were then reconciled using the various approaches discussed in Section 2. Also shown are results for bottom-up forecasts (designated as BU). We have considered alternative parameter values and sample sizes for this simulation setting, but to save space we do not present all results. The omitted results are qualitatively similar and are available upon request. The upper panels of Figures 2 and 3 show the variation in RMSE (root mean squared error) for the 1-step-ahead base and reconciled forecasts. The left panels show the results for the top level, and the right panels show the results for the bottom level. The upper-left panels for both sets of parameters show that the stronger the negative error correlation between the bottom level series, the lower the RMSE for the 1-step-ahead top level forecasts. This demonstrates that the negative error correlation between the two bottom level series has a smoothing effect, making the aggregate series easier to forecast. As the error correlation increases from −0.8 to 0.8, the RMSE increases almost monotonically. The top-right panels of both figures show U-shaped curves for the RMSE of the 1-step-ahead bottom level forecasts. As the error correlation between the two bottom level series increases in magnitude (either positively or negatively), the forecast accuracy deteriorates. This is most likely due to the inability of the univariate models to fully capture the dynamics across the bottom level series generated from the multivariate process, which increase in strength as the correlation increases in absolute value. Insert Figure 2 about here. Insert Figure 3 about here. The lower panels show the relative ratio in average RMSE between the reconciled and the base forecasts over the horizons h = 1, 1–4 and 1–12. A ratio less than one shows that the average RMSE of the reconciled forecasts is lower than that of the base forecasts. For example, for 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 14 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+h = 1, the average RMSE for MinT(Shrink) at the top level is approximately 30% lower than the RMSE of the base forecasts, indicating a 30% improvement in forecast accuracy when the error correlation between the bottom level series is −0.8. For both sets of parameters and for almost every setting across the entire correlation range, the MinT forecasts are amongst the most accurate, and they almost always improve on the average RMSE of the base forecasts for both the top and bottom level series (with a few rare exceptions). 
+
+3.2 Exploring the effect of correlation on a larger hierarchy 
+
+We now consider a slightly larger hierarchy, with 2 levels of aggregation and m = 7 series in total. The structure of the hierarchy is given in Figure 4. Insert Figure 4 about here. Once again the bottom level series were first generated and then summed appropriately to obtain the series for the levels above. Each series in the bottom level was generated from an ARIMA (p, d, q) process with p and q taking values of 0, 1 and 2, with equal probability and d
+
+taking values of 0 and 1 with equal probability. For each series constructed, the parameters were chosen randomly from a uniform distribution over a space well within the stationary and invertible parameter space. Table 1 shows the parameter space for each component of the ARIMA generating processes. Insert Table 1 about here. The bottom level ARIMA data generating processes have a contemporaneous error covariance matrix given by 
+
+5 3 2 13 4 2 12 2 5 31 1 3 4
+
+
+
+(12) in order to obtain a hierarchical structure with correlated series. This structure allows a strongly positive error correlation among the series with the same parent, but a moderately positive correlation among the series belonging to different parents. The errors were generated from a multivariate normal distribution with zero mean and the aforementioned covariance structure. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 15 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Simulation setup 
+
+For each series, T = 60, 180 or 300 observations were generated; the final h = 8, 16 or 24 observations respectively were withheld as test sets. Using the remaining observations as training data, base forecasts were generated from ExponenTial Smoothing (ETS) models using the default settings as implemented in the forecast package for R (Hyndman, 2017) and described in Hyndman and Khandakar (2008). The purpose of fitting ETS models to series generated from ARIMA processes is to emulate what happens in practice, where the true generating processes is unknown and misspecified. This process was repeated 1000 times. The results are presented in the left panel of Table 2 under the heading ‘Section 3.2: effect of correlation’. Each entry in the table shows the percentage difference in the average RMSE between the reconciled and the base forecasts. A negative (positive) entry shows a percentage decrease (increase) in average RMSE relative to the incoherent base forecasts. The bold entries identify the best performing approaches. The results show that the MinT(Shrink) approach generates the most accurate forecasts overall. MinT(Sample) also performs well, at least for 
+
+h = 1, and its forecast accuracy approaches that of MinT(Shrink) as the sample size increases. Insert Table 2 about here. Of the approaches that use a strictly diagonal covariance matrix, WLS v performs best at h = 1and shows a performance similar to that of MinT(Shrink) when h > 1. Recall that 1-step-ahead in-sample base forecast errors are used for the WLS and the MinT approaches, and it is assumed that Wh ∝ ˆW1 for all h > 1. Controlling for the possibly adverse effects of this assumption, and therefore evaluating only the 1-step-ahead forecast performance between WLS v
+
+and MinT(Shrink), it seems that specifying a non-diagonal covariance matrix and estimating it using shrinkage leads to a substantial improvement in forecast accuracy. The bottom-up (BU) approach performs especially well for small sample sizes. This is not surprising, given that covariance estimation is challenging and unreliable in this situation. Obviously the BU approach cannot improve the bottom level forecasts, so that all percentage differences are zero at the bottom level. 
+
+3.3 Exploring the smoothing effect of aggregation 
+
+A common characteristic of aggregated time series is that aggregation will smooth out random fluctuations and thereby more aggregated series are less noisy compared to their disaggregate 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 16 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+components. We captured this feature within a simulation setting by implementing a simulation design based on the work of van Erven and Cugliari (2014) for the hierarchical structure of Figure 4. The bottom level series were generated from ARIMA (p, d, q) processes as specified in Section 3.2. A noise component was then added to make the bottom-series noisier than the aggregated series. Specifically, the bottom level series were generated using 
+
+yAA ,t = zAA ,t − νt − 0.5 ωt,
+
+yAB ,t = zAB ,t + νt − 0.5 ωt,
+
+yBA ,t = zBA ,t − νt + 0.5 ωt,and yBB ,t = zBB ,t + νt + 0.5 ωt,where zAA ,t, zAB ,t, zBA ,t and zBB ,t are ARIMA (p, d, q) processes with independent error terms 
+
+τAA ,t, τAB ,t, τBA ,t, τBB ,t ∼ N (0, σ20 ), while νt ∼ N (0, σ21 ) and ωt ∼ N (0, σ22 ) are independent white noise processes. The data for the aggregated levels were obtained by summing the bottom level series. Hence, 
+
+yA,t = zAA ,t + zAB ,t − ωt,
+
+yB,t = zBA ,t + zBB ,t + ωt,and yt = zAA ,t + zAB ,t + zBA ,t + zBB ,t.This allows the bottom level series to be correlated with other series in the hierarchy. We set Var (τAA ,t + τAB ,t + τBA ,t + τBB ,t) ≤ Var (τAA ,t + τAB ,t − ωt) ≤ Var (τAA ,t − νt − 0.5 ωt),which simplifies to 2σ20 ≤ σ22 ≤ 43 (σ21 − σ20 ),thus ensuring that the aggregate series are less noisy than their disaggregate components. We set σ20 = 1, σ21 = 10 and σ22 = 6. Using these data generating processes, we implement the same simulation setup as in Section 3.2 for evaluating the forecasting performances of the alternative forecast reconciliation approaches. The results are presented in the right panel of Table 2 under the heading ‘Section 3.3: effect of smoothing’. As expected, there is a tremendous loss in accuracy from using the bottom-up approach to forecast such a structure. MinT(Shrink) outperforms all of the forecast reconciliation 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 17 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+approaches, with WLS v being second best. Again, we observe that MinT(Sample) approaches MinT(Shrink) in forecast accuracy as the sample size increases. 
+
+3.4 Reconciliation with seasonal data 
+
+Using the same hierarchical structure as in Section 3.2 (shown in Figure 4), we now consider a setting where the simulated series include a seasonal component. The bottom level series were generated using the basic structural time series model 
+
+bt = μt + γt + ηt,where μt, γt and ηt are the trend, seasonal and error components respectively, 
+
+μt = μt−1 + υt + $t, $t ∼ N (0, σ2 
+
+> $
+
+I4),
+
+υt = υt−1 + ζt, ζt ∼ N (0, σ2 
+
+> ζ
+
+I4),
+
+γt = −
+
+> s−1
+
+# ∑
+
+> i=1
+
+γt−i + ωt, ωt ∼ N (0, σ2 
+
+> ω
+
+I4),and $t, ζt and ωt are errors independent of each other and over time. The error variances were set to σ2 
+
+> $
+
+= 2, σ2 
+
+> ζ
+
+= 0.007 and σ2 
+
+> ω
+
+= 7. The number of seasons in the year was set to 
+
+s = 4 for quarterly data. The initial values for μ0, υ0, γ0, γ1, γ2 were generated independently from a multivariate normal distribution with mean zero and covariance matrix, Σ0 = I4. Each component of ηt was generated from an ARIMA (p, 0, q) process with p and q taking values of 0 and 1 with equal probability. The parameter space of the coefficients and the error covariance structure used are the same as those in Section 3.2, shown in Table 1 and Eq. (12) respectively. The bottom level series where then appropriately summed to obtain the data for higher levels. The simulation setup implemented is identical to that outlined in Section 3.2. Base forecasts were generated from both ARIMA and ETS models using the default settings as implemented in the forecast package for R (Hyndman, 2017) and described in Hyndman and Khandakar (2008). This process was repeated 500 times. The results are presented in Table 3. The left panel shows the results using the ARIMA base forecasts while the right panel shows the results using the ETS base forecasts. All of the reconcil-iation approaches improve the forecast accuracy of both sets of base forecasts. MinT(Shrink) consistently shows the largest improvements. MinT(Sample) also performs well for the larger 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 18 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+sample sizes, i.e., T = 300, for which a more accurate estimate of the covariance structure can be obtained. Although the aim of these simulations is not to compare the forecast accuracy between the base forecasts per se, it is worth noting that the ETS base forecasts tend to be more accurate than the ARIMA base forecasts. This is particularly noticeable for the bottom level base forecasts and also for T = 300. An important result here is that the severe model mis-specification occurring with the ARIMA base forecasts is compensated for by the reconciliation approaches, and especially MinT(Shrink) and MinT(Sample), leading to substantial improvements over the base forecasts. Hence, the covariance information used in the MinT approach is especially beneficial when there is severe model mis-specification. We should also note that for these cases, the bottom-up approach does not improve the forecast accuracy over the base forecasts. 
+
+3.5 Forecasting a ‘large’ hierarchy 
+
+In our final design we consider a much larger hierarchy. The structure comprises 5-levels and 2,047 series in total. More specifically, 1,536 series at the bottom level were aggregated in groups of four for the next four levels resulting in 384, 96, 24 and 6 series respectively for levels 4 to 1; which were then aggregated to give the top-level most aggregate series. The challenge here is to generate hierarchical time series at this very large scale that reflect features inherent in real data. To achieve this we generalise, expand and combine the designs of Sections 3.2 and 3.3. In particular, the data generating mechanism was designed to reflect (i) correlations across series; and (ii) a higher signal-to-noise ratio for aggregate series compared to their disaggregate components. The details of the data generating mechanism are presented in Appendix B. For each series, T = 180 observations were generated with the final h = 18 withheld as the test set. Using the remaining observations as training data, base forecasts were generated from ARIMA and ETS models using the default settings as implemented in the forecast package for R (Hyndman, 2017) and described in Hyndman and Khandakar (2008). This process was repeated 200 times. The results are presented in Table 5. We should note here that the length of each series is less than the total number of series in the structure. Hence, the sample variance covariance is not a positive definite matrix, and therefore we did not consider the MinT(Sample) approach. The reconciliation approaches overwhelmingly improve the forecast accuracy of both sets of base 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 19 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+forecasts. MinT(Shrink) consistently shows the largest improvements for the shorter forecast horizons h = 1 and 4 and WLS v for the longer forecast horizons h = 8 and 16. The bottom-up approach shows substantial losses relative to the base forecasts for h = 1 to 4. 
+
+# 4 Forecasting Australian domestic tourism 
+
+Domestic tourism flows within any country form a natural geographical hierarchy. Australia comprises seven states and territories which are further divided into 27 zones and 76 regions (Appendix C shows further details on the geographical hierarchy). Furthermore, grouping tourism flows by purpose of travel is also of interest as travel patterns and spending behaviour vary across these groups. We consider four purposes of travel: holiday, visiting friends and relatives (VFR), business and other. Grouping Australian domestic tourism flows by geographi-cal divisions and purposes of travel results in a total of 555 time series (both aggregated and disaggregated). Table 7 presents further details. Insert Table 7 about here. We use ‘visitor nights’, the total number of nights spent by Australians away from home, as a measure of tourism flows. The data come from the National Visitor Survey which is managed by Tourism Research Australia and are collected throughout the year using computer assisted telephone interviews from nearly 120,000 Australian residents aged 15 years and over (Tourism Research Australia, 2015). The data are monthly time series and span the period January 1998 to December 2016. The left panel of Figure 6 plots the total number of visitor nights for 2016. The map shows the diversity in the volume of tourism flows across the geographical divisions with the highest number of visitor nights concentrating around the state capitals. Figure 7 plots visitor nights grouped by the four purposes of travel together with the aggregate. The left panel shows homogeneous seasonal variation across the aggregate, holiday and VFR series in contrast to the business and other series plotted in the right panel. The series also show diverse trends. Generating accurate forecasts for each of the 555 time series within the Australian tourism grouping structure is imperative for the planning purposes of National, State and Local tourism authorities. Ensuring that these forecasts are reconciled across all geographical disaggregation levels and purposes of travel leads to coherent decision making across the various levels of management. Moreover, in the empirical results that follow we find overwhelming evidence 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 20 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+that reconciling incoherent base forecasts using the MinT approach, substantially improves forecast accuracy across all levels of disaggregation and groupings. One advantage of using a reconcilation approach to forecasting is that it implicitly models spatial autocorrelations in the data. With such a large collection of time series, it would be challenging to model the spatial autocorrelations directly, but through reconciliation we can implicitly account for spatial autocorrelations, especially when the MinT approach is used. Insert Figure 6 about here. Insert Figure 7 about here. We evaluate the forecast accuracy of MinT using a rolling window. We set the training window to 96 observations and generate 1- to 12-steps-ahead base forecasts for each of the 555 series. The base forecasts were generated from ARIMA and ETS models fitted using the default settings in the automated algorithms of Hyndman and Khandakar (2008) and implemented in the 
+
+forecast for R (Hyndman, 2017). The base forecasts were then combined or reconciled using the alternative approaches. We rolled the training window forward by one observation and repeat the process until November 2016. This gives a total of 132 1-step-ahead, 131 2-step-ahead, down to 121 12-step-ahead forecasts for each of the 555 series. We should note here that the number of observations per series is less than the total number of series in the structure. Hence, the sample variance covariance is not a positive definite matrix, and therefore the MinT(Sample) approach will not be considered. The results are presented in Table 8. The rows labelled ‘ Base ’ show the average RMSE ( ×10 3)for the base forecasts. A positive (negative) entry above this row shows a percentage increase (decrease) in average RMSE relative to the base forecasts. The top half of the table shows the results using ARIMA base forecasts, while the bottom half shows the results using ETS base forecasts. It is immediately clear that for all levels of disaggregation, MinT(Shrink) forecasts improve (and in many cases substantially improve) on the accuracy of the base forecasts. The improvements are more pronounced when the base forecasts are less accurate, which is the case with the ARIMA base forecasts compared to the ETS base forecasts. Insert Table 8 about here. Furthermore, the MinT(Shrink) approach returns the most accurate coherent forecasts for all levels. The only exception being the most aggregate level using ARIMA base forecasts, for which 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 21 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+OLS returns the most accurate forecasts. The two variations of WLS and OLS also perform well, generally improving forecast accuracy over the base forecasts. Insert Table 8 about here. Clearly the least accurate approach is the bottom-up showing increases in the average RMSE relative to the base forecasts for almost all levels of aggregation and all forecast horizons. These losses in forecast accuracy are substantial at the higher levels of aggregation and especially when using the least accurate ARIMA base forecasts. The biggest disadvantage of the bottom-up approach is that the series are modelled and forecasts are generated only at the bottom level. The series at the bottom level are highly disaggregated and therefore very noisy, making it challenging to identify any seasonal or possibly trending components. Table 9 shows the composition of ARIMA and ETS models identified at each level over the final estimation window. Fewer than 50% of the models identified at the bottom level, for both ARIMA and ETS models, include a seasonal component, and only 5% of them include both a seasonal and a trending component. These components become more prominent at the higher levels of aggregation and therefore they are more readily identified by the automated forecasting algorithms. These empirical results show that when forecasting such hierarchical or grouped structures, it is imperative that the approach used can bring informative signals from the higher levels of aggregation to the lower levels and vice versa. MinT, the two variations of WLS, and OLS are all able to do this, and hence improvements in forecast accuracy over the base forecasts are attained using these approaches even at the extremely noisy bottom level. Finally, the right panel of Figure 6 plots the projected annual growth rates for visitor nights for 2017. These are generated from MinT(Shrink) using the most accurate ETS base forecasts. The map shows the diversity in the projected growth rates across the geographical regions of Australia. Combining these with the left panel brings a plethora of invaluable information to the tourism authorities. These help identify key areas of growth and/or decline of Australian domestic tourism. 
+
+# 5 Conclusions and discussion 
+
+In the existing literature on forecasting hierarchical and grouped time series, the GLS estimator introduced by Hyndman et al. (2011) is the only previous approach which attempts to utilize information from the covariance structure between the series. However, in this paper we 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 22 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+have shown that it is impossible to compute such a solution in practice due to identifiability conditions. While overcoming this challenge we have proposed a new forecast reconciliation approach for forecasting hierarchical and grouped time series. Similar to van Erven and Cugliari (2014), we have shown that applying reconciliation guarantees coherent forecasts that are at least as good as the base forecasts. Hence, applying forecast reconciliation should always be preferred, and approaches that use limited information such as bottom-up or top-down should be avoided. A remarkable feature of this approach is that the minimizer has an analytical solution which is identical to a GLS estimator. Fortunately, the required estimate of the covariance structure is estimable in practice, thus leading to a feasible GLS solution. By exploring the features of the matrices involved in the GLS estimator, we have derived an alternative representation which involves inverting only a single matrix of lower dimension compared to the inversions involved in the original GLS solution. This makes our estimator scalable for handling a large collection of time series. A natural candidate estimator for the covariance matrix in the GLS solution is the sample covari-ance matrix, although it is not always positive definite or well estimated with large collections of time series. Consequently, we have discussed several alternative estimates including structured and unstructured diagonal matrices and a shrinkage type estimator. Using a series of simulation designs and a sizeable empirical application, we have illustrated that the proposed method using shrinkage performs well and generally seems to outperform existing methods. The covariance estimator is not only needed for computing reconciled point forecasts, but for computing prediction intervals, as shown in Lemma 1. We leave to a later paper a discussion of whether our shrinkage estimator is appropriate for this purpose, and whether the specific covariance structure of hierarchical and grouped time series can be exploited to obtain a better covariance estimator than those considered here. The methods introduced in this paper are implemented in the hts package on CRAN (Hyndman et al., 2017). 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 23 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+# References 
+
+Athanasopoulos, G, Hyndman, RJ, Kourentzes, N, and Petropoulos, F (2017). Forecasting with Temporal Hierarchies. European Journal of Operational Research 262 (1), 60–74. Athanasopoulos, G, Ahmed, RA, and Hyndman, RJ (2009). Hierarchical forecasts for Australian domestic tourism. International Journal of Forecasting 25 , 146–166. Bernstein, DS (2005). Matrix Mathematics: Theory, Facts, and Formulas with Application to Linear Systems Theory . Princeton University Press. Byron, RP (1978). The Estimation of Large Social Account Matrices. Journal of Royal Statistical Society, Series A 141 (3), 359–367. Cesa-Bianchi, N and Lugosi, G (2006). Prediction, Learning, and Games . 1st ed. Cambridge: Cam-bridge University Press. Dagum, EB and Cholette, PA (2006). Benchmarking, Temporal, Distribution, and Reconciliation Methods for Time Series . Springer-Verlag. Dunn, DM, Williams, WH, and Dechaine, TL (1976). Aggregate Versus Subaggregate Models in Local Area Forecasting. Journal of American Statistical Association 71 (353), 68–71. Horn, RA and Johnson, CR (1990). Matrix Analysis . Cambridge University Press. Hyndman, RJ (2017). forecast: Forecasting Functions for Time Series and Linear Models . R package version 8.1. http://pkg.robjhyndman.com/forecast .Hyndman, RJ, Ahmed, RA, Athanasopoulos, G, and Shang, HL (2011). Optimal combination forecasts for hierarchical time series. Computational Statistics and Data Analysis 55 , 2579–2589. Hyndman, RJ and Khandakar, Y (2008). Automatic Time Series Forecasting : The forecast Package for R. Journal of Statistical Software 27 (3). Hyndman, RJ, Lee, AJ, and Wang, E (2016). Fast computation of reconciled forecasts for hierar-chical and grouped time series. Computational Statistics and Data Analysis 97 , 16–32. Hyndman, R, Lee, A, Wang, E, and Wickramasuriya, S (2017). hts: Hierarchical and Grouped Time Series . R package version 5.1.4. https://CRAN.R-project.org/package=hts .Orcutt, GH, Watt, WH, and Edwards, JB (1968). Data Aggregation and Information Loss. The American Economic Review 58 (4), 773–787. Park, M and Nassar, M (2014). “Variational Bayesian inference for forecasting hierarchical time series”. www.gatsby.ucl.ac.uk/~mijung/ICMLworkshop_PARK_NASSAR.pdf .Penrose, R (1956). On best approximate solutions of linear matrix equations. Mathematical Proceedings of the Cambridge Philosophical Society 52 , 17–19. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 24 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Sayal, H, Aston, JAD, Elliott, D, and Ombao, H (2016). An introduction to applications of wavelet benchmarking with seasonal adjustment. Journal of the Royal Statistical Society. Series A: Statistics in Society 180 (3), 863–889. Schäfer, J and Strimmer, K (2005). A Shrinkage Approach to Large-Scale Covariance Matrix Estimation and Implications for Functional Genomics. Statistical Applications in Genetics and Molecular Biology 4(1), 32. Shlifer, E and Wolff, RW (1979). Aggregation and Proration in Forecasting. Management Science 
+
+25 (6), 594–603. Stone, R (1976). “The development of economic data systems”. In: Social Accounting for Develop-ment Planning with Special Reference to Sri Lanka . By Graham Pyatt and Alan Roe. Cambridge University Press, pp.xvi–xvii. Tourism Research Australia (2015). Tourism forecasts . Tech. rep. Canberra. van Erven, T and Cugliari, J (2014). “Game-theorically Optimal Reconciliation of Contempora-neous Hierarchical Time Series Forecasts”. In: Modeling and Stochastic Learning for Forecasting in High Dimension . Ed. by A Antoniadis, X Brossat, and JM Poggi. Springer Lecture Notes in Statistics. Paris: Springer, pp. 297–317. Wang, SD, Kuo, TS, and Hsu, CF (1986). Trace Bounds on the Solution of the Algebraic Matrix Riccati and Lyapunov Equation. IEEE Transactions on Automatic Control AC-31 , 1986. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 25 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+# A Proofs 
+
+A.1 Lemma 1 
+
+Proof. Let the h-step-ahead base and reconciled forecast errors be given as ˆet(h) = yt+h − ˆyt(h)
+
+and ˜et(h) = yt+h − ˜yt(h),for t = 1, 2, . . . , where ˆ yt(h) and ˜ yt(h) are the h-step-ahead base and reconciled forecasts using information up to and including time t, and yt+h are the observed values of all series at time t + h.We have that ˜et(h) = ˆet(h) + ( I − SP ) ˆyt(h)= ˆet(h) + ( I − SP ) [ yt+h − ˆet(h)] = SP ˆet(h) + ( I − SP )yt+h.Since yt+h = Sb t+h, where bt+h is the vector of observations at the bottom level, (I − SP )S = 0. Hence ˜ et(h) = SP ˆet(h) giving Var [ ˜et(h)] = SPW hP′S′,where Wh is the variance covariance matrix of the h-step-ahead base forecast errors. 
+
+A.2 Theorem 1 
+
+Proof. Reformulate the objective function such that, tr [SPW hP′S′] = tr [S′SPW hP′].As S′S and PW hP′ are both symmetric, and positive definite and positive semidefinite respec-tively, using Lemma 1 of Wang, Kuo, and Hsu (1986) we have tr [S′SPW hP′] ≥ λmin (S′S)tr [PW hP′] ≥ λmin (C′C + I)tr [PW hP′],
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 26 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+where λmin (A) denotes the minimum eigenvalue of matrix A and S =
+
+ CIn
+
+. Since C′C and 
+
+I are both symmetric, and positive semidefinite and positive definite respectively, applying Weyl’s inequalities (Horn and Johnson, 1990), 
+
+λmin (C′C + I)tr [PW hP′] ≥ [λmin (C′C) + λmin (I)] tr [PW hP′] ≥ tr [PW hP′],using the fact that all the eigenvalues of an identity matrix are unity. Now PS = In, so the minimization problem can be restated as min  
+
+> P
+
+tr [PW hP′] such that PS = I.If Wh is positive definite and we let L = W − 12 
+
+> h
+
+S and H = PW 12 
+
+> h
+
+, the minimization problem becomes min  
+
+> H
+
+tr [H H ′] such that H L = I.The unique solution of this well-known minimization problem is given by the Moore-Penrose generalized inverse of L (Penrose, 1956). As we know that L is full rank, H = ( L′ L)−1 L′ which gives 
+
+P = ( S′W −1 
+
+> h
+
+S)−1S′W −1 
+
+> h
+
+.As the above unique solution of MinT has a similar representation to a GLS estimator of a least squares problem, we can reformulate the trace minimization problem in terms of a linear equality constrained least squares problem as follows: min  
+
+> ˇyT(h)
+
+12 [ ˆyT (h) − ˇyT (h)] ′W −1 
+
+> h
+
+[ ˆyT (h) − ˇyT (h)] 
+
+s.t. ˇyT (h) = S ˇbT (h),or equivalently, min  
+
+> ˇyT(h)
+
+12 [ ˆyT (h) − ˇyT (h)] ′W −1 
+
+> h
+
+[ ˆyT (h) − ˇyT (h)] 
+
+s.t. U′ ˇyT (h) = 0,where ˇbT (h) is the vector of last mK elements of ˇ yT (h), U′ =
+
+[
+
+Im∗ −C
+
+]
+
+and m∗ = m − n.
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 27 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+The Lagrangian function for the minimization problem is 
+
+L[ ˇyT (h), λ] = 12 [ ˆyT (h) − ˇyT (h)] ′W −1 
+
+> h
+
+[ ˆyT (h) − ˇyT (h)] − λ′U′ ˇyT (h),where λ is a Lagrange multiplier vector. The first-order necessary conditions for ˜ yT (h) to be a solution of the minimization problem require that there is a vector ˜λ for which the following system of equations is satisfied: 
+
+[
+
+W −1 
+
+> h
+
+UU′ 0
+
+] [ 
+
+˜yT (h)
+
+−λ
+
+]
+
+=
+
+[ W −1 
+
+> h
+
+ˆyT (h)
+
+0
+
+]
+
+.Assuming that W −1 
+
+> h
+
+is positive definite yields the solution of the above system of equations as ˜yT (h) = [ I − WhU(U′WhU)−1U′] ˆyT (h)
+
+and ˜λ = −(U′WhU)−1U′ ˆyT (h).The h-step-ahead reconciled forecasts at the bottom level are given by ˜bT (h) = 
+
+[[ 0n×m∗ In
+
+] − [ 0n×m∗ In
+
+] WhU(U′WhU)−1U′]
+
+ˆyT (h) := P ˆyT (h).Hence we can define an alternative representation for the P matrix by 
+
+P = J − JW hU(U′WhU)−1U′,where J = [ 0n×m∗ In
+
+].
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 28 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+# B Data generating mechanism for Section 3.5 
+
+In order to present the details of the simulation setup, we consider a simplified 2-level hierarchy as shown in Figure 5. The structure has two parents, denoted by nodes A and B, and each one of them has four children denoted respectively by AA, AB, AC, AD and BA, BB, BC, BD. The bottom level series were generated by summing the two components shown in Table 4, reflecting features commonly observed in hierarchical time series. Insert Figure 5 about here. Insert Table 4 about here. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 29 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+# C Tourism hierarchy 
+
+Insert Table 6 about here. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 30 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+# Figures 
+
+Total    
+
+> A
+> AA AB AC
+> B
+> BA BB
+
+Figure 1: A two-level hierarchical tree diagram. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 31 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization llll lllllllll ll l l lllll lll l llllllllll        
+
+> 1.5 2.0 2.5 3.0 3.5 4.0 0.8 0.9 1.0 0.90 0.95 1.00 0.98 1.00 1.02 RMSE [h=1]  RMSE ratio [h=1]  RMSE ratio [h=1:4]  RMSE ratio [h=1:12] −0.8 −0.6 −0.4 −0.2 0.0 0.2 0.4 0.6 0.8
+
+Correlation Top                                  
+
+> llllllllllllllllllllllllllllllllllll
+> 1.8 2.0 2.2 1.00 1.01 1.02 1.00 1.01 0.99 1.00 1.01 RMSE [h=1]  RMSE ratio [h=1]  RMSE ratio [h=1:4]  RMSE ratio [h=1:12] −0.8 −0.6 −0.4 −0.2 0.0 0.2 0.4 0.6 0.8
+
+Correlation Bottom  
+
+> l
+
+BU OLS WLSv WLSs MinT(Sample) MinT(Shrink) Base 
+
+Figure 2: Forecasting performances of the base and reconciled forecasts for the top level series (shown in the left panels) and the bottom level series (shown in the right panels). The upper panels show the average RMSE for 1-step-ahead forecasts. The lower panels show the relative ratio of average RMSE between the reconciled forecasts and the base forecasts for h = 1, 1–4 and 1–12 steps ahead, respectively. The sample size is T = 192 and the parameters used are α = 0.8 ,
+
+β = 0.4 , σ2
+
+A = 2 and σ2
+
+B = 4.
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 32 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization llll llllllllll lllllllll lll lllllllll l        
+
+> 2.0 2.5 3.0 3.5 4.0 1.00 1.04 1.08 1.00 1.05 1.10 1.15 1.00 1.05 1.10 1.15 1.20 RMSE [h=1]  RMSE ratio [h=1]  RMSE ratio [h=1:4]  RMSE ratio [h=1:12] −0.8 −0.6 −0.4 −0.2 0.0 0.2 0.4 0.6 0.8
+
+Correlation Top                                  
+
+> llllllllllllllllllllllllllllllllllll
+> 1.8 2.0 2.2 2.4 0.97 0.98 0.99 1.00 1.01 0.97 0.98 0.99 1.00 1.01 0.98 0.99 1.00 1.01 RMSE [h=1]  RMSE ratio [h=1]  RMSE ratio [h=1:4]  RMSE ratio [h=1:12] −0.8 −0.6 −0.4 −0.2 0.0 0.2 0.4 0.6 0.8
+
+Correlation Bottom  
+
+> l
+
+BU OLS WLSv WLSs MinT(Sample) MinT(Shrink) Base 
+
+Figure 3: Forecasting performances of the base and reconciled forecasts for the top level series (shown in the left panels) and the bottom level series (shown in the right panels). The upper panels show the average RMSE for 1-step-ahead forecasts. The lower panels show the relative ratio of average RMSE between the reconciled and base forecasts for h = 1, 1–4 and 1–12 steps ahead, respectively. The sample size is T = 192 and the parameters used are α = 0.4 , β = 0.8 ,
+
+σ2
+
+A = 2 and σ2
+
+B = 4.
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 33 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Total   
+
+> A
+> AA AB
+> B
+> BA BB
+
+Figure 4: Hierarchical structure for simulations of Section 3.2. 
+
+Total       
+
+> A
+> AA AB AC AD
+> B
+> BA BB BC BD
+
+Figure 5: A simplified two-level hierarchical tree diagram. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 34 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Figure 6: Left: Total visitor nights in 2016. Right: Projected growth rates for 2017 using ETS base forecasts and reconciling using MinT(Shrink). 10 20 30 40 50 2462000 2005 2010 2015 2000 2005 2010 2015 Year Year Visitor nights (in millions) Total Holiday VFR Business Other 
+
+Figure 7: Visitor nights for Australia by purpose of travel. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 35 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+# Tables 
+
+Table 1: Parameter space for the AR and MA components. 
+
+AR component 
+
+p Coefficient Parameter space 1 φ1 [0.5, 0.7] 2 φ1 [φ2 − 0.9, 0.9 − φ2]
+
+φ2 [0.5, 0.7] MA component 
+
+q Coefficient Parameter space 1 θ1 [0.5, 0.7] 2 θ1 [−(0.9 + θ2)/3.2, (0.9 + θ2)/3.2] 
+
+θ2 [0.5, 0.7] The purpose of including 3.2 in the parameter space of θ1 is to obtain the same lower and upper bounds as in the parameter space of φ1.
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 36 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Table 2: Out-of-sample forecast results for simulations exploring the effect of correlation and smoothing. 
+
+Section 3.2: effect of correlation Section 3.3: effect of smoothing 
+
+T = 60 T = 180 T = 300 T = 60 T = 180 T = 300 
+
+h = 1 1–4 1–8 h = 1 1–8 1–16 h = 1 1–12 1–24 h = 1 1–4 1–8 h = 1 1–8 1–16 h = 1 1–12 1–24 
+
+Top level Top level BU −8.7 −8.7 −8.7 −5.2 −2.5 −5.5 −0.4 2.0 −5.5 −1.2 −0.6 48.9 22.6 12.8 42.8 12.2 5.7 51.4 6.2 3.7 OLS −5.1 −4.7 −4.1 −2.9 −2.0 −1.4 −1.4 −1.4 −3.2 −1.7 −1.6 1.4 −1.7 −3.1 −0.5 −2.6 −2.6 −2.6 −2.5 −2.5 −2.5 1.9 −3.0 −3.0 −3.0 −1.9 −1.9 −1.9 WLS v −8.2 −6.5 −6.5 −6.5 −4.8 −5.0 −2.3 −1.0 −5.3 −2.3 −2.3 −2.3 −2.0 −2.0 −2.0 −1.0 −2.4 −3.2 −2.0 −2.5 −2.1 0.2 −2.2 −1.4 WLS s −7.3 −6.2 −4.9 −4.9 −4.9 −4.3 −2.4 −2.4 −2.4 −1.4 −1.4 −1.4 −4.6 −2.2 −2.0 −2.0 −2.0 9.3 1.8 −1.4 6.3 −1.0 −2.0 10.4 −2.6 −1.6 MinT(Sample) −5.8 −3.1 −1.2 −6.3 −6.3 −6.3 0.5 3.4 −6.2 −1.8 −1.4 −0.6 −3.3 −3.3 −3.3 −3.9 −3.9 −3.9 −2.3 −2.2 −1.9 −0.3 −0.3 −0.3 −2.1 −1.3 MinT(Shrink) −8.0 −5.9 −4.1 −6.3 −6.3 −6.3 −0.7 1.5 −6.5 −6.5 −6.5 −2.3 −2.3 −2.3 −1.9 −1.8 −1.8 −1.8 −3.2 −3.7 −2.4 −2.4 −2.4 −2.5 −2.1 0.0 −2.1 −1.3 Level 1 Level 1 BU −4.8 −4.8 −4.8 −2.6 −1.4 −3.5 1.3 3.3 −2.3 0.4 0.9 8.2 4.9 3.4 6.5 2.1 0.6 6.7 0.8 0.8 OLS −1.3 −2.2 −2.8 −1.1 −0.4 −0.3 −0.3 −0.3 −0.6 −0.3 −0.3 −4.6 −4.9 −5.0 −4.3 −4.2 −3.4 −4.2 −3.1 −2.1 −2.1 −2.1 WLS v −4.2 −3.8 −3.8 −3.8 −3.5 −3.0 −0.6 0.4 −2.2 −0.7 −0.7 −0.7 −0.6 −0.6 −0.6 −5.2 −5.3 −5.2 −4.7 −4.2 −3.3 −4.6 −2.7 −1.8 WLS s −3.4 −3.5 −3.6 −3.6 −3.6 −2.4 −0.7 −0.7 −0.7 −0.1 −1.8 −0.6 −0.6 −0.6 −0.6 −3.0 −3.9 −4.4 −3.2 −3.9 −3.5 −3.5 −3.5 −2.9 −3.2 −3.2 −3.2 −2.1 −2.1 −2.1 MinT(Sample) −3.1 −0.7 −0.3 −4.7 −4.7 −4.7 2.1 4.7 −3.2 −0.2 0.0 −3.6 −4.3 −4.0 −5.0 −4.1 −3.0 −4.8 −3.1 −1.9 MinT(Shrink) −4.8 −4.8 −4.8 −3.5 −3.1 −4.6 0.8 2.7 −3.4 −3.4 −3.4 −0.7 −0.7 −0.7 −0.6 −0.6 −0.6 −5.5 −5.5 −5.5 −5.5 −5.5 −5.5 −5.3 −5.3 −5.3 −5.1 −5.1 −5.1 −4.5 −4.5 −4.5 −3.4 −5.0 −5.0 −5.0 −3.1 −2.0 Bottom level Bottom level BU 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 OLS 2.7 0.3 −1.0 1.8 −1.1 −2.2 −2.2 −2.2 1.3 −0.4 −0.8 −2.5 −2.6 −2.7 −2.1 −2.0 −1.5 −2.2 −1.3 −1.1 WLS v 0.8 −0.8 −1.4 0.4 −1.2 −1.8 0.1 −0.8 −1.0 −3.1 −3.2 −3.4 −3.4 −3.4 −2.5 −2.5 −1.9 −2.7 −1.6 −1.4 WLS s 1.1 −0.7 −1.6 0.8 −1.3 −1.3 −1.3 −2.1 0.4 −0.7 −0.9 −2.2 −2.4 −2.6 −1.9 −1.9 −1.5 −1.9 −1.3 −1.1 MinT(Sample) 0.9 1.1 0.2 −1.7 −1.7 −1.7 0.3 0.4 −1.5 −1.5 −1.5 −0.5 −0.9 −3.4 −1.7 −0.2 −3.3 −1.7 −0.6 −3.9 −2.1 −1.6 MinT(Shrink) −0.6 −0.6 −0.6 −1.3 −1.3 −1.3 −2.0 −2.0 −2.0 −1.6 −0.7 −1.0 −1.4 −0.9 −0.9 −0.9 −1.3 −1.3 −1.3 −4.1 −4.1 −4.1 −3.8 −3.8 −3.8 −3.4 −3.4 −3.4 −3.4 −3.4 −3.4 −2.8 −2.8 −2.8 −2.1 −2.1 −2.1 −4.0 −4.0 −4.0 −2.5 −2.5 −2.5 −1.9 −1.9 −1.9 Average Average BU −4.1 −2.3 −1.1 −2.7 0.3 1.6 −2.3 −0.2 0.1 7.5 4.8 3.3 6.4 2.7 1.3 7.1 1.4 1.0 OLS −0.9 −1.9 −2.4 −0.5 −1.1 −1.4 −1.4 −1.4 −0.6 −0.7 −0.8 −2.7 −3.1 −3.5 −2.5 −2.7 −2.3 −2.3 −2.1 −1.6 WLS v −3.5 −3.4 −3.4 −3.4 −3.0 −2.3 −1.3 −0.9 −2.2 −1.1 −1.1 −3.4 −3.7 −3.9 −3.0 −3.0 −2.4 −3.0 −2.0 −1.5 WLS s −2.8 −3.1 −3.1 −3.1 −3.1 −1.7 −1.4 −1.4 −1.4 −1.3 −1.7 −1.1 −1.1 −1.2 −2.2 −2.9 −1.4 −2.3 −2.2 −1.0 −2.1 −1.5 MinT(Sample) −2.4 −0.7 −0.3 −4.0 −4.0 −4.0 1.0 2.6 −3.4 −0.7 −0.8 −3.1 −2.7 −2.0 −3.7 −2.5 −1.6 −3.8 −2.4 −1.6 MinT(Shrink) −4.2 −4.2 −4.2 −3.3 −2.9 −3.9 −0.2 0.9 −3.5 −3.5 −3.5 −1.2 −1.2 −1.2 −1.2 −1.2 −1.2 −4.3 −4.3 −4.3 −4.2 −4.2 −4.2 −4.0 −4.0 −4.0 −3.8 −3.8 −3.8 −3.3 −3.3 −3.3 −2.5 −2.5 −2.5 −3.9 −3.9 −3.9 −2.6 −2.6 −2.6 −1.8 −1.8 −1.8 Each entry shows the percentage difference in average RMSE between the reconciled and base forecasts. A negative (positive) entry shows a percentage decrease (increase) in average RMSE relative to the base forecasts. Bold entries identify the best performing approaches. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 37 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Table 3: Out-of-sample forecast results from simulating seasonal data. 
+
+ARIMA ETS 
+
+T = 60 T = 180 T = 300 T = 60 T = 180 T = 300 
+
+h = 1 1–4 1–8 h = 1 1–8 1–16 h = 1 1–12 1–24 h = 1 1–4 1–8 h = 1 1–8 1–16 h = 1 1–12 1–24 
+
+Top level Top level BU 9.3 11.2 10.3 3.0 2.6 0.9 12.5 −8.5 −30.9 −5.3 −6.4 −7.9 1.0 −2.0 −4.5 1.2 −4.6 −8.8 OLS −1.9 −1.2 −1.4 −1.8 −1.8 −1.8 −2.7 −4.3 −2.7 −22.2 −33.3 −4.5 −5.0 −5.7 −0.8 −2.3 −4.3 −1.2 −1.2 −1.2 −4.5 −7.7 WLS v −2.0 −1.4 −1.4 −1.4 −1.7 −1.7 −1.7 −1.5 −3.2 −5.4 −5.4 −5.4 −3.5 −37.7 −62.0 −6.4 −6.4 −6.4 −6.9 −6.9 −6.9 −8.4 −8.4 −8.4 -0.6 −3.1 −3.1 −3.1 −6.0 −6.0 −6.0 −1.0 −6.1 −6.1 −6.1 −10.8 −10.8 −10.8 WLS s −1.2 −0.1 −0.4 −1.6 −2.8 −4.9 −1.4 −28.3 −46.1 −6.1 −6.7 −7.8 −0.7 −2.9 −5.7 −1.2 −1.2 −1.2 −5.9 −10.2 MinT(Sample) −0.4 0.6 0.5 −1.2 −3.0 −4.4 −3.3 −37.5 −62.5 −3.6 −3.7 −5.6 −1.1 −1.1 −1.1 −2.4 −4.5 −1.1 −5.1 −8.7 MinT(Shrink) −2.4 −2.4 −2.4 −1.4 −1.4 −1.4 −1.7 −1.7 −1.7 −1.8 −1.8 −1.8 −3.4 −3.4 −3.4 −5.2 −3.7 −3.7 −3.7 −37.9 −37.9 −37.9 −62.8 −62.8 −62.8 −4.9 −5.3 −7.2 −1.1 −1.1 −1.1 −2.7 −5.1 −1.1 −5.6 −9.6 
+
+Base 17.0 17.3 20.0 17.0 20.4 25.0 15.7 33.2 74.7 17.9 18.4 21.8 17.1 20.6 25.6 15.4 22.2 30.5 
+
+Level 1 Level 1 BU 8.3 10.2 8.6 1.1 2.1 1.6 13.1 24.4 16.8 −2.9 −5.0 −5.4 −0.3 −1.3 −2.4 0.6 −1.4 −2.5 OLS −3.4 −3.4 −3.7 −2.0 −2.4 −2.7 −1.4 −0.9 0.2 −2.1 −3.4 −3.4 −1.1 −1.3 −2.0 −0.5 −1.0 −1.5 WLS v −5.0 −5.6 −5.9 −2.7 −3.7 −4.5 −3.9 −19.9 −38.6 −4.0 −4.0 −4.0 −5.5 −5.5 −5.5 −6.0 −6.0 −6.0 −1.2 −2.2 −3.7 −3.7 −3.7 −0.7 −2.6 −4.3 −4.3 −4.3 WLS s −2.8 −2.2 −2.7 −2.1 −2.6 −3.4 −0.3 −4.3 −11.7 −3.7 −5.2 −5.5 −1.3 −2.0 −3.4 −0.7 −2.3 −3.7 MinT(Sample) −4.2 −4.3 −4.6 −2.3 −3.7 −4.0 −4.4 −21.0 −41.8 −1.8 −3.0 −4.1 −1.9 −1.9 −1.9 −2.1 −3.4 −1.1 −1.1 −1.1 −2.2 −3.5 MinT(Shrink) −5.6 −5.6 −5.6 −5.9 −5.9 −5.9 −6.2 −6.2 −6.2 −2.9 −2.9 −2.9 −4.1 −4.1 −4.1 −4.8 −4.8 −4.8 −4.7 −4.7 −4.7 −21.6 −21.6 −21.6 −42.3 −42.3 −42.3 −3.2 −4.5 −5.5 −1.8 −2.3 −2.3 −2.3 −3.7 −3.7 −3.7 −1.0 −2.7 −2.7 −2.7 −4.3 −4.3 −4.3 
+
+Base 10.6 10.7 12.6 10.3 12.3 15.5 9.6 16.2 30.6 10.6 10.8 12.8 10.2 12.2 15.7 9.2 13.2 18.4 
+
+Bottom level Bottom level BU 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 OLS −6.2 −7.1 −6.4 −2.0 −2.7 −2.4 −6.9 −8.6 −5.5 0.5 1.0 1.3 −0.6 0.0 0.2 −0.7 0.2 0.6 WLS v −14.1 −16.2 −14.6 −3.6 −5.2 −5.3 −15.6 −35.1 −45.3 −0.5 −0.5 −0.5 −0.2 −0.2 −0.2 −0.4 −0.6 −0.6 −0.8 −0.8 −0.7 −1.0 WLS s −5.9 −6.5 −5.9 −2.1 −2.9 −2.8 −6.4 −10.2 −10.5 −0.5 −0.5 −0.5 −0.2 −0.2 −0.2 −0.1 −0.7 −0.5 −0.6 −0.8 −0.5 −0.6 MinT(Sample) −13.7 −15.7 −14.4 −3.8 −5.9 −5.8 −16.3 −38.3 −51.8 0.9 0.8 0.2 −1.0 −0.8 −1.3 −1.0 −0.9 −1.4 MinT(Shrink) −14.9 −14.9 −14.9 −16.9 −16.9 −16.9 −15.5 −15.5 −15.5 −4.2 −4.2 −4.2 −6.2 −6.2 −6.2 −6.4 −6.4 −6.4 −16.6 −16.6 −16.6 −38.6 −38.6 −38.6 −52.1 −52.1 −52.1 −0.2 −0.2 −0.2 −0.2 −0.7 −0.7 −0.7 −1.1 −1.1 −1.1 −1.0 −1.0 −1.0 −1.5 −1.5 −1.5 −1.1 −1.1 −1.1 −1.2 −1.2 −1.2 −1.9 −1.9 −1.9 
+
+Base 7.4 7.6 8.9 6.4 7.9 10.2 7.0 13.6 24.6 6.5 6.5 7.9 6.2 7.5 9.9 5.8 8.6 12.2 
+
+Average Average BU 4.9 6.0 5.2 1.2 1.4 0.7 7.1 4.2 −5.5 −2.4 −3.4 −3.9 0.2 −1.0 −2.0 0.5 −1.7 −3.1 OLS −4.2 −4.5 −4.3 −1.9 −2.6 −3.0 −4.2 −10.3 −12.9 −1.7 −2.1 −2.2 −0.8 −1.0 −1.7 −0.8 −1.4 −2.3 WLS v −8.2 −9.2 −8.7 −2.7 −4.2 −5.1 −9.0 −31.7 −48.9 −3.3 −3.3 −3.3 −3.8 −3.8 −3.8 −4.4 −4.4 −4.4 −0.8 −1.8 −3.1 −0.8 −2.8 −4.6 WLS s −3.8 −3.6 −3.6 −2.0 −2.8 −3.5 −3.3 −13.6 −22.1 −3.1 −3.6 −4.0 −0.9 −1.7 −2.8 −0.9 −2.5 −4.1 MinT(Sample) −7.4 −8.1 −7.7 −2.6 −4.4 −4.9 −9.4 −33.4 −52.6 −1.2 −1.7 −2.8 −1.3 −1.7 −2.8 −1.0 −2.5 −4.0 MinT(Shrink) −8.9 −8.9 −8.9 −9.6 −9.6 −9.6 −9.2 −9.2 −9.2 −3.1 −3.1 −3.1 −4.8 −4.8 −4.8 −5.6 −5.6 −5.6 −9.7 −9.7 −9.7 −33.8 −33.8 −33.8 −53.0 −53.0 −53.0 −2.5 −3.1 −4.0 −1.4 −1.4 −1.4 −1.9 −1.9 −1.9 −3.2 −3.2 −3.2 −1.1 −1.1 −1.1 −2.9 −2.9 −2.9 −4.7 −4.7 −4.7 
+
+Base 9.7 9.9 11.5 9.0 10.9 13.9 9.0 17.2 33.4 9.3 9.4 11.3 8.9 10.7 13.8 8.2 11.8 16.6 Base shows the average RMSE of the base forecasts. A negative (positive) entry above this row shows the percentage decrease (increase) in average RMSE of the reconciled forecasts relative to the base forecasts. Bold entries identify the best performing approaches. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 38 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Table 4: Data generating mechanism for simulating a large hierarchy. 
+
+Component Data generating process (DGP) Correlation This component ensures that children belonging to the same parent are correlated, while children belonging to different parents are independent. For the children series this component was generated from ARIMA (p, d, q)
+
+processes with error variances drawn from a uniform distribution on the interval (0.05, 0.1 ). A compound symmetric block diagonal correlation structure with blocks of size 4 was used to generate contemporaneous error correlations. The correlations for each block were drawn from a uniform distribution on the interval (0.3, 0.8) allowing for moderate to high correlations among the children. Signal-to-noise ratio In order to ensure that aggregate series have a higher signal-to-noise ratio compared to their disaggregate counterparts, this component was generated from processes with off-setting errors. Specifically 
+
+xAA ,t = zt + 0.25 ωt + ηt, xBA ,t = zt − 0.25 ωt + νt,
+
+xAB ,t = zt + 0.25 ωt − ηt, xBB ,t = zt − 0.25 ωt − νt,
+
+xAC ,t = + 0.25 ωt, xBC ,t = − 0.25 ωt,
+
+xAD ,t = + 0.25 ωt, xBD ,t = − 0.25 ωt,where zt is an ARIMA (p, 1, q) process with normally distributed errors with mean zero and variance 0.005. ωt, ηt and νt were independently generated from ARIMA (p, 0, q) processes with normally distributed errors with mean zero and variance 0.4. For each ARIMA (p, d, q) process, p, q ∈ { 0, 1, 2 } and d ∈ { 0, 1 } with equal probability. The parameter spaces for the coefficients are given in Table 1. Note: For hierarchies involving more than 2-levels, the weights of off-setting errors from each level to the bottom level nodes (0.25 in this case) need to be calculated appropriately. The weights for a given node are simply the reciprocal of the number of descendant children at the bottom level. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 39 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Table 5: Out-of-sample forecast performances from 5-level hierarchy. 
+
+ARIMA ETS 
+
+h = 1 1–4 1–8 1–16 h = 1 1–4 1–8 1–16 h = 1 1–4 1–8 1–16 h = 1 1–4 1–8 1–16 
+
+Top level Level 1 Top level Level 1 BU 63.3 21.0 −1.9 −18.9 36.0 13.9 −2.0 −16.3 57.3 18.9 −1.8 −16.0 34.5 13.6 −1.7 −11.8 OLS −0.7 −0.7 −0.7 −1.6 −2.0 −2.2 −2.8 −0.1 1.4 2.1 −0.5 −0.5 −0.5 −1.6 −2.2 −3.3 −1.7 0.2 1.1 3.5 WLS v 14.2 −4.7 −14.1 −14.1 −14.1 −20.8 −20.8 −20.8 1.7 −6.8 −12.4 −12.4 −12.4 −18.0 −18.0 −18.0 13.6 −3.5 −12.3 −12.3 −12.3 −19.8 −19.8 −19.8 3.5 −4.7 −10.7 −10.7 −10.7 −15.2 −15.2 −15.2 WLS s 7.9 −6.9 −13.8 −18.8 −2.1 −8.1 −11.9 −16.0 8.1 −5.5 −12.0 −18.0 0.1 −6.1 −10.3 −13.4 MinT(Shrink) 3.1 −7.1 −7.1 −7.1 −11.6 −14.5 −5.3 −5.3 −5.3 −8.5 −8.5 −8.5 −10.4 −12.4 1.8 −6.5 −6.5 −6.5 −10.0 −14.9 −4.2 −4.2 −4.2 −6.9 −6.9 −6.9 −8.8 −10.8 
+
+Base 64.2 142.5 268.1 543.5 14.2 27.7 48.9 94.8 69.9 145.9 263.3 506.1 15.0 27.9 47.9 86.6 
+
+Level 2 Level 3 Level 2 Level 3 BU 16.5 6.6 −2.2 −10.9 4.6 1.2 −2.2 −5.6 15.0 6.0 −1.8 −6.8 4.5 1.4 −1.2 −2.3 OLS −2.7 0.2 2.6 5.5 −2.7 −0.9 1.1 4.3 −2.5 −0.2 2.3 6.9 −2.1 −0.8 1.4 5.2 WLS v −4.0 −6.8 −9.5 −9.5 −9.5 −12.4 −12.4 −12.4 −5.3 −5.6 −6.2 −6.2 −6.2 −6.8 −6.8 −6.8 −2.7 −5.6 −8.0 −8.0 −8.0 −9.3 −9.3 −9.3 −3.8 −4.5 −4.6 −4.6 −4.6 −3.9 −3.9 −3.9 WLS s −5.7 −7.5 −9.2 −10.9 −5.8 −5.9 −6.1 −6.2 −4.3 −6.4 −7.8 −8.0 −4.3 −4.8 −4.5 −3.4 MinT(Shrink) −7.2 −7.2 −7.2 −7.7 −7.7 −7.7 −8.2 −8.3 −6.3 −6.3 −6.3 −6.0 −6.0 −6.0 −5.7 −4.9 −6.6 −6.6 −6.6 −6.9 −6.9 −6.9 −6.8 −6.2 −5.3 −5.3 −5.3 −5.1 −5.1 −5.1 −4.1 −2.5 
+
+Base 5.3 9.4 15.3 27.4 2.5 4.0 6.1 9.9 5.6 9.4 15.0 25.1 2.5 4.0 5.9 9.2 
+
+Level 4 Bottom level Level 4 Bottom level BU 0.8 −0.1 −1.3 −2.8 0.0 0.0 0.0 0.0 1.1 0.6 −0.1 −0.5 0.0 0.0 0.0 0.0 OLS −1.5 −0.9 −0.1 1.2 0.7 0.7 1.0 1.8 −1.1 −0.6 0.3 1.7 0.5 0.5 0.7 1.1 WLS v −2.7 −2.9 −3.2 −3.2 −3.2 −3.6 −3.6 −3.6 −1.6 −1.6 −1.6 −1.3 −1.3 −1.3 −1.0 −1.0 −1.0 −0.3 −0.3 −0.3 −2.0 −2.1 −1.9 −1.9 −1.9 −1.6 −1.6 −1.6 −1.2 −1.2 −1.2 −1.1 −1.1 −1.1 −0.9 −0.9 −0.9 −0.6 −0.6 −0.6 WLS s −2.8 −3.0 −3.0 −3.0 −3.1 −3.4 −0.3 −0.3 −0.3 0.0 −2.0 −2.1 −1.9 −1.9 −1.9 −1.5 −0.2 −0.3 −0.2 −0.2 MinT(Shrink) −2.9 −2.9 −2.9 −3.0 −3.0 −3.0 −3.0 −2.9 −1.6 −1.6 −1.6 −1.3 −1.3 −1.3 −0.7 0.4 −2.3 −2.3 −2.3 −2.2 −2.2 −2.2 −1.7 −1.0 −1.2 −1.2 −1.2 −1.0 −0.5 0.1 
+
+Base 1.4 2.0 2.9 4.5 0.6 0.9 1.2 1.8 1.4 2.0 2.8 4.2 0.7 0.9 1.2 1.8 
+
+Average Average BU 5.4 2.3 −1.0 −5.1 5.1 2.4 −0.5 −3.1 OLS −0.7 −0.1 0.7 2.1 −0.5 −0.1 0.7 2.2 WLS v −1.8 −3.1 −4.4 −4.4 −4.4 −6.0 −6.0 −6.0 −1.1 −2.4 −3.5 −3.5 −3.5 −4.6 −4.6 −4.6 WLS s −1.8 −3.0 −4.0 −5.3 −1.1 −2.3 −3.2 −3.9 MinT(Shrink) −2.9 −2.9 −2.9 −3.4 −3.4 −3.4 −3.8 −4.0 −2.3 −2.3 −2.3 −2.8 −2.8 −2.8 −2.8 −3.0 
+
+Base 1.0 1.5 2.2 3.5 1.0 1.5 2.2 3.3 Base shows the average RMSE of the base forecasts. A negative (positive) entry above this row shows the percentage decrease (increase) in average RMSE of the reconciled forecasts relative to the base forecasts. Bold entries identify the best performing approaches. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 40 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Table 6: Geographical divisions of Australia. 
+
+Series Name Label Series Name Label 
+
+Total Regions continued 
+
+1 Australia Total 55 Lakes BCA 
+
+States 56 Gippsland BCB 2 NSW A 57 Phillip Island BCC 3 VIC B 58 Central Murray BDA 4 QLD C 59 Goulburn BDB 5 SA D 60 High Country BDC 6 WA E 61 Melbourne East BDD 7 TAS F 62 Upper Yarra BDE 8 NT G 63 Murray East BDF 
+
+Zones 64 Wimmera+Mallee BEA 9 Metro NSW AA 65 Western Grampians BEB 10 Nth Coast NSW AB 66 Bendigo Loddon BEC 11 Sth Coast NSW AC 67 Macedon BED 12 Sth NSW AD 68 Spa Country BEE 13 Nth NSW AE 69 Ballarat BEF 14 ACT AF 70 Central Highlands BEG 15 Metro VIC BA 71 Gold Coast CAA 16 West Coast VIC BB 72 Brisbane CAB 17 East Coast VIC BC 73 Sunshine Coast CAC 18 Nth East VIC BD 74 Central Queensland CBA 19 Nth West VIC BE 75 Bundaberg CBB 20 Metro QLD CA 76 Fraser Coast CBC 21 Central Coast QLD CB 77 Mackay CBD 22 Nth Coast QLD CC 78 Whitsundays CCA 23 Inland QLD CD 79 Northern CCB 24 Metro SA DA 80 Tropical North Queensland CCC 25 Sth Coast SA DB 81 Darling Downs CDA 26 Inland SA DC 82 Outback CDB 27 West Coast SA DD 83 Adelaide DAA 28 West Coast WA EA 84 Barossa DAB 29 Nth WA EB 85 Adelaide Hills DAC 30 Sth WA EC 86 Limestone Coast DBA 31 Sth TAS FA 87 Fleurieu Peninsula DBB 32 Nth East TAS FB 88 Kangaroo Island DBC 33 Nth West TAS FC 89 Murraylands DCA 34 Nth Coast NT GA 90 Riverland DCB 35 Central NT GB 91 Clare Valley DCC 
+
+Regions 92 Flinders Range and Outback DCD 36 Sydney AAA 93 Eyre Peninsula DDA 37 Central Coast AAB 94 Yorke Peninsula DDB 38 Hunter ABA 95 Australia’s Coral Coast EAA 39 North Coast NSW ABB 96 Experience Perth EAB 40 Northern Rivers Tropical NSW ABC 97 Australia’s South West EAC 41 South Coast ACA 98 Australia’s North West EBA 42 Snowy Mountains ADA 99 Australia’s Golden Outback ECA 43 Capital Country ADB 100 Hobart and the South FAA 44 The Murray ADC 101 East Coast FBA 45 Riverina ADD 102 Launceston, Tamar and the North FBB 46 Central NSW AEA 103 North West FCA 47 New England North West AEB 104 Wilderness West FCB 48 Outback NSW AEC 105 Darwin GAA 49 Blue Mountains AED 106 Kakadu Arnhem GAB 50 Canberra AFA 107 Katherine Daly GAC 51 Melbourne BAA 108 Barkly GBA 52 Peninsula BAB 109 Lasseter GBB 53 Geelong BAC 110 Alice Springs GBC 54 Western BBA 111 MacDonnell GBD 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 41 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Table 7: Grouped time series for Australian tourism flows. 
+
+Geographical Number of series per Number of series per division geographical division purpose of travel Total Australia 1 4 5States 7 28 35 Zones 27 108 135 Regions 76 304 380 Total 111 444 555 For more details on the geographical hierarchy refer to Appendix C. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 42 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Table 8: Out-of-sample forecast evaluation for Australian domestic tourism flows. 
+
+h = 1 2 3 6 12 1–6 1–12 h = 1 2 3 6 12 1–6 1–12 
+
+ARIMA Australia Australia by purpose of travel BU 26.2 22.2 20.0 22.9 17.1 22.2 22.2 12.9 8.1 9.6 6.9 6.5 8.6 7.2 OLS −3.1 −3.1 −3.1 −2.6 −2.6 −2.6 −3.2 −3.2 −3.2 −0.9 −0.9 −0.9 −1.0 −1.0 −1.0 −2.3 −2.3 −2.3 −1.3 −1.3 −1.3 −3.6 −3.7 −2.7 −4.6 −4.0 −3.7 −4.2 WLS v 2.3 2.3 1.1 3.0 1.3 2.2 3.1 −6.0 −7.7 −6.1 −8.6 −7.9 −7.4 −8.0 WLS s 1.2 0.9 −0.3 2.4 0.6 0.9 2.0 −5.6 −7.3 −5.8 −7.6 −7.6 −6.8 −7.5 MinT(Shrink) −1.3 −1.0 −1.0 0.4 −0.3 −0.5 0.5 −11.9 −11.9 −11.9 −12.9 −12.9 −12.9 −11.1 −11.1 −11.1 −13.0 −13.0 −13.0 −11.3 −11.3 −11.3 −12.2 −12.2 −12.2 −12.4 −12.4 −12.4 
+
+Base 173.7 176.3 180.6 182.1 198.9 179.4 183.9 77.2 79.2 78.6 82.2 84.5 79.8 82.1 
+
+States States by purpose of travel BU 3.5 7.0 8.9 7.9 7.1 7.0 7.0 9.4 7.0 6.9 6.5 0.8 7.1 5.9 OLS −6.8 −4.7 −3.1 −3.9 −3.1 −4.2 −4.1 3.0 1.5 1.3 1.5 −0.6 1.8 1.4 WLS v −9.3 −5.2 −2.9 −4.3 −3.3 −4.9 −4.6 −1.3 −2.6 −2.4 −3.1 −7.2 −2.4 −3.2 WLS s −9.0 −5.6 −3.4 −4.4 −3.6 −5.2 −4.8 −0.4 −2.0 −1.7 −1.8 −6.2 −1.6 −2.4 MinT(Shrink) −10.8 −10.8 −10.8 −7.1 −7.1 −7.1 −4.6 −4.6 −4.6 −6.1 −6.1 −6.1 −4.6 −4.6 −4.6 −6.7 −6.7 −6.7 −6.4 −6.4 −6.4 −3.1 −3.1 −3.1 −4.4 −4.4 −4.4 −4.3 −4.3 −4.3 −5.0 −5.0 −5.0 −8.5 −8.5 −8.5 −4.2 −4.2 −4.2 −4.9 −4.9 −4.9 
+
+Base 46.1 44.5 43.8 45.2 46.3 44.8 45.5 18.6 18.9 19.0 19.3 20.5 19.0 19.4 
+
+Zones Zones by purpose of travel BU −0.2 1.9 1.1 2.2 2.8 1.4 1.8 1.7 2.1 2.3 2.0 2.7 2.1 2.6 OLS −3.5 −3.2 −3.7 −3.6 −3.0 −3.5 −3.5 0.9 0.9 0.7 1.0 2.1 0.9 1.3 WLS v −7.8 −5.2 −5.7 −5.7 −4.3 −5.8 −5.6 −4.0 −3.0 −2.8 −4.0 −2.5 −3.3 −2.9 WLS s −6.4 −4.9 −5.2 −4.8 −4.1 −5.2 −5.1 −4.0 −3.0 −2.8 −4.0 −2.5 −3.3 −2.9 MinT(Shrink) −8.8 −8.8 −8.8 −6.4 −6.4 −6.4 −7.0 −7.0 −7.0 −7.2 −7.2 −7.2 −5.4 −5.4 −5.4 −7.1 −7.1 −7.1 −7.0 −7.0 −7.0 −5.0 −5.0 −5.0 −4.0 −4.0 −4.0 −4.0 −4.0 −4.0 −5.1 −5.1 −5.1 −3.4 −3.4 −3.4 −4.3 −4.3 −4.3 −3.9 −3.9 −3.9 
+
+Base 19.9 19.3 19.5 19.6 19.6 19.6 19.7 8.5 8.4 8.4 8.5 8.5 8.4 8.5 
+
+Regions Regions by purpose of travel BU −1.3 0.1 −0.8 0.4 1.7 −0.3 0.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 OLS −2.5 −2.1 −2.5 −2.4 −1.7 −2.4 −2.1 1.9 1.6 1.5 1.7 1.6 1.6 1.5 WLS v −6.4 −4.5 −5.2 −5.2 −3.5 −5.2 −4.7 −3.1 −2.8 −2.8 −3.4 −3.0 −3.0 −3.1 WLS s −4.9 −3.8 −4.3 −3.8 −2.7 −4.1 −3.6 −0.9 −0.9 −0.9 −0.8 −1.0 −0.9 −1.0 MinT(Shrink) −6.9 −6.9 −6.9 −5.3 −5.3 −5.3 −6.2 −6.2 −6.2 −6.1 −6.1 −6.1 −4.3 −4.3 −4.3 −5.9 −5.9 −5.9 −5.6 −5.6 −5.6 −3.7 −3.7 −3.7 −3.4 −3.4 −3.4 −3.6 −3.6 −3.6 −4.0 −4.0 −4.0 −3.6 −3.6 −3.6 −3.5 −3.5 −3.5 −3.7 −3.7 −3.7 
+
+Base 10.1 9.9 10.0 10.1 10.0 10.0 10.0 4.4 4.3 4.3 4.4 4.4 4.3 4.4 
+
+ETS Australia Australia by purpose of travel BU 12.1 5.5 4.3 3.7 5.6 5.4 6.0 8.1 4.5 4.8 4.8 5.1 5.2 5.1 OLS −0.5 −0.5 −0.5 −1.1 −1.1 −1.1 −1.8 −1.3 0.0 −1.2 −0.7 −0.6 −0.6 −0.6 −0.1 0.6 0.2 0.0 0.0 0.0 0.1 0.0 WLS v 3.3 0.4 −1.6 −1.2 1.8 −0.1 0.8 1.6 0.5 0.6 0.3 1.2 0.6 0.9 WLS s 2.4 0.0 −1.9 −1.4 1.4 −0.6 0.4 0.9 0.2 0.3 0.0 1.1 0.3 0.7 MinT(Shrink) 1.4 −0.8 −3.2 −3.2 −3.2 −3.3 −3.3 −3.3 −0.1 −0.1 −0.1 −1.7 −1.7 −1.7 −1.0 −1.0 −1.0 0.1 −0.4 −0.4 −0.4 −0.5 −0.5 −0.5 −0.9 −0.9 −0.9 0.0 0.0 0.0 −0.4 −0.4 −0.4 −0.2 −0.2 −0.2 
+
+Base 162.9 164.1 170.1 177.7 194.3 170.3 177.1 63.7 63.7 64.5 67.0 72.8 65.0 67.6 
+
+States States by purpose of travel BU 1.5 2.5 2.3 3.3 3.5 2.2 2.9 1.4 1.0 0.4 1.1 0.3 0.9 0.8 OLS −2.6 −1.0 −0.6 −0.6 −1.0 −1.0 −1.0 −1.2 −1.2 −0.6 −0.8 −0.7 −0.6 −1.8 −0.7 −1.0 WLS v −2.8 −0.9 −0.8 −0.8 0.0 −1.3 −0.9 −1.3 −1.3 −1.4 −1.5 −2.5 −1.5 −1.7 WLS s −3.0 −1.0 −0.9 −0.9 −0.2 −1.5 −1.0 −1.3 −1.4 −1.4 −1.4 −2.3 −1.4 −1.6 MinT(Shrink) −3.3 −3.3 −3.3 −1.2 −1.2 −1.2 −1.4 −1.4 −1.4 −1.6 −1.6 −1.6 −1.0 −1.0 −1.0 −1.8 −1.8 −1.8 −1.6 −1.6 −1.6 −1.7 −1.7 −1.7 −1.6 −1.6 −1.6 −1.8 −1.8 −1.8 −1.9 −1.9 −1.9 −3.0 −3.0 −3.0 −1.9 −1.9 −1.9 −2.1 −2.1 −2.1 
+
+Base 41.8 40.8 41.0 41.6 43.9 41.4 42.1 17.9 17.9 18.0 18.2 19.1 18.0 18.4 
+
+Zones Zones by purpose of travel BU 0.9 0.1 0.4 1.0 2.0 0.5 0.9 0.2 −0.2 −0.7 −0.3 0.7 −0.3 0.1 OLS −1.3 −1.4 −1.1 −1.1 −1.1 −1.2 −1.3 −0.4 −0.4 −0.4 −0.5 −0.5 −0.4 −0.4 WLS v −1.7 −2.1 −1.7 −1.5 −0.9 −1.7 −1.6 −1.4 −1.6 −1.9 −1.8 −1.5 −1.7 −1.6 WLS s −1.8 −2.0 −1.7 −1.6 −0.9 −1.7 −1.6 −1.4 −1.6 −1.9 −1.8 −1.5 −1.7 −1.6 MinT(Shrink) −2.2 −2.2 −2.2 −2.4 −2.4 −2.4 −2.1 −2.1 −2.1 −2.1 −2.1 −2.1 −1.5 −1.5 −1.5 −2.2 −2.2 −2.2 −2.2 −2.2 −2.2 −1.8 −1.8 −1.8 −2.0 −2.0 −2.0 −2.2 −2.2 −2.2 −2.1 −2.1 −2.1 −1.9 −1.9 −1.9 −2.0 −2.0 −2.0 −2.0 −2.0 −2.0 
+
+Base 18.0 18.1 18.1 18.1 18.6 18.1 18.3 8.0 8.0 8.0 8.1 8.2 8.0 8.1 
+
+Regions Regions by purpose of travel BU −0.7 −0.8 −1.0 −0.3 0.4 −0.7 −0.3 0.0 0.0 0.0 0.0 0.0 0.0 0.0 OLS −1.4 −1.4 −1.6 −1.4 −1.6 −1.5 −1.6 0.8 0.9 1.1 0.9 0.7 0.9 0.8 WLS v −2.4 −2.4 −2.5 −2.3 −2.1 −2.4 −2.3 −0.7 −0.8 −0.6 −0.8 −1.1 −0.7 −0.8 WLS s −2.4 −2.3 −2.5 −2.2 −2.0 −2.4 −2.3 −0.3 −0.2 −0.1 −0.2 −0.3 −0.2 −0.2 MinT(Shrink) −2.8 −2.8 −2.8 −2.7 −2.7 −2.7 −2.9 −2.9 −2.9 −2.7 −2.7 −2.7 −2.5 −2.5 −2.5 −2.8 −2.8 −2.8 −2.7 −2.7 −2.7 −1.1 −1.1 −1.1 −1.1 −1.1 −1.1 −1.0 −1.0 −1.0 −1.2 −1.2 −1.2 −1.5 −1.5 −1.5 −1.1 −1.1 −1.1 −1.2 −1.2 −1.2 
+
+Base 9.4 9.4 9.4 9.5 9.6 9.4 9.5 4.1 4.1 4.1 4.2 4.2 4.1 4.2 Base shows the average RMSE ( ×10 3) of the base forecasts. A negative (positive) entry above this row shows the percentage decrease (increase) in average RMSE of the reconciled forecasts relative to the base forecasts. Bold entries identify the best performing approaches. 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 43 Optimal forecast reconciliation for hierarchical and grouped time series through trace minimization 
+
+Table 9: ARIMA and ETS models identified for the final rolling window ending November 2016. 
+
+Geographical division Australia States Zones Regions Total number of series grouped by purpose of travel including the aggregates 5 35 135 380 Proportion of ARIMA models with Drift 0.80 0.31 0.19 0.07 Seasonal 0.80 0.91 0.73 0.47 Both 0.80 0.29 0.16 0.05 Proportion of ETS models with Trend 0.80 0.32 0.17 0.11 Seasonal 1.00 1.00 0.84 0.48 Both 0.80 0.32 0.14 0.05 
+
+Wickramasuriya, Athanasopoulos & Hyndman: 23 January 2018 44

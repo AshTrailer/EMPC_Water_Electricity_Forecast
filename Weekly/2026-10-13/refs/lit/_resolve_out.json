@@ -1,0 +1,476 @@
+[
+ {
+  "slug": "lago2021_prob",
+  "want": "Probabilistic electricity price forecasting benchmark Lago Marcjasz Weron",
+  "arxiv_id": "2205.11439",
+  "oa_url": "https://www.mdpi.com/1996-1073/15/14/4976/pdf?version=1658288276",
+  "best_oa": "https://www.mdpi.com/1996-1073/15/14/4976/pdf?version=1658288276",
+  "title": "Probabilistic Forecasting of German Electricity Imbalance Prices",
+  "year": 2022,
+  "doi": "https://doi.org/10.3390/en15144976",
+  "locations": [
+   "https://www.mdpi.com/1996-1073/15/14/4976/pdf?version=1658288276",
+   "http://arxiv.org/pdf/2205.11439",
+   "https://arxiv.org/pdf/2205.11439",
+   "https://duepublico2.uni-due.de/servlets/MCRFileNodeServlet/duepublico_derivate_00076528/energies_2022-15-04976.pdf",
+   "https://www.mdpi.com/1996-1073/15/14/4976/",
+   "https://doaj.org/article/111a984d9bee49e7aff796a8d53a3fde"
+  ]
+ },
+ {
+  "slug": "uniejewski2018_vst",
+  "want": "10.1109/tpwrs.2017.2734563",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "Variance Stabilizing Transformations for Electricity Spot Price Forecasting",
+  "year": 2017,
+  "doi": "https://doi.org/10.1109/tpwrs.2017.2734563",
+  "locations": [
+   "https://doi.org/10.1109/tpwrs.2017.2734563",
+   "http://www.im.pwr.wroc.pl/~hugo/RePEc/wuu/wpaper/HSC_17_01.pdf",
+   "https://ideas.repec.org/p/wuu/wpaper/hsc1701.html",
+   "https://econpapers.repec.org/paper/wuuwpaper/hsc1701.htm"
+  ]
+ },
+ {
+  "slug": "nowotarski2018_review",
+  "want": "10.1016/j.rser.2017.05.234",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "Recent advances in electricity price forecasting: A review of probabilistic forecasting",
+  "year": 2017,
+  "doi": "https://doi.org/10.1016/j.rser.2017.05.234",
+  "locations": [
+   "https://doi.org/10.1016/j.rser.2017.05.234",
+   "http://www.im.pwr.wroc.pl/~hugo/RePEc/wuu/wpaper/HSC_16_07.pdf",
+   "https://ideas.repec.org/p/wuu/wpaper/hsc1607.html",
+   "https://econpapers.repec.org/RePEc:wuu:wpaper:hsc1607",
+   "http://www.sciencedirect.com/science/article/pii/S1364032117308808"
+  ]
+ },
+ {
+  "slug": "corsi2009_har",
+  "want": "10.1093/jjfinec/nbp001",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "A Simple Approximate Long-Memory Model of Realized Volatility",
+  "year": 2008,
+  "doi": "https://doi.org/10.1093/jjfinec/nbp001",
+  "locations": [
+   "https://doi.org/10.1093/jjfinec/nbp001",
+   "http://hdl.handle.net/10.1093/jjfinec/nbp001",
+   "http://hdl.handle.net/11568/887300",
+   "http://hdl.handle.net/10278/38476"
+  ]
+ },
+ {
+  "slug": "campbell_shiller1988",
+  "want": "10.3386/w2511",
+  "arxiv_id": null,
+  "oa_url": "https://doi.org/10.3386/w2511",
+  "best_oa": "https://doi.org/10.3386/w2511",
+  "title": "Stock Prices, Earnings and Expected Dividends",
+  "year": 1988,
+  "doi": "https://doi.org/10.1111/j.1540-6261.1988.tb04598.x",
+  "locations": [
+   "https://doi.org/10.1111/j.1540-6261.1988.tb04598.x",
+   "https://doi.org/10.2307/2328190",
+   "https://doi.org/10.3386/w2511",
+   "https://cowles.yale.edu/sites/default/files/files/pub/d08/d0858.pdf",
+   "http://dash.harvard.edu/bitstream/handle/1/3224293/campbell_stockpricesearnings.pdf",
+   "http://www.nber.org/papers/w2511.pdf"
+  ]
+ },
+ {
+  "slug": "welch_goyal2008",
+  "want": "10.1093/rfs/hhm014",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "A Comprehensive Look at The Empirical Performance of Equity Premium Prediction",
+  "year": 2007,
+  "doi": "https://doi.org/10.1093/rfs/hhm014",
+  "locations": [
+   "https://doi.org/10.1093/rfs/hhm014",
+   "https://repec.som.yale.edu/icfpub/publications/2412.pdf",
+   "http://papers.nber.org/papers/w10483.pdf",
+   "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.153.4526",
+   "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.407.7908",
+   "http://icfpub.som.yale.edu/publications/2412"
+  ]
+ },
+ {
+  "slug": "welch_goyal2022",
+  "want": "10.1093/rfs/hhae044",
+  "arxiv_id": null,
+  "oa_url": "https://doi.org/10.1093/rfs/hhae044",
+  "best_oa": "https://doi.org/10.1093/rfs/hhae044",
+  "title": "A Comprehensive 2022 Look at the Empirical Performance of Equity Premium Prediction",
+  "year": 2024,
+  "doi": "https://doi.org/10.1093/rfs/hhae044",
+  "locations": [
+   "https://doi.org/10.1093/rfs/hhae044",
+   "http://hdl.handle.net/10.1093/rfs/hhae044",
+   "https://iris.unil.ch/handle/iris/261571",
+   "https://serval.unil.ch/notice/serval:BIB_17D2C9A6AA39"
+  ]
+ },
+ {
+  "slug": "binsbergen2022_bias",
+  "want": "10.3386/w27410",
+  "arxiv_id": null,
+  "oa_url": "https://doi.org/10.3386/w27410",
+  "best_oa": "https://doi.org/10.3386/w27410",
+  "title": "Biases in Long-Horizon Predictive Regressions",
+  "year": 2020,
+  "doi": "https://doi.org/10.3386/w27410",
+  "locations": [
+   "https://doi.org/10.3386/w27410"
+  ]
+ },
+ {
+  "slug": "chevillon2007_direct",
+  "want": "10.1111/j.1467-6419.2007.00518.x",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "DIRECT MULTI‐STEP ESTIMATION AND FORECASTING",
+  "year": 2007,
+  "doi": "https://doi.org/10.1111/j.1467-6419.2007.00518.x",
+  "locations": [
+   "https://doi.org/10.1111/j.1467-6419.2007.00518.x",
+   "http://www.blackwell-synergy.com/servlet/useragent?func=synergy&amp;synergyAction=showTOC&amp;journalCode=joes&amp;volume=21&amp;issue=4&amp;year=2007&amp;part=null"
+  ]
+ },
+ {
+  "slug": "marcellino2006_direct_iterated",
+  "want": "A comparison of direct and iterated multistep AR methods for forecasting macroeconomic time series",
+  "arxiv_id": null,
+  "oa_url": "https://doi.org/10.2139/ssrn.687782",
+  "best_oa": "https://doi.org/10.2139/ssrn.687782",
+  "title": "A comparison of direct and iterated multistep AR methods for forecasting macroeconomic time series",
+  "year": 2005,
+  "doi": "https://doi.org/10.1016/j.jeconom.2005.07.020",
+  "locations": [
+   "https://doi.org/10.1016/j.jeconom.2005.07.020",
+   "https://doi.org/10.2139/ssrn.687782",
+   "https://repec.unibocconi.it/igier/igi/wp/2005/285.pdf",
+   "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.594.8889",
+   "http://www.cepr.org/active/publications/discussion_papers/dp.php?dpno=4976",
+   "http://www.sciencedirect.com/science/article/pii/S0304-4076(05)00165-X"
+  ]
+ },
+ {
+  "slug": "claeskens2016_puzzle",
+  "want": "10.1016/j.ijforecast.2015.12.005",
+  "arxiv_id": null,
+  "oa_url": "https://pure.eur.nl/en/publications/4d8afc06-f032-4c3c-b8f7-54945f3229be",
+  "best_oa": "https://pure.eur.nl/en/publications/4d8afc06-f032-4c3c-b8f7-54945f3229be",
+  "title": "The forecast combination puzzle: A simple theoretical explanation",
+  "year": 2016,
+  "doi": "https://doi.org/10.1016/j.ijforecast.2015.12.005",
+  "locations": [
+   "https://doi.org/10.1016/j.ijforecast.2015.12.005",
+   "https://pure.eur.nl/en/publications/4d8afc06-f032-4c3c-b8f7-54945f3229be",
+   "https://lirias.kuleuven.be/retrieve/26ea3ca0-1488-49de-ba6b-4a8cd5674f35",
+   "https://pure.eur.nl/en/publications/4d8afc06-f032-4c3c-b8f7-54945f3229be",
+   "https://hdl.handle.net/1871.1/7238878c-f437-40e1-8c01-0fd69bf44357",
+   "https://research.vu.nl/en/publications/7238878c-f437-40e1-8c01-0fd69bf44357"
+  ]
+ },
+ {
+  "slug": "diebold_shin2019_lasso",
+  "want": "10.1016/j.ijforecast.2018.09.006",
+  "arxiv_id": null,
+  "oa_url": "https://economics.sas.upenn.edu/system/files/working-papers/18-014%20PIER%20Paper%20Submission.pdf",
+  "best_oa": "https://economics.sas.upenn.edu/system/files/working-papers/18-014%20PIER%20Paper%20Submission.pdf",
+  "title": "Machine learning for regularized survey forecast combination: Partially-egalitarian LASSO and its derivatives",
+  "year": 2018,
+  "doi": "https://doi.org/10.1016/j.ijforecast.2018.09.006",
+  "locations": [
+   "https://doi.org/10.1016/j.ijforecast.2018.09.006",
+   "https://economics.sas.upenn.edu/system/files/working-papers/18-014%20PIER%20Paper%20Submission.pdf",
+   "http://www.nber.org/papers/w24967.pdf",
+   "http://www.sciencedirect.com/science/article/pii/S0169207018301596"
+  ]
+ },
+ {
+  "slug": "smith_wallis2009",
+  "want": "10.1111/j.1468-0084.2008.00541.x",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "A Simple Explanation of the Forecast Combination Puzzle*",
+  "year": 2009,
+  "doi": "https://doi.org/10.1111/j.1468-0084.2008.00541.x",
+  "locations": [
+   "https://doi.org/10.1111/j.1468-0084.2008.00541.x",
+   "http://www.blackwell-synergy.com/doi/abs/10.1111/j.1468-0084.2008.00541.x"
+  ]
+ },
+ {
+  "slug": "ghysels2007_midas",
+  "want": "10.1080/07474930600972467",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "MIDAS Regressions: Further Results and New Directions",
+  "year": 2007,
+  "doi": "https://doi.org/10.1080/07474930600972467",
+  "locations": [
+   "https://doi.org/10.1080/07474930600972467",
+   "https://research.manchester.ac.uk/en/publications/f74589ab-dcbe-4139-a83b-aae91261fae7",
+   "http://www.tandfonline.com/doi/abs/10.1080/07474930600972467"
+  ]
+ },
+ {
+  "slug": "foroni2016_midas_bridge",
+  "want": "10.1016/j.ijforecast.2015.07.004",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "A comparison of MIDAS and bridge equations",
+  "year": 2016,
+  "doi": "https://doi.org/10.1016/j.ijforecast.2015.07.004",
+  "locations": [
+   "https://doi.org/10.1016/j.ijforecast.2015.07.004",
+   "http://www.sciencedirect.com/science/article/pii/S0169207015001144"
+  ]
+ },
+ {
+  "slug": "athanasopoulos2017_temporal",
+  "want": "10.1016/j.ejor.2017.02.046",
+  "arxiv_id": null,
+  "oa_url": "https://researchportal.bath.ac.uk/files/153427625/EJOR_2017_Temporal_hierarchies_post_print_.pdf",
+  "best_oa": "https://researchportal.bath.ac.uk/files/153427625/EJOR_2017_Temporal_hierarchies_post_print_.pdf",
+  "title": "Forecasting with temporal hierarchies",
+  "year": 2017,
+  "doi": "https://doi.org/10.1016/j.ejor.2017.02.046",
+  "locations": [
+   "https://doi.org/10.1016/j.ejor.2017.02.046",
+   "https://researchportal.bath.ac.uk/files/153427625/EJOR_2017_Temporal_hierarchies_post_print_.pdf"
+  ]
+ },
+ {
+  "slug": "hyndman2011_hierarchical",
+  "want": "10.1016/j.csda.2011.03.006",
+  "arxiv_id": null,
+  "oa_url": "https://figshare.com/articles/journal_contribution/Optimal_combination_forecasts_for_hierarchical_time_series/5085532",
+  "best_oa": "https://figshare.com/articles/journal_contribution/Optimal_combination_forecasts_for_hierarchical_time_series/5085532",
+  "title": "Optimal combination forecasts for hierarchical time series",
+  "year": 2011,
+  "doi": "https://doi.org/10.1016/j.csda.2011.03.006",
+  "locations": [
+   "https://doi.org/10.1016/j.csda.2011.03.006",
+   "http://www.buseco.monash.edu.au/ebs/pubs/wpapers/2007/wp9-07.pdf",
+   "https://EconPapers.repec.org/RePEc:msh:ebswps:2007-9",
+   "http://www.sciencedirect.com/science/article/pii/S0167947311000971",
+   "https://figshare.com/articles/journal_contribution/Optimal_combination_forecasts_for_hierarchical_time_series/5085532",
+   "http://hdl.handle.net/1885/196566"
+  ]
+ },
+ {
+  "slug": "wickramasuriya2019_tracemin",
+  "want": "10.1080/01621459.2018.1448825",
+  "arxiv_id": null,
+  "oa_url": "https://figshare.com/articles/journal_contribution/Optimal_forecast_reconciliation_for_hierarchical_and_grouped_time_series_through_trace_minimization/21521592",
+  "best_oa": "https://figshare.com/articles/journal_contribution/Optimal_forecast_reconciliation_for_hierarchical_and_grouped_time_series_through_trace_minimization/21521592",
+  "title": "Optimal Forecast Reconciliation for Hierarchical and Grouped Time Series Through Trace Minimization",
+  "year": 2018,
+  "doi": "https://doi.org/10.1080/01621459.2018.1448825",
+  "locations": [
+   "https://doi.org/10.1080/01621459.2018.1448825",
+   "https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp22-17.pdf",
+   "http://hdl.handle.net/10.1080/01621459.2018.1448825",
+   "https://figshare.com/articles/journal_contribution/Optimal_forecast_reconciliation_for_hierarchical_and_grouped_time_series_through_trace_minimization/21521592",
+   "https://figshare.com/articles/dataset/Optimal_Forecast_Reconciliation_for_Hierarchical_and_Grouped_Time_Series_Through_Trace_Minimization/7261613",
+   "https://doi.org/10.26180/21521592.v1"
+  ]
+ },
+ {
+  "slug": "athanasopoulos2024_reconciliation_review",
+  "want": "10.1016/j.ijforecast.2023.10.010",
+  "arxiv_id": null,
+  "oa_url": "https://doi.org/10.1016/j.ijforecast.2023.10.010",
+  "best_oa": "https://doi.org/10.1016/j.ijforecast.2023.10.010",
+  "title": "Forecast reconciliation: A review",
+  "year": 2023,
+  "doi": "https://doi.org/10.1016/j.ijforecast.2023.10.010",
+  "locations": [
+   "https://doi.org/10.1016/j.ijforecast.2023.10.010",
+   "https://www.monash.edu/business/ebs/research/publications/ebs/2023/wp08-2023.pdf",
+   "https://researchmgt.monash.edu/ws/files/637773595/565992428-oa.pdf",
+   "https://his.diva-portal.org/smash/get/diva2:1826266/FULLTEXT02",
+   "http://www.sciencedirect.com/science/article/pii/S0169207023001097",
+   "https://eprints.lancs.ac.uk/id/eprint/216697/"
+  ]
+ },
+ {
+  "slug": "elliott2013_complete_subset",
+  "want": "10.1016/j.jeconom.2013.04.017",
+  "arxiv_id": null,
+  "oa_url": "https://escholarship.org/content/qt1st3n7z7/qt1st3n7z7.pdf?t=osxb70",
+  "best_oa": "https://escholarship.org/content/qt1st3n7z7/qt1st3n7z7.pdf?t=osxb70",
+  "title": "Complete subset regressions",
+  "year": 2013,
+  "doi": "https://doi.org/10.1016/j.jeconom.2013.04.017",
+  "locations": [
+   "https://doi.org/10.1016/j.jeconom.2013.04.017",
+   "https://www.escholarship.org/uc/item/1st3n7z7.pdf;origin=repeccitec",
+   "https://escholarship.org/content/qt1st3n7z7/qt1st3n7z7.pdf?t=osxb70",
+   "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.258.7464",
+   "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.303.6960",
+   "https://ideas.repec.org/p/cdl/ucsdec/qt1st3n7z7.html"
+  ]
+ },
+ {
+  "slug": "stein_rule_forecast",
+  "want": "10.1108/s0731-9053(2012)0000030011",
+  "arxiv_id": null,
+  "oa_url": "https://pure.au.dk/ws/files/45366192/rp12_18.pdf",
+  "best_oa": "https://pure.au.dk/ws/files/45366192/rp12_18.pdf",
+  "title": "Stein-Rule Estimation and Generalized Shrinkage Methods for Forecasting Using Many Predictors",
+  "year": 2012,
+  "doi": "https://doi.org/10.1108/s0731-9053(2012)0000030011",
+  "locations": [
+   "https://doi.org/10.1108/s0731-9053(2012)0000030011",
+   "https://repec.econ.au.dk/repec/creates/rp/12/rp12_18.pdf",
+   "https://www.emerald.com/insight/content/doi/10.1108/S0731-9053(2012)0000030011/full/pdf?utm_source=repec&utm_medium=feed&utm_campaign=repec",
+   "https://pure.au.dk/ws/files/45366192/rp12_18.pdf",
+   "https://econpapers.repec.org/paper/aahcreate/2012-18.htm",
+   "https://www.emerald.com/insight/content/doi/10.1108/S0731-9053(2012)0000030011.html?utm_source=repec&utm_medium=feed&utm_campaign=repec"
+  ]
+ },
+ {
+  "slug": "ziel2016_lasso_ieee",
+  "want": "10.1109/tpwrs.2016.2521545",
+  "arxiv_id": "1509.01966",
+  "oa_url": "https://arxiv.org/pdf/1509.01966",
+  "best_oa": "https://arxiv.org/pdf/1509.01966",
+  "title": "Forecasting Electricity Spot Prices Using Lasso: On Capturing the Autoregressive Intraday Structure",
+  "year": 2016,
+  "doi": "https://doi.org/10.1109/tpwrs.2016.2521545",
+  "locations": [
+   "https://doi.org/10.1109/tpwrs.2016.2521545",
+   "http://arxiv.org/pdf/1509.01966",
+   "https://arxiv.org/pdf/1509.01966",
+   "https://econpapers.repec.org/RePEc:arx:papers:1509.01966",
+   "https://doi.org/10.48550/arxiv.1509.01966"
+  ]
+ },
+ {
+  "slug": "nowotarski2016_ltssc",
+  "want": "10.1016/j.eneco.2016.05.009",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "On the importance of the long-term seasonal component in day-ahead electricity price forecasting",
+  "year": 2016,
+  "doi": "https://doi.org/10.1016/j.eneco.2016.05.009",
+  "locations": [
+   "https://doi.org/10.1016/j.eneco.2016.05.009",
+   "http://www.im.pwr.wroc.pl/~hugo/RePEc/wuu/wpaper/HSC_16_05.pdf",
+   "https://econpapers.repec.org/paper/wuuwpaper/hsc1605.htm",
+   "http://www.sciencedirect.com/science/article/pii/S014098831630127X"
+  ]
+ },
+ {
+  "slug": "ziel2018_multivariate",
+  "want": "10.1016/j.eneco.2017.12.016",
+  "arxiv_id": "1805.06649",
+  "oa_url": "https://arxiv.org/pdf/1805.06649",
+  "best_oa": "https://arxiv.org/pdf/1805.06649",
+  "title": "Day-ahead electricity price forecasting with high-dimensional structures: Univariate vs. multivariate modeling frameworks",
+  "year": 2018,
+  "doi": "https://doi.org/10.1016/j.eneco.2017.12.016",
+  "locations": [
+   "https://doi.org/10.1016/j.eneco.2017.12.016",
+   "http://arxiv.org/pdf/1805.06649",
+   "https://arxiv.org/pdf/1805.06649",
+   "https://EconPapers.repec.org/RePEc:arx:papers:1805.06649",
+   "http://www.sciencedirect.com/science/article/pii/S014098831730436X",
+   "https://doi.org/10.48550/arxiv.1805.06649"
+  ]
+ },
+ {
+  "slug": "weron2014_review",
+  "want": "10.1016/j.ijforecast.2014.08.008",
+  "arxiv_id": null,
+  "oa_url": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf",
+  "best_oa": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf",
+  "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+  "year": 2014,
+  "doi": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+  "locations": [
+   "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf",
+   "https://econpapers.repec.org/RePEc:wuu:wpaper:hsc1407",
+   "http://www.sciencedirect.com/science/article/pii/S0169207014001083",
+   "http://doi.org/10.1016/j.ijforecast.2014.08.008"
+  ]
+ },
+ {
+  "slug": "maciejowska2021_regularized_qra",
+  "want": "10.1016/j.eneco.2021.105121",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "Regularized quantile regression averaging for probabilistic electricity price forecasting",
+  "year": 2021,
+  "doi": "https://doi.org/10.1016/j.eneco.2021.105121",
+  "locations": [
+   "https://doi.org/10.1016/j.eneco.2021.105121",
+   "http://www.im.pwr.wroc.pl/~hugo/RePEc/wuu/wpaper/HSC_19_04.pdf",
+   "http://www.sciencedirect.com/science/article/pii/S0140988321000268"
+  ]
+ },
+ {
+  "slug": "bunn2016_sarima_arx",
+  "want": "Forecasting the intraday market price of money",
+  "arxiv_id": null,
+  "oa_url": null,
+  "best_oa": null,
+  "title": "Forecasting the intraday market price of money",
+  "year": 2014,
+  "doi": "https://doi.org/10.1016/j.jempfin.2014.08.006",
+  "locations": [
+   "https://doi.org/10.1016/j.jempfin.2014.08.006",
+   "https://bia.unibz.it/esploro/outputs/journalArticle/Forecasting-the-Intraday-Market-Price-of/991005772511701241"
+  ]
+ },
+ {
+  "slug": "lodhi2022_negative_prices",
+  "want": "Forecasting negative electricity prices",
+  "arxiv_id": null,
+  "oa_url": "https://www.wiwi.hu-berlin.de/de/forschung/irtg/events/2019/2019_energyfinance_stolberg.pdf",
+  "best_oa": "https://www.wiwi.hu-berlin.de/de/forschung/irtg/events/2019/2019_energyfinance_stolberg.pdf",
+  "title": "Forecasting negative electricity prices",
+  "year": 2019,
+  "doi": null,
+  "locations": [
+   "https://www.wiwi.hu-berlin.de/de/forschung/irtg/events/2019/2019_energyfinance_stolberg.pdf",
+   "https://www.alexandria.unisg.ch/handle/20.500.14171/98727",
+   "https://www.alexandria.unisg.ch/publications/256983"
+  ]
+ },
+ {
+  "slug": "uniejewski2022_reconciling",
+  "want": "Forecasting day-ahead electricity prices reconciliation",
+  "arxiv_id": "2305.16255",
+  "oa_url": "https://arxiv.org/pdf/2305.16255",
+  "best_oa": "https://arxiv.org/pdf/2305.16255",
+  "title": "Hierarchical forecasting for aggregated curves with an application to day-ahead electricity price auctions",
+  "year": 2022,
+  "doi": "https://doi.org/10.1016/j.ijforecast.2022.11.004",
+  "locations": [
+   "https://doi.org/10.1016/j.ijforecast.2022.11.004",
+   "http://arxiv.org/pdf/2305.16255",
+   "https://arxiv.org/pdf/2305.16255",
+   "http://www.sciencedirect.com/science/article/pii/S0169207022001479",
+   "https://www.scopus.com/inward/record.url?partnerID=HzOxMe3b&origin=inward&scp=85144985632",
+   "https://doi.org/10.48550/arxiv.2305.16255"
+  ]
+ }
+]

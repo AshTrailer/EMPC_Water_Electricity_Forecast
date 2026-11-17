@@ -1,0 +1,265 @@
+# source: https://r.jina.ai/https://alfa.im.pwr.edu.pl/~hugo/RePEc/wuu/wpaper/HSC_16_05.pdf
+Title: HSC_16_05.pdf
+
+URL Source: https://alfa.im.pwr.edu.pl/~hugo/RePEc/wuu/wpaper/HSC_16_05.pdf
+
+Published Time: Tue, 15 Mar 2016 14:31:02 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+HSC/16/05 
+
+> HSC Research Report
+
+# On the importance of the long-term seasonal component in day-ahead electricity price forecasting 
+
+# Jakub Nowotarski 1
+
+# Rafał Weron 1 
+
+> 1
+
+Department of Operations Research, Wrocław University of Technology, Poland 
+
+Hugo Steinhaus Center Wrocław University of Technology 
+
+Wyb. Wyspiańskiego 27, 50-370  Wrocław, Poland 
+
+http://www.im.pwr.wroc.pl/~hugo/ On the importance of the long-term seasonal component in day-ahead electricity price forecasting 
+
+Jakub Nowotarski a, Rafał Weron a
+
+> aDepartment of Operations Research, Wrocław University of Technology, Wrocław, Poland
+
+Abstract 
+
+In day-ahead electricity price forecasting (EPF) the daily and weekly seasonalities are always taken into account, but the long-term seasonal component (LTSC) is believed to add unneces-sary complexity to the already parameter-rich models and is generally ignored. Conducting an extensive empirical study involving state-of-the-art time series models we show that (i) decom-posing a series of electricity prices into a LTSC and a stochastic component, (ii) modeling them independently and (iii) combining their forecasts can bring – contrary to a common belief – an accuracy gain compared to an approach in which a given time series model is calibrated to the prices themselves. 
+
+Keywords: Electricity spot price, Forecasting, Day-ahead market, Long-term seasonal component 
+
+1. Introduction 
+
+Without doubt electricity price forecasting (EPF) is of prime importance to the functioning of today’s energy business. Alongside load forecasting, short-term (also called spot or day-ahead )EPF has become the core process of an energy company’s planning activities at the operational level (Weron, 2014). Although it is very hard to quantify the benefits of improving load and /or price forecasts, Hong (2015) provides interesting back-of-the-envelope calculations. Based on U.S. data from the last decade, he concludes that for a typical medium-size utility with a 5 GW peak load, savings from a 1% reduction in the Mean Absolute Percentage Error (MAPE) are as much as $1.5 million per year from short-term load forecasting and $3 million per year from short-term load and price forecasting! It should be noted, that although we use here the terms short-term , spot and day-ahead in-terchangeably, the former two do not necessarily refer to the day-ahead market. Short-term EPF generally involves predicting prices in the day-ahead market – cleared typically at noon on the day before delivery, i.e. 12 to 36 hours before delivery, the adjustment markets – cleared a few hours before delivery, and the balancing or real-time markets – cleared minutes before delivery (Garcia-Martos and Conejo, 2013). The spot market, especially in the literature on European electricity      
+
+> Email addresses: jakub.nowotarski@pwr.edu.pl (Jakub Nowotarski), rafal.weron@pwr.edu.pl (Rafał Weron)
+> Preprint submitted to Elsevier March 15, 2016
+
+markets, is often used as a synonym of the day-ahead market. However, in the US the spot market is another name for the real-time market, while the day-ahead market is called the forward market 
+
+(Burger et al., 2007; Weron, 2006). Also some markets in Europe nowadays admit continuous trading for individual load periods up to a few hours before delivery. With the shifting of volume from the day-ahead to intra-day markets, also in Europe the term spot is more and more often being used to refer to the real-time markets (Weron, 2014). As has been noted in a number of studies, a key point in electricity spot price modeling and forecasting is the appropriate treatment of seasonality (Janczura et al., 2013; Lisi and Nan, 2014; Nowotarski et al., 2013). For mid-term horizons – ranging from a few days to a few months ahead and typically considered in derivatives pricing and risk management applications – the daily profile is usually regarded as irrelevant. In fact, most mid-term EPF models work with average daily prices and focus on the annual or long-term seasonal component (LTSC; also called the 
+
+trend-seasonal component ). However, in short-term EPF the daily and weekly seasonalities are always taken into account, but the LTSC is believed to add unnecessary complexity to the already parameter-rich models and is generally ignored (for recent reviews see Garcia-Martos and Conejo, 2013; Weron, 2014). But is this the right approach? Should the LTSC be included in day-ahead EPF models, contrary to a common belief that it is redundant in the short-term? It is exactly the aim of this paper to address these two important questions, that have not been investigated in the EPF literature to date. We perform an extensive empirical study which involves: 
+
+• two 2-year long, hourly resolution test periods from two distinct power markets (Southeast-ern United States and Scandinavia), 
+
+• two autoregressive model structures – one originally proposed by Misiorek et al. (2006) and later used in a number of EPF studies (Gaillard et al., 2016; Kristiansen, 2012; Maciejowska et al., 2016; Nowotarski et al., 2014; Weron, 2006; Weron and Misiorek, 2008; Ziel, 2016) and one which evolved from it during the successful participation of TEAM POLAND in the Global Energy Forecasting Competition 2014 (GEFCom2014; see Hong et al., 2016; Maciejowska and Nowotarski, 2016), 
+
+• two novel Seasonal Component AutoRegressive (SCAR) models that combine a 24 hour-ahead extrapolation of an estimated LTSC with the forecasts of autoregressive models, 
+
+• two well-performing LTSC model classes – wavelet smoothing and the Hodrick and Prescott (1997) filter, as advocated by Janczura et al. (2013), Lisi and Nan (2014), Nowotarski et al. (2013) and Weron and Zator (2014), 
+
+• model validation in terms of the robust weekly-weighted mean absolute error (WMAE; see Weron, 2014) and the Diebold and Mariano (1995) test, and draw statistically significant conclusions with far reaching consequences for day-ahead EPF. The remainder of the paper is structured as follows. In Section 2 we present the datasets. Then in Section 3 we describe the techniques considered for price forecasting: two baseline autoregres-sive model structures, two LTSC model classes and two novel SCAR models. In Section 4 we summarize the empirical findings and in Section 5 wrap up the results and conclude. 2Jan 1, 2011 Dec 26, 2011 Dec 31, 2012 Dec 17, 2013 LMP [USD/MWh] 0100 200 300 400 Initial calibration period ⇐ ⇒ Test period Hours [Jan 1, 2011 - Dec 17, 2013] Jan 1, 2011 Dec 26, 2011 Dec 31, 2012 Dec 17, 2013 Zonal load [GWh] 46810 12 Figure 1: GEFCom2014 hourly locational marginal prices (LMP; top ) and hourly day-ahead predictions of zonal load (bottom ) for the period January 1, 2011 – December 17, 2013. The vertical dashed lines mark the end of the initial calibration window. Each day the 360-day long window is rolled forward by 24 hours and price forecasts for the 24 hours of the next day are computed. 
+
+2. Datasets 
+
+The datasets used in this empirical study include two day-ahead time series. The first one comes from the Global Energy Forecasting Competition 2014 (GEFCom2014) – the largest energy forecasting competition to date, both in terms of the diversity of competition topics and wide geographic coverage of the participants (for details see Hong et al., 2016). The dataset includes three time series at hourly resolution: locational marginal prices, day-ahead predictions of zonal loads and day-ahead predictions of system loads and covers the period from January 1, 2011 to December 17, 2013. During the competition the information set was being extended on a weekly basis to prevent ‘peeking’ into the future. However, now it is available in whole from: www.drhongtao.com /articles. In this paper we only use two subseries – locational marginal prices and day-ahead predictions of zonal loads, see Fig. 1. The origin of the data has never been revealed by the organizers, but given its features it quite likely comes from a region in the Southeastern United States. The second dataset comes from one of the major European power markets – Nord Pool (NP). It comprises hourly system prices and hourly consumption prognosis for four Nordic countries (Denmark, Finland, Norway and Sweden) for the period January 1, 2013 – December 26, 2015, see Fig. 2. The time series were constructed using data published by the Nordic power exchange Nord Pool (www.nordpoolspot.com) and preprocessed to account for missing values and changes to /from the daylight saving time (like in Weron, 2006, Section 4.3.7). The missing data values were substituted by the arithmetic average of the neighboring values. The ‘doubled’ values (corre-3Jan 1, 2013 Dec 26, 2013 Dec 31, 2014 Dec 26, 2015 Price [EUR/MWh] 030 60 90 120 Initial calibration period ⇐ ⇒ Test period Hours [Jan 1, 2013 - Dec 26, 2015] Jan 1, 2013 Dec 26, 2013 Dec 31, 2014 Dec 26, 2015 Consumption [GWh] 25 35 45 55 65 75 Figure 2: Nord Pool hourly system prices ( top ) and hourly consumption prognosis ( bottom ) for the period January 1, 2013 – December 26, 2015. The vertical dashed lines mark the end of the initial calibration window. Each day the 360-day long window is rolled forward by 24 hours and price forecasts for the 24 hours of the next day are computed. 
+
+sponding to the changes from the daylight saving /summer time) were substituted by the arithmetic average of the two values for the ‘doubled’ hour. For both markets, the day-ahead forecasts of the hourly electricity price are determined within a rolling window scheme, using a 360-day calibration window. First, all considered models (their short-term and long-term components) are calibrated to data from the initial calibration period, i.e. January 1 to December 26 (year 2011 for GEFCom2014 and 2013 for Nord Pool) and forecasts for all 24 hours of the next day (December 27) are determined. Then the window is rolled forward by one day and forecasts for all 24 hours of December 28 are computed. This procedure is repeated until the predictions for the last day in the sample – December 17, 2013 (for GEFCom2014) or December 26, 2015 (for Nord Pool) – are made. 
+
+3. Methodology 
+
+3.1. The benchmarks 
+
+Our choice of the benchmark models is guided by previous literature on electricity price fore-casting and experience gained during the successful participation of TEAM POLAND in the GEF-Com2014 competition. The modeling is implemented separately across the hours, leading to 24 sets of parameters for each day the forecasting exercise is performed. This approach is inspired by the fact that each hour displays a rather distinct price profile, reflecting the daily variation of demand, costs and operational constraints, and by the extensive research on demand forecasting, 4which has generally favored the multi-model specification for short-term predictions (see Weron, 2014, for a review). The first benchmark belongs to the class of similar-day techniques. Most likely it was intro-duced to the EPF literature by Nogales et al. (2002) and dubbed the na¨ ıve method . It proceeds as follows: hour h on Monday is similar to the same hour on Monday of the previous week, and the same rule applies for Saturdays and Sundays; hour h on Tuesday is similar to the same hour on Monday, and the same rule applies for Wednesdays, Thursdays and Fridays. As was argued by Conejo et al. (2005) and Nogales et al. (2002), forecasting procedures that are not calibrated carefully fail to pass this ‘na¨ ıve test’ surprisingly often. We will denote this benchmark by Na¨ ıve .The second model is a parsimonious autoregressive structure originally proposed by Misiorek et al. (2006) and later used in a number of EPF studies (Gaillard et al., 2016; Kristiansen, 2012; Maciejowska et al., 2016; Nowotarski et al., 2014; Weron, 2006; Weron and Misiorek, 2008; Ziel, 2016). Within this model the natural logarithm of the electricity spot price, pt = log( Pt), is given by the following formula: 
+
+pt = φ1 pt−24 + φ2 pt−48 + φ7 pt−168 + φ8mp t + ψ1zt +
+
+> 3
+
+∑
+
+> i=1
+
+diDi + εt, (1) where the lagged log-prices pt−24 , pt−48 and pt−168 account for the autoregressive e ff ects of the previous days (the same hour yesterday, two days ago and one week ago), while mp t creates the link between bidding and price signals from the entire previous day (it is the minimum of the previous day’s 24 hourly log-prices). The variable zt refers to the hourly zonal load of a US utility or Nordic consumption (actually to forecasts made a day before, see Section 2). The three dummy variables – D1, D2 and D3 (for Monday, Saturday and Sunday, respectively) – account for the weekly seasonality. Finally, the εt’s are assumed to be independent and identically distributed (i.i.d.) normal variables. We will denote this autoregressive benchmark by ARX to reflect the fact that the load (or consumption) forecast is used as the eXogenous variable in Eqn. (1). The third benchmark is an extension of the ARX model, which takes into account the expe-rience gained during the GEFCom2014 competition (for a deailed discussion see Maciejowska and Nowotarski, 2016). It turns out that it may be beneficial to use di ff erent model structures for di ff erent days of the week, not only di ff erent parameter sets. Hence, the multi-day ARX model (denoted later in the text by mARX ) for the natural logarithm of the electricity price is given by the following formula: 
+
+pt =
+
+
+
+> 3
+
+∑
+
+> i=0
+
+φ1,iDi
+
+ pt−24 + φ2 pt−48 + φ3D1 pt−72 + φ7 pt−168 + φ8mp t + ψ1zt +
+
+> 3
+
+∑
+
+> i=1
+
+diDi + εt, (2) where D0 ≡ 1 and the term D1 pt−72 accounts for the autoregressive e ff ect of Friday’s prices on the prices for the same hour on Monday. Finally, note that both autoregressive models – ARX and 
+
+mARX – are estimated in this study in Matlab using Least Squares. 
+
+3.2. Seasonal Component AutoRegressive (SCAR) models 
+
+Let us now return to the question whether the long-term seasonal component should be in-cluded in day-ahead EPF models or not. To provide an answer, we will investigate whether (i) 5decomposing a series of electricity log-prices into a LTSC and a stochastic component (or resid-ual), (ii) modeling them independently and (iii) combining their forecasts brings an accuracy gain compared to an approach in which a given autoregressive model structure is calibrated to raw log-prices. Hence, we will compare ARX and mARX models (calibrated to raw log-prices) with the corresponding Seasonal Component AutoRegressive (SCAR) models – SCARX and mSCARX 
+
+(the same autoregressive structures, but calibrated to seasonally decomposed log-prices, then com-bined with LTSC forecasts). The standard approach to seasonal decomposition splits the series under investigation into the trend-cycle or long-term seasonal component (LTSC; Tt), the periodic short-term seasonal component (STSC; st) and remaining variability (i.e. the stochastic component; Xt), either in an additive or a multiplicative fashion (Hyndman and Athanasopoulos, 2013; Janczura et al., 2013). In the short-term EPF literature it is quite common to consider st and Xt jointly. We also do it here. Namely, we decompose the electricity spot log-price series pt into a sum of two independent parts: 
+
+• qt = Xt + st, i.e. the stochastic component with short-term periodicities, 
+
+• and Tt, i.e. the long-term seasonal component. Motivated by a series of recent articles on modeling and forecasting the LTSC of electricity spot prices (see Janczura et al., 2013; Lisi and Nan, 2014; Nowotarski et al., 2013; Weron and Zator, 2014, among others), we consider two well-performing model classes – wavelet smoothing and the Hodrick-Prescott (HP) filter. Recall, that any function or signal (here: the electricity log-price series, pt) can be built up as a sequence of projections onto one father wavelet (the smooth component or approximation) and a sequence of mother wavelets (or details): pt = S J + DJ + DJ−1 + ... + D1, where 2 J is the maximum scale sustainable by the number of observations (Percival and Walden, 2000; Weron, 2006). At the coarsest scale the signal can be estimated by S J . At a higher level of refinement the signal can be approximated by S J−1 = S J + DJ . At each step, by adding a mother wavelet 
+
+Dj of a lower scale j = J − 1, J − 2, ... , we obtain a better estimate of the original signal. This procedure, known as wavelet smoothing or lowpass filtering , yields a traditional linear smoother. Basing on the results of Janczura et al. (2013) and Nowotarski et al. (2013), we use the Daubechies family of order 24 as they make a reasonable trade-o ff between how compactly they are localized in time and their smoothness. To provide a comprehensive analysis, we consider ten smoothing levels: J = 5, . . . , 14, i.e. approximations S 5, ..., S 14 , respectively. This corresponds to a range of smoothers, roughly from daily (2 5 = 32 hours) to nearly biannual (2 14 hours or ca. 683 days). The Hodrick and Prescott (1997) filter was originally proposed in macroeconomics for de-composing the series of GDP values into a long-term growth component and the business cycle. The mechanics of the HP filter are, however, universal. When applied to electricity spot prices it splits the series into a smooth part – the LTSC, and a volatile part – the stochastic component with short-term periodicities. Weron and Zator (2014) advocated the use of the HP filter as a simpler, yet equally flexible alternative to wavelet smoothing. Also Lisi and Nan (2014) found it to be a very well performing smoother. For a noisy (or volatile) input series of electricity spot log-prices 6pt, the HP filter returns a smoothed series Tt which minimizes: min 
+
+> Tt
+
+
+
+> τ
+
+∑
+
+> t=1
+
+(pt − Tt)2 + λ
+
+> τ−1
+
+∑
+
+> t=2
+
+[
+
+(Tt+1 − Tt) − (Tt − Tt−1)
+
+]2
+
+ , (3) where τ is the number of observations (in this study: 360 × 24 = 8640 hours of the calibration window) and λ is a smoothing parameter. To find the optimal value of λ we use a similar grid as in Weron and Zator (2014), the only di ff erence is that in this study the price series are in hourly (not daily) resolution and the values of λ have to be larger. We use eight di ff erent λs: 1 × 10 8, 5 × 10 8,1 × 10 9, 5 × 10 9, 1 × 10 10 , 5 × 10 10 , 1 × 10 11 and 5 × 10 11 .A potential problem with the SCAR approach is that the LTSC has to be predicted (which is not a trivial task, see Nowotarski et al., 2013) before combining it with the day-ahead forecasts of the autoregressive model for qt. What makes the problem even more challenging is that the predictions of the trend-seasonal component cannot be properly evaluated, since the LTSC itself is an outcome of model assumptions and is not observed in reality. However, in the short-term we may assume that a simple persistent (or random walk ) forecast is good enough for our purposes. Note that Lisi and Nan (2014) used a similar approach but for daily, not hourly data. Summarizing, the SCAR modeling framework consists of the following: 1. Decomposing the series of electricity log-prices pt from the calibration window into a trend-seasonal component Tt and a stochastic component with short-term periodicities qt,using one of the ten wavelet smoothers ( S 5, ..., S 14 ) or one of the seven HP filters ( λ =
+
+1 × 10 8, ..., 5 × 10 11 ). Then computing persistent forecasts of the LTSC for the 24 hours of the next day, i.e. ˆ Tt∗+24 = . . . = ˆTt∗+1 ≡ Tt∗ , where t∗ is the time index of the last observation in the calibration window. 2. Calibrating autoregressive models defined by Eqns. (1) and (2) to qt and computing forecasts for the 24 hours of the next day, i.e. ˆ qt∗+1, ..., ˆqt∗+24 . Note, that unlike the seasonal decompo-sition in Step 1, which is made for the whole 360 × 24 = 8640 hour long calibration sample, here we split the data into 24 hourly series (like for the ARX and mARX benchmarks). 3. Adding forecasts of the autoregressive models computed in Step 2 to the persistent forecasts of the LTSC to yield log-price forecasts: ˆ pt∗+1, ..., ˆpt∗+24 .4. Taking the exponent of the log-price forecasts computed in Step 3 to convert them into price forecasts of the SCARX and mSCARX models: ˆ Pt = exp ( ˆ pt). 
+
+4. Empirical results 
+
+We now present day-ahead forecasting results for the two considered datasets: GEFCom2014 hourly locational marginal prices and Nord Pool hourly system prices. We use long, 2-year out-of-sample test periods to make sure the obtained results are reliable. Recall from Section 2, that models are re-estimated on a daily basis. Price forecasts ˆ Pt∗+1, ..., ˆPt∗+24 for all 24 hours of the next day are determined at the same point in time and the 360-day calibration window is rolled forward by one day: t∗ → t∗ + 24 hours. 74.1. Performance evaluation in terms of WMAE 
+
+Following Conejo et al. (2005), Weron and Misiorek (2008) and Nowotarski et al. (2014), we compare the models in terms of the Weekly-weighted Mean Absolute Error (WMAE) loss function. WMAE is a robust measure similar to MAPE but with the absolute error normalized by the mean weekly price to avoid the adverse e ff ect of negative and close to zero electricity spot prices. We evaluate the forecast performance using weekly time intervals, each with 24 × 7 = 168 hourly observations. Note that we also analyzed the forecasts using squared error losses, however, results were qualitatively similar and are omitted here due to space limitations. For each week we calculate the WMAE for model i as: WMAE i = 1¯P168 
+
+MAE i = 1168 · ¯P168 
+
+∑168 
+
+> h=1
+
+∣∣∣Ph − ˆPih
+
+∣∣∣, (4) where Ph is the actual price for hour h (not the log-price ph), ˆ Pih is the predicted price for that hour obtained from model i and ¯ P168 = 1168 
+
+∑168  
+
+> h=1
+
+Ph is the mean price for a given week. Note, that WMAE requires the test period to be a multiple of a week (or 168 hours). Hence, when computing WMAE we consider the first 103 full weeks (December 27, 2011 – December 16, 2013) for the GEFCom2014 dataset and the first 104 full weeks (December 27, 2013 – December 24, 2015) for the Nord Pool dataset. In Table 1 we report the average WMAE in the forecasting period for five di ff erent model classes: three benchmarks – Na¨ ıve , ARX and mARX , and two SCAR-type models that combine a 24 hour-ahead extrapolation of an estimated LTSC with the forecasts of autoregressive models – 
+
+SCARX and mSCARX . Each of the SCAR-type models is computed for ten wavelet-based and eight HP filter-based LTSC. We use su ffi xes -S J and -HP λ to denote SCAR-type models with an 
+
+S J wavelet-based LTSC and a HP filter-based LTSC with smoothing parameter λ, respectively. Several important conclusions can be drawn. Firstly, all autoregressive models beat the Na¨ ıve 
+
+benchmark by a large margin. This indicates that they all are highly e ffi cient forecasting tools. Secondly, a SCAR-type model with a properly selected wavelet-based seasonal component can improve the accuracy of day-ahead forecasts compared to the corresponding autoregressive bench-mark. Thirdly, somewhat surprisingly, this not the case for the HP filter-based LTSC. In fact, no matter what is the value of the smoothing parameter λ, SCAR-type models with HP filter-based LTSC never outperform the benchmark autoregressive models. Finally, the multi-day autoregres-sive models – mARX and mSCARX – are almost always better than the corresponding ARX and 
+
+SCARX models. For the GEFCom2014 dataset, the best performing wavelet approximation is S 12 , which roughly corresponds to half-year (2 12 = 4096 hours or 170 days) smoothing, the second best is S 13 ,equivalent to annual smoothing. Generally, all approximations between S 9 and S 14 work pretty well, however, not all can beat the corresponding benchmark autoregressive models, especially when non-multi-day specifications are considered. For the Nord Pool dataset, the best performing wavelet approximations are S 9 and S 10 , which roughly correspond to 3- and 6-week smoothing. Like for the GEFCom2014 dataset, more approximations work pretty well (this time from S 8 to 
+
+S 14 ) but not all can beat the corresponding benchmark autoregressive models, especially when multi-day specifications are considered. Generally, lower wavelet decomposition levels do not 8Table 1: Average WMAE for all 103 weeks of the GEFCom2014 out-of-sample test period ( upper half ) or all 104 weeks of the Nord Pool out-of-sample test period ( lower half ). WMAE errors for the SCARX and mSCARX models smaller (better) than those of the ARX and mARX benchmarks, respectively, are indicated in bold. Underlined are the results for the best performing model in each of the four parts of the table. Note, that the Na¨ ıve benchmark is much worse than any of the other models. Note also, that the mARX and mSCARX models are almost always better than the corresponding ARX and SCARX models.                                                                                                                                                                                                                                                         
+
+> GEFCom2014 Na¨ ıve ARX SCARX
+> Wavelet approximation S5S6S7S8S9S10 S11 S12 S13 S14
+> 13.530 13.686 12.466 11.558 11.378 11.264 11.263 11.112 11.221 11.245 20.475 11.232 HP filter λ
+> 1×10 85×10 81×10 95×10 91×10 10 5×10 10 1×10 11 5×10 11
+> 11.775 11.586 11.527 11.425 11.396 11.376 11.362 11.287
+> mARX mSCARX
+> Wavelet approximation S5S6S7S8S9S10 S11 S12 S13 S14
+> 13.482 13.647 12.233 11.379 11.216 11.213 11.312 10.901 10.976 11.130
+> 11.252 HP filter λ
+> 1×10 85×10 81×10 95×10 91×10 10 5×10 10 1×10 11 5×10 11
+> 11.580 11.414 11.369 11.347 11.381 11.548 11.612 11.598
+> Nord Pool Na¨ ıve ARX SCARX
+> Wavelet approximation S5S6S7S8S9S10 S11 S12 S13 S14
+> 9.949 9.988 8.598 8.389 8.309 8.332 8.417 8.453 8.463 8.475
+> 12.663 8.500 HP filter λ
+> 1×10 85×10 81×10 95×10 91×10 10 5×10 10 1×10 11 5×10 11
+> 8.665 8.697 8.718 8.760 8.766 8.766 8.757 8.729
+> mARX mSCARX
+> Wavelet approximation S5S6S7S8S9S10 S11 S12 S13 S14
+> 9.954 10.049 8.558 8.286 8.157 8.154 8.331 8.471 8.428 8.361 8.341 HP filter λ
+> 1×10 85×10 81×10 95×10 91×10 10 5×10 10 1×10 11 5×10 11
+> 8.516 8.504 8.513 8.526 8.530 8.561 8.578 8.644
+
+perform well, probably because the S 5, S 6 and S 7 smoothers are too sensitive to fluctuations in spot prices at the far end of the calibration window. Quite likely this variability at the edges of the sample is also the reason for the disappointing performance of the HP filter-based LTSC. 
+
+4.2. Diebold-Mariano (DM) tests 
+
+In order to formally investigate the advantages from using SCAR-type models over the autore-gressive benchmark models, we apply the Diebold and Mariano (1995) test. Since predictions for all 24 hours of the next day are made at the same time using the same information set, forecast errors for a particular day will typically exhibit high serial correlation. Therefore, like Bordignon et al. (2013) and Nowotarski et al. (2014), we conduct the DM tests for each of the 24 load periods separately, using absolute error losses of the model forecast: L(εt) = |εt| = |Pt − ˆPt|. For each best performing SCAR-type model in its class: 
+
+• SCARX-S 12 , -HP 5×10 11 , mSCARX-S 12 , -HP 5×10 9 for GEFCom2014, 9Table 2: The percentage and the number (in parentheses) of hours for which the best wavelet-based and the best HP filter-based SCAR-type model is able to outperform the corresponding autoregressive benchmark model ( #better ) and for which the benchmark model is able to outperform SCAR-type model ( #worse ), at the 5% significance level for the conducted Diebold-Mariano test. Compare with Figure 3. GEFCom2014 Nord Pool Both datasets SCARX-S 12 SCARX-HP 5×10 11 SCARX-S 9 SCARX-HP 1×10 8 Wavelets HP filter #better 46% (11) 0% (0) 29% (7) 0% (0) 38% (18) 0% (0) #worse 0% (0) 0% (0) 17% (4) 13% (3) 8% (4) 6% (3) mSCARX-S 12 mSCARX-HP 5×10 9 mSCARX-S 10 mSCARX-HP 5×10 8 Wavelets HP filter #better 92% (22) 0% (0) 42% (10) 4% (1) 67% (32) 2% (1) #worse 0% (0) 4% (1) 0% (0) 40% (10) 0% (0) 23% (11) 
+
+• SCARX-S 9, -HP 1×10 8 , mSCARX-S 10 , -HP 5×10 8 for Nord Pool, and for each hour independently, we calculate the loss di ff erential series: 
+
+dt = L(εmodel t ) − L(εbenchmark t ). (5) We then conduct the DM tests for significant di ff erences with respect to the performance of the corresponding benchmark model ( ARX or mARX ). We perform two one-sided DM tests at the 5% significance level: (i) a standard test with the null hypothesis H0 : E(dt) ≤ 0, i.e. the outper-formance of the benchmark by a given SCAR-type model, and (ii) the complementary test with the reverse null H0 : E(dt) ≥ 0, i.e. the outperformance of a given SCAR-type model by the benchmark. Figure 3 provides a graphical representation of the DM test statistic for each hour and model for both considered markets. The results are also summarized in Table 2. The obtained DM-test results support our observations from Section 3.1 on WMAE errors. Again, we can conclude that SCAR-type models with properly selected wavelet-based LTSC im-prove forecasting accuracy, especially when the generally more accurate multi-day models are con-sidered. For 67% of the hours the best mSCARX-S models significantly outperform the mARX 
+
+benchmark; at the same time they are never significantly outperformed by the benchmark. For the GEFCom2014 dataset all test statistics are positive and for 22 hours they are significant at the 5% level. For the Nord Pool dataset the results are not that optimistic, yet still only for five hours the test statistics are negative and all are insignificant at the 5% level. For the on average less accurate specifications based on Eqn. (1), the improvement in pre-dictive performance is not that clear-cut. For 38% of the hours the best SCARX-S models sig-nificantly outperform the ARX benchmark. However, for the Nord Pool dataset, SCARX-S 9 is significantly outperformed by the benchmark for four hours. Overall, the SCAR-type models are still generally better than the ARX benchmark. Finally, SCAR-type models with the HP filter-based LTSC again do not perform well. Regard-less of the selection of λ, this approach not able to significantly outperform the benchmark models (except for one hour for the Nord Pool dataset and the multi-day specifications). On the other hand, these models are significantly worse than the ARX benchmark for 6% of the hours and the 
+
+mARX benchmark for as many as 23% of the hours. 10 2 4 6 8 10 12 14 16 18 20 22 24                                      
+
+> DM test statistic
+> -4 -2 0246SCARX-S 12
+> SCARX-HP 5e11
+> 246810 12 14 16 18 20 22 24
+> DM test statistic
+> -4 -2 0246SCARX-S 9
+> SCARX-HP 1e8
+> Hours, GEFCom2014 246810 12 14 16 18 20 22 24
+> DM test statistic
+> -4 -2 0246mSCARX-S 12
+> mSCARX-HP 5e9
+> Hours, Nord Pool 246810 12 14 16 18 20 22 24
+> DM test statistic
+> -4 -2 0246mSCARX-S 10
+> mSCARX-HP 5e8
+
+Figure 3: Results for conducted one-sided Diebold-Mariano tests for both datasets: GEFCom2014 ( left panels )and Nord Pool ( right panels ). The SCARX models are tested against the ARX benchmark ( upper panels ) and the mSCARX models against the mARX benchmark ( lower panels ). The tests were conducted separately for each of the 24 hours. Only points lying above (i.e. better than the benchmark) or below (i.e. worse than the benchmark) the dashed lines are significant at the 5% level. See also Table 2. 
+
+5. Conclusions 
+
+In day-ahead electricity price forecasting (EPF) the daily and weekly seasonalities are always taken into account, but the long-term seasonal component (LTSC) is believed to add unnecessary complexity to the already parameter-rich models and is generally ignored (Weron, 2014). But is this the right approach? Should the LTSC be included in day-ahead EPF models, contrary to a common belief that it is redundant in the short-term? Conducting an extensive empirical study involving state-of-the-art time series models and two 2-year long, hourly resolution test periods from two distinct power markets (Southeastern United States and Scandinavia), we have addressed these important questions. To this end, we have in-troduced a new class of models – Seasonal Component AutoRegressive (SCAR) models – that combine a 24 hour-ahead extrapolation of an estimated LTSC with the forecasts of autoregressive models. We have compared the predictive performance of these models to that of three bench-marks in terms of the robust weekly-weighted mean absolute error (WMAE) and the Diebold and Mariano (1995) test. 11 We have shown that, all considered autoregressive models – both SCAR-type and the ARX-type benchmarks – beat the na¨ ıve benchmark of Nogales et al. (2002) by a large margin, which indicates that they all are highly e ffi cient forecasting tools. Furthermore, we have provided evi-dence that a SCAR-type model with a properly selected wavelet-based seasonal component can significantly (in terms of the DM test) improve the accuracy of day-ahead forecasts compared to the ARX-type benchmarks. We expect that this result will have far reaching consequences for day-ahead EPF in the near future. Somewhat surprisingly, we have also found that it does make a huge di ff erence what model is used for the LTSC. Despite evidence provided by Weron and Zator (2014) that the Hodrick and Prescott (1997) filter is a very flexible alternative to wavelet smoothing, the predictive performance of SCAR-type models with HP filter-based LTSC was disappointing and generally inferior to the ARX-type benchmarks. Finally, an added value of our SCAR methodology is that it creates a natural opportunity for considering forecast combinations, an approach which has been shown to provide additional accu-racy gains in day-ahead forecasting of electricity spot prices (Bordignon et al., 2013; Nowotarski et al., 2014). Although the optimal forecast combination design assumes aggregation of indepen-dent predictions, it may not be feasible in practice. Individual forecasts need to be produced by di ff erent experts and hence the costs of implementing such practices are often una ff ordable to util-ities. By considering SCAR models with di ff erent LTSC a forecaster should be able to generate a pool of accurate, yet to a large extent independent forecasts that may be combined to yield even better predictions. The validation of this conjecture is left, however, for future research. 
+
+Acknowledgments 
+
+This work was partially supported by the National Science Center (NCN, Poland) through grants 2013 /11 /N/HS4 /03649 (to JN) and 2015 /17 /B/HS4 /00334 (to RW). 
+
+References                         
+
+> Bordignon, S., Bunn, D. W., Lisi, F., Nan, F., 2013. Combining day-ahead forecasts for British electricity prices. Energy Economics 35, 88–103. Burger, M., Graeber, B., Schindlmayr, G., 2007. Managing energy risk: An integrated view on power and other energy markets. Wiley. Conejo, A. J., Contreras, J., Esp´ ınola, R., Plazas, M. A., 2005. Forecasting electricity prices for a day-ahead pool-based electric energy market. International Journal of Forecasting 21, 435–462. Diebold, F. X., Mariano, R. S., 1995. Comparing predictive accuracy. Journal of Business and Economic Statistics 13, 253–263. Gaillard, P., Goude, Y., Nedellec, R., 2016. Additive models and robust aggregation for GEFCom2014 probabilistic electric load and electricity price forecasting. International Journal of Forecasting, DOI: 10.1016 /j.ijforecast.2015.12.001. Garcia-Martos, C., Conejo, A., 2013. Price forecasting techniques in power systems. In: Wiley Encyclopedia of Electrical and Electronics Engineering. Wiley, pp. 1–23, (DOI: 10.1002 /047134608X.W8188). Hodrick, R. J., Prescott, E. C., 1997. Postwar u.s. business cycles: An empirical investigation. Journal of Money, Credit and Banking 29 (1), 1–16. Hong, T., 2015. Crystal ball lessons in predictive analytics. EnergyBiz, Spring, 35–37. Hong, T., Pinson, P., Fan, S., Zareipour, H., Troccoli, A., Hyndman, R. J., 2016. Probabilistic energy forecasting: Global Energy Forecasting Competition 2014 and beyond. International Journal of Forecasting, forthcoming.
+
+12 Hyndman, R., Athanasopoulos, G., 2013. Forecasting: Principles and practice. Online at http: // otexts.org /fpp /.Janczura, J., Tr¨ uck, S., Weron, R., Wol ff , R., 2013. Identifying spikes and seasonal components in electricity spot price data: A guide to robust modeling. Energy Economics 38, 96–110. Kristiansen, T., 2012. Forecasting nord pool day-ahead prices with an autoregressive model. Energy Policy 49, 328– 332. Lisi, F., Nan, F., 2014. Component estimation for electricity prices: Procedures and comparisons. Energy Economics 44, 143–159. Maciejowska, K., Nowotarski, J., 2016. A hybrid model for GEFCom2014 probabilistic electricity price forecasting. International Journal of Forecasting, forthcoming. Maciejowska, K., Nowotarski, J., Weron, R., 2016. Probabilistic forecasting of electricity spot prices using factor quantile regression averaging. International Journal of Forecasting, DOI: 10.1016 /j.ijforecast.2014.12.004. Misiorek, A., Tr¨ uck, S., Weron, R., 2006. Point and interval forecasting of spot electricity prices: Linear vs. non-linear time series models. Studies in Nonlinear Dynamics & Econometrics 10 (3), Article 2. Nogales, F. J., Contreras, J., Conejo, A. J., Espinola, R., 2002. Forecasting next-day electricity prices by time series models. IEEE Transactions on Power Systems 17, 342–348. Nowotarski, J., Raviv, E., Tr¨ uck, S., Weron, R., 2014. An empirical comparison of alternate schemes for combining electricity spot price forecasts. Energy Economics 46, 395–412. Nowotarski, J., Tomczyk, J., Weron, R., 2013. Robust estimation and forecasting of the long-term seasonal component of electricity spot prices. Energy Economics 39, 13–27. Percival, D. B., Walden, A. T., 2000. Wavelet Methods for Time Series Analysis. Cambridge University Press. Weron, R., 2006. Modeling and Forecasting Electricity Loads and Prices: A Statistical Approach. John Wiley & Sons, Chichester. Weron, R., 2014. Electricity price forecasting: A review of the state-of-the-art with a look into the future. International Journal of Forecasting 30, 1030–1081. Weron, R., Misiorek, A., 2008. Forecasting spot electricity prices: A comparison of parametric and semiparametric time series models. International Journal of Forecasting 24, 744–763. Weron, R., Zator, M., 2014. Revisiting the relationship between spot and futures prices in the nord pool electricity market. Energy Economics 44, 178–190. Ziel, F., 2016. Forecasting electricity spot prices using LASSO: On capturing the autoregressive intraday structure. IEEE Transactions on Power Systems, DOI: 10.1109 /TPWRS.2016.2521545. 
+
+13 HSC Research Report Series 20 16
+
+For a complete list please visit http://ideas.repec.org/s/wuu/wpaper.html 
+
+01  To combine or not to combine? Recent trends in electricity price forecasting by Jakub Nowotarski and Rafał Weron 
+
+02  The diamond model of social response within an agent-based approach by Paul R. Nail and Katarzyna Sznajd-Weron 
+
+03  Linking consumer opinions with reservation prices in an agent-based model of innovation diffusion by Anna Kowalska-Pyzalska, Karolina Ćwik, Arkadiusz Jędrzejewski and Katarzyna Sznajd-Weron 
+
+04  Impact of social interactions on demand curves for innovative products by Katarzyna Maciejowska, Arkadiusz Jędrzejewski, Anna Kowalska-Pyzalska and Rafał Weron 
+
+05  On the importance of the long-term seasonal component in day-ahead electricity price forecasting by Jakub Nowotarski and Rafał Weron

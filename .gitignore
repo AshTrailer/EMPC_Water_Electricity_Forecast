@@ -37,3 +37,15 @@ AEMO_Data/forecast_actual/
 # 本周工作区的临时件：matplotlib 字体缓存、上一版 PPT 的渲染图归档
 Weekly/**/_mplcache/
 Weekly/**/_prev_qa/
+
+# ── 迁移前收纳（2026-11-17）──────────────────────────────────────────────
+# AEMO 原始归档包与二进制中间件：单份 120-135 MB，超过 GitHub 单文件上限，
+# 且都能由 Online_Data_Capture_Script 重新抓取或重建。
+*.zip
+*.bin
+# Python wheel 与虚拟环境产物
+*.whl
+__pycache__/
+*.pyc
+# Word 的自动备份副本
+*.wbk

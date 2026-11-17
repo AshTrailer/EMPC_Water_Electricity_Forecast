@@ -1,0 +1,17 @@
+﻿median by lead: n=376 entries
+  col   1  median R  10.62  slots with a value 288
+  col  11  median R  17.31  slots with a value 288
+  col  12  median R  19.49  slots with a value 288
+  col  13  median R  21.13  slots with a value 288
+  col  58  median R  36.29  slots with a value 288
+  col 107  median R  52.30  slots with a value 288
+  col 203  median R  51.53  slots with a value 288
+  col 300  median R  65.82  slots with a value 288
+  col 376  median R  67.74  slots with a value   1
+
+first column with coverage < 288: col 329
+columns with full coverage: 328
+last column coverage: 1
+
+probe leads 60/1440/10980 -> median 19.49 36.29 67.74  coverage 288 288 1
+comparable cells: 101280 of 108288 = 93.53%

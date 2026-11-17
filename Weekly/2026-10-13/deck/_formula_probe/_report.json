@@ -1,0 +1,290 @@
+[
+ {
+  "name": "index",
+  "tex": "u(k,h) = \\mathrm{mod}(s(k)-1+h,\\; n_s)+1",
+  "ok": true,
+  "w": 653,
+  "h": 47,
+  "aspect": 13.894,
+  "alpha_min": 0
+ },
+ {
+  "name": "clamp",
+  "tex": "y_c(k) = \\min(\\max(y(k),\\, q_1(d)),\\, q_{99}(d))",
+  "ok": true,
+  "w": 707,
+  "h": 50,
+  "aspect": 14.14,
+  "alpha_min": 0
+ },
+ {
+  "name": "template",
+  "tex": "T(s) = \\frac{1}{\\min(k_s,\\,n_T)}\\sum_{i=1}^{\\min(k_s,n_T)} y_s^{(i)}",
+  "ok": true,
+  "w": 477,
+  "h": 124,
+  "aspect": 3.847,
+  "alpha_min": 0
+ },
+ {
+  "name": "resid",
+  "tex": "r(k) = y(k) - T_{k-1}(s(k))",
+  "ok": true,
+  "w": 441,
+  "h": 50,
+  "aspect": 8.82,
+  "alpha_min": 0
+ },
+ {
+  "name": "rls",
+  "tex": "G = \\frac{P_{rls}\\,u}{\\lambda + u^{\\top} P_{rls}\\,u},\\qquad \\theta \\leftarrow \\theta + G\\,(z-u^{\\top}\\theta)",
+  "ok": true,
+  "w": 702,
+  "h": 77,
+  "aspect": 9.117,
+  "alpha_min": 0
+ },
+ {
+  "name": "rlsP",
+  "tex": "P_{rls} \\leftarrow \\tfrac{1}{\\lambda}\\left(P_{rls} - G\\,u^{\\top}P_{rls}\\right)",
+  "ok": false,
+  "error": "ValueError: \nP_{rls} \\leftarrow \\tfrac{1}{\\lambda}\\left(P_{rls} - G\\,u^{\\top}P_{rls}\\right)\n                   ^\nParseFatalException: Unknown symbol: \\tfrac, found '\\'  (at char 19), (line:1, col:20)"
+ },
+ {
+  "name": "m1",
+  "tex": "\\hat{y}(k+h\\mid k) = y\\big(u(k,h) - n_s\\big)",
+  "ok": false,
+  "error": "ValueError: \n\\hat{y}(k+h\\mid k) = y\\big(u(k,h) - n_s\\big)\n                      ^\nParseFatalException: Unknown symbol: \\big, found '\\'  (at char 22), (line:1, col:23)"
+ },
+ {
+  "name": "m2",
+  "tex": "\\hat{y}(k+h\\mid k) = T(u(k,h))",
+  "ok": true,
+  "w": 436,
+  "h": 54,
+  "aspect": 8.074,
+  "alpha_min": 0
+ },
+ {
+  "name": "m3",
+  "tex": "\\hat{y}(k+h\\mid k) = \\theta(u(k,h))\\cdot y_{prev}(u(k,h))",
+  "ok": true,
+  "w": 702,
+  "h": 59,
+  "aspect": 11.898,
+  "alpha_min": 0
+ },
+ {
+  "name": "m4",
+  "tex": "\\hat{y}(k+h\\mid k) = T(u(k,h)) + \\hat{r}(k+h\\mid k)",
+  "ok": true,
+  "w": 682,
+  "h": 55,
+  "aspect": 12.4,
+  "alpha_min": 0
+ },
+ {
+  "name": "m4rec",
+  "tex": "\\hat{r}(k+s\\mid k) = \\sum_{j=1}^{p}\\phi_j\\,\\tilde{r}(k+s-j),\\qquad \\tilde{r} = \\begin{cases}\\end{cases}",
+  "ok": false,
+  "error": "ValueError: \n\\hat{r}(k+s\\mid k) = \\sum_{j=1}^{p}\\phi_j\\,\\tilde{r}(k+s-j),\\qquad \\tilde{r} = \\begin{cases}\\end{cases}\n                                                                               ^\nParseFatalException: Unknown symbol: \\begin, found '\\'  (at char 79), (line:1, col:80)"
+ },
+ {
+  "name": "m4rec2",
+  "tex": "\\hat{r}(k+s\\mid k)=\\sum_{j=1}^{p}\\phi_j\\tilde r(k+s-j),\\quad \\tilde r(\\cdot)=r(\\cdot)\\ \\mathrm{if}\\ s-j\\le 0\\ \\mathrm{else}\\ \\hat r(\\cdot)",
+  "ok": false,
+  "error": "ValueError: \n\\hat{r}(k+s\\mid k)=\\sum_{j=1}^{p}\\phi_j\\tilde r(k+s-j),\\quad \\tilde r(\\cdot)=r(\\cdot)\\ \\mathrm{if}\\ s-j\\le 0\\ \\mathrm{else}\\ \\hat r(\\cdot)\n                                                                                                       ^\nParseFatalException: Unknown symbol: \\le, found '\\'  (at char 103), (line:1, col:104)"
+ },
+ {
+  "name": "m5",
+  "tex": "\\hat{y}(k+h\\mid k) = y(k)",
+  "ok": true,
+  "w": 336,
+  "h": 54,
+  "aspect": 6.222,
+  "alpha_min": 0
+ },
+ {
+  "name": "m6",
+  "tex": "\\hat{y}(k+h\\mid k) = T(u(k,h)) + D_h\\,[1,\\;r(k),\\ldots,r(k-p+1)]^{\\top}",
+  "ok": true,
+  "w": 1016,
+  "h": 54,
+  "aspect": 18.815,
+  "alpha_min": 0
+ },
+ {
+  "name": "m7",
+  "tex": "\\hat{y}(k+h\\mid k) = y(k) + D'_h\\,[1,\\;\\Delta y(k),\\ldots,\\Delta y(k-p+1)]^{\\top}",
+  "ok": true,
+  "w": 994,
+  "h": 54,
+  "aspect": 18.407,
+  "alpha_min": 0
+ },
+ {
+  "name": "m8",
+  "tex": "\\hat{y}(k+h\\mid k) = c_h + a_h\\,y(k) + b_h\\,T(u(k,h)) + \\sum_{j=1}^{p}\\phi_{hj}\\,r(k-j+1) + \\sum_{j=1}^{p}\\psi_{hj}\\,\\Delta y(k-j+1)",
+  "ok": true,
+  "w": 1506,
+  "h": 125,
+  "aspect": 12.048,
+  "alpha_min": 0
+ },
+ {
+  "name": "m9",
+  "tex": "\\hat{L}(D) = c + b_1\\,L(D-1),\\qquad \\hat{y}(k+h\\mid k) = T(u(k,h)) + \\big(\\hat{L}(D)-\\bar{L}\\big)",
+  "ok": false,
+  "error": "ValueError: \n\\hat{L}(D) = c + b_1\\,L(D-1),\\qquad \\hat{y}(k+h\\mid k) = T(u(k,h)) + \\big(\\hat{L}(D)-\\bar{L}\\big)\n                                                                     ^\nParseFatalException: Unknown symbol: \\big, found '\\'  (at char 69), (line:1, col:70)"
+ },
+ {
+  "name": "m10",
+  "tex": "T_{mw}(s) = \\frac{1}{|W|}\\sum_{w\\in W} T_w(s),\\qquad W=\\{7,28,56,112\\}",
+  "ok": true,
+  "w": 897,
+  "h": 90,
+  "aspect": 9.967,
+  "alpha_min": 0
+ },
+ {
+  "name": "m12",
+  "tex": "\\hat{L}(D{=}\\mathrm{today}) = \\rho(k)\\,\\bar{y}_{run}(k) + (1-\\rho(k))\\,\\big(c+b_1 L(d-1)\\big)",
+  "ok": false,
+  "error": "ValueError: \n\\hat{L}(D{=}\\mathrm{today}) = \\rho(k)\\,\\bar{y}_{run}(k) + (1-\\rho(k))\\,\\big(c+b_1 L(d-1)\\big)\n                                                                       ^\nParseFatalException: Unknown symbol: \\big, found '\\'  (at char 71), (line:1, col:72)"
+ },
+ {
+  "name": "m13",
+  "tex": "\\xi_k = A\\,\\xi_{k-1} + w_k,\\qquad y(k) = C_k\\,\\xi_k + v_k,\\qquad \\hat{y}(k+h\\mid k) = C_{k+h}A^{h}\\hat{\\xi}_{k\\mid k}",
+  "ok": true,
+  "w": 1280,
+  "h": 67,
+  "aspect": 19.104,
+  "alpha_min": 0
+ },
+ {
+  "name": "m13g",
+  "tex": "\\hat{y}(k+h\\mid k) = G(h,\\,u(k,h))\\,\\hat{\\xi}_{k\\mid k},\\qquad G(h,s) = C_s A^{h}",
+  "ok": true,
+  "w": 938,
+  "h": 67,
+  "aspect": 14.0,
+  "alpha_min": 0
+ },
+ {
+  "name": "m14",
+  "tex": "T_e(s) = \\frac{\\sum_{i=0}^{K-1}(1-\\alpha)^i\\,y^{(i)}(s)}{\\sum_{i=0}^{K-1}(1-\\alpha)^i},\\qquad K = \\left\\lfloor \\frac{\\log w_{min}}{\\log(1-\\alpha)}\\right\\rfloor",
+  "ok": true,
+  "w": 712,
+  "h": 173,
+  "aspect": 4.116,
+  "alpha_min": 0
+ },
+ {
+  "name": "m15",
+  "tex": "\\hat{y}(k+h\\mid k) = S(k),\\qquad S(k) = \\frac{1}{w}\\sum_{i=0}^{w-1} y(k-i)",
+  "ok": true,
+  "w": 793,
+  "h": 118,
+  "aspect": 6.72,
+  "alpha_min": 0
+ },
+ {
+  "name": "m16",
+  "tex": "\\hat{y}(k+h\\mid k) = S(k) + \\left(\\frac{w-1}{2}+h\\right)\\big(S(k)-S(k-1)\\big)",
+  "ok": false,
+  "error": "ValueError: \n\\hat{y}(k+h\\mid k) = S(k) + \\left(\\frac{w-1}{2}+h\\right)\\big(S(k)-S(k-1)\\big)\n                                                        ^\nParseFatalException: Unknown symbol: \\big, found '\\'  (at char 56), (line:1, col:57)"
+ },
+ {
+  "name": "m18",
+  "tex": "T_c(s) = \\frac{1}{N_c}\\sum_{d\\in W_c} y_d(s),\\qquad c\\in\\{\\mathrm{weekday},\\mathrm{weekend}\\}",
+  "ok": true,
+  "w": 945,
+  "h": 95,
+  "aspect": 9.947,
+  "alpha_min": 0
+ },
+ {
+  "name": "m19sel",
+  "tex": "p^{\\ast}(s,h) = \\arg\\min_{p\\in P}\\ \\sum_{d\\in D_{28}} \\Big(y_c - \\mathrm{clip}\\big(T(u)+r^{(p)}\\big)\\Big)^2,\\qquad P=\\{1,2,3,4,5,6,8\\}",
+  "ok": false,
+  "error": "ValueError: \np^{\\ast}(s,h) = \\arg\\min_{p\\in P}\\ \\sum_{d\\in D_{28}} \\Big(y_c - \\mathrm{clip}\\big(T(u)+r^{(p)}\\big)\\Big)^2,\\qquad P=\\{1,2,3,4,5,6,8\\}\n                                                      ^\nParseFatalException: Unknown symbol: \\Big, found '\\'  (at char 54), (line:1, col:55)"
+ },
+ {
+  "name": "m20",
+  "tex": "\\hat{y}(k+h\\mid k) = T(u(k,h)) + \\hat{r}^{(p^{\\ast}(u,h))}(h)",
+  "ok": true,
+  "w": 683,
+  "h": 56,
+  "aspect": 12.196,
+  "alpha_min": 0
+ },
+ {
+  "name": "rmse",
+  "tex": "R(s,h) = \\sqrt{\\frac{1}{n_d}\\sum_{d=1}^{n_d} E(s,h,d)^2}",
+  "ok": true,
+  "w": 517,
+  "h": 131,
+  "aspect": 3.947,
+  "alpha_min": 0
+ },
+ {
+  "name": "dm",
+  "tex": "DM(s,h) = \\frac{\\bar{d}(s,h)}{\\sqrt{\\widehat{\\mathrm{Var}}(\\bar d(s,h))}},\\qquad d_i = e^{2}_{model,i}-e^{2}_{off,i}",
+  "ok": true,
+  "w": 839,
+  "h": 98,
+  "aspect": 8.561,
+  "alpha_min": 0
+ },
+ {
+  "name": "pooled",
+  "tex": "\\bar{R} = \\sqrt{\\frac{1}{n_s\\,n_h\\,n_d}\\sum_{s,h,d} E(s,h,d)^2}",
+  "ok": true,
+  "w": 498,
+  "h": 108,
+  "aspect": 4.611,
+  "alpha_min": 0
+ },
+ {
+  "name": "rho",
+  "tex": "\\rho(k) = \\frac{\\#\\{\\text{observed slots today}\\}}{n_s}",
+  "ok": true,
+  "w": 476,
+  "h": 70,
+  "aspect": 6.8,
+  "alpha_min": 0
+ },
+ {
+  "name": "textcmd",
+  "tex": "\\operatorname{clip}(x) \\quad \\text{plain text} \\quad \\substack{a\\\\b}",
+  "ok": true,
+  "w": 414,
+  "h": 77,
+  "aspect": 5.377,
+  "alpha_min": 0
+ },
+ {
+  "name": "cases",
+  "tex": "f(x) = \\begin{cases} a & x>0 \\\\ b & x\\le 0\\end{cases}",
+  "ok": false,
+  "error": "ValueError: \nf(x) = \\begin{cases} a & x>0 \\\\ b & x\\le 0\\end{cases}\n       ^\nParseFatalException: Unknown symbol: \\begin, found '\\'  (at char 7), (line:1, col:8)"
+ },
+ {
+  "name": "mathbb",
+  "tex": "w_m \\in \\mathbb{R},\\quad \\sum_{m} w_m = 1",
+  "ok": true,
+  "w": 366,
+  "h": 85,
+  "aspect": 4.306,
+  "alpha_min": 0
+ },
+ {
+  "name": "leadaxis",
+  "tex": "\\ell_i = 5i\\ \\mathrm{min}\\ (i=1\\ldots11),\\qquad \\ell_i = 30(i-11)\\ \\mathrm{min}\\ (i=12\\ldots376)",
+  "ok": true,
+  "w": 1121,
+  "h": 48,
+  "aspect": 23.354,
+  "alpha_min": 0
+ }
+]

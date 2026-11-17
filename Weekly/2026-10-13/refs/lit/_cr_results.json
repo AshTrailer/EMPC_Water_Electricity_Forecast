@@ -1,0 +1,537 @@
+[
+ {
+  "doi": "10.1093/jjfinec/nbp001",
+  "title": "A Simple Approximate Long-Memory Model of Realized Volatility",
+  "year": 2008,
+  "venue": "Journal of Financial Econometrics",
+  "authors": "F. Corsi",
+  "volume": "7",
+  "page": "174-196",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1111/j.1467-6419.2007.00518.x",
+  "title": "DIRECT MULTI‐STEP ESTIMATION AND FORECASTING",
+  "year": 2007,
+  "venue": "Journal of Economic Surveys",
+  "authors": "Guillaume Chevillon",
+  "volume": "21",
+  "page": "746-785",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1111/j.1468-0262.00418",
+  "http": 404
+ },
+ {
+  "doi": "10.1016/j.eneco.2023.106843",
+  "title": "Distributional neural networks for electricity price forecasting",
+  "year": 2023,
+  "venue": "Energy Economics",
+  "authors": "Grzegorz Marcjasz; Michał Narajewski; Rafał Weron; Florian Ziel",
+  "volume": "125",
+  "page": "106843",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1093/rfs/hhae044",
+  "title": "A Comprehensive 2022 Look at the Empirical Performance of Equity Premium Prediction",
+  "year": 2024,
+  "venue": "The Review of Financial Studies",
+  "authors": "Amit Goyal; Ivo Welch; Athanasse Zafirov",
+  "volume": "37",
+  "page": "3490-3557",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.jfineco.2021.09.013",
+  "title": "Biases in long-horizon predictive regressions",
+  "year": 2022,
+  "venue": "Journal of Financial Economics",
+  "authors": "Jacob Boudoukh; Ronen Israel; Matthew Richardson",
+  "volume": "145",
+  "page": "937-969",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2015.12.005",
+  "title": "The forecast combination puzzle: A simple theoretical explanation",
+  "year": 2016,
+  "venue": "International Journal of Forecasting",
+  "authors": "Gerda Claeskens; Jan R. Magnus; Andrey L. Vasnev; Wendun Wang",
+  "volume": "32",
+  "page": "754-762",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2018.09.006",
+  "title": "Machine learning for regularized survey forecast combination: Partially-egalitarian LASSO and its derivatives",
+  "year": 2019,
+  "venue": "International Journal of Forecasting",
+  "authors": "Francis X. Diebold; Minchul Shin",
+  "volume": "35",
+  "page": "1679-1691",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2013.01.010",
+  "title": "A comparison of mixed frequency approaches for nowcasting Euro area macroeconomic aggregates",
+  "year": 2014,
+  "venue": "International Journal of Forecasting",
+  "authors": "Claudia Foroni; Massimiliano Marcellino",
+  "volume": "30",
+  "page": "554-568",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1080/07474930600972467",
+  "title": "MIDAS Regressions: Further Results and New Directions",
+  "year": 2007,
+  "venue": "Econometric Reviews",
+  "authors": "Eric Ghysels; Arthur Sinko; Rossen Valkanov",
+  "volume": "26",
+  "page": "53-90",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2014.08.008",
+  "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+  "year": 2014,
+  "venue": "International Journal of Forecasting",
+  "authors": "Rafał Weron",
+  "volume": "30",
+  "page": "1030-1081",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.apenergy.2021.116983",
+  "title": "Forecasting day-ahead electricity prices: A review of state-of-the-art algorithms, best practices and an open-access benchmark",
+  "year": 2021,
+  "venue": "Applied Energy",
+  "authors": "Jesus Lago; Grzegorz Marcjasz; Bart De Schutter; Rafał Weron",
+  "volume": "293",
+  "page": "116983",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.apenergy.2018.02.069",
+  "title": "Forecasting spot electricity prices: Deep learning approaches and empirical comparison of traditional algorithms",
+  "year": 2018,
+  "venue": "Applied Energy",
+  "authors": "Jesus Lago; Fjo De Ridder; Bart De Schutter",
+  "volume": "221",
+  "page": "386-405",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.apenergy.2017.11.098",
+  "title": "Forecasting day-ahead electricity prices in Europe: The importance of considering market integration",
+  "year": 2018,
+  "venue": "Applied Energy",
+  "authors": "Jesus Lago; Fjo De Ridder; Peter Vrancx; Bart De Schutter",
+  "volume": "211",
+  "page": "890-903",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.eneco.2017.12.016",
+  "title": "Day-ahead electricity price forecasting with high-dimensional structures: Univariate vs. multivariate modeling frameworks",
+  "year": 2018,
+  "venue": "Energy Economics",
+  "authors": "Florian Ziel; Rafał Weron",
+  "volume": "70",
+  "page": "396-420",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.eneco.2016.05.009",
+  "title": "On the importance of the long-term seasonal component in day-ahead electricity price forecasting",
+  "year": 2016,
+  "venue": "Energy Economics",
+  "authors": "Jakub Nowotarski; Rafał Weron",
+  "volume": "57",
+  "page": "228-235",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/tpwrs.2017.2734563",
+  "title": "Variance Stabilizing Transformations for Electricity Spot Price Forecasting",
+  "year": 2018,
+  "venue": "IEEE Transactions on Power Systems",
+  "authors": "Bartosz Uniejewski; Rafal Weron; Florian Ziel",
+  "volume": "33",
+  "page": "2219-2229",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.rser.2017.05.234",
+  "title": "Recent advances in electricity price forecasting: A review of probabilistic forecasting",
+  "year": 2018,
+  "venue": "Renewable and Sustainable Energy Reviews",
+  "authors": "Jakub Nowotarski; Rafał Weron",
+  "volume": "81",
+  "page": "1548-1568",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2014.12.004",
+  "title": "Probabilistic forecasting of electricity spot prices using Factor Quantile Regression Averaging",
+  "year": 2016,
+  "venue": "International Journal of Forecasting",
+  "authors": "Katarzyna Maciejowska; Jakub Nowotarski; Rafał Weron",
+  "volume": "32",
+  "page": "957-965",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.eneco.2021.105121",
+  "title": "Regularized quantile regression averaging for probabilistic electricity price forecasting",
+  "year": 2021,
+  "venue": "Energy Economics",
+  "authors": "Bartosz Uniejewski; Rafał Weron",
+  "volume": "95",
+  "page": "105121",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.csda.2011.03.006",
+  "title": "Optimal combination forecasts for hierarchical time series",
+  "year": 2011,
+  "venue": "Computational Statistics &amp; Data Analysis",
+  "authors": "Rob J. Hyndman; Roman A. Ahmed; George Athanasopoulos; Han Lin Shang",
+  "volume": "55",
+  "page": "2579-2589",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1080/01621459.2018.1448825",
+  "title": "Optimal Forecast Reconciliation for Hierarchical and Grouped Time Series Through Trace Minimization",
+  "year": 2018,
+  "venue": "Journal of the American Statistical Association",
+  "authors": "Shanika L. Wickramasuriya; George Athanasopoulos; Rob J. Hyndman",
+  "volume": "114",
+  "page": "804-819",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ejor.2017.02.046",
+  "title": "Forecasting with temporal hierarchies",
+  "year": 2017,
+  "venue": "European Journal of Operational Research",
+  "authors": "George Athanasopoulos; Rob J. Hyndman; Nikolaos Kourentzes; Fotios Petropoulos",
+  "volume": "262",
+  "page": "60-74",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2023.10.010",
+  "title": "Forecast reconciliation: A review",
+  "year": 2024,
+  "venue": "International Journal of Forecasting",
+  "authors": "George Athanasopoulos; Rob J. Hyndman; Nikolaos Kourentzes; Anastasios Panagiotelis",
+  "volume": "40",
+  "page": "430-456",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2023.10.003",
+  "title": "Cross-temporal probabilistic forecast reconciliation: Methodological and practical issues",
+  "year": 2024,
+  "venue": "International Journal of Forecasting",
+  "authors": "Daniele Girolimetto; George Athanasopoulos; Tommaso Di Fonzo; Rob J. Hyndman",
+  "volume": "40",
+  "page": "1134-1151",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.annals.2019.02.001",
+  "title": "Cross-temporal coherent forecasts for Australian tourism",
+  "year": 2019,
+  "venue": "Annals of Tourism Research",
+  "authors": "Nikolaos Kourentzes; George Athanasopoulos",
+  "volume": "75",
+  "page": "393-409",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ejor.2022.07.040",
+  "title": "Probabilistic forecast reconciliation: Properties, evaluation and score optimisation",
+  "year": 2023,
+  "venue": "European Journal of Operational Research",
+  "authors": "Anastasios Panagiotelis; Puwasala Gamakumara; George Athanasopoulos; Rob J. Hyndman",
+  "volume": "306",
+  "page": "693-706",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1093/rfs/hhm014",
+  "title": "A Comprehensive Look at The Empirical Performance of Equity Premium Prediction",
+  "year": 2007,
+  "venue": "Review of Financial Studies",
+  "authors": "Ivo Welch; Amit Goyal",
+  "volume": "21",
+  "page": "1455-1508",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.3386/w27410",
+  "title": "Biases in Long-Horizon Predictive Regressions",
+  "year": 2020,
+  "authors": "Jacob Boudoukh; Ronen Israel; Matthew Richardson",
+  "type": "report"
+ },
+ {
+  "doi": "10.1016/j.jeconom.2024.105722",
+  "title": "Local projections vs. VARs: Lessons from thousands of DGPs",
+  "year": 2024,
+  "venue": "Journal of Econometrics",
+  "authors": "Dake Li; Mikkel Plagborg-Møller; Christian K. Wolf",
+  "volume": "244",
+  "page": "105722",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.jeconom.2020.03.002",
+  "title": "The term structure of equity and variance risk premia",
+  "year": 2020,
+  "venue": "Journal of Econometrics",
+  "authors": "Yacine Aït-Sahalia; Mustafa Karaman; Loriano Mancini",
+  "volume": "219",
+  "page": "204-230",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2013.12.003",
+  "title": "Comments on “A comparison of mixed frequency approaches for nowcasting euro area macroeconomic aggregates”",
+  "year": 2014,
+  "venue": "International Journal of Forecasting",
+  "authors": "Giulia Sestieri",
+  "volume": "30",
+  "page": "569-571",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2015.07.004",
+  "title": "A comparison of MIDAS and bridge equations",
+  "year": 2016,
+  "venue": "International Journal of Forecasting",
+  "authors": "Christian Schumacher",
+  "volume": "32",
+  "page": "257-270",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1111/j.1468-0084.2008.00541.x",
+  "title": "A Simple Explanation of the Forecast Combination Puzzle*",
+  "year": 2009,
+  "venue": "Oxford Bulletin of Economics and Statistics",
+  "authors": "Jeremy Smith; Kenneth F. Wallis",
+  "volume": "71",
+  "page": "331-355",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.apenergy.2018.02.081",
+  "title": "Conceptual design of cogeneration plants under a resilient design perspective: Resilience metrics and case study",
+  "year": 2018,
+  "venue": "Applied Energy",
+  "authors": "José Alexandre Matelli; Kai Goebel",
+  "volume": "215",
+  "page": "736-750",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.eneco.2018.11.007",
+  "title": "A multiscale analysis for carbon price drivers",
+  "year": 2019,
+  "venue": "Energy Economics",
+  "authors": "Bangzhu Zhu; Shunxin Ye; Dong Han; Ping Wang",
+  "volume": "78",
+  "page": "202-216",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.apenergy.2018.07.076",
+  "title": "Continuous adjoint formulation for wind farm layout optimization: A 2D implementation",
+  "year": 2018,
+  "venue": "Applied Energy",
+  "authors": "Enrico G.A. Antonini; David A. Romero; Cristina H. Amon",
+  "volume": "228",
+  "page": "2333-2345",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.eneco.2021.105445",
+  "title": "Energy poverty in Uganda: Evidence from a multidimensional approach",
+  "year": 2021,
+  "venue": "Energy Economics",
+  "authors": "Vincent Fred Ssennono; Joseph M. Ntayi; Faisal Buyinza; Francis Wasswa",
+  "volume": "101",
+  "page": "105445",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.apenergy.2022.118579",
+  "title": "Estimating power demand shaving capacity of buildings on an urban scale using extracted demand response profiles through machine learning models",
+  "year": 2022,
+  "venue": "Applied Energy",
+  "authors": "Xinran Yu; Semiha Ergan",
+  "volume": "310",
+  "page": "118579",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.eneco.2020.104961",
+  "title": "Copula stochastic volatility in oil returns: Approximate Bayesian computation with volatility prediction",
+  "year": 2020,
+  "venue": "Energy Economics",
+  "authors": "Audronė Virbickaitė; M. Concepción Ausín; Pedro Galeano",
+  "volume": "92",
+  "page": "104961",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.apenergy.2023.121141",
+  "title": "Energy audit, techno-economic, and environmental assessment of integrating solar technologies for energy management in a university residential building: A case study",
+  "year": 2023,
+  "venue": "Applied Energy",
+  "authors": "Issa Bosu; Hatem Mahmoud; Hamdy Hassan",
+  "volume": "341",
+  "page": "121141",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.eneco.2023.106583",
+  "title": "Energy-related financial literacy and retrofits of Soviet-era apartment buildings: The case of Lithuania",
+  "year": 2023,
+  "venue": "Energy Economics",
+  "authors": "Fissha Asmare; Vincentas Giedraitis; Jūratė Jaraitė; Andrius Kažukauskas",
+  "volume": "120",
+  "page": "106583",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.enpol.2014.11.038",
+  "title": "The merit-order effect in the Italian power market: The impact of solar and wind generation on national wholesale electricity prices",
+  "year": 2015,
+  "venue": "Energy Policy",
+  "authors": "Stefano Clò; Alessandra Cataldi; Pietro Zoppoli",
+  "volume": "77",
+  "page": "79-88",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.tej.2015.04.001",
+  "title": "Negative Wholesale Electricity Prices in the German, French and Belgian Day-Ahead, Intra-Day and Real-Time Markets",
+  "year": 2015,
+  "venue": "The Electricity Journal",
+  "authors": "Kristof De Vos",
+  "volume": "28",
+  "page": "36-50",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1007/s10182-011-0181-2",
+  "title": "Efficient estimation of Markov regime-switching models: An application to electricity spot prices",
+  "year": 2011,
+  "venue": "AStA Advances in Statistical Analysis",
+  "authors": "Joanna Janczura; Rafał Weron",
+  "volume": "96",
+  "page": "385-407",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/tpwrs.2016.2521545",
+  "title": "Forecasting Electricity Spot Prices Using Lasso: On Capturing the Autoregressive Intraday Structure",
+  "year": 2016,
+  "venue": "IEEE Transactions on Power Systems",
+  "authors": "Florian Ziel",
+  "volume": "31",
+  "page": "4977-4987",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ijforecast.2019.02.001",
+  "title": "Understanding intraday electricity markets: Variable selection and very short-term price forecasting using LASSO",
+  "year": 2019,
+  "venue": "International Journal of Forecasting",
+  "authors": "Bartosz Uniejewski; Grzegorz Marcjasz; Rafał Weron",
+  "volume": "35",
+  "page": "1533-1547",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.jeconom.2013.04.017",
+  "title": "Complete subset regressions",
+  "year": 2013,
+  "venue": "Journal of Econometrics",
+  "authors": "Graham Elliott; Antonio Gargano; Allan Timmermann",
+  "volume": "177",
+  "page": "357-373",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.3905/jpm.2004.110",
+  "title": "Honey, I Shrunk the Sample Covariance Matrix",
+  "year": 2004,
+  "venue": "The Journal of Portfolio Management",
+  "authors": "Olivier Ledoit; Michael Wolf",
+  "volume": "30",
+  "page": "110-119",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0927-5398(03)00007-0",
+  "title": "Improved estimation of the covariance matrix of stock returns with an application to portfolio selection",
+  "year": 2003,
+  "venue": "Journal of Empirical Finance",
+  "authors": "Olivier Ledoit; Michael Wolf",
+  "volume": "10",
+  "page": "603-621",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1073/pnas.0904287106",
+  "title": "Sparse and stable Markowitz portfolios",
+  "year": 2009,
+  "venue": "Proceedings of the National Academy of Sciences",
+  "authors": "Joshua Brodie; Ingrid Daubechies; Christine De Mol; Domenico Giannone",
+  "volume": "106",
+  "page": "12267-12272",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.3386/w8160",
+  "title": "Modeling and Forecasting Realized Volatility",
+  "year": 2001,
+  "authors": "Torben Andersen; Tim Bollerslev; Francis Diebold; Paul Labys",
+  "type": "report"
+ },
+ {
+  "doi": "10.3386/w24967",
+  "title": "Machine Learning for Regularized Survey Forecast Combination: Partially-Egalitarian Lasso and its Derivatives",
+  "year": 2018,
+  "authors": "Francis Diebold; Minchul Shin",
+  "type": "report"
+ },
+ {
+  "doi": "10.1093/rfs/hhaa047",
+  "title": "Do Minorities Pay More for Mortgages?",
+  "year": 2020,
+  "venue": "The Review of Financial Studies",
+  "authors": "Neil Bhutta; Aurel Hizmo",
+  "volume": "34",
+  "page": "763-789",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.eneco.2014.07.014",
+  "title": "An empirical comparison of alternative schemes for combining electricity spot price forecasts",
+  "year": 2014,
+  "venue": "Energy Economics",
+  "authors": "Jakub Nowotarski; Eran Raviv; Stefan Trück; Rafał Weron",
+  "volume": "46",
+  "page": "395-412",
+  "type": "journal-article"
+ }
+]

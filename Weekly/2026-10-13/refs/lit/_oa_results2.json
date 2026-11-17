@@ -1,0 +1,994 @@
+[
+ {
+  "q": "A Simple Approximate Long-Memory Model of Realized Volatility Corsi",
+  "hits": [
+   {
+    "title": "Vector error correction heterogeneous autoregressive forecast model of realized volatility and implied volatility",
+    "year": 2017,
+    "doi": "https://doi.org/10.1080/03610918.2017.1414250",
+    "cited": 5,
+    "oa": null,
+    "venue": "Communications in Statistics - Simulation and Computation",
+    "authors": "Ji Won Shin; Dong Wan Shin"
+   },
+   {
+    "title": "Long memory and nonlinearities in realized volatility: A Markov switching approach",
+    "year": 2010,
+    "doi": "https://doi.org/10.1016/j.csda.2010.12.008",
+    "cited": 59,
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0167947310004767",
+    "venue": "Computational Statistics & Data Analysis",
+    "authors": "Davide Raggi; Silvano Bordignon"
+   },
+   {
+    "title": "Realized stochastic volatility models with generalized Gegenbauer long memory",
+    "year": 2019,
+    "doi": "https://doi.org/10.1016/j.ecosta.2018.12.005",
+    "cited": 8,
+    "oa": "https://www.sciencedirect.com/science/article/pii/S2452306219300048",
+    "venue": "Econometrics and Statistics",
+    "authors": "Manabu Asai; Michael J. McAleer; Shelton Peiris"
+   }
+  ]
+ },
+ {
+  "q": "Direct multi-step estimation and forecasting Chevillon Journal of Economic Surveys",
+  "hits": [
+   {
+    "title": "A Multi-Horizon Quantile Recurrent Forecaster",
+    "year": 2017,
+    "doi": "https://doi.org/10.48550/arxiv.1711.11053",
+    "cited": 235,
+    "oa": "https://arxiv.org/pdf/1711.11053",
+    "venue": "arXiv (Cornell University)",
+    "authors": "Ruofeng Wen; Kari Torkkola; Narayanaswamy, Balakrishnan"
+   },
+   {
+    "title": "Multi‐step forecasting in the presence of breaks",
+    "year": 2017,
+    "doi": "https://doi.org/10.1002/for.2480",
+    "cited": 0,
+    "oa": "https://trepo.tuni.fi/bitstream/10024/95271/1/wp94-2014.pdf",
+    "venue": "Journal of Forecasting",
+    "authors": "Jari Hännikäinen"
+   },
+   {
+    "title": "Forecasting Economic Aggregates by Disaggregates",
+    "year": 2006,
+    "doi": "https://doi.org/10.2139/ssrn.882790",
+    "cited": 63,
+    "oa": "https://doi.org/10.2139/ssrn.882790",
+    "venue": "SSRN Electronic Journal",
+    "authors": "David F. Hendry; Kirstin Hubrich"
+   }
+  ]
+ },
+ {
+  "q": "Do We Really Need Both BEKK and DCC",
+  "hits": [
+   {
+    "title": "DO WE REALLY NEED BOTH BEKK AND DCC? A TALE OF TWO MULTIVARIATE GARCH MODELS",
+    "year": 2011,
+    "doi": "https://doi.org/10.1111/j.1467-6419.2011.00683.x",
+    "cited": 184,
+    "oa": null,
+    "venue": "Journal of Economic Surveys",
+    "authors": "Massimiliano Caporin; Michael J. McAleer"
+   },
+   {
+    "title": "Do We Really Need Both BEKK and DCC? A Tale of Two Covariance Models",
+    "year": 2009,
+    "doi": "https://doi.org/10.2139/ssrn.1338190",
+    "cited": 40,
+    "oa": "https://doi.org/10.2139/ssrn.1338190",
+    "venue": "SSRN Electronic Journal",
+    "authors": "Massimiliano Caporin; Michael J. McAleer"
+   },
+   {
+    "title": "Do We Really Need Both BEKK and DCC? A Tale of Two Multivariate GARCH Models",
+    "year": 2010,
+    "doi": "https://doi.org/10.2139/ssrn.1549167",
+    "cited": 39,
+    "oa": "https://doi.org/10.2139/ssrn.1549167",
+    "venue": "SSRN Electronic Journal",
+    "authors": "Massimiliano Caporin; Michael J. McAleer"
+   }
+  ]
+ },
+ {
+  "q": "Forecasting electricity prices a review Weron 2014 International Journal of Forecasting",
+  "hits": [
+   {
+    "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+    "cited": 1625,
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf",
+    "venue": "International Journal of Forecasting",
+    "authors": "Rafał Weron"
+   },
+   {
+    "title": "Transfer learning for electricity price forecasting",
+    "year": 2023,
+    "doi": "https://doi.org/10.1016/j.segan.2023.100996",
+    "cited": 42,
+    "oa": "https://arxiv.org/pdf/2007.03762",
+    "venue": "Sustainable Energy Grids and Networks",
+    "authors": "Salih Gündüz; Umut Uğurlu; İlkay Öksüz"
+   },
+   {
+    "title": "Forecasting Electricity Prices",
+    "year": 2022,
+    "doi": "https://doi.org/10.48550/arxiv.2204.11735",
+    "cited": 2,
+    "oa": "https://arxiv.org/pdf/2204.11735",
+    "venue": "RePEc: Research Papers in Economics",
+    "authors": "Katarzyna Maciejowska; Bartosz Uniejewski; Rafał Weron"
+   }
+  ]
+ },
+ {
+  "q": "Electricity price forecasting in the Danish market fundamentals available capacity interconnection",
+  "hits": [
+   {
+    "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+    "cited": 1625,
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf",
+    "venue": "International Journal of Forecasting",
+    "authors": "Rafał Weron"
+   },
+   {
+    "title": "The State of the Art Electricity Load and Price Forecasting for the Modern Wholesale Electricity Market",
+    "year": 2024,
+    "doi": "https://doi.org/10.3390/en17225797",
+    "cited": 34,
+    "oa": "https://www.mdpi.com/1996-1073/17/22/5797/pdf?version=1732108107",
+    "venue": "Energies",
+    "authors": "Vasileios M. Laitsos; Georgios Vontzos; Paschalis Paraschoudis"
+   },
+   {
+    "title": "Electricity Spot Price Modeling and Forecasting in European Markets",
+    "year": 2022,
+    "doi": "https://doi.org/10.3390/en15165980",
+    "cited": 16,
+    "oa": "https://www.mdpi.com/1996-1073/15/16/5980/pdf?version=1660814915",
+    "venue": "Energies",
+    "authors": "Shadi Tehrani; Jesús Juan; Eduardo Caro"
+   }
+  ]
+ },
+ {
+  "q": "The impact of wind and solar generation on electricity prices merit order effect",
+  "hits": [
+   {
+    "title": "The merit-order effect in the Italian power market: The impact of solar and wind generation on national wholesale electricity prices",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.enpol.2014.11.038",
+    "cited": 354,
+    "oa": null,
+    "venue": "Energy Policy",
+    "authors": "Stefano Clò; Alessandra Cataldi; Pietro Zoppoli"
+   },
+   {
+    "title": "The merit-order effect in the Italian Power Market: the impact of solar and wind generation on national wholesale electricity prices",
+    "year": 2014,
+    "doi": null,
+    "cited": 31,
+    "oa": null,
+    "venue": "RePEc: Research Papers in Economics",
+    "authors": "Alessandra Cataldi; Stefano Clò; Pietro Zoppoli"
+   },
+   {
+    "title": "Impact of Wind and Solar Generation on the Italian Zonal Electricity Price",
+    "year": 2021,
+    "doi": "https://doi.org/10.3390/en14185858",
+    "cited": 8,
+    "oa": "https://www.mdpi.com/1996-1073/14/18/5858/pdf?version=1631785023",
+    "venue": "Energies",
+    "authors": "Mahmood Hosseini Imani; Ettore Francesco Bompard; Pietro Colella"
+   }
+  ]
+ },
+ {
+  "q": "Negative electricity prices in the German day-ahead market causes",
+  "hits": [
+   {
+    "title": "Electricity market price forecasting using ELM and Bootstrap analysis: A case study of the German and Finnish Day-Ahead markets",
+    "year": 2024,
+    "doi": "https://doi.org/10.1016/j.apenergy.2024.123058",
+    "cited": 54,
+    "oa": "https://doi.org/10.1016/j.apenergy.2024.123058",
+    "venue": "Applied Energy",
+    "authors": "Stylianos Loizidis; Andreas Kyprianou; George Elia Georghiou"
+   },
+   {
+    "title": "Occurrence of negative prices on the German spot market for electricity and their influence on balancing power markets",
+    "year": 2010,
+    "doi": "https://doi.org/10.1109/eem.2010.5558703",
+    "cited": 71,
+    "oa": null,
+    "venue": "International Conference on the European Energy Market (EEM)",
+    "authors": "Fabio Genoese; Massimo Genoese; Martin Wietschel"
+   },
+   {
+    "title": "Negative Wholesale Electricity Prices in the German, French and Belgian Day-Ahead, Intra-Day and Real-Time Markets",
+    "year": 2015,
+    "doi": "https://doi.org/10.1016/j.tej.2015.04.001",
+    "cited": 83,
+    "oa": null,
+    "venue": "The Electricity Journal",
+    "authors": "Kristof De Vos"
+   }
+  ]
+ },
+ {
+  "q": "Electricity price forecasting negative prices quantile regression",
+  "hits": [
+   {
+    "title": "Wholesale electricity price forecasting by Quantile Regression and Kalman Filter method",
+    "year": 2023,
+    "doi": "https://doi.org/10.1016/j.energy.2023.129925",
+    "cited": 33,
+    "oa": null,
+    "venue": "Energy",
+    "authors": "Mohammad Reza Monjazeb; Hossein Amiri; Akram Movahedi"
+   },
+   {
+    "title": "Electricity price forecasting using quantile regression averaging with nonconvex regularization",
+    "year": 2024,
+    "doi": "https://doi.org/10.1002/for.3103",
+    "cited": 6,
+    "oa": null,
+    "venue": "Journal of Forecasting",
+    "authors": "He Jiang; Yao Dong; Jianzhou Wang"
+   },
+   {
+    "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+    "cited": 1625,
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf",
+    "venue": "International Journal of Forecasting",
+    "authors": "Rafał Weron"
+   }
+  ]
+ },
+ {
+  "q": "Regime switching models for electricity spot prices Weron",
+  "hits": [
+   {
+    "title": "Modeling Electricity Prices with Regime Switching Models",
+    "year": 2004,
+    "doi": "https://doi.org/10.1007/978-3-540-25944-2_111",
+    "cited": 84,
+    "oa": "https://link.springer.com/content/pdf/10.1007/978-3-540-25944-2_111.pdf",
+    "venue": "Lecture notes in computer science",
+    "authors": "Michael Bierbrauer; Stefan Trück; Rafał Weron"
+   },
+   {
+    "title": "Goodness-of-fit testing for the marginal distribution of regime-switching models with an application to electricity spot prices",
+    "year": 2012,
+    "doi": "https://doi.org/10.1007/s10182-012-0202-9",
+    "cited": 20,
+    "oa": "https://link.springer.com/content/pdf/10.1007/s10182-012-0202-9.pdf",
+    "venue": "AStA Advances in Statistical Analysis",
+    "authors": "Joanna Janczura; Rafał Weron"
+   },
+   {
+    "title": "A spot-forward model for electricity prices with regime shifts",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.eneco.2014.11.003",
+    "cited": 66,
+    "oa": "https://ntnuopen.ntnu.no/ntnu-xmlui/bitstream/11250/2389490/3/Paper-Revision_2014-07-23.pdf",
+    "venue": "Energy Economics",
+    "authors": "Florentina Paraschiv; Stein‐Erik Fleten; Michael Schürle"
+   }
+  ]
+ },
+ {
+  "q": "Modelling electricity prices a comparison of regime switching jump diffusion",
+  "hits": [
+   {
+    "title": "Modeling Electricity Prices with Regime Switching Models",
+    "year": 2004,
+    "doi": "https://doi.org/10.1007/978-3-540-25944-2_111",
+    "cited": 84,
+    "oa": "https://link.springer.com/content/pdf/10.1007/978-3-540-25944-2_111.pdf",
+    "venue": "Lecture notes in computer science",
+    "authors": "Michael Bierbrauer; Stefan Trück; Rafał Weron"
+   },
+   {
+    "title": "Efficient estimation of Markov regime-switching models: An application to electricity spot prices",
+    "year": 2011,
+    "doi": "https://doi.org/10.1007/s10182-011-0181-2",
+    "cited": 94,
+    "oa": "https://link.springer.com/content/pdf/10.1007/s10182-011-0181-2.pdf",
+    "venue": "AStA Advances in Statistical Analysis",
+    "authors": "Joanna Janczura; Rafał Weron"
+   },
+   {
+    "title": "An empirical comparison of alternate regime-switching models or electricity spot prices",
+    "year": 2010,
+    "doi": null,
+    "cited": 2,
+    "oa": null,
+    "venue": "Munich Personal RePEc Archive (Ludwig Maximilian University of Munich)",
+    "authors": "Joanna Janczura; Rafał Weron"
+   }
+  ]
+ },
+ {
+  "q": "Short term load forecasting typical load profile shape normalization",
+  "hits": [
+   {
+    "title": "Regression Model-Based Short-Term Load Forecasting for University Campus Load",
+    "year": 2022,
+    "doi": "https://doi.org/10.1109/access.2022.3144206",
+    "cited": 154,
+    "oa": "https://ieeexplore.ieee.org/ielx7/6287639/9668973/09684449.pdf",
+    "venue": "IEEE Access",
+    "authors": "Mithun Madhukumar; Albino Sebastian; Xiaodong Liang"
+   },
+   {
+    "title": "Computational Intelligence on Short-Term Load Forecasting: A Methodological Overview",
+    "year": 2019,
+    "doi": "https://doi.org/10.3390/en12030393",
+    "cited": 131,
+    "oa": "https://www.mdpi.com/1996-1073/12/3/393/pdf?version=1548572684",
+    "venue": "Energies",
+    "authors": "Narjes Fallah; Mehdi Ganjkhani; Shahab Shamshirband"
+   },
+   {
+    "title": "Day-Ahead Short-Term Load Forecasting for Holidays Based on Modification of Similar Days’ Load Profiles",
+    "year": 2022,
+    "doi": "https://doi.org/10.1109/access.2022.3150344",
+    "cited": 59,
+    "oa": "https://ieeexplore.ieee.org/ielx7/6287639/9668973/09709300.pdf",
+    "venue": "IEEE Access",
+    "authors": "Jihoo Son; Jiwon Cha; Hyun‐Su Kim"
+   }
+  ]
+ },
+ {
+  "q": "Load profile based electricity price forecasting profile clustering",
+  "hits": [
+   {
+    "title": "A Novel Load Image Profile-Based Electricity Load Clustering Methodology",
+    "year": 2019,
+    "doi": "https://doi.org/10.1109/access.2019.2914216",
+    "cited": 20,
+    "oa": "https://ieeexplore.ieee.org/ielx7/6287639/8600701/08703856.pdf",
+    "venue": "IEEE Access",
+    "authors": "Keon-Jun Park; Sung-Yong Son"
+   },
+   {
+    "title": "Forecasting Anonymized Electricity Load Profiles",
+    "year": 2025,
+    "doi": "https://doi.org/10.1109/powertech59965.2025.11180602",
+    "cited": 2,
+    "oa": "https://orbilu.uni.lu/bitstream/10993/65481/1/Forecasting%20Anonymized%20Electricity%20Load%20Profiles.pdf",
+    "venue": null,
+    "authors": "Joaquín Delgado Fernández; Sergio Potenciano Menci; A. Magitteri"
+   },
+   {
+    "title": "Electricity load forecasting: a systematic review",
+    "year": 2020,
+    "doi": "https://doi.org/10.1186/s43067-020-00021-8",
+    "cited": 391,
+    "oa": "https://jesit.springeropen.com/track/pdf/10.1186/s43067-020-00021-8",
+    "venue": "Journal of Electrical Systems and Information Technology",
+    "authors": "Isaac Kofi Nti; Moses Teimeh; Owusu Nyarko‐Boateng"
+   }
+  ]
+ },
+ {
+  "q": "Cross-temporal coherent forecasts for Australian tourism",
+  "hits": [
+   {
+    "title": "Cross-temporal coherent forecasts for Australian tourism",
+    "year": 2019,
+    "doi": "https://doi.org/10.1016/j.annals.2019.02.001",
+    "cited": 93,
+    "oa": "https://eprints.lancs.ac.uk/id/eprint/130999/1/Kourentzes_2019_Cross_temporal_coherent_forecasts_the_case_of_Australian_tourism_flows.pdf",
+    "venue": "Annals of Tourism Research",
+    "authors": "Nikolaos Kourentzes; George A. Athanasopoulos"
+   },
+   {
+    "title": "Cross-temporal probabilistic forecast reconciliation: Methodological and practical issues",
+    "year": 2023,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2023.10.003",
+    "cited": 17,
+    "oa": "https://doi.org/10.1016/j.ijforecast.2023.10.003",
+    "venue": "International Journal of Forecasting",
+    "authors": "Daniele Girolimetto; George Athanasopoulos; Tommaso Di Fonzo"
+   },
+   {
+    "title": "Coherent forecasts for tourism demand with automated immutability constraints",
+    "year": 2025,
+    "doi": "https://doi.org/10.1016/j.tourman.2025.105342",
+    "cited": 1,
+    "oa": "https://researchportal.bath.ac.uk/en/publications/fd90ec45-e403-415e-864b-b1910d58d416",
+    "venue": "Tourism Management",
+    "authors": "Quan Wen; Yanrong Zeng; Fotios Petropoulos"
+   }
+  ]
+ },
+ {
+  "q": "Temporal hierarchies",
+  "hits": [
+   {
+    "title": "Forecasting with temporal hierarchies",
+    "year": 2017,
+    "doi": "https://doi.org/10.1016/j.ejor.2017.02.046",
+    "cited": 263,
+    "oa": "https://researchportal.bath.ac.uk/files/153427625/EJOR_2017_Temporal_hierarchies_post_print_.pdf",
+    "venue": "European Journal of Operational Research",
+    "authors": "George A. Athanasopoulos; Rob J. Hyndman; Nikolaos Kourentzes"
+   },
+   {
+    "title": "Temporal hierarchies and inheritance semantics for GTRBAC",
+    "year": 2002,
+    "doi": "https://doi.org/10.1145/507711.507724",
+    "cited": 100,
+    "oa": null,
+    "venue": "ACM Symposium on Access Control Models and Technologies (SACMAT)",
+    "authors": "James B D Joshi; Elisa Bertino; Arif Ghafoor"
+   },
+   {
+    "title": "Temporal Hierarchical Control of Singing in Birds",
+    "year": 1996,
+    "doi": "https://doi.org/10.1126/science.273.5283.1871",
+    "cited": 608,
+    "oa": null,
+    "venue": "Science",
+    "authors": "Albert C. Yu; Daniel Margoliash"
+   }
+  ]
+ },
+ {
+  "q": "Forecasting day-ahead electricity prices with a hybrid model seasonal decomposition",
+  "hits": [
+   {
+    "title": "Day-Ahead Electricity Price Forecasting Based on Hybrid Regression Model",
+    "year": 2022,
+    "doi": "https://doi.org/10.1109/access.2022.3213081",
+    "cited": 73,
+    "oa": "https://ieeexplore.ieee.org/ielx7/6287639/6514899/09913980.pdf",
+    "venue": "IEEE Access",
+    "authors": "Ali Najem Alkawaz; Abdallah Abdellatif; Jeevan Kanesan"
+   },
+   {
+    "title": "A Deep Learning Based Hybrid Framework for Day-Ahead Electricity Price Forecasting",
+    "year": 2020,
+    "doi": "https://doi.org/10.1109/access.2020.3014241",
+    "cited": 104,
+    "oa": "https://doi.org/10.1109/access.2020.3014241",
+    "venue": "IEEE Access",
+    "authors": "Rongquan Zhang; Gangqiang Li; Zhengwei Ma"
+   },
+   {
+    "title": "A Hybrid Regression Model for Day-Ahead Energy Price Forecasting",
+    "year": 2019,
+    "doi": "https://doi.org/10.1109/access.2019.2904432",
+    "cited": 55,
+    "oa": "https://ieeexplore.ieee.org/ielx7/6287639/8600701/08665889.pdf",
+    "venue": "IEEE Access",
+    "authors": "Daniel Bissing; Michael T. Klein; Radhakrishnan Angamuthu Chinnathambi"
+   }
+  ]
+ },
+ {
+  "q": "Analysis and forecasting of electricity price risks with quantile factor models",
+  "hits": [
+   {
+    "title": "Analysis and Forecasting of Electricity Price Risks with Quantile Factor Models",
+    "year": 2015,
+    "doi": "https://doi.org/10.5547/01956574.37.1.dbun",
+    "cited": 81,
+    "oa": "http://hdl.handle.net/11250/2460664",
+    "venue": "The Energy Journal",
+    "authors": "Derek W. Bunn; Arne F. Andresen; Dipeng Chen"
+   },
+   {
+    "title": "Modeling the UK electricity price distributions using quantile regression",
+    "year": 2016,
+    "doi": "https://doi.org/10.1016/j.energy.2016.02.025",
+    "cited": 79,
+    "oa": "http://hdl.handle.net/11250/2457866",
+    "venue": "Energy",
+    "authors": "Lars Ivar Hagfors; Derek W. Bunn; Eline Kristoffersen"
+   },
+   {
+    "title": "Computing electricity spot price prediction intervals using quantile regression and forecast averaging",
+    "year": 2014,
+    "doi": "https://doi.org/10.1007/s00180-014-0523-0",
+    "cited": 157,
+    "oa": "https://link.springer.com/content/pdf/10.1007/s00180-014-0523-0.pdf",
+    "venue": "Computational Statistics",
+    "authors": "Jakub Nowotarski; Rafał Weron"
+   }
+  ]
+ },
+ {
+  "q": "Complete subset regressions forecast",
+  "hits": [
+   {
+    "title": "Complete subset regressions",
+    "year": 2013,
+    "doi": "https://doi.org/10.1016/j.jeconom.2013.04.017",
+    "cited": 211,
+    "oa": "https://escholarship.org/content/qt1st3n7z7/qt1st3n7z7.pdf?t=osxb70",
+    "venue": "Journal of Econometrics",
+    "authors": "Graham Elliott; Antonio Gargano; Allan Timmermann"
+   },
+   {
+    "title": "Complete subset regressions with large-dimensional sets of predictors",
+    "year": 2015,
+    "doi": "https://doi.org/10.1016/j.jedc.2015.03.004",
+    "cited": 44,
+    "oa": null,
+    "venue": "Journal of Economic Dynamics and Control",
+    "authors": "Graham Elliott; Antonio Gargano; Allan Timmermann"
+   },
+   {
+    "title": "Out-of-sample equity premium prediction: a complete subset quantile regression approach",
+    "year": 2019,
+    "doi": "https://doi.org/10.1080/1351847x.2019.1647866",
+    "cited": 28,
+    "oa": "https://doi.org/10.2139/ssrn.2335084",
+    "venue": "European Journal of Finance",
+    "authors": "Loukia Meligkotsidou; Ekaterini Panopoulou; Ioannis D. Vrontos"
+   }
+  ]
+ },
+ {
+  "q": "Dimension reduction for out-of-sample prediction",
+  "hits": [
+   {
+    "title": "Dimensionality and data reduction in telecom churn prediction",
+    "year": 2014,
+    "doi": "https://doi.org/10.1108/k-03-2013-0045",
+    "cited": 14,
+    "oa": null,
+    "venue": "Kybernetes",
+    "authors": "Wei‐Chao Lin; Chih‐Fong Tsai; Shih‐Wen Ke"
+   },
+   {
+    "title": "Out-of-Sample Prediction of Treasury Yield Correlations",
+    "year": 2025,
+    "doi": "https://doi.org/10.2139/ssrn.5786570",
+    "cited": 1,
+    "oa": "https://doi.org/10.2139/ssrn.5786570",
+    "venue": "SSRN Electronic Journal",
+    "authors": "Riccardo Rebonato; Xuan Feng"
+   },
+   {
+    "title": "Dimensionality reduction methods in multivariate prediction",
+    "year": 1998,
+    "doi": null,
+    "cited": 3,
+    "oa": "https://uwspace.uwaterloo.ca/bitstreams/1573cbf4-89cb-4d75-b115-b0373d9a48fd/download",
+    "venue": "Library and Archives Canada (Government of Canada)",
+    "authors": "Giovanni Maria Merola"
+   }
+  ]
+ },
+ {
+  "q": "Equity premium prediction machine learning out-of-sample",
+  "hits": [
+   {
+    "title": "Forecasting the equity premium: can machine learning beat the historical average?",
+    "year": 2024,
+    "doi": "https://doi.org/10.1080/14697688.2024.2409278",
+    "cited": 4,
+    "oa": "https://doi.org/10.2139/ssrn.4781195",
+    "venue": "Quantitative Finance",
+    "authors": "Xingfu Xu; Wei‐Han Liu"
+   },
+   {
+    "title": "Machine learning techniques for cross-sectional equity returns’ prediction",
+    "year": 2022,
+    "doi": "https://doi.org/10.1007/s00291-022-00693-w",
+    "cited": 27,
+    "oa": "https://link.springer.com/content/pdf/10.1007/s00291-022-00693-w.pdf",
+    "venue": "OR Spectrum",
+    "authors": "Christian Fieberg; Daniel Metko; Thorsten Poddig"
+   },
+   {
+    "title": "Out-of-sample equity premium prediction: a complete subset quantile regression approach",
+    "year": 2019,
+    "doi": "https://doi.org/10.1080/1351847x.2019.1647866",
+    "cited": 28,
+    "oa": "https://doi.org/10.2139/ssrn.2335084",
+    "venue": "European Journal of Finance",
+    "authors": "Loukia Meligkotsidou; Ekaterini Panopoulou; Ioannis D. Vrontos"
+   }
+  ]
+ },
+ {
+  "q": "The term structure of variance risk premia",
+  "hits": [
+   {
+    "title": "The term structure of equity and variance risk premia",
+    "year": 2020,
+    "doi": "https://doi.org/10.1016/j.jeconom.2020.03.002",
+    "cited": 94,
+    "oa": null,
+    "venue": "Journal of Econometrics",
+    "authors": "Yacine Aı̈t-Sahalia; Mustafa Karaman; Loriano Mancini"
+   },
+   {
+    "title": "The Term Structure of Variance Swaps and Risk Premia",
+    "year": 2018,
+    "doi": null,
+    "cited": 57,
+    "oa": null,
+    "venue": "RePEc: Research Papers in Economics",
+    "authors": "Yacine Aı̈t-Sahalia; Mustafa Karaman; Loriano Mancini"
+   },
+   {
+    "title": "The Term Structure of Variance Swaps, Risk Premia and the Expectation Hypothesis",
+    "year": 2012,
+    "doi": "https://doi.org/10.2139/ssrn.2136820",
+    "cited": 99,
+    "oa": "https://doi.org/10.2139/ssrn.2136820",
+    "venue": "SSRN Electronic Journal",
+    "authors": "Yacine Aı̈t-Sahalia; Mustafa Karaman; Loriano Mancini"
+   }
+  ]
+ },
+ {
+  "q": "Black-Litterman Global Portfolio Optimization",
+  "hits": [
+   {
+    "title": "Global Portfolio Optimization Revisited: A Least Discrimination Alternative to Black-Litterman",
+    "year": 2007,
+    "doi": null,
+    "cited": 14,
+    "oa": null,
+    "venue": "RePEc: Research Papers in Economics",
+    "authors": "Jacques P. Pezier"
+   },
+   {
+    "title": "The impact of global economic policy uncertainty on portfolio optimization: A Black–Litterman approach",
+    "year": 2022,
+    "doi": "https://doi.org/10.1016/j.irfa.2022.102476",
+    "cited": 34,
+    "oa": null,
+    "venue": "International Review of Financial Analysis",
+    "authors": "Yingwei Han; Jie Li"
+   },
+   {
+    "title": "Using fear, greed and machine learning for optimizing global portfolios: A Black-Litterman approach",
+    "year": 2023,
+    "doi": "https://doi.org/10.1016/j.frl.2023.104515",
+    "cited": 22,
+    "oa": null,
+    "venue": "Finance research letters",
+    "authors": "Ronil Barua; Anil Kumar Sharma"
+   }
+  ]
+ },
+ {
+  "q": "Honey I shrunk the sample covariance matrix",
+  "hits": [
+   {
+    "title": "Honey, I Shrunk the Sample Covariance Matrix",
+    "year": 2004,
+    "doi": "https://doi.org/10.3905/jpm.2004.110",
+    "cited": 1256,
+    "oa": "https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=433840",
+    "venue": "The Journal of Portfolio Management",
+    "authors": "Olivier Ledoit; Michael Wolf"
+   },
+   {
+    "title": "Eigenvectors of some large sample covariance matrix ensembles",
+    "year": 2010,
+    "doi": "https://doi.org/10.1007/s00440-010-0298-3",
+    "cited": 195,
+    "oa": "https://link.springer.com/content/pdf/10.1007/s00440-010-0298-3.pdf",
+    "venue": "Probability Theory and Related Fields",
+    "authors": "Olivier Ledoit; Sandrine Péché"
+   },
+   {
+    "title": "On the Variability of the Sample Covariance Matrix Under Complex Elliptical Distributions",
+    "year": 2021,
+    "doi": "https://doi.org/10.1109/lsp.2021.3117443",
+    "cited": 6,
+    "oa": "https://ieeexplore.ieee.org/ielx7/97/4358004/09557837.pdf",
+    "venue": "IEEE Signal Processing Letters",
+    "authors": "Elias Raninen; Esa Ollila; David E. Tyler"
+   }
+  ]
+ },
+ {
+  "q": "Improved estimation of the covariance matrix of stock returns with an application to portfolio selection",
+  "hits": [
+   {
+    "title": "Improved estimation of the covariance matrix of stock returns with an application to portfolio selection",
+    "year": 2003,
+    "doi": "https://doi.org/10.1016/s0927-5398(03)00007-0",
+    "cited": 1630,
+    "oa": null,
+    "venue": "Journal of Empirical Finance",
+    "authors": "Olivier Ledoit; Michael Wolf"
+   },
+   {
+    "title": "Improved estimation of the covariance matrix of stock returns with an application to portfolio selection",
+    "year": 2000,
+    "doi": null,
+    "cited": 12,
+    "oa": "https://e-archivo.uc3m.es/bitstreams/e11e70d5-4800-4da6-b6d6-6380060f39b1/download",
+    "venue": "e-Archivo (Carlos III University of Madrid)",
+    "authors": "Olivier Ledoit; Michael Wolf"
+   },
+   {
+    "title": "A Generalized Approach to Portfolio Optimization: Improving Performance by Constraining Portfolio Norms",
+    "year": 2009,
+    "doi": "https://doi.org/10.1287/mnsc.1080.0986",
+    "cited": 1038,
+    "oa": null,
+    "venue": "Management Science",
+    "authors": "Victor DeMiguel; Lorenzo Garlappi; Francisco J. Nogales"
+   }
+  ]
+ },
+ {
+  "q": "Bias in the estimation of the mean-reversion parameter",
+  "hits": [
+   {
+    "title": "Bias in the estimation of the mean reversion parameter in continuous time models",
+    "year": 2012,
+    "doi": "https://doi.org/10.1016/j.jeconom.2012.01.004",
+    "cited": 78,
+    "oa": null,
+    "venue": "Journal of Econometrics",
+    "authors": "Jun Yu"
+   },
+   {
+    "title": "Bias in the Estimate of a Mean Reversion Parameter for a Fractional Ornstein-Uhlenbeck Process",
+    "year": 2017,
+    "doi": null,
+    "cited": 0,
+    "oa": "https://uwspace.uwaterloo.ca/bitstream/10012/11212/1/Ng_WaiMan.pdf",
+    "venue": "UWSpace (University of Waterloo)",
+    "authors": "Wai Man Ng"
+   },
+   {
+    "title": "Bias in the estimation of mean reversion in continuous-time Lévy processes",
+    "year": 2015,
+    "doi": "https://doi.org/10.1016/j.econlet.2015.06.002",
+    "cited": 7,
+    "oa": "https://ink.library.smu.edu.sg/cgi/viewcontent.cgi?article=2984&context=soe_research",
+    "venue": "Economics Letters",
+    "authors": "Yong Bao; Aman Ullah; Yun Wang"
+   }
+  ]
+ },
+ {
+  "q": "Sparse and stable Markowitz portfolios",
+  "hits": [
+   {
+    "title": "Sparse and stable Markowitz portfolios",
+    "year": 2009,
+    "doi": "https://doi.org/10.1073/pnas.0904287106",
+    "cited": 481,
+    "oa": "https://arxiv.org/pdf/0708.0046",
+    "venue": "Proceedings of the National Academy of Sciences",
+    "authors": "Joshua Brodie; Ingrid C. Daubechies; Christine De Mol"
+   },
+   {
+    "title": "Sparse and Stable Markowitz Portfolios",
+    "year": 2008,
+    "doi": "https://doi.org/10.2139/ssrn.1258442",
+    "cited": 53,
+    "oa": "https://doi.org/10.2139/ssrn.1258442",
+    "venue": "SSRN Electronic Journal",
+    "authors": "Joshua Brodie; Ingrid C. Daubechies; Christine De Mol"
+   },
+   {
+    "title": "Construction, management, and performance of sparse Markowitz portfolios",
+    "year": 2013,
+    "doi": "https://doi.org/10.1515/snde-2012-0010",
+    "cited": 5,
+    "oa": "https://doi.org/10.2139/ssrn.2161564",
+    "venue": "Studies in Nonlinear Dynamics and Econometrics",
+    "authors": "Julie Henriques; Juan‐Pablo Ortega"
+   }
+  ]
+ },
+ {
+  "q": "Forecasting electricity prices with deep learning transformer long horizon performance",
+  "hits": [
+   {
+    "title": "Hybrid Deep Learning and Transformer-Based Framework for Multivariate Electricity Consumption Forecasting",
+    "year": 2026,
+    "doi": "https://doi.org/10.3390/app16062760",
+    "cited": 7,
+    "oa": "https://www.mdpi.com/2076-3417/16/6/2760/pdf",
+    "venue": "Applied Sciences",
+    "authors": "Muzaffer Ertürk; Murat Emeç; Mahmut Turhan"
+   },
+   {
+    "title": "Learning the Grid: Transformer Architectures for Electricity Price Forecasting in the Australian National Market",
+    "year": 2025,
+    "doi": "https://doi.org/10.3390/app16010075",
+    "cited": 2,
+    "oa": "https://www.mdpi.com/2076-3417/16/1/75/pdf?version=1766546330",
+    "venue": "Applied Sciences",
+    "authors": "Mark Sinclair; Andrew Shepley; Farshid Hajati"
+   },
+   {
+    "title": "Deep Learning for Electricity Price Forecasting: A Review of Day-Ahead, Intraday, and Balancing Electricity Markets",
+    "year": 2026,
+    "doi": null,
+    "cited": 0,
+    "oa": "https://arxiv.org/pdf/2602.10071",
+    "venue": "arXiv (Cornell University)",
+    "authors": "Runyao Yu; Derek W. Bunn; Julia Lin"
+   }
+  ]
+ },
+ {
+  "q": "Empirical comparison of deep learning electricity price forecasting hybrid models unfair",
+  "hits": [
+   {
+    "title": "Bayesian deep learning based method for probabilistic forecast of day-ahead electricity prices",
+    "year": 2019,
+    "doi": "https://doi.org/10.1016/j.apenergy.2019.05.068",
+    "cited": 129,
+    "oa": "https://re.public.polimi.it/bitstream/11311/1120105/2/11311-1120105_Matteucci.pdf",
+    "venue": "Applied Energy",
+    "authors": "Alessandro Brusaferri; Matteo Matteucci; Pietro Portolani"
+   },
+   {
+    "title": "A Transformer Approach for Electricity Price Forecasting",
+    "year": 2024,
+    "doi": "https://doi.org/10.2139/ssrn.4939087",
+    "cited": 9,
+    "oa": "https://doi.org/10.2139/ssrn.4939087",
+    "venue": "SSRN Electronic Journal",
+    "authors": "Oscar Llorente; José Portela"
+   },
+   {
+    "title": "A comprehensive review on deep learning approaches for short-term load forecasting",
+    "year": 2023,
+    "doi": "https://doi.org/10.1016/j.rser.2023.114031",
+    "cited": 302,
+    "oa": "https://researchonline.gcu.ac.uk/ws/files/81149524/81004974.pdf",
+    "venue": "Renewable and Sustainable Energy Reviews",
+    "authors": "Yavuz Eren; İbrahim Beklan Küçükdemiral"
+   }
+  ]
+ },
+ {
+  "q": "Nowcasting with large datasets a survey",
+  "hits": [
+   {
+    "title": "Nowcasting with Large Bayesian Vector Autoregressions",
+    "year": 2020,
+    "doi": "https://doi.org/10.1016/j.jeconom.2021.04.012",
+    "cited": 70,
+    "oa": "https://doi.org/10.2139/ssrn.3672229",
+    "venue": "Journal of Econometrics",
+    "authors": "Jacopo Cimadomo; Domenico Giannone; Michèle Lenza"
+   },
+   {
+    "title": "Skilful nowcasting of extreme precipitation with NowcastNet",
+    "year": 2023,
+    "doi": "https://doi.org/10.1038/s41586-023-06184-4",
+    "cited": 449,
+    "oa": "https://www.nature.com/articles/s41586-023-06184-4.pdf",
+    "venue": "Nature",
+    "authors": "Yuchen Zhang; Mingsheng Long; Kaiyuan Chen"
+   },
+   {
+    "title": "Nowcasting Real Economic Activity in the Euro Area: Assessing the Impact of Qualitative Surveys",
+    "year": 2018,
+    "doi": "https://doi.org/10.1007/s41549-017-0022-9",
+    "cited": 17,
+    "oa": "https://www.nbb.be/doc/oc/repec/reswpp/wp331en.pdf",
+    "venue": "Journal of Business Cycle Research",
+    "authors": "Raïsa Basselier; David de Antonio Liedo; Geert Langenus"
+   }
+  ]
+ },
+ {
+  "q": "Mixed frequency models a survey",
+  "hits": [
+   {
+    "title": "Daily news sentiment and monthly surveys: A mixed-frequency dynamic factor model for nowcasting consumer confidence",
+    "year": 2021,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2021.11.005",
+    "cited": 37,
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207021001795",
+    "venue": "International Journal of Forecasting",
+    "authors": "Andres Algaba; Samuel Borms; Kris Boudt"
+   },
+   {
+    "title": "A Survey of Econometric Methods for Mixed-Frequency Data",
+    "year": 2013,
+    "doi": "https://doi.org/10.2139/ssrn.2268912",
+    "cited": 120,
+    "oa": "https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=2268912",
+    "venue": "SSRN Electronic Journal",
+    "authors": "Claudia Foroni; Massimiliano Giuseppe Marcellino"
+   },
+   {
+    "title": "Realtime Nowcasting with a Bayesian Mixed Frequency Model with Stochastic Volatility",
+    "year": 2015,
+    "doi": "https://doi.org/10.1111/rssa.12092",
+    "cited": 103,
+    "oa": "https://academic.oup.com/jrsssa/article-pdf/178/4/837/49348195/jrsssa_178_4_837.pdf",
+    "venue": "Journal of the Royal Statistical Society Series A (Statistics in Society)",
+    "authors": "Andrea Carriero; Todd E. Clark; Massimiliano Giuseppe Marcellino"
+   }
+  ]
+ },
+ {
+  "q": "Forecasting with MIDAS and bridge equations nowcasting comparison",
+  "hits": [
+   {
+    "title": "A comparison of MIDAS and bridge equations",
+    "year": 2016,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2015.07.004",
+    "cited": 48,
+    "oa": null,
+    "venue": "International Journal of Forecasting",
+    "authors": "Christian Schumacher"
+   },
+   {
+    "title": "Midas and Bridge Equations",
+    "year": 2016,
+    "doi": "https://doi.org/10.2139/ssrn.2797010",
+    "cited": 14,
+    "oa": "https://doi.org/10.2139/ssrn.2797010",
+    "venue": "SSRN Electronic Journal",
+    "authors": "Christian Schumacher"
+   },
+   {
+    "title": "A comparison of mixed frequency approaches for nowcasting Euro area macroeconomic aggregates",
+    "year": 2013,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2013.01.010",
+    "cited": 127,
+    "oa": null,
+    "venue": "International Journal of Forecasting",
+    "authors": "Claudia Foroni; Massimiliano Giuseppe Marcellino"
+   }
+  ]
+ },
+ {
+  "q": "Temporal aggregation and forecast reconciliation",
+  "hits": [
+   {
+    "title": "Forecast reconciliation: A review",
+    "year": 2023,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2023.10.010",
+    "cited": 80,
+    "oa": "https://doi.org/10.1016/j.ijforecast.2023.10.010",
+    "venue": "International Journal of Forecasting",
+    "authors": "George Athanasopoulos; Rob J. Hyndman; Nikolaos Kourentzes"
+   },
+   {
+    "title": "Improvements for time series forecasting by using aggregation, hierarchical information, and reconciliation",
+    "year": 2025,
+    "doi": "https://doi.org/10.34726/hss.2025.116861",
+    "cited": 0,
+    "oa": "https://doi.org/10.34726/hss.2025.116861",
+    "venue": "reposiTUm (TU Wien)",
+    "authors": "Lukas Neubauer"
+   },
+   {
+    "title": "Forecasting with temporal hierarchies",
+    "year": 2017,
+    "doi": "https://doi.org/10.1016/j.ejor.2017.02.046",
+    "cited": 263,
+    "oa": "https://researchportal.bath.ac.uk/files/153427625/EJOR_2017_Temporal_hierarchies_post_print_.pdf",
+    "venue": "European Journal of Operational Research",
+    "authors": "George A. Athanasopoulos; Rob J. Hyndman; Nikolaos Kourentzes"
+   }
+  ]
+ }
+]

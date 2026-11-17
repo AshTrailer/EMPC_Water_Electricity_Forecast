@@ -1,0 +1,9742 @@
+
+=== page 1 ===
+Day-ahead electricity price forecasting with high-dimensional
+structures: Univariate vs. multivariate modeling frameworks
+Florian Ziela, Rafał Weronb
+aFaculty of Business Administration and Economics, University Duisburg-Essen, Essen, Germany
+bDepartment of Operations Research, Wrocław University of Technology, Wrocław, Poland
+Abstract
+We conduct an extensive empirical study on short-term electricity price forecasting (EPF) to ad-
+dress the long-standing question if the optimal model structure for EPF is univariate or multi-
+variate. We provide evidence that despite a minor edge in predictive performance overall, the
+multivariate modeling framework does not uniformly outperform the univariate one across all 12
+considered datasets, seasons of the year or hours of the day, and at times is outperformed by the lat-
+ter. This is an indication that combining advanced structures or the corresponding forecasts from
+both modeling approaches can bring a further improvement in forecasting accuracy. We show
+that this indeed can be the case, even for a simple averaging scheme involving only two models.
+Finally, we also analyze variable selection for the best performing high-dimensional lasso-type
+models, thus provide guidelines to structuring better performing forecasting model designs.
+Keywords: Electricity price forecasting, Day-ahead market, Univariate modeling, Multivariate
+modeling, Forecast combination, Regression, Variable selection, Lasso
+1. Introduction
+There is no consensus in the existing literature on short-term electricity price forecasting (EPF)
+as to the representation of the price series (see Weron, 2014, for a recent review). Should the
+modeling be implemented in a multivariate fashion, i.e., with separate but possibly interdependent
+models for each of the 24 (48 or more) load periods, or within a univariate framework, where one
+large model is constructed and the same set of parameters is used to produce one- to 24-step ahead
+predictions for all load periods of the next day?
+Surprisingly, though, there are very few and very limited studies in the EPF literature where
+the univariate and multivariate frameworks are compared. Cuaresma et al. (2004) apply variants
+of AR(1) and general ARMA processes (including ARMA with jumps) to short-term EPF in the
+German EEX market. They conclude that speciﬁcations in which each hour of the day is modeled
+separately (i.e., a multivariate framework) present uniformly better forecasting properties than
+univariate time series models. More recently, Ziel (2016a) notes that, when we compare the fore-
+casting performance of relatively simple time series models implemented either in a multivariate
+Email addresses: florian.ziel@uni-due.de (Florian Ziel), rafal.weron@pwr.edu.pl (Rafał Weron)
+Preprint submitted to Energy Economics
+This version: May 18, 2018
+arXiv:1805.06649v1  [stat.AP]  17 May 2018
+
+=== page 2 ===
+or a univariate framework, the latter generally perform better for the ﬁrst half of the day, whereas
+the former are better in the second half of the day. However, there has been no through, empirical
+study to date, involving many ﬁne-tuned speciﬁcations from both groups. With this paper we want
+to ﬁll the gap and provide much needed evidence. In particular we want to address three pertinent
+questions:
+1. Which modeling framework – multivariate or univariate – is better for EPF?
+2. If one of them is better, is it better across all hours, seasons of the year and markets?
+3. How many and which past values of the spot price process should be used in EPF models?
+The remainder of the paper is structured as follows. In Section 2 we thoroughly discuss the
+univariate and multivariate modeling frameworks, which are driven by diﬀerent data-format per-
+spectives. This is a crucial, conceptual part of the paper, which sets ground for the empirical
+analysis in the following Sections. In Section 3 we brieﬂy describe the 12 price series used and
+present the area hyperbolic sine transform for stabilizing the variance of spot price data. In Sec-
+tion 4 we deﬁne 10 forecasting models representing eight model classes: (C1) the mean values of
+the past prices, (C2) similar-day techniques, (C3) sets of 24 parsimonious, interrelated autoregres-
+sive (AR) structures (so-called expert models), (C4) sets of 24 univariate AR models, (C5) vector
+autoregressive (VAR) models, (C6) sets of 24 parameter-rich, interrelated AR models estimated
+using the least absolute shrinkage and selection operator (i.e., lasso or LASSO; which shrinks
+to zero the coeﬃcients of redundant explanatory variables), (C7) univariate AR models and (C8)
+univariate, parameter-rich AR models estimated using the lasso. In Section 5 we evaluate their
+performance on the basis of the Mean Absolute Error (MAE), the mean percentage deviation from
+the best (m.p.d.f.b.) model and using two variants of the Diebold and Mariano (1995) test for
+signiﬁcant diﬀerences in the forecasting performance. We also discuss variable selection for the
+best performing lasso-type models. In Section 6 we wrap up the results and provide guidelines for
+energy modelers and forecasters. Finally, in the Appendixes we deﬁne the full set of 58 forecasting
+models considered in our empirical study (for clarity of exposition in Section 5 we report detailed
+results only for 10 representative models), provide formulas for alternative representations of some
+of the models, and summarize the predictive performance of all 58 models.
+2. The univariate and multivariate modeling frameworks
+Recall, that the day-ahead price series is a result of conducted once per day (usually around
+noon) auctions for the 24 hours of the next day (Burger et al., 2007; Huisman et al., 2007; Weron
+and Ziel, 2018). Consequently, the electricity prices Pd,1, . . . , Pd,24 for day d and hours 1, . . . , 24
+are disclosed at once, and can be regarded as a multivariate time series of the 24-dimensional
+random vector Pd = [Pd,1, . . . , Pd,24]′. Next to the daily auction argument there are two other
+practical reasons for the multivariate modeling framework: (i) the demand forecasting literature,
+which has generally favored the multivariate framework for short-term predictions, and (ii) the fact
+that each load period (hour, half-hour) displays a rather distinct price proﬁle, reﬂecting the daily
+variation of demand, costs, operational constraints and bidding strategies (Gianfreda et al., 2016;
+Karakatsani and Bunn, 2008; Shahidehpour et al., 2002). On the other hand, the electricity prices
+can be rewritten as one ‘high-frequency’ (hourly, half-hourly) univariate time series: Pt = P24d+h =
+2
+
+=== page 3 ===
+Pd,h, hence are prone to modeling within a univariate framework. The univariate approach is more
+popular in the engineering EPF literature, dominated by neural network models (see Aggarwal
+et al., 2009, for a review), but has its roots also in the traditional time series analysis of ﬁnancial
+and commodity markets.
+Both approaches have their proponents. For instance, Cuaresma et al. (2004), Misiorek et al.
+(2006), Zhou et al. (2006), Garcia-Martos et al. (2007), Karakatsani and Bunn (2008), Lisi and
+Nan (2014), Alonso et al. (2016), Gaillard et al. (2016), Hagfors et al. (2016), Maciejowska et al.
+(2016), Nowotarski and Weron (2016), Uniejewski et al. (2016), and Ziel (2016a), among others,
+advocate the use of sets of 24 (48 or more) models estimated independently for each load period,
+typically using Ordinary Least Squares (OLS). In the neural network literature, Amjady and Key-
+nia (2009a), Marcjasz et al. (2018) and Panapakidis and Dagoumas (2016), among others, use a
+separate network (i.e., a diﬀerent parameter set) for each hour of the next day.
+Studies where univariate statistical time series models are used include Nogales et al. (2002),
+Contreras et al. (2003), Conejo et al. (2005), Zareipour et al. (2006), Paraschiv et al. (2015) and
+Ziel et al. (2015a), while papers where neural networks are put to work include Rodriguez and
+Anders (2004), Amjady (2006), Pao (2007), Amjady et al. (2010), Abedinia et al. (2015), Kim
+(2015), Dudek (2016), Keles et al. (2016) and Raﬁei et al. (2017), among others.
+2.1. The multivariate modeling framework
+The simplest, yet surprisingly often used structure for the 24-dimensional price time series is
+a set of 24 univariate models:
+
+Pd,1 = f1(Pd−1,1, Pd−2,1, ...) + εd,1
+−→
+ˆPd,1,
+...
+...
+Pd,24 = f24(Pd−1,24, Pd−2,24, ...) + εd,24
+−→
+ˆPd,24,
+(1)
+where εd,h is the innovation (noise) term for day d and hour h, and fh(·) are some functions of the
+explanatory variables of the past prices in the same load period. A commonly raised argument in
+favor of this approach is that it is simple to implement, involves only a small number of parameters
+for each load period and hence is computationally non-demanding. The downside, however, is
+that the estimated set of models does not take into account the potentially important dependencies
+between the variables across the load periods. Still, by increasing the set of dependent explanatory
+variables such interrelationships can be added. For instance, Gaillard et al. (2016), Uniejewski
+et al. (2016) and Ziel (2016a) consider the previous day’s price for midnight, i.e., Pd−1,24, as an
+explanatory variable in each of the 24 single models. Formally such a set of 24 interrelated models
+can be written as:
+
+Pd,1 = f1(Pd−1,1, Pd−2,1, . . . , Pd−1,24, Pd−2,24, . . .) + εd,1
+−→
+ˆPd,1,
+...
+...
+Pd,24 = f24(Pd−1,1, Pd−2,1, . . . , Pd−1,24, Pd−2,24, . . .) + εd,24
+−→
+ˆPd,24,
+(2)
+which according to Chatﬁeld (2000) and Diebold (2004) can be regraded as a multivariate model,
+since the dependency structure is interrelated.
+3
+
+=== page 4 ===
+It should be emphasized that both frameworks, deﬁned by Eqns. (1) and (2), make explicitly
+(or implicitly) assumptions on the innovations for individual load periods. For instance, that for
+each hour εd,h follows a normal distribution with zero mean, i.e., εd,h ∼N(0, σ2
+h). However, they do
+not assume anything about the joint distribution of the innovations for diﬀerent hours. To mitigate
+this unwanted feature, a fully multivariate modeling framework may be implemented which treats
+the price series as panel data:
+
+Pd,1
+...
+Pd,24
+= f
+
+
+Pd−1,1
+...
+Pd−1,24
+,
+
+Pd−2,1
+...
+Pd−2,24
+, ...
++
+
+εd,1
+...
+εd,24
+
+−→
+
+ˆPd,1
+...
+ˆPd,24
+
+.
+(3)
+The model structure may be identical to that in Eqns. (1)-(2), but it allows for a joint estimation
+for all load periods, e.g., via multivariate Least Squares, multivariate Yule-Walker equations (as
+in this paper) or maximum likelihood (L¨utkepohl, 2005). Hence, there is an explicit (or implicit)
+joint distribution assumption on the error vector εd = [εd,1, . . . , εd,24]′, e.g., that εd ∼N24(0, Σ),
+where Σ is a 24-dimensional covariance matrix of a multivariate normal distribution. Comparing
+Eqn. (3) with (2) it is clear that the former is more general and the set of 24 interrelated models
+can be nested in the fully multivariate model. From the statistical point of view, Eqn. (2) describes
+only the marginal distribution of Pd, but in an interrelated way.
+Note, that it is also possible to estimate a fully multivariate model using a two-step proce-
+dure. First estimating separately the 24 rows of Eqn. (3), then estimating the noise terms, e.g.,
+εd ∼N24(0, Σ), using the residuals of the 24 models. However, in such a case the dependencies
+between the 24 single model speciﬁcations are ignored and the estimation procedure may lead to
+a suboptimal in-sample ﬁt. But not necessarily worse forecasts. In general, as Chatﬁeld (2000)
+emphasizes, while fully multivariate models are usually found to yield a better in-sample ﬁt, their
+forecasts need not necessarily be better.
+Vector AutoRegression (VAR) is the basic modeling structure in the fully multivariate context,
+for sample EPF applications see Huisman et al. (2007), Panagiotelis and Smith (2008), Haldrup
+et al. (2010) and He et al. (2015). However, if the number of parameters is very large it may
+be a good idea to reduce dimensionality of the problem ﬁrst and consider factor models, as in
+Garcia-Martos et al. (2012), Wu et al. (2013), Maciejowska and Weron (2015, 2016) and Raviv
+et al. (2015). In one of the few applications in the computational intelligence EPF literature,
+Yamin et al. (2004) use a neural network with 24 nodes in the output layer, hence consider a fully
+multivariate approach.
+2.2. The univariate modeling framework
+In the second stream of EPF literature, the day-ahead electricity prices are modeled by a uni-
+variate time series model for Pt:
+Pt = f(Pt−1, Pt−2, ...) + εt,
+(4)
+where εt is the innovation term at time t, and f(·) is some function of the explanatory variables.
+Similarly as in Eqns. (1)-(3), the univariate time series model for the hourly prices Pt makes either
+an explicit or an implicit assumption on the innovations, e.g., that εt ∼N(0, σ2). However, in
+4
+
+=== page 5 ===
+contrast to the multivariate modeling framework, predicting the next day’s 24 hourly prices now
+involves computing one- to 24-step ahead forecasts:
+• either in a recursive or iterative scheme (as in this paper), where the price forecast for
+hour t is used as an explanatory variable when forecasting the price for hour (t + 1), i.e.,
+ˆPt = f(Pt−1, Pt−2, ...) −→ˆPt+1 = f( ˆPt, Pt−1, ...),
+• or directly by computing 24-step ahead forecasts for each load period: ˆPt = f(Pt−24, Pt−25, ...),
+ˆPt+1 = f(Pt−23, Pt−24, ...), etc., as in Keles et al. (2016); note, that this approach is a special
+case of the recursive scheme with ˆPt not depending on Pt−1, . . . , Pt−23.
+The drawback of the recursive scheme is that it is sensitive to the accumulation of errors because
+they propagate forward, while the latter method does not use the most recent information (which
+may decrease performance for the late night and early morning hours).
+2.3. Frameworks vs. models
+We consider two major modeling frameworks – multivariate and univariate. The multivariate
+framework uses an explicit ‘day × hour’, matrix-like structure for the 24-dimensional electricity
+price vector Pd, as introduced in Eqns. (1)-(3), and either explicitly or implicitly assumes that
+the residual variance is diﬀerent for each of the 24 (48 or more) load periods, i.e., Var(εd,h1) ,
+Var(εd,h2). The 24 individual models can be either estimated independently or jointly in a fully
+multivariate framework, see Eqn. (3), while prices for all load periods of the next day are predicted
+at once as one-step (de facto one-day) ahead forecasts.
+Note, that since the estimation in Eqn. (1) is conducted independently for each load period
+and not jointly for all, and there are no interdependencies between the models for individual load
+periods, many authors would not call such models multivariate. However, sets of estimated inde-
+pendently, but interdependent models, as deﬁned by Eqn. (2), are often regarded as multivariate
+(Chatﬁeld, 2000; Diebold, 2004). Finally, the framework deﬁned in Eqn. (3) clearly leads to mul-
+tivariate models (L¨utkepohl, 2005).
+The univariate framework treats prices as one ‘high-frequency’ hourly time series, as in Eqn.
+(4). The univariate models are estimated jointly for all load periods and either explicitly or im-
+plicitly assume that the residual variance, i.e., Var(εt), is the same across all hours (unless an
+additional variance model is speciﬁed). Forecasting with these models requires either using a re-
+cursive scheme and computing a series of 24 one-step ahead forecasts or calculating 24-step ahead
+predictions for each load period.
+2.4. Converting univariate to multivariate frameworks and vice versa
+We should also note, that in general a univariate framework can be converted into a multivari-
+ate one and vice versa, similarly as Pd,h can be rewritten into Pt = P24d+h. However, when doing
+so the implicit (and partially the explicit) error structure changes. For instance, when changing a
+multivariate framework into a univariate one, an implicit assumption on innovations εd,h turns into
+an implicit assumption on univariate innovations εt. Here, the innovation speciﬁcation gets sim-
+pliﬁed, since εd,h may have a diﬀerent variance for each hour h, but εt has a constant variance for
+all load periods. If we have an explicit innovation speciﬁcation within a multivariate framework,
+5
+
+=== page 6 ===
+e.g., εd ∼N(0, Σ), then it is preserved on the marginal distribution level. Hence, the resulting
+innovation speciﬁcation is εt ∼N(0, σ2
+t ) with σ2
+t being the diagonal elements of Σ.
+On the other hand, when changing a univariate framework to a multivariate one, the implicit
+assumption that innovations εt follow the same distribution, e.g., Var(εt) = σ2, turns to an im-
+plicit assumption that the innovations have a diﬀerent distribution for every hour of the day, e.g.,
+Var(εd,h) = σ2
+h. If we have an explicit distribution assumption, e.g., εt ∼N(0, σ2), it turns into
+a multivariate distribution assumption, e.g., εd ∼N(0, Σ) with a model speciﬁc restriction on the
+diagonal of Σ. However, this representation is usually not unique as a multivariate distribution
+cannot be represented uniquely by its marginal distributions.
+In practice, the forecasting impact of changing the model representation for implicit inno-
+vation speciﬁcations is marginal, since many estimation methods (e.g., OLS) are asymptotically
+consistent for homoscedastic but also for heteroscedastic innovation speciﬁcations. For illustration
+purposes, in Appendix B we show alternative representations of selected models.
+3. Datasets and data preprocessing
+3.1. Datasets
+To conduct a thorough empirical study we consider a total of 12 electricity spot price datasets,
+see Table 1. Note, that like Uniejewski et al. (2016), we use the terms spot and day-ahead inter-
+changeably, which is line with the majority of literature on European electricity markets. However,
+in the U.S., the spot market is another name for the real-time market, while the day-ahead market
+is usually called the forward market (Burger et al., 2007; Weron and Ziel, 2018).
+Eleven datasets come from six major European power markets, including the European Power
+Exchange (EPEX SPOT) for power spot trading in Germany, France, Austria, Switzerland and
+Luxembourg, the Nordic power exchange Nord Pool and OMIE, which manages the Iberian mar-
+kets (Spain and Portugal). All eleven concern day-ahead markets with 24 hourly load periods
+and cover a six year period from 30 July 2010 to 28 July 2016. The last dataset comes from the
+price track of the Global Energy Forecasting Competition 2014 (GEFCom2014), the largest en-
+ergy forecasting competition to date (Hong et al., 2016), and includes locational marginal prices
+(LMPs, i.e. zonal prices) at an hourly resolution from 1 January 2011 to 17 December 2013. The
+exact origin of the data has never been revealed by the organizers but – given its features – comes
+from one of the U.S. markets.
+In the empirical analysis we use a 730-day (ca. two-year) rolling calibration window. First, all
+considered models are estimated using data from the initial calibration period (i.e., from 31 July
+2010 to 30 July 2012 for the European datasets and from 1 January 2011 to 30 December 2012 for
+GEFCom2014) and forecasts for all 24 hours of the next day (respectively 31 July 2012 and 31
+December 2012) are determined. Then the window is rolled forward by one day, the models are
+reestimated and forecasts for all 24 hours of the next day are computed. This procedure is repeated
+until the predictions for the 24 hours of the last day in the out-of-sample test period (respectively
+28 July 2016 and 17 December 2013) are made. Note, that for the European datasets we are left
+with roughly four years (1459 days) of data for out-of-sample testing and for the GEFCom2014
+dataset with only 352 days. Note also, that because of the clock-change issue, we have to do minor
+adjustments to the data to obtain well deﬁned price processes. We interpolate the missing hour in
+6
+
+=== page 7 ===
+Table 1: Summary table of the considered electricity spot price series, i.e., day-ahead prices at hourly resolution. The
+GEFCom2014 dataset covers a three year period from 1 January 2011 to 17 December 2013, the remaining datasets –
+a six year period from 30 July 2010 to 28 July 2016.
+Electricity market and region
+Acronym
+Unit
+Source
+BELPEX price for Belgium
+BELPEX.BE
+EUR/MWh
+belpex.be
+EPEX price for Switzerland
+EPEX.CH
+EUR/MWh
+epexspot.com
+EPEX price for Germany and Austria
+EPEX.DE+AT
+EUR/MWh
+epexspot.com
+EPEX price for France
+EPEX.FR
+EUR/MWh
+epexspot.com
+EXAA price for Germany and Austria
+EXAA.DE+AT
+EUR/MWh
+exaa.at
+GEFCom2014 competition data
+GEFCOM2014
+USD/MWh
+Hong et al. (2016)
+Nord Pool price for West Denmark
+NP.DK1
+EUR/MWh
+nordpoolspot.com
+Nord Pool price for East Denmark
+NP.DK2
+EUR/MWh
+nordpoolspot.com
+Nord Pool System price
+NP.SYS
+EUR/MWh
+nordpoolspot.com
+OMIE price for Spain
+OMIE.ES
+EUR/MWh
+omie.es
+OMIE price for Portugal
+OMIE.PT
+EUR/MWh
+omie.es
+OTE price for the Czech Republic
+OTE.CZ
+EUR/MWh
+ote-cr.cz
+March and average the doubled hour in October for the European data. The GEFCom2014 data
+was released clock-change adjusted, however, the used adjustment methodology is not reported in
+Hong et al. (2016).
+3.2. Variance stabilizing transformation
+It is widely known that many electricity price series exhibit price spikes, mostly positive but
+in some markets also negative (Fanone et al., 2013; Nowotarski et al., 2014). For electricity prices
+with only positive values the logarithmic transform is very popular to reduce spike severity and
+consequently stabilize the variance. However, for datasets with very close to zero or negative
+prices the log-transform is not feasible. In such cases, typically no transformation is used. This is
+reasonable for moderately spiky data like the German/Austrian EPEX prices. But for datasets with
+extreme spikes, like the French EPEX prices, such a ‘raw data approach’ requires robust estimation
+algorithms (see e.g. Huber and Ronchetti, 2009) or models with embedded spike components (like
+in Weron, 2009). However, such robust techniques are not popular in EPF and most studies utilize
+standard least-squares methods.
+As we want to conduct a comprehensive forecasting study involving many diverse datasets,
+we have to deal with this problem in an automated way. The time series forecasting literature
+usually suggests the Box-Cox transform (Hyndman and Athanasopoulos, 2013). However, it has
+the disadvantage of returning a bi-modal marginal distribution of the transformed prices. As a
+viable alternative, we propose the area (or inverse) hyperbolic sine transformation (see Uniejewski
+et al., 2017, for a recent review of variance stabilizing transformations):
+asinh(x) = log
+
+x +
+√
+x2 + 1
+
+,
+(5)
+for standardized spot prices x = 1
+b{Pd,h −a}. In Figure 1 the original and transformed electricity
+prices are visualized for two series that exhibit positive and negative price spikes. We can see
+7
+
+=== page 8 ===
+that the spikes become less severe, but do not vanish completely. The area hyperbolic sine trans-
+formation has been originally used in the EPF context by Schneider (2011), but the article went
+unnoticed.
+In our empirical study in Section 5 we use the (median, MAD) normalization, i.e., we set the
+shift parameter, a, equal to the median of the 730-day calibration sample and the scale parameter,
+b, equal to the sample median absolute deviation (MAD) around the sample median adjusted by
+a factor for asymptotically normal consistency to the standard deviation (see Uniejewski et al.,
+2017). This factor is
+1
+z0.75 ≈1.4826 where z0.75 is the 75% quantile of the normal distribution; in
+R this is the default option if one runs mad(x), in Matlab this corresponds to 1.4826*mad(x,1).
+The transform acts so that close to a the transformation is almost linear, whereas positive and
+negative price spikes are pulled towards the center in a logarithmic way; asymptotically asinh(x) ≈
+sign(x) log(2|x|) as |x| →∞.
+In what follows, we denote by Yd,h (or Yt in the univariate context) the transformed data, i.e.
+Yd,h = asinh
+ Pd,h −a
+b
+!
+(6)
+and calibrate all models to the asinh-transformed prices (except for the naive model deﬁned in Sec-
+tion 4.2). Once the forecasts ˆYd,h are computed we apply the inverse transform, i.e., the hyperbolic
+sine, to obtain the day-ahead electricity price forecasts:
+ˆPd,h = b · sinh
+ ˆYd,h
+
++ a
+(7)
+and use the latter to evaluate and compare the models in Section 5.
+4. Models
+Our choice of the forecasting models is guided by the existing literature on short-term EPF
+and the desire to perform a comprehensive study that addresses the three pertinent questions put
+forward in the Introduction. As we want to focus on the explanatory power of the past spot
+prices, we consider ‘pure price’ or ‘price only’ models, i.e., models without exogenous (stochastic)
+variables, like weather, load or renewable energy generation forecasts.1 Overall we consider 58
+models from eight classes, see Appendix A. However, for clarity of exposition, in the main body
+of the text we focus only on 10 models – one best performing model from each of the eight classes
+and the second best performer from the two best classes (i.e., C6 and C8):
+C1. the weekly mean of hourly frequency benchmark, which is a simple periodic function →
+denoted by meanHoW,
+C2. the so-called naive benchmark of Nogales et al. (2002), which belongs to the class of similar-
+day techniques →denoted by naive,
+1Strictly speaking, however, our models include also other non-price variables – dummies representing calendar
+eﬀects. Yet, as is common in the EPF literature (Weron, 2014), we do not treat them as exogenous variables since
+their nature is deterministic and they can be removed prior to ﬁtting a stochastic model to prices, like in the 24AR and
+AR-type models considered here.
+8
+
+=== page 9 ===
+−200
+−100
+0
+100
+200
+EPEX.DE+AT
+Density
+−200
+−100
+0
+100
+200
+0.000
+0.010
+0.020
+2011
+2012
+2013
+2014
+2015
+2016
+−3
+−2
+−1
+0
+1
+2
+3
+EPEX.DE+AT  transformed
+Density
+−3
+−2
+−1
+0
+1
+2
+3
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0
+500
+1000
+1500
+2000
+EPEX.FR
+Density
+0
+500
+1000
+1500
+2000
+0.000
+0.005
+0.010
+0.015
+0.020
+2011
+2012
+2013
+2014
+2015
+2016
+−2
+0
+2
+4
+EPEX.FR  transformed
+Density
+−2
+0
+2
+4
+0.0
+0.1
+0.2
+0.3
+0.4
+Figure 1: EPEX spot price Pd,h in EUR/MWh for Germany and Austria (EPEX.DE+AT; top row) and France
+(EPEX.FR; third row), and the asinh-transformed prices, i.e., Yd,h, for both markets (second and bottow rows). The
+marginal densities are depicted in the right panels.
+9
+
+=== page 10 ===
+C3. 16 parsimonious autoregressive (AR) models within a multivariate framework, built on some
+prior knowledge of experts and following Uniejewski et al. (2016) and Ziel (2016a) called
+expert models or experts, estimated using Ordinary Least Squares (OLS) →represented by
+expertDoW,nl,
+C4. two AR speciﬁcations composed of sets of 24 independent models (for each hour of the day)
+and estimated using Yule-Walker equations →represented by 24ARHoW,
+C5. two vector autoregressive (VAR) models estimated using multivariate Yule-Walker equa-
+tions, i.e., the only fully multivariate models in this study →represented by VARHoW,
+C6. 16 parameter-rich AR structures within a multivariate framework, estimated using the least
+absolute shrinkage and selection operator (i.e., lasso or LASSO), which shrinks to zero
+the coeﬃcients of redundant explanatory variables →represented by 24lassoHQC
+DoW,p,nl and
+24lassoHQC
+DoW,nl,
+C7. four univariate AR models estimated using Yule-Walker equations →represented by ARHoW,
+C8. 16 univariate parameter-rich AR speciﬁcations estimated using the LASSO →represented
+by lassoHQC
+HoW,p and lassoHQC
+HoW.
+In Section 4.1 we deﬁne the seasonal dummies and means used later in the text. Next in Sections
+4.2-4.4 we describe the 10 representative models, starting with the two benchmarks, then moving
+on to autoregressive structures considered within a multivariate framework and concluding with
+univariate speciﬁcations. Model deﬁnitions for the remaining models can be found in Appendix
+A, while a summary of results in Appendix C.
+4.1. Seasonal dummies and means
+Before we introduce the forecasting models let us brieﬂy deﬁne three types of dummy variables
+and the corresponding (time-varying) means. Since the daily and weekly seasonalities are the most
+pronounced for electricity prices we deﬁne:
+• the hour-of-the-day dummy for k = 1, . . . , 24 and arbitrary d:
+HoDk
+d,h =
+
+1
+if h is the k-th hour of the day,
+0
+otherwise,
+• the day-of-the-week dummy for k = 1 (Monday), . . . , 7 (Sunday) and arbitrary h:
+DoWk
+d,h =
+
+1
+if d is the k-th day of the week,
+0
+otherwise,
+• the hour-of-the-week dummy for k = 1 (Monday, hour 1), . . . , 168 (Sunday, hour 24):
+HoWk
+d,h =
+
+1
+if 24(d −1) + h is the k-th hour of the week,
+0
+otherwise.
+10
+
+=== page 11 ===
+G
+G
+G
+GG
+G
+G
+G
+GG
+GG
+G
+G
+GGG
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+GG
+G
+G
+G
+GG
+G
+G
+G
+GGGG
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+GG
+G
+G
+G
+GG
+GG
+G
+GGGG
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+GG
+G
+G
+G
+GG
+GG
+G
+GGGG
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+GG
+G
+G
+G
+GG
+G
+G
+G
+G
+G
+GG
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+GGG
+G
+G
+G
+G
+GG
+G
+G
+GGG
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+GGGGG
+G
+G
+G
+GG
+G
+GG
+G
+G
+G
+GG
+G
+G
+G
+20
+30
+40
+50
+Hour of the Week
+EPEX.DE+AT price in EUR/MWh
+Mon
+Tue
+Wed
+Thu
+Fri
+Sat
+Sun
+0
+24
+48
+72
+96
+120
+144
+168
+PHoW
+PHoD
+PDoW
+P
+Figure 2: Illustration of the four means deﬁned in Section 4.1 for the EPEX spot price in Germany and Austria
+(EPEX.DE+AT), and the whole 6-year sample. Note, that back-transformed mean prices are plotted here, e.g., P =
+b · sinh(Y) + a.
+In the univariate context we use the single time index notation (HoDk
+t , DoWk
+t and HoWk
+t ) and
+sometimes we omit the time index at all. Note, that it always holds: HoW j+24(k−1) = DoWkHoDj.
+Note also, that we implicitly assume that the data resolution is hourly, as for the 12 datasets
+described in Section 3. However, all methods considered here can be easily modiﬁed to work with
+half-hourly, 15 minute or even shorter load periods.
+Given the three dummies – HoWk, HoDk and DoWk – we introduce three time-varying means
+estimated with OLS within a standard linear regression framework:
+• YHoW,d,h – the weekly mean of hourly frequency,
+• YHoD,d,h – the daily mean of hourly frequency,
+• YDoW,d,h – the weekly mean of daily frequency.
+In the same manner, we introduce the sample mean of the full sample, Y. In the empirical study of
+Section 5 all four means are computed iteratively, for each 730-day calibration window. However,
+in Figure 2 we illustrate the four means using the whole 6-year sample of the EPEX spot price in
+Germany and Austria (EPEX.DE+AT).
+4.2. Two simple benchmarks
+The ﬁrst benchmark, denoted by meanHoW, is given by the time-varying, i.e., estimated for
+each calibration window, weekly mean of hourly frequency of the asinh-transformed price Yd,h:
+Yd,h = YHoW,d,h + εd,h =
+168
+X
+k=1
+βkHoWk
+d,h + εd,h.
+(8)
+11
+
+=== page 12 ===
+Unless stated otherwise, the error terms (εd,h or εt) in all models considered in this study are as-
+sumed to have zero mean, ﬁnite variance and are uncorrelated. Note, that we have also considered
+two other time-varying means deﬁned in Section 4.1, YHoD,d,h and YDoW,d,h, but their predictive
+performance was worse and is not reported in this study.
+The second benchmark belongs to the class of similar-day techniques (for a taxonomy of EPF
+approaches see e.g. Weron, 2014):
+Pd,h
+=
+
+Pd−7,h + εd,h,
+DoWk
+d,h = 1 for k = 1, 6, 7,
+Pd−1,h + εd,h,
+otherwise,
+(9)
+and denote it by naive. Most likely it has been introduced to the EPF literature by Nogales et al.
+(2002). It proceeds as follows: the forecast for hour h on Monday, Saturday and Sunday is set
+equal to the price for the same hour a week ago; the forecast for hour h on the remaining days is
+set equal to the price for the same hour yesterday. As was argued by Nogales et al. (2002) and
+Conejo et al. (2005), forecasting procedures that are not calibrated carefully fail to outperform
+the naive method surprisingly often. Note, that we have also considered two simpler similar-day
+techniques: (i) Pd,h = Pd−1,h +εd,h and (ii) Pd,h = Pd−7,h +εd,h, but their predictive performance was
+worse and is not reported in this study.
+4.3. The multivariate modeling framework
+Having discussed two simple benchmarks, we are now ready to deﬁne models considered in
+this study within the multivariate framework. They all use an explicit ‘day × hour’, matrix-like
+structure, implicitly assume that the residual variance is diﬀerent for each load period, and are
+estimated:
+• independently for each load period and do not admit interdependencies between the hours
+of the day, see Eqn. (1),
+• independently for each load period but admit interdependencies between the hours of the
+day, see Eqn. (2),
+• or jointly in a fully multivariate framework, see Eqn. (3).
+In contrast to the univariate models discussed in Section 4.4, here the prices for all load periods of
+the next day are predicted at once as one-step (i.e, one-day) ahead forecasts.
+We should note, that recently reported empirical evidence provides a fundamental justiﬁca-
+tion of the multivariate framework, as opposed to the univariate. Namely, analyzing the bidding
+behavior in the Italian power market, Gianfreda et al. (2016) ﬁnd that since the solar production
+suddenly decreases in the evening and the merit order curve rapidly shifts, the thermal and hydro
+producers are able to exert market power at this time of the day. They further speculate that these
+generators apply diﬀerent bidding strategies for diﬀerent hours, hence signiﬁcantly change the
+respective price formation mechanisms.
+12
+
+=== page 13 ===
+4.3.1. An expert model
+This class of models is based on a parsimonious autoregressive structure originally proposed
+by Misiorek et al. (2006) and later used in a number of EPF studies (Weron and Misiorek, 2008;
+Serinaldi, 2011; Kristiansen, 2012; Nowotarski et al., 2014; Gaillard et al., 2016; Maciejowska
+et al., 2016; Marcjasz et al., 2018; Nowotarski and Weron, 2018; Uniejewski et al., 2016; Ziel,
+2016a). Since these models are built on some prior knowledge of experts, following Uniejewski
+et al. (2016) and Ziel (2016a), we refer to them as expert models. In the empirical comparison in
+Section 5, this class is represented by the expertDoW,nl model. Within this autoregressive structure
+the asinh-transformed price on day d and hour h is given by the following formula:
+Yd,h = βh,1 + βh,2Yd−1,h + βh,3Yd−2,h + βh,4Yd−7,h
+|                                    {z                                    }
+autoregressive eﬀects
++ βh,5Yd−1,min + βh,6Yd−1,max
+|                          {z                          }
+non-linear eﬀects
++βh,7Yd−1,24
++
+7
+X
+j=1
+βh,7+jDoW j
+d,h
+|               {z               }
+weekday dummies
++ εd,h,
+(10)
+where
+• the lagged prices Yd−1,h, Yd−2,h and Yd−7,h account for the autoregressive eﬀects of the previ-
+ous days (the same hour yesterday, two days ago and one week ago);
+• Yd−1,min = minh=1,...,24{Yd−1,h} and Yd−1,max = maxh=1,...,24{Yd−1,h} are respectively the minimum
+and the maximum of the previous day’s 24 hourly prices and create a link with all yesterday’s
+prices, not just the prices for the same hour; note, that the minimum and maximum are non-
+linear due to min(x, y) = 0.5(x + y −|x −y|) and max(x, y) = 0.5(x + y + |x −y|), hence
+subscript nl in the model name;
+• Yd−1,24 is the price for the last load period of the previous day and is included in (10) to
+take advantage of the fact that prices for early morning hours depend more on the previous
+day’s price at midnight than on the price for the same hour, as recently emphasized by
+Maciejowska and Nowotarski (2016) and Ziel (2016a);
+• and DoWi
+d,h, i = 1, ..., 7 are the daily dummies, hence subscript DoW in the model name.
+Note, that if h = 24 then the term which includes βh,7 is collinear with βh,2. Hence, in this case, the
+model has fewer parameters. We estimate the parameters using OLS.
+The expertDoW,nl model is inspired by the mAR1hm and AR2hm models of Uniejewski et al.
+(2016), but does not include a dummy for public holidays (for the sake of parsimony) and a term
+that depends on the average price of the previous day. The impact of the latter, however, has been
+shown by Uniejewski et al. (2016) to be negligible, hence the change.
+4.3.2. A set of 24 AR models
+This class of benchmarks is very popular in the EPF literature. In our setup, the demeaned
+with respect to YHoW,d,h asinh-transformed price is modeled as a standard autoregressive process
+13
+
+=== page 14 ===
+of order ph, i.e., AR(ph), independently for each hour h. Formally, the model – denoted later in
+the text by 24ARHoW – is given by:
+Yd,h = YHoW,d,h + φ0,h +
+ph
+X
+k=1
+φk,h(Yd−k,h −YHoW,d,h) + εd,h,
+(11)
+where φk,h are the autoregressive parameters. We estimate the model by solving the Yule-Walker
+equations with a maximum order ph,max = 8, to cover a potential dependency of up to 8 days. Each
+ph is chosen based on the Akaike Information Criterion (AIC), see e.g. Hyndman and Athana-
+sopoulos (2013) or Ziel and Steinert (2016).
+In contrast to the expert model deﬁned in Section 4.3.1, the 24ARHoW model does not admit
+any interdependencies between the prices for diﬀerent load periods. Although it is written in a
+multivariate framework, it actually is a set 24 independent univariate models at daily frequency,
+one for each hour, like in Eqn. (1). Note also, that this model is a special case of a 24-dimensional
+Vector AutoRegressive (VAR) model with diagonal parameter matrices, see Section 4.3.3 below.
+4.3.3. A VAR model
+Using matrix notation we introduce a Vector AutoRegressive (VAR) structure, denoted later in
+the text by VARHoW:
+Yd = YHoW,d + φ0 +
+p
+X
+k=1
+Φk(Yd−k −YHoW,d) + εd,
+(12)
+where Yd = [Yd,1, . . . , Yd,24] with its mean vector YHoW,d across all available days in the calibration
+sample (which corresponds to the 168 possible values of YHoW,d,h, 24 for each of the seven days
+of the week), Φk is a parameter matrix, φ0 is the intercept vector and εd = [εd,1, . . . , εd,24]. We
+calibrate the model by solving the multivariate Yule-Walker equations, see e.g. L¨utkepohl (2005),
+with pmax = 8 to cover the same memory as for the model in Section 4.3.2.
+4.3.4. Multivariate lasso models
+As has been noted in a number of studies, both statistical and computational intelligence, a
+key point in EPF is the appropriate choice of explanatory variables (Amjady and Keynia, 2009b;
+Gianfreda and Grossi, 2012; Gonz´alez et al., 2015; Karakatsani and Bunn, 2008; Keles et al.,
+2016; Maciejowska, 2014; Voronin and Partanen, 2013; Weron, 2014). The typical approach has
+been to select predictors in an ad hoc fashion, sometimes using expert knowledge, seldom based
+on formal selection or shrinkage procedures for high-dimensional model speciﬁcations (like in
+Gaillard et al., 2016; Ludwig et al., 2015; Uniejewski et al., 2016; Ziel, 2016a; Ziel et al., 2015a).
+Recall, that shrinkage (also known as regularization) ﬁts the full model with all predictors
+using an algorithm that shrinks coeﬃcients of the less important explanatory variables towards
+zero (James et al., 2013). Some shrinkage methods, like the least absolute shrinkage and selection
+operator (i.e., lasso or LASSO) introduced by Tibshirani (1996), may actually shrink some of the
+coeﬃcients to zero itself, thus de facto performing variable selection. It should be noted, however,
+that while variable selection is beneﬁcial for interpretability, for reducing the forecasting errors
+only the shrinkage property is crucial (Uniejewski et al., 2016).
+14
+
+=== page 15 ===
+Let us ﬁrst introduce a general regression model, somewhat inspired by the full ARX or fARX
+model of Uniejewski et al. (2016), and then deﬁne two special cases considered later in Section
+5 (the remaining models from this class are deﬁned in Appendix A.4). For each hour of the day,
+h = 1, . . . , 24, the model is given by:
+Yd,h =
+24
+X
+l=1
+8
+X
+k=1
+φh,k,l,0Yd−k,l
+|                 {z                 }
+autoregressive eﬀects
++
+8
+X
+k=1
+φh,k,min,0Yd−k,min +
+8
+X
+k=1
+φh,k,max,0Yd−k,max
+|                                                {z                                                }
+non-linear eﬀects
++
+7
+X
+j=1
+φh,0,0,jDoW j
+d,h
+|                {z                }
+weekday dummies
++
+7
+X
+j=1
+φh,1,h,jDoWj
+d,hYd−1,h +
+7
+X
+j=1
+φh,1,24,jDoW j
+d,hYd−1,24
+|                                                             {z                                                             }
+periodic eﬀects
++εd,h.
+(13)
+The ﬁrst term describes the autoregressive eﬀects up to eight days ago, the second and third terms
+specify the lagged non-linear eﬀects using the minimum and maximum price of the day (again up
+to eight days ago), the fourth term describes the day-of-the-week eﬀect and the ﬁfth and sixth terms
+are the periodic eﬀects (as seen in the periodic expert models, see Section 4.3.1). Note, that the φ’s
+are indexed by four variables, with the ﬁrst one indicating the target hour (i.e., h). The remaining
+three refer to the time lag in days (k = 1, . . . , 8 or 0), the hour of the day (l = 1, . . . , 24) or an
+aggregate value for all 24 hours of the day (l = min, max), and the day of the week ( j = 1, . . . , 7
+or 0).
+We denote this model by 24lassoHQC
+DoW,p,nl, because it is embedded in a multivariate framework
+(one equation for each of the 24 hours), estimated via the lasso (independently for each load period,
+see below), with day-of-the-week, periodic and non-linear eﬀects. The superscript HQC denotes
+the Hannan-Quinn Information Criterion used to select the tuning (or regularization) parameter λ
+within the calibration window, see Appendix A.4 for details. Based on Eqn. (13), we introduce
+a variant without the periodic parameter terms (i.e., with φh,1,h,j = φh,1,24,j = 0) and denote it by
+24lassoHQC
+DoW,nl.
+Now, let us comment on the calibration procedure. For this purpose, let us write Eqn. (13) in a
+more compact form:
+Yd,h = X′
+d,hβh + εd,h,
+(14)
+where Xd,h is a vector of the regressors and βh is a vector of their coeﬃcients. Given a D = 730
+observation sample Yh = [Y1,h, . . . , YD,h]′, the sample representation is as follows:
+Yh = X′
+hβh + Eh,
+(15)
+where X′
+h = [X′
+1,h, . . . , X′
+D,h]′ and Eh = [ε1,h, . . . , εD,h]′. To eﬃciently estimate the model using the
+lasso, we require a scaled version of the OLS equation, i.e.:
+eYh = e
+X′
+heβh + eEh,
+(16)
+where eYh and e
+Xh are the scaled versions of Yh and Xh, respectively, i.e. the ∥· ∥2-norm of each
+column is 1. Then the lasso estimator is given by (Hastie et al., 2015):
+beβh,λ = arg min
+β
+∥eYh −e
+X′
+hβ∥2
+2 + λ∥β∥1,
+(17)
+15
+
+=== page 16 ===
+with the tuning (or regularization) parameter λ ≥0. For λ = 0 we receive the OLS estimator of
+eβh. Given beβh,λ, by rescaling we can easily compute bβh.
+4.4. The univariate modeling framework
+Now, let us turn to the univariate framework and consider models for which the forecasts are
+computed recursively – the price forecast for hour 1 is used as input (i.e., an explanatory variable)
+when making the prediction for hour 2, etc. We will start with relatively standard AR model, then
+continue with parameter rich structures estimated via the lasso.
+4.4.1. A univariate AR model
+This univariate model, denoted later in the text by ARHoW, is a counterpart of the 24ARHoW
+model deﬁned in Section 4.3.2:
+Yt = YHoW,t + φ0 +
+p
+X
+k=1
+φk(Yt−k −YHoW,t) + εt,
+(18)
+where YHoW,t is the hour-of-the-week mean in the calibration period, φk are the autoregressive
+parameters and p is the order of the AR process. Again, we estimate the model by solving the
+Yule-Walker equations and minimizing the AIC with respect to the maximum considered AR order
+pmax = 196. Note, that pAR
+max = 196 hours corresponds to p24AR
+max
+= 8 days, i.e., a potential memory
+of eight days. Interestingly, in Ziel et al. (2015a), ARHoW served as a very strong benchmark for
+the EPEX.DE+AT market and outperformed a number of sophisticated model structures.
+4.4.2. Univariate lasso models
+Like ARHoW is a counterpart of 24ARHoW, the two univariate models considered here are
+similar to the multivariate lasso models discussed in Section 4.3.4. The lassoHQC
+HoW, p model is given
+by:
+Yt =
+168
+X
+k=1
+φ0,kHoWk
+t +
+196
+X
+k=1
+φ1,kYt−k +
+168
+X
+k=1
+φ2,kHoWk
+t Yt−1 +
+168
+X
+k=1
+φ3,kHoWk
+t Yt−24
+|                                             {z                                             }
+periodic eﬀects
++εt,
+(19)
+where superscript HQC denotes the information criterion used for the lasso estimation method. A
+variant without periodic eﬀects (i.e., with φ2,k = φ3,k = 0) is denoted by lassoHQC
+HoW. Note, that the
+ARHoW model deﬁned in Section 4.4.1 has the same structure as lassoHQC
+HoW, but is estimated in a
+diﬀerent way.
+5. Empirical results
+5.1. Performance evaluation in terms of MAE
+For each of the eleven European datasets we have D = 1459 days (or approximately 4 years)
+in the out-of-sample test period. For the GEFCom2014 only about 1 year (exactly D = 352 days)
+of out-of-sample data is available, however, given its popularity (gained during the competition),
+16
+
+=== page 17 ===
+Table 2: Mean Absolute Errors (MAE) in EUR/MWh (or USD/MWh for GEFCom2014) for the full out-of-sample
+period, as deﬁned by Eqn. (20), for the 10 models deﬁned in Section 4
+and all 12 datasets. A heat map is used to indicate better (→green) and worse (→red)
+performing models. In the bottom rows we report the mean percentage deviation from the best
+(m.p.d.f.b.) model, as deﬁned by Eqn. (21), for the MAE and the Root Mean Square Error
+(RMSE; the individual RMSE’s are not reported due to space limitations, but are available from
+the authors upon request).
+Market
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoHQC
+DoW,nl
+24lassoHQC
+DoW,p,nl
+ARHoW
+lassoHQC
+HoW
+lassoHQC
+HoW,p
+BELPEX.BE
+9.693
+8.362
+6.063
+6.293
+6.312
+5.973
+5.948
+6.032
+5.953
+5.958
+EPEX.CH
+9.909
+5.716
+4.072
+4.300
+4.139
+3.945
+3.926
+4.035
+3.993
+4.013
+EPEX.DE+AT
+8.110
+7.751
+5.225
+5.636
+5.200
+5.105
+5.118
+5.078
+5.058
+5.048
+EPEX.FR
+9.508
+7.111
+4.998
+5.218
+5.031
+4.862
+4.818
+4.923
+4.884
+4.880
+EXAA.DE+AT
+7.490
+6.450
+4.289
+4.657
+4.234
+4.146
+4.152
+4.155
+4.135
+4.120
+GEFCom2014
+15.119
+10.170
+7.022
+7.475
+7.057
+6.691
+6.724
+6.792
+6.861
+6.802
+NP.DK1
+8.059
+7.340
+5.191
+5.668
+5.248
+5.106
+5.128
+5.151
+5.086
+5.079
+NP.DK2
+7.960
+6.465
+4.881
+5.184
+4.947
+4.786
+4.804
+4.846
+4.772
+4.751
+NP.SYS
+6.441
+2.680
+1.806
+1.975
+2.062
+1.686
+1.692
+1.783
+1.763
+1.752
+OMIE.ES
+12.243
+8.529
+6.134
+7.080
+6.262
+6.067
+6.016
+6.155
+6.137
+6.123
+OMIE.PT
+12.079
+8.744
+6.289
+7.189
+6.370
+6.248
+6.237
+6.315
+6.313
+6.320
+OTE.CZ
+7.687
+6.835
+4.600
+4.942
+4.615
+4.512
+4.524
+4.473
+4.460
+4.452
+m.p.d.f.b.MAE (%)
+104.96
+47.60
+3.36
+11.84
+5.59
+0.62
+0.58
+1.90
+1.25
+1.04
+m.p.d.f.b.RMSE (%)
+77.24
+47.93
+2.61
+9.57
+4.53
+0.62
+0.79
+2.00
+1.95
+1.84
+data origin (the U.S.) and availability (see the online Appendix of Hong et al., 2016) we include it
+for comparative purposes.
+As the main evaluation criterion we consider the Mean Absolute Error (MAE) for the full
+out-of-sample period. It is computed for each model and dataset as:
+MAE =
+1
+24D
+D
+X
+d=1
+24
+X
+h=1
+|bεd,h|,
+(20)
+where bεd,h denotes the estimated forecasting error for day d and hour h. The MAE errors for the
+10 models deﬁned in Section 4 are reported for all 12 datasets in Table 2.2 We have also analyzed
+Root Mean Square Errors (RMSE), but the results were qualitatively the same and, hence, are
+not reported nor analyzed here due to space limitations (but are available from the authors upon
+request). Only in Table 2 we provide for comparison an aggregate measure of ﬁt based on the
+RMSE – the m.p.d.f.b. – as deﬁned in (21) below. Clearly, the relative forecasting performance of
+the models and their ranking is nearly identical, irrespective of whether MAE or RMSE is used.
+2The MAE errors for all 58 models and four major markets are visualized in Figure C.6 in Appendix C.
+17
+
+=== page 18 ===
+In Table 2 we can clearly see the dominance of the lasso models over the competitors. However,
+there is no single lasso model that is the best for all datasets. The multivariate 24lassoHQC
+DoW,nl
+and 24lassoHQC
+DoW,p,nl models are the best for seven datasets: BELPEX.BE, EPEX.CH, EPEX.FR,
+GEFCom2014, NP.SYS, OMIE.ES and OMIE.PT, while the univariate lassoHQC
+DoW,p model is the best
+for the remaining ﬁve datasets: EPEX.DE+AT, EXAA.DE+AT, NP.DK1, NP.DK2 and OTE.CZ.
+Given the full set of results for all 58 models (see Appendix A) and all 12 datasets it is
+hard to rank the models. In particular, it is not possible to make conclusive statements about the
+outperformance of the univariate modeling framework by the multivariate one or vice versa. To
+tackle this issue we introduce the mean percentage deviation from the best (m.p.d.f.b.) model,
+which is inspired by the m.d.f.b. measure used by Weron and Misiorek (2008) and Nowotarski
+et al. (2014), among others. The m.p.d.f.b. measure for model i indicates how similar is this
+model’s performance to the ‘optimal model’ composed of the best performing model for each of
+the 12 datasets:
+m.p.d.f.b.ERR = 1
+12
+12
+X
+j=1
+ERRi,j −ERRbest model,j
+
+ERRbest model,j
+× 100%,
+(21)
+where ERRbest model,j = min1≤i≤58 ERRi,j and ERR can be the MAE, as deﬁned in Eqn. (20), the
+Root Mean Square Error (RMSE) or any other error measure for point forecasts.
+The m.p.d.f.b. measures are reported in the bottom rows of Table 2.3 Somewhat surprisingly,
+we ﬁnd that the relatively simple, univariate ARHoW model with a m.p.d.f.b.MAE of 1.90% is only
+slightly worse than the more sophisticated lasso structures.
+For two markets (EPEX.DE+AT
+and OTE.CZ) it even beats the overall best performing 24lassoHQC
+DoW,p,nl model.
+This conﬁrms
+the ﬁndings of Ziel et al. (2015a) who found this model to be a very strong benchmark for the
+EPEX.DE+AT market, that outperformed a number of sophisticated model structures.
+The next in terms of m.p.d.f.b. are the expertDoW,nl and expertDoW,p,nl models with nearly
+identical performance (on average, but not across all datasets). They are extremely competitive
+for the Iberian markets. In particular, expertDoW,p,nl is second best in terms of MAE (only after
+24lassoHQC
+DoW,p,nl and just ahead of 24lassoHQC
+DoW,nl) for the OMIE.PT dataset.
+The performance of the AR and VAR-type structures considered within a multivariate frame-
+work is rather disappointing. The 24ARHoW model is worse than all expert speciﬁcations and
+VARHoW is not much better (see Appendix C for details). At the very end, which is not surpris-
+ing, are the simple benchmarks – meanHoW and naive are signiﬁcantly (see also the discussion in
+Section 5.2) outperformed by the more sophisticated models across all hours, seasons of the year
+and markets.
+Finally, let us look at model performance in the four seasons of the year: Spring (March, April,
+May), Summer (June, July, August), Fall (September, October, November) and Winter (December,
+January, February). Of course, there is some variability in forecasting accuracy across the seasons.
+For instance, in the Summer, expertDoW,nl is the best performing model for both Iberian datasets,
+but lassoHQC
+HoW and 24lassoHQC
+DoW,nl follow closely by. In the Fall, ARHoW is the best for EPEX.DE+AT
+and – somewhat surprisingly – the best overall in terms of m.p.d.f.b.MAE (see Table 3), but the
+3The m.p.d.f.b. measure for all 58 models is plotted in Fig. C.7 in Appendix C.
+18
+
+=== page 19 ===
+Table 3: Mean percentage deviation from the best model for the MAE errors, i.e., m.p.d.f.b.MAE (in %), in the four
+seasons of the year: Spring (March, April, May), Summer (June, July, August), Fall (September, October, November)
+and Winter (December, January, February), for the same 10 representative models as in Table 2. The values correspond
+to all 12 datasets and the full out-of-sample period. A heat map is used to indicate better (→green) and worse (→
+red) performing models.
+Season
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoHQC
+DoW,nl
+24lassoHQC
+DoW,p,nl
+ARHoW
+lassoHQC
+HoW
+lassoHQC
+HoW,p
+Spring
+121.21
+44.35
+5.34
+12.09
+8.12
+1.89
+1.42
+3.93
+2.39
+1.90
+Summer
+144.52
+48.77
+3.67
+11.09
+7.94
+0.82
+1.26
+2.80
+1.57
+2.11
+Fall
+74.78
+49.40
+3.38
+10.41
+5.73
+1.49
+1.38
+0.78
+1.04
+0.80
+Winter
+92.08
+50.65
+3.52
+15.19
+4.23
+1.21
+1.21
+2.69
+2.32
+1.86
+univariate lassoHQC
+HoW,p is right next to it (being the best for EPEX.CH and NP.DK2). In general,
+looking at the aggregate m.p.d.f.b.MAE values in Table 3, we can observe that the annual ranking
+of the models (see Table 2) is preserved in the Spring, Summer and Winter. However, in the Fall
+the univariate models have an edge over the multivariate lasso models. A plausible explanation
+may be that in the majority of analyzed markets the electricity prices and their volatility tend to
+increase towards the end of the calendar year. The univariate models, by taking into account all
+hourly prices in the past week, seem to be able to adapt quicker to the increasing prices.
+5.2. Testing for signiﬁcant diﬀerences in the forecasting performance
+The MAE values analyzed in Section 5.1 can be used to provide a ranking of models. However,
+the power to draw statistically signiﬁcant conclusions on the outperformance of the forecasts of
+one model by those of another is limited – even given their standard errors – since the dependency
+structure between the errors (or the MAE’s) is neglected. Therefore, we also computed the Diebold
+and Mariano (1995) test (abbreviated DM) which takes the correlation structure into account. It
+tests forecasts of each pair of models against each other.
+5.2.1. The ‘multivariate’ DM test
+In the EPF literature, the DM test is usually performed separately for each of the 24 hours of
+the day (see Weron, 2014). We also do this here. But ﬁrst let us introduce a diﬀerent approach,
+where only one statistic for each pair of models is computed based on the 24-dimensional vector
+of errors for each day; we call the resulting DM test multivariate or vectorized. Therefore, denote
+by bεX,d = [bεX,d,1, . . . ,bεX,d,24]′ and bεY,d = [bεY,d,1, . . . ,bεY,d,24]′ the vectors of out-of-sample errors for
+day d of models X and Y, respectively. Then the multivariate loss diﬀerential series:
+∆X,Y,d = ∥bεX,d∥1 −∥bεY,d∥1,
+(22)
+deﬁnes the diﬀerences of errors in the ∥· ∥1-norm, i.e., ∥bεX,d∥1 = P24
+i=1 |bεX,d,h|. For each model
+pair and each dataset we compute the p-value of two one-sided DM tests: (i) a test with the null
+hypothesis H0 : E(∆X,Y,d) ≤0, i.e., the outperformance of the forecasts of model Y by those
+19
+
+=== page 20 ===
+of model X, and (ii) the complementary test with the reverse null HR
+0 : E(∆X,Y,d) ≥0, i.e., the
+outperformance of the forecasts of model X by those of model Y. As in the standard DM test, we
+assume that the loss diﬀerential series is covariance stationary.
+In Figure 3 we summarize the results for the 10 considered models, for each market. We use
+a heat map to indicate the range of the p-values – the closer they are to zero (→dark green) the
+more signiﬁcant is the diﬀerence between the forecasts of a model on the X-axis (better) and the
+forecasts of a model on the Y-axis (worse). In other words, if in a given row each square is green
+then the forecasts of models on the X-axis are signiﬁcantly better then those of the model on the
+Y-axis. For instance, for all markets the ﬁrst row is always dark green indicating that the forecasts
+of meanHoW are signiﬁcantly outperformed by those of all other models. Likewise, for all markets
+the second row is dark green except for the ﬁrst column indicating that the forecasts of the naive
+model are always signiﬁcantly outperformed by those of all other models but meanHoW.
+Note, that the p-values of the DM test are symmetric around 0.5, so if the standard test with
+null H0 yields a p-value of 0.05, then the complementary test with the reverse null, i.e., HR
+0 , returns
+a p-value of 0.95. However, the charts in Figure 3 break the symmetry around the diagonal since
+the scale is capped at 0.1 (i.e., 10%; for better exposition of the relevant results). Thus if the
+standard test returns a p-value of, say, 0.85, then the complementary test yields a p-value of 0.15,
+and both are indicated by black squares. So neither the forecasts of the model on the X-axis are
+signiﬁcantly better than those of the model on the Y-axis nor vice versa, as is the case, e.g., for
+BELPEX.BE and models 24ARHoW and VARHoW.
+Looking closely at Figure 3 we can observe that for eight datasets (BELPEX.BE, EPEX.CH,
+EPEX.FR, EXAA.DE+AT, GEFCom2014, NP.SYS, OMIE.ES and OMIE.PT) the forecasts of
+the best according to MAE multivariate lasso model, i.e., 24lassoHQC
+DoW,p,nl, are not signiﬁcantly
+worse than those of the best univariate lasso model, i.e., lassoHQC
+HoW,p. On the other hand, the fore-
+casts of the latter are for eight markets (BELPEX.BE, EPEX.DE+AT, EPEX.FR, EXAA.DE+AT,
+GEFCom2014, NP.DK1, NP.DK2 and OTE.CZ) not signiﬁcantly worse than the forecasts of
+24lassoHQC
+DoW,p,nl. Thus, there are four markets (BELPEX.BE, EPEX.FR, EXAA.DE+AT and GEF-
+Com2014) where we cannot decide which model is better based on the considered DM test.
+5.2.2. The standard DM test and the performance across the hours
+To get a better understanding of how the signiﬁcance changes across the hours we now consider
+the standard DM test, for which the loss diﬀerential series is given by (see also Bordignon et al.,
+2013; Nowotarski et al., 2014; Ziel et al., 2015b; Nowotarski and Weron, 2016; Uniejewski et al.,
+2016):
+∆X,Y,d,h = |bεX,d,h| −|bεY,d,h|.
+(23)
+We perform two one-sided DM tests at the 5% signiﬁcance level: (i) a test with the null hypothesis
+H0 : E(∆X,Y,d,h) ≤0, i.e. the outperformance of the forecasts of model Y by those of model X, and
+(ii) the complementary test with the reverse null HR
+0 : E(∆X,Y,d,h) ≥0, i.e. the outperformance of
+the forecasts of model X by those of model Y. Note, that like in the above cited studies, we assume
+that forecasts for consecutive days, hence loss diﬀerentials are covariance stationary. Note also,
+that compared to the multivariate DM test approach discussed above, we now perform the test at
+one signiﬁcance level (5%) and focus on binary variables representing the passing or not of the
+20
+
+=== page 21 ===
+G
+BELPEX.BE
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+EPEX.CH
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+EPEX.DE+AT
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+EPEX.FR
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+EXAA.DE+AT
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+GEFCom2014
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+NP.DK1
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+NP.DK2
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+NP.SYS
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+OMIE.ES
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+OMIE.PT
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+OTE.CZ
+0%
+1%
+2%
+3%
+4%
+5%
+6%
+7%
+8%
+9%
+10%
+p−value
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+Figure 3: Results of the ‘multivariate’ (or ‘vectorized’) DM test deﬁned by the multivariate loss diﬀerential series in
+Eqn. (22). We use a heat map to indicate the range of the p-values – the closer they are to zero (→dark green) the
+more signiﬁcant is the diﬀerence between the forecasts of a model on the X-axis (better) and the forecasts of a model
+on the Y-axis (worse).
+21
+
+=== page 22 ===
+test for a particular hour, not the p-values themselves.
+In Figure 4 we summarize the DM results for all datasets. Namely, we sum the number of
+signiﬁcant diﬀerences in forecasting performance across the 24 hours and use a heat map to indi-
+cate the number of hours for which the forecasts of a model on the X-axis are signiﬁcantly better
+than those of a model on the Y-axis. If the forecasts of a model on the X-axis are signiﬁcantly
+better for all 24 hours of the day, we indicate this by a white square. On the other hand, if the
+forecasts of a model on the X-axis are not signiﬁcantly better for any hour, we plot a black square.
+Naturally, the diagonal (gray crosses on black squares) should be ignored as it concerns the same
+model on both axes. Columns with many non-black squares (the more green or white the better)
+indicate that the forecasts of a model on the X-axis are signiﬁcantly better than the forecasts of
+many of its competitors. Conversely, rows with many non-black squares mean that the forecasts
+of a model on the Y-axis are signiﬁcantly worse than the forecasts of many of its competitors. For
+instance, for the EPEX.CH dataset, the white row for the meanHoW benchmark indicates that the
+forecasts of this simple model are signiﬁcantly worse than the forecasts of all of its competitors
+for all 24 hours, while the black column for meanHoW means that not a single competitor produces
+signiﬁcantly worse forecasts than this benchmark, even for a single hour of the day.
+For the more sophisticated lasso models we cannot draw such clear cut conclusions. There
+is no model that would beat the competitors for all 24 hours of the day. Moreover, for most
+markets the forecasts of the best univariate and multivariate models are signiﬁcantly better than
+those of other structures only for some hours of the day. This shows that the statements about the
+signiﬁcance of results we were able to draw from the multivariate DM tests presented in Figure 3
+are mainly due to a signiﬁcantly better performance for a few hours of the day. More interestingly,
+we see that for many markets, there is at least one hour (indicated by a square that is at least red)
+where both the forecasts of 24lassoHQC
+DoW,p,nl are signiﬁcantly better than those of lassoHQC
+HoW,p and vice
+versa. For example, for the BELPEX.BE dataset the univariate lasso model shows signiﬁcantly
+better forecasts for seven hours of the day and signiﬁcantly worse for ﬁve hours.
+In an attempt to better understand the performance of the models across the hours of the day, in
+Figure 5 we plot the p-values of the 24 hourly DM tests for the best multivariate vs. the best uni-
+variate lasso models. The Y-axis is capped at 0.5, so we either plot a red circle (→24lassoHQC
+DoW,p,nl
+yields better forecasts) or a blue square (→lassoHQC
+HoW,p yields better forecasts). Clearly, no universal
+daily pattern can be observed. If anything, more often the multivariate speciﬁcation outperforms
+the univariate in the morning hours (for BELPEX.BE, EPEX.CH, EPEX.FR, OMIE.ES, OMIE.PT
+and except for hour 1 also for GEFCom2014), whereas the univariate more often outperforms the
+multivariate in the late evening/night hours (for BELPEX.BE, EPEX.DE+AT, EXAA.DE+AT, two
+Danish and two Iberian markets). This is in contrast to what Ziel (2016a) concludes for relatively
+simple models from both model classes – univariate models (like ARHoW) perform better for the
+ﬁrst half of the day, whereas similar structures within a multivariate framework (like 24ARHoW)
+are better in the second half of the day. This discrepancy may be due to the complexity (higher
+number of parameters in this study) or the calibration of the models (diﬀerent information criteria;
+introduction of the HQC criterion in this study, which apparently outperforms AIC and BIC, see
+Appendix C).
+Last but not least, the observation that for some hours of the day one model structure domi-
+22
+
+=== page 23 ===
+G
+BELPEX.BE
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+EPEX.CH
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+EPEX.DE+AT
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+EPEX.FR
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+EXAA.DE+AT
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+GEFCom2014
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+NP.DK1
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+NP.DK2
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+NP.SYS
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+OMIE.ES
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+OMIE.PT
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+G
+OTE.CZ
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+meanHoW
+naive
+expertDoW,nl
+24ARHoW
+VARHoW
+24lassoDoW,nl
+HQC
+24lassoDoW,p,nl
+HQC
+ARHoW
+lassoHoW
+HQC
+lassoHoW,p
+HQC
+Figure 4: Results of the 24 hourly DM tests at the 5% level, deﬁned by the loss diﬀerential series in Eqn. (23). We sum
+the number of signiﬁcant diﬀerences in forecasting performance across the 24 hours and use a heatmap to indicate the
+number of hours for which the forecasts of a model on the X-axis are signiﬁcantly better than those of a model on
+the Y-axis. A white square indicates that forecasts of a model on the X-axis are better for all 24 hours, while a black
+square that they are not better for a single hour.
+23
+
+=== page 24 ===
+G
+G
+G G
+G
+G G
+G
+G G G
+G
+G
+G
+BELPEX.BE
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G G
+G
+G G
+G
+G G G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G G G G G
+G
+G
+G
+G G G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+EPEX.CH
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G G G G G
+G
+G
+G
+G G G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+EPEX.DE+AT
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+G
+G G G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+EPEX.FR
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G
+G G G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+G
+G
+G
+G
+G
+EXAA.DE+AT
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G G
+G
+G
+G
+G
+G
+G
+G
+G
+G G
+G
+G G
+G
+G
+G
+G
+GEFCom2014
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G G
+G
+G
+G
+G
+G
+G
+G
+G
+G G
+G
+G G
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+G
+G
+G
+G
+NP.DK1
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+G
+G
+G
+G
+G
+G
+NP.DK2
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G
+G
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+G G G G G G G G
+G G
+G
+G
+G
+G
+G
+G G
+NP.SYS
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G G G G G G G G
+G G
+G
+G
+G
+G
+G
+G G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+G
+G G
+G
+G
+G
+G G G G G G
+G
+G
+G
+G
+G
+OMIE.ES
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G
+G G
+G
+G
+G
+G G G G G G
+G
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+G G
+G G
+G
+G
+G G G G G G
+G
+G
+G
+G
+G
+OMIE.PT
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G G
+G G
+G
+G
+G G G G G G
+G
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+G
+G
+G
+G
+OTE.CZ
+hour
+p−value
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+0
+0.05
+0.1
+0.2
+0.3
+0.4
+0.5
+G
+G
+G
+G
+G
+24lassoDoW,p,nl
+HQC
+ better 
+lassoHoW,p
+HQC better 
+Figure 5: Results of the 24 hourly DM tests, as deﬁned by the loss diﬀerential series in Eqn. (23), for the best
+multivariate vs. the best univariate lasso models. We plot the p-values for the standard test with null H0 (red circles;
+→24lassoHQC
+DoW,p,nl yields better forecasts) or the complementary test with reverse null HR
+0 (blue squares; →lassoHQC
+HoW,p
+yields better forecasts), whichever is smaller. The dashed green line represents the 5% signiﬁcance level.
+24
+
+=== page 25 ===
+Table 4: Mean Absolute Errors (MAE) for the better (ex-post) of the two best lasso models, i.e., 24lassoHQC
+DoW,p,nl and
+lassoHQC
+HoW,p, and their arithmetic average. Note, that combining yields an improvement for all 12 datasets. According
+to the multivariate DM-test, deﬁned by Eqn. (22), it is signiﬁcant at the 5% level for eight markets (denoted by *).
+BELPEX.BE
+EPEX.CH
+EPEX.DE+AT
+EPEX.FR
+EXAA.DE+AT
+GEFCom2014
+NP.DK1
+NP.DK2
+NP.SYS
+OMIE.ES
+OMIE.PT
+OTE.CZ
+Better of the two
+5.948 3.926 5.048 4.818
+4.120
+6.724
+5.079
+4.751
+1.692
+6.016
+6.237
+4.452
+Combination
+5.844 3.891 5.007 4.757
+4.070
+6.637
+5.045
+4.713
+1.687
+5.985
+6.193
+4.414
+Diﬀerence in MAE 0.104 0.035 0.041 0.061
+0.050
+0.087
+0.034
+0.037
+0.006
+0.031
+0.044
+0.038
+Improvement in %
+1.75* 0.89* 0.81* 1.27*
+1.22*
+1.30
+0.67*
+0.79*
+0.33
+0.52
+0.71
+0.85*
+nates another and vice versa gives grounds to believe (or expect) that combining their forecasts will
+yield further improvements. Although forecast combinations are not the focus of this study, we
+motivate this conclusion by considering a simple arithmetic average of the best two lasso models:
+24lassoHQC
+DoW,p,nl and lassoHQC
+HoW,p; for recent studies involving forecast averaging we refer to Bor-
+dignon et al. (2013), Nowotarski et al. (2014), Weron (2014), Raviv et al. (2015), Gaillard et al.
+(2016), Marcjasz et al. (2018) and Nowotarski and Weron (2018), among others. In Table 4 we
+report the MAE values for the better of the two lasso models (this is in row ‘Better of the two’) and
+their arithmetic average (row ‘Combination’). Clearly, the simple arithmetic average (the weights,
+i.e., 1
+2 for each model, are obviously chosen ex-ante) gives an improvement in forecasting accuracy
+(over the ex-post selected lasso model) for all 12 datasets. According to the multivariate DM-test,
+deﬁned by Eqn. (22), it is signiﬁcant at the 5% level for the majority of markets. The improvement
+of 1.30% for the GEFCom2014 dataset is not signiﬁcant probably due to the much shorter test
+period.
+5.3. Variable selection
+In this section we analyze the structures of the best multivariate and univariate lasso models.
+Like Uniejewski et al. (2016), we count the number of times a given explanatory variable was
+selected (its coeﬃcient is diﬀerent form zero) for 24lassoHQC
+DoW,p,nl (see Tables 5-8) or lassoHQC
+HoW,p (see
+Table 9). However, unlike Uniejewski et al. (2016), we do not present the numbers themselves, but
+the percentages (over all days in the out-of-sample test periods and across all 12 datasets). Heat
+maps are used to indicate more (→green) and less (→red) commonly-selected variables. Several
+interesting conclusions can be drawn.
+In particular, for the multivariate lasso model, see Eqn. (13), we observe that:
+• For the autoregressive parameters, i.e., φh,k,l,0, the most important is lag k = 1, which refers to
+electricity prices of the previous day, see Table 5 and compare with Tables 6 and 7. For k = 1
+we observe that the diagonal elements, φh,1,h,0, and the last hour of the previous day, φh,1,24,0,
+are much more ‘green’ than the remaining variables. However, the diagonal elements seem
+to be less important during the working hours, whereas φh,1,24,0 shows high relevance for
+25
+
+=== page 26 ===
+all h. This impact of hour 24 is likely the reason for the outperformance of the 24ARHoW
+model by VARHoW, see Table 2. Even though both models have the same structure in terms
+of variables used, only VARHoW captures the ‘last hour of the day’ eﬀect across all hours.
+• For the less relevant autoregressive parameters at lag k = 1, i.e., φh,1,l,0, the lower triangle
+with l < h carries most of the information. This is interesting because this triangle represents
+all prices Pd−1,l which are closer (in time) to the predicted price, i.e., Pd,h, than the prices 24
+hours ago, i.e., Pd−1,h, represented the by the ‘diagonal’ in Table 5. This relationship seems
+to carry the most information for the night hours (l = 1, 2, . . . , 6) and the evening hours
+(l = 18, 19, . . . , 24).
+• For the autoregressive parameters with lag k > 1, see Tables 5-7, generally only the diag-
+onal elements φh,k,h,0 show some importance. Seldom we observe a lag-importance ‘island’
+(e.g., for φh,2,5,0, φh,2,23,0 or φh,7,23,0 in the night hours) that could justify the complex model
+parametrization.
+• The non-linear minimum and maximum eﬀects, φh,k,l,min and φh,k,l,max, are only relevant for
+k = 1, i.e., the eﬀect of previous day’s minimum/maximum price, see Table 8. In general,
+it seems that the minimum is more important, especially in the ﬁrst six hours of the day. In
+contrast, the maximum seems to be more important for the late morning hours (h = 8, 9, 10).
+To some extent, these temporal diﬀerences are also visible in Tables 2 and 3 in Uniejewski
+et al. (2016). Interestingly, they conclude that the maximum ‘is slightly more inﬂuential’
+than the minimum, however, both in our and their study the diﬀerences are rather small.
+• The day-of-the-week dummies, i.e., φh,0,0,j, are in general very important, especially the
+Monday, Saturday and Sunday ( j = 1, 6, 7) dummies, see Table 8. This means that the
+commonly used design of expert models is appropriate (see e.g. Misiorek et al., 2006; Weron
+and Misiorek, 2008; Serinaldi, 2011; Kristiansen, 2012; Nowotarski et al., 2014; Gaillard
+et al., 2016; Maciejowska et al., 2016; Nowotarski and Weron, 2018; Uniejewski et al.,
+2016; Ziel, 2016a). The Tuesday and Friday (j = 2, 5) dummies are less important, with the
+latter one only for the evening hours.
+• The periodic parameters, φh,1,h,j and φh,1,24,j, exhibit relevance, see Table 8. However, in
+contrast to the day-of-the-week dummies (φh,0,0,j), φh,1,h,j’s are more important during the
+working days, especially Tuesday, Wednesday and Friday (j = 3, 4, 5).
+For the univariate lasso model, see Eqn. (19), we observe that:
+• The autoregressive parameters which model the dependency on the previous hour, i.e., φ1,k,
+have a clear pattern. Lags around multiples of 24 are very important, e.g. 23, 24, 25 and 26
+or 47, 48, 49 and 50. However, the remaining lags exhibit moderate importance and only
+for the ﬁrst 24 hours, see Table 9.
+• For the intercepts and periodic parameters, i.e., φ0,k, φ2,k and φ3,k, the patterns are not that
+obvious. However, almost every parameter seems to have relevance at least for some markets
+(as there are almost no red backgrounds). We also see that lags being a multiple of 24 tend
+to have more importance than the other parameters, which is most clearly visible for the
+intercepts: φ0,24, φ0,48, etc.
+26
+
+=== page 27 ===
+• Another interesting observation is that there is another group of lag-importance ‘islands’.
+These occur at lags of order 7 and 8, e.g. 24+7=31 and 24+8=32 or 48+7=55 and 48+8=56.
+Finally, we should note that for the multivariate model the non-linear eﬀects exhibit moderate
+importance and increase the overall model ﬁt. However, for the univariate model, the non-linear
+eﬀects do not improve the model performance. The reason may be that we only use two parameters
+to capture the minimum/maximum eﬀects, even though the eﬀect seems to be periodic. An intro-
+duction of non-linear periodic eﬀects in the univariate setting may lead to a further improvement
+of the predictive accuracy.
+6. Conclusions and guidelines for energy forecasters
+We have conducted an extensive empirical study on short-term electricity price forecasting
+(EPF) to address the long-standing question if the optimal model structure for EPF is univariate
+or multivariate. We provide evidence that despite a minor edge in predictive performance overall,
+as measured by the linear (MAE) and quadratic (RMSE) error measures and the mean percentage
+deviation from the best performing model (m.p.d.f.b.), the multivariate modeling approach does
+not uniformly outperform the univariate one across all datasets, seasons of the year or hours of
+the day, and at times is outperformed by the latter. These ﬂuctuations in forecasting performance
+across the hours of the day can be utilized, however, via model averaging or combining forecasts.
+As illustrated in the paper, a simple arithmetic average of the forecasts of the best multivariate and
+the best univariate lasso model beats the better (ex-post) of the two for all 12 considered datasets.
+When analyzing model performance in the four seasons of the year, we ﬁnd that the annual
+ranking of the models is preserved in the Spring, Summer and Winter. However, in the Fall the
+univariate models have an edge over the multivariate lasso models. A plausible explanation may be
+that in the majority of analyzed markets the electricity prices and their volatility tend to increase
+towards the end of the calendar year. The univariate models, by taking into account all hourly
+prices in the past week, seem to be able to adapt quicker to the increasing prices. Interestingly,
+team TOLOLO used a similar approach to win the Price Track of the GEFCom2014 competition
+(see Gaillard et al., 2016). For three tasks corresponding to days in December (i.e., late Fall/early
+Winter) they used a speciﬁcally designed model, diﬀerent from the models for the remaining tasks
+(corresponding to Summer months). These results suggest that the predictive eﬃciency may be
+further increased by designing diﬀerent models for diﬀerent seasons of the year.
+Also regarding performance across the markets, there is some variability in forecasting ac-
+curacy, which may be a result of diﬀerences in the generation mix or market regulations. The
+latter may be accounted for when constructing fundamental models (like the X-model of Ziel and
+Steinert, 2016, that focuses on modeling the bidding behavior), however, we do not see a straight-
+forward way of incorporating such information into statistical models. Yet, it is always one of the
+multivariate lasso models estimated using the HQC criterion or the univariate lasso model with
+periodic eﬀects, also estimated using the HQC criterion, that yields the best performance. Given
+that the three multivariate lasso models never perform badly, they are recommended for EPF in
+general.
+Concerning variable (or feature) selection, analyzing the structures of the best multivariate
+and univariate lasso models, we have identiﬁed the most important variables and thus provided
+27
+
+=== page 28 ===
+Table 5: Mean occurrence (in %) of the multivariate lasso model parameters across all 12 datasets and the full out-of-
+sample test period. Columns represent the hours and rows the parameters of the 24lassoHQC
+DoW,p,nl model, see Eqn. (13)
+for details. A heat map is used to indicate more (→green) and less (→red) commonly-selected variables. Continued
+in Table 6.
+h
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+Day (d −1)
+φh,1,1,0 21.42 10.61
+9.04 21.81 21.58 11.41 12.62 13.04 12.07
+8.86
+8.89
+8.62
+7.10
+8.43
+6.13
+5.93
+3.17
+0.92
+1.63
+3.26
+4.87
+9.18 13.31 19.85
+φh,1,2,0 41.75 24.36 11.67
+4.86
+5.44 11.05 16.98
+9.80
+7.99
+6.77 10.67
+7.19
+6.35 10.08 11.18 10.70
+8.47
+4.43
+4.91
+3.58
+6.20
+5.52
+9.19 27.72
+φh,1,3,0 31.88 39.68 34.41 16.96
+9.72 11.60
+7.48
+2.46
+1.29
+1.62
+1.82
+0.64
+1.10
+2.06
+2.39
+2.40
+4.34
+5.21
+9.95 10.41
+8.36 10.53 10.91 21.31
+φh,1,4,0 21.50 29.19 39.28 58.20 40.34 11.96
+3.39
+3.25
+4.58
+4.36
+3.61
+2.66
+3.26
+0.75
+0.67
+0.25
+0.42
+1.02
+3.02
+3.37
+2.65
+3.66
+1.14
+9.88
+φh,1,5,0 32.53 28.35 35.31 51.97 63.97 45.06 13.95 13.64 16.55 15.18 15.80 10.09 11.89
+7.81
+5.01
+3.56
+4.77
+1.17
+1.04
+0.74
+5.41
+7.99
+3.39
+6.69
+φh,1,6,0 39.64 41.88 41.60 44.22 54.20 72.06 42.67 20.43 12.95 12.71
+6.73
+6.12
+7.24
+4.20
+5.07
+3.16
+2.35
+1.75
+2.59
+2.39
+4.03
+4.41
+1.55
+4.67
+φh,1,7,0 14.67 17.46 10.22
+9.48 12.07 19.85 59.92 24.92 14.61 10.70
+3.68
+7.14 10.71 11.75 10.44 10.80
+7.79
+7.74
+6.96
+5.86
+6.98
+3.43
+0.37
+0.27
+φh,1,8,0 10.51 16.08 15.98 16.44 18.32 17.81 19.94 50.14 43.98 15.24
+5.71
+5.87
+6.80
+6.71
+6.25
+7.10
+7.60
+2.82
+2.14
+8.68 10.28
+4.71
+4.77
+1.70
+φh,1,9,0
+4.55
+3.23
+3.04
+3.29
+3.26
+4.73
+3.44 10.45 29.03 16.02
+6.90
+5.66 13.84 13.96 15.17 13.27 20.25 19.73 12.12
+7.87
+6.27
+3.52
+3.95
+2.94
+φh,1,10,0
+1.06
+0.67
+1.70
+3.14
+2.71
+4.41
+2.55
+0.85
+6.53 12.52 10.24
+4.29
+3.46
+7.52 10.73 17.44 28.05 29.79 14.38 10.66
+5.65
+7.72
+4.44
+3.46
+φh,1,11,0
+9.82
+0.19
+4.06
+3.58
+4.56
+4.58
+1.80
+2.58 11.75 19.77
+8.90
+2.99
+0.31
+0.00
+0.00
+0.17
+2.62
+4.57
+3.84
+0.54
+0.07
+0.12
+0.41
+0.02
+φh,1,12,0
+3.18
+0.54
+3.59
+5.93 12.65
+8.56
+6.02
+2.27
+5.97 27.63 33.81 23.73
+7.70
+1.39
+0.61
+2.69
+6.35
+8.62
+8.90
+6.10
+4.08
+2.32
+2.24
+0.15
+φh,1,13,0
+2.61
+2.15
+2.05 10.61 10.86
+5.85
+5.27
+3.58
+4.75
+6.53 13.51 25.40 26.51 10.94
+3.80
+1.42
+0.82
+3.80
+3.62
+1.76
+1.72
+2.51
+3.43
+2.72
+φh,1,14,0
+8.11
+3.18
+5.33
+6.03
+7.05
+5.39
+6.29
+8.75
+6.23 16.75 32.36 48.57 55.45 46.23 27.45
+8.23
+4.38
+1.85
+2.65
+1.00
+0.90
+2.04
+1.39
+1.05
+φh,1,15,0
+5.69
+5.40
+1.01
+1.24
+1.20
+1.04
+0.09
+5.44
+6.44 22.26 30.49 28.40 36.55 43.33 40.31 21.81
+4.59
+1.32
+0.80
+0.74
+0.61
+2.13
+1.68
+2.46
+φh,1,16,0
+8.71
+9.36
+5.90
+5.94
+4.72 14.99 11.28 17.03 23.49 22.16 25.10 30.27 41.13 37.42 45.01 46.93 19.64
+6.17
+4.26
+6.80
+4.30
+1.24
+0.85
+5.83
+φh,1,17,0 15.47 17.07
+7.86
+5.12
+5.31 10.53 10.93
+4.56
+7.90
+8.56 14.35 28.22 35.94 46.70 61.90 69.02 71.11 21.76
+5.54
+3.82
+1.66
+1.06
+2.20
+2.52
+φh,1,18,0 45.87 38.17 34.61 36.67 38.24 35.07 30.71 26.87 20.60 27.90 36.43 44.84 53.83 60.77 67.40 76.67 96.86 98.27 46.23 11.23
+2.72
+5.66
+6.31 11.48
+φh,1,19,0 40.18 54.28 61.40 53.42 46.69 49.64 22.85 43.51 39.30 42.98 46.41 32.88 29.82 32.84 25.37 28.45 27.92 67.46 93.92 28.63
+4.60
+5.87
+8.42 19.06
+φh,1,20,0 26.83 36.61 33.45 23.02 25.11 49.99 63.97 61.77 42.97 41.38 36.44 27.63 28.21 22.75 19.95 19.69 18.18 10.17 43.88 94.59 46.29
+7.63
+3.84
+9.61
+φh,1,21,0 35.19 31.57 23.84 23.38 23.04 45.30 77.22 69.11 67.79 67.09 63.11 59.66 43.68 42.45 41.45 38.86 35.14 25.28 26.83 51.94 92.74 48.93 11.74 16.59
+φh,1,22,0 43.63 38.34 39.88 45.70 47.89 50.66 70.33 61.18 68.10 60.56 63.11 64.87 52.10 48.25 47.32 47.90 42.08 27.31 25.42 28.63 75.75 99.17 60.31 32.36
+φh,1,23,0 30.38 22.55 18.56 18.73 22.85 17.96 25.37 30.99 41.82 50.92 62.93 70.34 65.37 61.04 57.70 56.01 51.60 46.40 38.14 37.16 32.31 63.60 95.44 68.07
+φh,1,24,0
+100
+100
+100
+100
+100
+100 99.99 96.41 94.71 93.01 91.30 90.15 92.68 93.25 95.27 95.59 91.48 90.29 87.18 77.23 77.69 81.20 90.89
+100
+Day (d −2)
+φh,2,1,0 15.84
+1.79
+4.21
+5.25
+5.34
+3.34
+3.83
+5.68
+6.57
+8.00 10.54 10.66
+8.02 11.72 11.28 11.46 14.86 11.63
+9.81
+6.47
+7.57 17.03 12.15 32.15
+φh,2,2,0 11.33 11.67
+7.23
+5.03
+4.41
+6.66 12.34
+6.97
+4.28
+5.55
+4.67
+5.33
+8.32
+8.02
+7.12
+5.63
+4.00
+6.00
+5.11
+3.81
+3.23
+3.82
+2.50 10.75
+φh,2,3,0
+6.16 19.18 16.01
+5.20
+3.99 12.08 14.63 12.38 13.78
+9.46
+5.96
+5.47
+6.82
+7.90
+7.75
+9.05
+9.76
+8.52
+7.94
+4.85
+5.64
+3.63
+1.80
+5.23
+φh,2,4,0
+7.46
+7.07 17.57 28.57 20.01 20.24 15.02 14.12 10.38
+4.21
+4.35
+2.68
+2.03
+7.60
+9.97
+8.58
+5.64
+5.61
+5.57
+2.74
+2.69
+2.10
+0.26
+1.05
+φh,2,5,0 28.03 22.72 22.68 31.32 44.40 26.97 23.42 20.64 17.51 13.66
+7.71
+3.55
+6.29
+5.84
+8.70
+8.59
+6.37
+5.43
+6.28
+1.62
+0.25
+2.31
+4.53
+6.02
+φh,2,6,0
+5.56 12.60
+6.95
+7.92
+8.61 17.33 19.61 14.77
+8.82
+7.02
+8.17
+8.44
+9.15
+8.67
+5.67
+5.31
+5.11
+4.59
+6.25
+5.51
+6.62
+4.47
+3.62
+2.76
+φh,2,7,0
+7.69
+7.04
+6.93
+9.31
+7.69
+5.55 13.85 10.65
+5.23
+1.87
+2.63
+2.86
+6.14
+7.68
+5.06
+3.25
+3.08
+0.70
+0.50
+2.54
+0.89
+0.49
+1.06
+3.11
+φh,2,8,0
+3.06
+4.69
+9.56
+8.40 10.46 14.53
+7.63
+6.42
+3.82
+3.07
+3.20
+6.65 11.17 10.39 11.62 12.43 12.32 10.38
+4.77
+4.20
+2.95
+5.24
+3.71
+2.50
+φh,2,9,0
+4.38
+4.91
+6.96
+7.16
+4.28
+6.49
+0.88
+0.83
+2.22
+0.50
+0.13
+0.22
+0.25
+2.50
+5.54
+9.77 16.26 18.22 13.66 14.32
+6.20
+3.02
+6.17
+8.61
+φh,2,10,0
+0.58
+3.38
+9.78 12.23
+8.61
+8.68
+2.64
+4.91
+6.27
+8.20
+1.41
+0.90
+0.71
+1.51
+1.19
+3.80
+6.17
+8.54
+5.95
+4.83
+2.51
+1.85
+0.35
+0.29
+φh,2,11,0
+4.12
+5.40
+6.54
+8.88
+5.96
+7.08
+0.78
+2.43
+4.39
+8.82
+7.44
+2.22
+0.91
+0.92
+0.83
+2.70
+4.55
+6.91 10.88
+9.55
+4.27
+0.87
+1.10
+1.12
+φh,2,12,0
+2.87
+7.99 10.28 16.54 15.03
+8.20
+2.49
+3.39
+2.09
+5.72 10.04
+4.87
+0.77
+0.07
+0.14
+0.03
+0.08
+1.01
+2.95
+2.84
+4.55
+1.37
+2.40
+2.96
+φh,2,13,0
+1.60
+2.15
+7.18
+9.78
+9.10
+8.91
+9.30
+4.47
+2.52
+3.00
+9.57 16.71 20.59 10.52
+8.47
+5.60
+2.31
+4.66 10.47
+7.13
+2.42
+0.82
+4.37
+2.99
+φh,2,14,0
+0.34
+3.70
+4.58
+5.43
+7.52
+6.51
+2.43
+2.35
+1.31
+1.12
+2.02
+3.82
+5.66
+5.38
+3.44
+0.63
+0.21
+3.03
+3.84
+5.05
+3.62
+0.74
+0.01
+0.40
+φh,2,15,0
+0.53
+2.00
+7.82
+8.78 11.00
+8.52 15.17 12.04
+5.29
+1.82
+2.79
+8.16
+9.21
+7.86
+5.62
+0.28
+0.42
+6.18
+2.34
+6.29
+1.78
+2.78
+0.22
+2.90
+φh,2,16,0
+2.25
+3.88
+5.04
+6.00
+7.62
+7.56
+1.89
+4.49
+2.91
+2.73
+1.85
+4.04
+4.37
+5.83
+5.29
+8.06
+5.37 12.93 12.28
+6.63
+1.72
+3.06
+2.85 12.53
+φh,2,17,0
+1.87
+2.68
+8.77 10.66 15.49
+9.29
+1.75
+4.29
+7.67
+8.33
+1.10
+1.99
+6.61
+8.02 14.35 19.60 22.91 10.93
+5.91
+1.53
+0.50
+0.47
+0.96
+3.47
+φh,2,18,0
+0.45
+5.17
+7.79
+6.99
+7.79
+6.17
+6.30
+6.01
+1.53
+1.50
+2.35
+4.88 14.11 16.96 23.02 35.14 55.58 71.47 19.41
+2.91
+0.60
+1.75
+3.62
+6.15
+φh,2,19,0
+1.13
+0.78
+1.21
+0.59
+0.90
+2.40
+0.99
+2.20
+1.07
+0.86
+1.85
+8.21
+9.90 11.38 11.78 15.90 20.69 22.86 65.00
+7.55 10.46
+2.90
+3.92
+4.87
+φh,2,20,0
+8.56
+3.10
+4.47
+4.71
+6.34
+2.30
+8.83
+8.58
+4.52
+3.57
+3.77
+9.78 13.00 14.00 13.53 15.40 13.24 13.86 15.47 78.76 18.60 12.22 15.66 16.72
+φh,2,21,0 10.20 15.79 20.62 28.96 26.19 13.22
+9.92 18.27
+3.90
+9.20
+9.18
+7.61
+8.50 15.20 15.75 13.42 10.50
+9.22
+8.66 20.05 70.64 18.09 11.22
+8.16
+φh,2,22,0 17.33 31.56 25.33 22.22 18.10 15.44
+7.23
+8.50
+1.41
+0.87
+2.39
+6.00
+2.21
+1.54
+5.28
+6.41
+5.99
+3.83
+1.45
+6.88
+6.76 57.21 24.05
+5.87
+φh,2,23,0 21.07 25.48 36.76 34.48 41.17 42.37 25.07 18.53 14.87 11.26 14.30 13.81
+9.53
+9.50
+7.35
+7.67 12.92
+6.47
+5.57
+6.29
+9.65 13.14 49.49 30.34
+φh,2,24,0 14.67 14.58 24.65 33.56 34.54 25.40 16.97 16.40 12.55 10.68 10.74 11.94 22.76 19.63 15.06 14.10
+9.93
+2.97
+7.17 12.21 14.60 27.42 38.10 54.77
+Day (d −3)
+φh,3,1,0
+6.76
+4.68
+5.62
+8.37
+9.62
+6.95 12.04
+4.02
+5.48
+5.87
+3.20
+4.20
+4.75
+6.05
+5.69
+7.44
+6.69
+3.50
+5.22
+4.71
+4.83
+6.12
+6.56 21.20
+φh,3,2,0
+6.71
+6.10
+4.81
+1.07
+0.17
+3.75
+4.57
+9.02
+8.90
+6.80
+8.74
+9.71
+8.63 12.30
+9.25 10.05 11.82
+8.93
+9.36
+2.98
+5.10
+8.73 10.69 16.67
+φh,3,3,0
+9.07 16.58 10.43
+3.99
+1.45
+2.82
+2.76
+2.82
+2.61
+1.22
+0.74
+2.87
+3.20
+2.54
+2.06
+1.33
+2.04
+0.61
+0.79
+0.90
+1.29
+1.12
+4.29
+1.71
+φh,3,4,0 11.31 16.38 24.62 25.34 29.17 24.38
+9.08
+7.18
+1.13
+3.04
+2.11
+2.52
+4.20
+4.14
+5.01
+2.93
+5.00
+2.91
+2.68
+0.34
+2.51
+0.53
+1.22
+1.86
+φh,3,5,0
+7.51
+5.12
+5.18 11.50 13.86 10.25
+4.71
+4.42
+2.25
+3.15
+3.46
+6.39
+6.50
+2.19
+4.91
+4.63
+6.75
+5.63
+6.11
+3.54
+1.71
+0.69
+0.52
+1.79
+φh,3,6,0 13.44
+5.62
+5.04 10.06 11.01 24.92
+7.88
+3.92
+5.14
+5.53
+3.90
+5.35
+4.41
+3.86
+3.85
+5.16
+7.73 10.25
+6.99
+3.58
+3.67
+4.78
+3.50
+2.63
+φh,3,7,0 14.88 15.06 22.54 21.76 17.35 15.99 24.22 20.67 17.07 14.44 11.17
+9.17
+3.54
+3.58
+5.84
+4.86
+4.48 10.15
+9.30 16.67
+4.84
+2.52
+0.84
+1.69
+φh,3,8,0
+2.08
+5.13
+6.03
+8.81
+3.08
+1.13
+4.88
+9.29
+3.95
+2.60
+1.28
+0.58
+0.11
+0.18
+2.14
+2.79
+3.34
+1.53
+2.32
+2.19
+2.29
+1.57
+3.82
+1.81
+φh,3,9,0
+2.95
+3.12
+1.51
+5.82
+4.95
+2.60
+1.45
+8.35 11.09
+5.59
+2.15
+1.59
+0.71
+0.49
+1.80
+3.25
+5.84
+8.81
+7.98
+7.24
+6.00
+5.61
+4.56
+4.46
+φh,3,10,0
+4.74
+7.72
+2.39
+2.12
+0.76
+0.61
+0.82
+5.03
+9.25
+8.54
+5.29
+1.84
+0.76
+0.38
+2.64
+3.20
+2.93
+4.66
+3.88
+3.67
+5.40
+3.38
+3.78
+7.51
+φh,3,11,0
+2.71
+0.50
+1.67
+2.93
+3.18
+3.77
+7.27 12.10
+4.69
+6.89
+6.04
+2.51
+0.08
+2.90
+3.18
+1.04
+0.91
+2.49
+1.58
+1.63
+0.49
+0.31
+0.49
+1.09
+φh,3,12,0
+0.95
+2.48
+2.33
+2.80
+3.99
+7.35
+2.23
+0.57
+1.34
+3.40
+6.99 12.17
+7.93
+3.26
+2.52
+3.32
+2.12
+1.64
+3.67
+3.69
+1.50
+0.61
+0.92
+3.07
+φh,3,13,0
+1.51
+0.77
+1.83
+3.64
+4.05
+2.26
+2.06
+1.21
+1.35
+5.31
+8.46 17.77 25.33 16.77
+8.93
+6.91
+5.25
+0.92
+0.06
+2.53
+1.20
+0.49
+2.56
+4.59
+φh,3,14,0
+2.09
+1.48
+2.70
+4.38
+6.91
+6.25
+5.37
+3.13
+3.46
+0.21
+0.31
+4.82
+7.43
+6.88
+5.60
+3.29
+2.32
+2.27
+0.58
+1.29
+2.96
+0.93
+2.35
+5.52
+φh,3,15,0
+0.18
+1.83
+1.13
+2.36
+3.11
+3.55
+4.05
+3.76
+5.32
+0.71
+0.34
+0.13
+0.29
+4.58
+9.83 12.53
+5.95
+6.97
+8.04
+3.82
+2.68
+2.76
+3.18
+6.47
+φh,3,16,0
+3.33
+3.45
+5.66
+7.45 12.35
+5.57
+2.80
+2.70
+3.26
+1.92
+0.62
+0.55
+0.44
+1.27
+2.96
+7.10
+0.25
+0.57
+4.34
+5.17
+2.96
+5.56
+4.21
+2.19
+φh,3,17,0
+0.55
+0.65
+6.17
+8.98 11.99 12.71 15.72 12.11 15.58 15.59
+7.68
+4.72
+5.74
+9.33
+9.37
+7.54 18.29
+7.02
+6.31
+7.39
+3.89
+2.39
+2.46
+0.59
+φh,3,18,0
+4.20
+1.31
+3.42
+3.02
+3.20
+1.92
+0.53
+1.33
+0.87
+2.22
+8.35
+4.44
+9.65
+9.77 13.13 16.15 26.09 43.75 11.98
+0.84
+1.38
+4.57
+3.18
+1.88
+φh,3,19,0
+3.68
+3.48
+4.53
+3.18
+3.07
+4.96
+4.24
+0.47
+0.07
+2.25
+5.67
+5.29
+5.11
+2.04
+1.43
+1.25
+3.92 11.59 46.20
+7.92
+1.84
+4.00
+3.25
+3.54
+φh,3,20,0
+3.02
+1.09
+0.79
+2.69
+2.05
+3.38
+7.04
+2.56
+1.78
+2.44
+1.25
+0.61
+2.79
+0.74
+1.12
+1.42
+2.56
+1.33
+1.87 46.83 11.70
+0.65
+0.82
+1.66
+φh,3,21,0
+5.73
+3.04
+4.21
+7.49
+7.74
+2.76 18.60 11.10
+6.76
+2.87
+1.35
+2.77
+3.19
+1.88
+4.40
+2.58
+5.53
+3.78
+2.71
+8.09 34.61
+6.37
+2.49
+1.03
+φh,3,22,0
+3.90
+8.02
+5.68
+7.28
+9.30
+1.82
+2.31
+4.21
+5.82
+3.29
+0.87
+2.37
+2.75
+3.94
+7.44
+5.71
+8.61 12.19 14.01
+2.47
+4.59 21.98
+3.95
+3.08
+φh,3,23,0
+5.57 14.75 16.49 16.00 12.54
+8.54
+4.50
+2.11
+3.83
+4.15
+7.82
+4.86
+4.80
+3.53
+3.24
+5.44
+4.35
+4.63
+7.63
+8.56
+4.66 11.53 29.60 12.28
+φh,3,24,0
+2.56
+4.32 10.43 13.79 11.89
+7.55
+4.66
+9.26
+3.64
+3.13
+6.52 11.26 11.33
+8.73
+7.67
+6.34
+8.65
+5.25
+3.51
+2.12
+4.19
+9.10 17.41 41.48
+28
+
+=== page 29 ===
+Table 6: Mean occurrence (in %) of the multivariate lasso model parameters across all 12 datasets and the full out-of-
+sample test period. Columns represent the hours and rows the parameters of the 24lassoHQC
+DoW,p,nl model, see Eqn. (13)
+for details. A heat map is used to indicate more (→green) and less (→red) commonly-selected variables. Continued
+in Table 7.
+h
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+Day (d −4)
+φh,4,1,0
+7.04
+3.46
+4.05
+3.88
+5.11
+6.11
+5.25
+3.59
+5.40
+5.71
+6.34
+5.70
+7.68
+5.49
+5.49
+3.00
+3.37
+3.27
+3.79
+0.36
+3.20
+6.37
+9.02 21.62
+φh,4,2,0
+8.20 15.72 11.92
+4.16
+2.60
+4.17
+2.98
+1.45
+2.82
+0.91
+1.37
+1.23
+0.31
+2.52
+5.12
+4.38
+6.57
+2.74
+3.53
+0.31
+0.41
+8.85
+8.46 13.46
+φh,4,3,0
+7.60
+6.20
+4.56
+3.19
+1.22
+3.25
+4.85
+5.82
+3.79
+3.73
+2.39
+3.37
+1.13
+0.58
+2.68
+3.88
+4.26
+3.64
+4.47
+0.79
+0.67
+0.94
+1.00
+4.21
+φh,4,4,0
+1.99
+3.84 10.93 15.62 12.19 10.30
+7.11
+4.39
+0.46
+0.97
+1.29
+3.15
+3.75
+6.44
+7.23
+6.97
+8.54
+8.32
+3.79
+1.85
+1.94
+1.57
+2.58
+1.07
+φh,4,5,0
+7.24
+7.20 15.26 26.49 33.18 21.68 13.41
+6.91
+2.44
+2.79
+2.41
+4.25
+7.33
+8.80
+7.24
+6.98
+5.73
+9.79
+8.92
+4.72
+1.20
+1.20
+0.35
+3.90
+φh,4,6,0
+8.60
+9.12 13.70 19.93 21.98 28.30 17.11 10.89
+9.51
+9.10
+7.20
+5.67
+8.27
+1.86
+2.43
+5.36
+6.86
+4.66
+4.92
+3.97 11.37
+4.68
+1.30
+4.69
+φh,4,7,0
+6.53
+4.18
+4.12
+3.12
+1.56
+2.02 13.36
+3.47
+5.23
+4.67
+3.11
+4.24
+7.67
+4.78
+4.32
+3.60
+2.57
+1.54
+1.77
+1.83
+3.12
+2.23
+2.02
+0.25
+φh,4,8,0
+6.37
+3.23
+6.63
+9.56
+5.71
+6.61
+6.92 11.66
+8.34
+5.94
+3.04
+2.69
+2.31
+2.47
+6.52
+6.70
+6.05
+4.74
+4.68
+3.11
+2.13
+3.11
+2.52
+2.48
+φh,4,9,0
+2.19
+5.16
+5.11
+3.44
+2.11
+1.82
+0.10
+2.04
+4.71
+3.86
+2.23
+1.20
+1.15
+3.39
+1.01
+1.43
+4.93
+8.86
+6.79
+5.63
+1.58
+0.89
+0.21
+0.51
+φh,4,10,0
+5.65
+1.77
+3.37
+4.71
+4.72
+2.24
+2.09
+5.20
+5.35
+3.27
+1.61
+2.83
+1.20
+3.22
+5.04
+4.06
+5.29
+4.26
+4.77
+4.08
+0.84
+0.59
+0.14
+0.47
+φh,4,11,0
+0.99
+2.42
+4.48
+3.44
+3.47
+1.65
+6.13 10.38
+8.40
+9.64 13.62
+2.76
+1.83
+0.97
+0.64
+1.08
+1.78
+4.47
+1.44
+1.10
+4.81
+5.05
+0.78
+3.64
+φh,4,12,0
+0.66
+2.38
+3.08
+3.14
+6.12
+5.19
+4.81
+5.00
+3.48
+5.08
+9.48 11.13 10.18
+6.02
+5.46
+3.52
+1.63
+2.22
+2.74
+4.24
+1.74
+0.93
+0.27
+2.04
+φh,4,13,0
+0.42
+0.83
+1.65
+3.72
+4.18
+7.29
+4.06
+4.41
+2.23
+3.58 10.56 17.34 23.28 11.29
+5.15
+3.66
+2.12
+0.94
+0.63
+0.44
+0.38
+0.01
+0.01
+2.78
+φh,4,14,0
+1.07
+6.83
+3.53
+0.55
+0.72
+1.42
+2.14
+1.47
+0.51
+1.02
+0.41
+1.85
+5.26
+4.28
+2.64
+1.34
+0.20
+1.16
+5.85
+5.98
+2.83
+0.99
+0.31
+1.35
+φh,4,15,0
+2.75
+7.44
+9.80
+6.51
+6.40
+1.18
+1.45
+0.50
+3.94
+2.23
+1.53
+6.74
+6.86 11.60 12.82
+4.81
+0.90
+1.48
+0.71
+0.89
+3.48
+1.35
+0.26
+1.20
+φh,4,16,0
+2.62
+2.86
+2.08
+2.56
+2.37
+2.35
+2.23
+3.69
+3.70
+3.86
+3.44
+1.96
+0.71
+1.34
+2.91
+6.08
+2.78
+2.24
+4.86
+7.15
+5.71
+6.05
+3.56
+2.65
+φh,4,17,0
+0.78
+2.15
+8.98
+8.08 12.57
+8.70 10.31
+7.68
+7.01
+4.23
+5.08
+3.64 10.39
+8.34 13.09 19.38 22.70
+9.37
+4.22
+3.34
+1.75 10.93 12.37
+8.81
+φh,4,18,0
+5.85
+4.99
+1.86
+2.51
+3.84
+3.76
+2.74
+1.79
+1.99
+4.03
+6.41
+7.13 17.60 17.29 13.86 15.90 21.60 47.44 13.53
+0.55
+0.11
+2.18
+3.71
+2.56
+φh,4,19,0
+1.27
+2.58
+2.52
+3.86
+8.66 12.19 10.85
+9.85
+3.45
+3.56
+3.17
+1.59
+5.71
+4.91
+4.75
+3.08
+1.76 14.59 43.77
+6.43
+0.74
+2.36
+1.72
+3.07
+φh,4,20,0
+1.90
+0.67
+1.98
+4.73
+3.50
+4.67
+8.68
+8.91
+4.33
+3.71
+3.03
+2.75
+1.59
+0.80
+1.90
+2.65
+3.60
+3.10
+9.78 54.95
+4.03
+0.36
+0.78
+3.35
+φh,4,21,0
+1.09
+1.05
+2.87
+5.47
+4.55
+4.55
+8.88
+4.56
+3.03
+5.31
+5.70
+4.63
+2.17
+0.99
+0.82
+1.05
+0.24
+0.97
+1.55 16.10 44.70
+5.74
+4.17
+4.62
+φh,4,22,0
+2.90
+9.04 10.37 13.75 13.66
+4.42
+1.82
+0.52
+2.07
+2.70
+2.61
+3.67
+4.31
+1.91
+1.92
+1.43
+1.45
+4.95
+3.42
+2.36 13.60 40.77
+6.25
+3.55
+φh,4,23,0
+3.24 11.00 13.53 15.06 17.27 15.62 13.03 14.55 11.77
+5.61
+3.30
+5.78
+7.34
+4.23
+5.17
+3.73
+3.20
+3.43
+5.15
+7.66
+5.90 21.55 45.20 26.62
+φh,4,24,0
+3.74
+3.62
+9.13 11.97 11.38
+8.35
+6.89
+4.17
+4.11
+5.61
+2.45
+2.10
+3.99
+5.51
+5.80
+3.15
+2.30
+0.96
+1.63
+3.11
+6.56 12.47 15.58 23.28
+Day (d −5)
+φh,5,1,0
+6.95
+2.11
+3.09
+2.65
+3.35
+2.83
+7.92 11.50
+6.36
+5.40
+2.57
+3.39
+3.68
+2.73
+2.29
+3.96
+2.99
+4.19
+4.19
+2.92
+5.87
+9.97 17.58 23.10
+φh,5,2,0
+1.97
+6.10
+3.33
+1.44
+1.45
+4.34
+4.36
+2.11
+1.32
+1.73
+2.12
+1.37
+1.22
+1.05
+1.30
+1.30
+0.66
+3.34
+3.25
+3.40
+4.34
+3.59
+2.45
+7.86
+φh,5,3,0
+5.76 13.50 11.56
+4.88
+3.22
+6.80
+6.27
+2.04
+0.71
+0.47
+0.36
+1.15
+0.60
+0.62
+0.79
+0.13
+0.39
+0.87
+2.08
+0.89
+0.46
+0.98
+1.72
+2.71
+φh,5,4,0
+2.04
+7.59 16.96 21.56 18.29
+9.84
+4.93
+0.15
+1.34
+0.29
+2.00
+2.20
+1.14
+3.24
+1.94
+0.61
+1.60
+1.69
+0.13
+0.05
+0.83
+0.69
+1.09
+0.17
+φh,5,5,0
+3.98
+6.64
+9.87 15.86 25.14 13.39
+5.33
+3.23
+3.34
+3.13
+1.06
+1.23
+2.57
+3.30
+4.35
+3.97
+1.46
+1.31
+2.04
+0.88
+0.81
+2.20
+0.99
+4.10
+φh,5,6,0
+8.33
+9.08 12.27 12.98 10.10 17.17 11.12
+5.28
+2.08
+0.17
+0.36
+0.38
+0.55
+1.26
+1.92
+6.23
+9.17
+8.40 10.04 11.95
+9.61 16.67
+4.59
+6.93
+φh,5,7,0
+2.97
+1.35
+5.11
+3.83
+3.58
+8.62 12.56 14.47 12.34
+7.89
+1.09
+1.33
+3.17
+2.60
+2.11
+1.51
+2.91
+8.08
+8.51 18.40 19.27
+4.35
+1.67
+0.67
+φh,5,8,0
+1.50
+0.53
+3.92
+5.47
+4.97
+2.90
+4.75
+8.73
+4.76
+1.59
+1.31
+0.92
+0.67
+1.34
+1.47
+0.50
+4.25
+0.73
+2.56
+7.45
+6.07
+0.70
+0.35
+0.18
+φh,5,9,0
+0.32
+1.99
+2.08
+3.78
+4.21
+2.18
+4.36
+2.89
+4.03
+1.80
+2.36
+1.60
+1.84
+3.05
+3.87
+3.22
+2.49
+1.99
+4.76
+5.83
+3.80
+2.75
+0.72
+0.05
+φh,5,10,0
+7.34
+3.03
+3.35
+2.02
+1.72
+2.05
+1.18
+4.46 11.03 12.29
+6.85
+2.95
+1.13
+1.08
+1.64
+1.91
+1.91
+2.31
+2.20
+3.98
+4.26
+1.60
+1.21
+0.16
+φh,5,11,0
+2.40
+1.33
+1.03
+0.67
+0.35
+1.77
+0.32
+0.59
+2.70
+2.89
+4.95
+4.51
+2.68
+0.87
+1.07
+0.86
+0.90
+0.26
+0.06
+1.38
+1.93
+1.13
+4.30
+1.15
+φh,5,12,0
+0.37
+1.34
+1.06
+1.93
+3.23
+4.28
+1.72
+1.75
+0.56
+3.74
+4.03
+4.64
+1.79
+1.50
+1.51
+2.03
+1.14
+1.33
+0.75
+0.66
+0.46
+0.09
+0.38
+0.87
+φh,5,13,0
+2.06
+0.23
+2.52
+1.82
+3.90
+5.86
+1.39
+1.29
+3.42
+2.67
+5.83
+9.15 14.99
+9.30
+6.09
+2.68
+0.38
+0.53
+0.56
+0.17
+2.32
+5.07
+2.28
+0.02
+φh,5,14,0
+0.86
+1.94
+1.38
+0.16
+1.37
+1.12
+5.36
+1.11
+0.63
+0.15
+0.62
+0.94
+4.50
+7.21
+5.39
+3.08
+1.39
+0.29
+0.58
+0.84
+0.73
+3.14
+2.18
+0.71
+φh,5,15,0
+0.03
+0.49
+4.55
+8.39
+8.29
+5.32
+3.83
+4.09
+0.85
+1.17
+0.28
+0.04
+1.91
+3.90
+6.09
+4.60
+2.68
+2.45
+0.49
+0.05
+0.03
+0.29
+0.49
+1.88
+φh,5,16,0
+1.31
+1.09
+3.01
+4.49
+5.40
+3.54
+0.89
+4.86
+1.19
+1.96
+0.42
+0.19
+1.07
+2.98
+4.02
+2.50
+1.69
+1.30
+1.19
+1.52
+1.37
+0.91
+3.21
+1.09
+φh,5,17,0
+0.50
+2.64
+2.78
+3.97
+6.24 15.39 11.83
+8.38 10.38
+9.67
+1.94
+0.19
+0.25
+3.06
+7.24 10.56 13.65
+3.86
+1.62
+0.74
+0.85
+2.32
+2.76
+2.82
+φh,5,18,0
+0.81
+1.60
+4.35
+4.44
+6.84
+5.47
+5.71
+3.91
+6.97
+4.03
+4.44
+4.69
+5.45 11.93 16.43 26.55 40.35 47.62 15.31
+2.38
+1.84
+0.79
+2.78
+4.76
+φh,5,19,0
+0.31
+0.91
+1.12
+2.08
+5.43
+2.26
+2.95
+1.49
+0.71
+2.15
+3.96
+4.09
+4.89
+3.80
+2.34
+1.84
+2.95
+5.76 40.46 13.01
+2.04
+1.19
+2.28
+2.07
+φh,5,20,0
+2.74
+5.37
+9.53 13.28 12.34
+9.54
+9.59
+8.58
+1.47
+2.78
+3.61
+3.08
+5.29
+5.60
+5.68
+3.40
+2.90
+2.95
+6.47 34.74 11.14
+1.48
+7.43
+6.57
+φh,5,21,0
+4.95
+7.25
+8.84 11.95
+9.28
+8.30 14.43
+8.81
+7.71
+7.20
+3.59
+5.96
+2.59
+0.78
+2.11
+2.86
+3.28
+3.13
+2.35 11.68 34.88 12.99
+4.81
+0.74
+φh,5,22,0
+7.25
+8.59
+6.79 16.52 20.78 17.47 10.90
+5.90
+2.50
+1.21
+1.66
+2.75
+3.75
+4.61
+4.65
+3.49
+4.91
+9.80
+5.92
+2.24
+8.16 35.97
+5.75
+0.99
+φh,5,23,0 14.06 13.11 18.99 19.36 23.16 22.93 12.49 14.44
+7.86
+3.39
+3.99
+2.36
+3.00
+5.47
+4.62
+4.06
+4.55 13.72 11.26
+6.21
+5.18
+8.48 30.28
+6.61
+φh,5,24,0
+1.96
+7.34 12.52 21.73 28.14 21.71 12.55
+6.12
+6.31
+5.15
+3.18
+4.68
+6.27
+7.55
+6.80
+9.47 10.12 11.60
+7.92 14.24
+6.49
+6.39 19.49 31.33
+Day (d −6)
+φh,6,1,0 14.59 11.22
+5.16
+5.24
+6.15
+5.00
+4.96
+5.26
+4.78
+1.82
+1.13
+3.34
+5.44
+4.62
+6.31
+6.91
+9.46 10.75
+9.47 17.59 15.18
+5.08
+4.44
+9.21
+φh,6,2,0
+8.46 17.63 10.12
+7.40
+1.63
+7.72
+9.82
+6.54
+4.29
+0.86
+2.92
+4.60
+2.73
+2.26
+2.51
+4.31
+5.18
+8.10
+7.89
+5.76
+7.75
+5.58
+1.45
+0.87
+φh,6,3,0
+2.58
+6.07
+9.06
+8.89
+7.39
+6.70
+6.40
+2.78
+3.41
+2.72
+2.04
+1.37
+0.91
+1.11
+2.79
+5.19
+7.75 10.50
+9.46
+5.51
+3.25
+2.39
+1.67
+0.62
+φh,6,4,0
+1.62
+8.72 20.28 29.32 24.29 10.40
+7.63
+4.67
+1.91
+4.00
+5.24
+5.48
+8.90
+7.07
+7.89
+7.39 11.54 13.39 10.66
+9.71
+8.08
+3.14
+2.96
+2.89
+φh,6,5,0
+3.75 10.68 21.70 35.28 35.50 26.09
+8.17
+3.64
+0.61
+2.79
+4.11
+5.52 10.15
+6.74
+7.16
+9.61
+6.72 12.66
+7.51
+6.84
+3.57
+1.02
+1.14
+2.04
+φh,6,6,0
+6.85
+6.32 12.12 16.75 24.77 48.61 15.46
+2.71
+1.95
+1.17
+2.66
+3.63
+4.51
+5.16
+3.02
+1.33
+0.45
+1.13
+0.06
+0.35
+0.12
+1.45
+0.52
+6.03
+φh,6,7,0
+6.12
+6.75 13.94 11.31 16.66 36.09 68.94 30.73 19.46 15.33
+7.86
+6.92
+9.52
+9.18
+8.44
+9.19
+8.78
+6.14
+4.54
+7.37 13.65 18.28
+7.99 17.83
+φh,6,8,0
+4.55
+5.00
+5.11
+3.31
+7.04
+8.49 12.97 40.52 31.86 16.08
+9.02
+7.80
+3.02
+4.22
+8.31
+6.83
+5.69
+5.56
+9.40 23.87 27.40 17.03
+6.91
+1.47
+φh,6,9,0
+0.18
+1.67
+2.94
+3.07
+2.41
+9.02
+7.96 25.07 32.56 18.82
+7.77
+4.30
+4.16
+4.52
+4.11
+4.75
+2.52
+1.90
+2.98
+4.87
+7.70 12.22
+5.98
+3.87
+φh,6,10,0
+0.87
+0.42
+0.85
+2.03
+1.81
+1.09
+4.05 10.49 22.96 34.41 19.48 12.12
+6.32
+5.58
+4.68
+3.76
+2.64
+1.92
+3.31
+6.76 13.13 13.27 11.14
+4.67
+φh,6,11,0
+2.64
+2.06
+0.61
+1.62
+1.86
+2.77
+3.67
+5.07
+7.22 20.94 27.53 15.41
+9.16
+7.49
+5.24
+3.53
+2.70
+2.99
+5.57
+3.45
+2.78
+2.87
+3.36
+4.99
+φh,6,12,0
+1.82
+1.66
+4.42
+2.22
+2.12
+2.74
+1.19
+2.58
+2.36
+7.98 18.74 24.60 14.90
+9.98
+8.32
+5.43
+1.15
+0.75
+1.08
+0.71
+4.39
+3.98
+8.53
+5.00
+φh,6,13,0
+4.28
+4.69
+2.79
+7.33
+4.61
+5.95
+4.32
+0.81
+0.85
+4.15
+8.24 17.85 24.02 18.14
+7.62
+4.96
+2.67
+4.19 10.45 12.26
+8.53
+4.41
+6.43
+7.11
+φh,6,14,0
+3.29
+2.24
+3.27
+4.73
+5.20
+6.03
+1.64
+1.23
+2.38
+1.24
+5.08
+8.20 15.71 21.44 14.19
+9.31
+5.01
+1.88
+4.55
+7.00
+5.84
+8.46
+6.55
+9.11
+φh,6,15,0
+0.29
+0.63
+3.48
+7.54
+7.17
+1.30
+3.06
+2.47
+0.07
+1.28
+2.07
+6.84
+9.71 21.96 31.09 25.24 13.46
+4.31
+4.03
+5.54 12.33 11.69 14.79 15.32
+φh,6,16,0
+0.46
+0.54
+0.53
+4.94
+2.73
+0.69
+1.90
+4.51
+1.95
+1.28
+1.90
+3.17
+1.76 10.17 17.28 19.50 12.10
+1.99
+4.87
+4.60
+5.66
+7.27
+3.83
+2.59
+φh,6,17,0
+1.60
+2.99
+1.13
+6.83
+2.16
+1.31
+1.50
+0.57
+1.98
+2.24
+2.24
+6.32
+9.83 12.50 13.15 21.49 31.71
+3.74
+0.55
+0.90
+0.89
+3.71
+0.98
+1.34
+φh,6,18,0
+1.04
+1.81
+2.95
+4.29
+1.76
+4.43
+3.23
+7.22
+4.87 12.09 18.86 18.74 22.84 30.15 33.29 42.53 55.96 77.30 27.60
+2.87
+3.59
+9.59
+4.60
+5.27
+φh,6,19,0
+0.90
+3.23
+3.38
+5.44
+7.73 13.06 18.17 12.52
+5.56
+6.79
+3.99
+2.10
+3.49
+4.78
+1.67
+2.37
+4.78 24.90 71.83 40.92
+7.75
+2.27
+5.28
+3.39
+φh,6,20,0
+0.62
+2.15
+2.92
+4.81
+4.11
+4.85
+7.53 10.17
+6.34
+5.29
+3.43
+3.54
+4.35
+1.66
+1.25
+1.01
+2.02
+3.07 10.66 64.34 26.57
+2.86
+6.62
+8.84
+φh,6,21,0
+3.00
+6.98
+4.81
+9.69
+6.43
+6.20
+9.46
+8.31
+7.09
+8.27
+7.49
+4.58
+3.38
+5.33
+3.88
+2.92
+1.26
+2.50
+1.36 14.39 74.66 36.65
+7.21
+1.13
+φh,6,22,0
+7.35 15.35 17.51 19.41 19.14 11.42
+5.20
+2.69
+4.20
+2.68
+5.28
+4.70
+3.28
+3.98
+3.87
+1.53
+3.40
+6.74
+6.60
+2.67
+5.90 51.75 17.63
+5.85
+φh,6,23,0
+1.79
+3.87
+4.81 11.01 18.62 16.98
+9.54
+9.24
+6.04
+1.64
+0.96
+1.54
+1.88
+3.00
+1.72
+1.63
+4.55
+7.50 12.61
+5.93
+3.67
+7.68 45.68 12.29
+φh,6,24,0
+8.70
+4.29
+7.86 14.24 16.17 16.02 10.97
+9.35
+6.12
+3.01
+2.04
+2.72
+4.15
+2.68
+1.88
+1.67
+1.72
+3.19
+3.15
+4.35
+4.97
+3.34 15.87 27.41
+29
+
+=== page 30 ===
+Table 7: Mean occurrence (in %) of the multivariate lasso model parameters across all 12 datasets and the full out-of-
+sample test period. Columns represent the hours and rows the parameters of the 24lassoHQC
+DoW,p,nl model, see Eqn. (13)
+for details. A heat map is used to indicate more (→green) and less (→red) commonly-selected variables. Continued
+in Table 8.
+h
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+Day (d −7)
+φh,7,1,0
+7.63
+5.08
+3.28 11.69
+8.09
+8.32 18.94 20.24 12.53
+6.10
+5.94
+8.06
+6.96
+7.17 12.78 10.98 11.13
+7.86
+5.03 11.65 13.40
+6.63 10.35 10.54
+φh,7,2,0 16.14 11.99
+4.62
+3.70
+2.92
+3.55
+5.05
+4.44 11.14
+7.41
+6.32
+5.74
+3.29
+2.73
+3.46
+2.97
+4.23
+2.38
+1.77
+2.54
+1.32
+1.49
+4.26
+2.13
+φh,7,3,0
+1.65 10.53 14.62
+6.82
+4.46
+3.43
+4.02
+1.83
+2.20
+3.16
+0.97
+0.41
+0.17
+1.26
+1.88
+3.93
+3.42
+6.11
+6.35
+2.36
+1.01
+0.73
+5.93
+7.78
+φh,7,4,0
+7.89 14.45 28.85 32.46 18.52
+4.86 10.64
+5.65
+6.67
+6.48
+7.67
+9.94 17.36 13.55 16.59 12.07 11.26 11.73 12.06
+8.80
+6.65
+2.24
+0.98
+1.79
+φh,7,5,0
+5.21
+5.88 11.13 17.71 28.45
+9.01
+6.09
+1.43
+1.56
+4.23
+8.84 11.41 11.21 12.19 10.50
+7.18
+5.89
+6.53
+5.90
+2.28
+6.20
+3.85
+1.63
+0.83
+φh,7,6,0
+5.00
+2.84
+7.63
+6.19 15.50 43.53 12.10
+4.73 11.38 10.83
+7.28
+6.44
+5.37
+4.96
+2.35
+3.12
+2.86
+2.23
+4.12
+6.06
+5.88
+2.55
+1.37
+8.15
+φh,7,7,0
+5.99
+4.39
+2.83
+4.79
+9.45 37.85 74.12 34.04 18.63 11.32
+5.94
+5.88
+8.05
+7.11
+8.02
+7.40
+7.43 10.37 16.85 21.78 28.56 32.35 12.63 21.31
+φh,7,8,0
+3.20
+5.40
+6.25
+6.09
+9.49 16.02 41.35 63.65 47.78 27.13 14.78
+8.92
+5.73
+7.79
+7.44
+7.63
+8.76
+6.76 17.32 17.44 20.32 17.89 11.19 16.41
+φh,7,9,0
+6.76
+7.22
+9.06
+7.16
+7.29
+5.64
+6.15 18.23 48.89 45.78 23.62 16.16
+9.05
+6.86
+5.43
+4.41
+5.85
+3.72 11.26
+5.79
+4.48
+6.48 12.23 10.53
+φh,7,10,0
+8.02
+7.89
+8.82 10.34
+7.53
+4.73
+2.92
+8.38 19.97 40.90 26.43 16.12 13.11
+8.84
+3.83
+3.81
+3.67
+2.81
+2.40
+6.92
+7.19
+5.73
+3.92
+3.51
+φh,7,11,0
+3.70
+5.69
+4.66
+2.22
+2.50
+3.87
+0.26
+0.22
+3.90 11.45 23.37 14.97
+5.28
+4.83
+2.64
+1.93
+0.30
+0.92
+3.55
+4.95
+6.20
+5.69
+2.54
+4.18
+φh,7,12,0
+0.35
+1.04
+2.75
+4.93
+6.16
+3.89
+0.33
+0.80
+4.52 11.54 23.58 25.99 14.21 10.18
+7.84
+4.39
+4.77
+3.79
+5.97
+8.33
+9.88 10.76
+9.23
+5.54
+φh,7,13,0
+8.67 14.66 10.44
+6.65
+1.95
+4.12
+2.00
+1.31
+1.45
+3.44 13.25 20.35 23.09 17.65
+9.94
+3.94
+4.42 10.78 14.03 14.69 18.83 13.79 16.34
+7.68
+φh,7,14,0
+0.98
+3.28
+4.48
+3.80
+4.68
+3.14
+0.46
+3.28
+5.48 16.18 24.23 31.74 40.15 39.80 33.42 25.45 11.10 10.58 11.57 11.17
+9.28
+9.85 10.78 11.24
+φh,7,15,0
+2.51
+2.48
+1.88
+3.55
+4.23
+3.67
+2.36
+5.51
+5.07
+8.20
+8.46 19.33 29.07 33.27 31.92 20.39 11.72 11.09
+2.91
+2.50
+1.75
+4.80 10.69
+9.05
+φh,7,16,0
+1.71
+1.37
+2.61
+1.23
+1.56
+1.18
+2.96
+8.90
+6.31
+7.56
+7.45
+9.05 18.90 30.08 40.75 43.55 26.06 13.35 15.82 11.09
+7.72
+8.80 12.07
+9.67
+φh,7,17,0
+1.15
+0.10
+1.22
+3.24
+0.78
+1.68
+1.66
+5.41
+3.00 11.73 19.36 23.54 23.14 32.93 43.37 50.99 74.85 44.31 14.12
+8.74
+5.34
+7.43
+8.15 12.32
+φh,7,18,0
+5.17
+4.04
+3.54
+3.47
+5.08
+5.51
+1.80
+5.13
+5.29
+9.02 14.89 16.87 31.49 36.37 31.46 25.29 33.01 64.05 38.59
+4.06
+3.80
+1.07
+3.03
+3.31
+φh,7,19,0
+2.28
+8.38
+7.88
+8.89 11.79 11.65 13.45 19.51 14.12 10.86 14.54 12.97
+9.90 13.94
+8.90 14.39 13.80 31.28 64.06 39.26
+8.67
+8.23
+8.92 10.24
+φh,7,20,0
+6.90
+3.15
+8.81 13.58 17.73 17.47 14.03
+4.51
+6.36
+7.14
+4.36
+4.77
+5.70
+5.99
+4.44
+5.98
+6.36
+1.02
+4.20 64.78 35.84 13.33
+7.72
+0.41
+φh,7,21,0
+1.94
+5.95 11.41 15.17 15.01 19.16 16.86
+9.81
+9.61
+4.19
+1.90
+3.44
+3.92
+5.08
+6.38
+6.69 12.72
+6.25
+1.92
+2.44 21.43 10.86
+4.80
+4.89
+φh,7,22,0
+1.92
+9.97 12.42 13.71
+9.17 10.11
+8.71
+4.24
+6.52
+5.05
+3.55
+0.83
+1.59
+3.79
+9.39
+8.51
+9.19 14.18 15.43
+4.14
+0.58 20.74
+9.44
+2.53
+φh,7,23,0
+3.06 14.16 25.30 28.82 30.17 36.45 28.01 20.00 10.29 10.65
+5.89
+2.38
+3.73
+8.66 17.44 22.40 27.80 38.14 33.85 23.71 10.64
+2.35 11.74
+5.47
+φh,7,24,0
+1.48
+4.50
+4.36 10.01 13.63 18.41 17.36 15.93 12.52
+8.19
+6.52
+7.43 10.97 12.09 18.52 18.73 22.12 22.65 23.41 22.86 10.06
+2.78
+3.32 14.86
+Day (d −8)
+φh,8,1,0
+5.88
+6.91 15.66 20.37 22.41 20.24 17.72 18.14 15.94 11.14
+4.26
+5.04
+5.84
+7.88
+7.94 10.02 11.18 10.41 14.16 12.92 10.13
+7.03
+4.33
+3.76
+φh,8,2,0 17.69
+3.78
+5.43
+2.55
+2.91
+4.06
+5.59
+4.12
+4.61
+1.64
+3.43
+5.17
+3.76
+3.67
+4.53
+3.10
+6.29
+3.89
+2.39
+2.70
+8.73
+6.11
+5.93
+4.30
+φh,8,3,0
+4.15
+4.83
+6.61
+6.46
+6.49
+6.69
+4.27
+5.57
+3.95
+1.49
+3.93
+3.87
+3.02
+5.50
+4.56
+6.86
+5.40
+4.91
+5.71
+4.19
+4.89
+7.03
+5.49
+4.02
+φh,8,4,0 11.20
+8.46
+7.18 11.54 15.78 17.29
+6.24
+4.83
+8.18
+3.87
+5.82
+2.19
+4.28
+5.65
+7.90 11.29 15.53 14.31 12.58 16.80 14.51 10.53
+2.80 10.74
+φh,8,5,0
+0.27
+2.15
+4.47
+9.21
+9.26
+5.91
+5.03
+7.37
+6.97
+5.64
+5.57
+8.18 11.15
+9.40
+7.90
+6.55
+8.36
+4.05
+2.59
+3.64
+2.17
+0.45
+1.25
+1.94
+φh,8,6,0 10.72
+7.53
+8.52 12.95 12.53 17.23
+5.86
+1.19
+2.07
+0.63
+2.47
+4.03
+3.34
+4.59
+2.97
+2.88
+2.73
+3.43
+4.77
+4.01
+1.97
+0.54
+0.39
+1.05
+φh,8,7,0
+8.81
+7.72 10.22
+9.29
+6.51
+5.46
+9.04
+2.10
+2.04
+3.52
+5.26
+5.87 13.78 17.31 16.14 13.55 11.60
+7.62
+5.67
+7.67
+5.84
+3.44
+3.21
+0.65
+φh,8,8,0
+4.66
+3.17
+4.08
+6.15
+6.49
+3.50
+2.51
+4.39
+2.98
+1.84
+1.42
+2.29
+2.39
+1.83
+2.56
+3.74
+4.18
+3.26
+4.79
+5.99
+7.79
+5.16
+2.82
+2.47
+φh,8,9,0
+3.13
+1.67
+3.79
+3.18
+3.40
+4.29
+4.10
+0.76
+0.43
+0.81
+0.59
+0.43
+0.55
+0.87
+2.50
+2.12 13.36
+7.87
+6.47
+3.09
+4.44
+4.18
+3.86
+0.62
+φh,8,10,0
+5.83
+2.25
+0.88
+1.13
+2.08
+6.66
+6.47
+1.08
+0.29
+1.60
+2.49
+4.73
+5.84
+7.38
+6.11
+6.97 10.43 12.64 11.80
+9.22
+4.73
+1.13
+1.56
+2.26
+φh,8,11,0
+8.79
+3.54
+5.52
+1.91
+6.17
+3.53
+6.37
+3.69
+2.83
+1.62
+1.41
+0.46
+0.09
+0.09
+0.43
+1.43
+1.11
+1.84
+3.16
+2.85
+1.77
+0.93
+3.06
+0.35
+φh,8,12,0
+3.27
+3.30
+5.23
+4.42
+5.16
+8.83
+4.32
+2.98
+1.76
+2.16
+1.53
+1.83
+0.54
+0.09
+0.29
+0.46
+0.63
+2.31
+4.66
+1.62
+1.34
+0.46
+0.15
+1.10
+φh,8,13,0
+0.36
+0.19
+1.05
+1.50
+2.84
+3.01
+6.30
+2.61
+2.82
+1.32
+3.46
+4.78
+2.72
+1.62
+2.72
+2.98
+2.98
+2.29
+0.66
+0.07
+0.39
+0.16
+0.00
+1.77
+φh,8,14,0
+0.46
+3.25
+4.82
+5.10
+4.88
+8.39
+3.63
+4.69
+3.54
+1.21
+1.37
+2.59
+5.73
+3.88
+2.55
+1.60
+0.50
+1.63
+0.54
+0.51
+2.19
+1.20
+1.58
+1.50
+φh,8,15,0
+2.19
+0.73
+0.43
+3.11
+6.34
+0.54
+3.39
+5.84
+6.03
+1.99
+0.66
+1.17
+1.79
+2.17
+2.68
+2.88
+5.60
+5.23
+1.91
+0.15
+0.21
+0.18
+0.82
+1.15
+φh,8,16,0
+1.44
+0.17
+0.51
+0.39
+1.39
+0.99
+0.47
+0.81
+1.09
+1.86
+2.07
+6.94
+9.02
+8.58
+8.83
+9.69
+2.49
+0.68
+0.53
+0.35
+0.22
+0.81
+2.34
+2.54
+φh,8,17,0
+2.40
+0.85
+0.89
+2.46
+5.15
+6.12
+6.21
+1.46
+3.99
+1.03
+0.12
+3.53
+2.27
+5.12
+3.19
+8.51 17.71 12.80
+4.82
+6.57
+6.28
+9.64
+8.58
+8.68
+φh,8,18,0
+2.52
+1.07
+0.80
+0.94
+4.46
+3.60
+6.07
+2.51
+6.72
+4.24
+3.01
+1.92
+3.06
+4.27
+4.58
+6.70 12.62 33.95 14.70
+1.75
+1.91
+9.46
+6.98
+2.66
+φh,8,19,0
+7.50
+3.67
+3.57
+7.86
+9.93
+6.87
+2.20
+6.61 12.92
+7.01
+2.59
+3.42
+3.50
+5.13
+5.20
+2.38
+0.79
+3.05 23.49 11.22
+0.78
+7.32
+5.08
+1.11
+φh,8,20,0
+4.16
+2.46
+8.50 11.45 13.97 12.30
+9.71 15.00
+6.37
+5.97
+6.68
+5.25
+5.85
+4.23
+4.84
+5.81
+4.88
+3.70
+3.47 20.80
+7.43
+2.55
+5.23
+1.74
+φh,8,21,0
+7.25 12.75 16.64 17.77 16.35
+7.40
+3.42 15.39
+7.08
+8.85
+6.45
+9.65
+6.87
+5.48 12.20
+9.48 10.70
+9.66
+6.38
+5.55 14.34
+1.82
+4.11
+5.72
+φh,8,22,0
+4.33
+8.93 10.04 16.30 12.54
+7.28
+4.64
+4.91
+3.29
+0.34
+1.96
+1.72
+1.56
+1.07
+2.47
+1.92
+3.46
+6.31
+6.93
+1.18
+8.10 26.47
+8.96
+4.88
+φh,8,23,0
+4.56 15.33 26.87 30.59 31.56 20.93 21.06
+9.42
+6.06
+3.55
+2.21
+3.01
+5.48
+5.35
+5.33
+5.20
+7.48 11.30 12.26
+9.60
+3.58
+5.07 23.33
+7.84
+φh,8,24,0
+7.34
+7.58 11.25 12.36 13.77 17.66 13.78 13.75 11.42 10.62 10.16
+6.56
+7.43
+8.48 10.14 10.85
+8.36
+9.18
+5.80
+4.67
+3.00
+3.83
+9.83 11.31
+30
+
+=== page 31 ===
+Table 8: Mean occurrence (in %) of the multivariate lasso model parameters across all 12 datasets and the full out-of-
+sample test period. Columns represent the hours and rows the parameters of the 24lassoHQC
+DoW,p,nl model, see Eqn. (13)
+for details. A heat map is used to indicate more (→green) and less (→red) commonly-selected variables.
+h
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+Daily minimums
+φh,1,min,0 57.99 66.16 80.84 87.56 81.33 54.23 26.01 25.68 20.48 12.72
+6.94
+5.83
+5.42
+4.45
+7.03
+5.54
+7.51
+5.76
+3.28
+1.68
+5.52
+2.91
+3.02
+7.03
+φh,2,min,0
+1.01
+8.69 13.20 16.20 14.91 12.35
+7.52
+5.59
+3.04
+0.15
+0.80
+1.04
+0.95
+2.96
+3.39
+2.68
+2.46
+1.30
+3.75
+2.50
+1.61
+2.15
+1.31
+3.23
+φh,3,min,0 14.29 22.78 22.77 27.55 24.29 18.38
+7.56
+4.16
+4.36
+1.51
+1.15
+1.67
+2.45
+1.71
+1.26
+0.97
+2.66
+1.23
+1.70
+2.63
+5.09
+4.54
+2.83
+3.50
+φh,4,min,0
+7.84
+8.01 11.65 18.02 16.59 12.95 10.40
+6.07
+1.03
+1.34
+1.55
+2.70
+4.06
+3.14
+5.44
+4.67
+9.50 15.95 13.49
+7.01
+6.25
+2.85
+2.45
+3.22
+φh,5,min,0 11.53 11.88 21.48 24.25 24.12 13.21
+4.08
+3.53
+0.79
+1.89
+3.01
+4.72
+5.50
+4.94
+4.06
+6.11
+7.26
+3.43
+4.33
+1.60
+2.67
+3.86
+2.25
+1.44
+φh,6,min,0
+5.37 13.53 23.47 21.92 27.64 25.79
+5.19
+1.04
+3.11
+2.32
+1.92
+2.08
+4.27
+2.84
+2.87
+6.69
+5.96
+3.65
+1.56
+1.22
+1.75
+0.50
+1.60
+2.70
+φh,7,min,0
+6.48
+8.76 13.14 13.48 13.01
+5.66
+1.90
+2.00
+0.86
+0.26
+0.60
+1.44
+3.69
+1.77
+1.67
+3.56
+3.01
+3.91
+4.35
+5.00
+5.07
+4.00
+3.01
+1.14
+φh,8,min,0
+2.46
+2.39
+6.19
+8.26 13.44
+7.23
+6.97
+8.70
+6.67
+8.64
+9.21 10.91 13.49 14.41 13.37 13.08
+8.00
+7.85
+5.49
+4.43
+3.72
+3.80
+5.30
+6.04
+Daily maximums
+φh,1,max,0 24.53 13.83 21.30 26.21 27.31 21.85 21.41 55.76 62.53 47.56 31.51 25.43 14.92
+9.67
+6.72
+4.31
+7.13
+7.79 10.33 15.28
+7.53
+4.03
+3.48
+3.90
+φh,2,max,0 18.14 22.28 25.77 22.57 24.48 16.80 29.67 28.34 24.89 19.93 17.27 14.70 13.86 12.42
+6.20
+5.94
+7.78
+2.30
+2.96
+5.66
+8.43 12.15 10.50
+7.15
+φh,3,max,0
+4.96
+2.13
+7.05
+6.47
+9.85 10.09 17.09 17.45 15.70 18.45 12.69
+8.36
+5.49
+4.18
+0.85
+2.04
+1.72
+0.57
+3.99
+8.18 15.13
+5.33
+6.29
+4.23
+φh,4,max,0
+8.31
+6.60
+5.04
+6.54
+9.67
+6.31 11.52 12.08 10.09
+7.87 12.16
+8.80
+5.78
+4.59
+4.28
+1.30
+1.23
+1.66
+1.87
+1.64
+3.80
+3.60
+5.17 11.70
+φh,5,max,0
+4.73
+0.99
+4.84
+6.88
+6.73
+3.34 12.91 12.73 11.82 10.93 15.06 15.22 13.08 12.24 11.68 11.31
+7.51
+8.38
+9.51
+9.74
+4.63
+1.08
+0.49
+0.87
+φh,6,max,0
+4.04
+4.79
+4.34
+2.91
+1.65
+1.12
+9.46 30.53 30.04 22.47
+6.36
+2.66
+2.35
+4.07
+4.14
+4.70
+5.36
+6.53
+7.78 11.33
+9.90
+5.09
+5.95
+2.27
+φh,7,max,0
+5.20
+6.41 13.87 12.78
+7.82 14.09 11.58 12.96 15.77
+9.49
+8.63
+8.26
+7.30
+8.10
+7.71
+8.68
+3.50
+3.59
+2.66
+1.86
+2.93
+0.89
+1.13
+3.55
+φh,8,max,0
+3.87
+3.78
+2.41
+2.89
+4.93
+5.86
+4.38
+2.19
+2.95
+4.50
+2.98
+2.97
+2.02
+1.81
+2.10
+2.56
+2.91
+2.43
+6.39
+7.43
+6.87
+7.05
+9.85
+9.80
+DoW dummies
+φh,0,0,1 22.61 22.29 27.32 25.24 22.66 60.04 88.09 85.89 93.59 97.73 95.53 94.01 95.86 97.22 99.46 99.71 99.94 99.97 99.73 96.70 93.83 87.32 73.40 53.01
+φh,0,0,2 27.80 46.46 42.87 42.67 45.42 40.12 36.81 43.44 37.81 34.31 30.82 38.15 31.30 37.60 46.98 51.57 52.96 53.39 40.40 28.78 32.96 40.62 33.46 24.70
+φh,0,0,3 20.98 13.92 15.17 16.09
+8.92 14.69 14.61 14.43 14.14 16.02 13.59 15.13
+9.03 15.42 19.23 16.85 13.52 17.48 18.64 17.04 19.64 14.92
+7.36
+3.24
+φh,0,0,4 23.87 14.91 21.66 21.47 18.69 18.97 20.21 19.36 13.52 14.35 10.08 10.34 14.68 12.45 12.84 14.37 16.01 15.17 23.05 17.48 12.33
+7.32 13.14
+7.89
+φh,0,0,5
+9.69 12.23 10.71
+9.38 10.49
+6.86
+7.96
+5.14
+9.29
+6.80
+7.45
+6.65
+5.25
+6.49 21.41 35.71 26.50 13.57 24.00 38.13 32.87 45.01 29.89
+7.29
+φh,0,0,6 74.08 60.13 55.84 50.60 30.44 92.69 93.32 97.92 99.54 98.71 98.26 93.64 95.58 99.32 99.88 99.84 99.45 97.65 95.34 94.63 97.24 90.99 74.01 64.73
+φh,0,0,7 52.63 76.93 78.50 78.29 87.97 90.70 89.07
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100 98.57 90.35 82.90 73.49 66.47 34.57 50.06
+Periodic on Y∗,h
+φh,1,h,1 18.71 12.25 13.46 14.93 20.98 19.94 20.08 26.92 16.09 22.81 25.79 24.16 22.43 22.62 21.48 23.51 34.66 33.15 34.28 41.74 43.25 34.87 20.82 17.60
+φh,1,h,2 21.02 16.13 20.15 15.90 13.89 15.38 32.89 33.32 31.00 27.40 31.94 25.89 19.21 24.91 33.36 37.56 44.95 43.46 39.35 32.49 33.03 27.80 30.85
+9.19
+φh,1,h,3 13.65 15.59 26.42 25.76 27.98 31.84 68.69 70.35 72.61 51.85 45.71 48.85 51.43 60.35 67.56 72.94 65.23 58.87 55.16 48.27 33.88 31.34 25.93 15.86
+φh,1,h,4 35.22 29.29 28.70 35.39 32.62 34.95 63.99 58.20 40.96 31.24 30.25 36.67 42.75 50.46 64.26 66.44 56.31 42.92 38.92 45.47 50.13 49.53 32.71 27.66
+φh,1,h,5 14.19 28.57 37.94 46.53 36.81 33.22 69.44 76.08 58.60 50.74 47.77 33.40 29.93 19.74 12.16 18.72 26.38 21.65 49.85 32.55 29.84 22.96 15.27 15.82
+φh,1,h,6 14.39 20.29 19.67 21.81 24.78 44.99 33.90 59.18 48.95 41.35 33.06 33.66 34.78 33.12 31.68 27.99 28.23 13.78 16.30 31.64 19.69 18.37
+7.03 27.03
+φh,1,h,7 29.57 28.45 26.33 28.86 34.16 40.50 24.74 14.12 17.23 13.60 19.40 39.36 41.85 51.45 55.81 54.55 47.65 45.33 36.21 22.29 32.53 33.50 20.88 45.95
+Periodic on Y∗,24
+φh,1,24,1 26.28 24.95 33.33 45.40 41.39 40.10 35.49 25.15 35.69 28.84 26.79 24.19 23.58 14.07 13.97 16.84 18.89 24.81 28.17 26.45 20.64 17.31 14.14
+φh,1,24,2 19.80 32.47 45.61 46.47 53.83 57.98 44.03 41.65 33.04 30.98 28.06 27.04 29.38 28.67 30.53 30.74 31.22 32.76 28.73 27.22 19.48 18.88
+5.30
+φh,1,24,3 18.96 32.24 34.27 42.07 36.84 40.72 31.93 45.29 34.20 29.24 23.01 23.69 22.46 17.62 16.92 15.80 19.28 22.54 18.85 13.86 19.55 11.35 15.59
+φh,1,24,4 12.84 27.89 35.46 31.46 40.28 46.01 41.86 44.74 49.17 36.89 27.92 25.85 24.19 18.63 21.74 25.02 30.40 31.96 33.81 27.32 16.69 11.51 12.94
+φh,1,24,5
+9.65 13.64 19.73 29.84 30.10 23.46 27.57 27.44 30.70 23.16 16.36 16.51 15.68 21.26 29.18 27.49 25.98 25.70 18.82 18.04 23.68 20.49 19.56
+φh,1,24,6 35.57 37.69 52.08 52.65 37.73 31.88 41.40 51.12 55.28 49.51 49.57 51.32 51.22 43.32 39.75 32.02 33.27 41.09 40.48 42.39 44.14 35.53 30.17
+φh,1,24,7 45.76 40.57 40.44 41.43 35.29 25.55 30.70 35.73 42.99 44.31 43.30 43.39 43.64 24.10 20.25 21.58 28.77 39.88 41.91 46.51 38.83 30.33 33.96
+31
+
+=== page 32 ===
+Table 9: Mean occurrence (in %) of the univariate lasso model parameters across all 12 datasets and the full out-of-
+sample test period. The columns represent the intercept (φ0,∗), the autoregressive terms (φ1,∗), the periodic eﬀects of
+lag 1 (φ2,∗) and the periodic eﬀects of lag 24 (φ3,∗) of the lassoHQC
+HoW,p model, see Eqn. (19) for details. Note, that this
+model does not include the non-linear eﬀects, i.e., φ4,1 = φ4,2 = 0. A heat map is used to indicate more (→green) and
+less (→red) commonly-selected variables.
+k
+φ0,k
+φ1,k
+φ2,k
+φ3,k
+k
+φ0,k
+φ1,k
+φ2,k
+φ3,k
+k
+φ0,k
+φ1,k
+φ2,k
+φ3,k
+Day (d −1)
+1
+86.83
+100
+67.10
+68.08
+Day (d −4)
+73
+78.28
+94.83
+75.55
+60.06
+Day (d −7)
+145
+74.26
+93.06
+76.05
+59.95
+2
+82.06
+77.90
+49.57
+53.58
+74
+51.43
+69.06
+52.67
+41.26
+146
+55.42
+82.13
+45.64
+40.19
+3
+45.99
+48.08
+62.44
+41.66
+75
+35.19
+11.07
+66.94
+36.55
+147
+61.26
+14.44
+51.99
+25.31
+4
+65.71
+36.68
+44.46
+34.73
+76
+42.81
+10.01
+61.13
+25.79
+148
+59.10
+24.08
+56.62
+30.80
+5
+89.24
+31.27
+55.53
+14.84
+77
+34.50
+14.13
+41.30
+8.96
+149
+35.02
+16.54
+47.39
+9.61
+6
+94.00
+61.81
+66.58
+45.47
+78
+57.19
+40.94
+29.12
+42.99
+150
+57.75
+17.07
+56.94
+50.51
+7
+100
+65.64
+66.75
+74.14
+79
+90.37
+14.31
+62.74
+67.14
+151
+82.86
+17.17
+60.63
+70.82
+8
+88.27
+55.85
+68.37
+80.82
+80
+100
+17.27
+68.22
+51.61
+152
+100
+43.28
+68.46
+71.91
+9
+68.37
+66.45
+80.92
+57.60
+81
+77.70
+18.11
+60.81
+46.99
+153
+71.27
+26.67
+59.52
+58.00
+10
+92.35
+65.01
+63.41
+52.18
+82
+73.26
+16.08
+45.85
+51.64
+154
+78.01
+9.24
+42.42
+50.62
+11
+70.42
+46.41
+77.50
+68.23
+83
+59.69
+17.05
+56.93
+48.88
+155
+52.13
+8.09
+54.28
+38.29
+12
+55.76
+4.65
+69.67
+61.84
+84
+73.65
+11.59
+79.45
+29.12
+156
+62.20
+16.00
+58.53
+28.96
+13
+56.18
+17.60
+55.40
+55.75
+85
+60.12
+9.00
+48.55
+46.45
+157
+68.83
+10.69
+43.09
+45.89
+14
+82.57
+47.88
+64.89
+64.95
+86
+88.17
+11.21
+86.66
+43.79
+158
+83.30
+33.17
+60.65
+41.40
+15
+79.33
+20.36
+34.73
+70.79
+87
+68.85
+12.22
+75.84
+43.29
+159
+66.00
+24.44
+62.88
+48.70
+16
+56.94
+12.57
+35.01
+41.50
+88
+64.69
+10.09
+53.04
+38.31
+160
+81.33
+18.93
+45.87
+41.97
+17
+58.66
+36.35
+48.90
+51.49
+89
+43.12
+14.04
+57.47
+32.20
+161
+73.23
+10.93
+47.70
+32.65
+18
+86.49
+28.66
+56.43
+78.55
+90
+87.23
+2.79
+74.72
+57.40
+162
+89.83
+22.12
+58.17
+52.95
+19
+68.47
+32.47
+62.21
+63.24
+91
+74.89
+3.33
+53.37
+61.60
+163
+62.42
+7.31
+55.36
+42.75
+20
+48.34
+30.79
+77.51
+73.22
+92
+53.33
+7.37
+85.96
+69.58
+164
+72.67
+18.22
+63.70
+50.49
+21
+89.92
+41.16
+69.35
+46.22
+93
+52.73
+20.92
+82.68
+48.97
+165
+62.30
+8.27
+75.31
+51.29
+22
+82.74
+52.34
+74.60
+50.83
+94
+69.72
+15.97
+67.33
+54.97
+166
+74.95
+10.32
+70.74
+36.87
+23
+99.47
+100
+50.80
+53.32
+95
+73.37
+79.26
+70.29
+56.09
+167
+88.65
+98.71
+55.11
+48.85
+24
+92.73
+98.65
+55.27
+65.90
+96
+99.03
+98.77
+78.98
+74.79
+168
+75.37
+92.83
+72.42
+61.78
+Day (d −2)
+25
+79.25
+99.70
+62.13
+55.83
+Day (d −5)
+97
+79.68
+90.17
+71.90
+49.75
+Day (d −8)
+169
+88.11
+26
+96.24
+100
+57.49
+43.81
+98
+60.21
+65.46
+60.01
+54.12
+170
+96.78
+27
+72.25
+40.57
+34.89
+35.11
+99
+51.81
+13.56
+51.73
+47.82
+171
+33.68
+28
+92.77
+51.94
+51.79
+24.65
+100
+55.58
+14.84
+50.55
+42.08
+172
+22.85
+29
+93.64
+35.78
+39.45
+30.03
+101
+36.11
+18.68
+33.30
+29.01
+173
+30.61
+30
+98.08
+48.45
+57.49
+26.15
+102
+64.45
+36.49
+44.15
+51.10
+174
+26.56
+31
+99.65
+19.91
+61.33
+40.14
+103
+82.01
+32.59
+69.81
+74.06
+175
+14.90
+32
+99.38
+29.39
+57.05
+59.41
+104
+99.11
+32.84
+70.28
+68.57
+176
+18.11
+33
+86.37
+7.85
+58.26
+58.41
+105
+81.69
+9.46
+69.55
+54.39
+177
+27.98
+34
+78.87
+9.29
+50.08
+48.22
+106
+63.19
+3.29
+41.68
+40.09
+178
+7.89
+35
+61.39
+8.61
+75.50
+46.17
+107
+60.25
+14.29
+59.46
+42.31
+179
+24.07
+36
+91.71
+9.36
+58.98
+50.36
+108
+58.88
+13.82
+69.76
+25.55
+180
+27.90
+37
+86.68
+7.31
+61.11
+31.84
+109
+54.17
+3.09
+55.16
+39.48
+181
+22.68
+38
+85.09
+17.33
+35.65
+45.18
+110
+79.99
+9.40
+86.70
+28.40
+182
+42.06
+39
+81.61
+7.43
+49.40
+39.18
+111
+47.13
+4.05
+75.16
+40.46
+183
+11.85
+40
+74.84
+9.88
+36.49
+36.77
+112
+66.40
+19.91
+51.63
+30.36
+184
+17.43
+41
+72.27
+13.88
+46.22
+48.15
+113
+68.14
+14.68
+45.45
+25.59
+185
+19.00
+42
+95.99
+7.46
+45.88
+73.86
+114
+79.59
+7.12
+70.48
+53.72
+186
+7.65
+43
+85.19
+16.49
+63.69
+84.65
+115
+71.41
+15.80
+61.79
+64.20
+187
+9.67
+44
+98.77
+8.49
+58.78
+76.25
+116
+37.18
+8.72
+69.04
+58.53
+188
+25.13
+45
+85.83
+21.10
+59.96
+60.93
+117
+61.07
+23.38
+91.86
+60.69
+189
+24.56
+46
+75.82
+22.14
+70.50
+66.11
+118
+77.14
+6.19
+72.13
+56.87
+190
+26.21
+47
+98.94
+70.51
+64.48
+46.15
+119
+68.12
+53.28
+61.83
+46.28
+191
+50.65
+48
+97.71
+99.55
+70.87
+67.70
+120
+99.58
+97.89
+83.79
+78.12
+192
+79.46
+Day (d −3)
+49
+82.48
+93.05
+81.50
+56.32
+Day (d −6)
+121
+81.43
+88.87
+66.69
+59.46
+50
+63.26
+67.10
+57.07
+40.84
+122
+59.59
+69.79
+35.82
+40.16
+51
+54.11
+16.64
+58.08
+37.18
+123
+61.97
+9.01
+55.55
+29.01
+52
+62.17
+10.73
+48.93
+28.28
+124
+64.24
+6.40
+64.78
+31.91
+53
+60.61
+10.09
+24.35
+29.21
+125
+48.78
+6.97
+42.80
+17.90
+54
+85.36
+32.72
+41.84
+36.71
+126
+60.10
+20.72
+40.42
+47.69
+55
+100
+28.79
+72.40
+56.11
+127
+82.95
+17.67
+55.86
+74.14
+56
+99.94
+48.23
+83.66
+81.46
+128
+99.61
+29.94
+72.13
+65.17
+57
+68.68
+8.18
+69.03
+72.33
+129
+64.47
+1.57
+77.51
+50.91
+58
+66.24
+6.86
+64.69
+59.50
+130
+57.94
+8.19
+55.55
+34.45
+59
+47.83
+18.26
+64.33
+75.16
+131
+47.57
+16.10
+63.26
+46.05
+60
+53.74
+4.48
+87.82
+84.64
+132
+67.04
+15.87
+78.29
+39.70
+61
+53.29
+6.91
+70.68
+52.51
+133
+43.06
+11.09
+40.82
+36.83
+62
+89.40
+13.39
+89.81
+64.46
+134
+82.29
+20.16
+66.76
+24.46
+63
+68.64
+10.13
+90.54
+59.85
+135
+39.72
+26.19
+88.79
+30.63
+64
+53.92
+12.35
+80.99
+54.23
+136
+58.00
+16.88
+54.52
+20.43
+65
+52.70
+18.23
+70.26
+47.75
+137
+56.96
+17.86
+45.98
+34.96
+66
+93.94
+13.87
+75.10
+53.74
+138
+83.25
+5.83
+69.99
+47.27
+67
+82.55
+7.89
+69.55
+60.23
+139
+80.07
+7.23
+53.59
+57.70
+68
+64.10
+15.84
+78.65
+59.85
+140
+52.06
+5.71
+78.50
+64.04
+69
+60.75
+9.33
+86.01
+75.01
+141
+66.81
+14.56
+84.78
+59.54
+70
+93.67
+5.39
+51.77
+62.16
+142
+68.31
+15.23
+65.13
+46.93
+71
+59.80
+74.02
+74.89
+65.22
+143
+77.16
+99.30
+58.66
+44.30
+72
+92.34
+97.32
+82.69
+78.64
+144
+93.65
+98.51
+85.65
+64.48
+32
+
+=== page 33 ===
+guidelines to structuring better performing expert models. In particular, we have conﬁrmed the
+high explanatory power of last day’s prices for the same or neighboring hours, of last day’s prices
+for midnight and of the price for the same hour a week earlier. However, more importantly, we
+have found the periodic eﬀects (daily dummies multiplied by the last day’s prices for the same
+hour or for midnight) to play a very important role. Hence, like Uniejewski et al. (2016), we
+strongly suggest to incorporate periodic structures not only in expert models, but also in general
+model designs.
+Finally, we should comment on converting univariate models into multivariate and vice versa.
+This possibility can give ideas for modeling approaches in the ‘other modeling world’. For in-
+stance, if we observe a clear eﬀect for a particular parameter in the multivariate setting, then
+the corresponding eﬀect should be important for univariate modeling as well. However, when
+rewriting multivariate models into univariate form and vice versa, the error structures change. So
+implicitly, in a multivariate speciﬁcation the residual variance is assumed to be diﬀerent for the
+24 models, whereas for the univariate models the considered estimation methods assume that the
+variance is the same across all hours. Here, iterative reweighting schemes can help to incorporate
+variance changing eﬀects, especially for univariate approaches (see e.g. Ziel et al., 2015a; Ziel,
+2016b).
+Appendix A. The set of models
+In this Appendix we deﬁne the remaining models from classes C3-C8 that were considered
+in the empirical study, but are not discussed and compared in Sections 4 and 5. They are brieﬂy
+evaluated in terms of WMAE and m.p.d.f.b. in Appendix C below.
+Appendix A.1. Expert models (class C3)
+For the asinh-transformed price on day d and hour h, the generic class of expert models used
+in this paper is deﬁned by:
+Yd,h = βh,1 + βh,2Yd−1,h + βh,3Yd−2,h + βh,4Yd−7,h
+|                                    {z                                    }
+autoregressive eﬀects
++ βh,5Yd−1,min + βh,6Yd−1,max
+|                          {z                          }
+non-linear eﬀects
++βh,7Yd−1,24
++
+7
+X
+j=1
+βh,7+ jDoWj
+d,h
+|               {z               }
+weekday dummies
++
+7
+X
+j=1
+βh,14+ jDoW j
+d,hYd−1,h +
+7
+X
+j=1
+βh,21+ jDoWj
+d,hYd−1,24
+|                                                            {z                                                            }
+periodic eﬀects
++εd,h.
+(A.1)
+Note, that due to collinearity βh,14, βh,21 and βh,28 can be dropped, so the model has eﬀectively 25
+parameters (for h = 24 only 18). We estimate the parameters using OLS.
+Such a model is denoted by expertDoW,p,nl. Compared to the expertDoW,nl model considered
+in Sections 4 and 5, the above formula additionally includes periodic eﬀects (hence subscript p
+in the model name). The second sum in Eqn. (A.1) is a consequence of the experience gained by
+TEAM POLAND during the GEFCom2014 competition; one of the conclusions of Maciejowska
+and Nowotarski (2016) was that it could be beneﬁcial to use diﬀerent model structures for diﬀerent
+days of the week, not only diﬀerent parameter sets. The third sum in Eqn. (A.1) is an innovation
+33
+
+=== page 34 ===
+introduced in this study to allow for diﬀerent model structures including the previous day’s price
+at midnight, i.e., Yd−1,24, for diﬀerent days of the week. We consider three special cases of the
+expertDoW,p,nl model:
+2. expertDoW,nl without periodic eﬀects (used in Sections 4 and 5),
+3. expertDoW,p without non-linear eﬀects,
+4. expertDoW without periodic and non-linear eﬀects.
+Furthermore, if we restrict the three sums in the second row of Eqn. (A.1) to sum only over
+Monday, Saturday and Sunday, i.e., j = 1, 6, 7, then we receive the next four experts:
+5. expertp,nl – the full model,
+6. expertnl without periodic eﬀects,
+7. expertp without non-linear eﬀects,
+8. expert without periodic and non-linear eﬀects.
+There is an important diﬀerence between models deﬁned in Eqn. (A.1) and the expert models
+considered by Uniejewski et al. (2016). In the latter article no intercept is included in the formulas,
+i.e., βh,1 = 0. Instead Yd,h is de-meaned by the daily mean of hourly frequency, i.e., YHoD,d,h in our
+notation of Section 4.1. Replacing Yd,h by (Yd,h −YHoD,d,h) and removing the intercept βh,1 in Eqn.
+(A.1) yields the corresponding models. We denote them by superscript ∗:
+9-10. expert∗
+DoW,p,nl and expert∗
+p,nl – the full models,
+11-12. expert∗
+DoW,nl and expert∗
+nl without periodic eﬀects,
+13-14. expert∗
+DoW,p and expert∗
+p without non-linear eﬀects,
+15-16. expert∗
+DoW and expert∗without periodic and non-linear eﬀects.
+Appendix A.2. The second 24AR-type model (class C4)
+As an alternative to the 24ARHoW model deﬁned in Section 4.3.2, we consider a speciﬁcation in
+which the asinh-transformed price is demeaned with respect to YHoD,d,h, not YHoW,d,h, and modeled
+as an AR(ph) process independently for each hour h. The resulting 24ARHoD model is given by:
+Yd,h = YHoD,d,h + φ0,h +
+ph
+X
+k=1
+φk,h(Yd−k,h −YHoD,d,h) + εd,h,
+(A.2)
+and estimated analogously to 24ARHoW.
+Appendix A.3. The second VAR-type model (class C5)
+As an alternative to the VARHoW model deﬁned in Section 4.3.3, we consider the VARHoD
+model:
+Yd = YHoD,d + φ0 +
+p
+X
+k=1
+Φk(Yd−k −YHoD,d) + εd,
+(A.3)
+where Yd = [Yd,1, . . . , Yd,24]′ with its mean vector YHoD,d across all available days in the calibration
+sample (which corresponds to the 24 possible values of YHoD,d,h). Analogously to VARHoW, we
+calibrate the model by solving the multivariate Yule-Walker equations with pmax = 8.
+34
+
+=== page 35 ===
+Appendix A.4. Multivariate lasso models (class C6)
+Based on Eqn. (13) and using certain restrictions, we can deﬁne the full set of 16 models:
+1-4. 24lassoIC
+DoW,p,nl – the full model,
+5-8. 24lassoIC
+DoW,nl without the periodic parameter terms (i.e., with φh,1,h,j = φh,1,24,j = 0),
+9-12. 24lassoIC
+DoW,p without the non-linear eﬀects (i.e., with φh,k,min,0 = φh,k,max,0 = 0),
+13-16. and 24lassoIC
+DoW without the non-linear and periodic eﬀects,
+where the superscript IC (= AIC, HQC, BIC, OLS) denotes the information criterion used.
+Because of the nature of the shrinkage factor in Eqn. (17), making λ suﬃciently large will
+cause some of the coeﬃcients to be exactly zero. Obviously, selecting a good value of λ for the
+lasso is critical. We choose it such that an in-sample information criterion is maximized. To this
+end, we consider the generalized information criterion (GIC; see Stoica and Selen, 2004):
+GICκ(β) = RSS(β) + κKβσ2,
+(A.4)
+where κ is an information criterion type parameter, RSS(β) is the residual sum of squares associ-
+ated with β, Kβ are the non-zero parameters in β and σ2 is the variance of the residuals that we
+estimate by the sample variance. We consider the following special cases:
+• the Akaike Information Criterion (AIC) with κ = 2, as used in the EPF context by Ziel et al.
+(2015a),
+• the Hannan-Quinn Information Criterion (HQC) with κ = 2 log(log(n)),
+• and the Bayesian Information Criterion (BIC; also known as the Schwarz criterion) with
+κ = log(n), as used in the EPF context by Ziel (2016a),
+where n is the sample size and p is the number of possible parameters in the model (in fact,
+both are the dimensions of the model parameters of the regression matrix). Next to the lasso
+estimation approach, we also consider the OLS solution, with IC=OLS. It can be interpreted
+as an information criterion based solution with κ = 0. Note, that two HQC-based models, i.e.,
+24lassoHQC
+DoW,p,nl and 24lassoHQC
+DoW,nl, have been analyzed in the empirical study in Section 5.
+Appendix A.5. Three other univariate AR models (class C7)
+The ARHoW model is complemented by three univariate AR structures:
+Yt = Y + φ0 +
+p
+X
+k=1
+φk(Yt−k −Y) + εt,
+(A.5)
+Yt = YDoW,t + φ0 +
+p
+X
+k=1
+φk(Yt−k −YDoW,t) + εt,
+(A.6)
+Yt = YHoD,t + φ0 +
+p
+X
+k=1
+φk(Yt−k −YHoD,t) + εt,
+(A.7)
+denoted by AR, ARDoW and ARHoD, respectively. Like the ARHoW model, we estimate these three
+variants by solving the Yule-Walker equations and minimizing the AIC with a maximum order of
+pmax = 196.
+35
+
+=== page 36 ===
+Appendix A.6. Univariate lasso models (class C8)
+Given the following general formula:
+Yt =
+168
+X
+k=1
+φ0,kHoWk
+t +
+196
+X
+k=1
+φ1,kYt−k +
+168
+X
+k=1
+φ2,kHoWk
+t Yt−1 +
+168
+X
+k=1
+φ3,kHoWk
+t Yt−24
+|                                             {z                                             }
+periodic eﬀects
++ φ4,1Yt−24,min + φ4,2Yt−24,max
+|                           {z                           }
+non-linear eﬀects
++εt,
+(A.8)
+we can deﬁne the full set of 16 models:
+1-4. lassoIC
+HoW,p,nl – the full model,
+5-8. lassoIC
+HoW,p without non-linear eﬀects (i.e., with φ4,1 = φ4,2 = 0),
+9-12. lassoIC
+HoW, nl without periodic eﬀects (i.e., with φ2,k = φ3,k = 0),
+13-16. and lassoIC
+HoW without non-linear and periodic eﬀects,
+where the superscript IC (= AIC, HQC, BIC, OLS) denotes the information criterion used; for
+estimation details see Section 4.3.4 and Appendix A.4). Note, that two HQC-based models, i.e.,
+24lassoHQC
+DoW,p and 24lassoHQC
+DoW, have been analyzed in the empirical study in Section 5.
+Appendix B. Alternative representations
+In this Appendix we provide alternative representations for some of the models considered
+in the study. This may lead to a better understanding of the autoregressive structures and the
+relationships between similar the multivariate and univariate modeling frameworks.
+For instance, the expert models deﬁned in Section 4.3.1 and Appendix A.1 can be written in
+a univariate way as well. However, the representation is quite complex, therefore we show the
+representation only for the expertDoW,p,nl model deﬁned by Eqn. (A.1). The model is a sparse
+168-periodic AR model with non-linear impact:
+Yt = φ0,t +
+168
+X
+k
+φk,tYt−k + φmin,tYmin,t + φmax,tYmax,t
+|                        {z                        }
+non-linear eﬀects
++εt,
+(B.1)
+φk,t =
+
+βh,1 + P7
+j=1 βh,7+ jDoW j
+t,
+for k = 0
+βh,7HoDk
+t + P7
+j=1 βh,21+ jHoDk
+t DoWj
+t,
+for k = 1, 2, . . . , 23
+βh,2 + βh,7HoDk
+t + P7
+j=1(βh,14+j + βh,21+jHoDk
+t )DoWj
+t,
+for k = 24
+βh,3,
+for k = 48
+βh,4,
+for k = 168
+0,
+otherwise,
+φmin,t = βh,5, φmax,t = βh,6, Ymin,t = min(Yd−1), Ymax,t = max(Yd−1) with h = mod(t −1, 24) + 1,
+d = (t −h)/24, and mod as modulo operator with respect to the second argument (here 24), e.g.,
+for t = 26 we receive mod(26 −1, 24) + 1 = 2.
+36
+
+=== page 37 ===
+On the other hand, the 24ARHoD model deﬁned by Eqn. (A.2) and the VARHoD model deﬁned
+by Eqn. (A.3) can be easily rewritten as univariate models. The former as a sparse 24-periodic AR
+model:
+Yt = φ0,t +
+p
+X
+k=1
+φ24k,tYt−24k + εt
+with φ24k,t = φ24k,h,
+(B.2)
+where p = maxh(ph) and h = mod(t −1, 24) + 1, and the latter as a 24-periodic AR model:
+Yt = φ0,t +
+K
+X
+k=1
+φk,tYt−k + εt
+with φ0,t = φ0,h,
+(B.3)
+φk,t = φdiv(k+h−1,24),h,mod(k+h−1,24)+1,
+h = mod(t −1, 24) + 1, K = 24(p + 1) −1, φk,l,m as elements of Φk where we set φ0,l,m = φp+i,l,m = 0
+for all i > 0 and div as quotient of the Euclidean division with respect to the second argument.
+Alternatively, we can represent the VARHoD model as a set of 24 single equations, where for each
+h we have:
+Yd,h = YHoD,d,h + φh,0 +
+p
+X
+k=1
+24
+X
+j=1
+φh,j,k(Yd−k,j −YHoD,d−k,h) + εd,h.
+(B.4)
+Finally, the univariate AR model, deﬁned by Eqn. (A.5), can be rewritten as a special case of
+a 24-dimensional VAR process. However, the representation is:
+Yd = Φ−1
+0 φ0 +
+rX
+k=1
+Φ−1
+0 Φk(Yd−1 −Y1) + εd,
+(B.5)
+with φ0 = (Y + φ0)1,
+Φ0 =
+
+1
+0
+0
+· · ·
+0
+0
+−φ1
+1
+0
+· · ·
+0
+0
+−φ2
+−φ1
+1
+· · ·
+0
+0
+...
+...
+...
+...
+...
+...
+−φ22
+−φ21
+−φ20
+· · ·
+1
+0
+−φ23
+−φ22
+−φ21
+· · ·
+−φ1
+1
+
+and Φk =
+
+φ24(k−1)
+φ24(k−1)−1
+· · ·
+φ24(k−1)−23
+φ24(k−1)+1
+φ24(k−1)
+· · ·
+φ24(k−1)−22
+...
+...
+...
+...
+φ24(k−1)+23
+φ24(k−1)+22
+· · ·
+φ24(k−1)
+
+,
+and we assume that φk = 0 for k > p.
+Appendix C. Model selection
+In Figures C.6 and C.7 we summarize the results for all 58 models. In particular, in Figure C.6
+we plot Mean Absolute Errors (MAE) for the full out-of-sample period, as deﬁned by Eqn. (20),
+for all 58 models and four major markets: EPEX.DE+AT, GEFCom2014, NP.SYS and OMIE.ES.
+From Figure C.7 we can clearly see that the HQC criterion, see Section 4.3.4, leads to the
+best performing on average lasso models, both multivariate and univariate. Interestingly, only the
+AIC and BIC criteria have been tried in this context before (see Ziel et al., 2015a; Ziel, 2016a).
+37
+
+=== page 38 ===
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+5.0
+5.1
+5.2
+5.3
+5.4
+MAE of EPEX.DE+AT
+meanHoW
+naive
+expert
+expertDoW
+expertp
+expertDoW,p
+expert*
+expertDoW
+*
+expertp
+*
+expertDoW,p
+*
+expertnl
+expertDoW,nl
+expertp,nl
+expertDoW,p,nl
+expertnl
+*
+expertDoW,nl
+*
+expertp,nl
+*
+expertDoW,p,nl
+*
+24ARHoD
+24ARHoW
+VARHoD
+VARHoW
+24lassoDoW
+OLS
+24lassoDoW
+AIC
+24lassoDoW
+HQC
+24lassoDoW
+BIC
+24lassoDoW,p
+OLS
+24lassoDoW,p
+AIC
+24lassoDoW,p
+HQC
+24lassoDoW,p
+BIC
+24lassoDoW,nl
+OLS
+24lassoDoW,nl
+AIC
+24lassoDoW,nl
+HQC
+24lassoDoW,nl
+BIC
+24lassoDoW,p,nl
+OLS
+24lassoDoW,p,nl
+AIC
+24lassoDoW,p,nl
+HQC
+24lassoDoW,p,nl
+BIC
+AR
+ARDoW
+ARHoW
+ARHoD
+lassoHoW
+OLS
+lassoHoW
+AIC
+lassoHoW
+HQC
+lassoHoW
+BIC
+lassoHoW,p
+OLS
+lassoHoW,p
+AIC
+lassoHoW,p
+HQC
+lassoHoW,p
+BIC
+lassoHoW,nl
+OLS
+lassoHoW,nl
+AIC
+lassoHoW,nl
+HQC
+lassoHoW,nl
+BIC
+lassoHoW,p,nl
+OLS
+lassoHoW,p,nl
+AIC
+lassoHoW,p,nl
+HQC
+lassoHoW,p,nl
+BIC
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+6.4
+6.6
+6.8
+7.0
+7.2
+MAE of GEFCom2014
+meanHoW
+naive
+expert
+expertDoW
+expertp
+expertDoW,p
+expert*
+expertDoW
+*
+expertp
+*
+expertDoW,p
+*
+expertnl
+expertDoW,nl
+expertp,nl
+expertDoW,p,nl
+expertnl
+*
+expertDoW,nl
+*
+expertp,nl
+*
+expertDoW,p,nl
+*
+24ARHoD
+24ARHoW
+VARHoD
+VARHoW
+24lassoDoW
+OLS
+24lassoDoW
+AIC
+24lassoDoW
+HQC
+24lassoDoW
+BIC
+24lassoDoW,p
+OLS
+24lassoDoW,p
+AIC
+24lassoDoW,p
+HQC
+24lassoDoW,p
+BIC
+24lassoDoW,nl
+OLS
+24lassoDoW,nl
+AIC
+24lassoDoW,nl
+HQC
+24lassoDoW,nl
+BIC
+24lassoDoW,p,nl
+OLS
+24lassoDoW,p,nl
+AIC
+24lassoDoW,p,nl
+HQC
+24lassoDoW,p,nl
+BIC
+AR
+ARDoW
+ARHoW
+ARHoD
+lassoHoW
+OLS
+lassoHoW
+AIC
+lassoHoW
+HQC
+lassoHoW
+BIC
+lassoHoW,p
+OLS
+lassoHoW,p
+AIC
+lassoHoW,p
+HQC
+lassoHoW,p
+BIC
+lassoHoW,nl
+OLS
+lassoHoW,nl
+AIC
+lassoHoW,nl
+HQC
+lassoHoW,nl
+BIC
+lassoHoW,p,nl
+OLS
+lassoHoW,p,nl
+AIC
+lassoHoW,p,nl
+HQC
+lassoHoW,p,nl
+BIC
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+1.65
+1.70
+1.75
+1.80
+1.85
+MAE of NP.SYS
+meanHoW
+naive
+expert
+expertDoW
+expertp
+expertDoW,p
+expert*
+expertDoW
+*
+expertp
+*
+expertDoW,p
+*
+expertnl
+expertDoW,nl
+expertp,nl
+expertDoW,p,nl
+expertnl
+*
+expertDoW,nl
+*
+expertp,nl
+*
+expertDoW,p,nl
+*
+24ARHoD
+24ARHoW
+VARHoD
+VARHoW
+24lassoDoW
+OLS
+24lassoDoW
+AIC
+24lassoDoW
+HQC
+24lassoDoW
+BIC
+24lassoDoW,p
+OLS
+24lassoDoW,p
+AIC
+24lassoDoW,p
+HQC
+24lassoDoW,p
+BIC
+24lassoDoW,nl
+OLS
+24lassoDoW,nl
+AIC
+24lassoDoW,nl
+HQC
+24lassoDoW,nl
+BIC
+24lassoDoW,p,nl
+OLS
+24lassoDoW,p,nl
+AIC
+24lassoDoW,p,nl
+HQC
+24lassoDoW,p,nl
+BIC
+AR
+ARDoW
+ARHoW
+ARHoD
+lassoHoW
+OLS
+lassoHoW
+AIC
+lassoHoW
+HQC
+lassoHoW
+BIC
+lassoHoW,p
+OLS
+lassoHoW,p
+AIC
+lassoHoW,p
+HQC
+lassoHoW,p
+BIC
+lassoHoW,nl
+OLS
+lassoHoW,nl
+AIC
+lassoHoW,nl
+HQC
+lassoHoW,nl
+BIC
+lassoHoW,p,nl
+OLS
+lassoHoW,p,nl
+AIC
+lassoHoW,p,nl
+HQC
+lassoHoW,p,nl
+BIC
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+6.0
+6.1
+6.2
+6.3
+MAE of OMIE.ES
+meanHoW
+naive
+expert
+expertDoW
+expertp
+expertDoW,p
+expert*
+expertDoW
+*
+expertp
+*
+expertDoW,p
+*
+expertnl
+expertDoW,nl
+expertp,nl
+expertDoW,p,nl
+expertnl
+*
+expertDoW,nl
+*
+expertp,nl
+*
+expertDoW,p,nl
+*
+24ARHoD
+24ARHoW
+VARHoD
+VARHoW
+24lassoDoW
+OLS
+24lassoDoW
+AIC
+24lassoDoW
+HQC
+24lassoDoW
+BIC
+24lassoDoW,p
+OLS
+24lassoDoW,p
+AIC
+24lassoDoW,p
+HQC
+24lassoDoW,p
+BIC
+24lassoDoW,nl
+OLS
+24lassoDoW,nl
+AIC
+24lassoDoW,nl
+HQC
+24lassoDoW,nl
+BIC
+24lassoDoW,p,nl
+OLS
+24lassoDoW,p,nl
+AIC
+24lassoDoW,p,nl
+HQC
+24lassoDoW,p,nl
+BIC
+AR
+ARDoW
+ARHoW
+ARHoD
+lassoHoW
+OLS
+lassoHoW
+AIC
+lassoHoW
+HQC
+lassoHoW
+BIC
+lassoHoW,p
+OLS
+lassoHoW,p
+AIC
+lassoHoW,p
+HQC
+lassoHoW,p
+BIC
+lassoHoW,nl
+OLS
+lassoHoW,nl
+AIC
+lassoHoW,nl
+HQC
+lassoHoW,nl
+BIC
+lassoHoW,p,nl
+OLS
+lassoHoW,p,nl
+AIC
+lassoHoW,p,nl
+HQC
+lassoHoW,p,nl
+BIC
+G
+G
+Figure C.6: Mean Absolute Errors (MAE) for the full out-of-sample period, as deﬁned by Eqn. (20), for all 58 models
+and four major markets (from top to bottom): EPEX.DE+AT, GEFCom2014, NP.SYS and OMIE.ES. The solid and
+dotted whiskers represent the 2σ and 3σ ranges, respectively. The dashed red line indicates the MAE of the best
+performing model. Gray/white background is used to group models from the same class. For clarity of presentation,
+in all four panels we use an upper cap, e.g., for the EPEX.DE+AT market all MAE values exceeding 5.5 (EUR/MWh)
+are set equal to 5.5.
+38
+
+=== page 39 ===
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+0.5
+1.0
+2.0
+5.0
+10.0
+20.0
+50.0
+100.0
+m.p.d.f.b. in %
+meanHoW
+naive
+expert
+expertDoW
+expertp
+expertDoW,p
+expert*
+expertDoW
+*
+expertp
+*
+expertDoW,p
+*
+expertnl
+expertDoW,nl
+expertp,nl
+expertDoW,p,nl
+expertnl
+*
+expertDoW,nl
+*
+expertp,nl
+*
+expertDoW,p,nl
+*
+24ARHoD
+24ARHoW
+VARHoD
+VARHoW
+24lassoDoW
+OLS
+24lassoDoW
+AIC
+24lassoDoW
+HQC
+24lassoDoW
+BIC
+24lassoDoW,p
+OLS
+24lassoDoW,p
+AIC
+24lassoDoW,p
+HQC
+24lassoDoW,p
+BIC
+24lassoDoW,nl
+OLS
+24lassoDoW,nl
+AIC
+24lassoDoW,nl
+HQC
+24lassoDoW,nl
+BIC
+24lassoDoW,p,nl
+OLS
+24lassoDoW,p,nl
+AIC
+24lassoDoW,p,nl
+HQC
+24lassoDoW,p,nl
+BIC
+AR
+ARDoW
+ARHoW
+ARHoD
+lassoHoW
+OLS
+lassoHoW
+AIC
+lassoHoW
+HQC
+lassoHoW
+BIC
+lassoHoW,p
+OLS
+lassoHoW,p
+AIC
+lassoHoW,p
+HQC
+lassoHoW,p
+BIC
+lassoHoW,nl
+OLS
+lassoHoW,nl
+AIC
+lassoHoW,nl
+HQC
+lassoHoW,nl
+BIC
+lassoHoW,p,nl
+OLS
+lassoHoW,p,nl
+AIC
+lassoHoW,p,nl
+HQC
+lassoHoW,p,nl
+BIC
+G
+G
+Figure C.7: Mean percentage deviation from the best (m.p.d.f.b.) model in terms of MAE, for all 58 models and
+across all 12 datasets, as deﬁned in Eqn. (21). Note the logarithmic scale on the Y-axis and compare with Table 2,
+where the m.p.d.f.b. values for 10 selected models are also provided. White background is used to indicate the 10
+selected models, gray – the worse performing models in each class.
+This behavior is, however, not uniform across the markets. For instance, for the NP.DK1 and
+NP.DK2 datasets lassoBIC
+DoW is as good as lassoHQC
+DoW,p. From Figure C.7 we can also see that the
+HQC-estimated multivariate lasso models on average outperform all univariate lasso models. But
+the diﬀerences are small. On the other hand, when the full model is estimated (i.e., the OLS
+‘criterion’), the performance deteriorates but the loss of forecasting accuracy is extreme only for
+the multivariate lasso models. Probably the 24 times shorter calibration sample of 730 observations
+is too small for the multi-parameter structure.
+The importance of including dummies for all days of the week is clearly visible in Fig. C.7.
+Every second expert model is better than the preceding model without the DoW component. These
+results support the observation of Uniejewski et al. (2016) that the weekly seasonality requires
+better modeling than oﬀered by typically-used expert models. This eﬀect is also visible for the
+multi-parameter structures – 24ARHoW is better than 24ARHoD, VARHoW is better than VARHoD,
+ARDoW is better than AR and ARHoW is better than ARHoD.
+Acknowledgments
+This work was partially supported by the National Science Center (NCN, Poland) through
+Grant 2015/17/B/HS4/00334 (to RW).
+References
+References
+Abedinia, O., Amjady, N., Shaﬁe-Khah, M., Catalao, J., 2015. Electricity price forecast using combinatorial neural
+network trained by a new stochastic search method. Energy Conversion and Management 105, 642–654.
+Aggarwal, S., Saini, L., Kumar, A., 2009. Electricity price forecasting in deregulated markets: A review and evalua-
+tion. International Journal of Electrical Power and Energy Systems 31, 13–22.
+Alonso, A. M., Bastos, G., Garc´ıa-Martos, C., 2016. Electricity price forecasting by averaging dynamic factor models.
+Energies 9 (8), 600.
+Amjady, N., 2006. Day-ahead price forecasting of electricity markets by a new fuzzy neural network. IEEE Transac-
+tions on Power Systems 21, 887–996.
+39
+
+=== page 40 ===
+Amjady, N., Daraeepour, A., Keynia, F., 2010. Day-ahead electricity price forecasting by modiﬁed relief algorithm
+and hybrid neural network. IET Generation, Transmission and Distribution 4 (3), 432–444.
+Amjady, N., Keynia, F., 2009a. Day-ahead price forecasting of electricity markets by a new feature selection algorithm
+and cascaded neural network technique. Energy Conversion and Management 50 (12), 2976–2982.
+Amjady, N., Keynia, F., 2009b. Day-ahead price forecasting of electricity markets by mutual information technique
+and cascaded neuro-evolutionary algorithm. IEEE Transactions on Power Systems 24 (1), 306–318.
+Bordignon, S., Bunn, D. W., Lisi, F., Nan, F., 2013. Combining day-ahead forecasts for British electricity prices.
+Energy Economics 35, 88–103.
+Burger, M., Graeber, B., Schindlmayr, G., 2007. Managing energy risk: An integrated view on power and other energy
+markets. Wiley.
+Chatﬁeld, C., 2000. Time-Series Forecasting. CRC Press.
+Conejo, A. J., Contreras, J., Esp´ınola, R., Plazas, M. A., 2005. Forecasting electricity prices for a day-ahead pool-
+based electric energy market. International Journal of Forecasting 21, 435–462.
+Contreras, J., Esp´ınola, R., Nogales, F., Conejo, A., 2003. ARIMA models to predict next-day electricity prices. IEEE
+Transactions on Power Systems 18 (3), 1014–1020.
+Cuaresma, J. C., Hlouskova, J., Kossmeier, S., Obersteiner, M., 2004. Forecasting electricity spot-prices using linear
+univariate time-series models. Applied Energy 77 (1), 87–106.
+Diebold, F. X., 2004. Elements of Forecasting (4th ed.). Thomson Higher Education.
+Diebold, F. X., Mariano, R. S., 1995. Comparing predictive accuracy. Journal of Business and Economic Statistics 13,
+253–263.
+Dudek, G., 2016. Multilayer perceptron for GEFCom2014 probabilistic electricity price forecasting. International
+Journal of Forecasting 32, 1057–1060.
+Fanone, E., Gamba, A., Prokopczuk, M., 2013. The case of negative day-ahead electricity prices. Energy Economics
+35, 22–34.
+Gaillard, P., Goude, Y., Nedellec, R., 2016. Additive models and robust aggregation for GEFCom2014 probabilistic
+electric load and electricity price forecasting. International Journal of Forecasting 32 (3), 1038–1050.
+Garcia-Martos, C., Rodriguez, J., Sanchez, M., 2007. Mixed models for short-run forecasting of electricity prices:
+Application for the Spanish market. IEEE Transactions on Power Systems 22, 544–551.
+Garcia-Martos, C., Rodriguez, J., Sanchez, M., 2012. Forecasting electricity prices by extracting dynamic common
+factors: Application to the Iberian market. IET Generation, Transmission & Distribution 6 (1), 11–20.
+Gianfreda, A., Grossi, L., 2012. Forecasting Italian electricity zonal prices with exogenous variables. Energy Eco-
+nomics 34, 2228–2239.
+Gianfreda, A., Parisio, L., Pelagatti, M., 2016. The RES-induced switching eﬀect across fossil fuels:
+An
+analysis of the Italian day-ahead and balancing prices and their connected costs. RG Working Paper, DOI:
+10.13140/RG.2.2.30195.12320.
+Gonz´alez, C., Mira-McWilliams, J., Ju´arez, I., 2015. Important variable assessment and electricity price forecasting
+based on regression tree models: Classiﬁcation and regression trees, bagging and random forests. IET Generation,
+Transmission & Distribution 9 (11), 1120–1128.
+Hagfors, L., Kamperud, H., Paraschiv, F., Prokopczuk, M., Sator, A., Westgaard, S., 2016. Prediction of extreme price
+occurrences in the German day-ahead electricity market. Quantitative Finance 16, 1929–1948.
+Haldrup, N., Nielsen, F. S., Nielsen, M. O., 2010. A vector autoregressive model for electricity prices subjected to
+long memory and regime switching. Energy Economics 32, 1044–1058.
+Hastie, T., Tibshirani, R., Wainwright, M., 2015. Statistical Learning with Sparsity: The Lasso and Generalizations.
+CRC Press.
+He, K., Yu, L., Tang, L., 2015. Electricity price forecasting with a BED (Bivariate EMD Denoising) methodology.
+Energy 91, 601–609.
+Hong, T., Pinson, P., Fan, S., Zareipour, H., Troccoli, A., Hyndman, R. J., 2016. Probabilistic energy forecasting:
+Global Energy Forecasting Competition 2014 and beyond. International Journal of Forecasting 32 (3), 896–913.
+Huber, P. J., Ronchetti, E. M., 2009. Robust Statistics, 2nd ed. Wiley.
+Huisman, R., Huurman, C., Mahieu, R., 2007. Hourly electricity prices in day-ahead markets. Energy Economics 29,
+240–248.
+40
+
+=== page 41 ===
+Hyndman, R., Athanasopoulos, G., 2013. Forecasting: Principles and practice. Online at http://otexts.org/fpp/.
+James, G., Witten, D., Hastie, T., Tibshirani, R., 2013. An Introduction to Statistical Learning with Applications in R.
+Springer, New York.
+Karakatsani, N., Bunn, D., 2008. Forecasting electricity prices: The impact of fundamentals and time-varying coeﬃ-
+cients. International Journal of Forecasting 24, 764–785.
+Keles, D., Scelle, J., Paraschiv, F., Fichtner, W., 2016. Extended forecast methods for day-ahead electricity spot prices
+applying artiﬁcial neural networks. Applied Energy 162, 218–230.
+Kim, M., 2015. Short-term price forecasting of Nordic power market by combination Levenberg-Marquardt and
+Cuckoo search algorithms. IET Generation, Transmission and Distribution 9 (13), 1553–1563.
+Kristiansen, T., 2012. Forecasting Nord Pool day-ahead prices with an autoregressive model. Energy Policy 49, 328–
+332.
+Lisi, F., Nan, F., 2014. Component estimation for electricity prices: Procedures and comparisons. Energy Economics
+44, 143–159.
+Ludwig, N., Feuerriegel, S., Neumann, D., 2015. Putting big data analytics to work: Feature selection for forecasting
+electricity prices using the LASSO and random forests. Journal of Decision Systems 24 (1), 19–36.
+L¨utkepohl, H., 2005. New Introduction to Multiple Time Series Analysis. Springer-Verlag, Berlin.
+Maciejowska, K., 2014. Fundamental and speculative shocks, what drives electricity prices? IEEE Conference Pro-
+ceedings - EEM14, DOI: 10.1109/EEM.2014.6861289.
+Maciejowska, K., Nowotarski, J., 2016. A hybrid model for GEFCom2014 probabilistic electricity price forecasting.
+International Journal of Forecasting 32 (3), 1051–1056.
+Maciejowska, K., Nowotarski, J., Weron, R., 2016. Probabilistic forecasting of electricity spot prices using Factor
+Quantile Regression Averaging. International Journal of Forecasting 32 (3), 957–965.
+Maciejowska, K., Weron, R., 2015. Forecasting of daily electricity prices with factor models: Utilizing intra-day and
+inter-zone relationships. Computational Statistics 30 (3), 805–819.
+Maciejowska, K., Weron, R., 2016. Short- and mid-term forecasting of baseload electricity prices in the UK: The
+impact of intra-day price relationships and market fundamentals. IEEE Transactions on Power Systems 31 (2),
+994–1005.
+Marcjasz, G., Uniejewski, B., Weron, R., 2018. On the importance of the long-term seasonal component in day-ahead
+electricity price forecasting with NARX neural networks. International Journal of Forecasting, forthcoming.
+Misiorek, A., Tr¨uck, S., Weron, R., 2006. Point and interval forecasting of spot electricity prices: Linear vs. non-linear
+time series models. Studies in Nonlinear Dynamics & Econometrics 10 (3), Article 2.
+Nogales, F. J., Contreras, J., Conejo, A. J., Espinola, R., 2002. Forecasting next-day electricity prices by time series
+models. IEEE Transactions on Power Systems 17, 342–348.
+Nowotarski, J., Raviv, E., Tr¨uck, S., Weron, R., 2014. An empirical comparison of alternate schemes for combining
+electricity spot price forecasts. Energy Economics 46, 395–412.
+Nowotarski, J., Weron, R., 2016. On the importance of the long-term seasonal component in day-ahead electricity
+price forecasting. Energy Economics 57, 228–235.
+Nowotarski, J., Weron, R., 2018. Recent advances in electricity price forecasting: A review of probabilistic forecast-
+ing. Renewable and Sustainable Energy Reviews 81, 1548–1568.
+Panagiotelis, A., Smith, M., 2008. Bayesian forecasting of intraday electricity prices using multivariate skew-elliptical
+distributions. International Journal of Forecasting 24, 710–727.
+Panapakidis, I., Dagoumas, A., 2016. Day-ahead electricity price forecasting via the application of artiﬁcial neural
+network based models. Applied Energy 172, 132–151.
+Pao, H. T., 2007. Forecasting electricity market pricing using artiﬁcial neural networks. Energy Conversion and Man-
+agement 48, 907–912.
+Paraschiv, F., Fleten, S.-E., Sch¨urle, M., 2015. A spot-forward model for electricity prices with regime shifts. Energy
+Economics 47, 142–153.
+Raﬁei, M., Niknam, T., Khooban, M.-H., 2017. Probabilistic forecasting of hourly electricity price by generalization
+of ELM for usage in improved wavelet neural network. IEEE Transactions on Industrial Informatics 13, 71–79.
+Raviv, E., Bouwman, K. E., van Dijk, D., 2015. Forecasting day-ahead electricity prices: Utilizing hourly prices.
+Energy Economics 50, 227239.
+41
+
+=== page 42 ===
+Rodriguez, C. P., Anders, G. J., 2004. Energy price forecasting in the Ontario competitive power system market. IEEE
+Transactions on Power Systems 19 (1), 366–374.
+Schneider, S., 2011. Power spot price models with negative prices. Journal of Energy Markets 4 (4), 77–102.
+Serinaldi, F., 2011. Distributional modeling and short-term forecasting of electricity prices by Generalized Additive
+Models for location, scale and shape. Energy Economics 33, 1216–1226.
+Shahidehpour, M., Yamin, H., Li, Z., 2002. Market Operations in Electric Power Systems: Forecasting, Scheduling,
+and Risk Management. Wiley.
+Stoica, P., Selen, Y., 2004. Model-order selection: A review of information criterion rules. IEEE Signal Processing
+Magazine 21 (4), 36–47.
+Tibshirani, R., 1996. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society B 58,
+267–288.
+Uniejewski, B., Nowotarski, J., Weron, R., 2016. Automated variable selection and shrinkage for day-ahead electricity
+price forecasting. Energies 9 (8), 621.
+Uniejewski, B., Weron, R., Ziel, F., 2017. Variance stabilizing transformations for electricity spot price forecasting.
+IEEE Transactions on Power Systems, DOI: 10.1109/TPWRS.2017.2734563.
+Voronin, S., Partanen, J., 2013. Price forecasting in the day-ahead energy market by an iterative method with separate
+normal price and price spike frameworks. Energies 6, 5897–5920.
+Weron, R., 2009. Heavy-tails and regime-switching in electricity prices. Mathematical Methods of Operations Re-
+search 69 (3), 457–473.
+Weron, R., 2014. Electricity price forecasting: A review of the state-of-the-art with a look into the future. International
+Journal of Forecasting 30, 1030–1081.
+Weron, R., Misiorek, A., 2008. Forecasting spot electricity prices: A comparison of parametric and semiparametric
+time series models. International Journal of Forecasting 24, 744–763.
+Weron, R., Ziel, F., 2018. Forecasting Electricity Prices: A Guide to Robust Modeling. CRC Press, forthcoming.
+Wu, H. C., Chan, S. C., Tsui, K. M., Hou, Y., 2013. A new recursive dynamic factor analysis for point and interval
+forecast of electricity price. IEEE Transactions on Power Systems 28, 2352–2365.
+Yamin, H. Y., Shahidehpour, S. M., Li, Z., 2004. Adaptive short-term electricity price forecasting using artiﬁcial
+neural networks in the restructured power markets. International Journal of Electrical Power and Energy Systems
+26, 571–581.
+Zareipour, H., Canizares, C. A., Bhattacharya, K., Thomson, J., 2006. Application of public-domain market informa-
+tion to forecast Ontario’s wholesale electricity prices. IEEE Transactions on Power Systems 21 (4), 1707–1717.
+Zhou, M., Yan, Z., Ni, Y., Li, G., Nie, Y., 2006. Electricity price forecasting with conﬁdence-interval estimation
+through an extended ARIMA approach. IEE Proceedings: Generation, Transmission and Distribution 153 (2),
+187–195.
+Ziel, F., 2016a. Forecasting electricity spot prices using LASSO: On capturing the autoregressive intraday structure.
+IEEE Transactions on Power Systems 31, 4977–4987.
+Ziel, F., 2016b. Iteratively reweighted adaptive lasso for conditional heteroscedastic time series with applications to
+AR-ARCH type processes. Computational Statistics and Data Analysis 100, 773–793.
+Ziel, F., Steinert, R., 2016. Electricity price forecasting using sale and purchase curves: The X-model. Energy Eco-
+nomics 59, 435–454.
+Ziel, F., Steinert, R., Husmann, S., 2015a. Eﬃcient modeling and forecasting of electricity spot prices. Energy Eco-
+nomics 47, 89–111.
+Ziel, F., Steinert, R., Husmann, S., 2015b. Forecasting day ahead electricity spot prices: The impact of the EXAA to
+other European electricity markets. Energy Economics 51, 430–444.
+42

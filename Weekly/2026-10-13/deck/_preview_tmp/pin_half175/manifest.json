@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "backend": "native",
+  "rasterEngine": "libreoffice",
+  "source": "saved",
+  "inputPath": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Weekly\\2026-10-13\\deck\\_preview_tmp\\pin_half175.pptx",
+  "sourceSha256": "d09b4d9177339dc048033985c38b7db89b1769a1ab5d988072bab04dbdc0346c",
+  "dpi": 175,
+  "pageCount": 1,
+  "images": [
+    {
+      "index": 1,
+      "page": 1,
+      "path": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Weekly\\2026-10-13\\deck\\_preview_tmp\\pin_half175\\page-0001.png",
+      "width": 2334,
+      "height": 1313,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280.0666666666666,
+        "height": 720.0666666666667
+      },
+      "byteLength": 18921
+    }
+  ],
+  "missingFonts": []
+}

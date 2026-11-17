@@ -1,0 +1,38 @@
+1. Project Overview
+The project is a simulation-based study of optimal pump scheduling for a water reservoir, where the objective is to minimise electricity cost while keeping the water level within a prescribed band (50%–90%). Electricity prices are time-varying and randomly fluctuating, obtained from the AEMO (Australian Energy Market Operator) public database. The core idea is to pump water when electricity is cheap and avoid pumping when it is expensive, subject to physical constraints on the reservoir level.
+
+The project has two main parts:
+
+Parameter estimation (electricity price forecasting): Model the electricity price forecast error using parameterised models (e.g., AR/ARMA). Estimate the model parameters taking into account that the forecasts will be used within an economic MPC setting.
+Economic Model Predictive Control (EMPC): Formulate and implement an EMPC strategy that uses the price forecasts to schedule pump operations optimally.
+A successful outcome is a working integrated solution (forecaster + EMPC) that achieves better results than directly using AEMO's forecasts when tested against historical data.
+
+Relevant background courses: Advanced Signal Processing, Control Systems, Probability and Random Models, Optimisation.
+
+Implementation language: MATLAB or Python (simulation-based).
+
+2. Key Points Discussed
+2.1 System Model
+A single water reservoir supplied by a pump, with a continuous downstream outflow (demand) plus disturbances.
+Simple volume-balance model: V(t) = V(t-1) + Qin(t-1) – Qout(t-1)
+Water level must stay within 50%–90% of the reservoir capacity.
+2.2 Control Strategy
+A standard PI controller could regulate the level around a fixed setpoint, but a constant level is not the goal here. The reservoir is meant to act as a buffer: fill it when power is cheap, drain it when power is expensive.
+Therefore we use MPC with explicit constraints to keep the level within the allowed band, and extend it to Economic MPC (EMPC), where the cost function directly minimises electricity cost rather than tracking error.
+Pump switching should not be too frequent (mechanical wear). This can be handled by adding a penalty on control changes (soft constraint) in the objective function.
+The supervisor emphasised watching out for long-term effects: a sequence of locally optimal decisions may drift away from the global optimum over time (e.g., greedily draining the tank during high prices may force expensive pumping later). This is a point to keep in mind when designing the horizon and cost function.
+2.3 Electricity Price Forecasting
+Electricity price data will be pulled from the AEMO data dashboard (link provided).
+A predictor is needed to feed the EMPC with future price sequences over the prediction horizon.
+Candidate tools discussed: Kalman filter, moving average, moving median filter — with the goal of minimising the forecast error between the predictor and the actual price.
+Note: moving average / median filters are only smoothing tools (no true prediction); they serve as a first baseline. For real forecasting we will need state-space / adaptive methods such as the Kalman filter (or RLS-based AR models).
+Price data contains strong periodic patterns (daily cycles, weekday vs weekend). The forecaster should capture these components.
+2.4 Reference Paper
+Supervisor provided the paper: Wang et al., "Minimizing Pumping Energy Cost in Real-Time Operations of Water Distribution Systems Using Economic Model Predictive Control", J. Water Resources Planning and Management, ASCE, 2021.
+Key ideas from the paper:
+Flow-based model of the water system (volume balance, same as ours but larger network).
+EMPC cost function = energy cost (price × pump power) + switching penalty.
+Constraints: tank level bounds, pump availability.
+Integer programming for pump on/off decisions, solved over a receding horizon (24 h), implemented with EPANET.
+Compared against trigger-level control: EMPC achieved cost reductions from 3% to 250% depending on demand loading.
+Our project follows the same EMPC framework but adds the price forecasting layer, which the paper does not include (it assumes known two-tier tariffs).

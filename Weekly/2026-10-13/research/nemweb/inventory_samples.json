@@ -1,0 +1,3278 @@
+{
+ "bidmove_current": {
+  "file": "PUBLIC_BIDMOVE_COMPLETE_20261011_0000000542426896.zip",
+  "bytes": 9376616,
+  "members": [
+   "PUBLIC_BIDMOVE_COMPLETE_20261011_0000000542426896.CSV"
+  ],
+  "tables": {
+   "BIDDAYOFFER_D": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "DUID",
+     "BIDTYPE",
+     "BIDSETTLEMENTDATE",
+     "OFFERDATE",
+     "VERSIONNO",
+     "PARTICIPANTID",
+     "DAILYENERGYCONSTRAINT",
+     "REBIDEXPLANATION",
+     "PRICEBAND1",
+     "PRICEBAND2",
+     "PRICEBAND3",
+     "PRICEBAND4",
+     "PRICEBAND5",
+     "PRICEBAND6",
+     "PRICEBAND7",
+     "PRICEBAND8",
+     "PRICEBAND9",
+     "PRICEBAND10",
+     "MINIMUMLOAD",
+     "T1",
+     "T2",
+     "T3",
+     "T4",
+     "NORMALSTATUS",
+     "LASTCHANGED",
+     "ENTRYTYPE",
+     "DIRECTION"
+    ],
+    "rows": 2277,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-11 00:00:00",
+      "max": "2026-10-11 00:00:00",
+      "n_parsed": 2277,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "BIDSETTLEMENTDATE": {
+      "min": "2020-08-21 00:00:00",
+      "max": "2026-10-11 00:00:00",
+      "n_parsed": 2277,
+      "distinct_within_cap": 60,
+      "step_minutes_top": [
+       [
+        1440,
+        8
+       ],
+       [
+        4320,
+        4
+       ],
+       [
+        7200,
+        3
+       ],
+       [
+        8640,
+        3
+       ]
+      ],
+      "span_hours": 53808.0
+     }
+    },
+    "note": ""
+   },
+   "BIDPEROFFER_D": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "DUID",
+     "BIDTYPE",
+     "BIDSETTLEMENTDATE",
+     "OFFERDATE",
+     "PERIODID",
+     "VERSIONNO",
+     "MAXAVAIL",
+     "FIXEDLOAD",
+     "ROCUP",
+     "ROCDOWN",
+     "ENABLEMENTMIN",
+     "ENABLEMENTMAX",
+     "LOWBREAKPOINT",
+     "HIGHBREAKPOINT",
+     "BANDAVAIL1",
+     "BANDAVAIL2",
+     "BANDAVAIL3",
+     "BANDAVAIL4",
+     "BANDAVAIL5",
+     "BANDAVAIL6",
+     "BANDAVAIL7",
+     "BANDAVAIL8",
+     "BANDAVAIL9",
+     "BANDAVAIL10",
+     "LASTCHANGED",
+     "PASAAVAILABILITY",
+     "INTERVAL_DATETIME",
+     "DIRECTION",
+     "ENERGYLIMIT",
+     "RECALL_PERIOD"
+    ],
+    "rows": 655776,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-11 00:00:00",
+      "max": "2026-10-11 00:00:00",
+      "n_parsed": 100000,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "BIDSETTLEMENTDATE": {
+      "min": "2020-08-21 00:00:00",
+      "max": "2026-10-11 00:00:00",
+      "n_parsed": 100000,
+      "distinct_within_cap": 60,
+      "step_minutes_top": [
+       [
+        1440,
+        8
+       ],
+       [
+        4320,
+        4
+       ],
+       [
+        7200,
+        3
+       ],
+       [
+        8640,
+        3
+       ]
+      ],
+      "span_hours": 53808.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-11 04:05:00",
+      "max": "2026-10-11 07:40:00",
+      "n_parsed": 100000,
+      "distinct_within_cap": 44,
+      "step_minutes_top": [
+       [
+        5,
+        43
+       ]
+      ],
+      "span_hours": 3.583
+     }
+    },
+    "note": "datetime stats cover the first 100000 rows only"
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "constraint_current": {
+  "file": "2026.zip",
+  "bytes": 478735,
+  "members": [
+   "2026/",
+   "2026/Week 14 CCR 30 March 2026 to 05 April 2026.xlsx",
+   "2026/Week 15 CCR 06 April 2026 to 12 April 2026.xlsx",
+   "2026/Week 16 CCR 13 April 2026 to 19 April 2026.xlsx",
+   "2026/Week 17 CCR 20 April 2026 to 26 April 2026.xlsx",
+   "2026/Week 18 CCR 27 April 2026 to 3 May 2026.xlsx",
+   "2026/Week 19 CCR 04 May 2026 to 10 May 2026.xlsx",
+   "2026/Week 20 CCR 11 May 2026 to 17 May 2026.xlsx",
+   "2026/Week 21 CCR 18 May 2026 to 24 May 2026.xlsx",
+   "2026/Week 22 CCR 25 May 2026 to 31 May 2026.xlsx",
+   "2026/Week 23 CCR 1 June 2026 to 7 June 2026.xlsx",
+   "2026/Week 24 CCR 8 June 2026 to 14 June 2026.xlsx",
+   "2026/Week 25 CCR 15 June 2026 to 21 June 2026.xlsx",
+   "2026/Week 26 CCR 22 June 2026 to 28 June 2026.xlsx",
+   "2026/Week 27 CCR 29 June 2026 to 05 July 2026.xlsx",
+   "2026/Week 28 CCR 06 July 2026 to 12 July 2026.xlsx",
+   "2026/Week 29 CCR 13 July 2026 to 19 July 2026.xlsx",
+   "2026/Week 30 CCR 20 July 2026 to 26 July 2026.xlsx",
+   "2026/Week 31 CCR 27 July 2026 to 2 August 2026.xlsx",
+   "2026/Week 32 CCR 3 August 2026 to 9 August 2026.xlsx",
+   "2026/Week 33 CCR 10 August 2026 to 16 August 2026.xlsx",
+   "2026/Week 34 CCR 17 August 2026 to 23 August 2026.xlsx",
+   "2026/Week 35 CCR 24 August 2026 to 30 August 2026.xlsx",
+   "2026/Week 36 CCR 31 August 2026 to 06 September 2026.xlsx",
+   "2026/Week 37 CCR 07 September 2026 to 13 September 2026.xlsx",
+   "2026/Week 38 CCR 14 September 2026 to 20 September 2026.xlsx",
+   "2026/Week 39 CCR 21 September 2026 to 27 September 2026.xlsx",
+   "2026/Week 40 CCR 28 September 2026 to 4 October 2026.xlsx",
+   "2026/Week 41 CCR 5 October 2026 to 11 October 2026.xlsx"
+  ],
+  "tables": {},
+  "members_total": 29,
+  "members_scanned": 29
+ },
+ "dispatchfcst_current": {
+  "file": "PUBLIC_DISPATCHFCST_202610130140_0000000542575735.zip",
+  "bytes": 7945,
+  "members": [
+   "PUBLIC_DISPATCHFCST_202610130140_0000000542575735.CSV"
+  ],
+  "tables": {
+   "FCAS_REQ_CONSTRAINT": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUNNO",
+     "INTERVAL_DATETIME",
+     "CONSTRAINTID",
+     "REGIONID",
+     "BIDTYPE",
+     "LHS",
+     "RHS",
+     "MARGINALVALUE",
+     "RRP",
+     "REGIONAL_ENABLEMENT",
+     "CONSTRAINT_ENABLEMENT",
+     "REGION_BASE_COST",
+     "BASE_COST",
+     "ADJUSTED_COST",
+     "P_REGULATION"
+    ],
+    "rows": 766,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:40:00",
+      "max": "2026-10-13 01:40:00",
+      "n_parsed": 766,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 01:40:00",
+      "max": "2026-10-13 01:40:00",
+      "n_parsed": 766,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "FCAS_REQ_RUN": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUNNO",
+     "LASTCHANGED"
+    ],
+    "rows": 1,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:40:00",
+      "max": "2026-10-13 01:40:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "dispatchis_current": {
+  "file": "PUBLIC_DISPATCHIS_202610130145_0000000542576314.zip",
+  "bytes": 20791,
+  "members": [
+   "PUBLIC_DISPATCHIS_202610130145_0000000542576314.CSV"
+  ],
+  "tables": {
+   "CASE_SOLUTION": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "RUNNO",
+     "INTERVENTION",
+     "CASESUBTYPE",
+     "SOLUTIONSTATUS",
+     "SPDVERSION",
+     "NONPHYSICALLOSSES",
+     "TOTALOBJECTIVE",
+     "TOTALAREAGENVIOLATION",
+     "TOTALINTERCONNECTORVIOLATION",
+     "TOTALGENERICVIOLATION",
+     "TOTALRAMPRATEVIOLATION",
+     "TOTALUNITMWCAPACITYVIOLATION",
+     "TOTAL5MINVIOLATION",
+     "TOTALREGVIOLATION",
+     "TOTAL6SECVIOLATION",
+     "TOTAL60SECVIOLATION",
+     "TOTALASPROFILEVIOLATION",
+     "TOTALFASTSTARTVIOLATION",
+     "TOTALENERGYOFFERVIOLATION",
+     "LASTCHANGED",
+     "SWITCHRUNINITIALSTATUS",
+     "SWITCHRUNBESTSTATUS",
+     "SWITCHRUNBESTSTATUS_INT"
+    ],
+    "rows": 1,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "LOCAL_PRICE": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "DUID",
+     "LOCAL_PRICE_ADJUSTMENT",
+     "LOCALLY_CONSTRAINED"
+    ],
+    "rows": 4,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 4,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "PRICE": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "RUNNO",
+     "REGIONID",
+     "DISPATCHINTERVAL",
+     "INTERVENTION",
+     "RRP",
+     "EEP",
+     "ROP",
+     "APCFLAG",
+     "MARKETSUSPENDEDFLAG",
+     "LASTCHANGED",
+     "RAISE6SECRRP",
+     "RAISE6SECROP",
+     "RAISE6SECAPCFLAG",
+     "RAISE60SECRRP",
+     "RAISE60SECROP",
+     "RAISE60SECAPCFLAG",
+     "RAISE5MINRRP",
+     "RAISE5MINROP",
+     "RAISE5MINAPCFLAG",
+     "RAISEREGRRP",
+     "RAISEREGROP",
+     "RAISEREGAPCFLAG",
+     "LOWER6SECRRP",
+     "LOWER6SECROP",
+     "LOWER6SECAPCFLAG",
+     "LOWER60SECRRP",
+     "LOWER60SECROP",
+     "LOWER60SECAPCFLAG",
+     "LOWER5MINRRP",
+     "LOWER5MINROP",
+     "LOWER5MINAPCFLAG",
+     "LOWERREGRRP",
+     "LOWERREGROP",
+     "LOWERREGAPCFLAG",
+     "PRICE_STATUS",
+     "PRE_AP_ENERGY_PRICE",
+     "PRE_AP_RAISE6_PRICE",
+     "PRE_AP_RAISE60_PRICE",
+     "PRE_AP_RAISE5MIN_PRICE",
+     "PRE_AP_RAISEREG_PRICE",
+     "PRE_AP_LOWER6_PRICE",
+     "PRE_AP_LOWER60_PRICE",
+     "PRE_AP_LOWER5MIN_PRICE",
+     "PRE_AP_LOWERREG_PRICE",
+     "RAISE1SECRRP",
+     "RAISE1SECROP",
+     "RAISE1SECAPCFLAG",
+     "LOWER1SECRRP",
+     "LOWER1SECROP",
+     "LOWER1SECAPCFLAG",
+     "PRE_AP_RAISE1_PRICE",
+     "PRE_AP_LOWER1_PRICE",
+     "CUMUL_PRE_AP_ENERGY_PRICE",
+     "CUMUL_PRE_AP_RAISE6_PRICE",
+     "CUMUL_PRE_AP_RAISE60_PRICE",
+     "CUMUL_PRE_AP_RAISE5MIN_PRICE",
+     "CUMUL_PRE_AP_RAISEREG_PRICE",
+     "CUMUL_PRE_AP_LOWER6_PRICE",
+     "CUMUL_PRE_AP_LOWER60_PRICE",
+     "CUMUL_PRE_AP_LOWER5MIN_PRICE",
+     "CUMUL_PRE_AP_LOWERREG_PRICE",
+     "CUMUL_PRE_AP_RAISE1_PRICE",
+     "CUMUL_PRE_AP_LOWER1_PRICE",
+     "OCD_STATUS",
+     "MII_STATUS"
+    ],
+    "rows": 5,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 5,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "REGIONSUM": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "RUNNO",
+     "REGIONID",
+     "DISPATCHINTERVAL",
+     "INTERVENTION",
+     "TOTALDEMAND",
+     "AVAILABLEGENERATION",
+     "AVAILABLELOAD",
+     "DEMANDFORECAST",
+     "DISPATCHABLEGENERATION",
+     "DISPATCHABLELOAD",
+     "NETINTERCHANGE",
+     "EXCESSGENERATION",
+     "LOWER5MINDISPATCH",
+     "LOWER5MINIMPORT",
+     "LOWER5MINLOCALDISPATCH",
+     "LOWER5MINLOCALPRICE",
+     "LOWER5MINLOCALREQ",
+     "LOWER5MINPRICE",
+     "LOWER5MINREQ",
+     "LOWER5MINSUPPLYPRICE",
+     "LOWER60SECDISPATCH",
+     "LOWER60SECIMPORT",
+     "LOWER60SECLOCALDISPATCH",
+     "LOWER60SECLOCALPRICE",
+     "LOWER60SECLOCALREQ",
+     "LOWER60SECPRICE",
+     "LOWER60SECREQ",
+     "LOWER60SECSUPPLYPRICE",
+     "LOWER6SECDISPATCH",
+     "LOWER6SECIMPORT",
+     "LOWER6SECLOCALDISPATCH",
+     "LOWER6SECLOCALPRICE",
+     "LOWER6SECLOCALREQ",
+     "LOWER6SECPRICE",
+     "LOWER6SECREQ",
+     "LOWER6SECSUPPLYPRICE",
+     "RAISE5MINDISPATCH",
+     "RAISE5MINIMPORT",
+     "RAISE5MINLOCALDISPATCH",
+     "RAISE5MINLOCALPRICE",
+     "RAISE5MINLOCALREQ",
+     "RAISE5MINPRICE",
+     "RAISE5MINREQ",
+     "RAISE5MINSUPPLYPRICE",
+     "RAISE60SECDISPATCH",
+     "RAISE60SECIMPORT",
+     "RAISE60SECLOCALDISPATCH",
+     "RAISE60SECLOCALPRICE",
+     "RAISE60SECLOCALREQ",
+     "RAISE60SECPRICE",
+     "RAISE60SECREQ",
+     "RAISE60SECSUPPLYPRICE",
+     "RAISE6SECDISPATCH",
+     "RAISE6SECIMPORT",
+     "RAISE6SECLOCALDISPATCH",
+     "RAISE6SECLOCALPRICE",
+     "RAISE6SECLOCALREQ",
+     "RAISE6SECPRICE",
+     "RAISE6SECREQ",
+     "RAISE6SECSUPPLYPRICE",
+     "AGGEGATEDISPATCHERROR",
+     "AGGREGATEDISPATCHERROR",
+     "LASTCHANGED",
+     "INITIALSUPPLY",
+     "CLEAREDSUPPLY",
+     "LOWERREGIMPORT",
+     "LOWERREGLOCALDISPATCH",
+     "LOWERREGLOCALREQ",
+     "LOWERREGREQ",
+     "RAISEREGIMPORT",
+     "RAISEREGLOCALDISPATCH",
+     "RAISEREGLOCALREQ",
+     "RAISEREGREQ",
+     "RAISE5MINLOCALVIOLATION",
+     "RAISEREGLOCALVIOLATION",
+     "RAISE60SECLOCALVIOLATION",
+     "RAISE6SECLOCALVIOLATION",
+     "LOWER5MINLOCALVIOLATION",
+     "LOWERREGLOCALVIOLATION",
+     "LOWER60SECLOCALVIOLATION",
+     "LOWER6SECLOCALVIOLATION",
+     "RAISE5MINVIOLATION",
+     "RAISEREGVIOLATION",
+     "RAISE60SECVIOLATION",
+     "RAISE6SECVIOLATION",
+     "LOWER5MINVIOLATION",
+     "LOWERREGVIOLATION",
+     "LOWER60SECVIOLATION",
+     "LOWER6SECVIOLATION",
+     "RAISE6SECACTUALAVAILABILITY",
+     "RAISE60SECACTUALAVAILABILITY",
+     "RAISE5MINACTUALAVAILABILITY",
+     "RAISEREGACTUALAVAILABILITY",
+     "LOWER6SECACTUALAVAILABILITY",
+     "LOWER60SECACTUALAVAILABILITY",
+     "LOWER5MINACTUALAVAILABILITY",
+     "LOWERREGACTUALAVAILABILITY",
+     "LORSURPLUS",
+     "LRCSURPLUS",
+     "TOTALINTERMITTENTGENERATION",
+     "DEMAND_AND_NONSCHEDGEN",
+     "UIGF",
+     "SEMISCHEDULE_CLEAREDMW",
+     "SEMISCHEDULE_COMPLIANCEMW",
+     "SS_SOLAR_UIGF",
+     "SS_WIND_UIGF",
+     "SS_SOLAR_CLEAREDMW",
+     "SS_WIND_CLEAREDMW",
+     "SS_SOLAR_COMPLIANCEMW",
+     "SS_WIND_COMPLIANCEMW",
+     "WDR_INITIALMW",
+     "WDR_AVAILABLE",
+     "WDR_DISPATCHED",
+     "RAISE1SECLOCALDISPATCH",
+     "LOWER1SECLOCALDISPATCH",
+     "RAISE1SECACTUALAVAILABILITY",
+     "LOWER1SECACTUALAVAILABILITY",
+     "SS_SOLAR_AVAILABILITY",
+     "SS_WIND_AVAILABILITY",
+     "BDU_ENERGY_STORAGE",
+     "BDU_MIN_AVAIL",
+     "BDU_MAX_AVAIL",
+     "BDU_CLEAREDMW_GEN",
+     "BDU_CLEAREDMW_LOAD",
+     "BDU_INITIAL_ENERGY_STORAGE"
+    ],
+    "rows": 5,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 5,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "INTERCONNECTORRES": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "RUNNO",
+     "INTERCONNECTORID",
+     "DISPATCHINTERVAL",
+     "INTERVENTION",
+     "METEREDMWFLOW",
+     "MWFLOW",
+     "MWLOSSES",
+     "MARGINALVALUE",
+     "VIOLATIONDEGREE",
+     "LASTCHANGED",
+     "EXPORTLIMIT",
+     "IMPORTLIMIT",
+     "MARGINALLOSS",
+     "EXPORTGENCONID",
+     "IMPORTGENCONID",
+     "FCASEXPORTLIMIT",
+     "FCASIMPORTLIMIT",
+     "LOCAL_PRICE_ADJUSTMENT_EXPORT",
+     "LOCALLY_CONSTRAINED_EXPORT",
+     "LOCAL_PRICE_ADJUSTMENT_IMPORT",
+     "LOCALLY_CONSTRAINED_IMPORT"
+    ],
+    "rows": 7,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 7,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "CONSTRAINT": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "RUNNO",
+     "CONSTRAINTID",
+     "DISPATCHINTERVAL",
+     "INTERVENTION",
+     "RHS",
+     "MARGINALVALUE",
+     "VIOLATIONDEGREE",
+     "LASTCHANGED",
+     "DUID",
+     "GENCONID_EFFECTIVEDATE",
+     "GENCONID_VERSIONNO",
+     "LHS"
+    ],
+    "rows": 1082,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 1082,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "INTERCONNECTION": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "RUNNO",
+     "INTERVENTION",
+     "FROM_REGIONID",
+     "TO_REGIONID",
+     "DISPATCHINTERVAL",
+     "IRLF",
+     "MWFLOW",
+     "METEREDMWFLOW",
+     "FROM_REGION_MW_LOSSES",
+     "TO_REGION_MW_LOSSES",
+     "LASTCHANGED"
+    ],
+    "rows": 5,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 5,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "histdemand_current": {
+  "file": "PUBLIC_HISTDEMAND_20261011_0000000542408372.zip",
+  "bytes": 1666,
+  "members": [
+   "PUBLIC_HISTDEMAND_20261011_0000000542408372.csv"
+  ],
+  "tables": {
+   "HISTORIC": {
+    "columns": [
+     "REGIONID",
+     "SETTLEMENTDATE",
+     "PERIODID",
+     "DEMAND"
+    ],
+    "rows": 240,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-11 00:00:00",
+      "max": "2026-10-11 00:00:00",
+      "n_parsed": 240,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "intermittent_current": {
+  "file": "PUBLIC_NEXT_DAY_INTERMITTENT_GEN_SCADA_20261011_0000000542423046.zip",
+  "bytes": 783596,
+  "members": [
+   "PUBLIC_NEXT_DAY_INTERMITTENT_GEN_SCADA_20261011_0000000542423046.CSV"
+  ],
+  "tables": {
+   "INTERMITTENT_GEN_SCADA": {
+    "columns": [
+     "RUN_DATETIME",
+     "DUID",
+     "SCADA_TYPE",
+     "SCADA_VALUE",
+     "SCADA_QUALITY",
+     "LASTCHANGED"
+    ],
+    "rows": 118080,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-11 04:05:00",
+      "max": "2026-10-12 00:20:00",
+      "n_parsed": 100000,
+      "distinct_within_cap": 244,
+      "step_minutes_top": [
+       [
+        5,
+        243
+       ]
+      ],
+      "span_hours": 20.25
+     }
+    },
+    "note": "datetime stats cover the first 100000 rows only"
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "mtpasa_current": {
+  "file": "PUBLIC_MTPASA_202610050100_0000000541451200.zip",
+  "bytes": 2540227,
+  "members": [
+   "PUBLIC_MTPASA_202610050100_0000000541451200.CSV"
+  ],
+  "tables": {
+   "CASERESULT": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUN_NO",
+     "PLEXOS_VERSION",
+     "LASTCHANGED"
+    ],
+    "rows": 1,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-05 01:00:00",
+      "max": "2026-10-05 01:00:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "CONSTRAINTRESULT": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUN_NO",
+     "RUNTYPE",
+     "DEMAND_POE_TYPE",
+     "DAY",
+     "CONSTRAINTID",
+     "EFFECTIVEDATE",
+     "VERSIONNO",
+     "PERIODID",
+     "PROBABILITYOFBINDING",
+     "PROBABILITYOFVIOLATION",
+     "CONSTRAINTVIOLATION90",
+     "CONSTRAINTVIOLATION50",
+     "CONSTRAINTVIOLATION10",
+     "LASTCHANGED"
+    ],
+    "rows": 29836,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-05 01:00:00",
+      "max": "2026-10-05 01:00:00",
+      "n_parsed": 29836,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "CONSTRAINTSUMMARY": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUN_NO",
+     "RUNTYPE",
+     "DEMAND_POE_TYPE",
+     "DAY",
+     "CONSTRAINTID",
+     "AGGREGATION_PERIOD",
+     "EFFECTIVEDATE",
+     "VERSIONNO",
+     "CONSTRAINTHOURSBINDING",
+     "LASTCHANGED"
+    ],
+    "rows": 302961,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-05 01:00:00",
+      "max": "2026-10-05 01:00:00",
+      "n_parsed": 100000,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": "datetime stats cover the first 100000 rows only"
+   },
+   "INTERCONNECTORRESULT": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUN_NO",
+     "RUNTYPE",
+     "DEMAND_POE_TYPE",
+     "DAY",
+     "INTERCONNECTORID",
+     "PERIODID",
+     "FLOW90",
+     "FLOW50",
+     "FLOW10",
+     "PROBABILITYOFBINDINGEXPORT",
+     "PROBABILITYOFBINDINGIMPORT",
+     "CALCULATEDEXPORTLIMIT",
+     "CALCULATEDIMPORTLIMIT",
+     "LASTCHANGED"
+    ],
+    "rows": 5103,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-05 01:00:00",
+      "max": "2026-10-05 01:00:00",
+      "n_parsed": 5103,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "LOLPRESULT": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUN_NO",
+     "RUNTYPE",
+     "DAY",
+     "REGIONID",
+     "WORST_INTERVAL_PERIODID",
+     "WORST_INTERVAL_DEMAND",
+     "WORST_INTERVAL_INTGEN",
+     "WORST_INTERVAL_DSP",
+     "LOSSOFLOADPROBABILITY",
+     "LOSSOFLOADMAGNITUDE",
+     "LASTCHANGED"
+    ],
+    "rows": 3640,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-05 01:00:00",
+      "max": "2026-10-05 01:00:00",
+      "n_parsed": 3640,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "REGIONRESULT": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUN_NO",
+     "RUNTYPE",
+     "DEMAND_POE_TYPE",
+     "DAY",
+     "REGIONID",
+     "PERIODID",
+     "DEMAND",
+     "AGGREGATEINSTALLEDCAPACITY",
+     "NUMBEROFITERATIONS",
+     "USE_NUMBEROFITERATIONS",
+     "USE_MAX",
+     "USE_UPPERQUARTILE",
+     "USE_MEDIAN",
+     "USE_LOWERQUARTILE",
+     "USE_MIN",
+     "USE_AVERAGE",
+     "USE_EVENT_AVERAGE",
+     "TOTALSCHEDULEDGEN90",
+     "TOTALSCHEDULEDGEN50",
+     "TOTALSCHEDULEDGEN10",
+     "TOTALINTERMITTENTGEN90",
+     "TOTALINTERMITTENTGEN50",
+     "TOTALINTERMITTENTGEN10",
+     "DEMANDSIDEPARTICIPATION90",
+     "DEMANDSIDEPARTICIPATION50",
+     "DEMANDSIDEPARTICIPATION10",
+     "LASTCHANGED",
+     "TOTALSEMISCHEDULEGEN90",
+     "TOTALSEMISCHEDULEGEN50",
+     "TOTALSEMISCHEDULEGEN10",
+     "TOTALAVAILABLEGENMIN",
+     "TOTALAVAILABLEGEN10",
+     "TOTALAVAILABLEGEN50",
+     "TOTALAVAILABLEGEN90",
+     "TOTALAVAILABLEGENMAX"
+    ],
+    "rows": 3645,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-05 01:00:00",
+      "max": "2026-10-05 01:00:00",
+      "n_parsed": 3645,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "REGIONSUMMARY": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUN_NO",
+     "RUNTYPE",
+     "DEMAND_POE_TYPE",
+     "AGGREGATION_PERIOD",
+     "PERIOD_ENDING",
+     "REGIONID",
+     "NATIVEDEMAND",
+     "USE_PERCENTILE10",
+     "USE_PERCENTILE20",
+     "USE_PERCENTILE30",
+     "USE_PERCENTILE40",
+     "USE_PERCENTILE50",
+     "USE_PERCENTILE60",
+     "USE_PERCENTILE70",
+     "USE_PERCENTILE80",
+     "USE_PERCENTILE90",
+     "USE_PERCENTILE100",
+     "USE_AVERAGE",
+     "NUMBEROFITERATIONS",
+     "USE_NUMBEROFITERATIONS",
+     "USE_EVENT_MAX",
+     "USE_EVENT_UPPERQUARTILE",
+     "USE_EVENT_MEDIAN",
+     "USE_EVENT_LOWERQUARTILE",
+     "USE_EVENT_MIN",
+     "WEIGHT",
+     "USE_WEIGHTED_AVG",
+     "LRC",
+     "LASTCHANGED"
+    ],
+    "rows": 270,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-05 01:00:00",
+      "max": "2026-10-05 01:00:00",
+      "n_parsed": 270,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "REGIONITERATION": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUN_NO",
+     "RUNTYPE",
+     "DEMAND_POE_TYPE",
+     "AGGREGATION_PERIOD",
+     "PERIOD_ENDING",
+     "REGIONID",
+     "USE_ITERATION_ID",
+     "USE_ITERATION_EVENT_NUMBER",
+     "USE_ITERATION_EVENT_AVERAGE",
+     "LASTCHANGED"
+    ],
+    "rows": 183,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-05 01:00:00",
+      "max": "2026-10-05 01:00:00",
+      "n_parsed": 183,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "p5min_current": {
+  "file": "PUBLIC_P5MIN_202610130145_20261013014035.zip",
+  "bytes": 210229,
+  "members": [
+   "PUBLIC_P5MIN_202610130145_20261013014035.CSV"
+  ],
+  "tables": {
+   "CASESOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "STARTINTERVAL_DATETIME",
+     "INTERVENTION",
+     "TOTALOBJECTIVE",
+     "NONPHYSICALLOSSES",
+     "TOTALAREAGENVIOLATION",
+     "TOTALINTERCONNECTORVIOLATION",
+     "TOTALGENERICVIOLATION",
+     "TOTALRAMPRATEVIOLATION",
+     "TOTALUNITMWCAPACITYVIOLATION",
+     "TOTAL5MINVIOLATION",
+     "TOTALREGVIOLATION",
+     "TOTAL6SECVIOLATION",
+     "TOTAL60SECVIOLATION",
+     "TOTALENERGYCONSTRVIOLATION",
+     "TOTALENERGYOFFERVIOLATION",
+     "TOTALASPROFILEVIOLATION",
+     "TOTALFASTSTARTVIOLATION",
+     "LASTCHANGED"
+    ],
+    "rows": 1,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "STARTINTERVAL_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "LOCAL_PRICE": {
+    "columns": [
+     "RUN_DATETIME",
+     "DUID",
+     "INTERVAL_DATETIME",
+     "LOCAL_PRICE_ADJUSTMENT",
+     "LOCALLY_CONSTRAINED",
+     "LASTCHANGED"
+    ],
+    "rows": 42,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 42,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 02:40:00",
+      "n_parsed": 42,
+      "distinct_within_cap": 12,
+      "step_minutes_top": [
+       [
+        5,
+        11
+       ]
+      ],
+      "span_hours": 0.917
+     }
+    },
+    "note": ""
+   },
+   "REGIONSOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVENTION",
+     "INTERVAL_DATETIME",
+     "REGIONID",
+     "RRP",
+     "ROP",
+     "EXCESSGENERATION",
+     "RAISE6SECRRP",
+     "RAISE6SECROP",
+     "RAISE60SECRRP",
+     "RAISE60SECROP",
+     "RAISE5MINRRP",
+     "RAISE5MINROP",
+     "RAISEREGRRP",
+     "RAISEREGROP",
+     "LOWER6SECRRP",
+     "LOWER6SECROP",
+     "LOWER60SECRRP",
+     "LOWER60SECROP",
+     "LOWER5MINRRP",
+     "LOWER5MINROP",
+     "LOWERREGRRP",
+     "LOWERREGROP",
+     "TOTALDEMAND",
+     "AVAILABLEGENERATION",
+     "AVAILABLELOAD",
+     "DEMANDFORECAST",
+     "DISPATCHABLEGENERATION",
+     "DISPATCHABLELOAD",
+     "NETINTERCHANGE",
+     "LOWER5MINDISPATCH",
+     "LOWER5MINIMPORT",
+     "LOWER5MINLOCALDISPATCH",
+     "LOWER5MINLOCALREQ",
+     "LOWER5MINREQ",
+     "LOWER60SECDISPATCH",
+     "LOWER60SECIMPORT",
+     "LOWER60SECLOCALDISPATCH",
+     "LOWER60SECLOCALREQ",
+     "LOWER60SECREQ",
+     "LOWER6SECDISPATCH",
+     "LOWER6SECIMPORT",
+     "LOWER6SECLOCALDISPATCH",
+     "LOWER6SECLOCALREQ",
+     "LOWER6SECREQ",
+     "RAISE5MINDISPATCH",
+     "RAISE5MINIMPORT",
+     "RAISE5MINLOCALDISPATCH",
+     "RAISE5MINLOCALREQ",
+     "RAISE5MINREQ",
+     "RAISE60SECDISPATCH",
+     "RAISE60SECIMPORT",
+     "RAISE60SECLOCALDISPATCH",
+     "RAISE60SECLOCALREQ",
+     "RAISE60SECREQ",
+     "RAISE6SECDISPATCH",
+     "RAISE6SECIMPORT",
+     "RAISE6SECLOCALDISPATCH",
+     "RAISE6SECLOCALREQ",
+     "RAISE6SECREQ",
+     "AGGREGATEDISPATCHERROR",
+     "INITIALSUPPLY",
+     "CLEAREDSUPPLY",
+     "LOWERREGIMPORT",
+     "LOWERREGDISPATCH",
+     "LOWERREGLOCALDISPATCH",
+     "LOWERREGLOCALREQ",
+     "LOWERREGREQ",
+     "RAISEREGIMPORT",
+     "RAISEREGDISPATCH",
+     "RAISEREGLOCALDISPATCH",
+     "RAISEREGLOCALREQ",
+     "RAISEREGREQ",
+     "RAISE5MINLOCALVIOLATION",
+     "RAISEREGLOCALVIOLATION",
+     "RAISE60SECLOCALVIOLATION",
+     "RAISE6SECLOCALVIOLATION",
+     "LOWER5MINLOCALVIOLATION",
+     "LOWERREGLOCALVIOLATION",
+     "LOWER60SECLOCALVIOLATION",
+     "LOWER6SECLOCALVIOLATION",
+     "RAISE5MINVIOLATION",
+     "RAISEREGVIOLATION",
+     "RAISE60SECVIOLATION",
+     "RAISE6SECVIOLATION",
+     "LOWER5MINVIOLATION",
+     "LOWERREGVIOLATION",
+     "LOWER60SECVIOLATION",
+     "LOWER6SECVIOLATION",
+     "LASTCHANGED",
+     "TOTALINTERMITTENTGENERATION",
+     "DEMAND_AND_NONSCHEDGEN",
+     "UIGF",
+     "SEMISCHEDULE_CLEAREDMW",
+     "SEMISCHEDULE_COMPLIANCEMW",
+     "SS_SOLAR_UIGF",
+     "SS_WIND_UIGF",
+     "SS_SOLAR_CLEAREDMW",
+     "SS_WIND_CLEAREDMW",
+     "SS_SOLAR_COMPLIANCEMW",
+     "SS_WIND_COMPLIANCEMW",
+     "WDR_INITIALMW",
+     "WDR_AVAILABLE",
+     "WDR_DISPATCHED",
+     "SS_SOLAR_AVAILABILITY",
+     "SS_WIND_AVAILABILITY",
+     "RAISE1SECRRP",
+     "RAISE1SECROP",
+     "LOWER1SECRRP",
+     "LOWER1SECROP",
+     "RAISE1SECLOCALDISPATCH",
+     "LOWER1SECLOCALDISPATCH",
+     "BDU_ENERGY_STORAGE",
+     "BDU_MIN_AVAIL",
+     "BDU_MAX_AVAIL",
+     "BDU_CLEAREDMW_GEN",
+     "BDU_CLEAREDMW_LOAD",
+     "BDU_INITIAL_ENERGY_STORAGE"
+    ],
+    "rows": 60,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 60,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 02:40:00",
+      "n_parsed": 60,
+      "distinct_within_cap": 12,
+      "step_minutes_top": [
+       [
+        5,
+        11
+       ]
+      ],
+      "span_hours": 0.917
+     }
+    },
+    "note": ""
+   },
+   "INTERCONNECTORSOLN": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVENTION",
+     "INTERCONNECTORID",
+     "INTERVAL_DATETIME",
+     "METEREDMWFLOW",
+     "MWFLOW",
+     "MWLOSSES",
+     "MARGINALVALUE",
+     "VIOLATIONDEGREE",
+     "MNSP",
+     "EXPORTLIMIT",
+     "IMPORTLIMIT",
+     "MARGINALLOSS",
+     "EXPORTGENCONID",
+     "IMPORTGENCONID",
+     "FCASEXPORTLIMIT",
+     "FCASIMPORTLIMIT",
+     "LASTCHANGED",
+     "LOCAL_PRICE_ADJUSTMENT_EXPORT",
+     "LOCALLY_CONSTRAINED_EXPORT",
+     "LOCAL_PRICE_ADJUSTMENT_IMPORT",
+     "LOCALLY_CONSTRAINED_IMPORT"
+    ],
+    "rows": 84,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 84,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 02:40:00",
+      "n_parsed": 84,
+      "distinct_within_cap": 12,
+      "step_minutes_top": [
+       [
+        5,
+        11
+       ]
+      ],
+      "span_hours": 0.917
+     }
+    },
+    "note": ""
+   },
+   "CONSTRAINTSOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVENTION",
+     "INTERVAL_DATETIME",
+     "CONSTRAINTID",
+     "RHS",
+     "MARGINALVALUE",
+     "VIOLATIONDEGREE",
+     "LASTCHANGED",
+     "DUID",
+     "GENCONID_EFFECTIVEDATE",
+     "GENCONID_VERSIONNO",
+     "LHS"
+    ],
+    "rows": 12984,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 01:45:00",
+      "n_parsed": 12984,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 01:45:00",
+      "max": "2026-10-13 02:40:00",
+      "n_parsed": 12984,
+      "distinct_within_cap": 12,
+      "step_minutes_top": [
+       [
+        5,
+        11
+       ]
+      ],
+      "span_hours": 0.917
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "p5minfcst_current": {
+  "file": "PUBLIC_P5MINFCST_202610130135_0000000542575797.zip",
+  "bytes": 87383,
+  "members": [
+   "PUBLIC_P5MINFCST_202610130135_0000000542575797.CSV"
+  ],
+  "tables": {
+   "FCAS_REQ_CONSTRAINT": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUNNO",
+     "INTERVAL_DATETIME",
+     "CONSTRAINTID",
+     "REGIONID",
+     "BIDTYPE",
+     "LHS",
+     "RHS",
+     "MARGINALVALUE",
+     "RRP",
+     "REGIONAL_ENABLEMENT",
+     "CONSTRAINT_ENABLEMENT",
+     "REGION_BASE_COST",
+     "BASE_COST",
+     "ADJUSTED_COST",
+     "P_REGULATION"
+    ],
+    "rows": 9192,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:40:00",
+      "max": "2026-10-13 01:40:00",
+      "n_parsed": 9192,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 01:40:00",
+      "max": "2026-10-13 02:35:00",
+      "n_parsed": 9192,
+      "distinct_within_cap": 12,
+      "step_minutes_top": [
+       [
+        5,
+        11
+       ]
+      ],
+      "span_hours": 0.917
+     }
+    },
+    "note": ""
+   },
+   "FCAS_REQ_RUN": {
+    "columns": [
+     "RUN_DATETIME",
+     "RUNNO",
+     "LASTCHANGED"
+    ],
+    "rows": 1,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:40:00",
+      "max": "2026-10-13 01:40:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "pd7day_current": {
+  "file": "PUBLIC_PD7DAY_20261012174724_0000000542519877.zip",
+  "bytes": 5023202,
+  "members": [
+   "PUBLIC_PD7DAY_20261012174724_0000000542519877.CSV"
+  ],
+  "tables": {
+   "CASESOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVENTION",
+     "LASTCHANGED"
+    ],
+    "rows": 1,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-12 18:00:00",
+      "max": "2026-10-12 18:00:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "MARKET_SUMMARY": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVAL_DATETIME",
+     "GPG_FUEL_FORECAST_TJ"
+    ],
+    "rows": 8,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-12 18:00:00",
+      "max": "2026-10-12 18:00:00",
+      "n_parsed": 8,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-12 00:00:00",
+      "max": "2026-10-19 00:00:00",
+      "n_parsed": 8,
+      "distinct_within_cap": 8,
+      "step_minutes_top": [
+       [
+        1440,
+        7
+       ]
+      ],
+      "span_hours": 168.0
+     }
+    },
+    "note": ""
+   },
+   "CONSTRAINTSOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVENTION",
+     "INTERVAL_DATETIME",
+     "CONSTRAINTID",
+     "RHS",
+     "MARGINALVALUE",
+     "VIOLATIONDEGREE",
+     "LHS",
+     "LASTCHANGED"
+    ],
+    "rows": 354032,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-12 18:00:00",
+      "max": "2026-10-12 18:00:00",
+      "n_parsed": 100000,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-12 18:00:00",
+      "max": "2026-10-14 19:00:00",
+      "n_parsed": 100000,
+      "distinct_within_cap": 99,
+      "step_minutes_top": [
+       [
+        30,
+        98
+       ]
+      ],
+      "span_hours": 49.0
+     }
+    },
+    "note": "datetime stats cover the first 100000 rows only"
+   },
+   "INTERCONNECTORSOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVENTION",
+     "INTERVAL_DATETIME",
+     "INTERCONNECTORID",
+     "METEREDMWFLOW",
+     "MWFLOW",
+     "MWLOSSES",
+     "MARGINALVALUE",
+     "VIOLATIONDEGREE",
+     "EXPORTLIMIT",
+     "IMPORTLIMIT",
+     "MARGINALLOSS",
+     "EXPORTCONSTRAINTID",
+     "IMPORTCONSTRAINTID",
+     "FCASEXPORTLIMIT",
+     "FCASIMPORTLIMIT",
+     "LOCAL_PRICE_ADJUSTMENT_EXPORT",
+     "LOCALLY_CONSTRAINED_EXPORT",
+     "LOCAL_PRICE_ADJUSTMENT_IMPORT",
+     "LOCALLY_CONSTRAINED_IMPORT",
+     "LASTCHANGED"
+    ],
+    "rows": 2499,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-12 18:00:00",
+      "max": "2026-10-12 18:00:00",
+      "n_parsed": 2499,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-12 18:00:00",
+      "max": "2026-10-20 04:00:00",
+      "n_parsed": 2499,
+      "distinct_within_cap": 357,
+      "step_minutes_top": [
+       [
+        30,
+        356
+       ]
+      ],
+      "span_hours": 178.0
+     }
+    },
+    "note": ""
+   },
+   "PRICESOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVENTION",
+     "INTERVAL_DATETIME",
+     "REGIONID",
+     "RRP",
+     "LOWER1SECRRP",
+     "LOWER6SECRRP",
+     "LOWER60SECRRP",
+     "LOWER5MINRRP",
+     "LOWERREGRRP",
+     "RAISE1SECRRP",
+     "RAISE6SECRRP",
+     "RAISE60SECRRP",
+     "RAISE5MINRRP",
+     "RAISEREGRRP",
+     "LASTCHANGED"
+    ],
+    "rows": 1785,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-12 18:00:00",
+      "max": "2026-10-12 18:00:00",
+      "n_parsed": 1785,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-12 18:00:00",
+      "max": "2026-10-20 04:00:00",
+      "n_parsed": 1785,
+      "distinct_within_cap": 357,
+      "step_minutes_top": [
+       [
+        30,
+        356
+       ]
+      ],
+      "span_hours": 178.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "pdpasa_current": {
+  "file": "PUBLIC_PDPASA_202610130200_0000000542575683.zip",
+  "bytes": 57216,
+  "members": [
+   "PUBLIC_PDPASA_202610130200_0000000542575683.CSV"
+  ],
+  "tables": {
+   "CASESOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "PASAVERSION",
+     "RESERVECONDITION",
+     "LORCONDITION",
+     "CAPACITYOBJFUNCTION",
+     "CAPACITYOPTION",
+     "MAXSURPLUSRESERVEOPTION",
+     "MAXSPARECAPACITYOPTION",
+     "INTERCONNECTORFLOWPENALTY",
+     "LASTCHANGED",
+     "RELIABILITYLRCDEMANDOPTION",
+     "OUTAGELRCDEMANDOPTION",
+     "LORDEMANDOPTION",
+     "RELIABILITYLRCCAPACITYOPTION",
+     "OUTAGELRCCAPACITYOPTION",
+     "LORCAPACITYOPTION",
+     "LORUIGFOPTION",
+     "RELIABILITYLRCUIGFOPTION",
+     "OUTAGELRCUIGFOPTION"
+    ],
+    "rows": 1,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-13 02:00:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "INTERCONNECTORSOLN": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVAL_DATETIME",
+     "INTERCONNECTORID",
+     "CAPACITYMWFLOW",
+     "CAPACITYMARGINALVALUE",
+     "CAPACITYVIOLATIONDEGREE",
+     "CALCULATEDEXPORTLIMIT",
+     "CALCULATEDIMPORTLIMIT",
+     "LASTCHANGED",
+     "RUNTYPE",
+     "EXPORTLIMITCONSTRAINTID",
+     "IMPORTLIMITCONSTRAINTID",
+     "STUDYREGIONID"
+    ],
+    "rows": 1855,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-13 02:00:00",
+      "n_parsed": 1855,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-14 04:00:00",
+      "n_parsed": 1855,
+      "distinct_within_cap": 53,
+      "step_minutes_top": [
+       [
+        30,
+        52
+       ]
+      ],
+      "span_hours": 26.0
+     }
+    },
+    "note": ""
+   },
+   "CONSTRAINTSOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVAL_DATETIME",
+     "CONSTRAINTID",
+     "CAPACITYRHS",
+     "CAPACITYMARGINALVALUE",
+     "CAPACITYVIOLATIONDEGREE",
+     "LASTCHANGED",
+     "RUNTYPE",
+     "STUDYREGIONID"
+    ],
+    "rows": 2698,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-13 02:00:00",
+      "n_parsed": 2698,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-14 04:00:00",
+      "n_parsed": 2698,
+      "distinct_within_cap": 53,
+      "step_minutes_top": [
+       [
+        30,
+        52
+       ]
+      ],
+      "span_hours": 26.0
+     }
+    },
+    "note": ""
+   },
+   "REGIONSOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVAL_DATETIME",
+     "REGIONID",
+     "DEMAND10",
+     "DEMAND50",
+     "DEMAND90",
+     "RESERVEREQ",
+     "CAPACITYREQ",
+     "ENERGYREQDEMAND50",
+     "UNCONSTRAINEDCAPACITY",
+     "CONSTRAINEDCAPACITY",
+     "NETINTERCHANGEUNDERSCARCITY",
+     "SURPLUSCAPACITY",
+     "SURPLUSRESERVE",
+     "RESERVECONDITION",
+     "MAXSURPLUSRESERVE",
+     "MAXSPARECAPACITY",
+     "LORCONDITION",
+     "AGGREGATECAPACITYAVAILABLE",
+     "AGGREGATESCHEDULEDLOAD",
+     "AGGREGATEPASAAVAILABILITY",
+     "LASTCHANGED",
+     "RUNTYPE",
+     "ENERGYREQDEMAND10",
+     "CALCULATEDLOR1LEVEL",
+     "CALCULATEDLOR2LEVEL",
+     "MSRNETINTERCHANGEUNDERSCARCITY",
+     "LORNETINTERCHANGEUNDERSCARCITY",
+     "TOTALINTERMITTENTGENERATION",
+     "DEMAND_AND_NONSCHEDGEN",
+     "UIGF",
+     "SEMISCHEDULEDCAPACITY",
+     "LOR_SEMISCHEDULEDCAPACITY",
+     "LCR",
+     "LCR2",
+     "FUM",
+     "SS_SOLAR_UIGF",
+     "SS_WIND_UIGF",
+     "SS_SOLAR_CAPACITY",
+     "SS_WIND_CAPACITY",
+     "SS_SOLAR_CLEARED",
+     "SS_WIND_CLEARED",
+     "WDR_AVAILABLE",
+     "WDR_PASAAVAILABLE",
+     "WDR_CAPACITY"
+    ],
+    "rows": 265,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-13 02:00:00",
+      "n_parsed": 265,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-14 04:00:00",
+      "n_parsed": 265,
+      "distinct_within_cap": 53,
+      "step_minutes_top": [
+       [
+        30,
+        52
+       ]
+      ],
+      "span_hours": 26.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "predispatchfcst_current": {
+  "file": "PUBLIC_PREDISPATCHFCST_202610130200_0000000542575340.zip",
+  "bytes": 370882,
+  "members": [
+   "PUBLIC_PREDISPATCHFCST_202610130200_0000000542575340.CSV"
+  ],
+  "tables": {
+   "FCAS_REQ_CONSTRAINT": {
+    "columns": [
+     "PREDISPATCHSEQNO",
+     "RUN_DATETIME",
+     "RUNNO",
+     "INTERVAL_DATETIME",
+     "CONSTRAINTID",
+     "REGIONID",
+     "BIDTYPE",
+     "LHS",
+     "RHS",
+     "MARGINALVALUE",
+     "RRP",
+     "REGIONAL_ENABLEMENT",
+     "CONSTRAINT_ENABLEMENT",
+     "REGION_BASE_COST",
+     "BASE_COST",
+     "ADJUSTED_COST",
+     "P_REGULATION"
+    ],
+    "rows": 41007,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-13 02:00:00",
+      "n_parsed": 41007,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-14 04:00:00",
+      "n_parsed": 41007,
+      "distinct_within_cap": 53,
+      "step_minutes_top": [
+       [
+        30,
+        52
+       ]
+      ],
+      "span_hours": 26.0
+     }
+    },
+    "note": ""
+   },
+   "FCAS_REQ_RUN": {
+    "columns": [
+     "PREDISPATCHSEQNO",
+     "RUN_DATETIME",
+     "RUNNO",
+     "LASTCHANGED"
+    ],
+    "rows": 1,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-13 02:00:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "public_prices_current": {
+  "file": "PUBLIC_PRICES_202610110000_20261012040503.zip",
+  "bytes": 259115,
+  "members": [
+   "PUBLIC_PRICES_202610110000_20261012040503.CSV"
+  ],
+  "tables": {
+   "DREGION": {
+    "columns": [
+     "2",
+     "SETTLEMENTDATE",
+     "RUNNO",
+     "REGIONID",
+     "INTERVENTION",
+     "RRP",
+     "EEP",
+     "ROP",
+     "APCFLAG",
+     "MARKETSUSPENDEDFLAG",
+     "TOTALDEMAND",
+     "DEMANDFORECAST",
+     "DISPATCHABLEGENERATION",
+     "DISPATCHABLELOAD",
+     "NETINTERCHANGE",
+     "EXCESSGENERATION",
+     "LOWER5MINDISPATCH",
+     "LOWER5MINIMPORT",
+     "LOWER5MINLOCALDISPATCH",
+     "LOWER5MINLOCALPRICE",
+     "LOWER5MINLOCALREQ",
+     "LOWER5MINPRICE",
+     "LOWER5MINREQ",
+     "LOWER5MINSUPPLYPRICE",
+     "LOWER60SECDISPATCH",
+     "LOWER60SECIMPORT",
+     "LOWER60SECLOCALDISPATCH",
+     "LOWER60SECLOCALPRICE",
+     "LOWER60SECLOCALREQ",
+     "LOWER60SECPRICE",
+     "LOWER60SECREQ",
+     "LOWER60SECSUPPLYPRICE",
+     "LOWER6SECDISPATCH",
+     "LOWER6SECIMPORT",
+     "LOWER6SECLOCALDISPATCH",
+     "LOWER6SECLOCALPRICE",
+     "LOWER6SECLOCALREQ",
+     "LOWER6SECPRICE",
+     "LOWER6SECREQ",
+     "LOWER6SECSUPPLYPRICE",
+     "RAISE5MINDISPATCH",
+     "RAISE5MINIMPORT",
+     "RAISE5MINLOCALDISPATCH",
+     "RAISE5MINLOCALPRICE",
+     "RAISE5MINLOCALREQ",
+     "RAISE5MINPRICE",
+     "RAISE5MINREQ",
+     "RAISE5MINSUPPLYPRICE",
+     "RAISE60SECDISPATCH",
+     "RAISE60SECIMPORT",
+     "RAISE60SECLOCALDISPATCH",
+     "RAISE60SECLOCALPRICE",
+     "RAISE60SECLOCALREQ",
+     "RAISE60SECPRICE",
+     "RAISE60SECREQ",
+     "RAISE60SECSUPPLYPRICE",
+     "RAISE6SECDISPATCH",
+     "RAISE6SECIMPORT",
+     "RAISE6SECLOCALDISPATCH",
+     "RAISE6SECLOCALPRICE",
+     "RAISE6SECLOCALREQ",
+     "RAISE6SECPRICE",
+     "RAISE6SECREQ",
+     "RAISE6SECSUPPLYPRICE",
+     "AGGREGATEDISPATCHERROR",
+     "AVAILABLEGENERATION",
+     "AVAILABLELOAD",
+     "INITIALSUPPLY",
+     "CLEAREDSUPPLY",
+     "LOWERREGIMPORT",
+     "LOWERREGLOCALDISPATCH",
+     "LOWERREGLOCALREQ",
+     "LOWERREGREQ",
+     "RAISEREGIMPORT",
+     "RAISEREGLOCALDISPATCH",
+     "RAISEREGLOCALREQ",
+     "RAISEREGREQ",
+     "RAISE5MINLOCALVIOLATION",
+     "RAISEREGLOCALVIOLATION",
+     "RAISE60SECLOCALVIOLATION",
+     "RAISE6SECLOCALVIOLATION",
+     "LOWER5MINLOCALVIOLATION",
+     "LOWERREGLOCALVIOLATION",
+     "LOWER60SECLOCALVIOLATION",
+     "LOWER6SECLOCALVIOLATION",
+     "RAISE5MINVIOLATION",
+     "RAISEREGVIOLATION",
+     "RAISE60SECVIOLATION",
+     "RAISE6SECVIOLATION",
+     "LOWER5MINVIOLATION",
+     "LOWERREGVIOLATION",
+     "LOWER60SECVIOLATION",
+     "LOWER6SECVIOLATION",
+     "RAISE6SECRRP",
+     "RAISE6SECROP",
+     "RAISE6SECAPCFLAG",
+     "RAISE60SECRRP",
+     "RAISE60SECROP",
+     "RAISE60SECAPCFLAG",
+     "RAISE5MINRRP",
+     "RAISE5MINROP",
+     "RAISE5MINAPCFLAG",
+     "RAISEREGRRP",
+     "RAISEREGROP",
+     "RAISEREGAPCFLAG",
+     "LOWER6SECRRP",
+     "LOWER6SECROP",
+     "LOWER6SECAPCFLAG",
+     "LOWER60SECRRP",
+     "LOWER60SECROP",
+     "LOWER60SECAPCFLAG",
+     "LOWER5MINRRP",
+     "LOWER5MINROP",
+     "LOWER5MINAPCFLAG",
+     "LOWERREGRRP",
+     "LOWERREGROP",
+     "LOWERREGAPCFLAG",
+     "LOWER1SECRRP",
+     "LOWER1SECROP",
+     "LOWER1SECAPCFLAG",
+     "RAISE1SECRRP",
+     "RAISE1SECROP",
+     "RAISE1SECAPCFLAG",
+     "RAISE1SECLOCALDISPATCH",
+     "LOWER1SECLOCALDISPATCH"
+    ],
+    "rows": 2880,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-11 04:05:00",
+      "max": "2026-10-12 04:00:00",
+      "n_parsed": 2880,
+      "distinct_within_cap": 288,
+      "step_minutes_top": [
+       [
+        5,
+        287
+       ]
+      ],
+      "span_hours": 23.917
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "rooftop_actual_area_current": {
+  "file": "PUBLIC_ROOFTOP_PV_ACTUAL_SATELLITE_AREA_20261013013000_0000000542575127.zip",
+  "bytes": 482,
+  "members": [
+   "PUBLIC_ROOFTOP_PV_ACTUAL_SATELLITE_AREA_20261013013000_0000000542575127.csv"
+  ],
+  "tables": {
+   "ACTUAL": {
+    "columns": [
+     "INTERVAL_DATETIME",
+     "AREAID",
+     "POWER",
+     "QI",
+     "TYPE",
+     "LASTCHANGED"
+    ],
+    "rows": 8,
+    "time": {
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 01:00:00",
+      "max": "2026-10-13 01:00:00",
+      "n_parsed": 8,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "rooftop_actual_current": {
+  "file": "PUBLIC_ROOFTOP_PV_ACTUAL_SATELLITE_20261013013000_0000000542575126.zip",
+  "bytes": 447,
+  "members": [
+   "PUBLIC_ROOFTOP_PV_ACTUAL_SATELLITE_20261013013000_0000000542575126.csv"
+  ],
+  "tables": {
+   "ACTUAL": {
+    "columns": [
+     "INTERVAL_DATETIME",
+     "REGIONID",
+     "POWER",
+     "QI",
+     "TYPE",
+     "LASTCHANGED"
+    ],
+    "rows": 5,
+    "time": {
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 01:00:00",
+      "max": "2026-10-13 01:00:00",
+      "n_parsed": 5,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "rooftop_forecast_archive": {
+  "file": "PUBLIC_ROOFTOP_PV_FORECAST_20260924.zip",
+  "bytes": 7836694,
+  "members": [
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924000000_0000000539475288.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924003000_0000000539478669.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924010000_0000000539482132.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924013000_0000000539485706.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924020000_0000000539489119.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924023000_0000000539492654.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924030000_0000000539496056.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924033000_0000000539499607.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924040000_0000000539503147.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924043000_0000000539507559.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924050000_0000000539510762.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924053000_0000000539513804.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924060000_0000000539516828.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924063000_0000000539519812.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924070000_0000000539523133.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924073000_0000000539526644.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924080000_0000000539529999.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924083000_0000000539533409.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924090000_0000000539536885.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924093000_0000000539540553.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924100000_0000000539544031.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924103000_0000000539547666.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924110000_0000000539551349.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924113000_0000000539555307.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924120000_0000000539558823.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924123000_0000000539562746.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924130000_0000000539566657.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924133000_0000000539570491.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924140000_0000000539574539.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924143000_0000000539578817.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924150000_0000000539582796.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924153000_0000000539586716.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924160000_0000000539590514.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924163000_0000000539594286.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924170000_0000000539597994.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924173000_0000000539601976.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924180000_0000000539605460.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924183000_0000000539609310.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924190000_0000000539612731.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924193000_0000000539616194.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924200000_0000000539619451.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924203000_0000000539622856.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924210000_0000000539626068.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924213000_0000000539629685.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924220000_0000000539633321.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924223000_0000000539636591.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924230000_0000000539640042.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260924233000_0000000539643440.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925000000_0000000539646865.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925003000_0000000539650321.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925010000_0000000539653839.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925013000_0000000539657433.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925020000_0000000539660808.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925023000_0000000539664226.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925030000_0000000539667642.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925033000_0000000539671113.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925040000_0000000539674560.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925043000_0000000539678874.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925050000_0000000539681918.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925053000_0000000539684733.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925060000_0000000539687679.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925063000_0000000539690732.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925070000_0000000539693815.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925073000_0000000539697213.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925080000_0000000539700536.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925083000_0000000539703705.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925090000_0000000539707033.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925093000_0000000539710587.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925100000_0000000539713194.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925103000_0000000539715577.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925110000_0000000539718308.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925113000_0000000539720963.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925120000_0000000539723439.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925123000_0000000539726272.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925130000_0000000539729070.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925133000_0000000539731989.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925140000_0000000539734725.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925143000_0000000539737835.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925150000_0000000539740754.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925153000_0000000539743817.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925160000_0000000539746901.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925163000_0000000539750005.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925170000_0000000539752744.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925173000_0000000539755440.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925180000_0000000539758012.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925183000_0000000539761054.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925190000_0000000539763528.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925193000_0000000539766022.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925200000_0000000539768604.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925203000_0000000539771097.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925210000_0000000539773502.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925213000_0000000539776084.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925220000_0000000539778531.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925223000_0000000539781125.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925230000_0000000539784009.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260925233000_0000000539787185.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926000000_0000000539789650.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926003000_0000000539792076.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926010000_0000000539794569.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926013000_0000000539797167.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926020000_0000000539799546.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926023000_0000000539801911.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926030000_0000000539804264.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926033000_0000000539806742.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926040000_0000000539809180.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926043000_0000000539812462.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926050000_0000000539814384.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926053000_0000000539816396.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926060000_0000000539818291.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926063000_0000000539820328.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926070000_0000000539822414.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926073000_0000000539824834.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926080000_0000000539827112.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926083000_0000000539829630.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926090000_0000000539831860.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926093000_0000000539834204.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926100000_0000000539836610.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926103000_0000000539839125.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926110000_0000000539841521.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926113000_0000000539844094.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926120000_0000000539846543.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926123000_0000000539849234.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926130000_0000000539851851.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926133000_0000000539855006.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926140000_0000000539857929.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926143000_0000000539860592.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926150000_0000000539863392.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926153000_0000000539866131.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926160000_0000000539868885.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926163000_0000000539871748.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926170000_0000000539874413.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926173000_0000000539877108.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926180000_0000000539879804.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926183000_0000000539882804.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926190000_0000000539885430.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926193000_0000000539887998.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926200000_0000000539890500.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926203000_0000000539892900.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926210000_0000000539895346.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926213000_0000000539897920.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926220000_0000000539900566.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926223000_0000000539903194.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926230000_0000000539905644.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260926233000_0000000539908139.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927000000_0000000539910694.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927003000_0000000539913284.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927010000_0000000539915685.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927013000_0000000539918307.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927020000_0000000539920931.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927023000_0000000539923516.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927030000_0000000539926028.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927033000_0000000539928573.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927040000_0000000539931019.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927043000_0000000539934450.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927050000_0000000539936499.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927053000_0000000539938607.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927060000_0000000539940643.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927063000_0000000539943387.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927070000_0000000539945681.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927073000_0000000539948734.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927080000_0000000539951044.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927083000_0000000539953995.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927090000_0000000539956503.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927093000_0000000539959669.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927100000_0000000539962130.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927103000_0000000539965115.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927110000_0000000539967733.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927113000_0000000539970908.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927120000_0000000539973171.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927123000_0000000539976376.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927130000_0000000539979164.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927133000_0000000539981998.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927140000_0000000539984688.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927143000_0000000539987565.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927150000_0000000539990339.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927153000_0000000539993140.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927160000_0000000539995833.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927163000_0000000539998656.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927170000_0000000540001349.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927173000_0000000540004197.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927180000_0000000540006801.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927183000_0000000540009612.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927190000_0000000540012115.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927193000_0000000540014683.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927200000_0000000540017184.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927203000_0000000540019702.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927210000_0000000540022083.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927213000_0000000540024579.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927220000_0000000540027254.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927223000_0000000540029745.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927230000_0000000540032219.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260927233000_0000000540034698.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928000000_0000000540037407.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928003000_0000000540039881.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928010000_0000000540042370.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928013000_0000000540045050.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928020000_0000000540047450.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928023000_0000000540049943.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928030000_0000000540052397.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928033000_0000000540054939.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928040000_0000000540057272.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928043000_0000000540060714.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928050000_0000000540062691.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928053000_0000000540064679.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928060000_0000000540066841.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928063000_0000000540069512.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928070000_0000000540071655.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928073000_0000000540074800.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928080000_0000000540077159.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928083000_0000000540080203.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928090000_0000000540082845.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928093000_0000000540086120.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928100000_0000000540088507.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928103000_0000000540091593.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928110000_0000000540094290.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928113000_0000000540097348.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928120000_0000000540100021.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928123000_0000000540102974.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928130000_0000000540105843.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928133000_0000000540108800.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928140000_0000000540111547.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928143000_0000000540114543.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928150000_0000000540117516.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928153000_0000000540120480.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928160000_0000000540123411.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928163000_0000000540126311.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928170000_0000000540129035.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928173000_0000000540131774.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928180000_0000000540134291.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928183000_0000000540137057.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928190000_0000000540139408.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928193000_0000000540141739.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928200000_0000000540144048.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928203000_0000000540146327.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928210000_0000000540148603.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928213000_0000000540151156.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928220000_0000000540153553.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928223000_0000000540155748.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928230000_0000000540158103.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260928233000_0000000540160404.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929000000_0000000540162671.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929003000_0000000540164993.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929010000_0000000540167303.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929013000_0000000540169718.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929020000_0000000540172034.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929023000_0000000540174432.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929030000_0000000540176723.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929033000_0000000540179132.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929040000_0000000540181548.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929043000_0000000540185010.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929050000_0000000540187038.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929053000_0000000540188984.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929060000_0000000540190987.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929063000_0000000540193007.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929070000_0000000540195183.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929073000_0000000540197700.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929080000_0000000540200236.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929083000_0000000540202532.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929090000_0000000540204788.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929093000_0000000540207066.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929100000_0000000540209500.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929103000_0000000540211806.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929110000_0000000540214287.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929113000_0000000540217223.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929120000_0000000540219650.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929123000_0000000540222615.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929130000_0000000540225289.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929133000_0000000540227980.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929140000_0000000540230828.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929143000_0000000540234192.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929150000_0000000540238068.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929153000_0000000540241953.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929160000_0000000540245671.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929163000_0000000540249242.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929170000_0000000540253147.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929173000_0000000540256950.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929180000_0000000540260630.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929183000_0000000540264523.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929190000_0000000540268168.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929193000_0000000540271622.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929200000_0000000540275177.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929203000_0000000540278623.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929210000_0000000540282113.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929213000_0000000540285530.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929220000_0000000540289107.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929223000_0000000540292615.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929230000_0000000540296118.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260929233000_0000000540299918.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930000000_0000000540303819.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930003000_0000000540307273.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930010000_0000000540310669.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930013000_0000000540314260.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930020000_0000000540317764.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930023000_0000000540321251.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930030000_0000000540324852.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930033000_0000000540328426.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930040000_0000000540331921.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930043000_0000000540336223.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930050000_0000000540339220.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930053000_0000000540342178.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930060000_0000000540345239.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930063000_0000000540348328.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930070000_0000000540351592.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930073000_0000000540355115.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930080000_0000000540358536.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930083000_0000000540361956.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930090000_0000000540365604.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930093000_0000000540369161.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930100000_0000000540372705.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930103000_0000000540376357.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930110000_0000000540379944.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930113000_0000000540383700.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930120000_0000000540388068.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930123000_0000000540392252.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930130000_0000000540396346.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930133000_0000000540400415.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930140000_0000000540404684.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930143000_0000000540408764.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930150000_0000000540412890.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930153000_0000000540416978.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930160000_0000000540420879.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930163000_0000000540424887.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930170000_0000000540428688.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930173000_0000000540432407.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930180000_0000000540436173.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930183000_0000000540440241.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930190000_0000000540443844.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930193000_0000000540447419.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930200000_0000000540450823.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930203000_0000000540454347.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930210000_0000000540457808.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930213000_0000000540461503.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930220000_0000000540465118.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930223000_0000000540468607.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930230000_0000000540472039.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_20260930233000_0000000540475487.zip"
+  ],
+  "tables": {
+   "FORECAST": {
+    "columns": [
+     "VERSION_DATETIME",
+     "REGIONID",
+     "INTERVAL_DATETIME",
+     "POWERMEAN",
+     "POWERPOE50",
+     "POWERPOELOW",
+     "POWERPOEHIGH",
+     "LASTCHANGED"
+    ],
+    "rows": 1920,
+    "time": {
+     "VERSION_DATETIME": {
+      "min": "2026-09-24 00:00:00",
+      "max": "2026-09-24 00:00:00",
+      "n_parsed": 1920,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-09-24 00:30:00",
+      "max": "2026-10-02 00:00:00",
+      "n_parsed": 1920,
+      "distinct_within_cap": 384,
+      "step_minutes_top": [
+       [
+        30,
+        383
+       ]
+      ],
+      "span_hours": 191.5
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 336,
+  "members_scanned": 336
+ },
+ "rooftop_forecast_area_archive": {
+  "file": "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929.zip",
+  "bytes": 12233607,
+  "members": [
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929000000_0000000540162672.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929003000_0000000540164994.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929010000_0000000540167304.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929013000_0000000540169719.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929020000_0000000540172035.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929023000_0000000540174433.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929030000_0000000540176724.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929033000_0000000540179133.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929040000_0000000540181549.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929043000_0000000540185011.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929050000_0000000540187039.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929053000_0000000540188985.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929060000_0000000540190988.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929063000_0000000540193008.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929070000_0000000540195184.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929073000_0000000540197701.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929080000_0000000540200237.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929083000_0000000540202533.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929090000_0000000540204789.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929093000_0000000540207067.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929100000_0000000540209501.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929103000_0000000540211807.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929110000_0000000540214288.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929113000_0000000540217224.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929120000_0000000540219651.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929123000_0000000540222616.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929130000_0000000540225290.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929133000_0000000540227981.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929140000_0000000540230829.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929143000_0000000540234193.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929150000_0000000540238069.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929153000_0000000540241954.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929160000_0000000540245672.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929163000_0000000540249243.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929170000_0000000540253148.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929173000_0000000540256951.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929180000_0000000540260631.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929183000_0000000540264524.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929190000_0000000540268169.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929193000_0000000540271623.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929200000_0000000540275178.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929203000_0000000540278624.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929210000_0000000540282114.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929213000_0000000540285531.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929220000_0000000540289108.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929223000_0000000540292616.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929230000_0000000540296119.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260929233000_0000000540299919.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930000000_0000000540303820.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930003000_0000000540307274.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930010000_0000000540310670.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930013000_0000000540314261.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930020000_0000000540317765.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930023000_0000000540321252.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930030000_0000000540324853.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930033000_0000000540328427.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930040000_0000000540331922.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930043000_0000000540336224.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930050000_0000000540339221.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930053000_0000000540342179.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930060000_0000000540345240.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930063000_0000000540348329.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930070000_0000000540351593.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930073000_0000000540355116.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930080000_0000000540358537.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930083000_0000000540361957.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930090000_0000000540365605.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930093000_0000000540369162.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930100000_0000000540372706.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930103000_0000000540376358.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930110000_0000000540379945.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930113000_0000000540383701.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930120000_0000000540388069.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930123000_0000000540392253.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930130000_0000000540396347.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930133000_0000000540400416.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930140000_0000000540404685.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930143000_0000000540408765.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930150000_0000000540412891.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930153000_0000000540416979.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930160000_0000000540420880.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930163000_0000000540424888.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930170000_0000000540428689.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930173000_0000000540432408.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930180000_0000000540436174.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930183000_0000000540440242.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930190000_0000000540443845.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930193000_0000000540447420.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930200000_0000000540450824.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930203000_0000000540454348.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930210000_0000000540457809.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930213000_0000000540461504.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930220000_0000000540465119.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930223000_0000000540468608.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930230000_0000000540472040.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20260930233000_0000000540475488.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001000000_0000000540479010.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001003000_0000000540482800.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001010000_0000000540486335.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001013000_0000000540490104.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001020000_0000000540493610.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001023000_0000000540497252.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001030000_0000000540500919.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001033000_0000000540504522.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001040000_0000000540507999.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001043000_0000000540512493.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001050000_0000000540515588.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001053000_0000000540518635.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001060000_0000000540521744.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001063000_0000000540525035.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001070000_0000000540528317.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001073000_0000000540532021.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001080000_0000000540535387.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001083000_0000000540538912.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001090000_0000000540542601.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001093000_0000000540546623.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001100000_0000000540550045.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001103000_0000000540554366.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001110000_0000000540558098.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001113000_0000000540562352.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001120000_0000000540566195.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001123000_0000000540570804.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001130000_0000000540574768.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001133000_0000000540579275.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001140000_0000000540583218.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001143000_0000000540587331.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001150000_0000000540591481.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001153000_0000000540595494.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001160000_0000000540599454.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001163000_0000000540603523.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001170000_0000000540607331.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001173000_0000000540611048.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001180000_0000000540614656.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001183000_0000000540618644.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001190000_0000000540622350.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001193000_0000000540625970.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001200000_0000000540629531.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001203000_0000000540633169.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001210000_0000000540636857.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001213000_0000000540640459.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001220000_0000000540644065.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001223000_0000000540648744.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001230000_0000000540653301.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261001233000_0000000540657018.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002000000_0000000540660858.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002003000_0000000540664648.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002010000_0000000540668344.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002013000_0000000540672071.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002020000_0000000540675792.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002023000_0000000540679356.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002030000_0000000540682925.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002033000_0000000540686704.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002040000_0000000540690336.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002043000_0000000540694843.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002050000_0000000540698027.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002053000_0000000540701181.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002060000_0000000540704383.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002063000_0000000540707760.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002070000_0000000540711168.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002073000_0000000540714751.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002080000_0000000540718192.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002083000_0000000540721751.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002090000_0000000540725277.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002093000_0000000540728849.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002100000_0000000540732457.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002103000_0000000540736414.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002110000_0000000540740180.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002113000_0000000540743981.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002120000_0000000540747836.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002123000_0000000540751991.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002130000_0000000540756026.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002133000_0000000540760096.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002140000_0000000540763999.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002143000_0000000540768021.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002150000_0000000540772159.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002153000_0000000540776320.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002160000_0000000540780251.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002163000_0000000540784319.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002170000_0000000540788453.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002173000_0000000540792562.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002180000_0000000540796345.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002183000_0000000540800614.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002190000_0000000540804404.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002193000_0000000540808076.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002200000_0000000540811850.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002203000_0000000540815610.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002210000_0000000540819390.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002213000_0000000540823056.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002220000_0000000540826913.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002223000_0000000540830733.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002230000_0000000540834236.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261002233000_0000000540837823.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003000000_0000000540841326.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003003000_0000000540844856.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003010000_0000000540848465.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003013000_0000000540852179.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003020000_0000000540855685.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003023000_0000000540859302.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003030000_0000000540862977.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003033000_0000000540866603.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003040000_0000000540870156.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003043000_0000000540874724.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003050000_0000000540877838.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003053000_0000000540881087.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003060000_0000000540884138.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003063000_0000000540887430.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003070000_0000000540890834.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003073000_0000000540894463.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003080000_0000000540898073.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003083000_0000000540901640.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003090000_0000000540905080.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003093000_0000000540908671.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003100000_0000000540912236.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003103000_0000000540915778.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003110000_0000000540919447.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003113000_0000000540923022.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003120000_0000000540926651.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003123000_0000000540931650.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003130000_0000000540935863.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003133000_0000000540939665.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003140000_0000000540943614.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003143000_0000000540947974.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003150000_0000000540951887.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003153000_0000000540956150.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003160000_0000000540960048.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003163000_0000000540964055.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003170000_0000000540967956.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003173000_0000000540971939.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003180000_0000000540975825.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003183000_0000000540979876.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003190000_0000000540983740.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003193000_0000000540987624.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003200000_0000000540991274.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003203000_0000000540994769.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003210000_0000000540998411.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003213000_0000000541002078.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003220000_0000000541005693.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003223000_0000000541009171.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003230000_0000000541012747.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261003233000_0000000541016229.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004000000_0000000541019826.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004003000_0000000541023548.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004010000_0000000541027033.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004013000_0000000541030778.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004020000_0000000541034538.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004023000_0000000541038129.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004030000_0000000541041725.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004033000_0000000541045465.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004040000_0000000541049020.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004043000_0000000541053494.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004050000_0000000541056642.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004053000_0000000541059727.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004060000_0000000541062972.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004063000_0000000541066039.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004070000_0000000541069446.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004073000_0000000541072798.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004080000_0000000541076343.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004083000_0000000541079803.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004090000_0000000541083166.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004093000_0000000541087045.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004100000_0000000541090300.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004103000_0000000541093734.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004110000_0000000541097161.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004113000_0000000541100950.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004120000_0000000541104293.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004123000_0000000541107814.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004130000_0000000541111527.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004133000_0000000541115186.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004140000_0000000541118921.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004143000_0000000541122535.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004150000_0000000541126063.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004153000_0000000541129644.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004160000_0000000541133220.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004163000_0000000541136968.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004170000_0000000541140670.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004173000_0000000541144463.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004180000_0000000541147908.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004183000_0000000541151388.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004190000_0000000541154966.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004193000_0000000541158386.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004200000_0000000541160867.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004203000_0000000541162365.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004210000_0000000541165868.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004213000_0000000541169129.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004220000_0000000541172312.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004223000_0000000541173854.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004230000_0000000541176119.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261004233000_0000000541179689.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005000000_0000000541183092.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005003000_0000000541186575.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005010000_0000000541189905.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005013000_0000000541193534.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005020000_0000000541196862.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005023000_0000000541200124.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005030000_0000000541203482.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005033000_0000000541206859.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005040000_0000000541210413.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005043000_0000000541214821.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005050000_0000000541218031.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005053000_0000000541221187.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005060000_0000000541224466.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005063000_0000000541227589.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005070000_0000000541231060.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005073000_0000000541234500.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005080000_0000000541237966.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005083000_0000000541241199.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005090000_0000000541244975.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005093000_0000000541248253.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005100000_0000000541251848.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005103000_0000000541255344.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005110000_0000000541259206.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005113000_0000000541263042.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005120000_0000000541266710.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005123000_0000000541270345.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005130000_0000000541274266.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005133000_0000000541278125.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005140000_0000000541281831.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005143000_0000000541285404.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005150000_0000000541289207.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005153000_0000000541292934.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005160000_0000000541296637.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005163000_0000000541300350.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005170000_0000000541303838.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005173000_0000000541308023.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005180000_0000000541311561.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005183000_0000000541315269.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005190000_0000000541318780.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005193000_0000000541322310.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005200000_0000000541325826.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005203000_0000000541329022.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005210000_0000000541332302.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005213000_0000000541335737.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005220000_0000000541339193.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005223000_0000000541342544.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005230000_0000000541345925.zip",
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261005233000_0000000541349465.zip"
+  ],
+  "tables": {
+   "FORECAST": {
+    "columns": [
+     "VERSION_DATETIME",
+     "AREAID",
+     "INTERVAL_DATETIME",
+     "POWERMEAN",
+     "POWERPOE50",
+     "POWERPOELOW",
+     "POWERPOEHIGH",
+     "LASTCHANGED"
+    ],
+    "rows": 3072,
+    "time": {
+     "VERSION_DATETIME": {
+      "min": "2026-09-29 00:00:00",
+      "max": "2026-09-29 00:00:00",
+      "n_parsed": 3072,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-09-29 00:30:00",
+      "max": "2026-10-07 00:00:00",
+      "n_parsed": 3072,
+      "distinct_within_cap": 384,
+      "step_minutes_top": [
+       [
+        30,
+        383
+       ]
+      ],
+      "span_hours": 191.5
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 336,
+  "members_scanned": 336
+ },
+ "rooftop_forecast_area_current": {
+  "file": "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261013013000_0000000542575123.zip",
+  "bytes": 40276,
+  "members": [
+   "PUBLIC_ROOFTOP_PV_FORECAST_AREA_20261013013000_0000000542575123.csv"
+  ],
+  "tables": {
+   "FORECAST": {
+    "columns": [
+     "VERSION_DATETIME",
+     "AREAID",
+     "INTERVAL_DATETIME",
+     "POWERMEAN",
+     "POWERPOE50",
+     "POWERPOELOW",
+     "POWERPOEHIGH",
+     "LASTCHANGED"
+    ],
+    "rows": 3072,
+    "time": {
+     "VERSION_DATETIME": {
+      "min": "2026-10-13 01:30:00",
+      "max": "2026-10-13 01:30:00",
+      "n_parsed": 3072,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-21 01:30:00",
+      "n_parsed": 3072,
+      "distinct_within_cap": 384,
+      "step_minutes_top": [
+       [
+        30,
+        383
+       ]
+      ],
+      "span_hours": 191.5
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "rooftop_forecast_current": {
+  "file": "PUBLIC_ROOFTOP_PV_FORECAST_20261013013000_0000000542575122.zip",
+  "bytes": 26424,
+  "members": [
+   "PUBLIC_ROOFTOP_PV_FORECAST_20261013013000_0000000542575122.csv"
+  ],
+  "tables": {
+   "FORECAST": {
+    "columns": [
+     "VERSION_DATETIME",
+     "REGIONID",
+     "INTERVAL_DATETIME",
+     "POWERMEAN",
+     "POWERPOE50",
+     "POWERPOELOW",
+     "POWERPOEHIGH",
+     "LASTCHANGED"
+    ],
+    "rows": 1920,
+    "time": {
+     "VERSION_DATETIME": {
+      "min": "2026-10-13 01:30:00",
+      "max": "2026-10-13 01:30:00",
+      "n_parsed": 1920,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-13 02:00:00",
+      "max": "2026-10-21 01:30:00",
+      "n_parsed": 1920,
+      "distinct_within_cap": 384,
+      "step_minutes_top": [
+       [
+        30,
+        383
+       ]
+      ],
+      "span_hours": 191.5
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "sevenday_full_current": {
+  "file": "PUBLIC_SEVENDAYOUTLOOK_FULL_20261013013446_0000000542575686.zip",
+  "bytes": 25412,
+  "members": [
+   "PUBLIC_SEVENDAYOUTLOOK_FULL_20261013013446_0000000542575686.CSV"
+  ],
+  "tables": {
+   "PEAK": {
+    "columns": [
+     "REGIONID",
+     "CALENDAR_DATE",
+     "SCHEDULED_DEMAND",
+     "SCHEDULED_CAPACITY",
+     "NET_INTERCHANGE",
+     "SCHEDULED_RESERVE",
+     "INTERVAL_DATETIME"
+    ],
+    "rows": 1480,
+    "time": {
+     "CALENDAR_DATE": {
+      "min": "2026-10-14 00:00:00",
+      "max": "2026-10-20 00:00:00",
+      "n_parsed": 1480,
+      "distinct_within_cap": 7,
+      "step_minutes_top": [
+       [
+        1440,
+        6
+       ]
+      ],
+      "span_hours": 144.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-14 00:30:00",
+      "max": "2026-10-20 04:00:00",
+      "n_parsed": 1480,
+      "distinct_within_cap": 296,
+      "step_minutes_top": [
+       [
+        30,
+        295
+       ]
+      ],
+      "span_hours": 147.5
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "stpasa_current": {
+  "file": "PUBLIC_STPASA_202610130100_0000000542573053.zip",
+  "bytes": 321991,
+  "members": [
+   "PUBLIC_STPASA_202610130100_0000000542573053.CSV"
+  ],
+  "tables": {
+   "CASESOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "PASAVERSION",
+     "RESERVECONDITION",
+     "LORCONDITION",
+     "CAPACITYOBJFUNCTION",
+     "CAPACITYOPTION",
+     "MAXSURPLUSRESERVEOPTION",
+     "MAXSPARECAPACITYOPTION",
+     "INTERCONNECTORFLOWPENALTY",
+     "LASTCHANGED",
+     "RELIABILITYLRCDEMANDOPTION",
+     "OUTAGELRCDEMANDOPTION",
+     "LORDEMANDOPTION",
+     "RELIABILITYLRCCAPACITYOPTION",
+     "OUTAGELRCCAPACITYOPTION",
+     "LORCAPACITYOPTION",
+     "LORUIGFOPTION",
+     "RELIABILITYLRCUIGFOPTION",
+     "OUTAGELRCUIGFOPTION"
+    ],
+    "rows": 1,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:00:00",
+      "max": "2026-10-13 01:00:00",
+      "n_parsed": 1,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     }
+    },
+    "note": ""
+   },
+   "INTERCONNECTORSOLN": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVAL_DATETIME",
+     "INTERCONNECTORID",
+     "CAPACITYMWFLOW",
+     "CAPACITYMARGINALVALUE",
+     "CAPACITYVIOLATIONDEGREE",
+     "CALCULATEDEXPORTLIMIT",
+     "CALCULATEDIMPORTLIMIT",
+     "LASTCHANGED",
+     "RUNTYPE",
+     "EXPORTLIMITCONSTRAINTID",
+     "IMPORTLIMITCONSTRAINTID",
+     "STUDYREGIONID"
+    ],
+    "rows": 10080,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:00:00",
+      "max": "2026-10-13 01:00:00",
+      "n_parsed": 10080,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-14 04:30:00",
+      "max": "2026-10-20 04:00:00",
+      "n_parsed": 10080,
+      "distinct_within_cap": 288,
+      "step_minutes_top": [
+       [
+        30,
+        287
+       ]
+      ],
+      "span_hours": 143.5
+     }
+    },
+    "note": ""
+   },
+   "CONSTRAINTSOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVAL_DATETIME",
+     "CONSTRAINTID",
+     "CAPACITYRHS",
+     "CAPACITYMARGINALVALUE",
+     "CAPACITYVIOLATIONDEGREE",
+     "LASTCHANGED",
+     "RUNTYPE",
+     "STUDYREGIONID"
+    ],
+    "rows": 20128,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:00:00",
+      "max": "2026-10-13 01:00:00",
+      "n_parsed": 20128,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-14 04:30:00",
+      "max": "2026-10-20 04:00:00",
+      "n_parsed": 20128,
+      "distinct_within_cap": 288,
+      "step_minutes_top": [
+       [
+        30,
+        287
+       ]
+      ],
+      "span_hours": 143.5
+     }
+    },
+    "note": ""
+   },
+   "REGIONSOLUTION": {
+    "columns": [
+     "RUN_DATETIME",
+     "INTERVAL_DATETIME",
+     "REGIONID",
+     "DEMAND10",
+     "DEMAND50",
+     "DEMAND90",
+     "RESERVEREQ",
+     "CAPACITYREQ",
+     "ENERGYREQDEMAND50",
+     "UNCONSTRAINEDCAPACITY",
+     "CONSTRAINEDCAPACITY",
+     "NETINTERCHANGEUNDERSCARCITY",
+     "SURPLUSCAPACITY",
+     "SURPLUSRESERVE",
+     "RESERVECONDITION",
+     "MAXSURPLUSRESERVE",
+     "MAXSPARECAPACITY",
+     "LORCONDITION",
+     "AGGREGATECAPACITYAVAILABLE",
+     "AGGREGATESCHEDULEDLOAD",
+     "AGGREGATEPASAAVAILABILITY",
+     "LASTCHANGED",
+     "RUNTYPE",
+     "ENERGYREQDEMAND10",
+     "CALCULATEDLOR1LEVEL",
+     "CALCULATEDLOR2LEVEL",
+     "MSRNETINTERCHANGEUNDERSCARCITY",
+     "LORNETINTERCHANGEUNDERSCARCITY",
+     "TOTALINTERMITTENTGENERATION",
+     "DEMAND_AND_NONSCHEDGEN",
+     "UIGF",
+     "SEMISCHEDULEDCAPACITY",
+     "LOR_SEMISCHEDULEDCAPACITY",
+     "LCR",
+     "LCR2",
+     "FUM",
+     "SS_SOLAR_UIGF",
+     "SS_WIND_UIGF",
+     "SS_SOLAR_CAPACITY",
+     "SS_WIND_CAPACITY",
+     "SS_SOLAR_CLEARED",
+     "SS_WIND_CLEARED",
+     "WDR_AVAILABLE",
+     "WDR_PASAAVAILABLE",
+     "WDR_CAPACITY"
+    ],
+    "rows": 1440,
+    "time": {
+     "RUN_DATETIME": {
+      "min": "2026-10-13 01:00:00",
+      "max": "2026-10-13 01:00:00",
+      "n_parsed": 1440,
+      "distinct_within_cap": 1,
+      "step_minutes_top": [],
+      "span_hours": 0.0
+     },
+     "INTERVAL_DATETIME": {
+      "min": "2026-10-14 04:30:00",
+      "max": "2026-10-20 04:00:00",
+      "n_parsed": 1440,
+      "distinct_within_cap": 288,
+      "step_minutes_top": [
+       [
+        30,
+        287
+       ]
+      ],
+      "span_hours": 143.5
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ },
+ "vwafcas_current": {
+  "file": "PUBLIC_VWAFCASPRICES_202610110000_20261012040504.zip",
+  "bytes": 5499,
+  "members": [
+   "PUBLIC_VWAFCASPRICES_202610110000_20261012040504.CSV"
+  ],
+  "tables": {
+   "VWAFCASPRICES": {
+    "columns": [
+     "SETTLEMENTDATE",
+     "RUNNO",
+     "LOWER5MINVWAPRICE",
+     "LOWER5MINVOLUME",
+     "LOWER5MINREVENUE",
+     "LOWER6SECVWAPRICE",
+     "LOWER6SECVOLUME",
+     "LOWER6SECREVENUE",
+     "LOWER60SECVWAPRICE",
+     "LOWER60SECVOLUME",
+     "LOWER60SECREVENUE",
+     "LOWERREGVWAPRICE",
+     "LOWERREGVOLUME",
+     "LOWERREGREVENUE",
+     "RAISE5MINVWAPRICE",
+     "RAISE5MINVOLUME",
+     "RAISE5MINREVENUE",
+     "RAISE6SECVWAPRICE",
+     "RAISE6SECVOLUME",
+     "RAISE6SECREVENUE",
+     "RAISE60SECVWAPRICE",
+     "RAISE60SECVOLUME",
+     "RAISE60SECREVENUE",
+     "RAISEREGVWAPRICE",
+     "RAISEREGVOLUME",
+     "RAISEREGREVENUE",
+     "LASTCHANGED"
+    ],
+    "rows": 48,
+    "time": {
+     "SETTLEMENTDATE": {
+      "min": "2026-10-11 04:30:00",
+      "max": "2026-10-12 04:00:00",
+      "n_parsed": 48,
+      "distinct_within_cap": 48,
+      "step_minutes_top": [
+       [
+        30,
+        47
+       ]
+      ],
+      "span_hours": 23.5
+     }
+    },
+    "note": ""
+   }
+  },
+  "members_total": 1,
+  "members_scanned": 1
+ }
+}

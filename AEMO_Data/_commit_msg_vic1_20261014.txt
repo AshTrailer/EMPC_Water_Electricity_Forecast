@@ -1,0 +1,45 @@
+Carry the predictor source and the VIC1 windows as the tracked data set
+
+The repository held five regions of every window while this project has only ever
+scored VIC1, and the predictor tree sat where it had been built rather than in one
+place. This commit is the two things that belong in the remote: the predictor, and
+the two organised AEMO windows.
+
+Predicitor/  84 .m and one README, 0.4 MB, nothing else. 44 of the files were not
+  tracked under this path before, because the tree had been built under
+  Weekly/EMPC/2026-09-23/predictor/. 8 more were modified in place. This is the
+  whole predictor: the registry and the shared axis, the sixteen models plus the
+  four that are registered but not atlas columns, the ensemble runs, and the
+  figure and report scripts.
+
+AEMO_Data/window_120d_20260201_20260601_vic1/  2026-02-01 .. 2026-06-01, 120 days.
+  p5min_5min_VIC1.csv 414,433 rows, predispatch_30min_VIC1.csv 319,681 rows,
+  dispatch_5min_VIC1.csv 34,539 rows.
+
+AEMO_Data/window_60d_20260811_20261009_vic1/  2026-08-11 .. 2026-10-09, 60 days.
+  predispatch_30min_VIC1.csv 159,841 rows, pd7day_30min_VIC1.csv 63,241 rows, and
+  p5min_vic1_partial/ with the 5-minute set and the two dispatch extracts.
+
+Both directories are renamed to say they hold VIC1 only, and each README carries
+a note at the top saying so. The row and size tables inside them still describe the
+five-region set they were written for, and the note says which line applies.
+Restoring five regions is a re-run of the build scripts the READMEs name.
+
+The other four regions are deleted from the working tree rather than kept: five
+regions is 575 MB against 133 MB, and both windows are regenerated from NEMWEB.
+
+AEMO_Data/level_multiwindow_figs/ is deliberately NOT tracked. It holds seven
+.mat error atlases of 283 to 468 MB, above the 100 MB per-file limit, and every
+one of them is rebuilt by Predicitor/run_full_ensemble_test.m. Its eight small
+PNGs are outputs of the same runs and are also left out.
+
+The 45 tracked files under the old AEMO_Data/ paths resolve as 16 renames (VIC1
+files that kept their contents), 11 renames into AEMO_Data/samples/, and 18
+deletions (the four non-VIC1 regions of each set). The VIC1 monthly price series
+is completed to 14 files; eight of them were already tracked and six were added.
+
+Timestamps in every file are NEM time, AEST UTC+10, with no suffix. Prices are
+unclamped and unfilled. Nothing in this commit changes a number: the CSVs that
+were already tracked are byte-identical, which the R100 similarity in the rename
+detection confirms.
+

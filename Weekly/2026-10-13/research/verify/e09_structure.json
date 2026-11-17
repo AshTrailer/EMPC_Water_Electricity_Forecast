@@ -1,0 +1,161 @@
+{
+  "scored_intervals": 9216,
+  "variants": {
+    "every unit in the stack": {
+      "demand_above_stack_pct": 0.0,
+      "mw_total_median": 19569.0,
+      "demand_median": 5012.87,
+      "at_export_median": -105.7,
+      "at_export_within_5_pct": 0.5967881944444444,
+      "rows": [
+        {
+          "group": "Victoria cheapest",
+          "n": 1573,
+          "below_pct": 0.0,
+          "inside_pct": 100.0,
+          "above_pct": 0.0,
+          "surplus_n": 1573,
+          "surplus_median": 5659.91,
+          "surplus_p10": 3677.846,
+          "surplus_p90": 7054.280000000001,
+          "inside_envelope_pct": 2.797202797202797,
+          "err_at_demand_median": -886.81,
+          "semi_share_median": 0.6139727649496743
+        },
+        {
+          "group": "in between",
+          "n": 7147,
+          "below_pct": 0.0,
+          "inside_pct": 100.0,
+          "above_pct": 0.0,
+          "surplus_n": 7147,
+          "surplus_median": 6570.59,
+          "surplus_p10": 4136.902,
+          "surplus_p90": 8100.334,
+          "inside_envelope_pct": 0.8395130824122009,
+          "err_at_demand_median": -905.62,
+          "semi_share_median": 0.6023730143165327
+        },
+        {
+          "group": "Victoria dearest",
+          "n": 496,
+          "below_pct": 0.0,
+          "inside_pct": 100.0,
+          "above_pct": 0.0,
+          "surplus_n": 496,
+          "surplus_median": 6640.585,
+          "surplus_p10": 5187.125,
+          "surplus_p90": 7629.655000000001,
+          "inside_envelope_pct": 0.0,
+          "err_at_demand_median": -249.90500000000003,
+          "semi_share_median": 0.6019154493566798
+        },
+        {
+          "group": "all",
+          "n": 9216,
+          "below_pct": 0.0,
+          "inside_pct": 100.0,
+          "above_pct": 0.0,
+          "surplus_n": 9216,
+          "surplus_median": 6394.495,
+          "surplus_p10": 4103.43,
+          "surplus_p90": 8013.995,
+          "inside_envelope_pct": 1.128472222222222,
+          "err_at_demand_median": -894.9,
+          "semi_share_median": 0.6054241435562806
+        }
+      ]
+    },
+    "semi scheduled removed": {
+      "demand_above_stack_pct": 0.0,
+      "mw_total_median": 12527.0,
+      "demand_median": 5012.87,
+      "at_export_median": 612.08,
+      "at_export_within_5_pct": 1.46484375,
+      "rows": [
+        {
+          "group": "Victoria cheapest",
+          "n": 1573,
+          "below_pct": 0.0,
+          "inside_pct": 100.0,
+          "above_pct": 0.0,
+          "surplus_n": 1573,
+          "surplus_median": -667.6400000000003,
+          "surplus_p10": -1632.2519999999997,
+          "surplus_p90": 512.5759999999997,
+          "inside_envelope_pct": 87.53973299427845,
+          "err_at_demand_median": 67.24000000000001,
+          "semi_share_median": NaN
+        },
+        {
+          "group": "in between",
+          "n": 7147,
+          "below_pct": 0.0,
+          "inside_pct": 100.0,
+          "above_pct": 0.0,
+          "surplus_n": 7147,
+          "surplus_median": -27.829999999999927,
+          "surplus_p10": -1298.2900000000002,
+          "surplus_p90": 1295.1680000000006,
+          "inside_envelope_pct": 93.19994403246116,
+          "err_at_demand_median": 3.74,
+          "semi_share_median": NaN
+        },
+        {
+          "group": "Victoria dearest",
+          "n": 496,
+          "below_pct": 0.0,
+          "inside_pct": 100.0,
+          "above_pct": 0.0,
+          "surplus_n": 496,
+          "surplus_median": -356.82000000000016,
+          "surplus_p10": -1801.145,
+          "surplus_p90": 729.29,
+          "inside_envelope_pct": 84.2741935483871,
+          "err_at_demand_median": 122.57,
+          "semi_share_median": NaN
+        },
+        {
+          "group": "all",
+          "n": 9216,
+          "below_pct": 0.0,
+          "inside_pct": 100.0,
+          "above_pct": 0.0,
+          "surplus_n": 9216,
+          "surplus_median": -197.125,
+          "surplus_p10": -1390.25,
+          "surplus_p90": 1191.32,
+          "inside_envelope_pct": 91.75347222222221,
+          "err_at_demand_median": 13.290000000000001,
+          "semi_share_median": NaN
+        }
+      ]
+    }
+  },
+  "semi_share_by_hour": [
+    0.5959454034524287,
+    0.5899066163322074,
+    0.5921420023932987,
+    0.6029650690495532,
+    0.6140939597315436,
+    0.6214542548941271,
+    0.6283579074934357,
+    0.6283579074934357,
+    0.6283579074934357,
+    0.627470754336426,
+    0.6283579074934357,
+    0.6112459120160354,
+    0.6027901569463282,
+    0.5769123783031989,
+    0.5671832269826801,
+    0.5791139240506329,
+    0.5838963963963963,
+    0.5923457730388424,
+    0.5993370328942262,
+    0.6019398408343174,
+    0.6074395104795127,
+    0.6081516958264099,
+    0.6082706031870173,
+    0.6082111495067136
+  ]
+}

@@ -1,0 +1,446 @@
+[
+ {
+  "q": "Global Portfolio Optimization Black Litterman Financial Analysts Journal 1992",
+  "hits": [
+   {
+    "title": "Copula-based Black–Litterman portfolio optimization",
+    "year": 2021,
+    "doi": "https://doi.org/10.1016/j.ejor.2021.06.015",
+    "cited": 43,
+    "venue": "European Journal of Operational Research",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0377221721005300/pdf"
+   },
+   {
+    "title": "A demystification of the Black–Litterman model: Managing quantitative and traditional portfolio construction",
+    "year": 2000,
+    "doi": "https://doi.org/10.1057/palgrave.jam.2240011",
+    "cited": 205,
+    "venue": "Journal of Asset Management",
+    "oa": "https://link.springer.com/content/pdf/10.1057%2Fpalgrave.jam.2240011.pdf"
+   },
+   {
+    "title": "Portfolio Optimization: Application of the Black-Litterman Model",
+    "year": 2026,
+    "doi": "https://doi.org/10.46928/iticusbe.1620460",
+    "cited": 0,
+    "venue": "İstanbul Ticaret Üniversitesi Sosyal Bilimler Dergisi",
+    "oa": "https://dergipark.org.tr/en/download/article-file/4523405"
+   },
+   {
+    "title": "Combining transformer based deep reinforcement learning with Black-Litterman model for portfolio optimization",
+    "year": 2024,
+    "doi": "https://doi.org/10.1007/s00521-024-09805-9",
+    "cited": 32,
+    "venue": "Neural Computing and Applications",
+    "oa": "https://arxiv.org/pdf/2402.16609"
+   }
+  ]
+ },
+ {
+  "q": "Forecasting day-ahead electricity prices with a hybrid model using load and renewable forecasts fundamentals contribution",
+  "hits": [
+   {
+    "title": "Day-Ahead Electricity Price Forecasting Based on Hybrid Regression Model",
+    "year": 2022,
+    "doi": "https://doi.org/10.1109/access.2022.3213081",
+    "cited": 73,
+    "venue": "IEEE Access",
+    "oa": "https://ieeexplore.ieee.org/ielx7/6287639/6514899/09913980.pdf"
+   },
+   {
+    "title": "A Review of Electricity Price Forecasting Models in the Day-Ahead, Intra-Day, and Balancing Markets",
+    "year": 2025,
+    "doi": "https://doi.org/10.3390/en18123097",
+    "cited": 58,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/18/12/3097/pdf?version=1749795910"
+   },
+   {
+    "title": "Framework for collaborative intelligence in forecasting day-ahead electricity price",
+    "year": 2021,
+    "doi": "https://doi.org/10.1016/j.apenergy.2021.118049",
+    "cited": 48,
+    "venue": "Applied Energy",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0306261921013398/pdf"
+   },
+   {
+    "title": "A Multi-Stage Price Forecasting Model for Day-Ahead Electricity Markets",
+    "year": 2018,
+    "doi": "https://doi.org/10.3390/forecast1010003",
+    "cited": 44,
+    "venue": "Forecasting",
+    "oa": "https://www.mdpi.com/2571-9394/1/1/3/pdf?version=1545206286"
+   }
+  ]
+ },
+ {
+  "q": "Forecasting electricity prices with fundamentals load wind solar available capacity interconnector",
+  "hits": [
+   {
+    "title": "The impact of wind power generation on the electricity price in Germany",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.eneco.2014.04.003",
+    "cited": 520,
+    "venue": "Energy Economics",
+    "oa": "https://www.ifo.de/DocDL/IfoWorkingPaper-143.pdf"
+   },
+   {
+    "title": "Globally interconnected solar-wind system addresses future electricity demands",
+    "year": 2025,
+    "doi": "https://doi.org/10.1038/s41467-025-59879-9",
+    "cited": 86,
+    "venue": "Nature Communications",
+    "oa": "https://www.nature.com/articles/s41467-025-59879-9.pdf"
+   },
+   {
+    "title": "Parsing the Effects of Wind and Solar Generation on the German Electricity Trade Surplus",
+    "year": 2019,
+    "doi": "https://doi.org/10.3390/en12183434",
+    "cited": 4,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/12/18/3434/pdf?version=1567757045"
+   },
+   {
+    "title": "Modeling and Forecasting Extreme Electricity Prices in Competitive Markets",
+    "year": 2026,
+    "doi": "https://doi.org/10.11575/prism/51038",
+    "cited": 0,
+    "venue": null,
+    "oa": "https://ucalgary.scholaris.ca/bitstreams/d204f6ca-c02d-446a-84ea-a99e7aa97178/download"
+   }
+  ]
+ },
+ {
+  "q": "Multi-step ahead electricity price forecasting direct strategy recursive strategy comparison",
+  "hits": [
+   {
+    "title": "A review and comparison of strategies for multi-step ahead time series forecasting based on the NN5 forecasting competition",
+    "year": 2012,
+    "doi": "https://doi.org/10.1016/j.eswa.2012.01.039",
+    "cited": 734,
+    "venue": "Expert Systems with Applications",
+    "oa": "https://arxiv.org/pdf/1108.3259"
+   },
+   {
+    "title": "A Hybrid Model for Multi-Day-Ahead Electricity Price Forecasting considering Price Spikes",
+    "year": 2023,
+    "doi": "https://doi.org/10.3390/forecast5030028",
+    "cited": 30,
+    "venue": "Forecasting",
+    "oa": "https://www.mdpi.com/2571-9394/5/3/28/pdf?version=1689752288"
+   },
+   {
+    "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+    "cited": 1625,
+    "venue": "International Journal of Forecasting",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf"
+   },
+   {
+    "title": "Framework for collaborative intelligence in forecasting day-ahead electricity price",
+    "year": 2021,
+    "doi": "https://doi.org/10.1016/j.apenergy.2021.118049",
+    "cited": 48,
+    "venue": "Applied Energy",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0306261921013398/pdf"
+   }
+  ]
+ },
+ {
+  "q": "Probabilistic electricity price forecasting review deep learning 2024",
+  "hits": [
+   {
+    "title": "A Review of Recent Trends in Electricity Price Forecasting Using Deep Learning Techniques",
+    "year": 2025,
+    "doi": "https://doi.org/10.3390/en18246422",
+    "cited": 7,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/18/24/6422/pdf"
+   },
+   {
+    "title": "Deep Learning for Electricity Price Forecasting: A Review of Day-Ahead, Intraday, and Balancing Electricity Markets",
+    "year": 2026,
+    "doi": null,
+    "cited": 0,
+    "venue": "arXiv (Cornell University)",
+    "oa": "https://arxiv.org/pdf/2602.10071"
+   },
+   {
+    "title": "Bayesian hierarchical probabilistic forecasting of intraday electricity prices",
+    "year": 2024,
+    "doi": "https://doi.org/10.1016/j.apenergy.2024.124975",
+    "cited": 27,
+    "venue": "Applied Energy",
+    "oa": "https://doi.org/10.1016/j.apenergy.2024.124975"
+   },
+   {
+    "title": "A Review of Electricity Price Forecasting Models in the Day-Ahead, Intra-Day, and Balancing Markets",
+    "year": 2025,
+    "doi": "https://doi.org/10.3390/en18123097",
+    "cited": 58,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/18/12/3097/pdf?version=1749795910"
+   }
+  ]
+ },
+ {
+  "q": "Forecasting intraday electricity prices with lasso variable selection very short-term",
+  "hits": [
+   {
+    "title": "Understanding intraday electricity markets: Variable selection and very short-term price forecasting using LASSO",
+    "year": 2019,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2019.02.001",
+    "cited": 122,
+    "venue": "International Journal of Forecasting",
+    "oa": null
+   },
+   {
+    "title": "Beating the Naïve—Combining LASSO with Naïve Intraday Electricity Price Forecasts",
+    "year": 2020,
+    "doi": "https://doi.org/10.3390/en13071667",
+    "cited": 45,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/13/7/1667/pdf?version=1585876369"
+   },
+   {
+    "title": "Automated Variable Selection and Shrinkage for Day-Ahead Electricity Price Forecasting",
+    "year": 2016,
+    "doi": "https://doi.org/10.3390/en9080621",
+    "cited": 126,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/9/8/621/pdf?version=1470385106"
+   },
+   {
+    "title": "Efficient Forecasting of Electricity Spot Prices with Expert and LASSO Models",
+    "year": 2018,
+    "doi": "https://doi.org/10.3390/en11082039",
+    "cited": 49,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/11/8/2039/pdf"
+   }
+  ]
+ },
+ {
+  "q": "The importance of the long-term seasonal component in day-ahead electricity price forecasting NARX",
+  "hits": [
+   {
+    "title": "On the importance of the long-term seasonal component in day-ahead electricity price forecasting with NARX neural networks",
+    "year": 2018,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2017.11.009",
+    "cited": 120,
+    "venue": "International Journal of Forecasting",
+    "oa": null
+   },
+   {
+    "title": "Importance of the Long-Term Seasonal Component in Day-Ahead Electricity Price Forecasting Revisited: Parameter-Rich Models Estimated via the LASSO",
+    "year": 2021,
+    "doi": "https://doi.org/10.3390/en14113249",
+    "cited": 14,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/14/11/3249/pdf?version=1622622325"
+   },
+   {
+    "title": "A Deep Learning Based Hybrid Framework for Day-Ahead Electricity Price Forecasting",
+    "year": 2020,
+    "doi": "https://doi.org/10.1109/access.2020.3014241",
+    "cited": 104,
+    "venue": "IEEE Access",
+    "oa": "https://doi.org/10.1109/access.2020.3014241"
+   },
+   {
+    "title": "Forecasting day-ahead electricity prices: A review of state-of-the-art algorithms, best practices and an open-access benchmark",
+    "year": 2020,
+    "doi": "https://doi.org/10.1016/j.apenergy.2021.116983",
+    "cited": 520,
+    "venue": "arXiv (Cornell University)",
+    "oa": "https://arxiv.org/pdf/2008.08004"
+   }
+  ]
+ },
+ {
+  "q": "Electricity price forecasting with deep learning a comparative study over 27 European markets",
+  "hits": [
+   {
+    "title": "Deep Learning for Cross-Border Electricity Price Forecasting: A Comparative Study",
+    "year": 2026,
+    "doi": "https://doi.org/10.1109/access.2026.3727000",
+    "cited": 0,
+    "venue": "IEEE Access",
+    "oa": "https://doi.org/10.1109/access.2026.3727000"
+   },
+   {
+    "title": "Electricity Price Forecasting in European Day Ahead Markets: A Greedy Consideration of Market Integration",
+    "year": 2021,
+    "doi": "https://doi.org/10.1109/access.2021.3108629",
+    "cited": 36,
+    "venue": "IEEE Access",
+    "oa": "https://ieeexplore.ieee.org/ielx7/6287639/6514899/09524683.pdf"
+   },
+   {
+    "title": "Electricity Spot Price Modeling and Forecasting in European Markets",
+    "year": 2022,
+    "doi": "https://doi.org/10.3390/en15165980",
+    "cited": 16,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/15/16/5980/pdf?version=1660814915"
+   },
+   {
+    "title": "Electricity Price Forecasting Using Recurrent Neural Networks",
+    "year": 2018,
+    "doi": "https://doi.org/10.3390/en11051255",
+    "cited": 299,
+    "venue": "Energies",
+    "oa": "https://www.mdpi.com/1996-1073/11/5/1255/pdf?version=1526617697"
+   }
+  ]
+ },
+ {
+  "q": "Forecast evaluation with economic value electricity price forecasting trading strategy",
+  "hits": [
+   {
+    "title": "Forecasting Electricity Prices",
+    "year": 2023,
+    "doi": "https://doi.org/10.1093/acrefore/9780190625979.013.667",
+    "cited": 11,
+    "venue": "Oxford Research Encyclopedia of Economics and Finance",
+    "oa": null
+   },
+   {
+    "title": "Forecasting Electricity Prices",
+    "year": 2022,
+    "doi": "https://doi.org/10.48550/arxiv.2204.11735",
+    "cited": 2,
+    "venue": "RePEc: Research Papers in Economics",
+    "oa": "https://arxiv.org/pdf/2204.11735"
+   },
+   {
+    "title": "Probabilistic Forecasting for Day-ahead Electricity Prices, Battery Trading Strategies and the Economic Evaluation of Predictive Accuracy",
+    "year": 2026,
+    "doi": "https://doi.org/10.48550/arxiv.2604.19580",
+    "cited": 0,
+    "venue": "arXiv (Cornell University)",
+    "oa": "https://arxiv.org/pdf/2604.19580"
+   },
+   {
+    "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+    "cited": 1625,
+    "venue": "International Journal of Forecasting",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf"
+   }
+  ]
+ },
+ {
+  "q": "Long-term electricity price forecasting model review",
+  "hits": [
+   {
+    "title": "Data-driven modeling for long-term electricity price forecasting",
+    "year": 2022,
+    "doi": "https://doi.org/10.1016/j.energy.2022.123107",
+    "cited": 89,
+    "venue": "Energy",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S036054422200010X/pdf"
+   },
+   {
+    "title": "FORECASTING ELECTRICITY PRICES IN DEREGULATED WHOLESALE SPOT ELECTRICITY MARKET - A REVIEW",
+    "year": 2013,
+    "doi": null,
+    "cited": 34,
+    "venue": "International Journal of Energy Economics and Policy",
+    "oa": "https://econjournals.com/index.php/ijeep/article/download/621/381"
+   },
+   {
+    "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+    "cited": 1625,
+    "venue": "International Journal of Forecasting",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf"
+   },
+   {
+    "title": "An Electricity Price Forecasting Model by Hybrid Structured Deep Neural Networks",
+    "year": 2018,
+    "doi": "https://doi.org/10.3390/su10041280",
+    "cited": 199,
+    "venue": "Sustainability",
+    "oa": "https://www.mdpi.com/2071-1050/10/4/1280/pdf"
+   }
+  ]
+ },
+ {
+  "q": "Forecasting the shape of the electricity price curve functional data approach",
+  "hits": [
+   {
+    "title": "Modeling and forecasting electricity spot prices: A functional data perspective",
+    "year": 2013,
+    "doi": "https://doi.org/10.1214/13-aoas652",
+    "cited": 106,
+    "venue": "The Annals of Applied Statistics",
+    "oa": "https://projecteuclid.org/journals/annals-of-applied-statistics/volume-7/issue-3/Modeling-and-forecasting-electricity-spot-prices--A-functional-data/10.1214/13-AOAS652.pdf"
+   },
+   {
+    "title": "Electricity price forecasting: A review of the state-of-the-art with a look into the future",
+    "year": 2014,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2014.08.008",
+    "cited": 1625,
+    "venue": "International Journal of Forecasting",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207014001083/pdf"
+   },
+   {
+    "title": "Forecasting electricity prices using bid data",
+    "year": 2022,
+    "doi": "https://doi.org/10.1016/j.ijforecast.2022.05.011",
+    "cited": 26,
+    "venue": "International Journal of Forecasting",
+    "oa": "https://www.sciencedirect.com/science/article/pii/S0169207022000711/pdf"
+   },
+   {
+    "title": "Forecasting the Colombian Electricity Spot Price under a Functional Approach",
+    "year": 2021,
+    "doi": null,
+    "cited": 0,
+    "venue": "International Journal of Energy Economics and Policy",
+    "oa": "https://econjournals.com/index.php/ijeep/article/download/10607/5704"
+   }
+  ]
+ },
+ {
+  "q": "Functional data analysis electricity price curve forecasting",
+  "hits": [
+   {
+    "title": "Forecasting of electricity price through a functional prediction of sale and purchase curves",
+    "year": 2019,
+    "doi": "https://doi.org/10.1002/for.2624",
+    "cited": 53,
+    "venue": "Journal of Forecasting",
+    "oa": null
+   },
+   {
+    "title": "Short-term forecast of daily curves of electricity demand and price",
+    "year": 2016,
+    "doi": "https://doi.org/10.1016/j.ijepes.2016.01.034",
+    "cited": 74,
+    "venue": "International Journal of Electrical Power & Energy Systems",
+    "oa": null
+   },
+   {
+    "title": "Modeling and forecasting electricity spot prices: A functional data perspective",
+    "year": 2013,
+    "doi": "https://doi.org/10.1214/13-aoas652",
+    "cited": 106,
+    "venue": "The Annals of Applied Statistics",
+    "oa": "https://projecteuclid.org/journals/annals-of-applied-statistics/volume-7/issue-3/Modeling-and-forecasting-electricity-spot-prices--A-functional-data/10.1214/13-AOAS652.pdf"
+   },
+   {
+    "title": "Time Series of Functional Data for Forecasting the Yield Curve and Electricity Prices",
+    "year": 2013,
+    "doi": null,
+    "cited": 0,
+    "venue": null,
+    "oa": null
+   }
+  ]
+ }
+]

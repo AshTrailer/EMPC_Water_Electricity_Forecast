@@ -1,0 +1,61 @@
+{
+  "format": "docx",
+  "verdict": "pass",
+  "checks": [
+    {
+      "id": "package",
+      "status": "pass"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "24 September"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "June 2027"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "supervisor and the team"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "did not list specific risks"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "pump decision module"
+    }
+  ],
+  "summary": {
+    "paragraphs": 83,
+    "tables": [
+      {
+        "rows": 6,
+        "columns": 4
+      }
+    ],
+    "sections": [
+      {
+        "page_twips": {
+          "w": "11906",
+          "h": "16838"
+        },
+        "margins_twips": {
+          "top": "1440",
+          "right": "1803",
+          "bottom": "1440",
+          "left": "1803",
+          "header": "720",
+          "footer": "720",
+          "gutter": "0"
+        }
+      }
+    ]
+  }
+}

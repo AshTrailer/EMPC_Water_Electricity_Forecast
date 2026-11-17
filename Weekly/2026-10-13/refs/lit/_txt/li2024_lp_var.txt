@@ -1,0 +1,3598 @@
+
+=== page 1 ===
+Local Projections vs. VARs:
+Lessons From Thousands of DGPs∗
+Dake Li
+Mikkel Plagborg-Møller
+Christian K. Wolf
+Two Sigma Investments, LP
+Princeton University
+MIT & NBER
+January 24, 2024
+Abstract: We conduct a simulation study of Local Projection (LP) and Vec-
+tor Autoregression (VAR) estimators of structural impulse responses across thou-
+sands of data generating processes, designed to mimic the properties of the uni-
+verse of U.S. macroeconomic data. Our analysis considers various identification
+schemes and several variants of LP and VAR estimators, employing bias cor-
+rection, shrinkage, or model averaging. A clear bias-variance trade-off emerges:
+LP estimators have lower bias than VAR estimators, but they also have sub-
+stantially higher variance at intermediate and long horizons. Bias-corrected LP
+is the preferred method if and only if the researcher overwhelmingly prioritizes
+bias. For researchers who also care about precision, VAR methods are the most
+attractive—Bayesian VARs at short and long horizons, and least-squares VARs
+at intermediate and long horizons.
+Keywords: external instrument, impulse response function, local projection, proxy variable,
+structural vector autoregression. JEL codes: C32, C36.
+∗Email: dakel@twosigma.com, mikkelpm@princeton.edu, and ckwolf@mit.edu. We received helpful
+comments from Isaiah Andrews, Régis Barnichon, Gabe Chodorow-Reich, Viet Hoang Dinh, Òscar Jordà,
+Helmut Lütkepohl, Massimiliano Marcellino, Pepe Montiel Olea, Ulrich Müller, Emi Nakamura, Frank
+Schorfheide, Chris Sims, Lumi Stevens, Jim Stock, Mark Watson, Andrei Zeleneev, several anonymous
+referees, and numerous seminar and conference participants. Samya Aboutajdine, Tomás Caravello, Chun-
+Beng Leow, and Eric Qian provided excellent research assistance. Plagborg-Møller acknowledges that this
+material is based upon work supported by the NSF under Grant #2238049, and Wolf does the same for
+Grant #2314736. Any opinions, findings, and conclusions or recommendations expressed in this material are
+those of the authors and do not necessarily reflect the views of the NSF. In addition, the views expressed
+herein are solely the views of the authors and are not necessarily the views of Two Sigma Investments, LP or
+any of its affiliates. They are not intended to provide, and should not be relied upon for, investment advice.
+This research was mostly conducted while Dake Li was affiliated with Princeton University.
+1
+arXiv:2104.00655v4  [econ.EM]  23 Jan 2024
+
+=== page 2 ===
+1
+Introduction
+Since Jordà (2005) introduced the popular local projection (LP) impulse response estimator,
+there has been a debate about its benefits and drawbacks relative to Vector Autoregression
+(VAR) estimation (Sims, 1980). Recently, Plagborg-Møller & Wolf (2021) proved that these
+two methods in fact estimate precisely the same impulse responses asymptotically, provided
+that the lag length used for estimation tends to infinity. This result holds regardless of
+identification scheme and regardless of the underlying data generating process (DGP). Nev-
+ertheless, the question of which estimator to choose in finite samples remains open. It is also
+an urgent question, since researchers have remarked that LPs and VARs can give conflicting
+results when applied to central economic questions such as the effects of monetary or fiscal
+stimulus (e.g., Ramey, 2016; Nakamura & Steinsson, 2018).
+Whereas the LP estimator utilizes the sample autocovariances flexibly by directly pro-
+jecting an outcome at the future horizon h on current covariates, a VAR(p) estimator instead
+extrapolates longer-run impulse responses from the first p sample autocovariances. Hence,
+though the estimates from the two methods agree approximately at horizons h ≤p, they
+can disagree substantially at intermediate and long horizons.1 Intuitively, the extrapola-
+tion employed by VARs should yield a lower variance but potentially a higher bias than for
+LPs, perfectly analogous to the trade-off between direct and iterated reduced-form forecasts
+(Schorfheide, 2005; Kilian & Lütkepohl, 2017).2 How much more should one care about bias
+than variance to optimally choose the LP estimator over the VAR estimator in realistic sam-
+ple sizes? And how does the trade-off depend on the DGP? Unfortunately, these questions
+are challenging to answer analytically, due to the dynamic and nonlinear nature of the time
+series estimators, as well as the breadth of DGPs encountered in applied practice.
+In this paper we illuminate the bias-variance trade-off in impulse response estimation
+through a comprehensive simulation study, applying LP and VAR methods to thousands
+of empirically relevant DGPs.
+Our goal is to identify which estimators perform well on
+average across many DGPs and thus may serve as practical default procedures.
+Rather
+than insisting on the usual binary distinction between “local projections” and “VARs”, we
+furthermore consider an entire menu of related estimation approaches that employ bias
+correction, shrinkage, or model-averaging. We find that the usual least-squares LP estimator
+1See Plagborg-Møller & Wolf (2021, Proposition 2) for a formal result.
+2The trade-off is also conceptually similar to the relationship between polynomial series estimators and
+kernel estimators in cross-sectional nonparametric regression.
+2
+
+=== page 3 ===
+tends to have lower bias than the least-squares VAR estimator, as expected, but also that this
+bias reduction comes at the cost of substantially higher variance. Out of all the procedures
+we analyze, bias-corrected LP is the most attractive estimator if and only if the researcher
+overwhelmingly prioritizes bias. If, however, the researcher also cares about precision (as in
+the conventional mean squared error criterion), then VAR methods are the most attractive;
+in particular, Bayesian VARs perform well at short and long horizons, while it is difficult to
+beat the least-squares VAR estimator at intermediate and long horizons.
+Our simulation study considers an extensive array of DGPs, obtained by drawing specifi-
+cations at random from a large-scale, empirically calibrated dynamic factor model (DFM).3
+We fit the DFM to the data set of Stock & Watson (2016), which contains a large number of
+quarterly U.S. macroeconomic time series spanning a wide variety of variable categories. As
+emphasized by Stock & Watson, such DFMs can accurately capture the joint co-movements
+of conventional macroeconomic data, and so our simulation results will be informative about
+the universe of standard U.S. time series. This estimated DFM exhibits realistic and com-
+plex dynamics in the short and long run, including cointegrating relationships among the
+latent factors. From the encompassing 207-variable DFM we then draw 6,000 random subsets
+of five variables (subject to constraints that emulate applied practice); all results reported
+below are essentially unchanged if instead we limit attention to 17 of the most commonly
+used macro series out of the 207. The randomly drawn subsets of time series constitute the
+set of DGPs that we consider for our simulation study. As the calibrated DFM is known
+to us, we can compute the true impulse responses, and therefore also estimator biases and
+mean squared errors. Importantly, none of these many DGPs can be exactly represented
+as a finite-order VAR model, yielding a non-trivial bias-variance trade-off between the LP
+and VAR estimators. Moreover, our DGPs exhibit substantial heterogeneity in how well
+they can be approximated by VAR models, in persistence and shape of impulse response
+functions, and in the invertibility of the structural shocks, consistent with the heterogeneity
+faced by applied researchers. While our results inevitably depend on the specification of
+the encompassing model, we believe that an estimation method that works well across our
+multitude of empirically calibrated DGPs has substantial promise as a default procedure.
+We study the ability of several variants of LP and VAR methods to accurately estimate
+impulse response functions. Consistent with the majority of applied work, the estimators are
+applied to data in levels, rather than transforming to stationarity prior to estimation. Since
+3Our overall approach is inspired by Lazarus et al. (2018), who are instead interested in the question of
+how to select among different long-run variance estimators.
+3
+
+=== page 4 ===
+VARs with very large lag lengths are asymptotically equivalent to LPs (Plagborg-Møller &
+Wolf, 2021; Xu, 2023), we focus on VAR estimators with moderate lag length choices, as
+conventionally found in the literature. In addition to the popular least-squares LP and VAR
+estimators, we further enrich the bias-variance possibility frontier by considering: (i) small-
+sample bias correction of the VAR coefficients (Pope, 1990; Kilian, 1998) and LP impulse
+response estimates (Herbst & Johannsen, 2023); (ii) penalized LP (Barnichon & Brownlees,
+2019), which smooths out impulse response functions; (iii) Bayesian VAR estimation, with
+priors selected as in Giannone et al. (2015); and (iv) model averaging of univariate and mul-
+tivariate VAR models of various lag lengths (Hansen, 2016). For each estimation method,
+we consider three oft-used structural identification schemes: observed shocks, instrumental
+variables (IVs)/proxies, and recursive identification. For IV identification, we further dis-
+tinguish between internal IV methods (Ramey, 2011; Plagborg-Møller & Wolf, 2021) and
+external IV methods (Stock, 2008; Stock & Watson, 2012; Mertens & Ravn, 2013). We then
+evaluate the performance of these estimators through the lens of loss functions with varying
+weights on bias and variance.
+Applying the estimation methods to simulated data from the thousands of DGPs, a clear
+and unavoidable bias-variance trade-off emerges. We highlight four main lessons:
+1. Though they perform similarly at short horizons, least-squares LP and VAR estimators lie
+on opposite ends of the bias-variance spectrum at intermediate and long horizons: small
+bias and large variance for LPs, and large bias and small variance for VARs. Strictly
+speaking, this statement is only true after applying the small-sample bias correction pro-
+cedures of Pope (1990), Kilian (1998), and Herbst & Johannsen (2023), which partially
+ameliorate the deleterious effects of the high persistence of our DGPs on the biases of the
+respective estimators. We find such bias correction to be particularly important for LPs.
+2. Out of all the estimators we consider, bias-corrected LP is the preferred option if and only
+if the loss function almost exclusively puts weight on bias (at the expense of variance).
+This is because the lower bias of LP relative to VAR comes at the cost of substantially
+higher variance, especially at longer horizons.
+3. If the loss function attaches at least moderate weight to variance (in addition to bias),
+such as in the case of mean squared error loss, VAR methods are attractive. But the
+optimal VAR method depends on the horizon: Bayesian VARs tend to perform well at
+short horizons, least-squares VARs at intermediate horizons, and the two methods are
+comparable at long horizons.
+4
+
+=== page 5 ===
+4. In the case of IV identification, the SVAR-IV estimator is heavily median-biased, but pro-
+vides substantial reduction in dispersion, measured by the interquartile range. Depending
+on the weight attached to bias, it may therefore be justifiable to use external IV methods
+despite their lack of robustness to non-invertibility (unlike internal IV methods).
+Our findings provide a novel perspective on recent work emphasizing the potential dangers
+of VAR model mis-specification (Ramey, 2016; Nakamura & Steinsson, 2018). We consider
+DGPs that do not admit finite-order VAR representations, so VAR methods indeed suffer
+from larger bias, as cautioned there.
+Reducing that bias via direct projection, however,
+tends to incur a steep cost in terms of increased sampling variance at intermediate and long
+horizons. Researchers who prefer to employ LP estimators should therefore be prepared to
+pay that price, and furthermore should apply the Herbst & Johannsen (2023) bias correction
+procedure when their data is persistent, as is usually the case.
+Literature.
+Our simulation study is inspired by the seminal work of Marcellino et al.
+(2006) on direct and iterated multi-step forecasts, though we focus instead on structural
+impulse responses.
+While simulation studies in the forecasting literature often analyze
+low-dimensional specifications, we consider multi-variable systems, consistent with standard
+practice in the applied structural macroeconometrics literature.
+The structural perspec-
+tive also requires us to contend with issues such as the variety of different popular shock
+identification schemes, normalization of impulse responses, and the special role of external
+instrumental variables.
+Our large-scale model set-up differs from prior simulation studies of LP and VAR meth-
+ods, which have considered at most a handful of DGPs. Examples here include Jordà (2005),
+Meier (2005), Kilian & Kim (2011), Brugnolini (2018), Choi & Chudik (2019), Austin (2020),
+and Bruns & Lütkepohl (2022). These papers either obtain their DGPs from stylized, low-
+dimensional VARMA models, calibrated DSGE models, and/or a few empirically calibrated
+VAR models. Our encompassing DGP is instead designed to closely mimic applied practice:
+we consider a non-stationary DFM with rich common and idiosyncratic dynamics that accu-
+rately captures key properties of the kinds of aggregate time series typically used in standard
+macroeconometric analyses. Our analysis also differs in the following respects: we consider
+shrinkage estimation procedures as competitors to the least-squares estimators; we study
+several popular structural identification schemes; and we examine how our conclusions vary
+with the impulse response horizon and the researcher’s loss function. All these features are
+essential to the above-mentioned main lessons that we draw from our results.
+5
+
+=== page 6 ===
+Even though the simulation results are at the heart of our analysis, we start off by illus-
+trating the bias-variance trade-off through an analytical example that builds on Schorfheide
+(2005). That paper develops a general theory of the asymptotic bias and variance of direct
+and iterated (reduced-form) forecasts under local mis-specification. While these theoretical
+results are valuable for analytically distilling the forces at work, they do not by themselves
+resolve the bias-variance trade-off faced by practitioners, as this trade-off invariably depends
+in a complicated fashion on many features of the DGP.
+Finally, we stress that our paper focuses solely on point estimation, as opposed to in-
+ference or hypothesis testing. See Inoue & Kilian (2020), Montiel Olea & Plagborg-Møller
+(2021), and Xu (2023) for theoretical as well as simulation results on VAR and LP confidence
+interval procedures. Moreover, we focus exclusively on impulse response estimands, rather
+than variance decompositions or historical decompositions.
+Outline.
+Section 2 illustrates the bias-variance trade-off for LP and VAR estimators using
+a simple analytical example. Section 3 describes the empirically calibrated dynamic factor
+model that we use to generate our many DGPs. Section 4 defines the menu of LP- and VAR-
+based estimation procedures. Section 5 contains our main simulation results and robustness
+checks. Section 6 summarizes the lessons for applied researchers and then offers guidance for
+future research. The appendix contains implementation details. A supplemental appendix
+with proofs and further simulation results as well as a Matlab code suite are available online.4
+2
+The bias-variance trade-off
+This section motivates our simulation study with an analytical discussion of the bias-variance
+trade-off between LP and VAR impulse response estimators.
+Section 2.1 analyzes these
+estimators in the context of a simple toy model that cleanly illustrates the trade-off, and
+Section 2.2 connects this analytical discussion to the rest of the paper.
+2.1
+Illustrative example
+Plagborg-Møller & Wolf (2021) show that the impulse response estimands of VAR and LP
+estimators with p lags generally differ at horizons h > p: the VAR extrapolates from the
+first p sample autocovariances, while LP exploits all autocovariances out to horizon h + p.
+4https://github.com/dake-li/lp_var_simul
+6
+
+=== page 7 ===
+This observation suggests the presence of a bias-variance trade-off whenever the true DGP
+is not a finite-order VAR, perfectly analogous to the choice between “direct” and “iterated”
+predictions in multi-step forecasting (Marcellino et al., 2006). We here formalize this basic
+intuition by extending the arguments of Schorfheide (2005) to structural impulse response
+estimation in a simple, albeit non-stationary DGP.
+Model.
+Consider a simple sequence of drifting DGPs for the scalar time series yt:
+yt = yt−1 + ε1,t + τε1,t−1 + α
+√
+T ε1,t−2 + ε2,t,
+(1)
+where εt ≡(ε1,t, ε2,t)′ is an i.i.d. white noise process with Var(εt) = diag(1, σ2
+2), and y0 = 0.
+We assume that the researcher observes wt ≡(ε1,t, yt)′, i.e., she observes the shock ε1,t but
+not ε2,t. The above DGP drifts towards a unit-root VAR(1) process in wt at rate T −1/2,
+where T is the sample size. We show below that this ensures a non-trivial bias-variance
+trade-off in the limit T →∞. The DGP captures the notion that finite-order autoregressive
+models are often a good—but not exact—approximation to the true underlying DGP. The
+degree of autoregressive mis-specification is governed by the parameter α.5
+We are interested in the impulse responses of yt with respect to a unit impulse in ε1,t.
+The true impulse response function implied by the model (1) equals θh,T ≡1 + τ1(h ≥
+1)+αT −1/21(h ≥2) at horizon h. This impulse response function reflects—in stark fashion—
+the common empirical finding that signal-to-noise ratios are especially low at longer horizons,
+here h ≥2, in the sense that the increment θ2,T −θ1,T is of the same asymptotic order as
+the standard errors of the LP and VAR estimators, as shown formally below.
+Estimators.
+For now, we consider two estimators of θh,T.
+1. LP. The least-squares local projection estimator ˆβh is obtained from the OLS regression
+yt+h = ˆβhε1,t + ˆζ′
+hwt−1 + residualt,h,
+(2)
+at each horizon h. Notice that this LP specification controls for one lag of the data.
+2. VAR. We consider a recursive VAR specification in wt = (ε1,t, yt)′, again with one lag.
+Define the usual least-squares coefficient estimator ˆA ≡(PT
+t=2 wtw′
+t−1)(PT
+t=2 wt−1w′
+t−1)−1
+5To interpret its units, consider a distributed lag regression of ∆yt on ε1,t, ε1,t−1, and ε1,t−2. Then it is
+standard to show that the t-statistic for significance of the second lag converges in distribution to N(α/σ2, 1).
+7
+
+=== page 8 ===
+and residual covariance matrix ˆΣ ≡T −1 PT
+t=2 ˆutˆu′
+t, where ˆut ≡wt −ˆAwt−1. Define the
+lower triangular Cholesky factor ˆC, where ˆC ˆC′ = ˆΣ. The un-normalized VAR impulse
+responses with respect to the first orthogonalized shock at horizon h are given by ˆAh ˆCe1,
+where ej is the j-th unit vector of dimension 2, j = 1, 2. To facilitate comparison with
+LP, we normalize the impact response of the first variable in the VAR (i.e., ε1,t) with
+respect to the first shock to be 1. This yields the estimator ˆδh ≡e′
+2 ˆAhˆγ, where ˆγ ≡(1, ˆκ)′
+and ˆκ ≡ˆΣ21/ˆΣ11.6
+Trade-off.
+Along the stated asymptote, the researcher faces a clear bias-variance trade-
+off between the LP and VAR impulse response estimators:
+Proposition 1. Consider the model (1), and fix h ≥0, τ ∈R, σ2 > 0, and α ∈R. Assume
+E(ε4
+j,t) < ∞for j = 1, 2. Then, as T →∞,
+√
+T(ˆβh −θh,T)
+d→N(aBiasLP,h, aVarLP,h),
+√
+T(ˆδh −θh,T)
+d→N(aBiasVAR,h, aVarVAR,h), (3)
+where for all h ≥0,
+aBiasLP,h ≡0,
+aVarLP,h ≡{1 + (h −1)(1 + τ)2}1(h ≥1) + (h + 1)σ2
+2.
+For h ∈{0, 1}, we have aBiasVAR,h = aBiasLP,h = 0 and aVarVAR,h = aVarLP,h. For h ≥2,
+aBiasVAR,h ≡−α,
+aVarVAR,h ≡(1 + τ)2 + 2σ2
+2.
+Proof. Please see Supplemental Appendix G.
+At horizons h ∈{0, 1}, there is no bias-variance trade-off: on impact, the two estimators
+are numerically equivalent; at h = 1, both are asymptotically unbiased with identical asymp-
+totic variance, consistent with Plagborg-Møller & Wolf (2021). Intuitively, the equivalence
+at h = 1 reflects the fact that the VAR(1) estimator does not extrapolate, instead reporting
+the direct projection of yt+1 on wt, exactly as LP does (Plagborg-Møller & Wolf, 2021).
+At horizons h ≥2 (i.e., exceeding the lag length used for estimation), the bias-variance
+trade-off is non-trivial. Specifically, the asymptotic biases satisfy | aBiasVAR,h | = |α| > 0 =
+6We have ˆC =
+
+√
+ˆΣ11
+0
+ˆΣ21/√
+ˆΣ11 ˆΣ22−ˆΣ2
+21/ˆΣ11
+
+. We therefore achieve the desired normalization of the impact
+effect of the shock by dividing ˆCe1 by
+pˆΣ11. This gives the normalized impulse responses ˆAhˆγ.
+8
+
+=== page 9 ===
+| aBiasLP,h | whenever α̸ = 0, while the asymptotic variances satisfy aVarLP,h −aVarVAR,h =
+1+σ2
+2+(h−2)[(1+τ)2+σ2
+2] > 0. Intuitively, LP directly projects yt+h on the shock ε1,t, which
+is uncorrelated with any lagged controls, so the asymptotic bias is always zero. In contrast,
+the VAR(1) estimator extrapolates the response at horizon h: the model’s structure implies
+that the precisely estimated autocovariances at lag 1 suffice to compute impulse responses
+at longer horizons. Though this tight parametric extrapolation yields a low variance relative
+to LP, it incurs a bias due to dynamic mis-specification when α̸ = 0. In the simple DGP
+(1), the asymptotic bias of the VAR estimator could be eliminated by simply increasing the
+lag length to 2 or higher, but in practice it may be difficult to determine the appropriate lag
+length, as we demonstrate below in Section 5.6. The fact that both the asymptotic bias and
+variance of the VAR impulse response estimator are constant at horizons h ≥2 is a special
+feature of the stylized DGP (1).7 Nevertheless, our simulation study below will demonstrate
+the robustness of the qualitative predictions that (i) the bias of VAR is high at intermediate
+and long horizons relative to LP, and (ii) the difference between the variance of LP and that
+of VAR tends to increase as a function of the horizon.8
+How does the optimal choice of estimator depend on the researcher’s preferences con-
+cerning bias and variance? To evaluate the performance of a given estimator ˆθh of θh,T, we
+will throughout this paper consider loss functions of the form9
+Lω(θh,T, ˆθh) = ω ×
+
+E[ˆθh −θh,T]
+2 + (1 −ω) × Var(ˆθh).
+(4)
+For ω = 1
+2, this is proportional to the mean squared error (MSE). For ω > 1
+2, the researcher is
+more concerned about (squared) bias than variance, and for ω = 1 the researcher exclusively
+cares about bias. Substituting the asymptotic bias and variance expressions in Proposition 1
+into the above loss function, we find that LP is preferred over VAR (asymptotically) if and
+only if the researcher prioritizes bias sufficiently heavily at the expense of variance, namely
+when ω ≥ω∗
+h ≡1 −α2/(α2 + aVarLP,h −aVarVAR,h) ∈(0, 1) (focusing here on the interesting
+case h ≥2 and α̸ = 0). We remark that—even in the very simple DGP (1)—the indifference
+weight ω∗
+h depends sensitively on all the model parameters and the horizon h.
+7In this DGP, the VAR coefficients on lagged yt are estimated super-consistently due to the unit root, so
+to first order, estimation uncertainty arises only from the coefficients on lagged ε1,t.
+8We derived similar analytical results for a stationary DGP in a previous working paper version of this
+article (Li et al., 2022).
+9The objective function (4) is not a loss function in the usual decision theoretic sense (which would call
+it a risk function when ω = 1
+2). We proceed with the non-standard terminology for ease of exposition.
+9
+
+=== page 10 ===
+2.2
+Outlook
+Because analytical bias-variance calculations will invariably end up depending in complicated
+ways on a multitude of parameters, we will in the rest of this paper use simulations to explore
+the nature of the bias-variance trade-off across a rich and empirically relevant set of DGPs.
+In the language of Section 2.1, these DGPs will inform us about empirically plausible degrees
+of mis-specification α, impulse response function shapes τ, and relative shock importances
+σ2
+2, and therefore about the practically relevant bias weight ω∗
+h necessary to justify the use
+of one linear projection technique over another one. Moreover, we will also consider several
+variants of the standard least-squares LP and VAR estimators, thus allowing us to further
+trace out the bias-variance possibility frontier.
+3
+Data generating processes
+This section presents our DGPs. We define the empirically calibrated encompassing model in
+Section 3.1, from which we draw thousands of DGPs with corresponding structural impulse
+response estimands, as described in Section 3.2. We discuss implementation details in Sec-
+tion 3.3, and provide summary statistics for the DGPs in Section 3.4. Various modifications
+to this baseline set of DGPs are considered later in Section 5.5.
+3.1
+Encompassing model
+We construct our simulation DGPs from an encompassing model that is known to accurately
+capture the time series properties of many U.S. macroeconomic time series: a dynamic factor
+model (DFM) fitted to the well-known Stock & Watson (2016) data set. Because we seek
+to follow applied practice in using data in levels rather than first differences, we employ a
+non-stationary variant of the DFM estimated by Stock & Watson.
+The DFM postulates that a large-dimensional nX × 1 vector Xt of observed macroeco-
+nomic time series is driven by a low-dimensional nf × 1 vector ft of latent factors, as well as
+an nX × 1 vector vt of idiosyncratic components. The latent factors are assumed to follow a
+non-stationary Vector Error Correction Model (VECM) with VAR(pf) representation
+ft = Φ(L)ft−1 + Hεt,
+(5)
+where εt = (ε1,t, . . . , εnf,t)′ is an nf ×1 vector of aggregate shocks, which are i.i.d. and mutu-
+10
+
+=== page 11 ===
+ally uncorrelated, with Var(εt) = Inf. The nf × nf matrix H determines the impact impulse
+responses of the factors with respect to the aggregate shocks. The observed macroeconomic
+series Xt are given by
+Xt = Λft + vt,
+(6)
+where the idiosyncratic component vi,t for macro observable Xi,t follows the potentially non-
+stationary AR(pv) process
+vi,t = Γi(L)vi,t−1 + Ξiξi,t,
+(7)
+with ξi,t i.i.d. across t and i. We assume that all shocks and innovations are jointly normal
+and homoskedastic. We will next in Section 3.2 describe how we construct our many lower-
+dimensional DGPs from this encompassing large-scale DFM; Section 3.3 then follows up with
+implementation details, including in particular a discussion of how the parameters of this
+non-stationary DFM are calibrated to the Stock & Watson (2016) data set.
+3.2
+DGPs and impulse response estimands
+We use the encompassing model (5)–(7) to build thousands of lower-dimensional DGPs for
+our simulation study. Specifically, for each DGP, we draw a random subset of n ¯w variables
+¯wt from the large vector Xt, i.e., ¯wt ⊂Xt. The variables ¯wt follow the time series process
+implied by the encompassing model (5)–(7). In particular, ¯wt is driven by some combination
+of aggregate structural shocks εt and idiosyncratic components vt. We draw thousands of
+such random combinations of variables, thus yielding thousands of lower-dimensional DGPs.
+The details of how we select the variable combinations are postponed until Section 3.3.
+For each DGP drawn in this way, we consider three types of structural impulse response
+estimands, chosen to mimic as closely as possible popular schemes for identifying the effects
+of policy shocks in applied macroeconometrics (Ramey, 2016; Stock & Watson, 2016). In
+the following, yt ∈¯wt denotes a response variable of interest in the DGP, it ∈¯wt is a policy
+variable used to normalize the scale of the shock (if applicable), zt is an external instrument
+(if applicable), and wt denotes the vector of all observed time series in the DGP.
+1. Observed shock identification.
+In this identification scheme we assume that the
+econometrician observes both the endogenous variables ¯wt and the first structural shock
+ε1,t, so the full vector of observables is wt = (ε1,t, ¯wt)′. The objects of interest are the
+impulse responses of an outcome variable yt with respect to a one standard deviation (i.e.,
+11
+
+=== page 12 ===
+one unit) innovation to ε1,t:
+θh ≡¯Λιy,•Θf
+•,1,h,
+h = 0, 1, 2, . . . ,
+(8)
+where Θf(L) are the impulse responses of the factors ft to the structural shocks εt implied
+by (5), while ¯Λ are those rows of Λ that correspond to the observables ¯wt. The index ιy
+corresponds to the location of yt in the vector ¯wt.
+This set-up captures those empirical studies in which the researcher has constructed a
+plausible direct measure of the shock of interest. Examples include the monetary shock
+series of Romer & Romer (2004) or the fiscal shock series of Ramey (2011). While one may
+worry about measurement error in practice, it is common in applied work to treat shocks
+as known, so we include this identification approach as a useful baseline. Measurement
+error is introduced in the next identification scheme.
+2. IV/proxy identification. In this scheme, instead of directly observing the structural
+shock ε1,t, the econometrician observes the noisy proxy
+zt = ρzzt−1 + ε1,t + νt,
+(9)
+where νt is an i.i.d. process (independent of all shocks and innovations in the DFM) with
+Var(νt) = σ2
+ν. The full vector of observables is thus wt = (zt, ¯wt)′. As is standard in IV
+applications, we here adopt the “unit effect” normalization of Stock & Watson (2016), so
+the object of interest becomes
+θh ≡
+¯Λιy,•Θf
+•,1,h
+¯Λιi,•Θf
+•,1,0
+,
+h = 0, 1, 2, . . . ,
+(10)
+where the index ιi corresponds to the location of a policy variable it in the vector ¯wt. The
+above unit effect normalization defines the magnitude of the shock ε1,t such that it raises
+the policy variable it by one unit on impact.
+One example of an IV zt is the high-frequency change in futures prices around monetary
+policy announcements employed by Gertler & Karadi (2015) to identify the effects of
+monetary policy shocks.
+3. Recursive identification. The final identification scheme is recursive (Cholesky) shock
+identification (e.g., Christiano et al., 1999). Because it turns out that the simulation
+12
+
+=== page 13 ===
+results for such shocks are qualitatively similar to the results when the shock is directly
+observed, we relegate discussion of recursive identification to a robustness check in Sec-
+tion 5.5, with technical definitions in Supplemental Appendix D.
+3.3
+Implementation
+This section first discusses how we estimate the DFM and then specifies the particular DGPs
+and structural impulse responses that we consider in the simulation study.
+DFM parameters.
+We parametrize the DFM (5)–(7) by estimating the model on the
+Stock & Watson (2016) data set. Recall that we model the variables in levels rather than
+first differences, unlike Stock & Watson. We provide a brief overview of our approach here,
+with details in Supplemental Appendix C.
+We begin with the vector of observables Xt. As in Stock & Watson (2016), that vector
+contains quarterly observations on 207 time series for 1959Q1–2014Q4, mostly consisting of
+real activity variables, price measures, interest rates, asset and wealth variables, and pro-
+ductivity series.10 Each series is seasonally adjusted as in Stock & Watson (2016). However,
+unlike those authors we do not transform the series to stationarity. Instead, variables that
+they transform to (non-log or log) first differences, we now keep in (non-log or log) levels;
+and variables that they transform to log second differences (which are mostly price indices),
+we only transform to log first differences. All estimation procedures mentioned below control
+for series-specific and common deterministic linear time trends.
+Our estimation approach is intended to allow for rich long- and short-run dynamics, open-
+ing the door for meaningful mis-specification of short-lag VARs. Following Bai & Ng (2004)
+and Barigozzi et al. (2021), we estimate the non-stationary DFM by extracting factors from
+differenced (and subsequently de-meaned) data, cumulating these factors, and then fitting a
+VECM to the cumulated factors; the aforementioned papers show that this estimation strat-
+egy consistently estimates the true VECM parameters under weak conditions that allow for
+cointegration. We set the number of factors nf equal to 6 as in Stock & Watson (2016). The
+VECM is estimated by quasi-maximum-likelihood without restricting the adjustment coef-
+ficients or cointegrating relations.11 The cointegration rank of the VECM is selected by the
+10Table 1 and the Data Appendix of Stock & Watson (2016) list all variables and their categories.
+11The reason we fit a VECM rather than an unrestricted VAR in levels to the factors is that the VAR
+estimator may underestimate persistence in finite samples, as is well known. While bias correction procedures
+exist, they may not always work well in practice. The VECM approach instead errs on the side of overstating
+13
+
+=== page 14 ===
+Johansen (1995) maximum eigenvalue test, which indicates that the latent factors are driven
+by four common stochastic trends. As in Stock & Watson (2016), we fit AR(pv) processes
+by OLS to each idiosyncratic residual after removing the estimated factors, separately for
+each i. We use lag lengths pf = pv = 4 for both the factor process and the idiosyncratic
+component processes, which is at the upper end of what is preferred by the Akaike Infor-
+mation Criterion, consistent with our goal of allowing rich dynamics. The above-mentioned
+estimation procedure pins down all parameters of the DFM except for the structural impact
+response matrix H; we discuss below how we construct that matrix.
+While the estimated encompassing DFM assumes a cointegrated VECM for the latent
+factors, the lower-dimensional DGPs that we subsequently extract from the DFM will not
+satisfy exact finite-order VECM or VAR processes, and will not be exactly cointegrated. This
+follows from the presence of the idiosyncratic components and the mismatch in dimensions
+between the latent factors and the observable series (as specified below). Indeed, we show
+below that most of the lower-dimensional DGPs feature a combination of exact unit roots
+(imposed in the factor VECM), several roots near unity (owing partly to the factor process
+and partly to the idiosyncratic component processes), as well as smaller roots that induce
+transitory dynamics. Our DGPs are therefore consistent with the common empirical finding
+that there is often substantial ambiguity about the appropriate VAR lag lengths, the exact
+magnitude of roots, and the presence or absence of cointegrating relationships.
+DGP and estimand selection.
+To provide a comprehensive picture of the bias-variance
+trade-off, we select thousands of different sets of observables ¯wt ⊂Xt. We consider two
+protocols for selecting these observables—one aimed at mimicking monetary policy shock
+applications, and one aimed at fiscal policy shock applications. Specifically, for each type of
+policy shock, we randomly draw 3,000 configurations of n ¯w = 5 macroeconomic observables
+¯wt. Thus, we end up with a total of 6,000 DGPs. For the monetary policy DGPs we restrict
+¯wt to always contain the federal funds rate, while for the fiscal policy DGPs we restrict ¯wt
+to contain federal government spending. These two series are chosen as the policy variables
+it for the IV and recursive estimands. The remaining four variables in ¯wt are then selected
+uniformly at random from Xt, except we impose that at least one variable should be a
+measure of real activity, and at least one other variable a measure of prices.12 The impulse
+the role of permanent shocks, consistent with our goal of allowing for rich long-run dynamics.
+12Real activity series correspond to categories 1–3 in the classification in Table 1 of Stock & Watson (2016),
+while price series correspond to category 6.
+14
+
+=== page 15 ===
+response variable yt is selected uniformly at random from the four series (other than it).
+For each of the DGPs, we implement the structural impulse response estimands as follows:
+1. Observed shock. We select the structural impact response matrix H in the factor equa-
+tion (5) so as to maximize the impact effect of the shock ε1,t on the federal funds rate (for
+monetary shocks) and government spending (for fiscal shocks), subject to the constraint
+that H is consistent with our estimate of the reduced-form innovation variance-covariance
+matrix for the factors. This ensures that monetary and fiscal shocks account for substan-
+tial short-run variation in nominal interest rates and government spending, respectively.
+Additionally, we avoid issues related to division by near-zeros when normalizing the im-
+pulse responses for the IV estimand. See Appendix A.1 for further details.
+2. IV. The matrix H is defined just as in the “observed shock” case. Next, turning to the IV
+parameters in equation (9), we draw ρz uniformly at random from the set {0, 0.25, 0.5}.13
+To ensure an empirically plausible signal-to-noise ratio, we calibrate σ2
+ν to three different
+values that yield population IV first-stage F-statistics between 10 and 30, roughly in line
+with heterogeneity in applied practice. See Appendix A.2 for details.
+3. Recursive identification. Implementation details are in Supplemental Appendix D.
+3.4
+Summary statistics
+Consistent with the experience of applied researchers, our DGPs exhibit substantial hetero-
+geneity along several dimensions. Table 1 displays the distribution of various population
+parameters across our 6,000 DGPs. The table focuses on impulse responses with respect
+to directly observed monetary policy and government spending shocks, though results for
+recursively defined shocks are similar, as shown in Supplemental Appendix F.3.
+First of all, the DGPs feature varying degrees of persistence. All DGPs have unit roots
+by construction; nevertheless, the DGPs differ in how heavily they load on the various non-
+stationary and stationary linear combinations of the latent factors.
+Table 1 reports the
+ratio of the traces of the long-run variance matrix and variance matrix applied to differenced
+data, trace(LRV (∆¯wt))/ trace(Var(∆¯wt)). This measure varies widely across the DGPs, with
+median equal to 1.02 (as when all series are simple random walks), and the 90th percentile
+equal to 3.54 (consistent with strong positive autocorrelation of the first differences). We
+13The external IVs used in empirical practice tend to have low to moderate autocorrelation (Ramey, 2016),
+consistent with our assumptions on ρz.
+15
+
+=== page 16 ===
+DGP summary statistics
+Percentile
+min
+10
+25
+50
+75
+90
+max
+Data and shocks
+trace(long-run var)/trace(var)
+0.03
+0.27
+0.54
+1.02
+1.98
+3.54
+23.73
+Fraction of VAR coef’s ℓ≥5
+0.07
+0.14
+0.17
+0.23
+0.29
+0.37
+0.81
+Degree of shock invertibility
+0.24
+0.30
+0.34
+0.39
+0.44
+0.49
+0.65
+IV first stage F-statistic
+7.18
+7.91
+10.55
+21.13
+24.20
+33.29
+33.97
+Impulse responses up to h = 20
+No. of interior local extrema
+0
+1
+2
+2
+3
+3
+5
+Horizon of max abs. value
+0
+0
+1
+4
+8
+19
+20
+Average/(max abs. value)
+-0.87
+-0.67
+-0.48
+0.01
+0.33
+0.64
+0.89
+R2 in regression on quadratic
+0.04
+0.46
+0.70
+0.85
+0.95
+0.98
+1.00
+Table 1: Quantiles of various population parameters across the DGPs for observed shock and IV
+identification. “long-run var”: long-run variance of differenced series. “var”: variance of differenced
+series. “Fraction of VAR coef’s ℓ≥5”: P1000
+ℓ=5 ∥Aw
+ℓ∥/ P1000
+ℓ=1 ∥Aw
+ℓ∥, where Aw
+ℓare the population
+VAR(∞) coefficient matrices and ∥· ∥is the Frobenius norm. “Degree of shock invertibility”: R2
+in a projection of ε1,t on { ¯wt−ℓ}∞
+ℓ=0. “IV first stage F-statistic”: T × R2/(1 −R2), where T = 200
+and R2 is the population R2 in a projection of it on zt, controlling for {wt−ℓ}∞
+ℓ=1. “Average/(max
+abs. value)”: ( 1
+21
+P20
+h=0 θh)/ maxh{|θh|}. “R2 in regression on quadratic”: R2 from a regression of
+the impulse response function {θh}20
+h=0 on a quadratic polynomial in h.
+will consider an alternative set of moderately persistent, stationary DGPs in one of our main
+robustness checks in Section 5.5.
+Second, the DGPs are heterogeneous in terms of how well they can be approximated
+by a low-order VAR. Table 1 reports the ratio P1000
+ℓ=5 ∥Aw
+ℓ∥/ P1000
+ℓ=1 ∥Aw
+ℓ∥, which measures the
+relative magnitude of the coefficient matrices {Aw
+ℓ}ℓin the VAR(∞) representation for { ¯wt}
+at or after lag 5 (with ∥· ∥here denoting the Frobenius matrix norm). The 10th and 90th
+percentiles equal 0.14 and 0.37, respectively. Hence, the analysis in Section 2 suggests that
+the bias of low-order VAR procedures will vary substantially across the various DGPs that
+we consider in our simulations.
+Third, for the IV specifications, we note that our DGPs differ in terms of shock invertibil-
+ity and IV strength. The degree of invertibility is defined as the R-squared in a population
+projection of the shock of interest on current and lagged macro observables { ¯wt−ℓ}∞
+ℓ=0.14 The
+14Projections on infinite collections of lagged variables are defined as the limit when the lag length tends
+16
+
+=== page 17 ===
+Selected impulse response function estimands
+Figure 1: Selected impulse responses of macro observables to monetary and fiscal policy shocks.
+Here the impulse response functions are normalized to have a maximum value of 1 or −1.
+bias of some SVAR-based external instrument procedures depends on how far below 1 this
+measure is, as discussed further in Section 4. The table shows that 90% of the DGPs have
+degrees of invertibility below 49%, i.e., substantial non-invertibility.15 This is not surprising:
+the DFM (5)–(7) features a realistic amount of idiosyncratic noise vt, making it challenging
+to accurately back out the aggregate shock ε1,t from a small number of time series ¯wt. The
+strength of the IV is by construction borderline weak to moderate, as the population first
+stage F-statistic (from a regression of the policy variable it on the IV zt, controlling for lagged
+data) is calibrated to vary between approximately 10 and 30, given sample size T = 200.
+Finally, the true impulse response estimands exhibit a wide variety of shapes. Table 1
+shows that the impulse response functions peak at very different horizons and are typically
+not simple monotonically decaying or even hump-shaped functions: the median number of
+interior local extrema of the impulse response functions is 2 (a monotonic function would
+to ∞, using a diffuse initialization of the Kalman filter.
+15Leeper et al. (2013) argue that adding forward-looking variables to a VAR ameliorates the invertibility
+problem. However, if we restrict attention to the 1,457 DGPs that contain at least one time series in the
+“Asset Price & Sentiment” category (see Supplemental Appendix F.11), the 90th percentile of the degree of
+invertibility increases only marginally to 51%.
+17
+
+=== page 18 ===
+have 0; a hump-shaped function would have 1). Many impulse response functions change
+sign at some horizon, as evidenced by the average response (across horizons) typically being
+much smaller than the maximal response. Finally, the smoothness of the impulse response
+functions varies substantially: the R-squared value in a regression of the impulse responses
+{θh}20
+h=0 on a quadratic polynomial b0 + b1 × h + b2 × h2 has 10th and 90th percentiles given
+by 0.46 and 0.98, respectively. For further illustration, Figure 1 displays the true values of
+six impulse response functions, providing a representative picture of the heterogeneity. The
+figure illustrates that, while some impulse response functions approximately return to 0 at
+long horizons, many do not, and some have the largest response even beyond horizon h = 20.
+4
+Estimation methods
+We now give a brief overview of the different VAR- and LP-based estimation methods that
+we consider in the simulation study.16 Though all these methods aim at estimating the same
+population impulse responses defined in Section 3.2, they differ in terms of their bias-variance
+properties, and in terms of their robustness to non-invertibility. Further implementation
+details are relegated to Appendix B. All estimators include an intercept.
+Local projection approaches.
+The basic idea behind local projections, as proposed
+by Jordà (2005), is to estimate the impulse responses separately at each horizon by a direct
+regression of the future outcome on current covariates. We consider three such approaches:
+1. Least-squares LP. OLS regression of the response variable yt+h on some innovation
+variable xt, controlling for p lags of all data series wt. The innovation variable equals
+xt = ε1,t for “observed shock” identification. For recursive identification, xt equals
+the policy variable it, and we additionally control for the contemporaneous values of
+the variables that are ordered before it in the system (Plagborg-Møller & Wolf, 2021).
+For IV identification, we set xt = it and instrument for this variable using the IV
+zt (this is the LP-IV estimator of Stock & Watson, 2018).
+Since least-squares LP
+does not mechanically impose any functional form on the relationship between impulse
+responses at different horizons h, it does not suffer from extrapolation bias. However,
+these estimated impulse response functions tend to look jagged in finite samples and
+be estimated with high variance at longer horizons.
+16To visualize the various estimation methods, Supplemental Appendix E plots the estimated impulse
+response functions in a few data sets simulated from a single DGP.
+18
+
+=== page 19 ===
+2. Bias-corrected LP (abbreviated “BC LP”). Herbst & Johannsen (2023) propose a
+bias-corrected version of LP, which partially removes the bias that is due to high
+persistence in the data. Though this bias is theoretically of order T −1 (where T is
+the sample size) and thus asymptotically negligible relative to the standard deviation,
+Herbst & Johannsen demonstrate that the bias can be sizable in sample sizes typical
+in the applied macroeconometrics literature.
+3. Penalized LP (abbreviated “Pen LP”). To lower the variance of least-squares LP at
+the expense of potentially increasing the bias, Barnichon & Brownlees (2019) propose
+a penalized regression modification of LP. The estimator minimizes the sum of squared
+forecast residuals (across both horizons and time) plus a penalty term that encourages
+the estimation of smooth impulse responses. This is a type of shrinkage estimation:
+the unrestricted least-squares estimate is pushed in the direction of a smooth quadratic
+function of the horizon. The degree of shrinkage is chosen by cross-validation.
+VAR approaches.
+Like local projections, a VAR with lag length p flexibly estimates the
+impulse responses out to horizon p; however, the VAR extrapolates the responses at longer
+horizons h > p using only the sample autocovariances out to lag p. As suggested by the
+analysis in Section 2, this tends to generate impulse response estimates with lower variance
+but higher bias than LP estimates at intermediate and long horizons. We consider four such
+VAR-based approaches:
+1. Least-squares VAR. Standard VAR impulse response estimates based on equation-
+by-equation OLS estimates of the reduced-form coefficients.
+2. Bias-corrected VAR (abbreviated “BC VAR”). As above, but follows Kilian (1998)
+in using the formula in Pope (1990) to analytically correct the order-T −1 bias of the
+reduced-form coefficients caused by persistent data.17
+3. Bayesian VAR (abbreviated “BVAR”). As above, but where the reduced-form co-
+efficients are estimated from a Bayesian VAR with automatic prior selection as in
+Giannone et al. (2015). We report the posterior means of the impulse responses calcu-
+lated from 100 draws. The prior specification follows the popular Minnesota prior, but
+with modifications that allow for cointegration. The prior variance hyper-parameters
+17Kilian & Lütkepohl (2017, Chapter 12.3) argue that this analytical bias correction yields similar results
+to more computationally intensive bootstrap bias correction methods.
+19
+
+=== page 20 ===
+(and thus the degree of shrinkage) are chosen in a data-dependent way by maximizing
+the marginal likelihood.
+4. VAR model averaging (abbreviated “VAR Avg”). Hansen (2016) develops a data-
+driven method for averaging across the impulse response estimates produced by several
+different VAR specifications. We construct a weighted average of 40 different speci-
+fications, each of which is estimated by OLS: univariate AR(1) to AR(20) models,
+and multivariate VAR(1) to VAR(20) models. The weights are chosen to minimize an
+empirical estimate of the final impulse response estimator’s MSE.
+The VAR model averaging estimator effectively includes LP among the list of candidate
+estimators (as in the related approach of Miranda-Agrippino & Ricco, 2021). This is
+because the candidate VAR(20) model gives results similar to LP with several lagged
+controls, at all horizons considered in our study (Plagborg-Møller & Wolf, 2021).
+Observed shock identification is carried out by simply ordering the shock first in the recursive
+VAR. Recursive identification is implemented as usual in the VAR literature. We consider
+two different approaches to IV estimation:
+i) Internal instruments. Proceed as if the IV were equal to the true shock of interest,
+i.e., order the IV first in the VAR and compute responses to the first orthogonalized
+innovation (Ramey, 2011). Plagborg-Møller & Wolf (2021) prove that this approach
+consistently estimates the normalized structural impulse responses (10) even if the IV is
+contaminated with measurement error as in (9), and even if the shock is non-invertible.
+ii) SVAR-IV (also known as proxy-SVAR). Exclude the IV from the reduced-form VAR,
+and estimate the structural shock by projecting the IV on the reduced-form VAR inno-
+vations (Stock, 2008; Stock & Watson, 2012; Mertens & Ravn, 2013; Gertler & Karadi,
+2015). This estimator is consistent if the shock of interest is invertible, but not otherwise
+(Forni et al., 2019; Plagborg-Møller & Wolf, 2022; Miranda-Agrippino & Ricco, 2023).
+We shall see that the SVAR-IV estimator tends to exhibit lower dispersion than the
+“internal instruments” estimator due to the smaller dimension of the VAR system.
+We implement the “internal instruments” approach using all four types of VAR estimation
+techniques described earlier. For brevity, we only consider the least-squares version of the
+“external instrument” SVAR-IV estimator.
+20
+
+=== page 21 ===
+Lag length selection.
+As a baseline, the LP and VAR estimators use p = 4 lags for
+estimation (except of course VAR model averaging, which uses many different lag lengths).
+In our DGPs, the Akaike Information Criterion almost always selects very short lag lengths
+ˆpAIC, as we discuss further in Section 5.6 below. Thus, for all intents and purposes, our
+results may be interpreted as having been generated by the lag length selection rule p =
+max{ˆpAIC, 4}. Our reading of applied practice is that researchers typically include at least
+4 lags in quarterly data. Results for p = 8 are discussed in Section 5.5.
+5
+Results
+This section presents our simulation results. We summarize the results through four lessons,
+presented in separate subsections. The first three lessons focus on observed shock identifi-
+cation. The fourth lesson is concerned with IV identification. We show in Section 5.5 that
+these conclusions are qualitatively robust to several alterations of our baseline simulation
+specification (including less persistent DGPs and recursive identification). Finally, in Sec-
+tion 5.6, we justify our focus on the average performance of estimators across DGPs, by
+arguing that there is limited scope for selecting among estimators in a data-dependent way.
+Throughout this section we present results for our 6,000 monetary and fiscal policy shock
+DGPs considered jointly rather than separately. For each DGP, we simulate time series of
+length T = 200 quarters and approximate the population bias and variance of the estimators
+by averaging across 5,000 Monte Carlo simulations. The main results (excluding robustness
+checks) take about one week to produce in Matlab on a research computing cluster with 300
+parallel cores.
+5.1
+There is a clear bias-variance trade-off between LP and VAR
+Our first takeaway is that researchers invariably face a bias-variance trade-off: because most
+of our DGPs are not well approximated by finite-order VAR models, least-squares LPs tend
+to have lower bias, while least-squares VAR estimators tend to have lower variance, consistent
+with the simple analytical example provided in Section 2. Strictly speaking, these statements
+are only exactly true for the bias-corrected versions of the estimators (Herbst & Johannsen,
+2023; Pope, 1990; Kilian, 1998), as the high persistence of our DGPs imparts a sizable finite-
+sample bias in the estimators at intermediate and long horizons, particularly for LPs. This
+bias correction, however, is not a free lunch, as it increases variance.
+21
+
+=== page 22 ===
+22
+Observed shock: Bias of estimators
+Figure 2: Median (across DGPs) of absolute bias |E(ˆθh −θh)| of the different estimation proce-
+dures, relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed shock: Standard deviation of estimators
+Figure 3:
+Median (across DGPs) of standard deviation
+q
+Var(ˆθh) of the different estimation
+procedures, relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 23 ===
+Figures 2 and 3 depict the bias-variance trade-off at various horizons.
+These figures
+show the median (across our 6,000 DGPs) of the absolute bias |E(ˆθh −θh)| or the standard
+deviation
+q
+Var(ˆθh), respectively, as a function of the horizon. The different lines correspond
+to different estimators ˆθh, with least-squares LP and VAR being the thick lines. Before
+taking the median, we cancel out the units of the response variables by dividing the bias and
+standard deviation by
+q
+1
+21
+P20
+h=0 θ2
+h, i.e., the root mean squared value of the true impulse
+response function out to horizon 20. Note that the scale of the vertical axis differs between
+the bias and standard deviation plots.
+The figures show that least-squares LP and VAR estimators have similar bias and vari-
+ance at horizons h ≤p = 4, but not at longer horizons h > p. The median biases then
+generally increase with the horizon, with the bias of VAR exceeding that of LP, except at
+long horizons.18 While the median standard deviation of LP is increasing in the horizon,
+that of VAR instead displays a hump-shaped pattern. At long horizons, the median standard
+deviation of LP is about double that of VAR. These observations are broadly consistent with
+the asymptotic results in Section 2, Schorfheide (2005), and Plagborg-Møller & Wolf (2021).
+Our results also show that the bias correction procedure of Herbst & Johannsen (2023) is
+critical to achieving uniformly low bias for the LP approach. Though the asymptotic bias of
+LP is zero when the shock is observed, as discussed in Section 2, the high persistence of our
+DGPs implies that the small-sample bias of least-squares LP is non-negligible at intermediate
+and long horizons, especially the latter. The bias-corrected version of LP proposed by Herbst
+& Johannsen (thin line with small dots in the figures) eliminates about a third of the bias
+at all horizons. In comparison with the LP case, bias correction is not as critical for VAR
+estimation, though the bias-corrected VAR estimator (dashed line) does have a somewhat
+lower bias than the least-squares VAR estimator at long horizons. After bias correction, LP
+has lower (median) bias than VAR at all horizons, as predicted by asymptotic theory. We
+further show in Section 5.5 below that such bias correction is not nearly as important in less
+persistent, stationary DGPs.
+Bias correction is not a free lunch, however, as it is associated with a substantial increase
+in variance. Figure 3 shows that the bias-corrected LP and VAR estimators have uniformly
+higher median standard deviation than the uncorrected estimators. In fact, bias-corrected
+LP has not only the uniformly lowest median bias among the methods we consider, it also has
+the uniformly highest standard deviation. Figures 4 and 5 show head-to-head comparisons
+18Kilian & Kim (2011) find in simulations that LP does not have lower bias than VAR estimators, but
+they consider a different variant of LP that uses an auxiliary VAR to identify the structural shocks.
+23
+
+=== page 24 ===
+24
+Observed shock: Least-squares LP vs. Bias-Corrected LP
+Figure 4: Fraction of DGPs for which the least-squares LP estimator has a lower loss than bias-
+corrected LP. The darker the region, the higher the fraction of DGPs for which least-squares LP
+is preferred. Horizontal axis: impulse response horizon h. Vertical axis: weight ω on squared bias
+in the loss function (4). The loss function is normalized by the scale of the true impulse response
+function, as in Figures 2 and 3. The impact horizon h = 0 is omitted due to numerical equivalence
+between the estimators.
+Observed shock: Least-squares VAR vs. Bias-Corrected VAR
+Figure 5: Fraction of DGPs for which the least-squares VAR estimator has a lower loss than the
+bias-corrected VAR estimator. The darker the region, the higher the fraction of DGPs for which
+least-squares VAR is preferred. See caption for Figure 4. The impact horizon h = 0 is omitted due
+to numerical equivalence between the estimators.
+
+=== page 25 ===
+of the least-squares and bias-corrected estimators for the LP and VAR cases, respectively.
+The figures show the fraction of DGPs for which the least-squares estimator achieves a lower
+loss (4) than the bias-corrected estimator, as a function of the horizon h and the weight ω
+attached to squared bias in the loss function; to interpret the figures, recall that ω = 0.5
+corresponds to MSE loss, while ω = 1 corresponds to an exclusive focus on bias at the expense
+of variance. The darker the plot, the more often is the least-squares estimator preferred over
+the bias-corrected one. Evidently, one has to attach a very high weight ω to bias in the loss
+function to prefer the bias-corrected estimator in more than 60% of DGPs; furthermore, a
+researcher with MSE loss would usually prefer the uncorrected estimators.
+5.2
+Bias-corrected LP is the best estimator if and only if the re-
+searcher overwhelmingly prioritizes bias
+Our second takeaway is that bias-corrected LP is the single best estimator in our choice
+set if and only if the researcher’s loss function overwhelmingly prioritizes bias. In contrast,
+uncorrected LP is never the best option if the goal is to minimize average loss across our
+DGPs. Under MSE loss, penalized LP typically outperforms the other LP procedures as it
+has substantially lower variance, though at the expense of a moderate increase in bias.
+Figure 6 shows the optimal estimation method as a function of the horizon h and the bias
+weight ω. The colors and patterns indicate the estimation method that minimizes the average
+loss (4) across DGPs, after normalizing the loss to cancel out units as in Figures 2 and 3. In
+this subsection we focus on the top part of Figure 6, i.e., where the weight ω on bias in the
+loss function is high. Bias-corrected LP emerges as the best estimator at most horizons in
+this case, as is to be expected given its excellent bias properties in Figure 2; nevertheless, the
+figure shows that the optimality of bias-corrected LP is predicated on ω exceeding roughly
+0.9, or even higher at some horizons, corresponding to an overwhelming focus on minimizing
+bias rather than variance. In contrast, uncorrected least-squares LP is essentially dominated:
+it has greater bias than bias-corrected LP (notably at longer horizons), yet materially higher
+variance than least-squares VAR or other shrinkage methods, and so no part of Figure 6 is
+orange with diagonal lines. We discuss the rest of Figure 6 in the next subsection.
+Figures 7 and 8 compare bias-corrected LP to bias-corrected VAR and to penalized
+LP, respectively. The former figure shows that bias-corrected LP is only preferred to bias-
+corrected VAR in at least 60% of DGPs when ω ≥0.9. In the latter figure, we see that the
+smoothing of impulse responses across horizons that the penalized LP estimator performs
+is usually attractive whenever ω ≤0.9, except at very short and very long horizons. By
+25
+
+=== page 26 ===
+Observed shock: Optimal estimation method
+Figure 6: Method that minimizes the average (across DGPs) loss function (4). Horizontal axis:
+impulse response horizon. Vertical axis: weight on squared bias in loss function. The loss function
+is normalized by the scale of the impulse response function, as in Figures 2 and 3. At h = 0, VAR
+and LP are numerically identical; we break the tie in favor of VAR.
+“betting on smoothness”, penalized LP achieves a substantial variance reduction relative to
+the un-penalized LP procedures, at the expense of a moderate increase in bias, see Figures 2
+and 3. In fact, there is a region of Figure 6 with intermediate horizons and moderately high
+weight on bias where penalized LP (green with diagonal cross-hatching) is the single best
+estimator. These findings underscore our conclusion that, across the majority of the DGPs,
+the use of bias-corrected LP can only be justified by committing to a nearly exclusive focus
+on minimizing bias, with little regard for precision.
+5.3
+VARs are attractive if there is some concern for precision
+Our third takeaway is that VAR estimators are attractive to researchers who place at least
+moderate weight on variance in their loss function. But the choice of VAR method depends
+on the horizon: Bayesian VARs perform well at short horizons, least-squares VARs at inter-
+mediate horizons, and at long horizons the two are comparable. VAR model averaging, on
+26
+
+=== page 27 ===
+27
+Observed shock: Bias-corrected LP vs. Bias-corrected VAR
+Figure 7: Fraction of DGPs for which the bias-corrected LP estimator has a lower loss than bias-
+corrected VAR. The darker the region, the higher the fraction of DGPs for which bias-corrected LP
+is preferred. Horizontal axis: impulse response horizon h. Vertical axis: weight ω on squared bias
+in the loss function (4). The loss function is normalized by the scale of the true impulse response
+function, as in Figures 2 and 3. The impact horizon h = 0 is omitted due to numerical equivalence
+between the estimators.
+Observed shock: Bias-corrected LP vs. Penalized LP
+Figure 8: Fraction of DGPs for which the bias-corrected LP estimator has a lower loss than the
+penalized LP estimator. The darker the region, the higher the fraction of DGPs for which bias-
+corrected LP is preferred. See caption for Figure 4.
+
+=== page 28 ===
+Observed shock: Least-squares VAR vs. Bayesian VAR
+Figure 9: Fraction of DGPs for which the least-squares VAR estimator has a lower loss than the
+BVAR estimator. The darker the region, the higher the fraction of DGPs for which least-squares
+VAR is preferred. See caption for Figure 4.
+the other hand, performs poorly regardless of bias-variance preferences.
+Returning to Figure 6, we see that for bias weights ω below 0.9, the optimal estimation
+method is almost always either least-squares VAR (purple areas) or BVAR (solid-dotted
+blue). The key attractive property of BVAR is that it has the lowest (median) standard
+deviation at all horizons among the methods we consider, as seen in Figure 3, though it also
+has high bias relative to least-squares VAR at intermediate horizons, as shown in Figure 2.
+The relatively high bias at intermediate horizons is possibly due to the fact that its prior
+specification, which is conventional in the literature, is motivated by one-step-ahead and
+long-run forecasting properties, as opposed to medium-run properties.19
+Figure 9 shows that the head-to-head performance of least-squares VAR vs. Bayesian
+VAR depends on the horizon. At short horizons h ≤4, BVAR is preferred in the majority
+of DGPs, and indeed it is the overall best estimator for most loss functions that place non-
+trivial weight on variance (see Figure 6). However, at intermediate horizons h ∈[5, 12],
+least-squares VAR is preferred over BVAR in the clear majority of DGPs for most loss
+19Moreover, the Giannone et al. (2015) approach of choosing the prior hyper-parameters to maximize the
+marginal likelihood implicitly targets one-step-ahead forecasts (see Equation 5 in their paper).
+28
+
+=== page 29 ===
+functions, and the former estimator is the overall preferred method for loss functions with
+ω ≤0.8. At long horizons h ≥13, the two VAR methods are comparable and outperform
+all other methods, unless the weight on bias in the loss function is high.
+Finally, we remark that bias-corrected VAR and VAR model averaging are rarely, if ever,
+optimal. Bias-corrected VAR (yellow with horizontal lines in Figure 6) can be rationalized
+at short horizons if the concern for bias is high, but the difference compared to least-squares
+VAR is small at these horizons, as discussed in Section 5.2. VAR model averaging performs
+poorly regardless of loss function and horizon, as it has substantial bias as well as a high
+standard deviation relative to other VAR-based estimators (see Figures 2 and 3). Closer
+inspection reveals that the high standard deviation is a consequence of a very fat-tailed
+sampling distribution, with a non-negligible probability of erratic estimates.20
+5.4
+SVAR-IV is heavily biased, but has relatively low dispersion
+Our last takeaway is concerned with IV/proxy identification. Among the invertibility-robust
+“internal instruments” estimators, the bias-variance trade-off is very similar to that already
+discussed above for the case of an observed shock. The alternative “external instruments”
+SVAR-IV procedure, however, contributes starkly to the trade-off: it can be severely biased
+due to its lack of robustness to non-invertibility, but at the same time it also has substantially
+lower dispersion than the “internal instruments” procedures.
+Since first and second moments of IV estimators may not exist theoretically (Sawa, 1972),
+we in this subsection report median bias (i.e., in each DGP, the median of the estimation
+error) instead of (mean) bias, and the interquartile range instead of the standard deviation.21
+We refer to the latter as “dispersion.”
+Figures 10 and 11 show the median bias and interquartile range of the various IV estima-
+tors. If we ignore the dotted line representing SVAR-IV, these figures are qualitatively similar
+to those presented in Section 5.1. However, SVAR-IV stands out by exhibiting especially
+high median bias and especially low interquartile range at all horizons. This is consistent
+with the existing theoretical work referenced in Section 4: unlike the “internal instruments”
+procedures, SVAR-IV is asymptotically biased when the shock is not invertible, and we saw
+in Section 3.4 that the degree of invertibility is generally low in our DGPs.22 On the other
+20We use Hansen’s (2016) code off the shelf. It would be interesting to investigate whether the procedure
+could be modified to avoid erratic estimates, perhaps by regularizing the averaging weights.
+21For completeness, (mean) bias and standard deviation are reported in Supplemental Appendix F.1.
+22Consistent with theory, we furthermore find that the median bias of SVAR-IV is particularly large
+29
+
+=== page 30 ===
+30
+IV: Median bias of estimators
+Figure 10: Median (across DGPs) of absolute median bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h. The first seven estimators listed in the figure legend include the proxy/IV
+directly in the observed data vector, see Section 4.
+IV: Interquartile range of estimators
+Figure 11: Median (across DGPs) of interquartile range of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h. See caption for Figure 10.
+
+=== page 31 ===
+hand, the SVAR-IV procedure has fewer parameters to estimate (as it excludes the IV zt
+from the reduced-form VAR regression), causing a reduction in dispersion relative to the
+other procedures. Though we view the high median bias of SVAR-IV across our DGPs as
+worrying, its low dispersion is intriguing and may in some cases trump the bias concerns.
+5.5
+Robustness
+This section argues that our main conclusions in Sections 5.1 to 5.4 are robust to several
+alterations of our baseline simulation specification. We pay particular attention to an exercise
+that replaces our non-stationary encompassing DFM with a stationary version. Various other
+robustness checks are listed subsequently, with details relegated to Supplemental Appendix F.
+Stationary DGPs.
+While the majority of applied papers estimate VARs and LPs with
+a mix of non-stationary and stationary variables in levels (e.g., Ramey, 2016), in some cases
+researchers transform all their data to stationarity prior to the analysis.
+To cover such
+applications, we have repeated our analysis using the stationary estimated DFM of Stock
+& Watson (2016) as our encompassing model. We construct impulse response estimands as
+before and compare the performance of the same estimation methods, except that the BVAR
+estimator uses a prior that shrinks towards white noise rather than random walks. Details
+on the implementation and results are presented in Supplemental Appendix F.2.
+Our headline qualitative conclusions go through in the stationary DGPs. We observe
+the same bias-variance trade-off as in our main analysis, with LPs achieving lower bias than
+VARs at the cost of elevated variance. As a result, except for researchers that exclusively
+prioritize bias, least-squares VARs or some kind of shrinkage—in the form of Bayesian VARs
+or penalized LPs—are preferred. The two most notable differences from our baseline analysis
+are that (i) penalized LP outperforms BVAR for MSE loss at very short horizons, and (ii)
+due to the moderate persistence of the stationary DGPs, bias correction has less bite, and
+uncorrected least-squares LP has near-zero bias at all horizons.
+Other robustness checks.
+The following modifications to our baseline simulation spec-
+ification all leave our main conclusions qualitatively unchanged.
+• Recursive identification: To complement the earlier results with observed shocks
+relative to other estimation methods in the subset of DGPs with the smallest degree of invertibility. See
+Supplemental Appendix F.1.
+31
+
+=== page 32 ===
+and proxy identification, we also consider recursive (Cholesky) identification schemes.
+We sidestep the controversial issue of whether recursive identification is an econom-
+ically valid identification strategy by taking as the parameter of interest the shared
+large-sample limit of the recursive LP/VAR estimators (as the lag length tends to
+infinity). Details on the definition and empirical implementation are provided in Sup-
+plemental Appendix D. Simulation results for recursively identified shocks are similar
+to those for observed shock identification when the weight ω on (squared) bias in the
+loss function exceeds 0.8. However, when ω ≤0.8, BVAR is more attractive than in our
+baseline analysis. This is because recursive (i.e., Cholesky) identification relies heavily
+on estimation of the reduced-form innovation variance-covariance matrix. Uniquely
+among the estimation procedures we consider, BVAR imposes useful shrinkage on this
+matrix through the prior. See Supplemental Appendix F.3.
+• Salient observables: Our results remain essentially unchanged if we restrict attention
+to a subset of 17 oft-used, salient macroeconomic time series out of the 207 ones in
+the full Stock & Watson (2016) data set. We consider the exhaustive list of all 1,581
+five-variable DGPs that can be formed from these 17 series, subject to the selection
+rules in Section 3.3. See Supplemental Appendix F.4.
+• Near-worst-case performance: Whereas our baseline results pertain to the median
+performance of estimators across DGPs, some researchers may instead prefer to focus
+on ensuring acceptable performance for particularly challenging DGPs. To this end,
+Supplemental Appendix F.5 reports the 90th percentiles of the bias and standard de-
+viation across DGPs. Interestingly, adopting this “near-worst-case” perspective does
+not alter much the relative magnitudes of bias and standard deviation across estima-
+tion procedures. Hence, none of the estimation procedures seem to have a particular
+advantage in ensuring robustness to challenging environments, over and above their
+performance in typical DGPs.
+• Monetary vs. fiscal shocks: If we consider the monetary shock DGPs separately
+from the fiscal shock DGPs, then the bias-variance trade-off is almost identical to that
+when we consider the DGPs jointly. See Supplemental Appendix F.6.
+• Larger lag length: If the lag length p is set to 8 instead of 4, then LP and VAR
+are approximately equivalent out to horizon 8, as predicted by asymptotic theory.
+BVAR is relatively more attractive than in the p = 4 case, as the prior reduces the
+32
+
+=== page 33 ===
+effective dimensionality of the otherwise high-dimensional VAR system. Beyond that
+our conclusions on the overall nature of the bias-variance trade-off are unaffected. See
+Supplemental Appendix F.7.
+• Smaller sample size: Halving the sample size to T = 100 quarters tends to increase
+the estimator standard deviations more than the biases, so shrinkage techniques look
+even more desirable than in our baseline, including in particular BVAR. Conversely,
+for bias-corrected LP to be optimal, bias needs to be prioritized even more heavily.
+See Supplemental Appendix F.8.
+• Larger sample size and lag length: We set sample size T = 720 and lag length
+p = 12, a configuration reminiscent of monthly data. However, we caution that the set-
+up does not faithfully represent actual monthly data sets, since our DFM parameters
+remain fixed at the quarterly calibration described in Section 3. As expected, least-
+squares LP and VAR have approximately equivalent properties out to horizon 12,
+while the trade-off between estimators at longer horizons is qualitatively similar to our
+baseline. At horizons below 12, shrinkage via BVAR or penalized LP is even more
+attractive than in our baseline, unless the bias weight in the loss function is high. See
+Supplemental Appendix F.9.
+• More observables: If we increase the number of observed macro variables per DGP
+from 5 to 7, our conclusions are not affected. The only notable quantitative change is
+that, for IV identification, SVAR-IV has slightly smaller bias relative to the internal
+instruments procedures, due to the mechanical increase in the degree of invertibility.
+See Supplemental Appendix F.10.
+• Variable categories: We find little evidence that the biases or standard deviations
+of individual impulse response estimators depend systematically on which categories
+of time series are included in the DGP (e.g., how many real activity or price series are
+used). See Supplemental Appendix F.11.
+5.6
+Discussion: can we select the estimator based on the data?
+It is natural to ask whether, instead of selecting estimators based on average performance
+across DGPs, the choice of estimator can be guided by the data at hand in each given DGP.
+We now show that this appears to be difficult, as conventional model selection or evaluation
+criteria are unable to detect even substantial mis-specification of the VAR(4) model in the
+33
+
+=== page 34 ===
+vast majority of our DGPs. These findings are consistent with the previously documented
+poor performance of the VAR model averaging estimator. For simplicity, we focus here on
+observed shock identification.
+First, the Akaike Information Criterion tends to select very short lag lengths ˆpAIC in
+our DGPs, as already mentioned earlier. The 90th percentile of ˆpAIC (across simulations)
+does not exceed 2 in any of our 6,000 DGPs, and it in fact equals 2 in only 68.3% of those
+DGPs. This frequently used model selection tool therefore essentially never indicates that
+the VAR(4) specification is mis-specified.
+Second, the Lagrange Multiplier test of residual serial correlation has low power in most
+of our DGPs. We carry out this test by regressing the sample VAR residuals on their first
+lags, controlling for four lags of the observed variables, and employing the likelihood ratio
+test defined in Johansen (1995). Using a 10% significance level for the test, only around 8% of
+the DGPs exhibit a rejection probability above 25%, and none of the DGPs have a rejection
+probability above 50%. Hence, this conventional specification test of the VAR(4) model is
+under-powered, despite the fact that many of our DGPs are in fact not well approximated
+by a VAR(4) model in population, as shown in Section 3.4.
+It is of course possible that other model selection criteria or specification tests will work
+better. However, at a minimum, the performance of the VAR model averaging estimator
+discussed in Section 5.3 and the evidence presented in this subsection together suggest that
+it is not straightforward to develop effective data-dependent estimator selection rules for use
+on conventional macroeconomic time series data.
+6
+Conclusion and directions for future research
+We conducted a large-scale simulation study of the performance of LP and VAR structural
+impulse response estimators, as well as several variants of these methods.
+We drew the
+following four main conclusions.
+1. As predicted by theory, there is a non-trivial bias-variance trade-off between least-squares
+LP and VAR estimators (after bias correction). Empirically relevant DGPs are unlikely to
+admit exact finite-order VAR representations, and so mis-specification of VAR estimators
+is indeed a valid concern, as discussed by Ramey (2016) and Nakamura & Steinsson
+(2018), among others. Nevertheless, the slope of the trade-off is steep, with the lower bias
+of LP coming at the cost of substantially higher variance.
+34
+
+=== page 35 ===
+2. Bias-corrected LP is the preferred estimator if and only if the researcher overwhelmingly
+prioritizes minimizing bias, with little regard to precision. Researchers who use LP should
+acknowledge their focus on bias, and they should apply the Herbst & Johannsen (2023)
+bias correction procedure when the data are persistent.
+3. For researchers that attach at least moderate weight to variance in their loss function
+(such as under the conventional MSE criterion), VAR methods are attractive. Specifi-
+cally, Bayesian VARs perform well at short horizons, least-squares VARs at intermediate
+horizons, and the two methods are comparable at long horizons. The fact that no single
+VAR method dominates at all horizons means that researchers must take a stand not only
+on their preferences for bias and variance, but also on their primary horizons of interest,
+or alternatively ensure that their findings are supported by multiple procedures.
+4. In the case of IV identification, the popular SVAR-IV (or proxy-SVAR) procedure can
+be severely biased, but it has substantially lower dispersion at all horizons than “internal
+instruments” procedures such as LP-IV or internal-IV VARs. The high (median) bias of
+SVAR-IV is due to its lack of robustness to non-invertibility, which is a pervasive and
+realistic feature of our DGPs.
+These conclusions inevitably depend on the choice of encompassing model and the specific
+implementation of the impulse response estimators. Our paper first and foremost has aimed
+to bring the bias-variance trade-off in impulse response estimation to the attention of applied
+researchers. Our particular quantification of this trade-off has sought to capture the wide
+range of applied settings faced by macroeconomists, by fitting a dynamic factor model with
+rich short-run and long-run dynamics to the well-known Stock & Watson (2016) data set.
+Our online code repository (see Footnote 4) facilitates experimentation with alternative
+encompassing models or estimation procedures.
+Our findings point to several potential areas for future research. First, we conjecture that
+the bias-variance trade-off may differ quantitatively in panel data settings, to the extent that
+the availability of a large cross section reduces the sampling variance of the estimators for a
+given time dimension, thus potentially making LP relatively more attractive than in the pure
+time series case. Second, our analysis has focused on the average performance of estimators
+across DGPs because we find that conventional model selection or evaluation tools are unable
+to detect substantial mis-specification of low-order VARs in our simulations; nevertheless,
+we view data-dependent estimator selection as an area ripe for further investigation. Third,
+it may be worth investigating whether the performance of the Bayesian VAR procedure at
+35
+
+=== page 36 ===
+intermediate horizons can be improved by developing alternative prior specifications that are
+specifically aimed at structural impulse response estimation rather than forecasting, unlike
+the priors used in much of the literature. Fourth, for the case of IV/proxy identification,
+an interesting question is whether it is possible to develop alternative invertibility-robust
+estimation procedures that capture some of the variance improvement enjoyed by the non-
+robust SVAR-IV estimator. Fifth, we leave exploration of other structural shock identifi-
+cation schemes—such as sign restrictions, long-run restrictions, and non-recursive short-run
+restrictions—to future work. Sixth, while our simulations were calibrated to quarterly data,
+it would be illuminating to see whether our conclusions apply also to monthly calibrations.
+36
+
+=== page 37 ===
+Appendix A
+Details on DGP definitions
+A.1
+Shock definition
+Our definition of the structural shock of interest, ε1,t, ensures that it has the largest possible
+contemporaneous effect on nominal interest rates (for monetary shocks) and government
+spending (for fiscal shocks). Letting ηt ≡Hεt, Ση ≡Var(ηt), and ι∗denote the index of the
+policy instrument it in the vector Xt, the shock is thus defined through the solution of the
+following problem:
+max
+H
+Λι∗,•He1
+s.t.
+HH′ = Ση,
+where e1 selects the first column of H. The solution equals H•,1 = ΣηΛ′
+ι∗,•(Λι∗,•ΣηΛ′
+ι∗,•)−1/2.23
+A.2
+IV process calibration
+We calibrate the innovation noise σ2
+ν in the IV equation to target population IV first-stage
+F-statistics between 10 and 30 when T = 200, consistent with borderline weak to moderately
+strong identification, as in the majority of applied work. This yields σν ∈{1.1, 1.5, 2.3}. We
+draw ρz and σν uniformly at random from their two sets.
+Appendix B
+Details on estimation procedures
+Least-squares LP.
+The least-squares LP estimator of the impulse response at horizon
+h is based on the coefficient ˆβh in the h-step-ahead OLS regression
+yt+h = ˆµh + ˆβhxt + ˆζhqt +
+p
+X
+ℓ=1
+ˆφh,ℓwt−ℓ+ residualt,h,
+(B.1)
+that is, we regress on the variable xt, with controls given by the vector qt as well as p lags of
+all of the data wt. The estimands of Section 3.2 can now be estimated as follows:
+1. Observed shock. We set xt equal to the observed shock ε1,t and omit the contempo-
+raneous controls qt (we still control for lagged data).24
+23The remaining columns in H are chosen arbitrarily to satisfy the variance-covariance constraint; these
+columns only matter for the simulation results through the implications for reduced-form dynamics.
+24The lags are not needed for consistency in this case, but they often improve efficiency.
+37
+
+=== page 38 ===
+2. IV. We estimate a Two-Stage Least Squares (2SLS) version of (B.1), setting xt equal
+to the policy variable it, and instrumenting for this variable with the IV zt. We omit
+qt in this specification (but still include lagged controls). This is numerically the same
+as doing a LP of yt+h on zt (with lagged controls), and dividing this coefficient by the
+LP coefficient in a regression of it on zt (with lagged controls), see Stock & Watson
+(2018) and Plagborg-Møller & Wolf (2021).
+3. Recursive identification. xt = it is the policy variable, while qt are the variables
+ordered before it in the identification scheme (Plagborg-Møller & Wolf, 2021).
+Bias-corrected LP.
+We implement the bias-corrected LP estimator of Herbst & Jo-
+hannsen (2023), using their approximate analytical bias formula for LP with controls and
+with population autocovariances substituted with sample analogues.25 Following their recom-
+mendation, we implement an iterative bias correction, where the impulse response estimate
+at horizon h is bias-corrected using the previously corrected impulse response estimates at
+horizons 1, 2, . . . , h −1.
+Penalized LP.
+The Barnichon & Brownlees (2019) estimator lowers the variance of LP
+by exploiting a prior belief in smoothness of the impulse response function across horizons.
+Following their preferred implementation, we model the impulse response function using B-
+spline basis functions. The jaggedness penalty function penalizes deviations from a quadratic
+function of the horizon h. We penalize impulse responses up to horizon 20. The penalty
+parameter is selected in a data-dependent way using 5-fold cross-validation.
+We do not
+penalize the coefficients on the control variables in the LP. When reporting relative impulse
+responses (10), we divide by the least-squares LP estimate of the impact response of the
+policy variable it to the structural shock.
+Least-squares VAR.
+The least-squares VAR coefficient estimates are obtained through
+equation-by-equation OLS regressions. We perform a Cholesky decomposition of the forecast
+error variance-covariance matrix and compute impulse response functions with respect to the
+orthogonalized shocks. The estimands of Section 3.2 can now be estimated as follows:
+25Herbst & Johannsen’s analytical derivations assume stationarity, but we will apply the formula regardless.
+This is similar to how analytical bias correction is typically carried out in VAR contexts (Kilian, 1998), as
+Pope (1990) also assumes stationarity.
+38
+
+=== page 39 ===
+1. Observed shock. The shock ε1,t is ordered first in wt, and we compute responses to
+the first innovation.
+2. IV. We initially consider an “internal instruments” approach as in Ramey (2011).
+That is, we include the IV zt in the data vector wt, order the IV first, and compute
+responses with respect to the first innovation (Plagborg-Møller & Wolf, 2021). The
+relative impulse response (10) is obtained by dividing by the impact response of the
+policy variable it.
+3. Recursive identification. The ordering of variables in wt equals the ordering of
+the desired population impulse response estimand (cf. Section 3.2), and we compute
+responses to the innovation of the policy instrument it.
+In contrast to the above internal instruments approach, the SVAR-IV (or “proxy-SVAR”)
+estimator of Stock (2008) is obtained by computing the reduced-form impulse responses ˆΨh
+(h = 0, 1, . . . ) corresponding to a VAR in ¯wt (i.e., excluding zt), and then reporting relative
+impulse responses (10) corresponding to the absolute structural impulse responses ˆΨhˆγ,
+where ˆγ is the sample covariance vector of the reduced-form VAR residuals ˆut and the IV zt.
+Bias-corrected VAR.
+We follow Kilian (1998) and consider a modification of the stan-
+dard least-squares VAR estimator that applies the Pope (1990) analytical bias correction
+to the reduced-form VAR coefficient matrices. We use Kilian’s procedure for ensuring the
+largest eigenvalue of the bias-corrected VAR companion matrix does not exceed 1.
+Bayesian VAR.
+Our BVAR implementation follows the default prior recommendations
+of Giannone et al. (2015), as implemented in their replication code. The prior is therefore
+a Minnesota prior, extended with the “sum-of-coefficients” and “dummy-initial-observation”
+priors to improve long-run forecasts.
+The degrees of shrinkage provided by each of the
+three prior components are governed by three prior hyper-parameters, which are selected by
+maximizing the marginal likelihood.26 To save on computation time, we do not optimize the
+hyper-parameter-vector ψ (in their notation), i.e., the diagonal of the scale matrix in the
+Wishart prior on the innovation variance matrix; instead, these hyper-parameters are fixed
+at the residual variance estimates from preliminary AR(1) regressions.
+26Note that we do not use Giannone et al.’s computationally intensive hierarchical Bayesian procedure
+but instead select hyper-parameters to maximize the marginal likelihood. In doing this, we substitute their
+custom optimization routine with the built-in Matlab function fminunc.
+39
+
+=== page 40 ===
+VAR model averaging.
+Hansen (2016) proposes a data-dependent procedure for aver-
+aging across impulse responses estimates produced by a collection of different AR and VAR
+models with different lag lengths. Let ˆδh(r) denote the un-normalized, least-squares recursive
+impulse response estimate at some horizon h for model r = 1, . . . , R. We estimate ˆδh(r) from
+R = 40 candidate models: first, univariate AR models for yt with lag lengths from p = 1 up
+to p = 20; and second, VAR models in wt with lag lengths from p = 1 up to p = 20. As in
+Hansen (2016), the variance-covariance matrix of innovations Σ and thus the impact effect δ0
+are fixed across candidate models and treated as known without error.27 The VAR model av-
+eraging estimator is given by PR
+r=1 ˆωrˆδh(r), where the weights {ˆωr}R
+r=1 are chosen to minimize
+the data-dependent approximated MSE estimate ˆ
+M(ω1, . . . , ωR) ≈E[T(PR
+r=1 ωrˆδh(r)−δh)2],
+subject to the constraints that all weights are nonnegative and PR
+r=1 ωr = 1. Details of the
+MSE estimate are given in Hansen (2016, Section 6).28 We run this optimization for the
+weights separately at each impulse response horizon. Relative impulse responses (10) are
+computed by dividing the absolute impulse response by the least-squares VAR(4) impact
+impulse response estimate of it with respect to the identified shock.
+References
+Austin, B. A. (2020). Essays on Labor Economics and Econometrics. PhD thesis, Harvard Univer-
+sity. Chapter 2: “The trade-off between LP-IV and SVAR-IV estimation”.
+Bai, J. & Ng, S. (2004). A PANIC Attack on Unit Roots and Cointegration. Econometrica, 72(4),
+1127–1177.
+Barigozzi, M., Lippi, M., & Luciani, M. (2021). Large-dimensional Dynamic Factor Models: Esti-
+mation of Impulse–Response Functions with I(1) cointegrated factors. Journal of Econometrics,
+221(2), 455–482.
+Barnichon, R. & Brownlees, C. (2019). Impulse Response Estimation by Smooth Local Projections.
+The Review of Economics and Statistics, 101(3), 522–530.
+Brugnolini, L. (2018). About Local Projection Impulse Response Function Reliability. CEIS Re-
+search Paper, Vol. 16, Issue 6, No. 440.
+27To match the impact effect estimate in our benchmark method of least-squares VAR, we use ˆΣ from the
+p = 4 VAR estimate as the true value across all the candidate models.
+28The object of interest, ˆδh(r), is a scalar, which allows us to omit the weighting matrix required in the
+MSE estimate in Hansen (2016).
+40
+
+=== page 41 ===
+Bruns, M. & Lütkepohl, H. (2022). Comparison of local projection estimators for proxy vector
+autoregressions. Journal of Economic Dynamics & Control, 134, 1–17.
+Choi, C.-Y. & Chudik, A. (2019). Estimating impulse response functions when the shock series is
+observed. Economics Letters, 180, 71–75.
+Christiano, L., Eichenbaum, M., & Evans, C. (1999). Monetary Policy Shocks: What Have We
+Learned and to What End? In J. B. Taylor & M. Woodford (Eds.), Handbook of Macroeconomics,
+volume 1A chapter 2, (pp. 65–148). Elsevier.
+Forni, M., Gambetti, L., & Sala, L. (2019). Structural VARs and noninvertible macroeconomic
+models. Journal of Applied Econometrics, 34(2), 221–246.
+Gertler, M. & Karadi, P. (2015). Monetary Policy Surprises, Credit Costs, and Economic Activity.
+American Economic Journal: Macroeconomics, 7(1), 44–76.
+Giannone, D., Lenza, M., & Primiceri, G. E. (2015). Prior selection for vector autoregressions.
+Review of Economics and Statistics, 97(2), 436–451.
+Hansen, B. E. (2016).
+Stein Combination Shrinkage for Vector Autoregressions.
+Manuscript,
+University of Wisconsin-Madison.
+Herbst, E. & Johannsen, B. K. (2023). Bias in Local Projections. Manuscript, Board of Governors
+of the Federal Reserve.
+Inoue, A. & Kilian, L. (2020). The uniform validity of impulse response inference in autoregressions.
+Journal of Econometrics, 215(2), 450–472.
+Johansen, S. (1995).
+Likelihood-Based Inference in Cointegrated Vector Autoregressive Models.
+Oxford University Press.
+Jordà, Ò. (2005). Estimation and Inference of Impulse Responses by Local Projections. American
+Economic Review, 95(1), 161–182.
+Kilian, L. (1998). Small-sample Confidence Intervals for Impulse Response Functions. Review of
+Economics and Statistics, 80(2), 218–230.
+Kilian, L. & Kim, Y. J. (2011). How Reliable Are Local Projection Estimators of Impulse Re-
+sponses? Review of Economics and Statistics, 93(4), 1460–1466.
+Kilian, L. & Lütkepohl, H. (2017). Structural Vector Autoregressive Analysis. Cambridge University
+Press.
+41
+
+=== page 42 ===
+Lazarus, E., Lewis, D. J., Stock, J. H., & Watson, M. W. (2018). HAR Inference: Recommendations
+for Practice. Journal of Business & Economic Statistics, 36(4), 541–559.
+Leeper, E. M., Walker, T. B., & Yang, S.-C. S. (2013). Fiscal Foresight and Information Flows.
+Econometrica, 81(3), 1115–1145.
+Li, D., Plagborg-Moller, M., & Wolf, C. K. (2022). Local Projections vs. VARs: Lessons From
+Thousands of DGPs. National Bureau of Economic Research Working Paper No. 30207.
+Marcellino, M., Stock, J. H., & Watson, M. W. (2006).
+A comparison of direct and iterated
+multistep AR methods for forecasting macroeconomic time series.
+Journal of Econometrics,
+135(1–2), 499–526.
+Meier, A. (2005). How Big is the Bias in Estimated Impulse Responses? A Horse Race between
+VAR and Local Projection Methods. Manuscript, European University Institute.
+Mertens, K. & Ravn, M. O. (2013). The Dynamic Effects of Personal and Corporate Income Tax
+Changes in the United States. American Economic Review, 103(4), 1212–1247.
+Miranda-Agrippino, S. & Ricco, G. (2021). Bayesian Local Projections. Warwick Economics Re-
+search Papers No. 1348.
+Miranda-Agrippino, S. & Ricco, G. (2023). Identification with External Instruments in Structural
+VARs. Journal of Monetary Economics, 135, 1–19.
+Montiel Olea, J. L. & Plagborg-Møller, M. (2021). Local Projection Inference Is Simpler and More
+Robust Than You Think. Econometrica, 89(4), 1789–1823.
+Nakamura, E. & Steinsson, J. (2018). Identification in Macroeconomics. Journal of Economic
+Perspectives, 32(3), 59–86.
+Plagborg-Møller, M. & Wolf, C. K. (2021). Local Projections and VARs Estimate the Same Impulse
+Responses. Econometrica, 89(2), 955–980.
+Plagborg-Møller, M. & Wolf, C. K. (2022). Instrumental Variable Identification of Dynamic Vari-
+ance Decompositions. Journal of Political Economy, (8), 2164–2202.
+Pope, A. L. (1990). Biases of Estimators in Multivariate Non-Gaussian Autoregressions. Journal
+of Time Series Analysis, 11(3), 249–258.
+Ramey, V. A. (2011). Identifying Government Spending Shocks: It’s All in the Timing. Quarterly
+Journal of Economics, 126(1), 1–50.
+42
+
+=== page 43 ===
+Ramey, V. A. (2016). Macroeconomic Shocks and Their Propagation. In J. B. Taylor & H. Uhlig
+(Eds.), Handbook of Macroeconomics, volume 2 chapter 2, (pp. 71–162). Elsevier.
+Romer, C. D. & Romer, D. H. (2004).
+A New Measure of Monetary Shocks: Derivation and
+Implications. American Economic Review, 94(4), 1055–1084.
+Sawa, T. (1972). Finite-Sample Properties of the k-Class Estimators. Econometrica, 40(4), 653–
+680.
+Schorfheide, F. (2005). VAR forecasting under misspecification. Journal of Econometrics, 128(1),
+99–136.
+Sims, C. A. (1980). Macroeconomics and Reality. Econometrica, 48(1), 1–48.
+Stock, J. H. (2008). What’s New in Econometrics: Time Series, Lecture 7. Lecture slides, NBER
+Summer Institute.
+Stock, J. H. & Watson, M. W. (2012).
+Disentangling the Channels of the 2007–09 Recession.
+Brookings Papers on Economic Activity, 2012(1), 81–135.
+Stock, J. H. & Watson, M. W. (2016). Dynamic factor models, factor-augmented vector autoregres-
+sions, and structural vector autoregressions in macroeconomics. In Handbook of Macroeconomics,
+volume 2 chapter 8, (pp. 415–525). Elsevier.
+Stock, J. H. & Watson, M. W. (2018). Identification and Estimation of Dynamic Causal Effects in
+Macroeconomics Using External Instruments. Economic Journal, 128(610), 917–948.
+Xu, K.-L. (2023). Local Projection Based Inference under General Conditions. Manuscript, Indiana
+University Bloomington.
+43
+
+=== page 44 ===
+Online Appendix for “Local Projections vs. VARs:
+Lessons From Thousands of DGPs”
+Dake Li
+Mikkel Plagborg-Møller
+Christian K. Wolf
+January 24, 2024
+Contents
+C
+Estimation of non-stationary DFM
+2
+D
+Definition of recursive shock estimand
+5
+E
+Examples of estimated IRFs
+8
+F
+Further simulation results and robustness
+13
+F.1
+IV estimators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+F.2
+Stationary DGPs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+F.3
+Recursive identification . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+F.4
+Salient observables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+F.5
+90th percentile loss . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+27
+F.6
+Fiscal and monetary shocks . . . . . . . . . . . . . . . . . . . . . . . . . .
+30
+F.7
+Longer estimation lag length . . . . . . . . . . . . . . . . . . . . . . . . .
+33
+F.8
+Smaller sample size
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+36
+F.9
+Larger sample size and estimation lag length
+. . . . . . . . . . . . . . . .
+39
+F.10
+More observables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+42
+F.11
+Splitting by variable categories . . . . . . . . . . . . . . . . . . . . . . . .
+46
+G
+Proofs
+48
+G.1
+Auxiliary lemmas
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+48
+G.2
+Proof of Proposition 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+51
+References
+54
+1
+arXiv:2104.00655v4  [econ.EM]  23 Jan 2024
+
+=== page 45 ===
+Appendix C
+Estimation of non-stationary DFM
+We here elaborate on our estimation of the non-stationary DFM, complementing the brief
+discussion in Section 3.3.
+Data transformation.
+We use the same dataset as Stock & Watson (2016) but, unlike
+those authors, do not transform the series to stationarity prior to estimating the DFM. This
+means that we change Stock & Watson’s transformation codes 2 (first differences), 3 (second
+differences), 5 (first log differences), and 6 (second log differences) to 1 (levels), 2, 4 (log
+levels), and 5, respectively. We then correct outliers using the same procedure as Stock &
+Watson, meaning that when the outlier adjustment procedure is applied to a series in levels,
+we difference the series, then adjust outliers, and then finally cumulate the series again.
+There are 8 series who have outliers adjusted, all of which are in levels. Finally, and unlike
+Stock & Watson, we refrain from subtracting a nonparametric trend estimate from the series.
+Instead, we control for a linear time trend in the estimation, as discussed below.
+Estimation.
+We set the number of factors nf equal to 6 as in Stock & Watson (2016),
+since these authors selected the number of factors based on information criteria applied to
+∆Xt (essentially), and this also remains a valid way to select nf in our non-stationary model.
+We then apply Stock & Watson’s PCA procedure for unbalanced panels to the differenced
+data ∆Xt.C.1 The differenced data is de-meaned and standardized prior to performing PCA,
+thus removing any series-specific deterministic linear time trends. This gives us estimates
+∆ˆft of the differenced factors (up to rotation), and we then cumulate ˆft = Pt
+s=1 ∆ˆfs. Asymp-
+totically, ˆft equals ft up to rotation and a linear time trend (Barigozzi et al., 2021).C.2 We
+then estimate the loadings Λ = (λ1, . . . , λnX)′ through series-by-series OLS regressions of
+Xi,t onto ˆft, controlling for a linear time trend. The OLS residuals ˆvi,t are estimates of the
+idiosyncratic components vi,t.
+As in Stock & Watson (2016), we next fit AR(pv) processes to each idiosyncratic residual
+ˆvi,t by OLS, separately for each i. Unlike Stock & Watson, we apply the Pope (1990) bias
+C.1Like Stock & Watson, we estimate the factors using only a subset of the variables in Xt, since some
+variables are essentially aggregates of other variables.
+C.2Since Stock & Watson (2016) also estimate factors from essentially the same differenced data, we refer to
+their interpretation of the factors (p. 488): “[T]he first factor explains large fractions of the variation in the
+growth of GDP and employment, but only small fractions of the variation in prices and financial variables.
+The second through fourth factors explain the variation in headline inflation, oil prices, housing starts, and
+some financial variables.”
+2
+
+=== page 46 ===
+correction to the AR coefficient estimates to avoid understating persistence.
+Differently from the stationary specification in Stock & Watson (2016), we fit a VECM
+to the 6 estimated factors ˆft, explicitly allowing for unit roots and cointegration. We specify
+that the VECM in error correction form contains pf −1 lagged difference terms, implying a
+VAR(pf) model for the factors, and control for a time trend. That is, the fitted VECM is of
+the form
+∆ˆft = ˆαˆβ′ ˆft−1 +
+pf−1
+X
+ℓ=1
+ˆBℓ∆ˆft−ℓ+ ˆν0 + ˆν1t + ˆηt,
+where ˆα and ˆβ are 6 × r matrices, with r denoting the cointegration rank, ˆB1, . . . , ˆBpf−1 are
+6 × 6 matrices, and ˆν0 and ˆν1 are 6 × 1 vectors. All estimated parameters (including the
+residual variance-covariance matrix) are unrestricted, with the exception of a conventional
+normalization on the first r columns of ˆβ.C.3 We estimate the cointegration rank r using the
+Johansen (1995) maximum eigenvalue test, again controlling for an unrestricted time trend.
+We apply a sequential testing procedure using a 5% significance level. Given the final non-
+rejected cointegration rank, we estimate the VECM parameters by quasi-MLE (Johansen,
+1995) and then transform these parameters into VAR parameters (Kilian & Lütkepohl, 2017,
+Equation 3.1.4). Note that, while the empirical estimation has controlled for deterministic
+linear time trends in the individual series and in the latent factor process (essentially equiv-
+alent with linearly detrending the data prior to analysis), we omit any such deterministic
+terms from the final calibrated DFM (5)–(7) used in our simulation study.
+To ensure comparability with Stock & Watson (2016), the principal components routine
+uses data starting in 1959Q1, while the loadings, idiosyncratic components, and factor VECM
+are estimated on data starting in 1959Q3.
+Further estimation details and results.
+We select the factor and idiosyncratic error
+lag lengths using the Akaike information criterion (AIC). For the factors, AIC is minimized
+at pf = 3, but the criterion is essentially flat for pf ∈[2, 4]; thus, to err on the side of allowing
+for richer long-run dynamics, we set pf = 4. For the idiosyncratic errors, we apply the AIC
+to each individual series. The 90th percentile of selected lags equals 4; we thus set pv = 4
+to be consistent with the clear majority of the series. All estimated idiosyncratic AR(4)
+processes are technically stationary, but half the processes have largest AR root exceeding
+0.86, with 25% exceeding 0.93.
+C.3We use the command jcitest in Matlab’s Econometrics Toolbox to test and estimate the VECM. We
+refer to the command’s documentation for implementation details.
+3
+
+=== page 47 ===
+The Johansen test selects a cointegration rank of 2 for the factor VECM, corresponding
+to 6 −2 = 4 common stochastic trends.
+4
+
+=== page 48 ===
+Appendix D
+Definition of recursive shock estimand
+Here we define the impulse response estimand for the recursive identification scheme.
+The researcher observes only the endogenous variables ¯wt ⊂Xt, with no further direct
+or noisy measures of structural shocks. Thus, the total vector of observables is wt = ¯wt.
+Consistent with a large literature on recursive shock identification in VARs (e.g., Christiano
+et al., 1999), we take as the estimand the impulse responses with respect to a recursive
+(Cholesky) orthogonalization of the reduced-form (Wold) forecast errors in the VAR(∞)
+process for ¯wt implied by the DFM. The shock of interest is the orthogonalized innovation to
+a policy variable it in wt. For monetary policy DGPs, we order the federal funds rate last, as
+in Christiano et al. (1999); this restricts the other included variables to not respond contem-
+poraneously to the monetary innovation. For fiscal policy DGPs, we order the government
+expenditure series first; this restricts the fiscal authority to respond to other innovations in
+the recursive VAR with a lag, as in Blanchard & Perotti (2002).
+Note that the recursively orthogonalized innovation differs across DGPs, and it generally
+does not equal any of the structural shocks εj,t in the DFM. We nevertheless consider this
+impulse response estimand due to its popularity in applied work.
+We now provide the mathematical definition of the estimand. Recall that the encompass-
+ing DFM takes the form (5)–(7). We map this DFM into the “ABCD” form of Fernández-
+Villaverde et al. (2007) as follows. The general ABCD representation takes the form
+st
+=
+Ast−1 + Bet,
+(D.1)
+yt
+=
+Cst−1 + Det,
+(D.2)
+where et ∼N(0, I).
+Define the notation Φ1:p = (Φ1, . . . , Φp), Γℓ= diag(δ1,ℓ, . . . , δnX,ℓ),
+Γ1:p = (Γ1, . . . , Γp), and Ξ = diag(Ξ1, . . . , ΞnX). Then the mapping from (5)–(7) to (D.1)–
+(D.2) given a selected set of observables ¯wt = ¯SXt is
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ft
+...
+ft−pf+1
+vt
+...
+vt−pv+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|
+{z
+}
+st
+=
+
+
+
+
+
+
+
+
+Φ1:pf−1
+Φpf
+0
+0
+I
+0
+0
+0
+0
+0
+Γ1:pv−1
+Γpv
+0
+0
+I
+0
+
+
+
+
+
+
+
+
+|
+{z
+}
+A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ft−1
+...
+ft−pf
+vt−1
+...
+vt−pv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++
+
+
+
+
+
+
+
+
+H
+0
+0
+0
+0
+Ξ
+0
+0
+
+
+
+
+
+
+
+
+|
+{z
+}
+B
+
+εt
+ξt
+
+
+| {z }
+et
+,
+(D.3)
+5
+
+=== page 49 ===
+¯wt
+=
+¯S
+
+ΛΦ1:pf
+Γ1:pv
+
+|
+{z
+}
+C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ft−1
+...
+ft−pf
+vt−1
+...
+vt−pv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++ ¯S
+
+ΛH
+Ξ
+
+|
+{z
+}
+D
+
+εt
+ξt
+
+.
+(D.4)
+Next we derive the “innovations representation” of the ABCD model, proceeding exactly
+as in Fernández-Villaverde et al. (2007):D.1
+ˆxt
+=
+Aˆxt−1 + K¯ut,
+¯wt
+=
+Cˆxt−1 + ¯ut,
+where ˆxt = E[st | ¯wt, ¯wt−1, . . . ] and ¯ut = ¯wt −E[ ¯wt | ¯wt−1, ¯wt−2, . . . ]. The innovations repre-
+sentation immediately yields the impulse responses of the observables ¯wt with respect to the
+Wold innovations ¯ut. We orthogonalize the Wold innovations using a Cholesky decomposi-
+tion, given the chosen ordering of the variables. In particular, letting Var(¯ut) = Σ¯u = ¯B ¯B′,
+with ¯B lower triangular, and denoting the Wold innovation impulse responses by ¯C(L), we
+define the recursive impulse response estimands as
+θh ≡
+¯Cιy,•,h ¯B•,ιi
+¯Cιi,•,0 ¯B•,ιi
+,
+h = 0, 1, 2, . . . ,
+(D.5)
+where ιy and ιi are the indices corresponding to yt and it in the vector ¯wt, respectively. Unlike
+the observed shock and IV estimands considered in Section 3.2, the estimand (D.5) might
+not equal the model-implied structural impulse response of the variable yt with respect to
+any aggregate shock εj,t in the DFM.D.2 In other words, the expression (D.5) is the impulse
+response with respect to a potentially non-structural innovation.
+D.1To ensure that the matrix Σ = Var(st | ¯wt, ¯wt−1, . . . ) is positive semidefinite despite numerical rounding
+errors, we write Equation 9 in Fernández-Villaverde et al. (2007) in the following equivalent way:
+Σ = L˜ΣL′,
+where L ≡˜A −˜A˜Σ ˜C′( ˜C ˜Σ ˜C′)−1 ˜C, ˜Σ ≡
+Σ
+0
+0
+I
+
+, ˜A ≡(A, B), ˜C ≡(C, D).
+D.2A necessary condition for the impulse responses (D.5) to equal structural impulse responses from (5)–(7)
+is that εj,t ∈span({ ¯wt−ℓ}∞
+ℓ=0) for at least one shock j. A sufficient condition for εt ∈span({ ¯wt−ℓ}∞
+ℓ=0) is
+that n ¯
+w = nf, ¯Λ is non-singular, and Ξi = 0 for all i in ¯wt.
+6
+
+=== page 50 ===
+To interpret the estimand (D.5), consider two popular applied identification schemes.
+First, in the monetary policy shock identification scheme of Christiano et al. (1999), yt may
+be aggregate output, it is the nominal interest rate, and the nominal rate is typically ordered
+after all other observables. The recursive estimand is then the impulse response of output to
+a residualized interest rate innovation, normalized by the impact response of interest rates.
+Second, for the fiscal policy shock identification procedure in Blanchard & Perotti (2002),
+we may again take yt to be aggregate output and let it be aggregate government spending.
+In this case, reduced-form innovations in the government spending equation are treated as
+structural shocks, and so (D.5) gives impulse responses to those innovations, normalized by
+the impact response of government spending.
+7
+
+=== page 51 ===
+Appendix E
+Examples of estimated IRFs
+Figures E.1 to E.7 provide a visual illustration of estimated impulse response functions (IRFs)
+from the seven estimation procedures defined in Section 4. We fix a single (randomly chosen)
+DGP with an observed fiscal shock and simulate ten data sets with sample size T = 200.
+We then apply the seven estimation methods to these ten data sets.
+8
+
+=== page 52 ===
+9
+Observed fiscal shock: LP IRFs
+Figure E.1:
+Structural impulse response estimand (thick blue) for one specification with an
+observed fiscal spending shock vs. ten least-squares LP impulse response estimates.
+Observed fiscal shock: Bias-corrected LP IRFs
+Figure E.2:
+Structural impulse response estimand (thick blue) for one specification with an
+observed fiscal spending shock vs. ten bias-corrected LP impulse response estimates.
+
+=== page 53 ===
+10
+Observed fiscal shock: Penalized LP IRFs
+Figure E.3:
+Structural impulse response estimand (thick blue) for one specification with an
+observed fiscal spending shock vs. ten penalized LP impulse response estimates.
+
+=== page 54 ===
+11
+Observed fiscal shock: VAR IRFs
+Figure E.4:
+Structural impulse response estimand (thick blue) for one specification with an
+observed fiscal spending shock vs. ten least-squares VAR impulse response estimates.
+Observed fiscal shock: Bias-corrected VAR IRFs
+Figure E.5:
+Structural impulse response estimand (thick blue) for one specification with an
+observed fiscal spending shock vs. ten bias-corrected VAR impulse response estimates.
+
+=== page 55 ===
+12
+Observed fiscal shock: BVAR IRFs
+Figure E.6:
+Structural impulse response estimand (thick blue) for one specification with an
+observed fiscal spending shock vs. ten Bayesian VAR impulse response estimates.
+Observed fiscal shock: VAR model averaging IRFs
+Figure E.7:
+Structural impulse response estimand (thick blue) for one specification with an
+observed fiscal spending shock vs. ten VAR model averaging impulse response estimates.
+
+=== page 56 ===
+Appendix F
+Further simulation results and robustness
+F.1
+IV estimators
+Figures F.1 and F.2 plot the mean bias and standard deviation of the estimation procedures
+in the case of IV identification. The relative ranking of the various estimation procedures
+is essentially the same as in the median bias and interquartile range plots presented in our
+main analysis in Section 5.4.
+Figures F.3 and F.4 show the median bias of our estimation procedures, but now for the
+10 percent of DGPs with the smallest and largest degrees of invertibility, respectively. As
+expected, the median bias for SVAR-IV is particularly elevated relative to other estimation
+methods if the degree of invertibility is small, as predicted by theory.
+13
+
+=== page 57 ===
+14
+IV: Mean bias of estimators
+Figure F.1: Median (across DGPs) of absolute mean bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+IV: Standard deviation of estimators
+Figure F.2: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 58 ===
+15
+IV: Median bias of estimators, small degree of invertibility
+Figure F.3: Median (across DGPs) of absolute median bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h, for the 10% of DGPs with the smallest degree of invertibility.
+IV: Median bias of estimators, large degree of invertibility
+Figure F.4: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h, for the 10% of DGPs with the largest degree of invertibility.
+
+=== page 59 ===
+F.2
+Stationary DGPs
+For our baseline analysis we used a non-stationary DFM with variables in levels as our
+encompassing model. We did this to follow the predominant practice in applied work of
+using variables in levels in LP and VAR regressions. Nevertheless, some researchers work
+with data that has been transformed to stationarity prior to the analysis. We here discuss
+results from an analogous simulation study conducted with a stationary encompassing DFM.
+Encompassing model.
+We consider a stationary version of the encompassing DFM (5)–
+(7). In particular, we parametrize the model based on the empirical reduced-form parameter
+estimates from Stock & Watson (2016), using the same specification as in Lazarus et al.
+(2018). We provide a brief summary here and refer to Stock & Watson for further details.
+Differently from our main analysis, each series in the vector of observables Xt is now trans-
+formed to ensure approximate stationarity. We follow Stock & Watson in selecting nf = 6
+factors, two lags in the factor equation (5), and two lags in the idiosyncratic component
+equation (7).
+The reduced-form parameters are estimated by principal components and
+least-squares procedures; in particular, the factor VAR equation (5) is estimated by OLS
+instead of imposing a VECM model. This pins down all parameters of the DFM except for
+the structural impact response matrix H, which we construct exactly as in our main analysis.
+DGP summary statistics.
+Table F.1 shows summary statistics of the 6,000 stationary
+DGPs (3,000 monetary DGPs and 3,000 fiscal ones, as in our baseline analysis). The persis-
+tence of the DGPs varies widely, as measured by the ratio trace(LRV ( ¯wt))/ trace(Var( ¯wt)),
+but note that none of the DGPs feature near-unit roots, with the largest absolute eigenvalue
+of the VAR companion matrix being below 0.91 in all cases. As in our baseline analysis, the
+DGPs feature marked heterogeneity in the characteristics of impulse response functions and
+in the degree to which the DGPs are well-approximated by a VAR(4) model.
+Estimators.
+The estimation procedures are the same as in the baseline analysis, except
+for the Bayesian VAR. Rather than centering the Minnesota prior at independent random
+walks, we center at independent white noise, i.e., all autoregressive coefficients are shrunk
+towards 0. We also remove the “sum-of-coefficients” and “dummy-initial-observation” priors.
+Results.
+Figures F.5 to F.7 show bias, standard deviation, as well as the best estimation
+method choice for our experiments based on the stationary DFM, focusing here on the case
+16
+
+=== page 60 ===
+Stationary DGPs: Summary statistics
+Percentile
+min
+10
+25
+50
+75
+90
+max
+Data and shocks
+trace(long-run var)/trace(var)
+0.36
+0.76
+1.00
+1.45
+2.18
+3.71
+18.09
+Largest VAR eigenvalue
+0.84
+0.84
+0.84
+0.84
+0.85
+0.86
+0.91
+Fraction of VAR coef’s ℓ≥5
+0.02
+0.11
+0.15
+0.21
+0.27
+0.34
+0.77
+Impulse responses up to h = 20
+No. of interior local extrema
+1
+2
+2
+2
+3
+4
+6
+Horizon of max abs. value
+0
+0
+0
+0
+1
+2
+8
+Average/(max abs. value)
+-0.42
+-0.16
+-0.08
+-0.02
+0.06
+0.11
+0.43
+R2 in regression on quadratic
+0.01
+0.10
+0.20
+0.46
+0.69
+0.83
+0.97
+Table F.1: Quantiles of various population parameters across the stationary DGPs for observed
+shock identification. “long-run var”: long-run variance of series. “var”: variance of series. “Largest
+VAR eigenvalue”: largest absolute eigenvalue of reduced-form VAR companion matrix. “Fraction
+of VAR coef’s ℓ≥5”: P1000
+ℓ=5 ∥Aw
+ℓ∥/ P1000
+ℓ=1 ∥Aw
+ℓ∥, where Aw
+ℓare the population VAR(∞) coefficient
+matrices and ∥· ∥is the Frobenius norm. “Average/(max abs. value)”: ( 1
+21
+P20
+h=0 θh)/ maxh{|θh|}.
+“R2 in regression on quadratic”: R2 from a regression of the impulse response function {θh}20
+h=0 on
+a quadratic polynomial in h.
+of an observed shock. We summarize the findings in three lessons that are analogous to those
+in Sections 5.1 to 5.3.
+1. Least-squares LP and VAR estimators again lie on opposite ends of the bias-variance
+spectrum. Furthermore, as in our main analysis, the slope of this trade-off is stark, with
+indifference between the two methods requiring the researcher to almost fully prioritize
+bias. Since the stationary DGPs are not highly persistent, bias correction has negligible
+impact, and indeed the uncorrected LP estimator has near-zero bias at all horizons (as
+predicted by asymptotic theory). Note also that the bias and standard deviation of the
+VAR estimators converge to zero as the horizon increases, a mechanical feature of VAR
+estimators in stationary DGPs that is not shared by LP methods.
+2. LP (bias-corrected or uncorrected) remains the preferred method when the weight ω on
+bias in the loss function is very high, but this requires ω to be even closer to 1 than
+in our baseline analysis. The region (gray with vertical lines) where bias-corrected LP is
+preferred at the top of Figure F.7 is very thin. Whenever the loss function puts non-trivial
+17
+
+=== page 61 ===
+weight on precision, penalized LP is usually preferred to least-squares or bias-corrected
+LP due to the substantial variance reduction.
+3. VAR methods tend to be preferred to least-squares or bias-corrected LP whenever the
+weight on variance in the loss function is non-trivial. However, for MSE loss, BVAR is
+now outperformed (on average across DGPs) at very short horizons h ≤2 by penalized
+LP, another shrinkage method. BVAR tends to outperform least-squares VAR at shorter
+horizons, but this ranking is reversed at intermediate horizons; at long horizons, the
+methods perform similarly since the estimated impulse responses are close to 0 anyway.
+Though at first sight bias-corrected VAR (yellow with horizontal lines) looks attractive
+in Figure F.7 at intermediate horizons when the weight on bias is moderately high, we
+remind the reader that least-squares VAR (purple) performs very similarly. VAR model
+averaging continues to perform poorly regardless of horizon and bias-variance preferences.
+18
+
+=== page 62 ===
+19
+Observed shock, stationary DGPs: Bias of estimators
+Figure F.5: Median (across DGPs) of absolute bias of the different estimation procedures, relative
+to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed shock, stationary DGPs: Standard deviation of estimators
+Figure F.6: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 63 ===
+20
+Observed shock, stationary DGPs: Optimal estimation method
+Figure F.7: Method that minimizes the average (across DGPs) loss function (4). Horizontal axis:
+impulse response horizon. Vertical axis: weight on squared bias in loss function. The loss function
+is normalized by the scale of the impulse response function, as in Figures F.5 and F.6.
+
+=== page 64 ===
+Recursive identification: DGP summary statistics
+Percentile
+min
+10
+25
+50
+75
+90
+max
+Impulse responses up to h = 20
+No. of interior local extrema
+0
+1
+2
+2
+3
+3
+7
+Horizon of max abs. value
+0
+1
+1
+6
+10
+20
+20
+Average/(max abs. value)
+-0.83
+-0.70
+-0.58
+-0.07
+0.38
+0.65
+0.94
+R2 in regression on quadratic
+0.01
+0.45
+0.65
+0.83
+0.93
+0.98
+1.00
+Table F.2: Quantiles of various population parameters across the 6,000 DGPs for recursive identi-
+fication. “Average/(max abs. value)”: ( 1
+21
+P20
+h=0 θh)/ maxh{|θh|}. “R2 in regression on quadratic”:
+R-squared from a regression of the impulse response function {θh}20
+h=0 on a quadratic polynomial
+in h.
+F.3
+Recursive identification
+Here we provide results for the recursive impulse response estimand defined in Section 3.2
+and Supplemental Appendix D.
+Table F.2 shows summary statistics for the impulse response functions in the recursive
+identification setting, analogous to the summary statistics for the “observed shock” case in
+the bottom half of Table 1 in Section 3.4. Note that the first three entries of the top half of
+that table apply without change here.F.1
+Figures F.8 and F.9 show the median (across DGPs) absolute bias and standard deviation
+of the various estimators. Figure F.10 depicts the best estimation method as a function of
+the horizon and the bias weight ω in the loss function (which is averaged across DGPs).
+These three figures are reasonably similar—both qualitatively as well as quantitatively—to
+the corresponding figures for the “observed shock” estimands in Section 5, with one notable
+difference: the relative bias increase for BVAR is smaller, and so now BVAR looks even
+more attractive, leading to the large solid-dotted blue area in Figure F.10. Intuitively, since
+recursive (i.e., Cholesky) shock identification depends heavily on estimating the reduced-
+form innovation variance-covariance matrix of the multivariate system, the stylized prior
+information about this matrix imposed by the BVAR provides helpful additional shrinkage
+that the other methods do not exploit.
+F.1The last two entries of ourse do not apply here: the degree of invertibility is trivially equal to 1, and we
+are not studying IV identification.
+21
+
+=== page 65 ===
+22
+Recursive identification: Bias of estimators
+Figure F.8: Median (across DGPs) of absolute bias of the different estimation procedures, relative
+to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Recursive identification: Standard deviation of estimators
+Figure F.9: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 66 ===
+23
+Recursive identification: Optimal estimation method
+Figure F.10: Method that minimizes the average (across DGPs) loss function (4). Horizontal
+axis: impulse response horizon. Vertical axis: weight on squared bias in loss function. The loss
+function is normalized by the scale of the impulse response function, as in Figures 2 and 3. At
+h = 0, VAR and LP are numerically identical; we break the tie in favor of VAR.
+
+=== page 67 ===
+F.4
+Salient observables
+We here re-run our analysis on a restricted set of DGPs that use a smaller subset of par-
+ticularly salient time series. Whereas our baseline analysis randomly draws series from the
+large set of 207 variables included in the empirical DFM of Stock & Watson (2016), we now
+consider the exhaustive list of all possible five-variable combinations of 17 oft-used series.
+Our subset of salient series includes (Stock & Watson Data Appendix series # in brack-
+ets): real GDP (1); real consumption (2); real investment (6); real government expenditure
+(12); the unemployment rate (56); personal consumption expenditure prices (95); the GDP
+deflator (97); the core consumer price index (121); average hourly earnings (132); the fed-
+eral funds rate (142); the 10-year Treasury rate (147); the BAA 10-year spread (151); an
+index of the U.S. dollar exchange rate relative to other major currencies (172); the S&P
+500 (181); a real house price index (193); consumer expectations (196); and real oil prices
+(202). As in our baseline analysis, we force each DGP to include either the federal funds
+rate or government spending (for monetary or fiscal shock estimands, respectively) as well
+as at least one real activity series (categories 1–3) and one price series (category 6). Subject
+to these constraints, we then generate the exhaustive list of all five-variable combinations of
+the salient series. This yields a total of 1,581 DGPs (845 monetary shock DGPs and 736
+fiscal shock DGPs).
+Results for bias, standard deviation, and optimal method choice are reported in Fig-
+ures F.11 to F.13. The figures look very similar to those from our baseline analysis. We
+therefore conclude that there is little in the way of systematic differences between the larger
+set of variables included in the full DFM and this smaller subset of particularly salient
+macroeconomic time series.
+24
+
+=== page 68 ===
+25
+Observed shock, salient observables: Bias of estimators
+Figure F.11:
+Median (across DGPs) of absolute bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed shock, salient observables: Standard deviation of estimators
+Figure F.12: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 69 ===
+26
+Observed shock, salient observables: Optimal estimation method
+Figure F.13: Method that minimizes the average (across DGPs) loss function (4). Horizontal
+axis: impulse response horizon. Vertical axis: weight on squared bias in loss function. The loss
+function is normalized by the scale of the impulse response function, as in Figures 2 and 3. At
+h = 0, VAR and LP are numerically identical; we break the tie in favor of VAR.
+
+=== page 70 ===
+F.5
+90th percentile loss
+Whereas our baseline results report medians (of bias and standard deviation) across DGPs,
+we now report the 90th percentiles across DGPs. This places the spotlight on those DGPs
+that are particularly challenging for impulse response estimation.
+Figures for bias, standard deviation, and optimal method choice are displayed in Fig-
+ures F.14 to F.16. By construction, the bias and standard deviation numbers are now higher
+for all estimators. Importantly, however, relative magnitudes do not change by much; that is,
+for DGPs in which VARs or shrinkage techniques do poorly, least-squares and bias-corrected
+LP tend to do just as poorly (relative to their respective median performance). As a result,
+optimal method choice for a researcher that evaluates loss at the 90th percentile looks similar
+to our baseline.
+27
+
+=== page 71 ===
+28
+Observed shock, 90th percentile of loss: Bias of estimators
+Figure F.14: 90th percentile (across DGPs) of absolute bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed shock, 90th percentile of loss: Standard deviation of estimators
+Figure F.15: 90th percentile (across DGPs) of standard deviation of the different estimation
+procedures, relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 72 ===
+29
+Observed shock, 90th percentile of loss: Optimal estimation method
+Figure F.16: Method that minimizes the 90th percentile (across DGPs) of the loss function (4).
+Horizontal axis: impulse response horizon. Vertical axis: weight on squared bias in loss function.
+The loss function is normalized by the scale of the impulse response function, as in Figures 2 and 3.
+At h = 0, VAR and LP are numerically identical; we break the tie in favor of VAR.
+
+=== page 73 ===
+F.6
+Fiscal and monetary shocks
+Recall that the results from Section 5 combine fiscal and monetary policy shock estimands.
+We here break the results down by policy shock estimand.
+Figures F.17 and F.18 show the bias and standard deviation plots for the 3,000 fiscal
+shock DGPs, while Figures F.19 and F.20 show the analogous figures for the 3,000 monetary
+shock DGPs. The results are qualitatively similar across the two kinds of DGPs, including
+the relative rankings of the various estimation procedures. However, the overall level of the
+standard deviations is somewhat higher in the fiscal shock case for all estimation methods.
+30
+
+=== page 74 ===
+31
+Observed fiscal shock: Bias of estimators
+Figure F.17:
+Median (across DGPs) of absolute bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed fiscal shock: Standard deviation of estimators
+Figure F.18: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 75 ===
+32
+Observed monetary shock: Bias of estimators
+Figure F.19:
+Median (across DGPs) of absolute bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed monetary shock: Standard deviation of estimators
+Figure F.20: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 76 ===
+F.7
+Longer estimation lag length
+Here we provide results for “observed shock” identification when the estimation lag length
+is increased to p = 8 (recall that we set p = 4 in Section 5).
+Figures F.21 and F.22 show the median (across DGPs) absolute bias and standard devia-
+tion of the estimation methods, while Figure F.23 shows the optimal method choice according
+to the loss function (which has been averaged across DGPs). Consistent with the theoretical
+results in Plagborg-Møller & Wolf (2021), least-squares LPs and VARs now perform similarly
+at all horizons h ≤p = 8. BVAR shrinkage now looks even more appealing than in our main
+analysis for loss functions with bias weight ω ≤0.7, due to the much lower standard devia-
+tion of this procedure. VAR bias correction has more bite in terms of reducing bias than in
+the baseline results. Otherwise the qualitative conclusions from Section 5 are unchanged.
+33
+
+=== page 77 ===
+34
+Observed shock, 8 lags: Bias of estimators
+Figure F.21:
+Median (across DGPs) of absolute bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed shock, 8 lags: Standard deviation of estimators
+Figure F.22: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 78 ===
+35
+Observed shock, 8 lags: Optimal estimation method
+Figure F.23: Method that minimizes the average (across DGPs) loss function (4). Horizontal
+axis: impulse response horizon. Vertical axis: weight on squared bias in loss function. The loss
+function is normalized by the scale of the impulse response function, as in Figures 2 and 3. At
+h = 0, VAR and LP are numerically identical; we break the tie in favor of VAR.
+
+=== page 79 ===
+F.8
+Smaller sample size
+Recall that our baseline experiments consider a sample size of T = 200 quarters. We here
+instead present results for T = 100. In the interest of space, we focus on results for “observed
+shock” identification.
+Results for bias, standard deviation, and optimal method choice are displayed in Fig-
+ures F.24 to F.26, respectively. The figures are qualitatively similar to those for our baseline
+analysis, though there is a quantitative difference: reducing the sample size increases stan-
+dard deviation by more (in relative terms) than bias. As a result, the estimation method
+choice plot indicates a more pronounced preference for shrinkage, with a larger area now
+solid-dotted blue (BVAR). Use of bias-corrected LP (grey with vertical lines) requires an
+even larger preference for low bias over high precision than in our baseline analysis.
+36
+
+=== page 80 ===
+37
+Observed shock, small sample: Bias of estimators
+Figure F.24:
+Median (across DGPs) of absolute bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed shock, small sample: Standard deviation of estimators
+Figure F.25: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 81 ===
+38
+Observed shock, small sample: Optimal estimation method
+Figure F.26: Method that minimizes the average (across DGPs) loss function (4). Horizontal
+axis: impulse response horizon. Vertical axis: weight on squared bias in loss function. The loss
+function is normalized by the scale of the impulse response function, as in Figures 2 and 3. At
+h = 0, VAR and LP are numerically identical; we break the tie in favor of VAR.
+
+=== page 82 ===
+F.9
+Larger sample size and estimation lag length
+While our baseline experiments have a sample size of T = 200 and an estimation lag length
+of p = 4, here we increase these to T = 720 and p = 12. This configuration of (T, p) is
+reminiscent of sample sizes and specifications often seen with monthly data. However, since
+the parameters of the encompassing DFM remain fixed at our quarterly calibration described
+in Section 3, we caution that it would be inappropriate to draw firm conclusions about how
+the estimators will perform in actual monthly data sets. In this subsection only, we use 2,000
+Monte Carlo simulations per DGP, rather than 5,000.
+Figures F.27 and F.28 show the bias and standard deviation of the estimators. As pre-
+dicted by theory (Plagborg-Møller & Wolf, 2021), the least-squares LP and VAR estimators
+give similar results for horizons h ≤p = 12. At horizons h > 12, the trade-off between the
+various estimators is qualitatively similar to our baseline results in Section 5. Figure F.29
+shows that, while the choice of optimal estimation method is overall similar to our base-
+line, penalized LP is more attractive at horizons h ∈[5, 12] and for loss functions with
+ω > 0.5 than in our baseline results, since this estimator offers useful shrinkage relative to
+least-squares LP or VAR. Nevertheless, BVAR remains the preferred estimator at almost all
+horizons for the special case of MSE loss (ω = 1/2).
+39
+
+=== page 83 ===
+40
+Observed shock, large sample, 12 lags: Bias of estimators
+Figure F.27:
+Median (across DGPs) of absolute bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed shock, large sample, 12 lags: Standard deviation of estimators
+Figure F.28: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 84 ===
+41
+Observed shock, large sample, 12 lags: Optimal estimation method
+Figure F.29: Method that minimizes the average (across DGPs) loss function (4). Horizontal
+axis: impulse response horizon. Vertical axis: weight on squared bias in loss function. The loss
+function is normalized by the scale of the impulse response function, as in Figures 2 and 3. At
+h = 0, VAR and LP are numerically identical; we break the tie in favor of VAR.
+
+=== page 85 ===
+F.10
+More observables
+Our baseline simulations assume that the econometrician observes n ¯w = 5 macro variables
+(perhaps in addition to an observed shock or IV). In this subsection we consider simulations
+that increase the number of macro observables from 5 to 7.
+We first consider the case of observed shock identification. Figures F.30 and F.31 show
+that the bias and standard deviation properties of the estimators change little from our
+baseline results when we increase the number of observables. All qualitative conclusions
+emphasized in Sections 5.1 to 5.3 continue to go through. Similarly, Figure F.32 shows that
+the choice of optimal method as a function of horizon and loss function is virtually unchanged
+from the baseline, with the minor exception that the region where penalized LP is preferred
+has shrunk somewhat.
+In the case of IV identification, the median bias and interquartile range for the various
+estimators displayed in Figures F.33 and F.34 are largely similar to our baseline results in
+Section 5.4. However, the median bias of SVAR-IV relative to internal-instruments proce-
+dures is slightly smaller when the number of observables is larger, due to the mechanical
+increase in the degree of invertibility (the median degree of invertibility across the DGPs
+equals 0.45, versus 0.39 in our baseline, cf. Table 1).
+42
+
+=== page 86 ===
+43
+Observed shock, 7 observables: Bias of estimators
+Figure F.30:
+Median (across DGPs) of absolute bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+Observed shock, 7 observables: Standard deviation of estimators
+Figure F.31: Median (across DGPs) of standard deviation of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 87 ===
+44
+Observed shock, 7 observables: Optimal estimation method
+Figure F.32: Method that minimizes the average (across DGPs) loss function (4). Horizontal
+axis: impulse response horizon. Vertical axis: weight on squared bias in loss function. The loss
+function is normalized by the scale of the impulse response function, as in Figures 2 and 3. At
+h = 0, VAR and LP are numerically identical; we break the tie in favor of VAR.
+
+=== page 88 ===
+45
+IV, 7 observables: Median bias of estimators
+Figure F.33: Median (across DGPs) of absolute median bias of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+IV, 7 observables: Interquartile range of estimators
+Figure F.34: Median (across DGPs) of interquartile range of the different estimation procedures,
+relative to
+q
+1
+21
+P20
+h=0 θ2
+h.
+
+=== page 89 ===
+F.11
+Splitting by variable categories
+Here we show that the categories of variables included in the DGP are not highly predictive
+of the bias or standard deviation of any estimator. We group the 207 variables in the Stock
+& Watson (2016) data set into 11 categories, proceeding exactly as in the Data Appendix to
+that paper, except that we lump together their final three categories in a single “Asset Price
+& Sentiment” category. Let ∆j,d denote the total number of variables in category j that are
+included in DGP d. We are interested in relating the absolute bias and standard deviation
+of the various estimation methods with ∆j,d, across DGPs and horizons.
+Using the baseline simulation results from Sections 5.1 to 5.3, we run the following OLS
+regression separately for each estimation method m, pooling observations across all DGPs
+and all horizons:
+log biasm,d,h =
+10
+X
+j=1
+ˆγj∆j,d +
+20
+X
+i=0
+ˆιi1(i = h) + ˆem,d,h,
+d = 1, . . . , 6000, h = 0, 1, . . . , 20.
+Here biasm,d,h is the absolute bias of estimator m in DGP d at horizon h, ˆγj are coefficients
+on the category counts, ˆιi are coefficients on indicator variables for each horizon, and ˆem,d,h
+is the OLS residual. Notice that we omit category 11 from the regression for reasons of
+multicollinearity (there are 5 variables in each DGP). We also run the above regression with
+the log standard deviation on the left-hand side in place of the log absolute bias.
+Table F.3 shows the coefficients ˆγj on the category counts. A coefficient of 0.1, say, means
+that adding one variable of that category to the DGP (while removing a variable from the
+omitted “Asset Price & Sentiment” category) leads to a 10% higher absolute bias (resp.,
+standard deviation). No coefficients in the table exceed 0.2 in absolute value, indicating
+that none of the categories are particularly predictive of the bias or standard deviation of
+the resulting impulse response estimates. The only exception is that adding variables from
+the “Interest Rates” category does seem to moderately lower the standard deviation of most
+of our estimation procedures, which is consistent with the results reported in Supplemental
+Appendix F.6. Though the regression results reported in Table F.3 pool across all horizons
+h ∈[0, 20], we obtain similar coefficients if we instead restrict the regressions only to the
+intermediate horizons h ∈[5, 12].
+We conclude that our baseline results do not conceal significant across-category hetero-
+geneity. In particular, and differently from Marcellino et al. (2006), we do not find major
+differences when comparing price and real activity series.
+46
+
+=== page 90 ===
+47
+Bias regression
+VAR
+VAR BC
+BVAR
+LP
+LP BC
+Pen LP
+VAR Avg
+NIPA
+-0.12
+-0.10
+-0.03
+-0.05
+-0.06
+0.01
+-0.04
+Industrial Production
+-0.06
+-0.06
+0.66
+-0.01
+-0.01
+0.06
+0.02
+Employment & Unemployment
+0.02
+0.07
+0.08
+-0.02
+0.05
+0.04
+-0.03
+Orders, Inventories & Sales
+-0.05
+-0.09
+0.01
+-0.03
+0.00
+0.02
+0.00
+Housing Starts & Permits
+-0.01
+0.01
+0.04
+0.02
+0.08
+0.08
+0.06
+Prices
+0.05
+0.15
+0.12
+-0.18
+-0.03
+-0.17
+-0.05
+Productivity & Earnings
+0.02
+-0.01
+0.03
+-0.02
+-0.05
+-0.02
+-0.01
+Interest Rates
+-0.01
+-0.01
+0.03
+-0.03
+-0.03
+-0.04
+-0.03
+Money & Credit
+0.04
+0.07
+0.08
+-0.03
+0.01
+0.00
+-0.03
+International
+0.07
+0.12
+0.15
+-0.11
+-0.05
+-0.09
+-0.05
+Standard deviation regression
+VAR
+VAR BC
+BVAR
+LP
+LP BC
+Pen LP
+VAR Avg
+NIPA
+0.08
+0.09
+0.08
+0.11
+0.11
+0.11
+0.10
+Industrial Production
+-0.02
+-0.02
+-0.02
+-0.04
+-0.04
+-0.03
+-0.03
+Employment & Unemployment
+0.08
+0.07
+0.08
+0.07
+0.08
+0.08
+0.07
+Orders, Inventories & Sales
+-0.04
+-0.04
+-0.05
+-0.04
+-0.04
+-0.03
+-0.04
+Housing Starts & Permits
+0.05
+0.05
+0.06
+0.06
+0.06
+0.07
+0.06
+Prices
+0.04
+0.04
+0.03
+0.11
+0.09
+0.06
+0.08
+Productivity & Earnings
+-0.03
+-0.03
+-0.03
+-0.04
+-0.04
+-0.04
+-0.04
+Interest Rates
+-0.13
+-0.13
+-0.13
+-0.17
+-0.17
+-0.17
+-0.17
+Money & Credit
+0.03
+0.03
+0.03
+0.02
+0.02
+0.03
+0.02
+International
+0.03
+0.03
+0.02
+0.07
+0.06
+0.05
+0.06
+Table F.3: Coefficients from OLS regressions of log bias (top table) or log standard deviation
+(bottom table) on variable category counts (along rows), controlling for horizon fixed effects. Re-
+gressions are run separately by estimation method (along columns), and observations are pooled
+across DGPs and horizons. Bias and standard deviation normalized as in Figures 2 and 3. Observed
+shock identification.
+
+=== page 91 ===
+Appendix G
+Proofs
+G.1
+Auxiliary lemmas
+Before proving Proposition 1, we state and prove some auxiliary lemmas. All lemmas below
+impose the assumptions of Proposition 1.
+Define the process ˜yt ≡Pt
+s=1(ε1,s + τε1,s−1 + ε2,s) for all t ≥1, with ˜y0 = 0, and let
+˜wt ≡(ε1,t, ˜yt)′. Define also the 2 × 2 matrix DT ≡diag(T 1/2, T).
+Lemma G.1. For all j = 1, 2 and ℓ≥0,
+1
+T
+T
+X
+t=1
+(yt −˜yt)2 = Op(1),
+1
+T 1/2
+T
+X
+t=1
+(yt −˜yt)εj,t+ℓ= Op(1).
+Proof. From the DGP (1) we have
+yt −˜yt =
+α
+√
+T
+t
+X
+s=1
+ε1,s−2.
+The first statement of the lemma follows from Markov’s inequality and a simple moment
+calculation. Then second statement of the lemma follows from Chebyshev’s inequality, since
+the process εj,t+ℓ
+Pt
+s=1 ε1,s−2 is serially uncorrelated and has a variance of order O(T).
+Lemma G.2. For any ℓ≥0 and j = 1, 2,
+T
+X
+t=1
+εj,t+ℓ˜w′
+t−1D−1
+T
+= Op(1).
+Proof. This follows from Chebyshev’s inequality and standard variance calculations, using
+that εj,t+ℓ˜w′
+t−1 is a serially uncorrelated process.
+Lemma G.3. For any ℓ≥1 and j = 1, 2,
+1
+T
+T
+X
+t=1
+εj,t−ℓ˜yt−1 = Op(1).
+Proof. Write
+1
+T
+PT
+t=1 εj,t−ℓ˜yt−1 =
+Pℓ−1
+b=0
+1
+T
+PT
+t=1 εj,t−ℓ∆˜yt−b−1 + 1
+T
+PT
+t=1 εj,t−ℓ˜yt−ℓ−1, where we
+define ˜yt = 0 for t ≤0. The first term is clearly Op(1), being composed of sample averages
+of stationary variables. The second term is Op(1) by Lemma G.2.
+48
+
+=== page 92 ===
+Lemma G.4. D−1
+T
+PT
+t=1 wtw′
+tD−1
+T
+d→diag
+
+1, {(1 + τ)2 + σ2
+2}
+R 1
+0 W(r)2 dr
+
+, where W(·) is a
+standard Brownian motion.
+Proof. By Lemma G.1, it suffices to show that D−1
+T
+PT
+t=1 ˜wt ˜w′
+tD−1
+T
+converges to the stated
+limiting distribution. The (1, 1) element converges in probability to 1 by the law of large
+numbers. The (1, 2) element is Op(T −1/2) by Lemma G.3. Finally, the convergence in distri-
+bution of the (2, 2) element follows from Phillips & Solo (1992, Thm. 3.4), the continuous
+mapping theorem, and the long-run variance of the process (ε1,t + τε1,t−1 + ε2,t) being equal
+to (1 + τ)2 + σ2
+2.
+Recall the definitions of θh,T, ˆβh, ˆδh, ˆA, ˆκ, and the unit vector ej from Section 2.
+Lemma G.5. For any 0 ≤ℓ≤h, define bℓ,h ≡1(ℓ> 0) + τ1(0 < ℓ< h). Then
+ˆβh −θh,T = 1
+T
+T−h
+X
+t=2
+h
+X
+ℓ=0
+(bℓ,hε1,t+ℓ+ ε2,t+ℓ)ε1,t + op(T −1/2).
+(G.1)
+Proof. Let ˆε1,t ≡ε1,t −ˆb′wt−1 be the residual from an auxiliary regression of ε1,t on wt−1.
+Using Lemmas G.1, G.2 and G.4, it is straightforward to show that
+DTˆb =
+(
+D−1
+T
+T−h
+X
+t=2
+wt−1w′
+t−1D−1
+T
+)−1 (
+D−1
+T
+T−h
+X
+t=2
+˜wt−1ε1,t + Op(T −1/2)
+)
+= Op(1).
+By the Frisch-Waugh theorem and sample orthogonality of ˆε1,t and wt−1, we may write
+ˆβh = θh,T +
+1
+T
+PT−h
+t=2 (yt+h −θh,T ˆε1,t)ˆε1,t
+1
+T
+PT−h
+t=2 ˆε2
+1,t
+= θh,T +
+1
+T
+PT−h
+t=2 (yt+h −θh,Tε1,t −τε1,t−1 −yt−1)ˆε1,t
+1
+T
+PT−h
+t=2 ˆε2
+1,t
+.
+(G.2)
+Lemmas G.1 and G.4 and DTˆb = Op(1) yield 1
+T
+PT−h
+t=2 ˆε2
+1,t
+p→E(ε2
+1,t) = 1. We can therefore
+focus on the numerator in the fraction in (G.2), which we decompose as
+1
+T
+T−h
+X
+t=2
+(yt+h −θh,Tε1,t −τε1,t−1 −yt−1)ε1,t + 1
+T
+T−h
+X
+t=2
+(yt+h −θh,Tε1,t −τε1,t−1 −yt−1)(ˆε1,t −ε1,t).
+(G.3)
+We first show that the first term above equals the right-hand side of (G.1). Iteration on the
+49
+
+=== page 93 ===
+DGP (1) implies
+yt+h −θh,Tε1,t −τε1,t−1 −yt−1 =
+h
+X
+ℓ=0
+(bℓ,hε1,t+ℓ+ ε2,t+ℓ) + α
+√
+T
+h
+X
+ℓ=0
+ε1,t+ℓ−21(ℓ̸ = 2).
+The desired conclusion then follows from
+1
+T
+T−h
+X
+t=2
+α
+√
+T
+h
+X
+ℓ=0
+ε1,t+ℓ−21(ℓ̸ = 2)ε1,t = Op(T −1),
+which can be easily verified with Chebyshev’s inequality, using that ε1,t+ℓε1,t is a serially
+uncorrelated process for ℓ̸ = 0.
+We finish the proof by showing that the second term in (G.3) is Op(T −1), i.e.,
+−1
+T
+T−h
+X
+t=2
+( h
+X
+ℓ=0
+(bℓ,hε1,t+ℓ+ ε2,t+ℓ) + α
+√
+T
+h
+X
+ℓ=0
+ε1,t+ℓ−21(ℓ̸ = 2)
+)
+w′
+t−1ˆb = Op(T −1).
+This follows from DTˆb = Op(1) and Lemmas G.1 to G.3.
+Lemma G.6. Define A0 ≡( 0 0
+τ 1 ). We have
+ˆA −A0 = 1
+T
+T
+X
+t=2
+
+
+ε1,t
+ε1,t + ε2,t
+
+ε1,t−1e′
+1 + op(T −1/2),
+ˆκ −1 = 1
+T
+T
+X
+t=2
+ε1,tε2,t + op(T −1/2).
+Proof. By appealing repeatedly to Lemmas G.1 to G.4, we get
+ˆA −A0 =
+
+1
+T
+T
+X
+t=2
+
+
+ε1,t
+ε1,t + ε2,t +
+α
+√
+T ε1,t−2
+
+w′
+t−1D−1
+T T 1/2
+
+
+ 
+D−1
+T
+T
+X
+t=2
+wt−1w′
+t−1D−1
+T
+!−1
+D−1
+T T 1/2
+=
+
+1
+T
+T
+X
+t=2
+
+
+ε1,t
+ε1,t + ε2,t
+
+˜w′
+t−1D−1
+T T 1/2 + α
+T e2
+T
+X
+t=2
+ε1,t−2 ˜w′
+t−1D−1
+T + Op(T −1)
+
+{e1e′
+1 + op(1)}
+=
+
+1
+T
+T
+X
+t=2
+
+
+ε1,t
+ε1,t + ε2,t
+
+˜w′
+t−1D−1
+T T 1/2 + Op(T −1)
+
+{e1e′
+1 + op(1)}
+=
+
+1
+T
+T
+X
+t=2
+
+
+ε1,t
+ε1,t + ε2,t
+
+(ε1,t−1e′
+1 + T −1/2˜yt−1e′
+2) + Op(T −1)
+
+{e1e′
+1 + op(1)}
+50
+
+=== page 94 ===
+= 1
+T
+T
+X
+t=2
+
+
+ε1,t
+ε1,t + ε2,t
+
+ε1,t−1e′
+1 +
+1
+T 3/2
+T
+X
+t=2
+
+
+ε1,t
+ε1,t + ε2,t
+
+˜yt−1e′
+2 × op(1) + op(T −1/2)
+= 1
+T
+T
+X
+t=2
+
+
+ε1,t
+ε1,t + ε2,t
+
+ε1,t−1e′
+1 + Op(T −1/2) × op(1) + op(T −1/2).
+This proves the first statement of the lemma.
+Next, by the Frisch-Waugh Theorem, ˆκ ≡ˆΣ21/ˆΣ11 equals the coefficient on ε1,t in an
+OLS regression of yt on ε1,t and wt−1. In other words, ˆκ equals the impact LP estimate ˆβ0.
+The second statement of the lemma then follows from Lemma G.5 applied to h = 0.
+G.2
+Proof of Proposition 1
+We derive the asymptotic distributions of the LP and VAR estimators in that order.
+LP.
+It follows from Lemma G.5 and a standard martingale central limit theorem that
+√
+T(ˆβh −θh,T)
+d→N(0, aVarLP),
+where
+aVarLP = E(ε2
+1,t)E
+
+
+( h
+X
+ℓ=0
+(bℓ,hε1,t+ℓ+ ε2,t+ℓ)
+)2
+
+=
+h
+X
+ℓ=0
+b2
+ℓ,h + (h + 1)σ2
+2
+= {1 + (h −1)(1 + τ)2)}1(h ≥1) + (h + 1)σ2
+2.
+VAR.
+We derive the asymptotic distribution of ˆδh by appealing to the delta method. Let
+fh(A, κ) ≡e′
+2Ahγ, where γ = (1, κ)′, so that ˆδh = fh( ˆA, ˆκ). We need the Jacobians of this
+transformation with respect to vec(A) and κ. In fact, we only require the Jacobians with
+respect to vec(Ae1) and κ, since Lemma G.6 implies that the second column of ˆA is super-
+consistent. The Jacobians should be evaluated at plim ˆA = A0 ≡( 0 0
+τ 1 ) and plim ˆκ = 1.
+Thus, γ should be evaluated at γ0 ≡(1, 1)′.
+First, for h ≥2, the Jacobian with respect to Ae1 equals (Magnus & Neudecker, 2007, p.
+51
+
+=== page 95 ===
+208)
+∂e′
+2Ahγ
+∂vec(Ae1)
+
+A=A0,γ=γ0
+= (γ′ ⊗e′
+2)
+h
+X
+j=1
+
+(A′
+0)h−j ⊗Aj−1
+0
+
+(e1 ⊗I)
+= (γ′ ⊗e′
+2)
+h
+X
+j=1
+{(A′
+0)h−je1} ⊗Aj−1
+0
+= (γ′ ⊗e′
+2)(e1 ⊗A0 + 0)
+= (γ′e1 ⊗e′
+2A0)
+= (τ, 1),
+where the third equality uses that A0 is an idempotent matrix, and A′
+0e1 = 0. For h = 1,
+the Jacobian with respect to vec(Ae1) obviously equals (0, 1). So we can write the Jacobian
+for all h ≥1 as (τ1(h ≥2), 1).
+Second, for any h ≥1, the Jacobian with respect to κ equals
+∂e′
+2Ahγ
+∂κ
+
+A=A0,γ=γ0
+= e′
+2Ah
+0e2 = e′
+2A0e2 = 1.
+Next, Lemma G.6 and a standard martingale central limit theorem imply
+√
+T( ˆA −A0)e1
+d→N(0, aVar( ˆAe1)),
+√
+T(ˆκ −1)
+d→N(0, aVar(ˆκ)),
+where
+aVar( ˆAe1) = Var
+
+
+
+
+ε1,t
+ε1,t + ε2,t
+
+ε1,t−1
+
+=
+
+1
+1
+1
+1 + σ2
+2
+
+,
+aVar(ˆκ) = Var(ε1,tε2,t) = σ2
+2.
+Moreover, ˆAe1 and ˆκ are asymptotically independent by Lemma G.6, since
+Cov
+
+
+
+
+ε1,t
+ε1,t + ε2,t
+
+ε1,t−1, ε1,tε2,t
+
+= 0.
+Given all the preceding ingredients, we can apply the delta method to conclude that
+√
+T(ˆδh −θh,T) =
+√
+T(ˆδh −e′
+2Ahγ) +
+√
+T(e′
+2Ahγ −θh,T)
+d→N(aBiasVAR, aVarVAR),
+52
+
+=== page 96 ===
+where, for h ≥1,
+aBiasVAR =
+√
+T(e′
+2Ahγ −θh,T) = −α1(h ≥2),
+aVarVAR = (τ1(h ≥2), 1)
+
+1
+1
+1
+1 + σ2
+2
+
+
+
+τ1(h ≥2)
+1
+
++ σ2
+2
+= (1 + τ1(h ≥2))2 + 2σ2
+2.
+53
+
+=== page 97 ===
+References
+Barigozzi, M., Lippi, M., & Luciani, M. (2021). Large-dimensional Dynamic Factor Models:
+Estimation of Impulse–Response Functions with I(1) cointegrated factors.
+Journal of
+Econometrics, 221(2), 455–482.
+Blanchard, O. & Perotti, R. (2002). An Empirical Characterization of the Dynamic Effects of
+Changes in Government Spending and Taxes on Output. Quarterly Journal of Economics,
+117(4), 1329–1368.
+Christiano, L., Eichenbaum, M., & Evans, C. (1999). Monetary Policy Shocks: What Have
+We Learned and to What End?
+In J. B. Taylor & M. Woodford (Eds.), Handbook of
+Macroeconomics, volume 1A chapter 2, (pp. 65–148). Elsevier.
+Fernández-Villaverde, J., Rubio-Ramírez, J. F., Sargent, T. J., & Watson, M. W. (2007).
+ABCs (and Ds) of Understanding VARs. American Economic Review, 97(3), 1021–1026.
+Johansen, S. (1995). Likelihood-Based Inference in Cointegrated Vector Autoregressive Mod-
+els. Oxford University Press.
+Lazarus, E., Lewis, D. J., Stock, J. H., & Watson, M. W. (2018). HAR Inference: Recom-
+mendations for Practice. Journal of Business & Economic Statistics, 36(4), 541–559.
+Magnus, J. & Neudecker, H. (2007). Matrix Differential Calculus with Applications in Statis-
+tics and Econometrics (3rd ed.). Wiley Series in Probability and Statistics. John Wiley
+& Sons.
+Marcellino, M., Stock, J. H., & Watson, M. W. (2006). A comparison of direct and iterated
+multistep AR methods for forecasting macroeconomic time series. Journal of Economet-
+rics, 135(1–2), 499–526.
+Phillips, P. C. B. & Solo, V. (1992). Asymptotics for Linear Processes. Annals of Statistics,
+20(2), 971–1001.
+Plagborg-Møller, M. & Wolf, C. K. (2021). Local Projections and VARs Estimate the Same
+Impulse Responses. Econometrica, 89(2), 955–980.
+Pope, A. L. (1990). Biases of Estimators in Multivariate Non-Gaussian Autoregressions.
+Journal of Time Series Analysis, 11(3), 249–258.
+54
+
+=== page 98 ===
+Stock, J. H. & Watson, M. W. (2016). Dynamic factor models, factor-augmented vector
+autoregressions, and structural vector autoregressions in macroeconomics. In Handbook of
+Macroeconomics, volume 2 chapter 8, (pp. 415–525). Elsevier.
+55

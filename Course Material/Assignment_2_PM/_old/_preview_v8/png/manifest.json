@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "backend": "native",
+  "rasterEngine": "pdfium",
+  "source": "saved",
+  "inputPath": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Assignment_2_PM\\_preview_v8\\deck.pdf",
+  "sourceSha256": "c9df17717e6b93cdb230786048f919233daeacc0de6522b3aba4554edc5b2b01",
+  "dpi": 140,
+  "pageCount": 3,
+  "images": [
+    {
+      "index": 1,
+      "page": 3,
+      "path": "C:\\Ash\\Projects\\EMPC_Water_Electricity_Forecast\\Assignment_2_PM\\_preview_v8\\png\\page-0001.png",
+      "width": 1867,
+      "height": 1050,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "byteLength": 153336
+    }
+  ],
+  "missingFonts": []
+}

@@ -1,0 +1,57 @@
+FixedData 7214 bytes, Var2Data 6900 bytes, Fixed2Data 2816 bytes
+stride 196: 36 records, remainder 158
+
+33 strings in Var2Data
+
+=== field sweep over the first 40 bytes of every record ===
+  rec     0   4   8  12  16  20  24  28  32  36
+    0  0000   0   0   00001   0   0   00002   0
+    1     0   0   000000015 1280000ffffffffffff
+    2     0   0   0   0   0000800030002ffffffff
+    3  27d8   1   0   0   0   000000015b0800001
+    4  3cd93ccd3ccd   2   0   0   0   000080003
+    5  27d8263427d827d8   1   0   0   0   00000
+    6  3cc83cc83cc83cd93cc83cc8   4   0   0   0
+    7     0   0   0   0   0   0   0   0   0   0
+    8  000000643ccb3ccd3ccb3ccd3ccb3ccd3ccb3ccd
+    9  9600   0006412c027d812c027d812c027d812c0
+   10   500   0   0000000643ccf3ccf3ccf3ccf3ccf
+   11     0000083408340   0006412c027d812c027d8
+
+=== records with name, duration and any 8-byte timestamp ===
+  [ 0] u24=      0  Capstone Project                                       stamps=[]
+  [ 1] u24=4294901760  Project Kick-off & First Team/Mentor Meeting           stamps=[]
+  [ 2] u24=3011510275  Literature Review                                      stamps=[]
+  [ 3] u24= 524288  Read related papers (MPC pump scheduling & price for   stamps=[]
+  [ 4] u24=      0  System Infrastructure & Baseline Control & Data Prep   stamps=[]
+  [ 5] u24=      0  Download AEMO historical data                          stamps=[]
+  [ 6] u24=      4  Data pipeline, filtering & controller API test syste   stamps=[]
+  [ 7] u24=      0  P controller for simple closed-loop level control      stamps=[]
+  [ 8] u24=668482763  Baseline system operational                            stamps=[]
+  [ 9] u24=1020209112  Predictive Modelling & Validation & Theoretical Fram   stamps=[]
+  [10] u24=668482767  Update RLS from filter to recursive AR predictor       stamps=[]
+  [11] u24=1020400320  Implement Kalman predictor (HSSKF)                     stamps=[(0, '2046-12-24 14:40:35.532800')]
+  [12] u24=6553600  Error vs prediction horizon experiment                 stamps=[]
+  [13] u24=   9600  Theoretical derivation & evaluation metrics            stamps=[(12, '2046-12-24 14:40:35.532800')]
+  [14] u24=629146100  Predictor Testing                                      stamps=[]
+  [15] u24=      0  Test predictor update-time settings                    stamps=[(24, '2046-12-24 14:40:35.532800')]
+  [16] u24=4294967295  Test weekday vs weekend data                           stamps=[]
+  [17] u24=      0  Test different training windows                        stamps=[(36, '2046-12-24 14:40:35.532800')]
+  [18] u24=      0  Prepare mathematical description for report            stamps=[]
+  [19] u24=      0  Predictor validated (meets target error)               stamps=[(48, '2046-12-24 14:40:35.532800')]
+  [20] u24=      0  MPC & EMPC Development                                 stamps=[]
+  [21] u24=      0  First version MPC controller                           stamps=[(60, '2046-12-24 14:42:09.904640')]
+  [22] u24=      0  Test solver on simple water level control              stamps=[]
+  [23] u24=      0  Integrate price predictor into EMPC objective          stamps=[(72, '2046-12-24 14:40:35.532800')]
+  [24] u24=      0  Build full tank/pump simulation scenario               stamps=[]
+  [25] u24=      0  EMPC vs baseline comparison & tuning                   stamps=[(84, '2046-12-24 14:40:35.532800')]
+  [26] u24=      0  EMPC framework operational                             stamps=[]
+  [27] u24=     25  Results & Reporting                                    stamps=[(96, '2046-12-24 14:40:35.532800')]
+  [28] u24=      0  Analyse cost savings & robustness                      stamps=[]
+  [29] u24=      0  Write final report                                     stamps=[(108, '2046-12-24 14:40:35.532800')]
+  [30] u24=  65535  Prepare oral presentation                              stamps=[]
+  [31] u24=4294967295  Final report submitted                                 stamps=[]
+  [32] u24=668467202  Oral exam                                              stamps=[]
+  [33] u24=545259523  ?                                                      stamps=[]
+  [34] u24= 524288  ?                                                      stamps=[]
+  [35] u24=      0  ?                                                      stamps=[]

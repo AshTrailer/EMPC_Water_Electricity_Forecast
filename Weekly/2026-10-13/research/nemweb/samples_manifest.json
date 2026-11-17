@@ -1,0 +1,179 @@
+[
+ {
+  "base": "CURRENT",
+  "dir": "P5_Reports",
+  "label": "p5min_current",
+  "status": 200,
+  "zips": 577,
+  "newest": "PUBLIC_P5MIN_202610130145_20261013014035.zip",
+  "bytes": 210229,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "DispatchIS_Reports",
+  "label": "dispatchis_current",
+  "status": 200,
+  "zips": 577,
+  "newest": "PUBLIC_DISPATCHIS_202610130145_0000000542576314.zip",
+  "bytes": 20791,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "Short_Term_PASA_Reports",
+  "label": "stpasa_current",
+  "status": 200,
+  "zips": 1440,
+  "newest": "PUBLIC_STPASA_202610130100_0000000542573053.zip",
+  "bytes": 321991,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "PD7Day",
+  "label": "pd7day_current",
+  "status": 200,
+  "zips": 180,
+  "newest": "PUBLIC_PD7DAY_20261012174724_0000000542519877.zip",
+  "bytes": 5023202,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "Medium_Term_PASA_Reports",
+  "label": "mtpasa_current",
+  "status": 200,
+  "zips": 8,
+  "newest": "PUBLIC_MTPASA_202610050100_0000000541451200.zip",
+  "bytes": 2540227,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "Bidmove_Complete",
+  "label": "bidmove_current",
+  "status": 200,
+  "zips": 60,
+  "newest": "PUBLIC_BIDMOVE_COMPLETE_20261011_0000000542426896.zip",
+  "bytes": 9376616,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "Weekly_Constraint_Reports",
+  "label": "constraint_current",
+  "status": 200,
+  "zips": 1,
+  "newest": "2026.zip",
+  "bytes": 478735,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "DISPATCHFCST",
+  "label": "dispatchfcst_current",
+  "status": 200,
+  "zips": 577,
+  "newest": "PUBLIC_DISPATCHFCST_202610130140_0000000542575735.zip",
+  "bytes": 7945,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "P5MINFCST",
+  "label": "p5minfcst_current",
+  "status": 200,
+  "zips": 576,
+  "newest": "PUBLIC_P5MINFCST_202610130135_0000000542575797.zip",
+  "bytes": 87383,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "PREDISPATCHFCST",
+  "label": "predispatchfcst_current",
+  "status": 200,
+  "zips": 673,
+  "newest": "PUBLIC_PREDISPATCHFCST_202610130200_0000000542575340.zip",
+  "bytes": 370882,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "SEVENDAYOUTLOOK_FULL",
+  "label": "sevenday_full_current",
+  "status": 200,
+  "zips": 2880,
+  "newest": "PUBLIC_SEVENDAYOUTLOOK_FULL_20261013013446_0000000542575686.zip",
+  "bytes": 25412,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "PDPASA",
+  "label": "pdpasa_current",
+  "status": 200,
+  "zips": 673,
+  "newest": "PUBLIC_PDPASA_202610130200_0000000542575683.zip",
+  "bytes": 57216,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "Public_Prices",
+  "label": "public_prices_current",
+  "status": 200,
+  "zips": 60,
+  "newest": "PUBLIC_PRICES_202610110000_20261012040503.zip",
+  "bytes": 259115,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "HistDemand",
+  "label": "histdemand_current",
+  "status": 200,
+  "zips": 60,
+  "newest": "PUBLIC_HISTDEMAND_20261011_0000000542408372.zip",
+  "bytes": 1666,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "Next_Day_Intermittent_Gen_Scada",
+  "label": "intermittent_current",
+  "status": 200,
+  "zips": 60,
+  "newest": "PUBLIC_NEXT_DAY_INTERMITTENT_GEN_SCADA_20261011_0000000542423046.zip",
+  "bytes": 783596,
+  "state": "downloaded"
+ },
+ {
+  "base": "CURRENT",
+  "dir": "Vwa_Fcas_Prices",
+  "label": "vwafcas_current",
+  "status": 200,
+  "zips": 60,
+  "newest": "PUBLIC_VWAFCASPRICES_202610110000_20261012040504.zip",
+  "bytes": 5499,
+  "state": "downloaded"
+ },
+ {
+  "base": "ARCHIVE",
+  "dir": "ROOFTOP_PV",
+  "label": "rooftop_archive",
+  "status": 200,
+  "zips": 0
+ },
+ {
+  "base": "ARCHIVE",
+  "dir": "Short_Term_PASA_Reports",
+  "label": "stpasa_archive",
+  "status": 200,
+  "zips": 12,
+  "newest": "PUBLIC_STPASA_20260801.zip",
+  "bytes": 225494684,
+  "state": "downloaded"
+ }
+]

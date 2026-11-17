@@ -1,0 +1,933 @@
+{
+ "root": "https://www.nemweb.com.au/Reports/CURRENT/",
+ "fetched_at": "2026-10-12T15:38:52.646Z",
+ "dirs": [
+  {
+   "dir": "ANCILLARY_SERVICES_REPORTS",
+   "status": 200,
+   "n": 31,
+   "n_csv": 0,
+   "oldest": "PUBLIC_ANCILLARY_SERVICES_20260303.zip",
+   "newest": "PUBLIC_ANCILLARY_SERVICES_20261006.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Adjusted_Prices_Reports",
+   "status": 200,
+   "n": 120,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PRICE_REVISION_DISPATCH_20260819124005_0000000533400983.zip",
+   "newest": "PUBLIC_PRICE_REVISION_DISPATCH_20261008173355_0000000541831277.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Alt_Limits",
+   "status": 200,
+   "n": 1,
+   "n_csv": 0,
+   "oldest": "PUBLIC_TER_DAILY.zip",
+   "newest": "PUBLIC_TER_DAILY.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Ancillary_Services_Payments",
+   "status": 200,
+   "n": 0,
+   "n_csv": 30,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Auction_Units_Reports",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Bidmove_Complete",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_BIDMOVE_COMPLETE_20260813_0000000532535069.zip",
+   "newest": "PUBLIC_BIDMOVE_COMPLETE_20261011_0000000542426896.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Bidmove_Summary",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Billing",
+   "status": 200,
+   "n": 532,
+   "n_csv": 0,
+   "oldest": "PUBLIC_BILLING_20170202011133_0000000280585170.zip",
+   "newest": "PUBLIC_BILLING_DIRECT_PROV_RECON_2021Week20FINAL_20210609114129.zip",
+   "hasData": true
+  },
+  {
+   "dir": "CDEII",
+   "status": 200,
+   "n": 0,
+   "n_csv": 12,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "CSC_CSP_ConstraintList",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "CSC_CSP_Settlements",
+   "status": 200,
+   "n": 40,
+   "n_csv": 0,
+   "oldest": "PUBLIC_BILLINGCSP_2026WEEK10REVISE_20261001120145_0000000540566355.zip",
+   "newest": "PUBLIC_BILLINGCSP_2026WEEK9REVISE_20260924112609_0000000539554620.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Causer_Pays",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Causer_Pays_Elements",
+   "status": 200,
+   "n": 0,
+   "n_csv": 31,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Causer_Pays_Rslcpf",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Causer_Pays_Scada",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "DAILYOCD",
+   "status": 200,
+   "n": 42,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DAILYOCD_202509120000_20250913040503.zip",
+   "newest": "PUBLIC_DAILYOCD_202610090000_20261010040503.zip",
+   "hasData": true
+  },
+  {
+   "dir": "DISPATCHFCST",
+   "status": 200,
+   "n": 577,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DISPATCHFCST_202610110135_0000000542236003.zip",
+   "newest": "PUBLIC_DISPATCHFCST_202610130135_0000000542575173.zip",
+   "hasData": true
+  },
+  {
+   "dir": "DISPATCHIS_PRICE_REVISIONS",
+   "status": 200,
+   "n": 5971,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PRICE_REVISION_DISPATCHIS_20250301163013_0000000453111936.zip",
+   "newest": "PUBLIC_PRICE_REVISION_DISPATCHIS_20261008173355_0000000541831278.zip",
+   "hasData": true
+  },
+  {
+   "dir": "DISPATCH_NEGATIVE_RESIDUE",
+   "status": 200,
+   "n": 577,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DISPATCH_NEGATIVE_RESIDUE_202610110140_0000000542236018.zip",
+   "newest": "PUBLIC_DISPATCH_NEGATIVE_RESIDUE_202610130140_0000000542575180.zip",
+   "hasData": true
+  },
+  {
+   "dir": "DWGM",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Daily_Reports",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DAILY_202608130000_20260814040505.zip",
+   "newest": "PUBLIC_DAILY_202610110000_20261012040504.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Directions_Reconciliation",
+   "status": 200,
+   "n": 26,
+   "n_csv": 0,
+   "oldest": "PUBLIC_BILLING_DIRECT_FINAL_CRA_SPLIT_CAT_REG_2026Week11_20261008115308.zip",
+   "newest": "PUBLIC_BILLING_DIRECT_PROV_RECON_2026Week37REVISE_20261009083112.zip",
+   "hasData": true
+  },
+  {
+   "dir": "DispatchIS_Reports",
+   "status": 200,
+   "n": 576,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DISPATCHIS_202610110145_0000000542237148.zip",
+   "newest": "PUBLIC_DISPATCHIS_202610130140_0000000542575716.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Dispatch_IRSR",
+   "status": 200,
+   "n": 577,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DISPATCH_IRSR_202610110135_0000000542236029.zip",
+   "newest": "PUBLIC_DISPATCH_IRSR_202610130135_0000000542575211.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Dispatch_Reports",
+   "status": 200,
+   "n": 576,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DISPATCH_202610110140_20261011013507_LEGACY.zip",
+   "newest": "PUBLIC_DISPATCH_202610130135_20261013013013_LEGACY.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Dispatch_SCADA",
+   "status": 200,
+   "n": 576,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DISPATCHSCADA_202610110140_0000000542236590.zip",
+   "newest": "PUBLIC_DISPATCHSCADA_202610130135_0000000542575157.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Dispatchprices_PRE_AP",
+   "status": 200,
+   "n": 576,
+   "n_csv": 0,
+   "oldest": "PUBLIC_DISPATCHPRICES_PRE_AP_202610110140_0000000542236589.zip",
+   "newest": "PUBLIC_DISPATCHPRICES_PRE_AP_202610130135_0000000542575156.zip",
+   "hasData": true
+  },
+  {
+   "dir": "ECGS",
+   "status": 200,
+   "n": 0,
+   "n_csv": 1,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "FPP",
+   "status": 200,
+   "n": 1327,
+   "n_csv": 0,
+   "oldest": "PUBLIC_FPP_DCF_202412141802_0000000443338900.zip",
+   "newest": "PUBLIC_FPP_DCF_202610120338_0000000542419432.zip",
+   "hasData": true
+  },
+  {
+   "dir": "FPPDAILY",
+   "status": 200,
+   "n": 178,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_FPPMW_20260814_0000000532548864.zip",
+   "newest": "PUBLIC_NEXT_DAY_FPP_20261011_0000000542441403.zip",
+   "hasData": true
+  },
+  {
+   "dir": "FPPRATES",
+   "status": 200,
+   "n": 578,
+   "n_csv": 0,
+   "oldest": "PUBLIC_FPP_RATES_202610081135_0000000542460739.zip",
+   "newest": "PUBLIC_FPP_RATES_202610130125_0000000542574982.zip",
+   "hasData": true
+  },
+  {
+   "dir": "FPPRUN",
+   "status": 200,
+   "n": 578,
+   "n_csv": 0,
+   "oldest": "PUBLIC_FPP_RUN_202610081135_0000000542460736.zip",
+   "newest": "PUBLIC_FPP_RUN_202610130125_0000000542574979.zip",
+   "hasData": true
+  },
+  {
+   "dir": "FPP_HIST_REG_PERF",
+   "status": 200,
+   "n": 74,
+   "n_csv": 0,
+   "oldest": "PUBLIC_FPP_HIST_REGION_PERFORMANCE_20250517180634_0000000463700812.zip",
+   "newest": "PUBLIC_FPP_HIST_REGION_PERFORMANCE_20261010180738_0000000542183335.zip",
+   "hasData": true
+  },
+  {
+   "dir": "GBB",
+   "status": 200,
+   "n": 9,
+   "n_csv": 62,
+   "oldest": "GasBBActualFlowStorage.zip",
+   "newest": "GasBBPipelineConnectionFlow_2023_2028.zip",
+   "hasData": true
+  },
+  {
+   "dir": "GSH",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Gas_Supply_Guarantee",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "HighImpactOutages",
+   "status": 200,
+   "n": 0,
+   "n_csv": 245,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "HistDemand",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_HISTDEMAND_20260813_0000000532517135.zip",
+   "newest": "PUBLIC_HISTDEMAND_20261011_0000000542408372.zip",
+   "hasData": true
+  },
+  {
+   "dir": "IBEI",
+   "status": 200,
+   "n": 0,
+   "n_csv": 12,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "MCCDispatch",
+   "status": 200,
+   "n": 575,
+   "n_csv": 0,
+   "oldest": "PUBLIC_MCCDISPATCH_202610110140_0000000542236617.zip",
+   "newest": "PUBLIC_MCCDISPATCH_202610130135_0000000542575226.zip",
+   "hasData": true
+  },
+  {
+   "dir": "MMSDataModelReport",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "MTPASA_DUIDAvailability",
+   "status": 200,
+   "n": 8041,
+   "n_csv": 0,
+   "oldest": "PUBLIC_MTPASADUIDAVAILABILITY_202008201200_0000000327353179.zip",
+   "newest": "PUBLIC_MTPASADUIDAVAILABILITY_202610121800_0000000542523434.zip",
+   "hasData": true
+  },
+  {
+   "dir": "MTPASA_RegionAvailability",
+   "status": 200,
+   "n": 211,
+   "n_csv": 0,
+   "oldest": "PUBLIC_MTPASAREGIONAVAILABILITY_202608140900_0000000532565075.zip",
+   "newest": "PUBLIC_MTPASAREGIONAVAILABILITY_202610121800_0000000542523436.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Marginal_Loss_Factors",
+   "status": 200,
+   "n": 2190,
+   "n_csv": 0,
+   "oldest": "MLF_20201014090001.zip",
+   "newest": "MLF_20261012090007.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Market_Notice",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Medium_Term_PASA_Reports",
+   "status": 200,
+   "n": 8,
+   "n_csv": 0,
+   "oldest": "PUBLIC_MTPASA_202608170100_0000000533250025.zip",
+   "newest": "PUBLIC_MTPASA_202610050100_0000000541451200.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Mktsusp_Pricing",
+   "status": 200,
+   "n": 9,
+   "n_csv": 0,
+   "oldest": "PUBLIC_MARKET_SUSPENSION_SCHEDULE_20260815235515_0000000532828913.zip",
+   "newest": "PUBLIC_MARKET_SUSPENSION_SCHEDULE_20261010235518_0000000542224873.zip",
+   "hasData": true
+  },
+  {
+   "dir": "NEXT_DAY_AVAIL_SUBMISS_CLUSTER",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_AVAIL_SUBMISS_CLUSTER_20260814041038_0000000532531349.zip",
+   "newest": "PUBLIC_NEXT_DAY_AVAIL_SUBMISS_CLUSTER_20261012041045_0000000542423038.zip",
+   "hasData": true
+  },
+  {
+   "dir": "NEXT_DAY_AVAIL_SUBMISS_DAY",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_AVAIL_SUBMISS_DAY_20260814041104_0000000532531351.zip",
+   "newest": "PUBLIC_NEXT_DAY_AVAIL_SUBMISS_DAY_20261012041053_0000000542423040.zip",
+   "hasData": true
+  },
+  {
+   "dir": "NEXT_DAY_MCCDISPATCH",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_MCCDISPATCH_20260813_0000000532535071.zip",
+   "newest": "PUBLIC_NEXT_DAY_MCCDISPATCH_20261011_0000000542426898.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Network",
+   "status": 200,
+   "n": 351,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NETWORK_20261006013008_0000000541363111.zip",
+   "newest": "PUBLIC_NETWORK_20261013013008_0000000542575120.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_Actual_Gen",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_ACTUAL_GEN_20260813_0000000532531348.zip",
+   "newest": "PUBLIC_NEXT_DAY_ACTUAL_GEN_20261011_0000000542423037.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_Dispatch",
+   "status": 200,
+   "n": 395,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_DISPATCH_20250912_0000000480418927.zip",
+   "newest": "PUBLIC_NEXT_DAY_DISPATCH_20261011_0000000542423041.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_Intermittent_DS",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_INTERMITTENT_DS_20260813_0000000532531356.zip",
+   "newest": "PUBLIC_NEXT_DAY_INTERMITTENT_DS_20261011_0000000542423045.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_Intermittent_Gen_Scada",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_INTERMITTENT_GEN_SCADA_20260813_0000000532531357.zip",
+   "newest": "PUBLIC_NEXT_DAY_INTERMITTENT_GEN_SCADA_20261011_0000000542423046.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_Offer_Energy",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Next_Day_Offer_Energy_SPARSE",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_OFFER_ENERGY_SPARSE_20260813_0000000532535073.zip",
+   "newest": "PUBLIC_NEXT_DAY_OFFER_ENERGY_SPARSE_20261011_0000000542426900.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_Offer_FCAS",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Next_Day_Offer_FCAS_SPARSE",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_OFFER_FCAS_SPARSE_20260813_0000000532535077.zip",
+   "newest": "PUBLIC_NEXT_DAY_OFFER_FCAS_SPARSE_20261011_0000000542426904.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_PreDispatch",
+   "status": 200,
+   "n": 61,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_PREDISPATCH_20260813_0000000532535080.zip",
+   "newest": "PUBLIC_NEXT_DAY_PREDISPATCH_D_20261008_0000000541913376.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_PreDispatchD",
+   "status": 200,
+   "n": 59,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_PREDISPATCH_D_20260813_0000000532535081.zip",
+   "newest": "PUBLIC_NEXT_DAY_PREDISPATCH_D_20261011_0000000542426908.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Next_Day_Trading",
+   "status": 200,
+   "n": 1703,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_TRADING_20170201_0000000280588679.zip",
+   "newest": "PUBLIC_NEXT_DAY_TRADING_20210930_0000000350043172.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Operational_Demand",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Operational_Demand_Less_SNSG",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "P5MINFCST",
+   "status": 200,
+   "n": 576,
+   "n_csv": 0,
+   "oldest": "PUBLIC_P5MINFCST_202610110135_0000000542236663.zip",
+   "newest": "PUBLIC_P5MINFCST_202610130130_0000000542575224.zip",
+   "hasData": true
+  },
+  {
+   "dir": "P5_Reports",
+   "status": 200,
+   "n": 576,
+   "n_csv": 0,
+   "oldest": "PUBLIC_P5MIN_202610110140_20261011013535.zip",
+   "newest": "PUBLIC_P5MIN_202610130135_20261013013035.zip",
+   "hasData": true
+  },
+  {
+   "dir": "PD7Day",
+   "status": 200,
+   "n": 180,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PD7DAY_20260814070847_0000000532550477.zip",
+   "newest": "PUBLIC_PD7DAY_20261012174724_0000000542519877.zip",
+   "hasData": true
+  },
+  {
+   "dir": "PDPASA",
+   "status": 200,
+   "n": 672,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PDPASA_202609290200_0000000540170078.zip",
+   "newest": "PUBLIC_PDPASA_202610130130_0000000542572096.zip",
+   "hasData": true
+  },
+  {
+   "dir": "PDPASA_DUIDAvailability",
+   "status": 200,
+   "n": 2879,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PDPASA_DUIDAVAILABILITY_202608140230_0000000532517363.zip",
+   "newest": "PUBLIC_PDPASA_DUIDAVAILABILITY_202610130130_0000000542571727.zip",
+   "hasData": true
+  },
+  {
+   "dir": "PREDISPATCHFCST",
+   "status": 200,
+   "n": 673,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PREDISPATCHFCST_202609290200_0000000540169847.zip",
+   "newest": "PUBLIC_PREDISPATCHFCST_202610130200_0000000542575340.zip",
+   "hasData": true
+  },
+  {
+   "dir": "PasaSnap",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "PredispatchIS_Reports",
+   "status": 200,
+   "n": 672,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PREDISPATCHIS_202609290230_20260929020155.zip",
+   "newest": "PUBLIC_PREDISPATCHIS_202610130200_20261013013152.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Predispatch_IRSR",
+   "status": 200,
+   "n": 672,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PREDISPATCH_IRSR_202609290200_0000000540169840.zip",
+   "newest": "PUBLIC_PREDISPATCH_IRSR_202610130130_0000000542571732.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Predispatch_Reports",
+   "status": 200,
+   "n": 671,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PREDISPATCH_202609290230_20260929020201_LEGACY.zip",
+   "newest": "PUBLIC_PREDISPATCH_202610130130_20261013010151_LEGACY.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Predispatch_Sensitivities",
+   "status": 200,
+   "n": 672,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PREDISPATCH_SENSITIVITIES_20260929013830_0000000540170336.zip",
+   "newest": "PUBLIC_PREDISPATCH_SENSITIVITIES_20261013010853_0000000542572549.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Public_Prices",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_PRICES_202608130000_20260814040503.zip",
+   "newest": "PUBLIC_PRICES_202610110000_20261012040503.zip",
+   "hasData": true
+  },
+  {
+   "dir": "PublishedModelDataAccess",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "ROOFTOP_PV",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Regional_Summary_Report",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Reserve_Contract_Recovery",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "SEVENDAYOUTLOOK_FULL",
+   "status": 200,
+   "n": 2880,
+   "n_csv": 0,
+   "oldest": "PUBLIC_SEVENDAYOUTLOOK_FULL_20260814013429_0000000532514459.zip",
+   "newest": "PUBLIC_SEVENDAYOUTLOOK_FULL_20261013010458_0000000542572099.zip",
+   "hasData": true
+  },
+  {
+   "dir": "SEVENDAYOUTLOOK_PEAK",
+   "status": 200,
+   "n": 2880,
+   "n_csv": 0,
+   "oldest": "PUBLIC_SEVENDAYOUTLOOK_PEAK_20260814013429_0000000532514460.zip",
+   "newest": "PUBLIC_SEVENDAYOUTLOOK_PEAK_20261013010458_0000000542572100.zip",
+   "hasData": true
+  },
+  {
+   "dir": "SRA_Bids",
+   "status": 200,
+   "n": 0,
+   "n_csv": 5,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "SRA_NSR_RECONCILIATION",
+   "status": 200,
+   "n": 6,
+   "n_csv": 0,
+   "oldest": "PUBLIC_SRAFINANCIALS_RECONCILIATION_2025_4_20251020100535.zip",
+   "newest": "PUBLIC_SRAFINANCIALS_RECONCILIATION_2026_3_20260720154935.zip",
+   "hasData": true
+  },
+  {
+   "dir": "SRA_Offers",
+   "status": 200,
+   "n": 0,
+   "n_csv": 28,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "SRA_Results",
+   "status": 200,
+   "n": 0,
+   "n_csv": 1356,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "SSM_ENABLEMENT_COSTS",
+   "status": 200,
+   "n": 242,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_ENABLEMENT_COSTS_20251202_120016_0000000492027787.zip",
+   "newest": "PUBLIC_NEXT_DAY_ENABLEMENT_COSTS_20261012_120011_0000000542476117.zip",
+   "hasData": true
+  },
+  {
+   "dir": "SSM_ENABLEMENT_PERIOD",
+   "status": 200,
+   "n": 242,
+   "n_csv": 0,
+   "oldest": "PUBLIC_NEXT_DAY_ENABLEMENT_PERIOD_20251202_120016_0000000492027788.zip",
+   "newest": "PUBLIC_NEXT_DAY_ENABLEMENT_PERIOD_20261012_120007_0000000542476118.zip",
+   "hasData": true
+  },
+  {
+   "dir": "STPASA_DUIDAvailability",
+   "status": 200,
+   "n": 1439,
+   "n_csv": 0,
+   "oldest": "PUBLIC_STPASA_DUIDAVAILABILITY_202608140200_0000000532517132.zip",
+   "newest": "PUBLIC_STPASA_DUIDAVAILABILITY_202610130100_0000000542571434.zip",
+   "hasData": true
+  },
+  {
+   "dir": "STTM",
+   "status": 200,
+   "n": 32,
+   "n_csv": 47,
+   "oldest": "CurrentDay.zip",
+   "newest": "Day31.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Settlements",
+   "status": 200,
+   "n": 5609,
+   "n_csv": 0,
+   "oldest": "PUBLIC_SETTLEMENTS_20170202011150_0000000280585184.zip",
+   "newest": "PUBLIC_SETTLEMENTS_EXTN_20260820121039_0000000533558359.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Short_Term_PASA_Reports",
+   "status": 200,
+   "n": 1440,
+   "n_csv": 0,
+   "oldest": "PUBLIC_STPASA_202608140200_0000000532518360.zip",
+   "newest": "PUBLIC_STPASA_202610130100_0000000542573053.zip",
+   "hasData": true
+  },
+  {
+   "dir": "SupplyDemand",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "TradingIS_Reports",
+   "status": 200,
+   "n": 4032,
+   "n_csv": 0,
+   "oldest": "PUBLIC_TRADINGIS_202609290140_0000000540170111.zip",
+   "newest": "PUBLIC_TRADINGIS_202610130135_0000000542575145.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Trading_Cumulative_Price",
+   "status": 200,
+   "n": 4034,
+   "n_csv": 0,
+   "oldest": "PUBLIC_TRADING_CUMULATIVE_PRICE_202609290130_0000000540169381.zip",
+   "newest": "PUBLIC_TRADING_CUMULATIVE_PRICE_202610130135_0000000542575147.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Trading_IRSR",
+   "status": 200,
+   "n": 4032,
+   "n_csv": 0,
+   "oldest": "PUBLIC_TRADING_IRSR_202609290130_0000000540169428.zip",
+   "newest": "PUBLIC_TRADING_IRSR_202610130135_0000000542575215.zip",
+   "hasData": true
+  },
+  {
+   "dir": "VicGas",
+   "status": 200,
+   "n": 32,
+   "n_csv": 93,
+   "oldest": "CurrentDay.zip",
+   "newest": "PublicRpts31.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Vwa_Fcas_Prices",
+   "status": 200,
+   "n": 60,
+   "n_csv": 0,
+   "oldest": "PUBLIC_VWAFCASPRICES_202608130000_20260814040502.zip",
+   "newest": "PUBLIC_VWAFCASPRICES_202610110000_20261012040504.zip",
+   "hasData": true
+  },
+  {
+   "dir": "WDR_CAPACITY_NO_SCADA",
+   "status": 200,
+   "n": 1817,
+   "n_csv": 0,
+   "oldest": "PUBLIC_WDR_CAPACITY_NO_SCADA_20211021_0000000351232024.zip",
+   "newest": "PUBLIC_WDR_CAPACITY_NO_SCADA_20261011_0000000542426911.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Weekly_Bulletin",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Weekly_Constraint_Reports",
+   "status": 200,
+   "n": 1,
+   "n_csv": 0,
+   "oldest": "2026.zip",
+   "newest": "2026.zip",
+   "hasData": true
+  },
+  {
+   "dir": "Yesterdays_Bids_Reports",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  },
+  {
+   "dir": "Yesterdays_MNSPBids_Reports",
+   "status": 200,
+   "n": 0,
+   "n_csv": 0,
+   "oldest": null,
+   "newest": null,
+   "hasData": false
+  }
+ ]
+}

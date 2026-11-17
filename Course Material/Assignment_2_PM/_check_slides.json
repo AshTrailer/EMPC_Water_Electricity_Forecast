@@ -1,0 +1,39 @@
+{
+  "format": "pptx",
+  "verdict": "pass",
+  "checks": [
+    {
+      "id": "package",
+      "status": "pass"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Retrospective"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "cross-source audit"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Backup"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "controller link"
+    },
+    {
+      "id": "count",
+      "status": "pass",
+      "expected": 3,
+      "actual": 3
+    }
+  ],
+  "summary": {
+    "slides": 3
+  }
+}

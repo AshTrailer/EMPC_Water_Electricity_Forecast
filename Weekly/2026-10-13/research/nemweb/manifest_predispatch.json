@@ -1,0 +1,327 @@
+{
+ "dir": "Predispatch_Reports",
+ "from": "202610120000",
+ "to": "202610130300",
+ "listed": 672,
+ "picked": 53,
+ "manifest": [
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120000_20261011233207_LEGACY.zip",
+   "eff": "202610120000",
+   "bytes": 460403,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120030_20261012000153_LEGACY.zip",
+   "eff": "202610120030",
+   "bytes": 453220,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120100_20261012003153_LEGACY.zip",
+   "eff": "202610120100",
+   "bytes": 445188,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120130_20261012010154_LEGACY.zip",
+   "eff": "202610120130",
+   "bytes": 438321,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120200_20261012013146_LEGACY.zip",
+   "eff": "202610120200",
+   "bytes": 430937,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120230_20261012020147_LEGACY.zip",
+   "eff": "202610120230",
+   "bytes": 424346,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120300_20261012023140_LEGACY.zip",
+   "eff": "202610120300",
+   "bytes": 416940,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120330_20261012030142_LEGACY.zip",
+   "eff": "202610120330",
+   "bytes": 409943,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120400_20261012033158_LEGACY.zip",
+   "eff": "202610120400",
+   "bytes": 402319,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120430_20261012040159_LEGACY.zip",
+   "eff": "202610120430",
+   "bytes": 395230,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120500_20261012043144_LEGACY.zip",
+   "eff": "202610120500",
+   "bytes": 387312,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120530_20261012050158_LEGACY.zip",
+   "eff": "202610120530",
+   "bytes": 380137,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120600_20261012053204_LEGACY.zip",
+   "eff": "202610120600",
+   "bytes": 372924,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120630_20261012060144_LEGACY.zip",
+   "eff": "202610120630",
+   "bytes": 363598,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120700_20261012063146_LEGACY.zip",
+   "eff": "202610120700",
+   "bytes": 353871,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120730_20261012070131_LEGACY.zip",
+   "eff": "202610120730",
+   "bytes": 345912,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120800_20261012073150_LEGACY.zip",
+   "eff": "202610120800",
+   "bytes": 336557,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120830_20261012080139_LEGACY.zip",
+   "eff": "202610120830",
+   "bytes": 328338,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120900_20261012083133_LEGACY.zip",
+   "eff": "202610120900",
+   "bytes": 319533,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610120930_20261012090133_LEGACY.zip",
+   "eff": "202610120930",
+   "bytes": 310031,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121000_20261012093134_LEGACY.zip",
+   "eff": "202610121000",
+   "bytes": 301581,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121030_20261012100120_LEGACY.zip",
+   "eff": "202610121030",
+   "bytes": 293825,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121100_20261012103121_LEGACY.zip",
+   "eff": "202610121100",
+   "bytes": 285298,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121130_20261012110128_LEGACY.zip",
+   "eff": "202610121130",
+   "bytes": 277832,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121200_20261012113128_LEGACY.zip",
+   "eff": "202610121200",
+   "bytes": 270196,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121230_20261012120129_LEGACY.zip",
+   "eff": "202610121230",
+   "bytes": 262179,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121300_20261012123237_LEGACY.zip",
+   "eff": "202610121300",
+   "bytes": 631698,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121330_20261012130223_LEGACY.zip",
+   "eff": "202610121330",
+   "bytes": 625227,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121400_20261012133222_LEGACY.zip",
+   "eff": "202610121400",
+   "bytes": 616170,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121430_20261012140223_LEGACY.zip",
+   "eff": "202610121430",
+   "bytes": 609210,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121500_20261012143223_LEGACY.zip",
+   "eff": "202610121500",
+   "bytes": 601238,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121530_20261012150209_LEGACY.zip",
+   "eff": "202610121530",
+   "bytes": 589356,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121600_20261012153224_LEGACY.zip",
+   "eff": "202610121600",
+   "bytes": 581176,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121630_20261012160211_LEGACY.zip",
+   "eff": "202610121630",
+   "bytes": 573321,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121700_20261012163211_LEGACY.zip",
+   "eff": "202610121700",
+   "bytes": 564626,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121730_20261012170212_LEGACY.zip",
+   "eff": "202610121730",
+   "bytes": 557640,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121800_20261012173212_LEGACY.zip",
+   "eff": "202610121800",
+   "bytes": 548304,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121830_20261012180213_LEGACY.zip",
+   "eff": "202610121830",
+   "bytes": 541394,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121900_20261012183214_LEGACY.zip",
+   "eff": "202610121900",
+   "bytes": 533373,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610121930_20261012190214_LEGACY.zip",
+   "eff": "202610121930",
+   "bytes": 526117,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610122000_20261012193204_LEGACY.zip",
+   "eff": "202610122000",
+   "bytes": 518289,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610122030_20261012200200_LEGACY.zip",
+   "eff": "202610122030",
+   "bytes": 511518,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610122100_20261012203200_LEGACY.zip",
+   "eff": "202610122100",
+   "bytes": 502908,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610122130_20261012210202_LEGACY.zip",
+   "eff": "202610122130",
+   "bytes": 495504,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610122200_20261012213202_LEGACY.zip",
+   "eff": "202610122200",
+   "bytes": 488251,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610122230_20261012220202_LEGACY.zip",
+   "eff": "202610122230",
+   "bytes": 481886,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610122300_20261012223206_LEGACY.zip",
+   "eff": "202610122300",
+   "bytes": 474942,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610122330_20261012230204_LEGACY.zip",
+   "eff": "202610122330",
+   "bytes": 467932,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610130000_20261012233149_LEGACY.zip",
+   "eff": "202610130000",
+   "bytes": 459187,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610130030_20261013000150_LEGACY.zip",
+   "eff": "202610130030",
+   "bytes": 452650,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610130100_20261013003151_LEGACY.zip",
+   "eff": "202610130100",
+   "bytes": 445004,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610130130_20261013010151_LEGACY.zip",
+   "eff": "202610130130",
+   "bytes": 438531,
+   "status": "downloaded"
+  },
+  {
+   "name": "PUBLIC_PREDISPATCH_202610130200_20261013013155_LEGACY.zip",
+   "eff": "202610130200",
+   "bytes": 430363,
+   "status": "downloaded"
+  }
+ ]
+}

@@ -38,7 +38,12 @@ function cfg = official_composite_load(data_root)
       data_root (1,1) string
    end
 
-   win = fullfile(data_root, "window_60d_20260811_20261009");
+   % The staging step that prepares the VIC1 windows for the remote repository
+   % appends the region to the directory name, so the loader accepts either
+   % spelling rather than pinning one: a rename must not take the composite
+   % offline, and a missing directory has to report which names it tried.
+   win = pick_dir(data_root, ["window_60d_20260811_20261009_vic1", ...
+                              "window_60d_20260811_20261009"]);
    src = [fullfile(win, "p5min_vic1_partial", "p5min_20260811_20261009.csv"), ...
           fullfile(win, "predispatch_30min_VIC1.csv"), ...
           fullfile(win, "pd7day_30min_VIC1.csv")];
@@ -90,6 +95,22 @@ function cfg = official_composite_load(data_root)
       datestr(double(lo)/1440 + datenum(2025,1,1), 'yyyy-mm-dd HH:MM'), ...
       datestr(double(hi)/1440 + datenum(2025,1,1), 'yyyy-mm-dd HH:MM'));
 end
+
+function p = pick_dir(root, names)
+   % The first of `names` that exists under `root`. Raises when none does, and
+   % says which names it tried, because "no file at ..." on the fourth path is
+   % not enough to tell a rename from a missing window.
+   for i = 1:numel(names)
+      cand = fullfile(root, names(i));
+      if isfolder(cand)
+         p = cand;
+         return;
+      end
+   end
+   error('official_composite_load:no_window', ...
+      'no data window under %s; tried %s', root, strjoin(names, ", "));
+end
+
 
 function [eff, tgt, rrp] = read_product(path, name)
    % One product file, three columns only. Column 1 is the effective time and

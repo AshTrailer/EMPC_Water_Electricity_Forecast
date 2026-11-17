@@ -1,0 +1,19 @@
+{
+  "from": "20260914",
+  "to": "20260916",
+  "rows": 36244,
+  "feats": [
+    "pm",
+    "pn",
+    "headroom",
+    "mw_total",
+    "mw_below_0",
+    "mw_below_100",
+    "demand"
+  ],
+  "no_curve": 0,
+  "demand_missing": 10412,
+  "demand_exceeds_curve": 0,
+  "units_in_region": 140,
+  "note": "times are minutes since 1970, stored as float64 pairs; features are float32 in feats order"
+}

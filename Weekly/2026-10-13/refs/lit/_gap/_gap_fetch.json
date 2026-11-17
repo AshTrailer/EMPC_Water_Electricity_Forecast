@@ -1,0 +1,106 @@
+[
+ {
+  "slug": "vst_hsc1701",
+  "ok": false,
+  "url": null,
+  "bytes": 0,
+  "isPdf": false,
+  "tried": [
+   {
+    "url": "https://alfa.im.pwr.edu.pl/~hugo/RePEc/wuu/wpaper/HSC_17_01.pdf",
+    "err": "fetch failed"
+   }
+  ]
+ },
+ {
+  "slug": "vst_efc17",
+  "ok": true,
+  "url": "https://efc.pwr.edu.pl/assets/EFC17/Uniejewski_EFC17.pdf",
+  "bytes": 2424082,
+  "isPdf": true,
+  "tried": [
+   {
+    "url": "https://efc.pwr.edu.pl/assets/EFC17/Uniejewski_EFC17.pdf",
+    "status": 200,
+    "bytes": 2424082,
+    "isPdf": true
+   }
+  ]
+ },
+ {
+  "slug": "ltsc_hsc1605",
+  "ok": false,
+  "url": null,
+  "bytes": 0,
+  "isPdf": false,
+  "tried": [
+   {
+    "url": "https://alfa.im.pwr.edu.pl/~hugo/RePEc/wuu/wpaper/HSC_16_05.pdf",
+    "err": "fetch failed"
+   }
+  ]
+ },
+ {
+  "slug": "temporal_hsc_wp",
+  "ok": false,
+  "url": null,
+  "bytes": 0,
+  "isPdf": false,
+  "tried": [
+   {
+    "url": "https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp12-17.pdf",
+    "status": 403,
+    "bytes": 6027,
+    "isPdf": false
+   },
+   {
+    "url": "https://www.monash.edu/business/ebs/research/publications/ebs/2017/wp12-2017.pdf",
+    "status": 403,
+    "bytes": 5927,
+    "isPdf": false
+   },
+   {
+    "url": "https://robjhyndman.com/papers/Temporal.pdf",
+    "status": 403,
+    "bytes": 75193,
+    "isPdf": false
+   },
+   {
+    "url": "https://robjhyndman.com/papers/temporalhierarchies.pdf",
+    "status": 403,
+    "bytes": 75193,
+    "isPdf": false
+   }
+  ]
+ },
+ {
+  "slug": "ltsc_extrapolating_pdf",
+  "ok": true,
+  "url": "https://arxiv.org/pdf/2503.02518",
+  "bytes": 2139610,
+  "isPdf": true,
+  "tried": [
+   {
+    "url": "https://arxiv.org/pdf/2503.02518",
+    "status": 200,
+    "bytes": 2139610,
+    "isPdf": true
+   }
+  ]
+ },
+ {
+  "slug": "weron2022_review_pdf",
+  "ok": true,
+  "url": "https://arxiv.org/pdf/2204.11735",
+  "bytes": 876020,
+  "isPdf": true,
+  "tried": [
+   {
+    "url": "https://arxiv.org/pdf/2204.11735",
+    "status": 200,
+    "bytes": 876020,
+    "isPdf": true
+   }
+  ]
+ }
+]

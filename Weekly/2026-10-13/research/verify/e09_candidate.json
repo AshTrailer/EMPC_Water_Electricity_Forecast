@@ -1,0 +1,23 @@
+{
+  "rows": 85248,
+  "cols": [
+    "origin",
+    "target",
+    "q_dispatchable",
+    "price_at_dispatchable",
+    "price_at_demand",
+    "price_at_total_generation",
+    "rrp",
+    "demand",
+    "dispatchable",
+    "net_interchange",
+    "ss_solar",
+    "ss_wind",
+    "lodge_age_min"
+  ],
+  "day_from": 20260908,
+  "day_to": 20261009,
+  "dispatchable_above_stack": 0,
+  "oldest_lodgement_used_min": 69634.33333333209,
+  "note": "every reading uses, per unit and period, the newest lodgement at or before the origin; price_at_dispatchable is the scheduled stack read at the published dispatchable generation"
+}

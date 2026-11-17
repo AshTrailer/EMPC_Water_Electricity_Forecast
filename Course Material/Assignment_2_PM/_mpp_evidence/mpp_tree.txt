@@ -1,0 +1,176 @@
+=== storage tree ===
+  /Root Entry/CompObj                            115 bytes
+  /Root Entry/DocumentSummaryInformation        1060 bytes
+  /Root Entry/SummaryInformation                 260 bytes
+  /Root Entry/   114/TBkndAssn/Fixed2Data        1632 bytes
+  /Root Entry/   114/TBkndAssn/Fixed2Meta        1818 bytes
+  /Root Entry/   114/TBkndAssn/FixedData         3740 bytes
+  /Root Entry/   114/TBkndAssn/FixedMeta         1172 bytes
+  /Root Entry/   114/TBkndAssn/Props               88 bytes
+  /Root Entry/   114/TBkndAssn/Var2Data          4020 bytes
+  /Root Entry/   114/TBkndAssn/VarMeta            804 bytes
+  /Root Entry/   114/TBkndCal/Fixed2Data          288 bytes
+  /Root Entry/   114/TBkndCal/Fixed2Meta           76 bytes
+  /Root Entry/   114/TBkndCal/FixedData            88 bytes
+  /Root Entry/   114/TBkndCal/FixedMeta            76 bytes
+  /Root Entry/   114/TBkndCal/Var2Data             22 bytes
+  /Root Entry/   114/TBkndCal/VarMeta              36 bytes
+  /Root Entry/   114/TBkndCons/Fixed2Data        1440 bytes
+  /Root Entry/   114/TBkndCons/Fixed2Meta         286 bytes
+  /Root Entry/   114/TBkndCons/FixedData          600 bytes
+  /Root Entry/   114/TBkndCons/FixedMeta          316 bytes
+  /Root Entry/   114/TBkndCons/VarMeta             24 bytes
+  /Root Entry/   114/TBkndOutlCode/Fixed2Data     136 bytes
+  /Root Entry/   114/TBkndOutlCode/Fixed2Meta      56 bytes
+  /Root Entry/   114/TBkndOutlCode/FixedData       62 bytes
+  /Root Entry/   114/TBkndOutlCode/FixedMeta       56 bytes
+  /Root Entry/   114/TBkndOutlCode/Var2Data        12 bytes
+  /Root Entry/   114/TBkndOutlCode/VarMeta         36 bytes
+  /Root Entry/   114/TBkndRsc/Fixed2Data          160 bytes
+  /Root Entry/   114/TBkndRsc/Fixed2Meta          216 bytes
+  /Root Entry/   114/TBkndRsc/FixedData           220 bytes
+  /Root Entry/   114/TBkndRsc/FixedMeta           164 bytes
+  /Root Entry/   114/TBkndRsc/Props                72 bytes
+  /Root Entry/   114/TBkndRsc/Var2Data             28 bytes
+  /Root Entry/   114/TBkndRsc/VarMeta              48 bytes
+  /Root Entry/   114/TBkndTask/Fixed2Data        2816 bytes
+  /Root Entry/   114/TBkndTask/Fixed2Meta        4152 bytes
+  /Root Entry/   114/TBkndTask/FixedData         7214 bytes
+  /Root Entry/   114/TBkndTask/FixedMeta         2084 bytes
+  /Root Entry/   114/TBkndTask/Props               86 bytes
+  /Root Entry/   114/TBkndTask/Var2Data          6900 bytes
+  /Root Entry/   114/TBkndTask/VarMeta           3864 bytes
+  /Root Entry/Props14                             628 bytes
+
+=== task-name candidate streams ===
+
+--- /Root Entry/   114/TBkndTask/Var2Data (6900 bytes) ---
+   0x00050  Capstone Project
+   0x000DE  Project Kick-off & First Team/Mentor Meeting
+   0x00188  Literature Review
+   0x001FC  Read related papers (MPC pump scheduling & price forecasting)
+   0x002C8  System Infrastructure & Baseline Control & Data Preparation
+   0x00390  Download AEMO historical data
+   0x0041C  Data pipeline, filtering & controller API test system in Matlab
+   0x004EC  P controller for simple closed-loop level control
+   0x005A0  Baseline system operational
+   0x00628  Predictive Modelling & Validation & Theoretical Framework
+   0x006EC  Update RLS from filter to recursive AR predictor
+   0x0079E  Implement Kalman predictor (HSSKF)
+   0x00834  Error vs prediction horizon experiment
+   0x008D2  Theoretical derivation & evaluation metrics
+   0x0097A  Predictor Testing
+   0x009EE  Test predictor update-time settings
+   0x00A86  Test weekday vs weekend data
+   0x00B10  Test different training windows
+   0x00BA0  Prepare mathematical description for report
+   0x00C48  Predictor validated (meets target error)
+   0x00CEA  MPC & EMPC Development
+   0x00D68  First version MPC controller
+   0x00DF2  Test solver on simple water level control
+   0x00E96  Integrate price predictor into EMPC objective
+   0x00F42  Build full tank/pump simulation scenario
+   0x00FE4  EMPC vs baseline comparison & tuning
+   0x0107E  EMPC framework operational
+   0x01104  Results & Reporting
+   0x0117C  Analyse cost savings & robustness
+   0x01210  Write final report
+   0x01286  Prepare oral presentation
+   0x0130A  Final report submitted
+   0x01388  Oral exam
+
+--- /Root Entry/Props14 (628 bytes) ---
+   0x0001C  16,0,10417,20197
+   0x0004A  16,0,10417,20197
+   0x00086  \\uom-file.unimelb.edu.au\citrix\daasredirected\StudentDesktop\changhan\Desktop\Capstone Project.mpp
+   0x00262  Ash Zhang
+
+=== date-field scan on every FixedData / FixedMeta stream ===
+
+--- /Root Entry/   114/TBkndAssn/Fixed2Data (1632 bytes) ---
+  [Fixed2Data] plausible date fields: 1
+      0x026C u64 2034-09-15 02:14:08.526950
+
+--- /Root Entry/   114/TBkndAssn/Fixed2Meta (1818 bytes) ---
+  [Fixed2Meta] plausible date fields: 10
+      0x002C u64 2057-09-06 23:40:07.585588
+      0x0100 u64 2057-09-06 23:40:07.585588
+      0x01D4 u64 2057-09-06 23:40:07.585588
+      0x0220 u64 2029-02-20 23:41:22.111488
+      0x02A8 u64 2057-09-06 23:40:07.585588
+      0x037C u64 2057-09-06 23:40:07.585588
+      0x0450 u64 2057-09-06 23:40:07.585588
+      0x0524 u64 2057-09-06 23:40:07.585588
+      0x05F8 u64 2057-09-06 23:40:07.585588
+      0x06CC u64 2057-09-06 23:40:07.585588
+
+--- /Root Entry/   114/TBkndAssn/FixedData (3740 bytes) ---
+
+--- /Root Entry/   114/TBkndAssn/FixedMeta (1172 bytes) ---
+  [FixedMeta] plausible date fields: 1
+      0x00B8 u64 2091-07-30 16:08:39.099188
+
+--- /Root Entry/   114/TBkndCal/Fixed2Data (288 bytes) ---
+
+--- /Root Entry/   114/TBkndCal/Fixed2Meta (76 bytes) ---
+
+--- /Root Entry/   114/TBkndCal/FixedData (88 bytes) ---
+
+--- /Root Entry/   114/TBkndCal/FixedMeta (76 bytes) ---
+
+--- /Root Entry/   114/TBkndCons/Fixed2Data (1440 bytes) ---
+
+--- /Root Entry/   114/TBkndCons/Fixed2Meta (286 bytes) ---
+  [Fixed2Meta] plausible date fields: 1
+      0x0068 u64 2029-02-20 23:41:22.111668
+
+--- /Root Entry/   114/TBkndCons/FixedData (600 bytes) ---
+
+--- /Root Entry/   114/TBkndCons/FixedMeta (316 bytes) ---
+  [FixedMeta] plausible date fields: 3
+      0x00F4 u64 2011-04-21 08:42:08.690198
+      0x0108 u64 2046-12-24 14:40:35.532822
+      0x011C u64 2082-08-28 20:39:02.375446
+
+--- /Root Entry/   114/TBkndOutlCode/Fixed2Data (136 bytes) ---
+
+--- /Root Entry/   114/TBkndOutlCode/Fixed2Meta (56 bytes) ---
+
+--- /Root Entry/   114/TBkndOutlCode/FixedData (62 bytes) ---
+
+--- /Root Entry/   114/TBkndOutlCode/FixedMeta (56 bytes) ---
+
+--- /Root Entry/   114/TBkndRsc/Fixed2Data (160 bytes) ---
+
+--- /Root Entry/   114/TBkndRsc/Fixed2Meta (216 bytes) ---
+
+--- /Root Entry/   114/TBkndRsc/FixedData (220 bytes) ---
+
+--- /Root Entry/   114/TBkndRsc/FixedMeta (164 bytes) ---
+
+--- /Root Entry/   114/TBkndTask/Fixed2Data (2816 bytes) ---
+
+--- /Root Entry/   114/TBkndTask/Fixed2Meta (4152 bytes) ---
+  [Fixed2Meta] plausible date fields: 1
+      0x02A0 u64 2000-08-06 23:42:36.637388
+
+--- /Root Entry/   114/TBkndTask/FixedData (7214 bytes) ---
+  [FixedData] plausible date fields: 16
+      0x0078 u64 2046-12-24 14:40:35.532800
+      0x020C u64 2046-12-24 14:40:35.532800
+      0x03A0 u64 2046-12-24 14:40:35.532800
+      0x06D8 u64 2046-12-24 14:40:35.532800
+      0x086C u64 2046-12-24 14:40:35.532800
+      0x0A00 u64 2046-12-24 14:40:35.532800
+      0x0B94 u64 2046-12-24 14:40:35.532800
+      0x0D28 u64 2046-12-24 14:40:35.532800
+      0x0EBC u64 2046-12-24 14:40:35.532800
+      0x1050 u64 2046-12-24 14:42:09.904640
+      0x11E4 u64 2046-12-24 14:40:35.532800
+      0x1378 u64 2046-12-24 14:40:35.532800
+      0x150C u64 2046-12-24 14:40:35.532800
+      0x16A0 u64 2046-12-24 14:40:35.532800
+      0x1834 u64 2046-12-24 14:40:35.532800
+      0x19C8 u64 2046-12-24 14:40:35.532800
+
+--- /Root Entry/   114/TBkndTask/FixedMeta (2084 bytes) ---

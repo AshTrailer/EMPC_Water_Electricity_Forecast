@@ -1,0 +1,793 @@
+{
+ "slide_width": 12192000,
+ "slide_height": 6858000,
+ "slides": [
+  {
+   "index": 1,
+   "kind": "nav",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": null,
+   "label": "Electricity price forecasting for economic MPC",
+   "note": "26 slides, presented 2026-09-17"
+  },
+  {
+   "index": 2,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 1,
+   "pictures": 0
+  },
+  {
+   "index": 3,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 2,
+   "pictures": 0
+  },
+  {
+   "index": 4,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 3,
+   "pictures": 0
+  },
+  {
+   "index": 5,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 4,
+   "pictures": 0
+  },
+  {
+   "index": 6,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 5,
+   "pictures": 0
+  },
+  {
+   "index": 7,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 6,
+   "pictures": 1
+  },
+  {
+   "index": 8,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 7,
+   "pictures": 3
+  },
+  {
+   "index": 9,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 8,
+   "pictures": 3
+  },
+  {
+   "index": 10,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 9,
+   "pictures": 8
+  },
+  {
+   "index": 11,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 10,
+   "pictures": 5
+  },
+  {
+   "index": 12,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 11,
+   "pictures": 6
+  },
+  {
+   "index": 13,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 12,
+   "pictures": 3
+  },
+  {
+   "index": 14,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 13,
+   "pictures": 1
+  },
+  {
+   "index": 15,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 14,
+   "pictures": 1
+  },
+  {
+   "index": 16,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 15,
+   "pictures": 0
+  },
+  {
+   "index": 17,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 16,
+   "pictures": 0
+  },
+  {
+   "index": 18,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 17,
+   "pictures": 10
+  },
+  {
+   "index": 19,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 18,
+   "pictures": 2
+  },
+  {
+   "index": 20,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 19,
+   "pictures": 3
+  },
+  {
+   "index": 21,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 20,
+   "pictures": 4
+  },
+  {
+   "index": 22,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 21,
+   "pictures": 7
+  },
+  {
+   "index": 23,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 22,
+   "pictures": 0
+  },
+  {
+   "index": 24,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 23,
+   "pictures": 2
+  },
+  {
+   "index": 25,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 24,
+   "pictures": 2
+  },
+  {
+   "index": 26,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 25,
+   "pictures": 0
+  },
+  {
+   "index": 27,
+   "kind": "carry",
+   "source": "Capstone_Forecasting_Deck.pptx",
+   "source_slide": 26,
+   "pictures": 0
+  },
+  {
+   "index": 28,
+   "kind": "nav",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": null,
+   "label": "Data chain audit, predictor baseline, AEMO error model",
+   "note": "22 slides, presented 2026-09-23"
+  },
+  {
+   "index": 29,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 1,
+   "pictures": 0
+  },
+  {
+   "index": 30,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 2,
+   "pictures": 0
+  },
+  {
+   "index": 31,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 3,
+   "pictures": 0
+  },
+  {
+   "index": 32,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 4,
+   "pictures": 0
+  },
+  {
+   "index": 33,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 5,
+   "pictures": 0
+  },
+  {
+   "index": 34,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 6,
+   "pictures": 1
+  },
+  {
+   "index": 35,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 7,
+   "pictures": 0
+  },
+  {
+   "index": 36,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 8,
+   "pictures": 0
+  },
+  {
+   "index": 37,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 9,
+   "pictures": 0
+  },
+  {
+   "index": 38,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 10,
+   "pictures": 0
+  },
+  {
+   "index": 39,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 11,
+   "pictures": 0
+  },
+  {
+   "index": 40,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 12,
+   "pictures": 2
+  },
+  {
+   "index": 41,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 13,
+   "pictures": 0
+  },
+  {
+   "index": 42,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 14,
+   "pictures": 0
+  },
+  {
+   "index": 43,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 15,
+   "pictures": 5
+  },
+  {
+   "index": 44,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 16,
+   "pictures": 0
+  },
+  {
+   "index": 45,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 17,
+   "pictures": 1
+  },
+  {
+   "index": 46,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 18,
+   "pictures": 1
+  },
+  {
+   "index": 47,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 19,
+   "pictures": 1
+  },
+  {
+   "index": 48,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 20,
+   "pictures": 0
+  },
+  {
+   "index": 49,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 21,
+   "pictures": 0
+  },
+  {
+   "index": 50,
+   "kind": "carry",
+   "source": "Capstone_Weekly_2026-09-23.pptx",
+   "source_slide": 22,
+   "pictures": 0
+  },
+  {
+   "index": 51,
+   "kind": "nav",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": null,
+   "label": "VIC1 price forecaster",
+   "note": "11 slides, presented 2026-10-08"
+  },
+  {
+   "index": 52,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 1,
+   "pictures": 0
+  },
+  {
+   "index": 53,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 2,
+   "pictures": 0
+  },
+  {
+   "index": 54,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 3,
+   "pictures": 0
+  },
+  {
+   "index": 55,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 4,
+   "pictures": 0
+  },
+  {
+   "index": 56,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 5,
+   "pictures": 2
+  },
+  {
+   "index": 57,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 6,
+   "pictures": 1
+  },
+  {
+   "index": 58,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 7,
+   "pictures": 1
+  },
+  {
+   "index": 59,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 8,
+   "pictures": 1
+  },
+  {
+   "index": 60,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 9,
+   "pictures": 0
+  },
+  {
+   "index": 61,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 10,
+   "pictures": 0
+  },
+  {
+   "index": 62,
+   "kind": "carry",
+   "source": "Capstone_Update_2026-10-08_EN.pptx",
+   "source_slide": 11,
+   "pictures": 0
+  },
+  {
+   "index": 63,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 1,
+   "pictures": 0
+  },
+  {
+   "index": 64,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 2,
+   "pictures": 2
+  },
+  {
+   "index": 65,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 3,
+   "pictures": 4
+  },
+  {
+   "index": 66,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 4,
+   "pictures": 5
+  },
+  {
+   "index": 67,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 5,
+   "pictures": 6
+  },
+  {
+   "index": 68,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 6,
+   "pictures": 7
+  },
+  {
+   "index": 69,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 7,
+   "pictures": 8
+  },
+  {
+   "index": 70,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 8,
+   "pictures": 14
+  },
+  {
+   "index": 71,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 9,
+   "pictures": 17
+  },
+  {
+   "index": 72,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 10,
+   "pictures": 19
+  },
+  {
+   "index": 73,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 11,
+   "pictures": 22
+  },
+  {
+   "index": 74,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 12,
+   "pictures": 25
+  },
+  {
+   "index": 75,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 13,
+   "pictures": 30
+  },
+  {
+   "index": 76,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 14,
+   "pictures": 32
+  },
+  {
+   "index": 77,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 15,
+   "pictures": 34
+  },
+  {
+   "index": 78,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 16,
+   "pictures": 36
+  },
+  {
+   "index": 79,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 17,
+   "pictures": 39
+  },
+  {
+   "index": 80,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 18,
+   "pictures": 42
+  },
+  {
+   "index": 81,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 19,
+   "pictures": 45
+  },
+  {
+   "index": 82,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 20,
+   "pictures": 47
+  },
+  {
+   "index": 83,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 21,
+   "pictures": 50
+  },
+  {
+   "index": 84,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 22,
+   "pictures": 56
+  },
+  {
+   "index": 85,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 23,
+   "pictures": 59
+  },
+  {
+   "index": 86,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 24,
+   "pictures": 60
+  },
+  {
+   "index": 87,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 25,
+   "pictures": 61
+  },
+  {
+   "index": 88,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 26,
+   "pictures": 62
+  },
+  {
+   "index": 89,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 27,
+   "pictures": 64
+  },
+  {
+   "index": 90,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 28,
+   "pictures": 66
+  },
+  {
+   "index": 91,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 29,
+   "pictures": 68
+  },
+  {
+   "index": 92,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 30,
+   "pictures": 69
+  },
+  {
+   "index": 93,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 31,
+   "pictures": 70
+  },
+  {
+   "index": 94,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 32,
+   "pictures": 72
+  },
+  {
+   "index": 95,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 33,
+   "pictures": 74
+  },
+  {
+   "index": 96,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 34,
+   "pictures": 76
+  },
+  {
+   "index": 97,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 35,
+   "pictures": 78
+  },
+  {
+   "index": 98,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 36,
+   "pictures": 80
+  },
+  {
+   "index": 99,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 37,
+   "pictures": 82
+  },
+  {
+   "index": 100,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 38,
+   "pictures": 84
+  },
+  {
+   "index": 101,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 39,
+   "pictures": 86
+  },
+  {
+   "index": 102,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 40,
+   "pictures": 88
+  },
+  {
+   "index": 103,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 41,
+   "pictures": 90
+  },
+  {
+   "index": 104,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 42,
+   "pictures": 92
+  },
+  {
+   "index": 105,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 43,
+   "pictures": 94
+  },
+  {
+   "index": 106,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 44,
+   "pictures": 95
+  },
+  {
+   "index": 107,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 45,
+   "pictures": 96
+  },
+  {
+   "index": 108,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 46,
+   "pictures": 97
+  },
+  {
+   "index": 109,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 47,
+   "pictures": 97
+  },
+  {
+   "index": 110,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 48,
+   "pictures": 98
+  },
+  {
+   "index": 111,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 49,
+   "pictures": 99
+  },
+  {
+   "index": 112,
+   "kind": "new",
+   "source": "deck_B_new.pptx",
+   "source_slide": 50,
+   "pictures": 99
+  }
+ ]
+}

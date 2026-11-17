@@ -1,0 +1,3087 @@
+
+=== page 1 ===
+Department of Economics and Business 
+Aarhus University 
+Bartholins Allé 10 
+DK-8000 Aarhus C 
+Denmark 
+Email: oekonomi@au.dk  
+Tel: +45 8716 5515 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Stein-Rule Estimation and Generalized Shrinkage Methods 
+for Forecasting Using Many Predictors 
+ 
+Eric Hillebrand and Tae-Hwy Lee 
+ 
+CREATES Research Paper 2012-18 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+=== page 2 ===
+Stein-Rule Estimation and Generalized Shrinkage Methods for
+Forecasting Using Many Predictors∗
+Eric Hillebrand
+CREATES
+Aarhus University, Denmark
+ehillebrand@creates.au.dk
+Tae-Hwy Lee
+University of California, Riverside
+Department of Economics
+taelee@ucr.edu
+April 2012
+Abstract
+We examine the Stein-rule shrinkage estimator for possible improvements in estimation and
+forecasting when there are many predictors in a linear time series model. We consider the Stein-rule
+estimator of Hill and Judge (1987) that shrinks the unrestricted unbiased OLS estimator towards a
+restricted biased principal component (PC) estimator. Since the Stein-rule estimator combines the
+OLS and PC estimators, it is a model-averaging estimator and produces a combined forecast. The
+conditions under which the improvement can be achieved depend on several unknown parameters
+that determine the degree of the Stein-rule shrinkage. We conduct Monte Carlo simulations to
+examine these parameter regions. The overall picture that emerges is that the Stein-rule shrinkage
+estimator can dominate both OLS and principal components estimators within an intermediate
+range of the signal-to-noise ratio. If the signal-to-noise ratio is low, the PC estimator is superior.
+If the signal-to-noise ratio is high, the OLS estimator is superior. In out-of-sample forecasting with
+AR(1) predictors, the Stein-rule shrinkage estimator can dominate both OLS and PC estimators
+when the predictors exhibit low persistence.
+Keywords:
+Stein-rule, shrinkage, risk, variance-bias tradeoﬀ, OLS, principal components.
+JEL Classiﬁcations:
+C1, C2, C5
+1
+Introduction
+Recent contributions to the forecasting literature consider many predictors in data-rich environments
+and principal components, such as Stock and Watson (2002, 2006, 2011), Bai (2003), Bai and Ng
+(2006, 2008), Bair et al. (2006), Hung and Lee (2010), Hillebrand et al. (2011), and Inoue and Kilian
+(2008), among others. In particular, Stock and Watson (2011) note that many forecasting models in
+this environment can be written in a uniﬁed framework called the shrinkage representation. Although
+the notion of the generalized shrinkage representation can be found in much earlier publications (e.g.,
+∗This article has been prepared for Advances in Econometrics Vol. 30. EH acknowledges support from the Danish
+National Research Foundation.
+1
+
+=== page 3 ===
+Judge and Bock 1978), interest in shrinkage has been revived in the recent literature on out-of-sample
+forecasting.
+The issue of forecasting using many predictors was discussed earlier in econometrics and statistics
+under the subject heading of ill-conditioned data or multicollinearity. In particular, Hill and Judge
+(1987) studied “improved prediction in the presence of multicollinearity.”
+They examined possible
+improvements in estimation and forecasting when there are many predictors in a linear regression model.
+The Stein-rule estimator proposed in their paper shrinks the unrestricted unbiased OLS estimator
+towards a restricted biased principal component (PC) estimator.
+Improvements are usually measured employing a risk function of the squared forecast error loss.
+While the asymptotic risk functions for the OLS and PC estimators are rather easily obtained, the risk
+of the Stein-rule is complicated as it depends on several unknown parameters and data-characteristics.
+It is not easy to understand conditions and situations under which improvements can be achieved.
+We conduct Monte Carlo simulations to shed light on the issue, both in-sample estimation and out-
+of-sample forecasting. In general, a key feature is that the desired improvement through Stein-rule
+shrinkage depends on the signal-to-noise ratio, which is aﬀected by multiple determinants. The Stein-
+rule shrinkage estimator can dominate both OLS and PC estimators within an intermediate range of
+the signal-to-noise ratio. If the signal-to-noise ratio is low, the PC estimator tends to be superior. If
+the signal-to-noise ratio is high, the OLS estimator tends to be superior. In out-of-sample forecasting
+with AR(1) predictors, the Stein-rule shrinkage estimator can dominate both OLS and PC estimators
+when the predictors have low persistence.
+Hill and Fomby (1992) examined the out-of-sample performance of a variety of biased estimation
+procedures such as ridge regression, principal component regression, and several Stein-like estimators.
+Their setup of evaluation was out-of-sample prediction in the sense that the out-of-sample data are
+diﬀerent from the data used for parameter estimation, but not out-of-sample prediction in the context
+of the recent time series forecasting literature.
+As the Stein-rule estimator of Hill and Judge (1987) combines OLS and PC estimators, it can
+be shown that it is a model-averaging estimator and thus produces a combined forecast.
+In fact,
+Hansen (2011) shows that the Stein-type shrinkage estimator is a Mallow-type combined estimator.
+Other papers have studied the relation between Stein-like shrinkage and forecast combinations. Fomby
+and Samanta (1991) use the Stein-rule for directly combining forecasts. Clark and McCracken (2009)
+examine the properties of combined forecasts of two nested models and note that their combined forecast
+is a Stein-type shrinkage forecast. Hence, the shrinkage principle provides insights not only into how to
+solve the issues of estimation in the presence of multicollinearity and forecasting using many predictors,
+but also how forecast combinations in the sense of Bates and Granger (1969) yield improvements.
+The paper is organized as follows. Section 2 presents the shrinkage representation for forecasting
+using principal components. In Section 3 we consider the OLS and PC estimators and their asymptotic
+2
+
+=== page 4 ===
+risk of the squared error loss. In Section 4, the Stein-rule shrinkage estimator that combines the OLS
+and PC estimators is presented. Section 5 and Section 6 present Monte Carlo analysis for in-sample and
+out-of-sample performance of these three estimators – OLS, PC and the Stein-rule estimators. Finally,
+Section 7 provides some concluding remarks.
+2
+Shrinkage Representation
+This section uses Stock and Watson’s (2011) notation. Let the time series under study be denoted by yt
+and let Pit, i = 1, . . . , K, be a set of K orthonormal predictors such that P ′P/T = IK. These predictors
+can be thought of as the principal components of a possibly large data set Xt−1. The statistical model
+is
+yt = δ′Pt−1 + εt,
+(1)
+where δ ∈RK is a parameter vector and εt is some error with mean zero and variance σ2. Both yt and Pt
+are assumed to have sample mean zero. Let ˜yT +1|T be the forecast of y at time T + 1 given information
+through time T. The theorems in Stock and Watson (2011) show that an array of forecasting methods,
+namely Normal Bayes, Bayesian Model Averaging, Empirical Bayes, and Bagging, have a shrinkage
+representation
+˜yT +1|T =
+K
+X
+i=1
+ψ(κti)ˆδiPiT + oP (1),
+(2)
+where ˆδi = T −1 PT
+t=1 Pi,t−1yt is the OLS estimator of δi, ti =
+√
+T ˆδi/ˆσ is the t-statistic for ˆδi, ˆσ2 =
+PT
+t=1(yt −ˆδ′Pt−1)2/(T −K) is the consistent estimator of σ2, ψ is a function that is speciﬁc to a
+forecasting method, and κ is a constant that is speciﬁc to a forecasting method. See also Judge and
+Bock (1978, p. 231) and Hill and Fomby (1992, p. 6) for a general representation of a family of minimax
+shrinkage estimators.
+3
+Principal Component Model
+This section follows Hill and Judge (1987, 1990) and Hill and Fomby (1992), with adapted notation.
+Let the model in terms of the original predictor X be
+y = Xβ + ε,
+(3)
+where y is a T × 1 time series, X is a T × K matrix of K predictors, β is a K × 1 parameter vector,
+and ε is a T × 1 error time series with the conditional mean zero E(ε|X) = 0 and conditional variance
+E (εε′|X) = σ2IK. Note that we do not assume normality of ε in this section while we generate it
+from the normal distribution in our simulation study in Sections 5 and 6. Our interest is to forecast y
+when the number K of predictors in X is large. The location vector β is unknown and the objective
+3
+
+=== page 5 ===
+is to estimate it by β(y, X). We consider three estimators for β in this paper: (i) the ordinary least
+squares (OLS) estimator denoted ˆβ, (ii) the principal component (PC) estimator denoted ˆβ∗, and (iii)
+the Stein-like combined estimator of ˆβ and ˆβ∗, which is to be denoted as ˜β in the next section. In
+this section we examine the sampling properties of ˆβ and ˆβ∗in terms of the asymptotic risk under
+the weighted squared error loss. In Sections 5 and 6 we compare them with the Stein-like combined
+estimator ˜β.
+The sampling performance of an estimator β (y, X) is evaluated by its risk function, the expected
+weighted squared error loss with weight Q,
+Risk (β, β(y, X), Q) = E [(β (y, X) −β)′Q(β (y, X) −β)] .
+(4)
+As we will examine the performance of the Stein-like estimator in dynamic models for forecasting with
+weakly dependent time series, the predictor matrix X is treated as stochastic. Hence, the expectation in
+(4) is taken over the joint probability law of (y, X) . In this section we compute the weighted quadratic
+risk with a weight Q = X′X, which gives the squared conditional prediction error risk. In Sections 5
+and 6 we also consider a weight Q = IK. The asymptotic risks of ˆβ and ˆβ∗are computed below based
+on the asymptotic covariances of ˆβ and ˆβ∗.
+The OLS estimator
+ˆβ = (X′X)−1 X′y,
+(5)
+conditional on X, has the asymptotic sampling property
+√
+T
+
+ˆβ −β
+
+X
+d→N
+ 0, σ2(X′X)−1
+.
+(6)
+The asymptotic quadratic risk weighted with Q = X′X of the OLS estimator ˆβ is
+Risk
+
+β, ˆβ, X′X
+
+=
+E
+
+ˆβ −β
+′
+X′X
+
+ˆβ −β
+
+(7)
+=
+tr E
+
+X′X
+
+ˆβ −β
+ 
+ˆβ −β
+′
+=
+tr E
+
+X′XE
+
+ˆβ −β
+ 
+ˆβ −β
+′
+|X
+
+=
+tr E
+n
+X′X σ2 (X′X)−1o
+=
+tr(σ2IK)
+=
+Kσ2.
+Since the bias E
+
+ˆβ −β|X
+
+= 0 conditional on X, the risk contains only a variance component.
+Turning to the PC estimator ˆβ∗, let V be the K × K matrix of eigenvectors of X′X = T V ΛV ′,
+where Λ is the diagonal matrix of eigenvalues in descending order. Then, V ′V = IK and
+Y = Xβ + ε = XV Λ−1
+2 Λ
+1
+2 V ′β + ε = Pδ + ε, P = XV Λ−1
+2 , δ = Λ
+1
+2 V ′β.
+(8)
+4
+
+=== page 6 ===
+This is the principal components regression model; P contains the principal components of X, and
+ˆδ = (P ′P)−1 P ′y = T −1P ′y can be estimated either from the principal components or as ˆδ = Λ
+1
+2 V ′ ˆβ
+from the OLS estimator of β. So far, the principal components model is equivalent to the original model.
+When X has a large degree of collinearity, the eigenvalues in Λ vary greatly in magnitude, and some
+are close to zero. Then, the number of components is decomposed into K = K1 + K2, where K1 is the
+number of eigenvalues that are relatively large and K2 is the number of eigenvalues that are relatively
+close to zero. The K2 principal components that correspond to the small eigenvalues are discarded; the
+remaining K1 principal components are kept. The model becomes
+y = Pδ + ε = (P1 P2)
+ δ1
+δ2
+
++ ε = P1δ1 + P2δ2 + ε,
+(9)
+= X(V1 V2)Λ−1
+2 Λ
+1
+2 (V1 V2)′β + ε = XV1Λ
+−1
+2
+1
+Λ
+1
+2
+1 V ′
+1β + XV2Λ
+−1
+2
+2
+Λ
+1
+2
+2 V ′
+2β + ε,
+(10)
+where Λ1 and Λ2 are the K1 × K1 and K2 × K2 diagonal matrices, respectively, that contain the
+corresponding eigenvalues, and P2δ2 = XV2Λ
+−1
+2
+2
+Λ
+1
+2
+2 V ′
+2β is deleted. Therefore, principal components
+regression with deleted components is equivalent to OLS estimation with the restriction
+δ2 = Rβ = Λ
+1
+2
+2 V ′
+2β = 0,
+(11)
+where R = Λ
+1
+2
+2 V ′
+2 imposes K2 linear restrictions on β. Note that R = Λ
+1
+2
+2 V ′
+2 is stochastic depending on
+X, and the risk of the restricted estimator is the expected loss with expectation taken over (y, X).
+The principal components estimator of δ with K2 deleted components, corresponding to the restric-
+tions δ2 = 0, is
+ˆδ1 = (P ′
+1P1)−1P ′
+1Y = T −1P ′
+1Y.
+(12)
+The asymptotic distribution conditional on X is
+√
+T
+
+ˆδ1 −δ1
+
+X
+d→N
+ 0, σ2IK1
+
+.
+(13)
+The estimator ˆδ1 and setting δ2 = 0 result in the ﬁt
+y = P1ˆδ1 + ˆε = X V1Λ
+−1
+2
+1
+ˆδ1 + ˆε,
+(14)
+and the principal components estimator of β is therefore
+ˆβ∗= V1Λ
+−1
+2
+1
+ˆδ1.
+(15)
+This is a special case of the restricted least squares (RLS) estimators explored by Mittelhammer (1985).
+Fomby, Hill, and Johnson (1978) present an optimality property of ˆβ∗that the trace of the asymptotic
+covariance matrix of ˆβ∗obtained by deleting K2 principal components associated with the smallest
+eigenvalues is at least as small as that for any other RLS estimator with J ≤K2 restrictions. This
+optimality is in terms of the asymptotic quadratic risk weighted with Q = IK, i.e., Risk
+
+β, ˆβ∗, IK
+
+.
+5
+
+=== page 7 ===
+For forecasting, it is interesting to examine the asymptotic quadratic risk weighted with Q = X′X
+of the PC estimator ˆβ∗.
+Risk
+
+β, ˆβ∗, X′X
+
+=
+E
+
+ˆβ∗−β
+′
+X′X
+
+ˆβ∗−β
+
+(16)
+=
+E
+
+V1Λ
+−1
+2
+1
+ˆδ1 −β
+′
+(T V ΛV ′)
+
+V1Λ
+−1
+2
+1
+ˆδ1 −β
+
+=
+TE
+
+V1Λ
+−1
+2
+1
+ˆδ1 −β
+′ 
+V Λ1/2Λ1/2V ′ 
+V1Λ
+−1
+2
+1
+ˆδ1 −β
+
+=
+TE
+
+ˆδ′
+1Λ
+−1
+2
+1
+V ′
+1V Λ1/2 −β′V Λ1/2 
+Λ1/2V ′V1Λ
+−1
+2
+1
+ˆδ1 −Λ1/2V ′β
+
+=
+TE
+
+ˆδ′
+1
+ IK1
+0 
+−δ′  IK1
+0
+
+ˆδ1 −δ
+
+=
+TE
+
+ˆδ1 −δ1
+′ 
+ˆδ1 −δ1
+
++ Tδ′
+2δ2
+=
+T tr E
+
+ˆδ1 −δ1
+ 
+ˆδ1 −δ1
+′
++ Tδ′
+2δ2
+=
+T tr
+ T −1σ2IK1
+
++ Tδ′
+2δ2
+=
+K1σ2 + Tδ′
+2δ2
+where the ﬁrst term corresponds to the variance term which declines as K1 decreases and the second
+term corresponds to the bias term. The second to the last equality follows from (13).
+To compare the asymptotic risks of the OLS ˆβ estimator and the PC estimator ˆβ∗, look at the risk
+diﬀerence
+Risk
+
+β, ˆβ, X′X
+
+−Risk
+
+β, ˆβ∗, X′X
+
+= Kσ2 −
+ K1σ2 + Tδ′
+2δ2
+
+= K2σ2 −Tδ′
+2δ2,
+which is positive when δ′
+2δ2 is small. This is the case if the restriction in (11) is reasonable. In that
+case the OLS estimator ˆβ is dominated by the PC estimator ˆβ∗.
+4
+Stein-Rule Estimator
+Hill and Judge (1987, 1990) propose a Stein-rule estimator ˜β that shrinks the standard OLS estimator
+ˆβ towards the principal components estimator ˆβ∗:
+˜β
+=
+ˆβ∗+
+ 
+1 −
+aˆσ2(T −K)
+ˆβ′R′(R(X′X)−1R′)−1R ˆβ
+!
+(ˆβ −ˆβ∗)
+(17)
+≡
+ˆβ∗+ (1 −ψ) (ˆβ −ˆβ∗)
+=
+(1 −ψ) ˆβ + ψ ˆβ∗
+6
+
+=== page 8 ===
+where a is a constant, R is deﬁned from (11), and the Stein coeﬃcient ψ is the shrinkage from the OLS
+estimator ˆβ to the PC estimator ˆβ∗. Using R = Λ
+1
+2
+2 V ′
+2 and ˆβ = V Λ−1
+2 ˆδ, we obtain
+˜β = V1Λ
+−1
+2
+1
+ˆδ1 +
+ 
+1 −1
+T
+aˆσ2(T −K)
+ˆδ′Λ−1
+2 V ′V2Λ
+1
+2
+2 (Λ
+1
+2
+2 V ′
+2V Λ−1V ′V2Λ
+1
+2
+2 )−1Λ
+1
+2
+2 V ′
+2V Λ−1
+2 ˆδ
+!
+(V Λ−1
+2 ˆδ −V1Λ
+−1
+2
+1
+ˆδ1).
+(18)
+Using that
+V ′V2 =
+
+0
+IK2
+
+,
+V ′
+2V = [0 IK2] , and (X′X)−1 = T −1 V Λ−1V ′,
+where IK2 is the K2 × K2 identity matrix, we obtain that
+˜β =
+ 
+1 −1
+T
+aˆσ2(T −K)
+ˆδ′
+2ˆδ2
+!
+(V Λ−1
+2 ˆδ −V1Λ
+−1
+2
+1
+ˆδ1) + V1Λ
+−1
+2
+1
+ˆδ1.
+(19)
+Further rearrangement yields the expression
+˜β = V1Λ
+−1
+2
+1
+ˆδ1 +
+ 
+1 −1
+T
+aˆσ2(T −K)
+ˆδ′
+2ˆδ2
+!
+V2Λ
+−1
+2
+2
+ˆδ2,
+(20)
+for the Stein-rule estimator, from which its shrinkage representation can now be read. Since the in-
+dividual t-statistics of the principal components are given by ti =
+√
+T ˆδ2,i/ˆσ, the coeﬃcient of the K2
+terms in ˆδ corresponding to the discarded principal components can be written
+1 −1
+T
+aˆσ2(T −K)
+ˆδ′
+2ˆδ2
+= 1 −a(T −K)
+PK
+K1+1 t2
+i
+= 1 −
+a(T −K)
+K2FK2,T −K
+,
+(21)
+where FK2,T −K = PK
+K1+1 t2
+i /K2 is the test statistic for H0 : δ2 = 0, the restriction of Equation (11).
+Note that
+FK2,T −K =
+PK
+K1+1 t2
+i
+K2
+= T ˆδ′
+2ˆδ2/K2
+ˆσ2
+= signal from K2 discarded variables
+noise
+.
+The Stein coeﬃcient function ψ in the shrinkage representation of Section 2 is given by
+ψ(κ, tK1+1, . . . , tK) =
+
+
+
+V1Λ
+−1
+2
+1
+,
+i ∈{1, . . . , K1},
+
+1 −
+a(T −K)
+PK
+K1+1 t2
+i
+
+V2Λ
+−1
+2
+2
+,
+i ∈{K1 + 1, . . . , K},
+(22)
+where κ depends on a, T, K, K1, V2, Λ2.
+The asymptotic quadratic risk weighted with Q = X′X for the Stein estimator ˜β
+Risk
+
+β, ˜β, X′X
+
+= E
+
+˜β −β
+′
+X′X
+
+˜β −β
+
+(23)
+can be calculated here but it is rather complicated as it depends on parameters such as β, σ, a, and
+on data characteristics such as T, K, K1, X (with X determining Λ, V ). Hence, we use Monte Carlo
+analysis in the next two sections to examine the risk of ˜β in comparison with those of ˆβ and ˆβ∗.
+7
+
+=== page 9 ===
+5
+In-Sample Performance of Stein-Rule Shrinkage Estimator
+We conduct Monte Carlo analysis to compare the risk of ˜β with those of ˆβ and ˆβ∗. The risk of the
+Stein-rule estimator depends on β, σ, a, T, K, K1, X. For the risk comparisons we ﬁx T = 200 and
+K = 50 while we vary β, σ, a, K1, and X.
+5.1
+Simulation Design
+The elementary model to be studied is the linear equation
+y = Xβ + ε,
+(24)
+where y is a T × 1 vector, X is a T × K matrix of regressors, ε is a T × 1 random vector drawn from
+N(0, σ2) distribution, β ∈RK×1, and σ ∈R+.
+We compare the performance of the Stein-rule estimator in-sample with the standard OLS estimator
+and the principal components estimator and employ the following simulation design. We draw a matrix
+X0 of N(0, 1) random variables of dimensions T × K, T = 200, K = 50. We aim to impose diﬀerent
+eigenvalue structures on the regressor matrix X in the spirit of Hill and Judge (1987). To this end, we
+singular-value decompose X0 into
+X0 = UΛ
+1
+2
+0 V ′
+and discard the diagonal matrix Λ
+1
+2
+0 . The regressor matrix X is then constructed as
+X = UΛ
+1
+2 V ′,
+(25)
+where Λ is constructed according to three diﬀerent scenarios.
+• The singular values are constant.
+Λ
+1
+2 = diag(2, . . . , 2).
+(26)
+• The singular values are linearly decreasing from 5 to 1.
+• The singular values are exponentially decreasing from 5 to 1.
+diag(Λ
+1
+2 ) = 1 + 4e−0.10k,
+k = 1, . . . , K.
+(27)
+In the data-generating process, we consider diﬀerent scenarios for the variance σ2 of the error process.
+In particular, we set
+σ ∈{1, 3, 5, 7}.
+(28)
+8
+
+=== page 10 ===
+The data-generating parameter vector β is set to
+β =
+ L
+K
+
+k∈{1,...,K}
+,
+(29)
+such that its direction in parameter space is (1/K)k and its length is L. We consider diﬀerent scenarios
+for the length L of the vector, in particular,
+L ∈{0, 1, 2, 3}.
+(30)
+The performance of the estimators is measured in terms of their risk. The general risk function
+considered is
+Risk (β, β(y, X), Q) = E
+
+(β (y, X) −β)′ Q (β (y, X) −β)
+
+,
+as shown in (4). We study the particular case where Q = I, which results in the standard mean squared
+error considered in James and Stein (1961) and Judge and Bock (1978) and the second case where
+Q = X′X as considered in Judge and Bock (1978), Hill and Judge (1987, 1990), and Hill and Fomby
+(1992). This risk measure can be interpreted as the square of the distance (Xβ −X ˆβ) of the ﬁtted
+value from the signal part of y.
+There are a few estimator-speciﬁc settings to consider as well, in particular the number K1 of
+principal components for the principal components estimator and the value of the parameter a in the
+Stein-rule shrinkage estimator. We consider K1 ∈{1, 5, 10, 20} and a ∈(0, 1). The two numbers
+interact through the bounds for a given in Judge and Bock (1978, p. 193) and Hill and Judge (1987, p.
+87):
+0 ≤a ≤2(K −K1 −2)
+T −K + 2
+.
+(31)
+Here, for K1 ∈{1, 5, 10, 20}, we obtain
+0 ≤a ≤0.62, 0.57, 0.50, 0.37,
+so that we expect the region for a in which the Stein-rule shrinkage estimator performs better than
+OLS and PC estimators to move towards the origin as the number of components increases.
+5.2
+Choosing the Number of Principal Components
+Figures 1 to 3 show the risk of the three estimators, Stein-rule shrinkage, OLS, and PC, as functions of
+the parameter a of the Stein-rule shrinkage estimator. Since the OLS and PC estimators do not depend
+on this parameter, they are constants in the graphs. The risk of the OLS estimator is depicted by a
+dotted line; the risk of the PC estimator is shown as a dashed line. The risk of the Stein-rule shrinkage
+estimator is shown as connected dots. The left panel of four plots in each ﬁgure shows the MSE risk
+9
+
+=== page 11 ===
+(Q = I); the right panel of four plots shows the risk for Q = X′X. The four plots show the diﬀerent
+scenarios for the number K1 ∈{1, 5, 10, 20} of principal components. Each ﬁgure shows a diﬀerent
+singular value scenario, Figure 1 shows the case of constant singular values equal to two; Figure 2 shows
+the case of linearly decreasing singular values, and Figure 3 shows the case of exponentially decreasing
+singular values.
+The graphs show that the risk of the Stein-rule follows a parabola in a, which indicates that there
+is an optimal a, at least in the simulation scenarios considered. Unlike in the case of the original James
+and Stein (1961) estimator, this optimal a is not analytically known at this point. The minimum of the
+parabola is moving inwards toward the origin as the number K1 of components increases, as expected.
+For the scenarios where the singular values are constant and where they are linearly decreasing, the OLS
+estimator performs generally better than the PC estimator. For exponentially decreasing singular values,
+the PC estimator often performs better than the OLS estimator. The Stein-rule shrinkage estimator has
+a greater relative advantage over PC and OLS estimators for small number of components (K1 = 1, 5).
+For larger K1, the performance of the Stein-rule shrinkage estimator approaches that of the relatively
+better estimator among OLS and PC. Note that the singular value scenarios considered in this paper
+do not include values close to zero as in Hill and Judge (1987). We found that for most scenarios of
+this nature, where a strong degree of multicollinearity is present, the principal components estimator
+performs better than the Stein-rule shrinkage estimator.
+5.3
+Diﬀerent Variance Scenarios
+Figures 4 through 6 report the performance of the estimators for diﬀerent noise levels
+σ ∈{1, 3, 5, 7}.
+The organization of the graphs is the same as described in Section 5.2. Again, the risk of the Stein-rule
+shrinkage estimator describes a parabola in a, indicating the existence of an optimal parameter value.
+For low values of variance, OLS performs better than principal components, and as the noise level
+increases, the PC estimator outperforms OLS. The Stein-rule shrinkage estimator can outperform both
+OLS and PC estimators within an intermediate noise range.
+5.4
+Diﬀerent Lengths of the Parameter Vector β
+Figures 7 through 9 display the performance of the estimators for diﬀerent lengths L of the parameter
+vector β = L/K. The four plots of each panel show the risks of the estimators for
+L ∈{0, 1, 2, 3}.
+The organization of the graphs is the same as described in Section 5.2. If L = 0, that is, there is no
+signal in y, the PC estimator outperforms both OLS and the Stein-rule shrinkage estimators. For large
+10
+
+=== page 12 ===
+values of L, OLS performs better than the other estimators. On an intermediate range, the Stein-rule
+shrinkage estimator can outperform both other estimators.
+Recall from Equation (11) that δ2 = Λ
+1
+2
+2 V ′
+2β where β =
+ L
+K
+
+. Hence, the length L for β determines
+the length of δ2. Because Tδ′
+2δ2 is the second term in the asymptotic risk of the PC estimator corre-
+sponding to the bias due to the omission of the K2 principal components, as shown in (16), a large
+value of L increases the risk of the PC estimator compared to the risk of the OLS estimator.
+For the Stein-rule estimator, a large value of L increases Tδ′
+2δ2, which in turn will increase the F
+statistic deﬁned from (21)
+FK2,T −K = T ˆδ′
+2ˆδ2/K2
+ˆσ2
+and hence reduces the Stein-rule coeﬃcient ψ for the shrinkage from the OLS estimator ˆβ to the PC
+estimator ˆβ∗.
+6
+Out-of-Sample Performance of Stein-Rule Shrinkage Estima-
+tor
+6.1
+Simulation Design
+We assess the out-of-sample (OOS) performance of the Stein-rule shrinkage estimator in two diﬀerent
+simulation setups. One is exactly the same as described in Section 5.1, only that the forecast perfor-
+mance on T2 = 100 out-of-sample observations is evaluated. The two risk functions considered for the
+OOS comparison are the mean squared forecast error (MSFE)
+MSFE (β(y, X)) = E[(ˆy −y)′(ˆy −y)],
+(32)
+where ˆy = Xβ(y, X), and the squared signal-to-prediction distance as considered in (4) with Q = X′X,
+Risk(β, β(y, X), X′X) = E[(β(y, X) −β)′X′X(β(y, X) −β)].
+(33)
+The second simulation environment that we study has AR(1) time series in the columns of the
+regressor matrix X. That is,
+X = [x1,t x2,t . . . xK,t],
+(34)
+and the individual columns follow
+xk,t = φxk,t−1 + σX,kξt,k,
+k = 1, . . . , K, ξt,k ∼N(0, 1).
+(35)
+The standard deviations of the AR(1) processes in the columns of X are chosen to correspond to the
+exponentially decaying sequence employed in Equation (27):
+p
+Var xk,t =
+σX,k
+p
+1 −φ2 = 1 + 4e−0.10k, k = 1, . . . , K.
+(36)
+11
+
+=== page 13 ===
+Thus, σX,k = σX,k(φ) = 1 + 4e−0.10kp
+1 −φ2. Varying φ replaces the variance dimension considered
+in the in-sample study.
+The standard deviation of the noise in y is set to σY = 3 and T2 = 100
+out-of-sample observations are evaluated.
+Note that principal components are linear combinations of the columns of X,
+P1 = XV1Λ
+−1
+2
+1
+,
+(37)
+and therefore the individual components are, with some coeﬃcients wk,j determined by V1 and Λ1,
+Pj,t =
+K
+X
+k=1
+wk,jxk,t = φ
+K
+X
+k=1
+wk,jxk,t−1 +
+K
+X
+k=1
+wk,jσX,kξt,k,
+= φPj,t−1 + ηj,t,
+where ηj,t = PK
+k=1 wk,jσX,kξt,k. As long as the AR(1) parameter φ is the same across all columns of
+X, the principal components will themselves be AR(1) processes with the same decorrelation length as
+the individual columns. If diﬀerent φk are chosen across the columns, the principal components will be
+linear combinations of AR(1) processes with diﬀerent persistence parameters, which can lead to long
+memory behavior of the components, as described in Granger (1980).
+6.2
+Choosing the Number of Principal Components
+Figures 10 and 11 display the out-of-sample performance of the estimators for diﬀerent numbers of
+principal components
+K1 ∈{1, 5, 10, 20}.
+The organization of the graphs is similar to the one described in Section 5.2. Instead of diﬀerent singular
+value scenarios, two diﬀerent simulation designs are considered. Figure 10 shows the case where the
+regressor matrix X is drawn from independent N(0, 1) distributions; Figure 11 shows the case where
+the regressors are AR(1) time series. Unlike in the in-sample study, here the relative performance of PC
+and OLS estimators changes with the number K1 of principal components. For small numbers, OLS
+performs better than PC, and for large K1, PC performs better than OLS. The Stein-rule shrinkage
+estimator dominates for up to ten components. There is no obvious diﬀerence between the i.i.d. and
+the AR(1) simulation scenarios.
+6.3
+Diﬀerent Variance Scenarios
+Figure 12 shows the performance of the estimator when X is drawn from an N(0, 1) distribution.
+Similar to the in-sample study, OLS performs best for low noise levels and PC performs best for high
+noise levels. The Stein-rule shrinkage estimator can outperform both in an intermediate noise range.
+12
+
+=== page 14 ===
+Figure 13 shows the performance for the estimators when the columns of X follow AR(1) dynamics.
+The four plots in each panel show the situation for diﬀerent values φ ∈{0.30, 0.50, 0.90, 0.99} of the
+AR-parameter. The standard deviation of the error in the AR model is then set through σX,k(φ) =
+1 + 4e−0.10kp
+1 −φ2 such that the standard deviation of the column follows Equation (36). The ﬁgure
+shows that the Stein-rule shrinkage estimator outperforms OLS and PC estimators in low persistence
+scenarios (φ = 0.30, 0.50), whereas in high persistence scenarios (φ = 0.90, 0.99) the PC estimator
+outperforms both Stein-rule and OLS. The relative performance of OLS and PC estimators also changes
+with persistence: In low persistence scenarios, OLS performs better than PC, and vice versa for high
+persistence.
+6.4
+Diﬀerent Lengths of the Parameter Vector β
+Figures 14 and 15 show the performance of the estimators for diﬀerent lengths L ∈{0, 1, 2, 3} of the
+parameter vector. As in the in-sample case, when L = 0, PC performs best. For L = 1, OLS performs
+better than PC, but both are dominated by the Stein-rule shrinkage estimator. For higher values of L,
+OLS performs best among all three estimators. This holds true for both simulation environments, i.i.d.
+regressors and AR(1) regressors.
+7
+Concluding Remarks
+In this paper, we have shown that the Stein-rule shrinkage estimator that shrinks the OLS estimator
+towards the PC estimator, as proposed in Hill and Judge (1987, 1990), can be represented as a shrinkage
+estimator for a forecasting model as proposed in Stock and Watson (2011). We examined the perfor-
+mance of the estimator in a variety of simulation environments, both in-sample and out-of-sample. The
+overall picture that emerges is that the Stein-rule shrinkage estimator can dominate both OLS and
+principal components estimators within an intermediate range of the signal-to-noise ratio. If the noise
+level is high (high variance of noise terms) or if the signal is low (short parameter vector), the principal
+components estimator is superior. If the noise level is low (low variance of noise terms) or if the signal
+is high (long parameter vector), OLS is superior. In out-of-sample simulations with AR(1) regressors,
+the Stein-rule shrinkage estimator can dominate both OLS and principal components estimators in low
+persistence situations.
+Acknowledgments
+We would like to thank the participants of the Advances in Econometrics conference in Baton Rouge
+in March 2012 for their helpful comments, in particular Carter Hill, Tom Fomby, Stan Johnson, Mike
+McCracken, and Lee Adkins. We would also like to thank the organizers of the conference, in particular
+Dek Terrell, for a job superbly done.
+13
+
+=== page 15 ===
+References
+Bai, J. (2003).
+Inferential Theory for Factor Models of Large Dimensions.
+Econometrica, 71(1),
+135–171.
+Bai, J., & Ng, S. (2006). Conﬁdence Intervals for Diﬀusion Index Forecasts and Inference for Factor-
+Augmented Regressions. Econometrica, 74(4), 1133–1150.
+Bai, J., & Ng, S. (2008). Forecasting Economic Time Series Using Targeted Predictors. Journal of
+Econometrics, 146, 304–317.
+Bair, E., Hastie, T., Paul, D., & Tibshirani, R. (2006). Prediction by Supervised Principal Compo-
+nents. Journal of the American Statistical Association, 101(473), 119–137.
+Bates, J.M., & Granger, C.W.J. (1969). The Combination of Forecasts. Operations Research Quar-
+terly, 20, 451–468.
+Clark, T.E., & McCracken, M.W. (2009). Combining Forecasts from Nested Models. Oxford Bulletin
+of Economics and Statistics, 71(3), 303–329.
+Fomby, T.B., Hill, R.C., & Johnson, S.R. (1978). An Optimal Property of Principal Components in
+the Context of Restricted Least Squares. Journal of the American Statistical Association, 73(361),
+191–193.
+Fomby, T.B., & Samanta, S.K. (1991). Application of Stein Rules to Combination Forecasting. Journal
+of Business and Economic Statistics, 9(4), 391–407.
+Granger, C.W.J. (1980). Long Memory Relationships and the Aggregation of Dynamic Models. Jour-
+nal of Econometrics, 14, 227–238.
+Hansen, B. (2011). Eﬃcient Shrinkage in Parametric Models. Manuscript, University of Wisconsin,
+Madison.
+Hill, R.C., & Fomby, T.B. (1992). The Eﬀect of Extrapolation on Minimax Stein-Rule Prediction. In
+W. Griﬃths, H. L¨utkepohl, & M.E. Bock (Eds.), Readings in Econometric Theory and Practice,
+A Volume in Honor of George G. Judge (pp. 3–32). Amsterdam: North-Holland.
+Hill, R.C., & Judge, G.G. (1987). Improved Prediction in the Presence of Multicollinearity. Journal
+of Econometrics, 35, 83–100.
+Hill, R.C., & Judge, G.G. (1990). Improved Estimation under Collinearity and Squared Error Loss.
+Journal of Multivariate Analysis, 32, 296–312.
+14
+
+=== page 16 ===
+Hillebrand, E., Huang, H., Lee, T.-H., & Li, C. (2011). Using the Yield Curve in Forecasting Output
+Growth and Inﬂation. Manuscript, Aarhus University and UC Riverside.
+Huang, H., & Lee, T.-H. (2010). To Combine Forecasts or To Combine Information? Econometric
+Reviews, 29, 534–570.
+Inoue, A., & Kilian, L. (2008). How Useful is Bagging in Forecasting Economic Time Series? A Case
+Study of U.S. CPI Inﬂation. Journal of the American Statistical Association, 103(482), 511–522.
+James, W., & Stein, C.M. (1961). Estimation with Quadratic Loss. Proceedings of the Fourth Berkeley
+Symposium on Mathematical Statistics and Probability, 1, 361–379.
+Judge, G.G., & Bock, M.E. (1978). The Statistical Implications of Pre-Test and Stein-Rule Estimators
+in Econometrics. Amsterdam: North-Holland.
+Mittelhammer, R.C. (1985). Quadratic Risk Domination of Restricted Least Squares Estimators via
+Stein-Rules Auxiliary Constraints. Journal of Econometrics, 29, 289–304.
+Stock, J.H., & Watson, M.W. (2002). Forecasting Using Principal Components from a Large Number
+of Predictors. Journal of the American Statistical Association, 97, 1167–1179.
+Stock, J.H., & Watson, M.W. (2006).
+Forecasting with Many Predictors.
+In: G. Elliott, C.W.J.
+Granger, & A. Timmermann (Eds.), Handbook of Economic Forecasting, Volume 1 (pp. 515–
+554). Amsterdam: North Holland.
+Stock, J.H., & Watson, M.W. (2011). Generalized Shrinkage Methods for Forecasting Using Many
+Predictors. Manuscript, Harvard University and Princeton University.
+15
+
+=== page 17 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+7
+x 10
+−3
+a
+Q=I
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+7
+8
+x 10
+−3
+a
+Q=I
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+x 10
+−3
+a
+Q=I
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+12
+14
+x 10
+−3
+a
+Q=I
+K1 = 20
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+7
+8
+a
+Q=XT X
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+12
+a
+Q=XT X
+K1 = 20
+Figure 1: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are constant and equal to two. Other
+parameters are set to L = 1, σ = 3. The connected dots line shows the performance of the Stein-like
+estimator. For comparison, the performance of the standard OLS estimator is shown in dots. The
+performance of the principal components estimator is plotted with dashes.
+16
+
+=== page 18 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+x 10
+−3
+a
+Q=I
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+x 10
+−3
+a
+Q=I
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+x 10
+−3
+a
+Q=I
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.002
+0.004
+0.006
+0.008
+0.01
+a
+Q=I
+K1 = 20
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+a
+Q=XT X
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+a
+Q=XT X
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+7
+a
+Q=XT X
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+a
+Q=XT X
+K1 = 20
+Figure 2: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are linearly decreasing from 5 to 1. Other
+parameters are set to L = 1, σ = 3. The connected dots line shows the performance of the Stein-like
+estimator. For comparison, the performance of the standard OLS estimator is shown in dots. The
+performance of the principal components estimator is plotted with dashes.
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+x 10
+−3
+a
+Q=I
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+12
+14
+16
+x 10
+−3
+a
+Q=I
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.005
+0.01
+0.015
+0.02
+0.025
+0.03
+a
+Q=I
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.01
+0.02
+0.03
+0.04
+0.05
+0.06
+a
+Q=I
+K1 = 20
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+7
+8
+a
+Q=XT X
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+a
+Q=XT X
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+a
+Q=XT X
+K1 = 20
+Figure 3: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are exponentially decreasing from 5 to 1 at
+a rate of 0.10. Other parameters are set to L = 1, σ = 3. The connected dots line shows the performance
+of the Stein-like estimator. For comparison, the performance of the standard OLS estimator is shown
+in dots. The performance of the principal components estimator is plotted with dashes.
+17
+
+=== page 19 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+1
+2
+3
+4
+5
+x 10
+−3
+a
+Q=I
+σ = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+7
+x 10
+−3
+a
+Q=I
+σ = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.005
+0.01
+0.015
+0.02
+0.025
+0.03
+a
+Q=I
+σ = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.01
+0.02
+0.03
+0.04
+0.05
+0.06
+a
+Q=I
+σ = 7
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+1
+2
+3
+4
+a
+Q=XT X
+σ = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+σ = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+25
+a
+Q=XT X
+σ = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+10
+20
+30
+40
+50
+a
+Q=XT X
+σ = 7
+Figure 4: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are constant and equal to two. Other
+parameters are set to L = 1, K1 = 1. The connected dots line shows the performance of the Stein-like
+estimator. For comparison, the performance of the standard OLS estimator is shown in dots. The
+performance of the principal components estimator is plotted with dashes.
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+1
+2
+3
+4
+5
+x 10
+−3
+a
+Q=I
+σ = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+x 10
+−3
+a
+Q=I
+σ = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+3
+4
+5
+6
+7
+8
+9
+10
+x 10
+−3
+a
+Q=I
+σ = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.005
+0.01
+0.015
+0.02
+0.025
+a
+Q=I
+σ = 7
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+a
+Q=XT X
+σ = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+a
+Q=XT X
+σ = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+4
+6
+8
+10
+12
+14
+16
+a
+Q=XT X
+σ = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+5
+10
+15
+20
+25
+30
+35
+40
+a
+Q=XT X
+σ = 7
+Figure 5: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are linearly decreasing from 5 to 1. Other
+parameters are set to L = 1, K1 = 1. The connected dots line shows the performance of the Stein-like
+estimator. For comparison, the performance of the standard OLS estimator is shown in dots. The
+performance of the principal components estimator is plotted with dashes.
+18
+
+=== page 20 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+1
+2
+3
+4
+5
+x 10
+−3
+a
+Q=I
+σ = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+x 10
+−3
+a
+Q=I
+σ = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.01
+0.02
+0.03
+0.04
+a
+Q=I
+σ = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.02
+0.04
+0.06
+0.08
+0.1
+0.12
+a
+Q=I
+σ = 7
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+1
+2
+3
+4
+a
+Q=XT X
+σ = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+σ = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+25
+a
+Q=XT X
+σ = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+10
+20
+30
+40
+50
+a
+Q=XT X
+σ = 7
+Figure 6: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are exponentially decreasing from 5 to
+1 at a rate of 0.10.
+Other parameters are set to L = 1, K1 = 1.
+The connected dots line shows
+the performance of the Stein-like estimator. For comparison, the performance of the standard OLS
+estimator is shown in dots. The performance of the principal components estimator is plotted with
+dashes.
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.002
+0.004
+0.006
+0.008
+0.01
+0.012
+0.014
+a
+Q=I
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+7
+x 10
+−3
+a
+Q=I
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.005
+0.01
+0.015
+0.02
+a
+Q=I
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.01
+0.02
+0.03
+0.04
+0.05
+a
+Q=I
+L = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+12
+a
+Q=XT X
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+a
+Q=XT X
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+10
+20
+30
+40
+a
+Q=XT X
+L = 3
+Figure 7: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are constant and equal to two. Other
+parameters are set to K1 = 1, σ = 3. The connected dots line shows the performance of the Stein-like
+estimator. For comparison, the performance of the standard OLS estimator is shown in dots. The
+performance of the principal components estimator is plotted with dashes.
+19
+
+=== page 21 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.002
+0.004
+0.006
+0.008
+0.01
+0.012
+a
+Q=I
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+x 10
+−3
+a
+Q=I
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.005
+0.01
+0.015
+0.02
+a
+Q=I
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.01
+0.02
+0.03
+0.04
+0.05
+a
+Q=I
+L = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+12
+a
+Q=XT X
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+a
+Q=XT X
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+10
+20
+30
+40
+a
+Q=XT X
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+20
+40
+60
+80
+100
+a
+Q=XT X
+L = 3
+Figure 8: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are linearly decreasing from 5 to 1. Other
+parameters are set to K1 = 1, σ = 3. The connected dots line shows the performance of the Stein-like
+estimator. For comparison, the performance of the standard OLS estimator is shown in dots. The
+performance of the principal components estimator is plotted with dashes.
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.005
+0.01
+0.015
+0.02
+0.025
+0.03
+a
+Q=I
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+x 10
+−3
+a
+Q=I
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.005
+0.01
+0.015
+0.02
+a
+Q=I
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.01
+0.02
+0.03
+0.04
+0.05
+a
+Q=I
+L = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+12
+a
+Q=XT X
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+a
+Q=XT X
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+25
+30
+35
+a
+Q=XT X
+L = 3
+Figure 9: Risk(β(y, X)) = E[(β(y, X) −β)′Q(β(y, X) −β)] as function of a. Left panel: Q = I (MSE),
+right panel: Q = X′X. The data-generating singular values are exponentially decreasing from 5 to
+1 at a rate of 0.10.
+Other parameters are set to K1 = 1, σ = 3.
+The connected dots line shows
+the performance of the Stein-like estimator. For comparison, the performance of the standard OLS
+estimator is shown in dots. The performance of the principal components estimator is plotted with
+dashes.
+20
+
+=== page 22 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+11
+12
+13
+14
+15
+a
+Q=I
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+11
+12
+13
+14
+15
+16
+17
+a
+Q=I
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+12
+14
+16
+18
+20
+22
+a
+Q=I
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+15
+20
+25
+30
+35
+a
+Q=I
+K1 = 20
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+7
+8
+a
+Q=XT X
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+12
+a
+Q=XT X
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+25
+a
+Q=XT X
+K1 = 20
+Figure 10: Left panel MSFE(β(y, X)) = E[(ˆy −y)′(ˆy −y)], where ˆy is a T2-vector of forecasts of y, as
+function of a. Right panel: Risk(β, β(y, X), X′X) = E[(β(y, X) −β)′X′X(β(y, X) −β)] for the T2-
+period forecast sample. The data-generating eigenvalues are exponentially decreasing from 5 to 1 at a
+rate of 0.10. Other parameters are set to L = 1, σ = 3. The connected dots line shows the performance
+of the Stein-like estimator. For comparison, the performance of the standard OLS estimator is shown
+in dots. The performance of the principal components estimator is plotted with dashes.
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+11
+12
+13
+14
+15
+a
+Q=I
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+12
+14
+16
+18
+a
+Q=I
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+12
+14
+16
+18
+20
+22
+a
+Q=I
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+15
+20
+25
+30
+35
+40
+a
+Q=I
+K1 = 20
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+K1 = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+a
+Q=XT X
+K1 = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+2
+4
+6
+8
+10
+12
+14
+a
+Q=XT X
+K1 = 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+25
+30
+a
+Q=XT X
+K1 = 20
+Figure 11: Left panel MSFE(β(y, X)) = E[(ˆy −y)′(ˆy −y)], where ˆy is a T2-vector of forecasts of y, as
+function of a. Right panel: Risk(β, β(y, X), X′X) = E[(β(y, X) −β)′X′X(β(y, X) −β)] for the T2-
+period forecast sample. The columns of the regressor matrix X are AR(1) processes. Other parameters
+are set to L = 1, σ = 3. The connected dots line shows the performance of the Stein-like estimator.
+For comparison, the performance of the standard OLS estimator is shown in dots. The performance of
+the principal components estimator is plotted with dashes.
+21
+
+=== page 23 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+a
+Q=I
+σ = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+11
+12
+13
+14
+15
+a
+Q=I
+σ = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+25
+30
+35
+40
+45
+50
+a
+Q=I
+σ = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+50
+60
+70
+80
+90
+100
+110
+a
+Q=I
+σ = 7
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+1
+2
+3
+4
+a
+Q=XT X
+σ = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+σ = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+25
+a
+Q=XT X
+σ = 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+10
+20
+30
+40
+50
+60
+a
+Q=XT X
+σ = 7
+Figure 12: Left panel MSFE(β(y, X)) = E[(ˆy −y)′(ˆy −y)], where ˆy is a T2-vector of forecasts of y, as
+function of a. Right panel: Risk(β, β(y, X), X′X) = E[(β(y, X) −β)′X′X(β(y, X) −β)] for the T2-
+period forecast sample. The data-generating eigenvalues are exponentially decreasing from 5 to 1 at a
+rate of 0.10. Other parameters are set to K1 = 1, L = 1. The connected dots line shows the performance
+of the Stein-like estimator. For comparison, the performance of the standard OLS estimator is shown
+in dots. The performance of the principal components estimator is plotted with dashes.
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+11
+12
+13
+14
+15
+a
+Q=I
+φ = 0.3
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+11
+12
+13
+14
+15
+a
+Q=I
+φ = 0.5
+0
+0.2
+0.4
+0.6
+0.8
+1
+12
+14
+16
+18
+20
+22
+a
+Q=I
+φ = 0.9
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+20
+40
+60
+80
+100
+120
+140
+a
+Q=I
+φ = 0.99
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+φ = 0.3
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+φ = 0.5
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+12
+a
+Q=XT X
+φ = 0.9
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+20
+40
+60
+80
+100
+120
+140
+a
+Q=XT X
+φ = 0.99
+Figure 13: Left panel MSFE(β(y, X)) = E[(ˆy −y)′(ˆy −y)], where ˆy is a T2-vector of forecasts of y, as
+function of a. Right panel: Risk(β, β(y, X), X′X) = E[(β(y, X) −β)′X′X(β(y, X) −β)] for the T2-
+period forecast sample. The columns of the regressor matrix X are AR(1) processes. Other parameters
+are set to K1 = 1, L = 1. The connected dots line shows the performance of the Stein-like estimator.
+For comparison, the performance of the standard OLS estimator is shown in dots. The performance of
+the principal components estimator is plotted with dashes.
+22
+
+=== page 24 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+5
+10
+15
+20
+25
+a
+Q=I
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+11
+12
+13
+14
+15
+a
+Q=I
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+12
+14
+16
+18
+20
+22
+24
+a
+Q=I
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+15
+20
+25
+30
+35
+40
+45
+a
+Q=I
+L = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+a
+Q=XT X
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+12
+14
+16
+a
+Q=XT X
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+25
+30
+35
+a
+Q=XT X
+L = 3
+Figure 14: Left panel MSFE(β(y, X)) = E[(ˆy −y)′(ˆy −y)], where ˆy is a T2-vector of forecasts of y, as
+function of a. Right panel: Risk(β, β(y, X), X′X) = E[(β(y, X) −β)′X′X(β(y, X) −β)] for the T2-
+period forecast sample. The data-generating eigenvalues are exponentially decreasing from 5 to 1 at a
+rate of 0.10. Other parameters are set to K1 = 1, σ = 3. The connected dots line shows the performance
+of the Stein-like estimator. For comparison, the performance of the standard OLS estimator is shown
+in dots. The performance of the principal components estimator is plotted with dashes.
+0
+0.2
+0.4
+0.6
+0.8
+1
+5
+10
+15
+20
+25
+a
+Q=I
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+11
+12
+13
+14
+15
+a
+Q=I
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+12
+14
+16
+18
+20
+22
+24
+a
+Q=I
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+10
+15
+20
+25
+30
+35
+40
+45
+a
+Q=I
+L = 3
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+a
+Q=XT X
+L = 0
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+2
+3
+4
+5
+6
+a
+Q=XT X
+L = 1
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+4
+6
+8
+10
+12
+14
+16
+a
+Q=XT X
+L = 2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+5
+10
+15
+20
+25
+30
+35
+a
+Q=XT X
+L = 3
+Figure 15: Left panel MSFE(β(y, X)) = E[(ˆy −y)′(ˆy −y)], where ˆy is a T2-vector of forecasts of y, as
+function of a. Right panel: Risk(β, β(y, X), X′X) = E[(β(y, X) −β)′X′X(β(y, X) −β)] for the T2-
+period forecast sample. The columns of the regressor matrix X are AR(1) processes. Other parameters
+are set to K1 = 1, σ = 3. The connected dots line shows the performance of the Stein-like estimator.
+For comparison, the performance of the standard OLS estimator is shown in dots. The performance of
+the principal components estimator is plotted with dashes.
+23
+
+=== page 25 ===
+Research Papers 
+2012 
+ 
+ 
+ 
+2012-01: 
+Matei Demetrescu and Robinson Kruse: The Power of Unit Root Tests 
+Against Nonlinear Local Alternatives 
+2012-02: 
+Matias D. Cattaneo, Michael Jansson and Whitney K. Newey: 
+Alternative Asymptotics and the Partially Linear Model with Many 
+Regressors 
+2012-03: 
+Matt P. Dziubinski: Conditionally-Uniform Feasible Grid Search 
+Algorithm 
+2012-04: 
+Jeroen V.K. Rombouts, Lars Stentoft and Francesco Violante: The 
+Value of Multivariate Model Sophistication: An Application to pricing 
+Dow Jones Industrial Average options 
+2012-05: 
+Anders Bredahl Kock: On the Oracle Property of the Adaptive LASSO 
+in Stationary and Nonstationary Autoregressions 
+2012-06: 
+Christian Bach and Matt P. Dziubinski: Commodity derivatives pricing 
+with inventory effects 
+2012-07: 
+Cristina Amado and Timo Teräsvirta: Modelling Changes in the 
+Unconditional Variance of Long Stock Return Series 
+2012-08: 
+Anne Opschoor, Michel van der Wel, Dick van Dijk and Nick Taylor: 
+On the Effects of Private Information on Volatility 
+2012-09: 
+Annastiina Silvennoinen and Timo Teräsvirta: Modelling conditional 
+correlations of asset returns: A smooth transition approach 
+2012-10: 
+Peter Exterkate: Model Selection in Kernel Ridge Regression 
+2012-11: 
+Torben G. Andersen, Nicola Fusari and Viktor Todorov: Parametric 
+Inference and Dynamic State Recovery from Option Panels 
+2012-12: 
+Mark Podolskij and Katrin Wasmuth: Goodness-of-fit testing for 
+fractional diffusions 
+2012-13: 
+Almut E. D. Veraart and Luitgard A. M. Veraart: Modelling electricity 
+day–ahead prices by multivariate Lévy 
+2012-14: 
+Niels Haldrup, Robinson Kruse, Timo Teräsvirta and Rasmus T. 
+Varneskov: Unit roots, nonlinearities and structural breaks 
+2012-15: 
+Matt P. Dziubinski and Stefano Grassi: Heterogeneous Computing in 
+Economics: A Simplified Approach 
+2012-16: 
+Anders Bredahl Kock and Laurent A.F. Callot: Oracle Inequalities for 
+High Dimensional Vector Autoregressions 
+2012-17: 
+Eric Hillebrand, Huiyu Huang, Tae-Hwy Lee and Canlin Li: Using the 
+Yield Curve in Forecasting Output Growth and Inflation 
+2012-18: 
+Eric Hillebrand and Tae-Hwy Lee: Stein-Rule Estimation and 
+Generalized Shrinkage Methods for Forecasting Using Many Predictors 
+ 
+ 
